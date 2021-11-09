@@ -77,6 +77,9 @@ class MyApp extends StatelessWidget {
                             const Text('Fynn',
                                 style: TextStyle(fontSize: 24),
                                 textAlign: TextAlign.center),
+                            const Text('Mudassar',
+                                style: TextStyle(fontSize: 24),
+                                textAlign: TextAlign.center),
                           ])),
                       Positioned(
                           top: -100,
