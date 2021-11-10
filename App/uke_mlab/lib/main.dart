@@ -57,39 +57,19 @@ class MyApp extends StatelessWidget {
                     children: <Widget>[
                       Container(
                           width: double.infinity,
-                          height: 280,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: Colors.lightBlue),
-                          padding: const EdgeInsets.fromLTRB(20, 50, 20, 20),
+                          height: 320,
+                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), color: Colors.lightBlue),
+                          padding: const EdgeInsets.fromLTRB(20, 60, 20, 0),
                           child: ListView(children: [
-                            const Text("We can make cool stuff!",
-                                style: TextStyle(fontSize: 24),
-                                textAlign: TextAlign.center),
-                            Text(
-                                "We have random words: " +
-                                    wordPair.asPascalCase,
-                                style: const TextStyle(fontSize: 36),
-                                textAlign: TextAlign.center),
-                            const Text('This is the Team:',
-                                style: TextStyle(fontSize: 36),
-                                textAlign: TextAlign.center),
-                            const Text('Fynn',
-                                style: TextStyle(fontSize: 24),
-                                textAlign: TextAlign.center),
-                            const Text('Mudassar',
-                                style: TextStyle(fontSize: 24),
-                                textAlign: TextAlign.center),
-                            const Text('Arne',
-                                style: TextStyle(fontSize: 24),
-                                textAlign: TextAlign.center),
+                            const Text("We can make cool stuff!", style: TextStyle(fontSize: 24), textAlign: TextAlign.center),
+                            Text("We have random words: " + wordPair.asPascalCase, style: const TextStyle(fontSize: 36), textAlign: TextAlign.center),
+                            const Text('This is the Team:', style: TextStyle(fontSize: 36), textAlign: TextAlign.center),
+                            const Text('Fynn', style: TextStyle(fontSize: 24), textAlign: TextAlign.center),
+                            const Text('Mudassar', style: TextStyle(fontSize: 24), textAlign: TextAlign.center),
+                            const Text('Arne', style: TextStyle(fontSize: 24), textAlign: TextAlign.center),
+                            const Text('Maximilian', style: TextStyle(fontSize: 24), textAlign: TextAlign.center),
                           ])),
-                      Positioned(
-                          top: -100,
-                          child: Image.network(
-                              "https://i.imgur.com/2yaf2wb.png",
-                              width: 150,
-                              height: 150))
+                      Positioned(top: -100, child: Image.network("https://i.imgur.com/2yaf2wb.png", width: 150, height: 150))
                     ],
                   )),
             ],
