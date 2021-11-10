@@ -68,6 +68,7 @@ class MyApp extends StatelessWidget {
                             const Text('Mudassar', style: TextStyle(fontSize: 24), textAlign: TextAlign.center),
                             const Text('Arne', style: TextStyle(fontSize: 24), textAlign: TextAlign.center),
                             const Text('Maximilian', style: TextStyle(fontSize: 24), textAlign: TextAlign.center),
+                            const Text('Anni', style: TextStyle(fontSize: 24), textAlign: TextAlign.center),
                           ])),
                       Positioned(top: -100, child: Image.network("https://i.imgur.com/2yaf2wb.png", width: 150, height: 150))
                     ],
