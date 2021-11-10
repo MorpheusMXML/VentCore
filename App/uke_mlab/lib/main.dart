@@ -6,11 +6,11 @@ import 'package:flutter/services.dart';
 
 void main() {
   // We need to call it manually,
-  // because we going to call setPreferredOrientations()
+  // because we are going to call setPreferredOrientations()
   // before the runApp() call
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Than we setup preferred orientations,
+  // Then we setup preferred orientations,
   // and only after it finished we run our app
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeRight,
@@ -57,20 +57,48 @@ class MyApp extends StatelessWidget {
                     children: <Widget>[
                       Container(
                           width: double.infinity,
-                          height: 320,
-                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), color: Colors.lightBlue),
+                          height: 360,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: Colors.lightBlue),
                           padding: const EdgeInsets.fromLTRB(20, 60, 20, 0),
                           child: ListView(children: [
-                            const Text("We can make cool stuff!", style: TextStyle(fontSize: 24), textAlign: TextAlign.center),
-                            Text("We have random words: " + wordPair.asPascalCase, style: const TextStyle(fontSize: 36), textAlign: TextAlign.center),
-                            const Text('This is the Team:', style: TextStyle(fontSize: 36), textAlign: TextAlign.center),
-                            const Text('Fynn', style: TextStyle(fontSize: 24), textAlign: TextAlign.center),
-                            const Text('Mudassar', style: TextStyle(fontSize: 24), textAlign: TextAlign.center),
-                            const Text('Arne', style: TextStyle(fontSize: 24), textAlign: TextAlign.center),
-                            const Text('Maximilian', style: TextStyle(fontSize: 24), textAlign: TextAlign.center),
-                            const Text('Anni', style: TextStyle(fontSize: 24), textAlign: TextAlign.center),
+                            const Text("We can make cool stuff!",
+                                style: TextStyle(fontSize: 24),
+                                textAlign: TextAlign.center),
+                            Text(
+                                "We have random words: " +
+                                    wordPair.asPascalCase,
+                                style: const TextStyle(fontSize: 36),
+                                textAlign: TextAlign.center),
+                            const Text('This is the Team:',
+                                style: TextStyle(fontSize: 36),
+                                textAlign: TextAlign.center),
+                            const Text('Fynn',
+                                style: TextStyle(fontSize: 24),
+                                textAlign: TextAlign.center),
+                            const Text('Mudassar',
+                                style: TextStyle(fontSize: 24),
+                                textAlign: TextAlign.center),
+                            const Text('Arne',
+                                style: TextStyle(fontSize: 24),
+                                textAlign: TextAlign.center),
+                            const Text('Maximilian',
+                                style: TextStyle(fontSize: 24),
+                                textAlign: TextAlign.center),
+                            const Text('Anni',
+                                style: TextStyle(fontSize: 24),
+                                textAlign: TextAlign.center),
+                            const Text('Noah',
+                                style: TextStyle(fontSize: 24),
+                                textAlign: TextAlign.center),
                           ])),
-                      Positioned(top: -100, child: Image.network("https://i.imgur.com/2yaf2wb.png", width: 150, height: 150))
+                      Positioned(
+                          top: -100,
+                          child: Image.network(
+                              "https://i.imgur.com/2yaf2wb.png",
+                              width: 150,
+                              height: 150))
                     ],
                   )),
             ],
