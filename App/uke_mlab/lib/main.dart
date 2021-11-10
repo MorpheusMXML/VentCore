@@ -92,6 +92,9 @@ class MyApp extends StatelessWidget {
                             const Text('Noah',
                                 style: TextStyle(fontSize: 24),
                                 textAlign: TextAlign.center),
+                            const Text('Corvin',
+                                style: TextStyle(fontSize: 24),
+                                textAlign: TextAlign.center),
                           ])),
                       Positioned(
                           top: -100,
