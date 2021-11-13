@@ -1,0 +1,14 @@
+.container {
+  text-align: center;
+}
+
+.plot {
+  display: flex;
+}
+
+.current-val {
+  align-self: center;
+  font-size: 48px;
+  border: 2px solid black;
+  padding: 24px;
+}
