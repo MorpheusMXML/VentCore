@@ -6,11 +6,11 @@ import 'package:flutter/services.dart';
 
 void main() {
   // We need to call it manually,
-  // because we going to call setPreferredOrientations()
+  // because we are going to call setPreferredOrientations()
   // before the runApp() call
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Than we setup preferred orientations,
+  // Then we setup preferred orientations,
   // and only after it finished we run our app
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeRight,
@@ -57,11 +57,11 @@ class MyApp extends StatelessWidget {
                     children: <Widget>[
                       Container(
                           width: double.infinity,
-                          height: 280,
+                          height: 400,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
                               color: Colors.lightBlue),
-                          padding: const EdgeInsets.fromLTRB(20, 50, 20, 20),
+                          padding: const EdgeInsets.fromLTRB(20, 60, 20, 0),
                           child: ListView(children: [
                             const Text("We can make cool stuff!",
                                 style: TextStyle(fontSize: 24),
@@ -78,6 +78,21 @@ class MyApp extends StatelessWidget {
                                 style: TextStyle(fontSize: 24),
                                 textAlign: TextAlign.center),
                             const Text('Mudassar',
+                                style: TextStyle(fontSize: 24),
+                                textAlign: TextAlign.center),
+                            const Text('Arne',
+                                style: TextStyle(fontSize: 24),
+                                textAlign: TextAlign.center),
+                            const Text('Maximilian',
+                                style: TextStyle(fontSize: 24),
+                                textAlign: TextAlign.center),
+                            const Text('Anni',
+                                style: TextStyle(fontSize: 24),
+                                textAlign: TextAlign.center),
+                            const Text('Noah',
+                                style: TextStyle(fontSize: 24),
+                                textAlign: TextAlign.center),
+                            const Text('Corvin',
                                 style: TextStyle(fontSize: 24),
                                 textAlign: TextAlign.center),
                           ])),
