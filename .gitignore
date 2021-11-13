@@ -64,5 +64,17 @@ lib/generated_plugin_registrant.dart
 
 # Temporary data
 .ipynb_checkpoints/
-.DS_Store
+.DS_*
 .idea
+
+### react ###
+*.log
+logs
+**/*.backup.*
+**/*.back.*
+node_modules
+bower_components
+*.sublime*
+psd
+thumb
+sketch
