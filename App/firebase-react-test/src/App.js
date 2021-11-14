@@ -19,6 +19,8 @@ const App = () => {
   const [currentHeartFreq, setCurrentHeartFreq] = useState(0);
   const [currentOxySat, setCurrentOxySat] = useState(0);
 
+  const [heartFreqPhase, setHeartFreqPhase] = useState(0);
+  const [oxySatPhase, setOxySatPhase] = useState(0);
 
   // Read data from firebase
   const getPatients = () => {
@@ -65,17 +67,62 @@ const App = () => {
 
   // generate random values for HF and SpO2 every second
   useInterval(() => {
-    const randomHF = Math.round(Math.random() * 100);
-    const randomO2 = Math.round(Math.random() * 100);
+    const randomO2 = Math.round(Math.random() * 5);
+    const randomHF = Math.round(Math.random() * 10);
 
-    setHeartFreq(heartFreq.slice(1).concat(randomHF));
+    let HF;
+    let O2;
+
+    switch (heartFreqPhase) {
+      case(1):
+        HF = 70 + randomHF;
+        break;
+      case(2):
+        HF = 30 + randomHF;
+        break;
+      case(3):
+        HF = 120 + randomHF;
+        break;
+      case(4):
+        HF = 30 + randomHF;
+        break;
+      case(5):
+        HF = 70 + randomHF;
+        break;
+      case(6):
+        HF = 50 + randomHF;
+        break;
+      default:
+        HF = 50 + randomHF;
+        break;
+    }
+
+    switch (oxySatPhase) {
+      case(1):
+        O2 = 98 + randomO2;
+        break;
+      case(2):
+        O2 = 96 + randomO2;
+        break;
+      case(3):
+        O2 = 92 + randomO2;
+        break;
+      default:
+        O2 = 90 + randomO2;
+        break;
+    }
+
+    setHeartFreqPhase((heartFreqPhase + 1) % 9);
+    setOxySatPhase((oxySat + 1) % 4);
+
+    setHeartFreq(heartFreq.slice(1).concat(HF));
     setOxySat(oxySat.slice(1).concat(randomO2));
     setXAxis(xAxis.slice(1).concat(new Date()));
 
     updatePatient({
       id: "1",
-      heartFrequency: randomHF,
-      spO2: randomO2
+      heartFrequency: HF,
+      spO2: O2
     });
   }, 1000);
 
