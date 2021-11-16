@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-=======
-//
-//just a widget to play with
-import 'package:responsive_grid/responsive_grid.dart';
-
->>>>>>> 669d04f (#23 [TASK] add layout, theme, basic structure)
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -32,7 +25,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
     return GetMaterialApp(
       title: 'MLab UKE',
       // TODO: Custom theme
@@ -52,22 +44,6 @@ class MyApp extends StatelessWidget {
         ),
       ],
       initialRoute: "/monitor",
-=======
-    const Color containerColor = Color(0xff49454f);
-    return MaterialApp(
-      theme: ThemeData(
-        scaffoldBackgroundColor: const Color(0xff1c1c1e),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Color.fromRGBO(29, 25, 43, 100),
-        ),
-      ),
-      title: 'Welcome to the UKE Mlab Team',
-      home: Scaffold(
-          appBar: AppBar(
-            title: const Text('Welcome to the UKE Mlab Team'),
-          ),
-          body: View(containerColor: containerColor)),
->>>>>>> 669d04f (#23 [TASK] add layout, theme, basic structure)
     );
   }
 }

@@ -36,14 +36,11 @@ dependencies:
 
   # The following is just an experiement for the upcoming flutter app
   responsive_grid: ^2.0.0
-<<<<<<< HEAD
   google_fonts: ^2.1.0
   syncfusion_flutter_charts: ^19.3.55
   get: ^4.3.8
   # firebase_core: ^1.10.0
   # cloud_firestore: ^3.1.0
-=======
->>>>>>> 669d04f (#23 [TASK] add layout, theme, basic structure)
 
 dev_dependencies:
   flutter_test:
