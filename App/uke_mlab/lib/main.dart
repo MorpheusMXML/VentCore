@@ -4,6 +4,10 @@ import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'package:uke_mlab/src/controller.dart';
+import 'package:uke_mlab/src/model.dart';
+import 'package:uke_mlab/src/view.dart';
+
 void main() {
   // We need to call it manually,
   // because we are going to call setPreferredOrientations()
