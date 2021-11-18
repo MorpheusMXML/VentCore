@@ -30,6 +30,10 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_svg: ^0.22.0
+<<<<<<< HEAD
+=======
+
+>>>>>>> 237c277 ([TASK] #29 Added 2 icons, aligned button content)
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
