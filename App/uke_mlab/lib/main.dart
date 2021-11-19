@@ -1,17 +1,24 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 //
 //just a widget to play with
 import 'package:responsive_grid/responsive_grid.dart';
 
 >>>>>>> 50ec0fe (#23 [TASK] add layout, theme, basic structure)
+=======
+>>>>>>> c429014 ([TASK]#23 Add Readme,And Example Project)
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/screens/monitor.dart';
 import 'package:uke_mlab/widgets/statusbar.dart';
 
+<<<<<<< HEAD
 import 'providers/mockup.dart';
+=======
+import 'package:uke_mlab/screens/monitor.dart';
+>>>>>>> c429014 ([TASK]#23 Add Readme,And Example Project)
 
 void main() {
   // We need to call it manually,
@@ -55,19 +62,24 @@ class MyApp extends StatelessWidget {
 =======
     const Color containerColor = Color(0xff49454f);
     return MaterialApp(
-      theme: ThemeData(
-        scaffoldBackgroundColor: const Color(0xff1c1c1e),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Color.fromRGBO(29, 25, 43, 100),
-        ),
-      ),
-      title: 'Welcome to the UKE Mlab Team',
-      home: Scaffold(
-          appBar: AppBar(
-            title: const Text('Welcome to the UKE Mlab Team'),
+        theme: ThemeData(
+          scaffoldBackgroundColor: const Color(0xff1c1c1e),
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Color.fromRGBO(29, 25, 43, 100),
           ),
+<<<<<<< HEAD
           body: View(containerColor: containerColor)),
 >>>>>>> 50ec0fe (#23 [TASK] add layout, theme, basic structure)
     );
+=======
+        ),
+        title: 'Welcome to the UKE Mlab Team 123',
+        home: Scaffold(
+          appBar: AppBar(
+            title: const Text('Welcome to the UKE Mlab Team 123 0 0 0'),
+          ),
+          body: Monitor(),
+        ));
+>>>>>>> c429014 ([TASK]#23 Add Readme,And Example Project)
   }
 }
