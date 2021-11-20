@@ -6,48 +6,68 @@ class ActiveModels {
 
 // TODO factory for objects
 
-class DataObject {
-  RxInt upperAlarmBound = 0.obs;
-  RxInt lowerAlarmBound = 0.obs;
-  var valuesPlaceholder = 0
-      .obs; // TODO Datastructure holding instead of placeholder, discuss with group
+//Historic data INCLUDES the presentData value at the end, is initiated with 100
+//Alarm recognition is done in Alarm manager
+class DataModel {
+  RxInt _upperAlarmBound = 0.obs;
+  RxInt _lowerAlarmBound = 0.obs;
+  Rx<ChartData> _presentData = ChartData(DateTime.now(), 0).obs;
+  List<Rx<ChartData>> _historicalData =
+      []; //growable list TODO: find out why compiler thinks final ist correct here, since pointer should change
+  final int _historicalDataMaxLength = 100; //TODO could be a parameter
 
-  DataObject(int upperBound, int lowerBound) {
-    upperAlarmBound = upperBound as RxInt;
-    lowerAlarmBound = lowerBound as RxInt;
+  DataModel(RxInt upperBound, RxInt lowerBound) {
+    _upperAlarmBound = upperBound;
+    _lowerAlarmBound = lowerBound;
   }
 
-  void updateValues(int value) {
-    valuesPlaceholder =
-        value as RxInt; //TODO add Value to data structure from API/input
-  }
+  void updateValues(DateTime newTimeStamp, double newValue) {
+    _presentData = ChartData(newTimeStamp, newValue).obs;
+    _historicalData.add(_presentData);
 
-  //TODO replace
-  RxInt getValues() {
-    return valuesPlaceholder;
-  }
-
-  // TODO checkBoundaries and following could also be done in alarmManager
-  void checkBoundaries() {
-    if ((upperAlarmBound as int) <
-        (valuesPlaceholder as int)) //TODO replace valuesPlaceholder
-    {
-      sendAlarm(valuesPlaceholder as int, true);
-    } else if ((valuesPlaceholder as int) <
-        (lowerAlarmBound as int)) //TODO replace valuesPlaceholder
-    {
-      sendAlarm(valuesPlaceholder as int, false);
-    } else {
-      stopAlarm();
+    //TODO Check whether MaxLength < list length, if so, drop beginning
+    if (_historicalDataMaxLength < _historicalData.length) {
+      _historicalData.removeAt(0);
     }
   }
 
-  // up = true: upper bound failed
-  void sendAlarm(int placeholder, bool up) {
-    //TODO send an alarm to alarm manager once designed and implemented
+  void updateUpperAlarmBoundary(int newBoundary) {
+    _upperAlarmBound = newBoundary as RxInt;
   }
 
-  void stopAlarm() {
-    //TODO send a stop alarm signal to alarm manager once designed and implemented
+  void updateLowerAlarmBoundary(int newBoundary) {
+    _lowerAlarmBound = newBoundary as RxInt;
+  }
+
+  Rx<ChartData> getPresenData() {
+    return _presentData;
+  }
+
+  List<Rx<ChartData>> getHistoricalData() {
+    return _historicalData;
+  }
+
+  RxInt getUpperAlarmBound() {
+    return _upperAlarmBound;
+  }
+
+  RxInt getLowerAlarmBound() {
+    return _lowerAlarmBound;
+  }
+}
+
+// Construct a new data entry tuple
+class ChartData {
+  final DateTime time;
+  final double value;
+
+  ChartData(this.time, this.value);
+
+  DateTime getTime() {
+    return time;
+  }
+
+  double getValue() {
+    return value;
   }
 }
