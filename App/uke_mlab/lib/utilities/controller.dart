@@ -6,11 +6,11 @@ class Controller {
   bool _scenarioStarted = false;
 
   void setUpperBoundary(DataModel dataModel, int value) {
-    dataModel.updateUpperAlarmBoundary(value);
+    dataModel.setUpperAlarmBoundary(value);
   }
 
   void setLowerBoundary(DataModel dataModel, int value) {
-    dataModel.updateLowerAlarmBoundary(value);
+    dataModel.setLowerAlarmBoundary(value);
   }
 
   //TODO implement

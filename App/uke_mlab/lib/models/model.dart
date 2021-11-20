@@ -2,15 +2,20 @@ import 'package:get/get.dart';
 
 class ModelManager {
   final Map<String, DataModel> _activeModels = {};
+  //TODO get standard values as Adult values, maybe from a respective JSON?
+  //TODO better keys than names
+  //Add aditional data entries as soon as model data is required
+  final _initialValues = {
+    MapEntry("HeartFrequency", DataModel(0.obs, 0.obs)),
+    MapEntry("SpO2", DataModel(0.obs, 0.obs))
+  };
 
   ModelManager() {
-    //TODO get standard values as Adult values
-    //TODO better keys than names
-    //Add aditional data entries as soon as model data is required
-    _activeModels.addEntries({
-      MapEntry("HeartFrequency", DataModel(0.obs, 0.obs)),
-      MapEntry("SpO2", DataModel(0.obs, 0.obs))
-    });
+    _activeModels.addEntries(_initialValues);
+  }
+
+  void resetModels() {
+    _activeModels.forEach((key, value) => value.resetDataModel());
   }
 
   //TODO better keys, see above
@@ -27,6 +32,11 @@ class ModelManager {
 class DataModel {
   late RxInt _upperAlarmBound;
   late RxInt _lowerAlarmBound;
+
+  //Could have observable type to avoid type conversions, but why should these values be observable?
+  late int _initialUpperBound;
+  late int _initialLowerBound;
+
   Rx<ChartData> _presentData =
       ChartData(DateTime.now(), 0).obs; //TODO better/other initialisation?
   List<Rx<ChartData>> _historicalData =
@@ -35,7 +45,9 @@ class DataModel {
 
   DataModel(RxInt upperBound, RxInt lowerBound) {
     _upperAlarmBound = upperBound;
+    _initialUpperBound = upperBound.toInt();
     _lowerAlarmBound = lowerBound;
+    _initialLowerBound = lowerBound.toInt();
   }
 
   void updateValues(DateTime newTimeStamp, double newValue) {
@@ -48,12 +60,19 @@ class DataModel {
     }
   }
 
-  void updateUpperAlarmBoundary(int newBoundary) {
-    _upperAlarmBound = newBoundary as RxInt;
+  void resetDataModel() {
+    _upperAlarmBound = RxInt(_initialUpperBound);
+    _lowerAlarmBound = RxInt(_initialLowerBound);
+    _presentData = ChartData(DateTime.now(), 0).obs;
+    _historicalData.clear();
   }
 
-  void updateLowerAlarmBoundary(int newBoundary) {
-    _lowerAlarmBound = newBoundary as RxInt;
+  void setUpperAlarmBoundary(int newBoundary) {
+    _upperAlarmBound = RxInt(newBoundary);
+  }
+
+  void setLowerAlarmBoundary(int newBoundary) {
+    _lowerAlarmBound = RxInt(newBoundary);
   }
 
   Rx<ChartData> getPresenData() {
