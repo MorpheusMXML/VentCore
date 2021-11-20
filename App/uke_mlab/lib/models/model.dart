@@ -1,7 +1,23 @@
 import 'package:get/get.dart';
 
-class ActiveModels {
-  //TODO: use a datastructure to monitor active models
+class ModelManager {
+  final Map<String, DataModel> _activeModels = {};
+
+  ModelManager() {
+    //TODO get standard values as Adult values
+    //TODO better keys than names
+    //Add aditional data entries as soon as model data is required
+    _activeModels.addEntries({
+      MapEntry("HeartFrequency", DataModel(0.obs, 0.obs)),
+      MapEntry("SpO2", DataModel(0.obs, 0.obs))
+    });
+  }
+
+  //TODO better keys, see above
+  //Returns null if no key matched, use null exception if used
+  DataModel? getDataModel(String key) {
+    return _activeModels[key];
+  }
 }
 
 // TODO factory for objects
@@ -9,9 +25,10 @@ class ActiveModels {
 //Historic data INCLUDES the presentData value at the end, is initiated with 100
 //Alarm recognition is done in Alarm manager
 class DataModel {
-  RxInt _upperAlarmBound = 0.obs;
-  RxInt _lowerAlarmBound = 0.obs;
-  Rx<ChartData> _presentData = ChartData(DateTime.now(), 0).obs;
+  late RxInt _upperAlarmBound;
+  late RxInt _lowerAlarmBound;
+  Rx<ChartData> _presentData =
+      ChartData(DateTime.now(), 0).obs; //TODO better/other initialisation?
   List<Rx<ChartData>> _historicalData =
       []; //growable list TODO: find out why compiler thinks final ist correct here, since pointer should change
   final int _historicalDataMaxLength = 100; //TODO could be a parameter
