@@ -2,9 +2,9 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:uke_mlab/widgets/start_screen_button.dart';
+import 'package:uke_mlab/widgets/demo_screen_button.dart';
 
-class startScreen extends StatelessWidget {
+class demoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(children: [
@@ -15,12 +15,9 @@ class startScreen extends StatelessWidget {
             Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
-                  startScreenButton(
-                      name: 'Adult', image: 'assets/icons/adults2.svg'),
-                  startScreenButton(
-                      name: 'Children', image: 'assets/icons/children.svg'),
-                  startScreenButton(
-                      name: 'Infant', image: 'assets/icons/newborn.svg'),
+                  DemoScreenButton(name: "Demo Scenario 1"),
+                  DemoScreenButton(name: "Demo Scenario 2"),
+                  DemoScreenButton(name: "Demo Scenario 3"),
                 ]),
           ],
         ),
