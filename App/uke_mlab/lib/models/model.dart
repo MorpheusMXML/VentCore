@@ -25,7 +25,7 @@ class DataModel {
     _presentData = ChartData(newTimeStamp, newValue).obs;
     _historicalData.add(_presentData);
 
-    //TODO Check whether MaxLength < list length, if so, drop beginning
+    //Check whether MaxLength < list length, if so, drop beginning
     if (_historicalDataMaxLength < _historicalData.length) {
       _historicalData.removeAt(0);
     }
@@ -58,16 +58,16 @@ class DataModel {
 
 // Construct a new data entry tuple
 class ChartData {
-  final DateTime time;
-  final double value;
+  final DateTime _time;
+  final double _value;
 
-  ChartData(this.time, this.value);
+  ChartData(this._time, this._value);
 
   DateTime getTime() {
-    return time;
+    return _time;
   }
 
   double getValue() {
-    return value;
+    return _value;
   }
 }
