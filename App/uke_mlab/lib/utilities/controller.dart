@@ -51,10 +51,10 @@ class Controller {
     // else case for throwing some kind of error message?
   }
 
-  void endScenario() {
+  void endScenario(ModelManager manager) {
     if (_scenarioStarted) {
       //stop scenario
-      //reset values in data model
+      manager.resetModels();
       _scenarioStarted = false;
     }
     // else case for throwing some kind of error message?
