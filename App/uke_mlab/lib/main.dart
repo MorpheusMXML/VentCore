@@ -1,13 +1,7 @@
-//
-//just a widget to play with
-import 'package:responsive_grid/responsive_grid.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:uke_mlab/src/controller.dart';
-import 'package:uke_mlab/src/model.dart';
-import 'package:uke_mlab/src/view.dart';
+import 'package:uke_mlab/screens/monitor.dart';
 
 void main() {
   // We need to call it manually,
@@ -28,18 +22,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     const Color containerColor = Color(0xff49454f);
     return MaterialApp(
-      theme: ThemeData(
-        scaffoldBackgroundColor: const Color(0xff1c1c1e),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Color.fromRGBO(29, 25, 43, 100),
-        ),
-      ),
-      title: 'Welcome to the UKE Mlab Team',
-      home: Scaffold(
-          appBar: AppBar(
-            title: const Text('Welcome to the UKE Mlab Team'),
+        theme: ThemeData(
+          scaffoldBackgroundColor: const Color(0xff1c1c1e),
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Color.fromRGBO(29, 25, 43, 100),
           ),
-          body: View(containerColor: containerColor)),
-    );
+        ),
+        title: 'Welcome to the UKE Mlab Team 123',
+        home: Scaffold(
+          appBar: AppBar(
+            title: const Text('Welcome to the UKE Mlab Team 123 0 0 0'),
+          ),
+          body: Monitor(),
+        ));
   }
 }
