@@ -1,4 +1,4 @@
-# UKE Style Guide
+# UKE Style Guide: Categories
 
 ### General
 
@@ -21,7 +21,7 @@
   
 |Element|Hex-Code|Preview |
 |:---|:---:|:---:|
-|yellow alarm: text|	#FBFF00|![#FBFF00](https://via.placeholder.com/50/FBFF00/000000?text=+)|
+|yellow alarm|	#FBFF00|![#FBFF00](https://via.placeholder.com/50/FBFF00/000000?text=+)|
 |triggered alarm border: text|	#24843D|![#24843D](https://via.placeholder.com/50/24843D/000000?text=+)|
 |yellow alarm: text|	#000000|![#000000](https://via.placeholder.com/50/000000/000000?text=+)|
 |message|	#49FF00|![#49FF00](https://via.placeholder.com/50/49FF00/000000?text=+)|
