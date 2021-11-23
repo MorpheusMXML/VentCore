@@ -2,14 +2,18 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:uke_mlab/widgets/start_screen_button.dart';
+import 'package:uke_mlab/widgets/aed_button.dart';
+import 'package:uke_mlab/widgets/start_screen/name_field.dart';
+import 'package:uke_mlab/widgets/start_screen/slider.dart';
+import 'package:uke_mlab/widgets/start_screen/start_screen_button.dart';
+import 'package:uke_mlab/widgets/start_screen/start_screen_skip.dart';
 
 class startScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(children: [
       Flexible(
-        flex: 3,
+        flex: 5,
         child: Row(
           children: [
             Column(
@@ -26,14 +30,25 @@ class startScreen extends StatelessWidget {
         ),
       ),
       Flexible(
-        flex: 2,
+        flex: 4,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Container(
-              height: 100,
-              color: Colors.amber,
-            )
+              //Fett
+              margin: const EdgeInsets.fromLTRB(0, 0, 65, 12),
+              color: Color(0xff25232a),
+              height: 320 / MediaQuery.of(context).devicePixelRatio,
+              width: 830 / MediaQuery.of(context).devicePixelRatio,
+              child: Column(
+                children: [
+                  nameField(),
+                  startScreenSlider(),
+                ],
+              ),
+            ),
+            aedButton(),
+            startScreenSkip()
           ],
         ),
       ),
