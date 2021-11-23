@@ -24,24 +24,25 @@ class Monitor extends StatelessWidget {
             children: [
               Flexible(
                 flex: 1,
-                child: Container(
-                  color: Colors.green,
-                  child: Row(
-                    children: const [
-                      Flexible(
-                        flex: 1,
-                        child: ValueTile(
-                          textColor: 0xffFF00E4,
-                        ),
+                child: Row(
+                  children: const [
+                    Flexible(
+                      flex: 1,
+                      child: ValueTile(
+                        name: "Pulse",
+                        textColor: 0xffFF00E4,
+                        backgroundColor: 0xff2A2831,
                       ),
-                      Flexible(
-                        flex: 1,
-                        child: ValueTile(
-                          textColor: 0xffFF10E4,
-                        ),
+                    ),
+                    Flexible(
+                      flex: 1,
+                      child: ValueTile(
+                        name: "Breath. Freq.",
+                        textColor: 0xff0CECDD,
+                        backgroundColor: 0xff2A2831,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
               Flexible(
