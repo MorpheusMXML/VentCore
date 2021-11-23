@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:uke_mlab/widgets/example_flexible.dart';
+import 'package:uke_mlab/widgets/value_tile.dart';
 
 class Monitor extends StatelessWidget {
   @override
@@ -8,7 +9,7 @@ class Monitor extends StatelessWidget {
     return Row(
       children: [
         Flexible(
-          flex: 3,
+          flex: 4,
           child: Column(
             children: [
               ExampleFlexible(),
@@ -23,15 +24,33 @@ class Monitor extends StatelessWidget {
             children: [
               Flexible(
                 flex: 1,
-                child: Container(height: 100, color: Colors.amber),
+                child: Container(
+                  color: Colors.green,
+                  child: Row(
+                    children: const [
+                      Flexible(
+                        flex: 1,
+                        child: ValueTile(
+                          textColor: 0xffFF00E4,
+                        ),
+                      ),
+                      Flexible(
+                        flex: 1,
+                        child: ValueTile(
+                          textColor: 0xffFF10E4,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
               Flexible(
                 flex: 1,
-                child: Container(height: 100, color: Colors.blue),
+                child: Container(color: Colors.amber),
               ),
               Flexible(
-                flex: 2,
-                child: Container(height: 100, color: Colors.purple),
+                flex: 1,
+                child: Container(color: Colors.purple),
               ),
             ],
           ),
