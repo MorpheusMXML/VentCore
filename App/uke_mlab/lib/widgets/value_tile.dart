@@ -20,25 +20,33 @@ class ValueTile extends StatelessWidget {
       color: Color(backgroundColor),
       margin: const EdgeInsets.all(12),
       width: double.maxFinite,
-      child: Column(children: [
-        Container(
-          // This margin causes the Text to be pushed away from the edge of the container.
-          margin: const EdgeInsets.only(top: 12, left: 12, right: 12),
-          child: Text(
-            name,
-            style: TextStyle(
-              color: Color(textColor),
-              fontSize: 40,
-              // temp fix for long names
-              overflow: TextOverflow.ellipsis,
+      child: Column(
+        children: [
+          Flexible(
+            flex: 1,
+            child: Center(
+              child: Text(
+                name,
+                style: TextStyle(
+                  color: Color(textColor),
+                  fontSize: 40,
+                  // temp fix for long names
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
             ),
           ),
-        ),
-        ValueBox(
-          textColor: textColor,
-          value: value,
-        ),
-      ]),
+          Flexible(
+            // cant decrease --> pixel overflow
+            flex: 3,
+            child: ValueBox(
+              backgroundColor: backgroundColor,
+              textColor: textColor,
+              value: value,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
