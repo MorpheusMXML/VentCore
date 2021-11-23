@@ -51,17 +51,16 @@ class startScreenButton extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        right:
-                            127), //TODO: Wie bekommen wir den Text ohne Padding gecentert im gesamt Button?
-                    child: Text(
-                      name,
-                      style: const TextStyle(fontSize: 25),
-                    ),
+                  Text(
+                    name,
+                    style: const TextStyle(fontSize: 25),
                   ),
                 ],
               ),
+            ),
+            Flexible(
+              flex: 2,
+              child: Container(), //Leer damit Button Text zentriert
             ),
           ],
         ),
