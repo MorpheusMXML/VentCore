@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'package:uke_mlab/widgets/example_flexible.dart';
+import 'package:uke_mlab/widgets/graph_container.dart';
 import 'package:uke_mlab/widgets/value_tile.dart';
+import 'package:uke_mlab/widgets/graph_adder.dart';
 
 class Monitor extends StatelessWidget {
+  const Monitor({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -12,9 +15,10 @@ class Monitor extends StatelessWidget {
           flex: 4,
           child: Column(
             children: const [
-              ExampleFlexible(),
-              ExampleFlexible(),
-              ExampleFlexible(),
+              GraphContainer(),
+              GraphContainer(),
+              GraphContainer(),
+              GraphAdder(),
             ],
           ),
         ),
