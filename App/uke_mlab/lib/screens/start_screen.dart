@@ -30,21 +30,27 @@ class startScreen extends StatelessWidget {
         ),
       ),
       Flexible(
-        flex: 4,
+        flex:
+            3, //von 4 auf 3 damit Patientencontainer wieder auf eine höhe mit Buttons
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Container(
-              //Fett
-              margin: const EdgeInsets.fromLTRB(0, 0, 65, 12),
-              color: Color(0xff25232a),
-              height: 320 / MediaQuery.of(context).devicePixelRatio,
-              width: 830 / MediaQuery.of(context).devicePixelRatio,
-              child: Column(
-                children: [
-                  nameField(),
-                  startScreenSlider(),
-                ],
+            //Ganzer Container auf einer Höhe mit Buttons darunter
+            Align(
+              alignment: Alignment.centerRight,
+              //Fetter Container
+              child: Container(
+                margin: const EdgeInsets.fromLTRB(0, 0, 65, 12),
+                color: Color(0xff25232a),
+                height: 320 / MediaQuery.of(context).devicePixelRatio,
+                width: 830 / MediaQuery.of(context).devicePixelRatio,
+                child: Column(
+                  children: const [
+                    nameField(),
+                    startScreenSlider(name: "Weight"),
+                    startScreenSlider(name: "Height"),
+                  ],
+                ),
               ),
             ),
             aedButton(),
