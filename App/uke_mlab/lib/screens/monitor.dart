@@ -11,7 +11,7 @@ class Monitor extends StatelessWidget {
         Flexible(
           flex: 4,
           child: Column(
-            children: [
+            children: const [
               ExampleFlexible(),
               ExampleFlexible(),
               ExampleFlexible(),
