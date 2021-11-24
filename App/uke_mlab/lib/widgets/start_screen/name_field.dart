@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/material.dart';
 
 class nameField extends StatelessWidget {
@@ -8,19 +10,20 @@ class nameField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+      margin: const EdgeInsets.all(10),
       height: 80 / MediaQuery.of(context).devicePixelRatio,
-      color: Color(0xff322f37),
+      color: const Color(0xff322f37),
       child: Row(
         children: const [
           Flexible(
-              flex: 3,
-              fit: FlexFit.tight,
-              child: Padding(
-                padding: EdgeInsets.only(left: 10),
-                child: Text('Name',
-                    style: TextStyle(fontSize: 17, color: Color(0xffeeeeee))),
-              )),
+            flex: 2,
+            fit: FlexFit.tight,
+            child: Padding(
+              padding: EdgeInsets.only(left: 10),
+              child: Text('Name',
+                  style: TextStyle(fontSize: 17, color: Color(0xffeeeeee))),
+            ),
+          ),
           Flexible(
               flex: 8,
               child: Padding(
