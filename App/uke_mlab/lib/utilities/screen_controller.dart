@@ -2,7 +2,7 @@ import 'package:uke_mlab/models/model.dart';
 
 // basic controller to interact with model
 // (at the moment) just boundary update
-class Controller {
+class ScreenController {
   bool _scenarioStarted = false;
 
   void setUpperBoundary(DataModel dataModel, int value) {

@@ -18,8 +18,8 @@ class SystemState {
   final Map<sensors, boundaryState> _violationStates = {};
 
   SystemState() {
-    _violationStates.forEach(
-        (key, value) => {_violationStates[key] = boundaryState.inBoundaries});
+    _violationStates
+        .forEach((key, value) => {value = boundaryState.inBoundaries});
   }
 
   void setBoundaryState(sensors key, boundaryState newState) {
