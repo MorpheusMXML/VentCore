@@ -1,1 +1,0 @@
-//Models are the collection of data that are usually sourced from the servers, users, or external APIs, these are used in combination with widgets to complete the user interface of the app. 

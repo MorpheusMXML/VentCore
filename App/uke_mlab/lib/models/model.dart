@@ -1,13 +1,13 @@
 import 'package:get/get.dart';
+import 'package:uke_mlab/models/sensors.dart';
 
 class ModelManager {
-  final Map<String, DataModel> _activeModels = {};
+  final Map<sensors, DataModel> _activeModels = {};
   //TODO get standard values as Adult values, maybe from a respective JSON?
-  //TODO better keys than names
   //Add aditional data entries as soon as model data is required
   final _initialValues = {
-    MapEntry("HeartFrequency", DataModel(0.obs, 0.obs)),
-    MapEntry("SpO2", DataModel(0.obs, 0.obs))
+    MapEntry(sensors.heartFrequency, DataModel(0.obs, 0.obs)),
+    MapEntry(sensors.spo2, DataModel(0.obs, 0.obs))
   };
 
   ModelManager() {
@@ -18,14 +18,11 @@ class ModelManager {
     _activeModels.forEach((key, value) => value.resetDataModel());
   }
 
-  //TODO better keys, see above
   //Returns null if no key matched, use null exception if used
-  DataModel? getDataModel(String key) {
+  DataModel? getDataModel(sensors key) {
     return _activeModels[key];
   }
 }
-
-// TODO factory for objects
 
 //Historic data INCLUDES the presentData value at the end, is initiated with 100
 //Alarm recognition is done in Alarm manager
