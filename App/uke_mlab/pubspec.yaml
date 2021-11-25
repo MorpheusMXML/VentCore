@@ -39,6 +39,7 @@ dependencies:
   # The following is just an experiement for the upcoming flutter app
   responsive_grid: ^2.0.0
   google_fonts: ^2.1.0
+  syncfusion_flutter_charts: ^19.3.55
 
 dev_dependencies:
   flutter_test:
