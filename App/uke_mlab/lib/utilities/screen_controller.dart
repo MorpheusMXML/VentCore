@@ -1,3 +1,4 @@
+import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/models/model.dart';
 
 // basic controller to interact with model
@@ -20,25 +21,25 @@ class ScreenController {
   void acknowledgeAlarm() {}
 
   //TODO add interaction with scenarios when scenarios are present
-  void startScenario(int scenarioNumber) {
+  void startScenario(scenarios scenario) {
     _scenarioStarted = true;
-    switch (scenarioNumber) {
-      case 1:
+    switch (scenario) {
+      case scenarios.scenario1:
         //start scenario 1
         break;
-      case 2:
+      case scenarios.scenario2:
         //start scenario 2
         break;
-      case 31:
+      case scenarios.scenario3a:
         //start scenario 3a
         break;
-      case 32:
+      case scenarios.scenario3b:
         //start scenario 3b
         break;
-      case 33:
+      case scenarios.scenario3c:
         //start scenario 3c
         break;
-      case 4:
+      case scenarios.scenario4:
       //start scenario 4
       default: // return Error "no scenario with such a number found" vs start one of the scenarios with a hint
     }
