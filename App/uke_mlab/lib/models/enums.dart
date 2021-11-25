@@ -12,3 +12,9 @@ enum scenarios {
   scenario3c,
   scenario4
 }
+
+enum boundaryState {
+  lowerBoundaryViolated,
+  inBoundaries,
+  upperBoundaryViolated
+}

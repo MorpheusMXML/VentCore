@@ -1,10 +1,11 @@
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/model.dart';
 
-class AlarmNotifier {
+class AlarmController {
   late ModelManager _modelManager;
 
-  AlarmNotifier(ModelManager modelManager) {
+  AlarmController(ModelManager modelManager) {
     _modelManager = modelManager;
+    _modelManager.registerAlarmController(this);
   }
 }
