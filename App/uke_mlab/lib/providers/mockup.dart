@@ -1,13 +1,15 @@
 import 'dart:math';
-
 import 'package:get/get.dart';
 
+// DataClass used by the Graphs
+// x: DateTime, y: value (HF, SpO2, ...)
 class ChartData {
   ChartData(this.time, this.value);
   final DateTime time;
   final double value;
 }
 
+// GetX requires Bindings for Controllers
 class MonitorBinding extends Bindings {
   @override
   void dependencies() {
@@ -15,8 +17,10 @@ class MonitorBinding extends Bindings {
   }
 }
 
+// GetX Controller contains variables used by other widgets
+// Sample Data and update function for graphs
 class MonitorController extends GetxController {
-  int counter = 5;
+  Random random = Random();
 
   var data = [
     ChartData(DateTime.now(), 0),
@@ -40,8 +44,6 @@ class MonitorController extends GetxController {
   var data2 = [ChartData(DateTime.now(), 0)].obs;
 
   var data3 = [ChartData(DateTime.now(), 0)].obs;
-
-  Random random = Random();
 
   updateData() {
     data.add(ChartData(DateTime.now(), random.nextInt(100).toDouble()));
