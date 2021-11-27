@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:uke_mlab/providers/mockup.dart';
 import 'package:uke_mlab/widgets/bell.dart';
@@ -16,24 +14,32 @@ class GraphContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-      flex: 1,
+    return Container(
+      margin: const EdgeInsets.only(left: 20),
+      height: 200,
       child: Row(
         children: [
           Flexible(
             flex: 1,
-            child: Bell(),
-          ),
-          Flexible(
-            flex: 6,
-            child: Graph(data: data),
-          ),
-          Flexible(
-            flex: 2,
-            child: ValueBox(
-              value: 20,
-              textColor: 0xff0CECDD,
-              backgroundColor: 0xff2A2831,
+            child: Row(
+              children: [
+                const Flexible(
+                  flex: 1,
+                  child: Bell(),
+                ),
+                Flexible(
+                  flex: 6,
+                  child: Graph(data: data),
+                ),
+                Flexible(
+                  flex: 2,
+                  child: ValueBox(
+                    value: data[data.length - 1].value.toInt(),
+                    textColor: 0xff0CECDD,
+                    backgroundColor: 0xff2A2831,
+                  ),
+                )
+              ],
             ),
           )
         ],
