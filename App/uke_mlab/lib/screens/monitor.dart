@@ -6,8 +6,6 @@ import 'package:uke_mlab/widgets/graph_container.dart';
 import 'package:uke_mlab/widgets/value_tile.dart';
 import 'package:uke_mlab/widgets/graph_adder.dart';
 
-
-
 class Monitor extends StatelessWidget {
   const Monitor({Key? key}) : super(key: key);
 
@@ -20,6 +18,8 @@ class Monitor extends StatelessWidget {
         Flexible(
           flex: 4,
           child: Column(
+            // Add condition here? 
+            // If GraphAdder is tapped, render different children
             children: [
               GraphContainer(data: monitorController.data),
               GraphContainer(data: monitorController.data2),
