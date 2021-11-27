@@ -79,6 +79,12 @@ class MonitorController extends GetxController {
     ChartData(DateTime.now(), 0)
   ].obs;
 
+  bool isAddGraphTapped = false;
+  void invert() {
+    isAddGraphTapped = !isAddGraphTapped;
+    update();
+  }
+
   updateData() {
     data.add(ChartData(DateTime.now(), random.nextInt(100).toDouble()));
     data.removeAt(0);
