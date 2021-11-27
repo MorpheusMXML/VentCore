@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:uke_mlab/providers/mockup.dart';
 import 'package:uke_mlab/widgets/bell.dart';
 import 'package:uke_mlab/widgets/value_box.dart';
@@ -33,12 +34,11 @@ class GraphContainer extends StatelessWidget {
                 ),
                 Flexible(
                   flex: 2,
-                  child: ValueBox(
-                    // dynamic assigning doesn't work?
-                    value: data[data.length - 1].value.toInt(),
-                    textColor: 0xff0CECDD,
-                    backgroundColor: 0xff2A2831,
-                  ),
+                  child: Obx(() => ValueBox(
+                        value: data[data.length - 1].value.toInt(),
+                        textColor: 0xff0CECDD,
+                        backgroundColor: 0xff2A2831,
+                      )),
                 )
               ],
             ),
