@@ -1,6 +1,3 @@
-import 'dart:async';
-//import 'package:cloud_firestore/cloud_firestore.dart';
-//import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -17,42 +14,39 @@ class Graph extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final monitorController = Get.find<MonitorController>();
-    ChartSeriesController? _chartSeriesController;
+    ChartSeriesController? myController;
 
-    return Container(
-      margin: const EdgeInsets.only(top: 30, bottom: 20),
-      child: Row(
-        children: [
-          Flexible(
-            flex: 1,
-            child: ElevatedButton(
-              onPressed: () {
-                _chartSeriesController?.updateDataSource(
-                  addedDataIndexes: <int>[data.length - 1],
-                  removedDataIndexes: <int>[0],
-                );
-                monitorController.updateData();
-              },
-              child: Text("update"),
-            ),
+    return Row(
+      children: [
+        Flexible(
+          flex: 1,
+          child: ElevatedButton(
+            onPressed: () {
+              myController?.updateDataSource(
+                addedDataIndexes: <int>[data.length - 1],
+                removedDataIndexes: <int>[0],
+              );
+              monitorController.updateData();
+            },
+            child: const Text("update"),
           ),
-          Flexible(
-            flex: 4,
-            child: SfCartesianChart(
-              primaryXAxis: CategoryAxis(),
-              series: [
-                LineSeries(
-                    dataSource: data,
-                    onRendererCreated: (ChartSeriesController controller) {
-                      _chartSeriesController = controller;
-                    },
-                    xValueMapper: (ChartData data, _) => data.time,
-                    yValueMapper: (ChartData data, _) => data.value)
-              ],
-            ),
+        ),
+        Flexible(
+          flex: 4,
+          child: SfCartesianChart(
+            primaryXAxis: CategoryAxis(),
+            series: [
+              LineSeries(
+                  dataSource: data,
+                  onRendererCreated: (ChartSeriesController controller) {
+                    myController = controller;
+                  },
+                  xValueMapper: (ChartData data, _) => data.time,
+                  yValueMapper: (ChartData data, _) => data.value)
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
