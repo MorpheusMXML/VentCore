@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -16,36 +18,25 @@ class Graph extends StatelessWidget {
     final monitorController = Get.find<MonitorController>();
     ChartSeriesController? myController;
 
-    return Row(
-      children: [
-        Flexible(
-          flex: 1,
-          child: ElevatedButton(
-            onPressed: () {
-              myController?.updateDataSource(
-                addedDataIndexes: <int>[data.length - 1],
-                removedDataIndexes: <int>[0],
-              );
-              monitorController.updateData();
+    // execute every 500 milliseconds
+    Timer.periodic(const Duration(milliseconds: 500), (timer) {
+      myController?.updateDataSource(
+        addedDataIndexes: <int>[data.length - 1],
+        removedDataIndexes: <int>[0],
+      );
+      monitorController.updateData();
+    });
+
+    return SfCartesianChart(
+      primaryXAxis: CategoryAxis(),
+      series: [
+        SplineSeries(
+            dataSource: data,
+            onRendererCreated: (ChartSeriesController controller) {
+              myController = controller;
             },
-            child: const Text("update"),
-          ),
-        ),
-        Flexible(
-          flex: 4,
-          child: SfCartesianChart(
-            primaryXAxis: CategoryAxis(),
-            series: [
-              LineSeries(
-                  dataSource: data,
-                  onRendererCreated: (ChartSeriesController controller) {
-                    myController = controller;
-                  },
-                  xValueMapper: (ChartData data, _) => data.time,
-                  yValueMapper: (ChartData data, _) => data.value)
-            ],
-          ),
-        ),
+            xValueMapper: (ChartData data, _) => data.time,
+            yValueMapper: (ChartData data, _) => data.value)
       ],
     );
   }
