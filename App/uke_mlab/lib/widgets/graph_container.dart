@@ -34,6 +34,7 @@ class GraphContainer extends StatelessWidget {
                 Flexible(
                   flex: 2,
                   child: ValueBox(
+                    // dynamic assigning doesn't work?
                     value: data[data.length - 1].value.toInt(),
                     textColor: 0xff0CECDD,
                     backgroundColor: 0xff2A2831,
