@@ -41,12 +41,52 @@ class MonitorController extends GetxController {
     ChartData(DateTime.now(), 0)
   ].obs;
 
-  var data2 = [ChartData(DateTime.now(), 0)].obs;
+  var data2 = [
+    ChartData(DateTime.now(), 0),
+    ChartData(DateTime.now(), 0),
+    ChartData(DateTime.now(), 0),
+    ChartData(DateTime.now(), 0),
+    ChartData(DateTime.now(), 0),
+    ChartData(DateTime.now(), 0),
+    ChartData(DateTime.now(), 0),
+    ChartData(DateTime.now(), 0),
+    ChartData(DateTime.now(), 0),
+    ChartData(DateTime.now(), 0),
+    ChartData(DateTime.now(), 0),
+    ChartData(DateTime.now(), 0),
+    ChartData(DateTime.now(), 0),
+    ChartData(DateTime.now(), 0),
+    ChartData(DateTime.now(), 0),
+    ChartData(DateTime.now(), 0)
+  ].obs;
 
-  var data3 = [ChartData(DateTime.now(), 0)].obs;
+  var data3 = [
+    ChartData(DateTime.now(), 0),
+    ChartData(DateTime.now(), 0),
+    ChartData(DateTime.now(), 0),
+    ChartData(DateTime.now(), 0),
+    ChartData(DateTime.now(), 0),
+    ChartData(DateTime.now(), 0),
+    ChartData(DateTime.now(), 0),
+    ChartData(DateTime.now(), 0),
+    ChartData(DateTime.now(), 0),
+    ChartData(DateTime.now(), 0),
+    ChartData(DateTime.now(), 0),
+    ChartData(DateTime.now(), 0),
+    ChartData(DateTime.now(), 0),
+    ChartData(DateTime.now(), 0),
+    ChartData(DateTime.now(), 0),
+    ChartData(DateTime.now(), 0)
+  ].obs;
 
   updateData() {
     data.add(ChartData(DateTime.now(), random.nextInt(100).toDouble()));
     data.removeAt(0);
+
+    data2.add(ChartData(DateTime.now(), random.nextInt(100).toDouble()));
+    data2.removeAt(0);
+
+    data3.add(ChartData(DateTime.now(), random.nextInt(100).toDouble()));
+    data3.removeAt(0);
   }
 }
