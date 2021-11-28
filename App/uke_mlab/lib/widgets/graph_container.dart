@@ -7,10 +7,12 @@ import 'package:uke_mlab/widgets/graph.dart';
 
 class GraphContainer extends StatelessWidget {
   final List<ChartData> data;
+  final Color color;
 
   const GraphContainer({
     Key? key,
     required this.data,
+    required this.color,
   }) : super(key: key);
 
   @override
@@ -30,15 +32,20 @@ class GraphContainer extends StatelessWidget {
                 ),
                 Flexible(
                   flex: 6,
-                  child: Graph(data: data),
+                  child: Graph(
+                    data: data,
+                    color: color,
+                  ),
                 ),
                 Flexible(
                   flex: 2,
-                  child: Obx(() => ValueBox(
-                        value: data[data.length - 1].value.toInt(),
-                        textColor: 0xff0CECDD,
-                        backgroundColor: 0xff2A2831,
-                      )),
+                  child: Obx(
+                    () => ValueBox(
+                      value: data[data.length - 1].value.toInt(),
+                      textColor: 0xff0CECDD,
+                      backgroundColor: 0xff2A2831,
+                    ),
+                  ),
                 )
               ],
             ),
