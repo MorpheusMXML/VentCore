@@ -21,10 +21,7 @@ class ValueTile extends StatelessWidget {
       child: Container(
         color: Color(backgroundColor),
         margin: const EdgeInsets.only(right: 8, bottom: 8),
-        width: double.maxFinite,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Flexible(
               flex: 1,
