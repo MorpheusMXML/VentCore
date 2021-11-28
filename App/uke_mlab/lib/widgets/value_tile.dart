@@ -8,23 +8,26 @@ class ValueTile extends StatelessWidget {
   final String name;
 
   const ValueTile({
+    Key? key,
     required this.textColor,
     required this.name,
     required this.backgroundColor,
     this.value = 78,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Color(backgroundColor),
-      margin: const EdgeInsets.all(12),
-      width: double.maxFinite,
-      child: Column(
-        children: [
-          Flexible(
-            flex: 1,
-            child: Center(
+    return Flexible(
+      child: Container(
+        color: Color(backgroundColor),
+        margin: const EdgeInsets.only(right: 8, bottom: 8),
+        width: double.maxFinite,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Flexible(
+              flex: 1,
               child: Text(
                 name,
                 style: TextStyle(
@@ -35,17 +38,17 @@ class ValueTile extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-          Flexible(
-            // cant decrease --> pixel overflow
-            flex: 3,
-            child: ValueBox(
-              backgroundColor: backgroundColor,
-              textColor: textColor,
-              value: value,
+            Flexible(
+              // cant decrease --> pixel overflow
+              flex: 3,
+              child: ValueBox(
+                backgroundColor: backgroundColor,
+                textColor: textColor,
+                value: value,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
