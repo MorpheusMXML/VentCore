@@ -21,9 +21,12 @@ class Monitor extends StatelessWidget {
             // Add condition here?
             // If GraphAdder is tapped, render different children
             children: [
-              GraphContainer(data: monitorController.data),
-              GraphContainer(data: monitorController.data2),
-              GraphContainer(data: monitorController.data3),
+              GraphContainer(
+                  data: monitorController.data, color: Colors.yellow),
+              GraphContainer(
+                  data: monitorController.data2, color: Colors.purple),
+              GraphContainer(
+                  data: monitorController.data3, color: Colors.green),
               const GraphAdder(),
             ],
           ),
