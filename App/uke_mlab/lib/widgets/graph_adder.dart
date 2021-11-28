@@ -16,7 +16,15 @@ class GraphAdder extends StatelessWidget {
 
   getWidget(controller) {
     if (controller.isAddGraphTapped) {
-      return Text("popup");
+      return ElevatedButton(
+        onPressed: () => controller.invert(),
+        style: ElevatedButton.styleFrom(
+          primary: Colors.pink[800],
+          fixedSize: const Size(120, 80),
+          shape: const ContinuousRectangleBorder(),
+        ),
+        child: const Text("Popup"),
+      );
     } else {
       return ElevatedButton(
         onPressed: () => controller.invert(),
