@@ -18,7 +18,7 @@ class MonitorBinding extends Bindings {
 }
 
 // GetX Controller contains variables used by other widgets
-// Sample Data and update function for graphs
+// Sample Data, update function for graphs and tap detection
 class MonitorController extends GetxController {
   Random random = Random();
 
