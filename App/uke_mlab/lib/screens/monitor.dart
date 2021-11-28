@@ -18,7 +18,7 @@ class Monitor extends StatelessWidget {
         Flexible(
           flex: 4,
           child: Column(
-            // Add condition here? 
+            // Add condition here?
             // If GraphAdder is tapped, render different children
             children: [
               GraphContainer(data: monitorController.data),
@@ -36,21 +36,15 @@ class Monitor extends StatelessWidget {
                 flex: 1,
                 child: Row(
                   children: const [
-                    Flexible(
-                      flex: 1,
-                      child: ValueTile(
-                        name: "Pulse",
-                        textColor: 0xffFF00E4,
-                        backgroundColor: 0xff2A2831,
-                      ),
+                    ValueTile(
+                      name: "Pulse",
+                      textColor: 0xffFF00E4,
+                      backgroundColor: 0xff2A2831,
                     ),
-                    Flexible(
-                      flex: 1,
-                      child: ValueTile(
-                        name: "Breath. Freq.",
-                        textColor: 0xff0CECDD,
-                        backgroundColor: 0xff2A2831,
-                      ),
+                    ValueTile(
+                      name: "Breath. Freq.",
+                      textColor: 0xff0CECDD,
+                      backgroundColor: 0xff2A2831,
                     ),
                   ],
                 ),
