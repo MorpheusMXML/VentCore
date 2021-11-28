@@ -36,9 +36,22 @@ class MyApp extends StatelessWidget {
       ),
       getPages: [
         GetPage(
-            name: "/home", page: () => Monitor(), binding: MonitorBinding()),
+          name: "/monitor",
+          page: () => const Monitor(),
+          binding: MonitorBinding(),
+        ),
+        /*GetPage(
+          name: "/aed",
+          page: () => const AED(),
+          binding: AEDBinding(),
+        ),
+        GetPage(
+          name: "/home",
+          page: () => const Ventilation(),
+          binding: VentilationBinding(),
+        ),*/
       ],
-      initialRoute: "/home",
+      initialRoute: "/monitor",
     );
   }
 }
