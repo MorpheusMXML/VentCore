@@ -7,10 +7,12 @@ import 'package:uke_mlab/providers/mockup.dart';
 
 class Graph extends StatelessWidget {
   final List<ChartData> data;
+  final Color color;
 
   const Graph({
     Key? key,
     required this.data,
+    required this.color,
   }) : super(key: key);
 
   @override
@@ -31,6 +33,7 @@ class Graph extends StatelessWidget {
       primaryXAxis: CategoryAxis(),
       series: [
         SplineSeries(
+            color: color,
             dataSource: data,
             onRendererCreated: (ChartSeriesController controller) {
               myController = controller;
