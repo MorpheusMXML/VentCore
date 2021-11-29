@@ -3,7 +3,7 @@ import 'package:uke_mlab/widgets/value_box.dart';
 
 class ValueTile extends StatelessWidget {
   final Color textColor;
-  final int backgroundColor;
+  final Color backgroundColor;
   final int value;
   final String name;
 
@@ -12,26 +12,30 @@ class ValueTile extends StatelessWidget {
     required this.textColor,
     required this.name,
     required this.backgroundColor,
-    this.value = 78,
+    required this.value,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Flexible(
       child: Container(
-        color: Color(backgroundColor),
+        color: backgroundColor,
         margin: const EdgeInsets.only(right: 8, bottom: 8),
         child: Column(
           children: [
             Flexible(
               flex: 1,
-              child: Text(
-                name,
-                style: TextStyle(
-                  color: textColor,
-                  fontSize: 40,
-                  // temp fix for long names
-                  overflow: TextOverflow.ellipsis,
+              child: Container(
+                margin: const EdgeInsets.only(top: 4, bottom: 4),
+                child: Text(
+                  name,
+                  style: TextStyle(
+                    decoration: TextDecoration.none,
+                    color: textColor,
+                    fontSize: 40,
+                    // temp fix for long names
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ),
             ),
