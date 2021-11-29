@@ -29,8 +29,23 @@ class Graph extends StatelessWidget {
       monitorController.updateData();
     });
 
+    // doesn't work for some reason
+    // primaryXAxis: DateTimeAxis(
+    //    dateFormat: DateFormat.ms(),
+
     return SfCartesianChart(
-      primaryXAxis: CategoryAxis(),
+      backgroundColor: Theme.of(context).cardColor,
+      primaryYAxis: CategoryAxis(
+        majorGridLines:
+            MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
+      ),
+      primaryXAxis: CategoryAxis(
+        majorGridLines: MajorGridLines(
+            width: 1,
+            color:
+                Theme.of(context).shadowColor //Theme.of(context).shadowColor,
+            ),
+      ),
       series: [
         SplineSeries(
             color: color,
