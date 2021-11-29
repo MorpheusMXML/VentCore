@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ValueBox extends StatelessWidget {
-  final int textColor;
+  final Color textColor;
   // To be changed to "actual" data
   final int value;
   final int backgroundColor;
@@ -39,7 +39,7 @@ class ValueBox extends StatelessWidget {
                   width: double.maxFinite,
                   child: Text(
                     miniTitle,
-                    style: TextStyle(color: Color(textColor)),
+                    style: TextStyle(color: textColor),
                     textAlign: TextAlign.left,
                   ),
                 ),
@@ -53,7 +53,7 @@ class ValueBox extends StatelessWidget {
                     style: TextStyle(
                       // doesn't work here for some reason
                       //overflow: TextOverflow.ellipsis,
-                      color: Color(textColor),
+                      color: textColor,
                     ),
                     textAlign: TextAlign.right,
                   ),
@@ -64,7 +64,7 @@ class ValueBox extends StatelessWidget {
           Text(
             value.toString(),
             style: TextStyle(
-              color: Color(textColor),
+              color: textColor,
               fontSize: 80,
             ),
           ),
@@ -76,7 +76,7 @@ class ValueBox extends StatelessWidget {
                   width: double.maxFinite,
                   child: Text(
                     "58",
-                    style: TextStyle(color: Color(textColor)),
+                    style: TextStyle(color: textColor),
                     textAlign: TextAlign.left,
                   ),
                 ),
@@ -90,7 +90,7 @@ class ValueBox extends StatelessWidget {
                     style: TextStyle(
                       // doesn't work here for some reason
                       //overflow: TextOverflow.ellipsis,
-                      color: Color(textColor),
+                      color: textColor,
                     ),
                     textAlign: TextAlign.right,
                   ),
