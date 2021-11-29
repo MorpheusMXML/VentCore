@@ -17,10 +17,10 @@ class GraphContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(left: 20),
+    return SizedBox(
       height: 200,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Flexible(
             flex: 1,
@@ -30,6 +30,7 @@ class GraphContainer extends StatelessWidget {
                   flex: 1,
                   child: Bell(),
                 ),
+                Container(width: 10),
                 Flexible(
                   flex: 6,
                   child: Graph(
@@ -37,12 +38,13 @@ class GraphContainer extends StatelessWidget {
                     color: color,
                   ),
                 ),
+                Container(width: 10),
                 Flexible(
                   flex: 2,
                   child: Obx(
                     () => ValueBox(
                       value: data[data.length - 1].value.toInt(),
-                      textColor: 0xff0CECDD,
+                      textColor: color,
                       backgroundColor: 0xff2A2831,
                     ),
                   ),
