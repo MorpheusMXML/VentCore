@@ -32,7 +32,7 @@ class ValueTile extends StatelessWidget {
                   style: TextStyle(
                     decoration: TextDecoration.none,
                     color: textColor,
-                    fontSize: 40,
+                    fontSize: 20,
                     // temp fix for long names
                     overflow: TextOverflow.ellipsis,
                   ),
