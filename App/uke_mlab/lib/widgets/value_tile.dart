@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:uke_mlab/widgets/value_box.dart';
 
 class ValueTile extends StatelessWidget {
-  final int textColor;
+  final Color textColor;
   final int backgroundColor;
   final int value;
   final String name;
@@ -28,7 +28,7 @@ class ValueTile extends StatelessWidget {
               child: Text(
                 name,
                 style: TextStyle(
-                  color: Color(textColor),
+                  color: textColor,
                   fontSize: 40,
                   // temp fix for long names
                   overflow: TextOverflow.ellipsis,
