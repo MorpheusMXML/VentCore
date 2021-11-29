@@ -50,7 +50,7 @@ class ValueBox extends StatelessWidget {
             value.toString(),
             style: TextStyle(
               color: textColor,
-              fontSize: 80,
+              fontSize: 50,
             ),
           ),
           Row(
