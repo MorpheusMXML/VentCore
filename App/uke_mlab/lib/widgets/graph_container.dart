@@ -18,7 +18,7 @@ class GraphContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 200,
+      height: 150,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
