@@ -79,18 +79,37 @@ class Monitor extends StatelessWidget {
                   ),
                 ),
                 Flexible(
-                  flex: 1,
+                  flex: 2,
                   child: Row(
                     children: const [
                       ValueTile(
                         name: "placeholder",
-                        textColor: Color(0xFF0CECDD),
+                        textColor: Color(0xFFFFFFFF),
                         backgroundColor: Color(0xff2A2831),
                         value: 0,
                       ),
                       ValueTile(
                         name: "placeholder",
-                        textColor: Color(0xFF0CECDD),
+                        textColor: Color(0xFFFFFFFF),
+                        backgroundColor: Color(0xff2A2831),
+                        value: 0,
+                      ),
+                    ],
+                  ),
+                ),
+                Flexible(
+                  flex: 1,
+                  child: Row(
+                    children: const [
+                      ValueTile(
+                        name: "placeholder",
+                        textColor: Color(0xFFFFFFFF),
+                        backgroundColor: Color(0xff2A2831),
+                        value: 0,
+                      ),
+                      ValueTile(
+                        name: "placeholder",
+                        textColor: Color(0xFFFFFFFF),
                         backgroundColor: Color(0xff2A2831),
                         value: 0,
                       ),
