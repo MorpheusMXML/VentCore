@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class ValueBox extends StatelessWidget {
   final Color textColor;
-  // To be changed to "actual" data
   final int value;
   final int backgroundColor;
   final String miniTitle;
@@ -10,8 +9,8 @@ class ValueBox extends StatelessWidget {
   const ValueBox({
     Key? key,
     required this.textColor,
-    // To be changed to "actual" data
     required this.value,
+    // to be changed
     this.miniTitle = "PP",
     required this.backgroundColor,
   }) : super(key: key);
@@ -32,31 +31,17 @@ class ValueBox extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Flexible(
-                flex: 1,
-                child: SizedBox(
-                  width: double.maxFinite,
-                  child: Text(
-                    miniTitle,
-                    style: TextStyle(color: textColor),
-                    textAlign: TextAlign.left,
-                  ),
-                ),
+              Text(
+                miniTitle,
+                style: TextStyle(color: textColor),
               ),
-              Flexible(
-                flex: 1,
-                child: SizedBox(
-                  width: double.maxFinite,
-                  child: Text(
-                    "120",
-                    style: TextStyle(
-                      // doesn't work here for some reason
-                      //overflow: TextOverflow.ellipsis,
-                      color: textColor,
-                    ),
-                    textAlign: TextAlign.right,
-                  ),
+              Text(
+                // to be changed
+                "120",
+                style: TextStyle(
+                  color: textColor,
                 ),
               ),
             ],
@@ -69,32 +54,21 @@ class ValueBox extends StatelessWidget {
             ),
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Flexible(
-                flex: 1,
-                child: SizedBox(
-                  width: double.maxFinite,
-                  child: Text(
-                    "58",
-                    style: TextStyle(color: textColor),
-                    textAlign: TextAlign.left,
-                  ),
-                ),
+              Text(
+                // to be changed
+                "58",
+                style: TextStyle(color: textColor),
+                textAlign: TextAlign.left,
               ),
-              Flexible(
-                flex: 1,
-                child: SizedBox(
-                  width: double.maxFinite,
-                  child: Text(
-                    "1/ min.",
-                    style: TextStyle(
-                      // doesn't work here for some reason
-                      //overflow: TextOverflow.ellipsis,
-                      color: textColor,
-                    ),
-                    textAlign: TextAlign.right,
-                  ),
+              Text(
+                // to be changed
+                "1/ min.",
+                style: TextStyle(
+                  color: textColor,
                 ),
+                textAlign: TextAlign.right,
               ),
             ],
           ),
