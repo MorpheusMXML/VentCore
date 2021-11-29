@@ -24,15 +24,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // const Color containerColor = Color(0xff49454f);
 
     return GetMaterialApp(
       title: 'Welcome to the UKE Mlab Team 123',
       theme: ThemeData(
-        scaffoldBackgroundColor: const Color(0xff1c1c1e),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Color.fromRGBO(29, 25, 43, 100),
-        ),
+        appBarTheme: const AppBarTheme(backgroundColor: Color(0xFF1D192B)),
+        scaffoldBackgroundColor: const Color(0xFF1C1C1E),
+        // this is kind of used as a storage for Colors we need to reuse
+        // maybe write our own ThemeData Class?
+        cardColor: const Color(0xFF2A2831),
+        shadowColor: const Color(0xFF49454F)
       ),
       getPages: [
         GetPage(
