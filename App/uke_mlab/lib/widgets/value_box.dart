@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ValueBox extends StatelessWidget {
   final Color textColor;
   final int value;
-  final int backgroundColor;
+  final Color backgroundColor;
   final String miniTitle;
 
   const ValueBox({
@@ -23,7 +23,7 @@ class ValueBox extends StatelessWidget {
     return ElevatedButton(
       style: ButtonStyle(
         shape: MaterialStateProperty.all(const RoundedRectangleBorder()),
-        backgroundColor: MaterialStateProperty.all(Color(backgroundColor)),
+        backgroundColor: MaterialStateProperty.all(backgroundColor),
       ),
       onPressed: _showSnack,
       child: Column(
