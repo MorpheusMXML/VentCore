@@ -45,7 +45,7 @@ class GraphContainer extends StatelessWidget {
                     () => ValueBox(
                       value: data[data.length - 1].value.toInt(),
                       textColor: color,
-                      backgroundColor: 0xff2A2831,
+                      backgroundColor: const Color(0xff2A2831),
                     ),
                   ),
                 )
