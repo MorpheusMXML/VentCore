@@ -22,7 +22,7 @@ class MonitorBinding extends Bindings {
 class MonitorController extends GetxController {
   Random random = Random();
 
-  var data = [
+  List<ChartData> data = [
     ChartData(DateTime.now(), 0),
     ChartData(DateTime.now(), 0),
     ChartData(DateTime.now(), 0),
@@ -41,7 +41,7 @@ class MonitorController extends GetxController {
     ChartData(DateTime.now(), 0)
   ].obs;
 
-  var data2 = [
+  List<ChartData> data2 = [
     ChartData(DateTime.now(), 0),
     ChartData(DateTime.now(), 0),
     ChartData(DateTime.now(), 0),
@@ -60,7 +60,7 @@ class MonitorController extends GetxController {
     ChartData(DateTime.now(), 0)
   ].obs;
 
-  var data3 = [
+  List<ChartData> data3 = [
     ChartData(DateTime.now(), 0),
     ChartData(DateTime.now(), 0),
     ChartData(DateTime.now(), 0),
