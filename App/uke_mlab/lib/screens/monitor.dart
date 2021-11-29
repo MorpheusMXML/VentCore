@@ -46,25 +46,56 @@ class Monitor extends StatelessWidget {
                   child: Row(
                     children: const [
                       ValueTile(
-                        name: "Pulse",
-                        textColor: Color(0xffFF00E4),
-                        backgroundColor: 0xff2A2831,
+                        name: "NIDB",
+                        textColor: Color(0xFFDC362E),
+                        backgroundColor: Color(0xFF2A2831),
+                        value: 0,
+                      ),
+                      ValueTile(
+                          name: "Pulse",
+                          textColor: Color(0xFFFF00E4),
+                          backgroundColor: Color(0xFF2A2831),
+                          value: 0),
+                    ],
+                  ),
+                ),
+                Flexible(
+                  flex: 1,
+                  child: Row(
+                    children: const [
+                      ValueTile(
+                        name: "MVe",
+                        textColor: Color(0xFF0CECDD),
+                        backgroundColor: Color(0xff2A2831),
+                        value: 0,
                       ),
                       ValueTile(
                         name: "Breath. Freq.",
-                        textColor: Color(0xff0CECDD),
-                        backgroundColor: 0xff2A2831,
+                        textColor: Color(0xFF0CECDD),
+                        backgroundColor: Color(0xff2A2831),
+                        value: 0,
                       ),
                     ],
                   ),
                 ),
                 Flexible(
                   flex: 1,
-                  child: Container(color: Colors.amber),
-                ),
-                Flexible(
-                  flex: 1,
-                  child: Container(color: Colors.purple),
+                  child: Row(
+                    children: const [
+                      ValueTile(
+                        name: "placeholder",
+                        textColor: Color(0xFF0CECDD),
+                        backgroundColor: Color(0xff2A2831),
+                        value: 0,
+                      ),
+                      ValueTile(
+                        name: "placeholder",
+                        textColor: Color(0xFF0CECDD),
+                        backgroundColor: Color(0xff2A2831),
+                        value: 0,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
