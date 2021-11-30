@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -29,17 +29,14 @@ class Graph extends StatelessWidget {
       monitorController.updateData();
     });
 
-    // doesn't work for some reason
-    // primaryXAxis: DateTimeAxis(
-    //    dateFormat: DateFormat.ms(),
-
     return SfCartesianChart(
       backgroundColor: Theme.of(context).cardColor,
       primaryYAxis: CategoryAxis(
         majorGridLines:
             MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
       ),
-      primaryXAxis: CategoryAxis(
+      primaryXAxis: DateTimeAxis(
+        dateFormat: DateFormat.ms(),
         majorGridLines: MajorGridLines(
             width: 1,
             color:
