@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/screens/monitor.dart';
+import 'package:uke_mlab/widgets/statusbar.dart';
 
 import 'providers/mockup.dart';
 
@@ -24,33 +25,23 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return GetMaterialApp(
-      title: 'Welcome to the UKE Mlab Team 123',
+      title: 'MLab UKE',
+      // TODO: Custom theme
       theme: ThemeData(
-        appBarTheme: const AppBarTheme(backgroundColor: Color(0xFF1D192B)),
-        scaffoldBackgroundColor: const Color(0xFF1C1C1E),
-        // this is kind of used as a storage for Colors we need to reuse
-        // maybe write our own ThemeData Class?
-        cardColor: const Color(0xFF2A2831),
-        shadowColor: const Color(0xFF49454F)
-      ),
+          appBarTheme: const AppBarTheme(backgroundColor: Color(0xFF1D192B)),
+          scaffoldBackgroundColor: const Color(0xFF1C1C1E),
+          cardColor: const Color(0xFF2A2831),
+          shadowColor: const Color(0xFF49454F)),
       getPages: [
         GetPage(
           name: "/monitor",
-          page: () => const Monitor(),
+          page: () => Scaffold(
+            appBar: AppBar(title: const StatusBar()),
+            body: const Monitor(),
+          ),
           binding: MonitorBinding(),
         ),
-        /*GetPage(
-          name: "/aed",
-          page: () => const AED(),
-          binding: AEDBinding(),
-        ),
-        GetPage(
-          name: "/home",
-          page: () => const Ventilation(),
-          binding: VentilationBinding(),
-        ),*/
       ],
       initialRoute: "/monitor",
     );
