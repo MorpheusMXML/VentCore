@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-<<<<<<< HEAD
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/mockup.dart';
 
@@ -35,28 +33,6 @@ class Monitor extends StatelessWidget {
                   data: monitorController.data3, color: Colors.green),
               Container(height: 10),
               const GraphAdder(),
-=======
-=======
->>>>>>> 4924591b61d571eee4862fb71aed813a92e32eed
-
-import 'package:uke_mlab/widgets/example_flexible.dart';
-
-class Monitor extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Flexible(
-          flex: 3,
-          child: Column(
-            children: [
-              ExampleFlexible(),
-              ExampleFlexible(),
-              ExampleFlexible(),
-<<<<<<< HEAD
->>>>>>> c429014 ([TASK]#23 Add Readme,And Example Project)
-=======
->>>>>>> 4924591b61d571eee4862fb71aed813a92e32eed
             ],
           ),
         ),
@@ -66,8 +42,6 @@ class Monitor extends StatelessWidget {
             children: [
               Flexible(
                 flex: 1,
-<<<<<<< HEAD
-<<<<<<< HEAD
                 child: Row(
                   children: const [
                     ValueTile(
@@ -140,22 +114,6 @@ class Monitor extends StatelessWidget {
                     ),
                   ],
                 ),
-=======
-=======
->>>>>>> 4924591b61d571eee4862fb71aed813a92e32eed
-                child: Container(height: 100, color: Colors.amber),
-              ),
-              Flexible(
-                flex: 1,
-                child: Container(height: 100, color: Colors.blue),
-              ),
-              Flexible(
-                flex: 2,
-                child: Container(height: 100, color: Colors.purple),
-<<<<<<< HEAD
->>>>>>> c429014 ([TASK]#23 Add Readme,And Example Project)
-=======
->>>>>>> 4924591b61d571eee4862fb71aed813a92e32eed
               ),
             ],
           ),

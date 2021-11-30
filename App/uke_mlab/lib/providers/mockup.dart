@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 import 'dart:math';
 import 'package:get/get.dart';
 
@@ -98,9 +96,3 @@ class MonitorController extends GetxController {
     data3.removeAt(0);
   }
 }
-=======
-//This directory is supposed to hold all the interactions that transact the data from outside the app.
->>>>>>> 3afe214 ([FEATURE]#23 new filestructure)
-=======
-//This directory is supposed to hold all the interactions that transact the data from outside the app.
->>>>>>> 4924591b61d571eee4862fb71aed813a92e32eed

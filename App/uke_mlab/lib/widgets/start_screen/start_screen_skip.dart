@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:uke_mlab/screens/monitor.dart';
 
 class startScreenSkip extends StatelessWidget {
   const startScreenSkip({
@@ -22,8 +21,7 @@ class startScreenSkip extends StatelessWidget {
         ),
         child: const Text('Skip', style: TextStyle(fontSize: 20)),
         onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Monitor()));
+          Navigator.pushNamed(context, '/monitor');
         },
       ),
     );

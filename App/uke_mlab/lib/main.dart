@@ -1,31 +1,11 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-//
-//just a widget to play with
-import 'package:responsive_grid/responsive_grid.dart';
-
->>>>>>> 50ec0fe (#23 [TASK] add layout, theme, basic structure)
-=======
->>>>>>> c429014 ([TASK]#23 Add Readme,And Example Project)
-=======
->>>>>>> 4924591b61d571eee4862fb71aed813a92e32eed
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/screens/monitor.dart';
+import 'package:uke_mlab/screens/start_screen.dart';
 import 'package:uke_mlab/widgets/statusbar.dart';
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 import 'providers/mockup.dart';
-=======
-import 'package:uke_mlab/screens/monitor.dart';
->>>>>>> c429014 ([TASK]#23 Add Readme,And Example Project)
-=======
-import 'package:uke_mlab/screens/monitor.dart';
->>>>>>> 4924591b61d571eee4862fb71aed813a92e32eed
 
 void main() {
   // We need to call it manually,
@@ -46,8 +26,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
-<<<<<<< HEAD
     return GetMaterialApp(
       title: 'MLab UKE',
       // TODO: Custom theme
@@ -62,46 +40,17 @@ class MyApp extends StatelessWidget {
           page: () => Scaffold(
             appBar: AppBar(title: const StatusBar()),
             body: const Monitor(),
-=======
-    const Color containerColor = Color(0xff49454f);
-    return MaterialApp(
-        theme: ThemeData(
-          scaffoldBackgroundColor: const Color(0xff1c1c1e),
-          appBarTheme: const AppBarTheme(
-            backgroundColor: Color.fromRGBO(29, 25, 43, 100),
->>>>>>> 4924591b61d571eee4862fb71aed813a92e32eed
           ),
           binding: MonitorBinding(),
         ),
-<<<<<<< HEAD
+        GetPage(
+            name: "/start_screen",
+            page: () => Scaffold(
+                  appBar: AppBar(title: const StatusBar()),
+                  body: startScreen(),
+                ))
       ],
-      initialRoute: "/monitor",
-=======
-    const Color containerColor = Color(0xff49454f);
-    return MaterialApp(
-        theme: ThemeData(
-          scaffoldBackgroundColor: const Color(0xff1c1c1e),
-          appBarTheme: const AppBarTheme(
-            backgroundColor: Color.fromRGBO(29, 25, 43, 100),
-          ),
-<<<<<<< HEAD
-          body: View(containerColor: containerColor)),
->>>>>>> 50ec0fe (#23 [TASK] add layout, theme, basic structure)
+      initialRoute: "/start_screen",
     );
-=======
-        ),
-=======
->>>>>>> 4924591b61d571eee4862fb71aed813a92e32eed
-        title: 'Welcome to the UKE Mlab Team 123',
-        home: Scaffold(
-          appBar: AppBar(
-            title: const Text('Welcome to the UKE Mlab Team 123 0 0 0'),
-          ),
-          body: Monitor(),
-        ));
-<<<<<<< HEAD
->>>>>>> c429014 ([TASK]#23 Add Readme,And Example Project)
-=======
->>>>>>> 4924591b61d571eee4862fb71aed813a92e32eed
   }
 }
