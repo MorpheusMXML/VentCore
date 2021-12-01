@@ -20,59 +20,62 @@ class ValueBox extends StatelessWidget {
     void _showSnack() => ScaffoldMessenger.of(context)
         .showSnackBar(const SnackBar(content: Text("Button Tapped")));
 
-    return ElevatedButton(
-      style: ButtonStyle(
-        shape: MaterialStateProperty.all(const RoundedRectangleBorder()),
-        backgroundColor: MaterialStateProperty.all(backgroundColor),
-      ),
-      onPressed: _showSnack,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                miniTitle,
-                style: TextStyle(color: textColor),
-              ),
-              Text(
-                // to be changed
-                "120",
-                style: TextStyle(
-                  color: textColor,
+    return AspectRatio(
+      aspectRatio: 1,
+      child: ElevatedButton(
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all(const RoundedRectangleBorder()),
+          backgroundColor: MaterialStateProperty.all(backgroundColor),
+        ),
+        onPressed: _showSnack,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  miniTitle,
+                  style: TextStyle(color: textColor),
                 ),
-              ),
-            ],
-          ),
-          Text(
-            value.toString(),
-            style: TextStyle(
-              color: textColor,
-              fontSize: 50,
+                Text(
+                  // to be changed
+                  "120",
+                  style: TextStyle(
+                    color: textColor,
+                  ),
+                ),
+              ],
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                // to be changed
-                "58",
-                style: TextStyle(color: textColor),
-                textAlign: TextAlign.left,
+            Text(
+              value.toString(),
+              style: TextStyle(
+                color: textColor,
+                fontSize: 50,
               ),
-              Text(
-                // to be changed
-                "1/ min.",
-                style: TextStyle(
-                  color: textColor,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  // to be changed
+                  "58",
+                  style: TextStyle(color: textColor),
+                  textAlign: TextAlign.left,
                 ),
-                textAlign: TextAlign.right,
-              ),
-            ],
-          ),
-        ],
+                Text(
+                  // to be changed
+                  "1/ min.",
+                  style: TextStyle(
+                    color: textColor,
+                  ),
+                  textAlign: TextAlign.right,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
