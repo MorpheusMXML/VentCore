@@ -20,8 +20,8 @@ class Graph extends StatelessWidget {
     final monitorController = Get.find<MonitorController>();
     ChartSeriesController? myController;
 
-    // execute every 500 milliseconds
-    Timer.periodic(const Duration(milliseconds: 500), (timer) {
+    // execute every 1000 milliseconds
+    Timer.periodic(const Duration(milliseconds: 1000), (timer) {
       myController?.updateDataSource(
         addedDataIndexes: <int>[data.length - 1],
         removedDataIndexes: <int>[0],
@@ -29,14 +29,15 @@ class Graph extends StatelessWidget {
       monitorController.updateData();
     });
 
+    // use visibleMaximum and visibleMinimum for NumericAxis
+
     return SfCartesianChart(
       backgroundColor: Theme.of(context).cardColor,
-      primaryYAxis: CategoryAxis(
+      primaryYAxis: NumericAxis(
         majorGridLines:
             MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
       ),
-      primaryXAxis: DateTimeAxis(
-        dateFormat: DateFormat.ms(),
+      primaryXAxis: NumericAxis(
         majorGridLines: MajorGridLines(
             width: 1,
             color:
@@ -50,7 +51,7 @@ class Graph extends StatelessWidget {
             onRendererCreated: (ChartSeriesController controller) {
               myController = controller;
             },
-            xValueMapper: (ChartData data, _) => data.time,
+            xValueMapper: (ChartData data, _) => data.counter,
             yValueMapper: (ChartData data, _) => data.value)
       ],
     );
