@@ -17,9 +17,9 @@ class ValueTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Flexible(
+    return Expanded(
       child: Container(
-        color: backgroundColor,
+        color: const Color(0xFF25232A),
         margin: const EdgeInsets.only(right: 8, bottom: 8),
         child: Column(
           children: [
