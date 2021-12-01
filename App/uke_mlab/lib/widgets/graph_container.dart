@@ -37,7 +37,7 @@ class GraphContainer extends StatelessWidget {
                 Container(width: 10),
                 Obx(
                   () => ValueBox(
-                    value: data[data.length - 1].value.toInt(),
+                    value: data[data.length - 1].value,
                     textColor: color,
                     backgroundColor: const Color(0xff2A2831),
                   ),
