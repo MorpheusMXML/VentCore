@@ -26,27 +26,20 @@ class GraphContainer extends StatelessWidget {
             flex: 1,
             child: Row(
               children: [
-                const Flexible(
-                  flex: 1,
-                  child: Bell(),
-                ),
+                const Bell(),
                 Container(width: 10),
-                Flexible(
-                  flex: 6,
+                Expanded(
                   child: Graph(
                     data: data,
                     color: color,
                   ),
                 ),
                 Container(width: 10),
-                Flexible(
-                  flex: 2,
-                  child: Obx(
-                    () => ValueBox(
-                      value: data[data.length - 1].value.toInt(),
-                      textColor: color,
-                      backgroundColor: const Color(0xff2A2831),
-                    ),
+                Obx(
+                  () => ValueBox(
+                    value: data[data.length - 1].value.toInt(),
+                    textColor: color,
+                    backgroundColor: const Color(0xff2A2831),
                   ),
                 )
               ],
