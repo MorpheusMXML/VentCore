@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/mockup.dart';
-import 'package:uke_mlab/widgets/bell.dart';
+import 'package:uke_mlab/widgets/graph/graph_notification.dart';
 import 'package:uke_mlab/widgets/value_box.dart';
-import 'package:uke_mlab/widgets/graph.dart';
+import 'package:uke_mlab/widgets/graph/graph.dart';
 
 class GraphContainer extends StatelessWidget {
   final List<ChartData> data;
@@ -26,7 +26,7 @@ class GraphContainer extends StatelessWidget {
             flex: 1,
             child: Row(
               children: [
-                const Bell(),
+                const GraphNotification(),
                 Container(width: 10),
                 Expanded(
                   child: Graph(
