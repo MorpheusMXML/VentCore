@@ -3,7 +3,8 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/providers/mockup.dart';
 
 import 'package:uke_mlab/widgets/graph/graph_container.dart';
-import 'package:uke_mlab/widgets/setting_tile.dart';
+import 'package:uke_mlab/widgets/info/info_tile.dart';
+import 'package:uke_mlab/widgets/setting/setting_tile.dart';
 import 'package:uke_mlab/widgets/value_tile.dart';
 import 'package:uke_mlab/widgets/graph/graph_adder.dart';
 
@@ -86,16 +87,11 @@ class Monitor extends StatelessWidget {
                   children: const [
                     Flexible(
                       flex: 1,
-                      child: SettingTile(),
+                      child: InfoTile(),
                     ),
                     Flexible(
                       flex: 1,
-                      child: ValueTile(
-                        name: "placeholder",
-                        textColor: Color(0xFFFFFFFF),
-                        backgroundColor: Color(0xff2A2831),
-                        value: 0,
-                      ),
+                      child: SettingTile(),
                     ),
                   ],
                 ),
