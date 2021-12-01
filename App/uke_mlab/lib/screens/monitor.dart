@@ -18,22 +18,25 @@ class Monitor extends StatelessWidget {
       children: [
         Flexible(
           flex: 4,
-          child: Column(
-            // Add condition here?
-            // If GraphAdder is tapped, render different children
-            children: [
-              GraphContainer(
-                  data: monitorController.data, color: Colors.yellow),
-              // The containers in the column are there for spacing
-              Container(height: 10),
-              GraphContainer(
-                  data: monitorController.data2, color: Colors.purple),
-              Container(height: 10),
-              GraphContainer(
-                  data: monitorController.data3, color: Colors.green),
-              Container(height: 10),
-              const GraphAdder(),
-            ],
+          child: Container(
+            margin: const EdgeInsets.only(left: 8, right: 8),
+            child: Column(
+              // Add condition here?
+              // If GraphAdder is tapped, render different children
+              children: [
+                GraphContainer(
+                    data: monitorController.data, color: Colors.yellow),
+                // The containers in the column are there for spacing
+                Container(height: 10),
+                GraphContainer(
+                    data: monitorController.data2, color: Colors.purple),
+                Container(height: 10),
+                GraphContainer(
+                    data: monitorController.data3, color: Colors.green),
+                Container(height: 10),
+                const GraphAdder(),
+              ],
+            ),
           ),
         ),
         Flexible(
