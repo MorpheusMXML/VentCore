@@ -13,7 +13,9 @@ class ModelManager {
   ModelManager() {
     _initialValues = {
       MapEntry(sensors.heartFrequency, DataModel(0.obs, 0.obs, this)),
-      MapEntry(sensors.spo2, DataModel(0.obs, 0.obs, this))
+      MapEntry(sensors.spo2, DataModel(0.obs, 0.obs, this)),
+      MapEntry(sensors.pulse, DataModel(0.obs, 0.obs, this)),
+      MapEntry(sensors.breathFrequency, DataModel(0.obs, 0.obs, this))
     };
     _activeModels.addEntries(_initialValues);
   }
@@ -27,8 +29,12 @@ class ModelManager {
   }
 
   //Returns null if no key matched, use null exception if used
-  DataModel? getDataModel(sensors key) {
-    return _activeModels[key];
+  DataModel getDataModel(sensors key) {
+    if (_activeModels[key] != null) {
+      return _activeModels[key]!;
+    } else {
+      throw ArgumentError("No mapping for sensor key " + key.toString());
+    }
   }
 
   AlarmController getAlarmController() {
@@ -38,7 +44,7 @@ class ModelManager {
 
 //Historic data INCLUDES the presentData value at the end, is initiated with 100
 //Alarm recognition is done in Alarm manager
-class DataModel {
+class DataModel extends GetxController {
   late RxInt _upperAlarmBound;
   late RxInt _lowerAlarmBound;
 
@@ -46,11 +52,10 @@ class DataModel {
   late int _initialUpperBound;
   late int _initialLowerBound;
 
-  Rx<ChartData> _presentData =
-      ChartData(DateTime.now(), 0).obs; //TODO better/other initialisation?
-  List<Rx<ChartData>> _historicalData =
-      []; //growable list TODO: find out why compiler thinks final ist correct here, since pointer should change
-  final int _historicalDataMaxLength = 100; //TODO could be a parameter
+  Rx<ChartData> presentData = ChartData(DateTime.now(), 0).obs;
+  final _historicalData = []
+      .obs; //growable list TODO: find out why compiler thinks final ist correct here, since pointer could change
+  final int _historicalDataMaxLength = 100; //TODO should be a parameter
   late final ModelManager _modelManager;
 
   DataModel(RxInt upperBound, RxInt lowerBound, ModelManager modelManager) {
@@ -61,13 +66,15 @@ class DataModel {
     _modelManager = modelManager;
   }
 
+  //updates a value, puts current tuple into historical list (needed for histories) + forces getx to do an update
   void updateValues(DateTime newTimeStamp, double newValue) {
-    _presentData = ChartData(newTimeStamp, newValue).obs;
-    _historicalData.add(_presentData);
+    presentData = ChartData(newTimeStamp, newValue).obs;
+    _historicalData.add(presentData);
 
     if (_historicalDataMaxLength < _historicalData.length) {
       _historicalData.removeAt(0);
     }
+    update();
   }
 
   //informs alarmController about change via call
@@ -77,9 +84,9 @@ class DataModel {
   }
 
   boundaryState evaluateBoundarieViolation() {
-    if (_presentData.value.getValue() > _upperAlarmBound.toDouble()) {
+    if (presentData.value.getValue() > _upperAlarmBound.toDouble()) {
       return boundaryState.upperBoundaryViolated;
-    } else if (_presentData.value.getValue() < _lowerAlarmBound.toDouble()) {
+    } else if (presentData.value.getValue() < _lowerAlarmBound.toDouble()) {
       return boundaryState.lowerBoundaryViolated;
     } else {
       return boundaryState.inBoundaries;
@@ -89,7 +96,7 @@ class DataModel {
   void resetDataModel() {
     _upperAlarmBound = RxInt(_initialUpperBound);
     _lowerAlarmBound = RxInt(_initialLowerBound);
-    _presentData = ChartData(DateTime.now(), 0).obs;
+    presentData = ChartData(DateTime.now(), 0).obs;
     _historicalData.clear();
   }
 
@@ -102,10 +109,10 @@ class DataModel {
   }
 
   Rx<ChartData> getPresenData() {
-    return _presentData;
+    return presentData;
   }
 
-  List<Rx<ChartData>> getHistoricalData() {
+  getHistoricalData() {
     return _historicalData;
   }
 

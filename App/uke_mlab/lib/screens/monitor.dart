@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:uke_mlab/models/enums.dart';
+import 'package:uke_mlab/models/model.dart';
+import 'package:uke_mlab/utilities/screen_controller.dart';
 
 import 'package:uke_mlab/widgets/graph_container.dart';
 import 'package:uke_mlab/widgets/value_tile.dart';
 import 'package:uke_mlab/widgets/graph_adder.dart';
 
+import 'package:get/get.dart';
+
 class Monitor extends StatelessWidget {
-  const Monitor({Key? key}) : super(key: key);
+  final ModelManager modelManager = Get.find();
+  final ScreenController screenController = Get.find();
+
+  Monitor({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,10 +22,14 @@ class Monitor extends StatelessWidget {
         Flexible(
           flex: 4,
           child: Column(
-            children: const [
-              GraphContainer(),
-              GraphContainer(),
-              GraphContainer(),
+            children: [
+              //nonsensical input atm
+              GraphContainer(
+                  dataModel: modelManager.getDataModel(sensors.spo2)),
+              GraphContainer(
+                  dataModel: modelManager.getDataModel(sensors.spo2)),
+              GraphContainer(
+                  dataModel: modelManager.getDataModel(sensors.spo2)),
               GraphAdder(),
             ],
           ),
@@ -29,13 +41,14 @@ class Monitor extends StatelessWidget {
               Flexible(
                 flex: 1,
                 child: Row(
-                  children: const [
+                  children: [
                     Flexible(
                       flex: 1,
                       child: ValueTile(
                         name: "Pulse",
                         textColor: 0xffFF00E4,
                         backgroundColor: 0xff2A2831,
+                        dataModel: modelManager.getDataModel(sensors.pulse),
                       ),
                     ),
                     Flexible(
@@ -44,6 +57,8 @@ class Monitor extends StatelessWidget {
                         name: "Breath. Freq.",
                         textColor: 0xff0CECDD,
                         backgroundColor: 0xff2A2831,
+                        dataModel:
+                            modelManager.getDataModel(sensors.breathFrequency),
                       ),
                     ),
                   ],

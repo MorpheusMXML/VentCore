@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:uke_mlab/models/model.dart';
 
 import 'package:uke_mlab/screens/monitor.dart';
+import 'package:uke_mlab/utilities/alarm_controller.dart';
+import 'package:uke_mlab/utilities/screen_controller.dart';
+
+import 'package:get/get.dart';
 
 void main() {
   // We need to call it manually,
@@ -18,6 +23,14 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  final ModelManager modelManager = Get.put(ModelManager());
+
+  MyApp({Key? key}) : super(key: key) {
+    final AlarmController alarmController =
+        Get.put(AlarmController(modelManager));
+    final ScreenController screenController = Get.put(ScreenController());
+  }
+
   @override
   Widget build(BuildContext context) {
     const Color containerColor = Color(0xff49454f);

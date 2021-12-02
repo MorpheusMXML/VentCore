@@ -1,4 +1,7 @@
 import 'package:uke_mlab/models/enums.dart';
+// Atm unsused
+// TODO address in DataModel update/set methods
+// TODO use in use in AlarmController
 
 class SystemState {
   screenStatus _screenStatus = screenStatus.topLevelScreen;

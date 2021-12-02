@@ -1,31 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:uke_mlab/models/model.dart';
+import 'package:uke_mlab/utilities/screen_controller.dart';
+
+import 'package:get/get.dart';
 
 class ValueBox extends StatelessWidget {
   final int textColor;
   // To be changed to "actual" data
-  final int value;
   final int backgroundColor;
   final String miniTitle;
+  final DataModel dataModel;
+  final ScreenController screenController = Get.find();
 
-  const ValueBox({
+  ValueBox({
     Key? key,
     required this.textColor,
     // To be changed to "actual" data
-    required this.value,
     this.miniTitle = "PP",
     required this.backgroundColor,
+    required this.dataModel,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    void _showSnack() => ScaffoldMessenger.of(context)
-        .showSnackBar(const SnackBar(content: Text("Button Tapped")));
+    void _buttonPressed() {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("Button Tapped")));
+      screenController.increaseValue(dataModel);
+    }
 
     return ElevatedButton(
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all(Color(backgroundColor)),
       ),
-      onPressed: _showSnack,
+      onPressed: _buttonPressed,
       child: Container(
         margin: const EdgeInsets.only(top: 8, bottom: 4, left: 4, right: 4),
         child: Column(
@@ -63,11 +71,13 @@ class ValueBox extends StatelessWidget {
               ],
               mainAxisAlignment: MainAxisAlignment.center,
             ),
-            Text(
-              value.toString(),
-              style: TextStyle(
-                color: Color(textColor),
-                fontSize: 80,
+            Obx(
+              () => Text(
+                "${dataModel.presentData.value.getValue().toInt()}",
+                style: TextStyle(
+                  color: Color(textColor),
+                  fontSize: 80,
+                ),
               ),
             ),
             Row(

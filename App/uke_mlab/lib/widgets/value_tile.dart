@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:uke_mlab/models/model.dart';
 import 'package:uke_mlab/widgets/value_box.dart';
 
 class ValueTile extends StatelessWidget {
   final int textColor;
   final int backgroundColor;
-  final int value;
   final String name;
+  final DataModel dataModel;
 
   const ValueTile({
     required this.textColor,
     required this.name,
     required this.backgroundColor,
-    this.value = 78,
+    required this.dataModel,
   });
 
   @override
@@ -42,7 +43,7 @@ class ValueTile extends StatelessWidget {
             child: ValueBox(
               backgroundColor: backgroundColor,
               textColor: textColor,
-              value: value,
+              dataModel: dataModel,
             ),
           ),
         ],

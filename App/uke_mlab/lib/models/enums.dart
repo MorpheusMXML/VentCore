@@ -1,6 +1,8 @@
 enum sensors {
   heartFrequency,
   spo2,
+  pulse,
+  breathFrequency
   //TODO expand
 }
 

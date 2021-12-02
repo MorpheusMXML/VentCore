@@ -14,6 +14,12 @@ class ScreenController {
     dataModel.setLowerAlarmBoundary(value);
   }
 
+  // JUST FOR TESTING, NOT FOR USE!!!
+  void increaseValue(DataModel dataModel) {
+    dataModel.updateValues(
+        DateTime.now(), dataModel.getPresenData().value.getValue() + 1);
+  }
+
   //TODO implement
   void muteAlarm() {}
 
