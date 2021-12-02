@@ -29,67 +29,15 @@ class MonitorController extends GetxController {
 
   int count = 0;
 
-  List<ChartData> data = [
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-  ].obs;
-
-  List<ChartData> data2 = [
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-  ].obs;
-
-  List<ChartData> data3 = [
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-    ChartData(DateTime.now(), 0, 0),
-  ].obs;
+  List<ChartData> data = List.filled(50, ChartData(DateTime.now(), 0, 0)).obs;
+  List<ChartData> data2 = List.filled(50, ChartData(DateTime.now(), 0, 0)).obs;
+  List<ChartData> data3 = List.filled(50, ChartData(DateTime.now(), 0, 0)).obs;
 
   bool isAddGraphTapped = false;
   void invert() {
     isAddGraphTapped = !isAddGraphTapped;
     update();
   }
-
-  //20 40 20 10 100 0 20 50 20
 
   updateData() {
     count++;
