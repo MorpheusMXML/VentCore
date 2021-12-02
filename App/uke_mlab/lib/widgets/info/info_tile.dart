@@ -6,14 +6,16 @@ class InfoTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: const [
-        Info(),
-        Info(),
-        Info(),
-        Info(),
-      ],
+    return Expanded(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: const [
+          Info(type: "pPeak", value: 50.12, unit: "mBar"),
+          Info(type: "pPlat", value: 4.58, unit: "mBar"),
+          Info(type: "pMean", value: 16.58, unit: "mBar"),
+          Info(type: "MV", value: 7.2, unit: "l/min"),
+        ],
+      ),
     );
   }
 }
