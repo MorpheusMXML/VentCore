@@ -7,10 +7,12 @@ import 'package:uke_mlab/providers/mockup.dart';
 class Graph extends StatelessWidget {
   final List<ChartData> data;
   final Color color;
+  final String type;
 
   const Graph({
     Key? key,
     required this.data,
+    required this.type,
     required this.color,
   }) : super(key: key);
 
@@ -20,12 +22,12 @@ class Graph extends StatelessWidget {
     ChartSeriesController? myController;
 
     // execute every 1000 milliseconds
-    Timer.periodic(const Duration(milliseconds: 1000), (timer) {
+    Timer.periodic(const Duration(milliseconds: 500), (timer) {
       myController?.updateDataSource(
         addedDataIndexes: <int>[data.length - 1],
         removedDataIndexes: <int>[0],
       );
-      monitorController.updateData();
+      monitorController.updateData(type);
     });
 
     // use visibleMaximum and visibleMinimum for NumericAxis
@@ -33,6 +35,7 @@ class Graph extends StatelessWidget {
     return SfCartesianChart(
       backgroundColor: Theme.of(context).cardColor,
       primaryYAxis: NumericAxis(
+        maximum: 100,
         majorGridLines:
             MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
       ),
