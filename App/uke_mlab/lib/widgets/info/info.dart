@@ -2,29 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:uke_mlab/widgets/info/info_text.dart';
 
 class Info extends StatelessWidget {
-  final String type;
-  final double value;
-  final String unit;
+  final List<Map<String, Object>> data;
 
   const Info({
     Key? key,
-    required this.type,
-    required this.value,
-    required this.unit,
+    required this.data,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return Container(
+      decoration: const BoxDecoration(
+        color: Color(0xFF25232A),
+      ),
       child: Container(
-          decoration: const BoxDecoration(
-            color: Color(0xFF2A2831),
-            borderRadius: BorderRadius.all(Radius.circular(20)),
-          ),
-          margin: const EdgeInsets.all(8),
-          child: Container(
-              margin: const EdgeInsets.only(left: 12, right: 12),
-              child: InfoText(type: type, value: value, unit: unit))),
+        margin: const EdgeInsets.only(left: 12, right: 12),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: data.map((e) {
+            return InfoText(
+                type: e["type"].toString(),
+                value: e["value"].toString(),
+                unit: e["unit"].toString());
+          }).toList(),
+        ),
+      ),
     );
   }
 }
