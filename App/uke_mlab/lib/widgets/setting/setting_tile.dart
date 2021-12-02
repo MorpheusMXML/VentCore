@@ -8,15 +8,18 @@ class SettingTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
+        SizedBox(
+          width: double.infinity,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              primary: const Color(0xFF5AC8FA),
             ),
-            primary: const Color(0xFF5AC8FA),
+            child: const Text("IPPV"),
+            onPressed: () {},
           ),
-          child: const Text("IPPV"),
-          onPressed: () {},
         ),
         const Setting(),
         const Setting(),
