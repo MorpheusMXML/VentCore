@@ -23,6 +23,10 @@ class MonitorBinding extends Bindings {
 class MonitorController extends GetxController {
   Random random = Random();
 
+  List<double> factors = [-0.2, -0.1, 0, 0.1, 0.2];
+
+  int phase = 0;
+
   int count = 0;
 
   List<ChartData> data = [
@@ -85,10 +89,62 @@ class MonitorController extends GetxController {
     update();
   }
 
-  updateData() {
-    count += 1;
+  //20 40 20 10 100 0 20 50 20
 
-    data.add(ChartData(DateTime.now(), random.nextInt(100), count));
+  updateData() {
+    count++;
+    phase = (phase + 1) % 5;
+
+    int nextValue;
+
+    switch (phase) {
+      case 1:
+        nextValue =
+            (40 + random.nextInt(20) * factors[random.nextInt(factors.length)])
+                .round();
+        break;
+      case 2:
+        nextValue =
+            (10 + random.nextInt(20) * factors[random.nextInt(factors.length)])
+                .round();
+        break;
+      case 3:
+        nextValue =
+            (95 + random.nextInt(20) * factors[random.nextInt(factors.length)])
+                .round();
+        break;
+      case 4:
+        nextValue =
+            (10 + random.nextInt(20) * factors[random.nextInt(factors.length)])
+                .round();
+        break;
+      case 5:
+        nextValue =
+            (5 + random.nextInt(20) * factors[random.nextInt(factors.length)])
+                .round();
+        break;
+      case 6:
+        nextValue =
+            (20 + random.nextInt(20) * factors[random.nextInt(factors.length)])
+                .round();
+        break;
+      case 7:
+        nextValue =
+            (50 + random.nextInt(20) * factors[random.nextInt(factors.length)])
+                .round();
+        break;
+      case 8:
+        nextValue =
+            (20 + random.nextInt(20) * factors[random.nextInt(factors.length)])
+                .round();
+        break;
+      default:
+        nextValue =
+            (20 + random.nextInt(20) * factors[random.nextInt(factors.length)])
+                .round();
+    }
+
+    data.add(ChartData(DateTime.now(), nextValue, count));
     data.removeAt(0);
 
     data2.add(ChartData(DateTime.now(), random.nextInt(100), count));
