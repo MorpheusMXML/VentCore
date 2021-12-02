@@ -18,3 +18,10 @@ enum boundaryState {
   inBoundaries,
   upperBoundaryViolated
 }
+
+enum screenStatus {
+  topLevelScreen,
+  monitoringScreen,
+  ventilationScreen,
+  defibrillationScreen
+}

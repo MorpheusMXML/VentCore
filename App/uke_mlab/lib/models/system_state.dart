@@ -1,17 +1,4 @@
-import 'package:uke_mlab/models/sensors.dart';
-
-enum screenStatus {
-  topLevelScreen,
-  monitoringScreen,
-  ventilationScreen,
-  defibrillationScreen
-}
-
-enum boundaryState {
-  lowerBoundaryViolated,
-  inBoundaries,
-  upperBoundaryViolated
-}
+import 'package:uke_mlab/models/enums.dart';
 
 class SystemState {
   screenStatus _screenStatus = screenStatus.topLevelScreen;
