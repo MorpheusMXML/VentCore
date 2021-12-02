@@ -8,9 +8,11 @@ import 'package:uke_mlab/widgets/graph/graph.dart';
 class GraphContainer extends StatelessWidget {
   final List<ChartData> data;
   final Color color;
+  final String type;
 
   const GraphContainer({
     Key? key,
+    required this.type,
     required this.data,
     required this.color,
   }) : super(key: key);
@@ -30,6 +32,7 @@ class GraphContainer extends StatelessWidget {
                 Container(width: 10),
                 Expanded(
                   child: Graph(
+                    type: type,
                     data: data,
                     color: color,
                   ),
@@ -37,7 +40,7 @@ class GraphContainer extends StatelessWidget {
                 Container(width: 10),
                 Obx(
                   () => ValueBox(
-                    value: data[data.length - 1].value,
+                    value: data[data.length - 2].value,
                     textColor: color,
                     backgroundColor: const Color(0xff2A2831),
                   ),
