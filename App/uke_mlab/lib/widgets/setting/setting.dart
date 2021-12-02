@@ -10,13 +10,30 @@ class Setting extends StatelessWidget {
       children: [
         Flexible(
           flex: 1,
-          child:
-              ElevatedButton(onPressed: () {}, child: const Icon(Icons.remove)),
+          child: ElevatedButton(
+            onPressed: () {},
+            child: const Icon(Icons.remove),
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              primary: const Color(0xFF5AC8FA),
+            ),
+          ),
         ),
         const Flexible(flex: 2, child: SettingText()),
         Flexible(
           flex: 1,
-          child: ElevatedButton(onPressed: () {}, child: const Icon(Icons.add)),
+          child: ElevatedButton(
+            onPressed: () {},
+            child: const Icon(Icons.add),
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              primary: const Color(0xFF5AC8FA),
+            ),
+          ),
         ),
       ],
     );
