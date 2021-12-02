@@ -7,14 +7,14 @@ class SettingText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: [
       const Text(
-        "1",
+        "Freq",
         style: TextStyle(fontSize: 16, color: Colors.white),
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: const [
-          Text("1", style: TextStyle(fontSize: 32, color: Colors.white)),
-          Text("2", style: TextStyle(fontSize: 16, color: Colors.white)),
+          Text("12", style: TextStyle(fontSize: 32, color: Colors.white)),
+          Text("/min", style: TextStyle(fontSize: 16, color: Colors.white)),
         ],
       )
     ]);
