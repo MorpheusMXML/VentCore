@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class InfoText extends StatelessWidget {
   final String type;
-  final double value;
+  final String value;
   final String unit;
 
   const InfoText({
@@ -14,24 +14,31 @@ class InfoText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Expanded(
-          child: Text(
-            type,
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: const BoxDecoration(
+        color: Color(0xFF2A2831),
+        borderRadius: BorderRadius.all(Radius.circular(8)),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(
+            child: Text(
+              type,
+              style: const TextStyle(fontSize: 16, color: Colors.white),
+            ),
+          ),
+          Text(
+            value.toString(),
             style: const TextStyle(fontSize: 16, color: Colors.white),
           ),
-        ),
-        Text(
-          value.toString(),
-          style: const TextStyle(fontSize: 16, color: Colors.white),
-        ),
-        Text(
-          unit,
-          style: const TextStyle(fontSize: 10, color: Colors.white),
-        ),
-      ],
+          Text(
+            unit,
+            style: const TextStyle(fontSize: 10, color: Colors.white),
+          ),
+        ],
+      ),
     );
   }
 }
