@@ -27,7 +27,7 @@ class Monitor extends StatelessWidget {
               children: [
                 GraphContainer(
                     type: "1",
-                    data: monitorController.data,
+                    data: monitorController.data1,
                     color: Colors.yellow),
                 // The containers in the column are there for spacing
                 Container(height: 10),
@@ -110,19 +110,29 @@ class Monitor extends StatelessWidget {
               Flexible(
                 flex: 1,
                 child: Row(
-                  children: const [
-                    ValueTile(
-                      name: "placeholder",
-                      textColor: Color(0xFFFFFFFF),
-                      backgroundColor: Color(0xff2A2831),
-                      value: 0,
-                    ),
-                    ValueTile(
-                      name: "placeholder",
-                      textColor: Color(0xFFFFFFFF),
-                      backgroundColor: Color(0xff2A2831),
-                      value: 0,
-                    ),
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 20),
+                      child: AspectRatio(
+                        aspectRatio: 1,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: const Color(0xFF363638),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          onPressed: () {},
+                          child: const Text(
+                            "AED Button",
+                            style: TextStyle(
+                              fontSize: 24,
+                              color: Color(0xFF34C759),
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),
