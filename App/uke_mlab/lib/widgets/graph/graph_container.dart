@@ -21,27 +21,30 @@ class GraphContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Flexible(
       flex: 2,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          const GraphNotification(),
-          Container(width: 10),
-          Expanded(
-            child: Graph(
-              type: type,
-              data: data,
-              color: color,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxHeight: 150),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            const GraphNotification(),
+            Container(width: 10),
+            Expanded(
+              child: Graph(
+                type: type,
+                data: data,
+                color: color,
+              ),
             ),
-          ),
-          Container(width: 10),
-          Obx(
-            () => ValueBox(
-              value: data[data.length - 2].value,
-              textColor: color,
-              backgroundColor: const Color(0xff2A2831),
-            ),
-          )
-        ],
+            Container(width: 10),
+            Obx(
+              () => ValueBox(
+                value: data[data.length - 2].value,
+                textColor: color,
+                backgroundColor: const Color(0xff2A2831),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
