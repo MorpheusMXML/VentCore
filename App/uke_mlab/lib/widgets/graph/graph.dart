@@ -30,11 +30,10 @@ class Graph extends StatelessWidget {
       monitorController.updateData(type);
     });
 
-    // use visibleMaximum and visibleMinimum for NumericAxis
-
     return SfCartesianChart(
       backgroundColor: Theme.of(context).cardColor,
       primaryYAxis: NumericAxis(
+        minimum: 0,
         maximum: 100,
         majorGridLines:
             MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
