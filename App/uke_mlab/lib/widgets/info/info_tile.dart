@@ -15,7 +15,9 @@ class InfoTile extends StatelessWidget {
       itemCount: data.length,
       itemBuilder: (BuildContext context, int index) {
         return Container(
-          padding: const EdgeInsets.only(top: 8, bottom: 8),
+          color: const Color(0xFF25232A),
+          padding: const EdgeInsets.all(8),
+          margin: const EdgeInsets.only(right: 8),
           child: InfoText(
             type: data[index]["type"].toString(),
             value: data[index]["value"].toString(),
