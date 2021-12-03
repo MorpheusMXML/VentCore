@@ -35,7 +35,7 @@ class Monitor extends StatelessWidget {
                 GraphContainer(
                     data: monitorController.data3, color: Colors.green),
                 Container(height: 10),
-                const GraphAdder(),
+                const Flexible(flex: 1, child: GraphAdder()),
               ],
             ),
           ),
