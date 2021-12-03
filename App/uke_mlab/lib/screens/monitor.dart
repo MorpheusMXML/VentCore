@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/mockup.dart';
+import 'package:uke_mlab/providers/style_controller.dart';
 
 import 'package:uke_mlab/widgets/graph/graph_container.dart';
 import 'package:uke_mlab/widgets/info/info_tile.dart';
@@ -14,6 +15,7 @@ class Monitor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final monitorController = Get.find<MonitorController>();
+    final _styleController = Get.put(StyleController());
 
     return Row(
       children: [
@@ -28,19 +30,15 @@ class Monitor extends StatelessWidget {
                 GraphContainer(
                     type: "1",
                     data: monitorController.data1,
-                    color: Colors.yellow),
-                // The containers in the column are there for spacing
-                Container(height: 10),
+                    color: _styleController.heartFreqColor),
                 GraphContainer(
                     type: "2",
                     data: monitorController.data2,
-                    color: Colors.purple),
-                Container(height: 10),
+                    color: _styleController.oxySatColor),
                 GraphContainer(
                     type: "3",
                     data: monitorController.data3,
-                    color: Colors.green),
-                Container(height: 10),
+                    color: _styleController.co2Color),
                 const Flexible(flex: 1, child: GraphAdder()),
               ],
             ),
