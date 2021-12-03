@@ -25,93 +25,110 @@ class MonitorController extends GetxController {
 
   List<double> factors = [-0.2, -0.1, 0, 0.1, 0.2];
 
-  int phase = 0;
+  // every graph has phases for their frequencies
+  int phase1 = 0;
+  int phase2 = 0;
+  int phase3 = 0;
 
-  int count = 0;
+  // x-axis value
+  int count1 = 0;
+  int count2 = 0;
+  int count3 = 0;
 
-  List<ChartData> data = List.filled(30, ChartData(DateTime.now(), 0, 0)).obs;
+  // initialize graph data
+  List<ChartData> data1 = List.filled(30, ChartData(DateTime.now(), 0, 0)).obs;
   List<ChartData> data2 = List.filled(30, ChartData(DateTime.now(), 0, 0)).obs;
   List<ChartData> data3 = List.filled(30, ChartData(DateTime.now(), 0, 0)).obs;
 
+  // handle button click on GraphAdder widget
   bool isAddGraphTapped = false;
   void invert() {
     isAddGraphTapped = !isAddGraphTapped;
     update();
   }
 
+  // Add variation to set phase values to make it appear more natural
+  int getVariation({int num = 20}) {
+    double randomFactor = factors[random.nextInt(factors.length)];
+    double variation = random.nextInt(num) * randomFactor;
+    return variation.round();
+  }
+
+  // update function called by the timer in Graph class
   updateData(String type) {
     switch (type) {
       case "1":
-        int nextValue;
-        phase = (phase + 1) % 9;
-        count++;
-        switch (phase) {
+        int nextValue1;
+        phase1 = (phase1 + 1) % 9;
+        count1++;
+        switch (phase1) {
           case 1:
-            nextValue = (40 +
-                    random.nextInt(20) *
-                        factors[random.nextInt(factors.length)])
-                .round();
+            nextValue1 = 40 + getVariation();
             break;
           case 2:
-            nextValue = (10 +
-                    random.nextInt(20) *
-                        factors[random.nextInt(factors.length)])
-                .round();
+            nextValue1 = 10 + getVariation();
             break;
           case 3:
-            nextValue = (90 +
-                    random.nextInt(20) *
-                        factors[random.nextInt(factors.length)])
-                .round();
+            nextValue1 = 90 + getVariation();
             break;
           case 4:
-            nextValue = (10 +
-                    random.nextInt(20) *
-                        factors[random.nextInt(factors.length)])
-                .round();
+            nextValue1 = 10 + getVariation();
             break;
           case 5:
-            nextValue = (20 +
-                    random.nextInt(20) *
-                        factors[random.nextInt(factors.length)])
-                .round();
+            nextValue1 = 20 + getVariation();
             break;
           case 6:
-            nextValue = (20 +
-                    random.nextInt(20) *
-                        factors[random.nextInt(factors.length)])
-                .round();
+            nextValue1 = 20 + getVariation();
             break;
           case 7:
-            nextValue = (60 +
-                    random.nextInt(20) *
-                        factors[random.nextInt(factors.length)])
-                .round();
+            nextValue1 = 60 + getVariation();
             break;
           case 8:
-            nextValue = (20 +
-                    random.nextInt(20) *
-                        factors[random.nextInt(factors.length)])
-                .round();
+            nextValue1 = 20 + getVariation();
             break;
           default:
-            nextValue = (20 +
-                    random.nextInt(20) *
-                        factors[random.nextInt(factors.length)])
-                .round();
+            nextValue1 = 20 + getVariation();
         }
-
-        data.add(ChartData(DateTime.now(), nextValue, count));
-        data.removeAt(0);
+        data1.add(ChartData(DateTime.now(), nextValue1, count1));
+        data1.removeAt(0);
         break;
+
       case "2":
-        data2.add(ChartData(DateTime.now(), random.nextInt(100), count));
+        int nextValue2;
+        phase2 = (phase2 + 1) % 4;
+        count2++;
+        switch (phase2) {
+          case 1:
+            nextValue2 = 95 + getVariation();
+            break;
+          case 2:
+            nextValue2 = 60 + getVariation();
+            break;
+          case 3:
+            nextValue2 = 60 + getVariation();
+            break;
+          default:
+            nextValue2 = 5 + getVariation();
+        }
+        data2.add(ChartData(DateTime.now(), nextValue2, count2));
         data2.removeAt(0);
         break;
+
       case "3":
-        data3.add(ChartData(DateTime.now(), random.nextInt(100), count));
+        int nextValue3;
+        phase3 = (phase3 + 1) % 2;
+        count3++;
+        switch (phase3) {
+          case 1:
+            nextValue3 = 90 + getVariation();
+            break;
+          default:
+            nextValue3 = 10 + getVariation();
+        }
+        data3.add(ChartData(DateTime.now(), nextValue3, count3));
         data3.removeAt(0);
         break;
+
       default:
         print("Pain");
     }
