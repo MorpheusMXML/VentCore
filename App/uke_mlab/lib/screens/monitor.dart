@@ -99,35 +99,6 @@ class Monitor extends StatelessWidget {
                   ],
                 ),
               ),
-              Flexible(
-                flex: 1,
-                child: Row(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 20),
-                      child: AspectRatio(
-                        aspectRatio: 1,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: const Color(0xFF363638),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                          onPressed: () {},
-                          child: const Text(
-                            "AED Button",
-                            style: TextStyle(
-                              fontSize: 24,
-                              color: Color(0xFF34C759),
-                            ),
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
             ],
           ),
         )
