@@ -45,13 +45,15 @@ class Monitor extends StatelessWidget {
                       name: "NIDB",
                       textColor: const Color(0xFFDC362E),
                       backgroundColor: const Color(0xFF2A2831),
-                      value: monitorController.initialGraphs[0]["data"] as List<ChartData>,
+                      value: monitorController.initialGraphs[0]["data"]
+                          as List<ChartData>,
                     ),
                     ValueTile(
                       name: "Pulse",
                       textColor: const Color(0xFFFF00E4),
                       backgroundColor: const Color(0xFF2A2831),
-                      value: monitorController.initialGraphs[0]["data"] as List<ChartData>,
+                      value: monitorController.initialGraphs[0]["data"]
+                          as List<ChartData>,
                     ),
                   ],
                 ),
@@ -64,13 +66,15 @@ class Monitor extends StatelessWidget {
                       name: "MVe",
                       textColor: const Color(0xFF0CECDD),
                       backgroundColor: const Color(0xff2A2831),
-                      value: monitorController.initialGraphs[0]["data"] as List<ChartData>,
+                      value: monitorController.initialGraphs[0]["data"]
+                          as List<ChartData>,
                     ),
                     ValueTile(
                       name: "Breath. Freq.",
                       textColor: const Color(0xFF0CECDD),
                       backgroundColor: const Color(0xff2A2831),
-                      value: monitorController.initialGraphs[0]["data"] as List<ChartData>,
+                      value: monitorController.initialGraphs[0]["data"]
+                          as List<ChartData>,
                     ),
                   ],
                 ),
