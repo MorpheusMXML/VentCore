@@ -1,18 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:uke_mlab/providers/mockup.dart';
 
 class GraphNotification extends StatelessWidget {
   const GraphNotification({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {},
-      style: ElevatedButton.styleFrom(
-        primary: Colors.grey[800],
-        fixedSize: const Size(80, 80),
-        shape: const CircleBorder(),
-      ),
-      child: const Icon(Icons.notifications, size: 40),
-    );
+    final monitorController = Get.find<MonitorController>();
+
+    if (false) {
+      return ElevatedButton(
+        onPressed: () {},
+        style: ElevatedButton.styleFrom(
+          primary: Colors.grey[800],
+          fixedSize: const Size(80, 80),
+          shape: const CircleBorder(),
+        ),
+        child: const Icon(Icons.notifications_off, size: 40),
+      );
+    } else {
+      return ElevatedButton(
+        onPressed: () {},
+        style: ElevatedButton.styleFrom(
+          primary: Colors.grey[800],
+          fixedSize: const Size(80, 80),
+          shape: const CircleBorder(),
+        ),
+        child: const Icon(Icons.notifications, size: 40),
+      );
+    }
   }
 }
