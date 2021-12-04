@@ -1,120 +1,92 @@
 import 'package:flutter/material.dart';
-import 'package:uke_mlab/models/enums.dart';
-import 'package:uke_mlab/models/model.dart';
-import 'package:uke_mlab/utilities/screen_controller.dart';
-
 import 'package:get/get.dart';
 
+import 'package:uke_mlab/models/enums.dart';
+import 'package:uke_mlab/models/model.dart';
+
+import 'package:uke_mlab/utilities/screen_controller.dart';
+
 class ValueBox extends StatelessWidget {
-  final int textColor;
-  // To be changed to "actual" data
-  final int backgroundColor;
+  final Color textColor;
+  final int value;
+  final Color backgroundColor;
   final String miniTitle;
-  final sensorEnum sensor;
+  //final sensorEnum sensor;
   final ScreenController screenController = Get.find();
 
   ValueBox({
     Key? key,
     required this.textColor,
-    // To be changed to "actual" data
+    required this.value,
+    // to be changed
     this.miniTitle = "PP",
     required this.backgroundColor,
-    required this.sensor,
+    //required this.sensor,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
+    //final DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
 
-    void _buttonPressed() {
+    void _showSnack() {
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text("Button Tapped")));
-      dataModel.updateValues(dataModel.singleData.value.value + 1.0); //testing
+      //dataModel.updateValues(dataModel.singleData.value.value + 1.0); //testing
     }
 
-    return ElevatedButton(
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(Color(backgroundColor)),
-      ),
-      onPressed: _buttonPressed,
-      child: Container(
-        margin: const EdgeInsets.only(top: 8, bottom: 4, left: 4, right: 4),
+    return AspectRatio(
+      aspectRatio: 1,
+      child: ElevatedButton(
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all(const RoundedRectangleBorder()),
+          backgroundColor: MaterialStateProperty.all(backgroundColor),
+        ),
+        onPressed: _showSnack,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Flexible(
-                  flex: 1,
-                  child: Container(
-                    width: double.maxFinite,
-                    margin: const EdgeInsets.only(left: 8, top: 8),
-                    child: Text(
-                      miniTitle,
-                      style: TextStyle(color: Color(textColor)),
-                      textAlign: TextAlign.left,
-                    ),
-                  ),
+                Text(
+                  miniTitle,
+                  style: TextStyle(color: textColor),
                 ),
-                Flexible(
-                  flex: 1,
-                  child: Container(
-                    margin: const EdgeInsets.only(right: 8, top: 8),
-                    width: double.maxFinite,
-                    child: Text(
-                      "120",
-                      style: TextStyle(
-                        // doesn't work here for some reason
-                        //overflow: TextOverflow.ellipsis,
-                        color: Color(textColor),
-                      ),
-                      textAlign: TextAlign.right,
-                    ),
+                Text(
+                  // to be changed
+                  "120",
+                  style: TextStyle(
+                    color: textColor,
                   ),
                 ),
               ],
-              mainAxisAlignment: MainAxisAlignment.center,
             ),
-            Obx(
-              () => Text(
-                "${dataModel.singleData.value.value.toInt()}",
-                style: TextStyle(
-                  color: Color(textColor),
-                  fontSize: 80,
-                ),
+            Text(
+              value.toString(),
+              style: TextStyle(
+                color: textColor,
+                fontSize: 50,
               ),
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Flexible(
-                  flex: 1,
-                  child: Container(
-                    width: double.maxFinite,
-                    margin: const EdgeInsets.only(left: 8),
-                    child: Text(
-                      "58",
-                      style: TextStyle(color: Color(textColor)),
-                      textAlign: TextAlign.left,
-                    ),
-                  ),
+                Text(
+                  // to be changed
+                  "58",
+                  style: TextStyle(color: textColor),
+                  textAlign: TextAlign.left,
                 ),
-                Flexible(
-                  flex: 1,
-                  child: Container(
-                    margin: const EdgeInsets.only(right: 8),
-                    width: double.maxFinite,
-                    child: Text(
-                      "1/ min.",
-                      style: TextStyle(
-                        // doesn't work here for some reason
-                        //overflow: TextOverflow.ellipsis,
-                        color: Color(textColor),
-                      ),
-                      textAlign: TextAlign.right,
-                    ),
+                Text(
+                  // to be changed
+                  "1/ min.",
+                  style: TextStyle(
+                    color: textColor,
                   ),
+                  textAlign: TextAlign.right,
                 ),
               ],
-              mainAxisAlignment: MainAxisAlignment.center,
             ),
           ],
         ),
