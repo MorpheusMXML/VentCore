@@ -52,7 +52,7 @@ class MonitorController extends GetxController {
       "data": List.filled(30, ChartData(DateTime.now(), 0, 0)).obs,
       "color": Colors.yellow
     }
-  ];
+  ].obs;
 
   // handle button click on GraphAdder widget
   bool isAddGraphTapped = false;
