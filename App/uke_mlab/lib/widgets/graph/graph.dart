@@ -22,7 +22,7 @@ class Graph extends StatelessWidget {
     ChartSeriesController? myController;
 
     // execute every 1000 milliseconds
-    Timer.periodic(const Duration(milliseconds: 5000), (timer) {
+    Timer.periodic(const Duration(milliseconds: 1000), (timer) {
       myController?.updateDataSource(
         addedDataIndexes: <int>[data.length - 1],
         removedDataIndexes: <int>[0],
