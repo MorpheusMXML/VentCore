@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import 'package:uke_mlab/screens/monitor.dart';
+import 'package:uke_mlab/screens/start_screen.dart';
 import 'package:uke_mlab/widgets/statusbar.dart';
 
 import 'package:uke_mlab/models/model.dart';
@@ -56,8 +57,14 @@ class MyApp extends StatelessWidget {
           ),
           binding: MonitorBinding(),
         ),
+        GetPage(
+            name: "/start_screen",
+            page: () => Scaffold(
+                  appBar: AppBar(title: const StatusBar()),
+                  body: startScreen(),
+                ))
       ],
-      initialRoute: "/monitor",
+      initialRoute: "/start_screen",
     );
   }
 }
