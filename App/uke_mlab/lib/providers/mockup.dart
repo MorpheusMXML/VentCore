@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 // DataClass used by the Graphs
@@ -35,10 +36,23 @@ class MonitorController extends GetxController {
   int count2 = 0;
   int count3 = 0;
 
-  // initialize graph data
-  List<ChartData> data1 = List.filled(30, ChartData(DateTime.now(), 0, 0)).obs;
-  List<ChartData> data2 = List.filled(30, ChartData(DateTime.now(), 0, 0)).obs;
-  List<ChartData> data3 = List.filled(30, ChartData(DateTime.now(), 0, 0)).obs;
+  List<Map<String, Object>> initialGraphs = [
+    {
+      "type": "1",
+      "data": List.filled(30, ChartData(DateTime.now(), 0, 0)).obs,
+      "color": Colors.green
+    },
+    {
+      "type": "2",
+      "data": List.filled(30, ChartData(DateTime.now(), 0, 0)).obs,
+      "color": Colors.blue
+    },
+    {
+      "type": "3",
+      "data": List.filled(30, ChartData(DateTime.now(), 0, 0)).obs,
+      "color": Colors.yellow
+    }
+  ];
 
   // handle button click on GraphAdder widget
   bool isAddGraphTapped = false;
@@ -89,8 +103,9 @@ class MonitorController extends GetxController {
           default:
             nextValue1 = 20 + getVariation();
         }
-        data1.add(ChartData(DateTime.now(), nextValue1, count1));
-        data1.removeAt(0);
+        (initialGraphs[0]["data"] as List<ChartData>)
+            .add(ChartData(DateTime.now(), nextValue1, count1));
+        (initialGraphs[0]["data"] as List<ChartData>).removeAt(0);
         break;
 
       case "2":
@@ -110,8 +125,9 @@ class MonitorController extends GetxController {
           default:
             nextValue2 = 5 + getVariation();
         }
-        data2.add(ChartData(DateTime.now(), nextValue2, count2));
-        data2.removeAt(0);
+        (initialGraphs[1]["data"] as List<ChartData>)
+            .add(ChartData(DateTime.now(), nextValue2, count2));
+        (initialGraphs[1]["data"] as List<ChartData>).removeAt(0);
         break;
 
       case "3":
@@ -125,8 +141,9 @@ class MonitorController extends GetxController {
           default:
             nextValue3 = 10 + getVariation();
         }
-        data3.add(ChartData(DateTime.now(), nextValue3, count3));
-        data3.removeAt(0);
+        (initialGraphs[2]["data"] as List<ChartData>)
+            .add(ChartData(DateTime.now(), nextValue3, count3));
+        (initialGraphs[2]["data"] as List<ChartData>).removeAt(0);
         break;
 
       default:
