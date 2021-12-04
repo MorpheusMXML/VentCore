@@ -26,9 +26,24 @@ class Monitor extends StatelessWidget {
             child: Column(
               children: [
                 GraphContainer(
+<<<<<<< HEAD
                   data: monitorController.initialGraphs,
                 ),
                 const GraphAdder(),
+=======
+                    type: "1",
+                    data: monitorController.data1,
+                    color: _styleController.heartFreqColor),
+                GraphContainer(
+                    type: "2",
+                    data: monitorController.data2,
+                    color: _styleController.oxySatColor),
+                GraphContainer(
+                    type: "3",
+                    data: monitorController.data3,
+                    color: _styleController.co2Color),
+                const Flexible(flex: 1, child: GraphAdder()),
+>>>>>>> a2e4436 ([TASK] #55 added styleController to monitor)
               ],
             ),
           ),
