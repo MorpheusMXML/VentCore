@@ -9,8 +9,17 @@ import 'package:uke_mlab/widgets/setting/setting_tile.dart';
 import 'package:uke_mlab/widgets/value_tile.dart';
 import 'package:uke_mlab/widgets/graph/graph_adder.dart';
 
+import 'package:uke_mlab/providers/mockup.dart';
+
+import 'package:uke_mlab/models/model.dart';
+
+import 'package:uke_mlab/utilities/screen_controller.dart';
+
 class Monitor extends StatelessWidget {
-  const Monitor({Key? key}) : super(key: key);
+  final ModelManager modelManager = Get.find();
+  final ScreenController screenController = Get.find();
+
+  Monitor({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
