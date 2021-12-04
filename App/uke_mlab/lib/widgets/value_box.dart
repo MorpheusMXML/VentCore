@@ -1,24 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import 'package:uke_mlab/models/enums.dart';
+import 'package:uke_mlab/models/model.dart';
+
+import 'package:uke_mlab/utilities/screen_controller.dart';
 
 class ValueBox extends StatelessWidget {
   final Color textColor;
   final int value;
   final Color backgroundColor;
   final String miniTitle;
+  //final sensorEnum sensor;
+  final ScreenController screenController = Get.find();
 
-  const ValueBox({
+  ValueBox({
     Key? key,
     required this.textColor,
     required this.value,
     // to be changed
     this.miniTitle = "PP",
     required this.backgroundColor,
+    //required this.sensor,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    void _showSnack() => ScaffoldMessenger.of(context)
-        .showSnackBar(const SnackBar(content: Text("Button Tapped")));
+    //final DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
+
+    void _showSnack() {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("Button Tapped")));
+      //dataModel.updateValues(dataModel.singleData.value.value + 1.0); //testing
+    }
 
     return AspectRatio(
       aspectRatio: 1,

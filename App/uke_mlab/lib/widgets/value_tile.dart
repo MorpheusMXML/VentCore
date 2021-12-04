@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+
+import 'package:uke_mlab/models/enums.dart';
+
 import 'package:uke_mlab/widgets/value_box.dart';
 
 class ValueTile extends StatelessWidget {
@@ -6,6 +9,7 @@ class ValueTile extends StatelessWidget {
   final Color backgroundColor;
   final int value;
   final String name;
+  //final sensorEnum sensor;
 
   const ValueTile({
     Key? key,
