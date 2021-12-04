@@ -9,8 +9,9 @@ import 'package:flutter/material.dart';
 class DemoScreenButton extends StatelessWidget {
   final String name;
   const DemoScreenButton({
+    Key? key,
     required this.name,
-  });
+  }): super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(

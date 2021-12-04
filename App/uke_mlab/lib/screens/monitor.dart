@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'package:uke_mlab/widgets/graph_container.dart';
-import 'package:uke_mlab/widgets/statusbar.dart';
-import 'package:uke_mlab/widgets/value_tile.dart';
-import 'package:uke_mlab/widgets/graph_adder.dart';
-
 import 'package:uke_mlab/providers/mockup.dart';
+import 'package:uke_mlab/providers/style_controller.dart';
 
+import 'package:uke_mlab/widgets/graph/graph_container.dart';
+import 'package:uke_mlab/widgets/info/info_tile.dart';
+import 'package:uke_mlab/widgets/setting/setting_tile.dart';
+import 'package:uke_mlab/widgets/value_tile.dart';
+import 'package:uke_mlab/widgets/graph/graph_adder.dart';
 import 'package:uke_mlab/models/model.dart';
-
 import 'package:uke_mlab/utilities/screen_controller.dart';
 
 class Monitor extends StatelessWidget {
@@ -21,6 +20,7 @@ class Monitor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final monitorController = Get.find<MonitorController>();
+    final _styleController = Get.put(StyleController());
 
     return Row(
       children: [
@@ -29,19 +29,10 @@ class Monitor extends StatelessWidget {
           child: Container(
             margin: const EdgeInsets.only(left: 8, right: 8),
             child: Column(
-              // Add condition here?
-              // If GraphAdder is tapped, render different children
               children: [
                 GraphContainer(
-                    data: monitorController.data, color: Colors.yellow),
-                // The containers in the column are there for spacing
-                Container(height: 10),
-                GraphContainer(
-                    data: monitorController.data2, color: Colors.purple),
-                Container(height: 10),
-                GraphContainer(
-                    data: monitorController.data3, color: Colors.green),
-                Container(height: 10),
+                  data: monitorController.initialGraphs,
+                ),
                 const GraphAdder(),
               ],
             ),
@@ -54,36 +45,41 @@ class Monitor extends StatelessWidget {
               Flexible(
                 flex: 1,
                 child: Row(
-                  children: const [
+                  children: [
                     ValueTile(
                       name: "NIDB",
-                      textColor: Color(0xFFDC362E),
-                      backgroundColor: Color(0xFF2A2831),
-                      value: 0,
+                      textColor: const Color(0xFFDC362E),
+                      backgroundColor: const Color(0xFF2A2831),
+                      value: monitorController.initialGraphs[0]["data"]
+                          as List<ChartDataMockup>,
                     ),
                     ValueTile(
-                        name: "Pulse",
-                        textColor: Color(0xFFFF00E4),
-                        backgroundColor: Color(0xFF2A2831),
-                        value: 0),
+                      name: "Pulse",
+                      textColor: const Color(0xFFFF00E4),
+                      backgroundColor: const Color(0xFF2A2831),
+                      value: monitorController.initialGraphs[0]["data"]
+                          as List<ChartDataMockup>,
+                    ),
                   ],
                 ),
               ),
               Flexible(
                 flex: 1,
                 child: Row(
-                  children: const [
+                  children: [
                     ValueTile(
                       name: "MVe",
-                      textColor: Color(0xFF0CECDD),
-                      backgroundColor: Color(0xff2A2831),
-                      value: 0,
+                      textColor: const Color(0xFF0CECDD),
+                      backgroundColor: const Color(0xff2A2831),
+                      value: monitorController.initialGraphs[0]["data"]
+                          as List<ChartDataMockup>,
                     ),
                     ValueTile(
                       name: "Breath. Freq.",
-                      textColor: Color(0xFF0CECDD),
-                      backgroundColor: Color(0xff2A2831),
-                      value: 0,
+                      textColor: const Color(0xFF0CECDD),
+                      backgroundColor: const Color(0xff2A2831),
+                      value: monitorController.initialGraphs[0]["data"]
+                          as List<ChartDataMockup>,
                     ),
                   ],
                 ),
@@ -92,36 +88,18 @@ class Monitor extends StatelessWidget {
                 flex: 2,
                 child: Row(
                   children: const [
-                    ValueTile(
-                      name: "placeholder",
-                      textColor: Color(0xFFFFFFFF),
-                      backgroundColor: Color(0xff2A2831),
-                      value: 0,
+                    Flexible(
+                      flex: 1,
+                      child: InfoTile(data: [
+                        {"type": "pPeak", "value": 50.12, "unit": "mBar"},
+                        {"type": "pPlat", "value": 4.58, "unit": "mBar"},
+                        {"type": "pMean", "value": 16.58, "unit": "mBar"},
+                        {"type": "MV", "value": 7.2, "unit": "l/min"}
+                      ]),
                     ),
-                    ValueTile(
-                      name: "placeholder",
-                      textColor: Color(0xFFFFFFFF),
-                      backgroundColor: Color(0xff2A2831),
-                      value: 0,
-                    ),
-                  ],
-                ),
-              ),
-              Flexible(
-                flex: 1,
-                child: Row(
-                  children: const [
-                    ValueTile(
-                      name: "placeholder",
-                      textColor: Color(0xFFFFFFFF),
-                      backgroundColor: Color(0xff2A2831),
-                      value: 0,
-                    ),
-                    ValueTile(
-                      name: "placeholder",
-                      textColor: Color(0xFFFFFFFF),
-                      backgroundColor: Color(0xff2A2831),
-                      value: 0,
+                    Flexible(
+                      flex: 1,
+                      child: SettingTile(),
                     ),
                   ],
                 ),

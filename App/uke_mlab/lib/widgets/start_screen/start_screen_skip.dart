@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class startScreenSkip extends StatelessWidget {
-  const startScreenSkip({
+class StartScreenSkip extends StatelessWidget {
+  const StartScreenSkip({
     Key? key,
   }) : super(key: key);
 

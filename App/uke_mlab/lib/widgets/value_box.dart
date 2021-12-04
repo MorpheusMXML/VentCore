@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'package:uke_mlab/models/enums.dart';
-import 'package:uke_mlab/models/model.dart';
-
+import 'package:uke_mlab/providers/mockup.dart';
 import 'package:uke_mlab/utilities/screen_controller.dart';
 
 class ValueBox extends StatelessWidget {
   final Color textColor;
-  final int value;
+  final List<ChartDataMockup> value;
   final Color backgroundColor;
   final String miniTitle;
   //final sensorEnum sensor;
@@ -62,11 +59,13 @@ class ValueBox extends StatelessWidget {
                 ),
               ],
             ),
-            Text(
-              value.toString(),
-              style: TextStyle(
-                color: textColor,
-                fontSize: 50,
+            Obx(
+              () => Text(
+                value[value.length - 2].value.toString(),
+                style: TextStyle(
+                  color: textColor,
+                  fontSize: 50,
+                ),
               ),
             ),
             Row(

@@ -1,17 +1,18 @@
 import 'dart:async';
-import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:uke_mlab/providers/mockup.dart';
 
 class Graph extends StatelessWidget {
-  final List<ChartData> data;
+  final List<ChartDataMockup> data;
   final Color color;
+  final String type;
 
   const Graph({
     Key? key,
     required this.data,
+    required this.type,
     required this.color,
   }) : super(key: key);
 
@@ -26,14 +27,14 @@ class Graph extends StatelessWidget {
         addedDataIndexes: <int>[data.length - 1],
         removedDataIndexes: <int>[0],
       );
-      monitorController.updateData();
+      monitorController.updateData(type);
     });
-
-    // use visibleMaximum and visibleMinimum for NumericAxis
 
     return SfCartesianChart(
       backgroundColor: Theme.of(context).cardColor,
       primaryYAxis: NumericAxis(
+        minimum: 0,
+        maximum: 100,
         majorGridLines:
             MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
       ),
@@ -51,8 +52,8 @@ class Graph extends StatelessWidget {
             onRendererCreated: (ChartSeriesController controller) {
               myController = controller;
             },
-            xValueMapper: (ChartData data, _) => data.counter,
-            yValueMapper: (ChartData data, _) => data.value)
+            xValueMapper: (ChartDataMockup data, _) => data.counter,
+            yValueMapper: (ChartDataMockup data, _) => data.value)
       ],
     );
   }
