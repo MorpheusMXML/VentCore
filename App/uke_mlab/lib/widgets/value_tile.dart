@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:uke_mlab/providers/mockup.dart';
 import 'package:uke_mlab/widgets/value_box.dart';
 
 class ValueTile extends StatelessWidget {
   final Color textColor;
   final Color backgroundColor;
-  final int value;
+  final List<ChartData> value;
   final String name;
 
   const ValueTile({
