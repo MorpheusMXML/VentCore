@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:uke_mlab/models/model.dart';
+import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/widgets/value_box.dart';
 
 class ValueTile extends StatelessWidget {
   final int textColor;
   final int backgroundColor;
   final String name;
-  final DataModel dataModel;
+  final sensorEnum sensor;
 
   const ValueTile({
     required this.textColor,
     required this.name,
     required this.backgroundColor,
-    required this.dataModel,
+    required this.sensor,
   });
 
   @override
@@ -43,7 +43,7 @@ class ValueTile extends StatelessWidget {
             child: ValueBox(
               backgroundColor: backgroundColor,
               textColor: textColor,
-              dataModel: dataModel,
+              sensor: sensor,
             ),
           ),
         ],

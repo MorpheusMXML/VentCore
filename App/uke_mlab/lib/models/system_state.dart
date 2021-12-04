@@ -4,27 +4,14 @@ import 'package:uke_mlab/models/enums.dart';
 // TODO use in use in AlarmController
 
 class SystemState {
-  screenStatus _screenStatus = screenStatus.topLevelScreen;
-  final Map<sensors, boundaryState> _violationStates = {};
+  screenStatusEnum screenStatus = screenStatusEnum.topLevelScreen;
+  final Map<sensorEnum, boundaryStateEnum> violationStates = {};
+  bool scenarioStarted = false;
 
+  // SystemState initated with no violations at place and screenStatus as topLevelScreen
   SystemState() {
-    _violationStates
-        .forEach((key, value) => {value = boundaryState.inBoundaries});
-  }
-
-  void setBoundaryState(sensors key, boundaryState newState) {
-    _violationStates[key] = newState;
-  }
-
-  boundaryState? getBoundaryState(sensors key) {
-    return _violationStates[key];
-  }
-
-  void setScreenStatus(screenStatus newStatus) {
-    _screenStatus = newStatus;
-  }
-
-  screenStatus getScreenStatus() {
-    return _screenStatus;
+    for (var sensor in sensorEnum.values) {
+      violationStates[sensor] = boundaryStateEnum.inBoundaries;
+    }
   }
 }

@@ -1,40 +1,20 @@
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/enums.dart';
+import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/utilities/alarm_controller.dart';
 
 class ModelManager {
-  final Map<sensors, DataModel> _activeModels = {};
-  //TODO get standard values as Adult values, maybe from a respective JSON?
-  //Add aditional data entries as soon as model data is required
-  late final _initialValues;
-
   late final AlarmController _alarmController;
 
   ModelManager() {
-    _initialValues = {
-      MapEntry(sensors.heartFrequency, DataModel(0.obs, 0.obs, this)),
-      MapEntry(sensors.spo2, DataModel(0.obs, 0.obs, this)),
-      MapEntry(sensors.pulse, DataModel(0.obs, 0.obs, this)),
-      MapEntry(sensors.breathFrequency, DataModel(0.obs, 0.obs, this))
-    };
-    _activeModels.addEntries(_initialValues);
-  }
-
-  void resetModels() {
-    _activeModels.forEach((key, value) => value.resetDataModel());
+    for (var sensor in sensorEnum.values) {
+      //TODO read standard values from somewhere
+      Get.put(DataModel(sensor, 10, 0, this), tag: sensor.toString());
+    }
   }
 
   void registerAlarmController(AlarmController newController) {
     _alarmController = newController;
-  }
-
-  //Returns null if no key matched, use null exception if used
-  DataModel getDataModel(sensors key) {
-    if (_activeModels[key] != null) {
-      return _activeModels[key]!;
-    } else {
-      throw ArgumentError("No mapping for sensor key " + key.toString());
-    }
   }
 
   AlarmController getAlarmController() {
@@ -42,101 +22,91 @@ class ModelManager {
   }
 }
 
-//Historic data INCLUDES the presentData value at the end, is initiated with 100
-//Alarm recognition is done in Alarm manager
+// graphData INCLUDES the singleData value at the end
+// Alarm evaluation is done in alarm_controller
+// graphDataMaxLength is initialized with 100, can be manipulated
 class DataModel extends GetxController {
-  late RxInt _upperAlarmBound;
-  late RxInt _lowerAlarmBound;
+  late final sensorEnum sensorKey;
 
-  //Could have observable type to avoid type conversions, but why should these values be observable?
-  late int _initialUpperBound;
-  late int _initialLowerBound;
+  final RxInt upperAlarmBound = 0.obs;
+  final RxInt lowerAlarmBound = 0.obs;
 
-  Rx<ChartData> presentData = ChartData(DateTime.now(), 0).obs;
-  final _historicalData = []
-      .obs; //growable list TODO: find out why compiler thinks final ist correct here, since pointer could change
-  final int _historicalDataMaxLength = 100; //TODO should be a parameter
-  late final ModelManager _modelManager;
+  late final int initialUpperBound;
+  late final int initialLowerBound;
 
-  DataModel(RxInt upperBound, RxInt lowerBound, ModelManager modelManager) {
-    _upperAlarmBound = upperBound;
-    _initialUpperBound = upperBound.toInt();
-    _lowerAlarmBound = lowerBound;
-    _initialLowerBound = lowerBound.toInt();
-    _modelManager = modelManager;
+  late final Rx<ChartData> singleData;
+
+  final graphData =
+      [].obs; //variable list, maybe fill up to _graphDataMaxLength?
+  int graphDataMaxLength = 100;
+
+  late final ModelManager modelManager;
+  final SystemState _systemState = Get.find<SystemState>();
+
+  DataModel(sensorEnum initSensorKey, int upperBound, int lowerBound,
+      ModelManager modelManager) {
+    sensorKey = initSensorKey;
+
+    initialUpperBound = upperBound;
+    initialLowerBound = lowerBound;
+
+    upperAlarmBound.value = upperBound;
+    lowerAlarmBound.value = lowerBound;
+
+    modelManager = modelManager;
+
+    singleData = ChartData(DateTime.now(), 0.0).obs;
   }
 
-  //updates a value, puts current tuple into historical list (needed for histories) + forces getx to do an update
-  void updateValues(DateTime newTimeStamp, double newValue) {
-    presentData = ChartData(newTimeStamp, newValue).obs;
-    _historicalData.add(presentData);
-
-    if (_historicalDataMaxLength < _historicalData.length) {
-      _historicalData.removeAt(0);
+  // updates singleDate with a new value, puts singleData at the end of the list
+  // if graphData would exceed maxLenght, remove first (oldest) element
+  // graphData is sorted by oldest at pos 0 to latest element
+  void updateValues(double newValue) {
+    singleData.value = ChartData(DateTime.now(), newValue);
+    if (graphData.length + 1 > graphDataMaxLength) {
+      graphData.removeAt(0);
     }
-    update();
+    graphData.add(singleData.value);
+
+    //evaluates whether update violated alarm boundaries or returns into boundaries
+    if (singleData.value.value > upperAlarmBound.value) {
+      evaluateBoundaryChange(boundaryStateEnum.upperBoundaryViolated);
+    } else if (singleData.value.value < lowerAlarmBound.value) {
+      evaluateBoundaryChange(boundaryStateEnum.lowerBoundaryViolated);
+    } else {
+      evaluateBoundaryChange(boundaryStateEnum.inBoundaries);
+    }
+  }
+
+  void evaluateBoundaryChange(boundaryState) {
+    if (_systemState.violationStates[sensorKey] != boundaryState) {
+      _systemState.violationStates[sensorKey] = boundaryState;
+      informAlarmController(boundaryState);
+    }
   }
 
   //informs alarmController about change via call
-  void informAlarmController() {
-    //TODO implememt
+  void informAlarmController(boundaryStateEnum boundaryState) {
+    //TODO implememt instead of just printing
+    print("$sensorKey had boundary change to $boundaryState");
     //requires information about own state
   }
 
-  boundaryState evaluateBoundarieViolation() {
-    if (presentData.value.getValue() > _upperAlarmBound.toDouble()) {
-      return boundaryState.upperBoundaryViolated;
-    } else if (presentData.value.getValue() < _lowerAlarmBound.toDouble()) {
-      return boundaryState.lowerBoundaryViolated;
-    } else {
-      return boundaryState.inBoundaries;
-    }
-  }
-
   void resetDataModel() {
-    _upperAlarmBound = RxInt(_initialUpperBound);
-    _lowerAlarmBound = RxInt(_initialLowerBound);
-    presentData = ChartData(DateTime.now(), 0).obs;
-    _historicalData.clear();
-  }
-
-  void setUpperAlarmBoundary(int newBoundary) {
-    _upperAlarmBound = RxInt(newBoundary);
-  }
-
-  void setLowerAlarmBoundary(int newBoundary) {
-    _lowerAlarmBound = RxInt(newBoundary);
-  }
-
-  Rx<ChartData> getPresenData() {
-    return presentData;
-  }
-
-  getHistoricalData() {
-    return _historicalData;
-  }
-
-  RxInt getUpperAlarmBound() {
-    return _upperAlarmBound;
-  }
-
-  RxInt getLowerAlarmBound() {
-    return _lowerAlarmBound;
+    // reset alarm boundaries
+    upperAlarmBound.value = initialUpperBound;
+    lowerAlarmBound.value = initialLowerBound;
+    //reset singleData to 0 entry
+    singleData.value = ChartData(DateTime.now(), 0.0);
+    //clear historical data
+    graphData.clear();
   }
 }
 
 // Construct a new data entry tuple
 class ChartData {
-  final DateTime _time;
-  final double _value;
+  final DateTime time;
+  final double value;
 
-  ChartData(this._time, this._value);
-
-  DateTime getTime() {
-    return _time;
-  }
-
-  double getValue() {
-    return _value;
-  }
+  ChartData(this.time, this.value);
 }

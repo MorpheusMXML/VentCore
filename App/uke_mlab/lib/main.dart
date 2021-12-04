@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:uke_mlab/models/model.dart';
+import 'package:uke_mlab/models/system_state.dart';
 
 import 'package:uke_mlab/screens/monitor.dart';
 import 'package:uke_mlab/utilities/alarm_controller.dart';
@@ -23,6 +24,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  final SystemState systemState = Get.put(SystemState());
   final ModelManager modelManager = Get.put(ModelManager());
 
   MyApp({Key? key}) : super(key: key) {

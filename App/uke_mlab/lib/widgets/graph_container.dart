@@ -1,17 +1,16 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:uke_mlab/models/model.dart';
+import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/widgets/bell.dart';
 import 'package:uke_mlab/widgets/value_box.dart';
 import 'package:uke_mlab/widgets/graph.dart';
 
 class GraphContainer extends StatelessWidget {
-  final DataModel dataModel;
-
+  final sensorEnum sensor;
   const GraphContainer({
     Key? key,
-    required this.dataModel,
+    required this.sensor,
   }) : super(key: key);
 
   @override
@@ -33,7 +32,7 @@ class GraphContainer extends StatelessWidget {
             child: ValueBox(
               textColor: 0xff0CECDD,
               backgroundColor: 0xff2A2831,
-              dataModel: dataModel,
+              sensor: sensor,
             ),
           )
         ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/models/model.dart';
 import 'package:uke_mlab/utilities/screen_controller.dart';
 
@@ -9,7 +10,7 @@ class ValueBox extends StatelessWidget {
   // To be changed to "actual" data
   final int backgroundColor;
   final String miniTitle;
-  final DataModel dataModel;
+  final sensorEnum sensor;
   final ScreenController screenController = Get.find();
 
   ValueBox({
@@ -18,15 +19,17 @@ class ValueBox extends StatelessWidget {
     // To be changed to "actual" data
     this.miniTitle = "PP",
     required this.backgroundColor,
-    required this.dataModel,
+    required this.sensor,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
+
     void _buttonPressed() {
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text("Button Tapped")));
-      screenController.increaseValue(dataModel);
+      dataModel.updateValues(dataModel.singleData.value.value + 1.0); //testing
     }
 
     return ElevatedButton(
@@ -73,7 +76,7 @@ class ValueBox extends StatelessWidget {
             ),
             Obx(
               () => Text(
-                "${dataModel.presentData.value.getValue().toInt()}",
+                "${dataModel.singleData.value.value.toInt()}",
                 style: TextStyle(
                   color: Color(textColor),
                   fontSize: 80,

@@ -22,14 +22,11 @@ class Monitor extends StatelessWidget {
         Flexible(
           flex: 4,
           child: Column(
-            children: [
+            children: const [
               //nonsensical input atm
-              GraphContainer(
-                  dataModel: modelManager.getDataModel(sensors.spo2)),
-              GraphContainer(
-                  dataModel: modelManager.getDataModel(sensors.spo2)),
-              GraphContainer(
-                  dataModel: modelManager.getDataModel(sensors.spo2)),
+              GraphContainer(sensor: sensorEnum.spo2),
+              GraphContainer(sensor: sensorEnum.spo2),
+              GraphContainer(sensor: sensorEnum.spo2),
               GraphAdder(),
             ],
           ),
@@ -41,14 +38,14 @@ class Monitor extends StatelessWidget {
               Flexible(
                 flex: 1,
                 child: Row(
-                  children: [
+                  children: const [
                     Flexible(
                       flex: 1,
                       child: ValueTile(
                         name: "Pulse",
                         textColor: 0xffFF00E4,
                         backgroundColor: 0xff2A2831,
-                        dataModel: modelManager.getDataModel(sensors.pulse),
+                        sensor: sensorEnum.pulse,
                       ),
                     ),
                     Flexible(
@@ -57,8 +54,7 @@ class Monitor extends StatelessWidget {
                         name: "Breath. Freq.",
                         textColor: 0xff0CECDD,
                         backgroundColor: 0xff2A2831,
-                        dataModel:
-                            modelManager.getDataModel(sensors.breathFrequency),
+                        sensor: sensorEnum.breathFrequency,
                       ),
                     ),
                   ],

@@ -1,4 +1,4 @@
-enum sensors {
+enum sensorEnum {
   heartFrequency,
   spo2,
   pulse,
@@ -6,7 +6,7 @@ enum sensors {
   //TODO expand
 }
 
-enum scenarios {
+enum scenariosEnum {
   scenario1,
   scenario2,
   scenario3a,
@@ -15,13 +15,13 @@ enum scenarios {
   scenario4
 }
 
-enum boundaryState {
+enum boundaryStateEnum {
   lowerBoundaryViolated,
   inBoundaries,
   upperBoundaryViolated
 }
 
-enum screenStatus {
+enum screenStatusEnum {
   topLevelScreen,
   monitoringScreen,
   ventilationScreen,
