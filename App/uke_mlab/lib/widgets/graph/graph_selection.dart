@@ -18,7 +18,7 @@ class GraphSelection extends StatelessWidget {
               onPressed: () => controller.initialGraphs.add({
                     "type": "3",
                     "data":
-                        controller.initialGraphs[0]["data"] as List<ChartData>,
+                        controller.initialGraphs[0]["data"] as List<ChartDataMockup>,
                     "color": Colors.yellow
                   }),
               child: const Text(
@@ -29,7 +29,7 @@ class GraphSelection extends StatelessWidget {
               onPressed: () => controller.initialGraphs.add({
                     "type": "3",
                     "data":
-                        controller.initialGraphs[1]["data"] as List<ChartData>,
+                        controller.initialGraphs[1]["data"] as List<ChartDataMockup>,
                     "color": Colors.green
                   }),
               child: const Text(
@@ -40,7 +40,7 @@ class GraphSelection extends StatelessWidget {
               onPressed: () => controller.initialGraphs.add({
                     "type": "3",
                     "data":
-                        controller.initialGraphs[2]["data"] as List<ChartData>,
+                        controller.initialGraphs[2]["data"] as List<ChartDataMockup>,
                     "color": Colors.brown
                   }),
               child: const Text(

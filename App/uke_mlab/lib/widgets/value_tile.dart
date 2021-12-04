@@ -7,7 +7,7 @@ import 'package:uke_mlab/widgets/value_box.dart';
 class ValueTile extends StatelessWidget {
   final Color textColor;
   final Color backgroundColor;
-  final List<ChartData> value;
+  final List<ChartDataMockup> value;
   final String name;
   //final sensorEnum sensor;
 

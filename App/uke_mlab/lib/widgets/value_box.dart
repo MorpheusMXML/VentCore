@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:uke_mlab/providers/mockup.dart';
-import 'package:uke_mlab/models/enums.dart';
-import 'package:uke_mlab/models/model.dart';
 import 'package:uke_mlab/utilities/screen_controller.dart';
 
 class ValueBox extends StatelessWidget {
   final Color textColor;
-  final List<ChartData> value;
+  final List<ChartDataMockup> value;
   final Color backgroundColor;
   final String miniTitle;
   //final sensorEnum sensor;

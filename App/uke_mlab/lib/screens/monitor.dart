@@ -8,11 +8,7 @@ import 'package:uke_mlab/widgets/info/info_tile.dart';
 import 'package:uke_mlab/widgets/setting/setting_tile.dart';
 import 'package:uke_mlab/widgets/value_tile.dart';
 import 'package:uke_mlab/widgets/graph/graph_adder.dart';
-
-import 'package:uke_mlab/providers/mockup.dart';
-
 import 'package:uke_mlab/models/model.dart';
-
 import 'package:uke_mlab/utilities/screen_controller.dart';
 
 class Monitor extends StatelessWidget {
@@ -55,14 +51,14 @@ class Monitor extends StatelessWidget {
                       textColor: const Color(0xFFDC362E),
                       backgroundColor: const Color(0xFF2A2831),
                       value: monitorController.initialGraphs[0]["data"]
-                          as List<ChartData>,
+                          as List<ChartDataMockup>,
                     ),
                     ValueTile(
                       name: "Pulse",
                       textColor: const Color(0xFFFF00E4),
                       backgroundColor: const Color(0xFF2A2831),
                       value: monitorController.initialGraphs[0]["data"]
-                          as List<ChartData>,
+                          as List<ChartDataMockup>,
                     ),
                   ],
                 ),
@@ -76,14 +72,14 @@ class Monitor extends StatelessWidget {
                       textColor: const Color(0xFF0CECDD),
                       backgroundColor: const Color(0xff2A2831),
                       value: monitorController.initialGraphs[0]["data"]
-                          as List<ChartData>,
+                          as List<ChartDataMockup>,
                     ),
                     ValueTile(
                       name: "Breath. Freq.",
                       textColor: const Color(0xFF0CECDD),
                       backgroundColor: const Color(0xff2A2831),
                       value: monitorController.initialGraphs[0]["data"]
-                          as List<ChartData>,
+                          as List<ChartDataMockup>,
                     ),
                   ],
                 ),

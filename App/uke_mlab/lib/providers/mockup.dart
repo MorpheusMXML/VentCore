@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 
 // DataClass used by the Graphs
 // x: DateTime, y: value (HF, SpO2, ...)
-class ChartData {
-  ChartData(this.time, this.value, this.counter);
+class ChartDataMockup {
+  ChartDataMockup(this.time, this.value, this.counter);
   final DateTime time;
   final int value;
   final int counter;
@@ -41,17 +41,17 @@ class MonitorController extends GetxController {
       // type is used as a key, probably could use key property of widgets but
       // there were issues passing <Key> to children
       "type": "1",
-      "data": List.filled(30, ChartData(DateTime.now(), 0, 0)).obs,
+      "data": List.filled(30, ChartDataMockup(DateTime.now(), 0, 0)).obs,
       "color": Colors.green
     },
     {
       "type": "2",
-      "data": List.filled(30, ChartData(DateTime.now(), 0, 0)).obs,
+      "data": List.filled(30, ChartDataMockup(DateTime.now(), 0, 0)).obs,
       "color": Colors.blue
     },
     {
       "type": "3",
-      "data": List.filled(30, ChartData(DateTime.now(), 0, 0)).obs,
+      "data": List.filled(30, ChartDataMockup(DateTime.now(), 0, 0)).obs,
       "color": Colors.yellow
     }
   ].obs;
@@ -111,9 +111,9 @@ class MonitorController extends GetxController {
           default:
             nextValue1 = 20 + getVariation();
         }
-        (initialGraphs[0]["data"] as List<ChartData>)
-            .add(ChartData(DateTime.now(), nextValue1, count1));
-        (initialGraphs[0]["data"] as List<ChartData>).removeAt(0);
+        (initialGraphs[0]["data"] as List<ChartDataMockup>)
+            .add(ChartDataMockup(DateTime.now(), nextValue1, count1));
+        (initialGraphs[0]["data"] as List<ChartDataMockup>).removeAt(0);
         break;
 
       case "2":
@@ -133,9 +133,9 @@ class MonitorController extends GetxController {
           default:
             nextValue2 = 5 + getVariation();
         }
-        (initialGraphs[1]["data"] as List<ChartData>)
-            .add(ChartData(DateTime.now(), nextValue2, count2));
-        (initialGraphs[1]["data"] as List<ChartData>).removeAt(0);
+        (initialGraphs[1]["data"] as List<ChartDataMockup>)
+            .add(ChartDataMockup(DateTime.now(), nextValue2, count2));
+        (initialGraphs[1]["data"] as List<ChartDataMockup>).removeAt(0);
         break;
 
       case "3":
@@ -149,9 +149,9 @@ class MonitorController extends GetxController {
           default:
             nextValue3 = 10 + getVariation();
         }
-        (initialGraphs[2]["data"] as List<ChartData>)
-            .add(ChartData(DateTime.now(), nextValue3, count3));
-        (initialGraphs[2]["data"] as List<ChartData>).removeAt(0);
+        (initialGraphs[2]["data"] as List<ChartDataMockup>)
+            .add(ChartDataMockup(DateTime.now(), nextValue3, count3));
+        (initialGraphs[2]["data"] as List<ChartDataMockup>).removeAt(0);
         break;
 
       default:

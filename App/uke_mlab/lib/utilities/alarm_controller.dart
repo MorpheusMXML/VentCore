@@ -1,4 +1,3 @@
-import 'package:get/get.dart';
 import 'package:uke_mlab/models/model.dart';
 
 class AlarmController {

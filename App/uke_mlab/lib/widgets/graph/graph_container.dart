@@ -29,12 +29,12 @@ class GraphContainer extends StatelessWidget {
                       Expanded(
                         child: Graph(
                           type: data[index]["type"] as String,
-                          data: data[index]["data"] as List<ChartData>,
+                          data: data[index]["data"] as List<ChartDataMockup>,
                           color: data[index]["color"] as Color,
                         ),
                       ),
                       ValueBox(
-                        value: data[index]["data"] as List<ChartData>,
+                        value: data[index]["data"] as List<ChartDataMockup>,
                         textColor: data[index]["color"] as Color,
                         backgroundColor: const Color(0xFF2A2831),
                       ),

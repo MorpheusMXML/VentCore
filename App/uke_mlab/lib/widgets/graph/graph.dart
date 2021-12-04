@@ -5,7 +5,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:uke_mlab/providers/mockup.dart';
 
 class Graph extends StatelessWidget {
-  final List<ChartData> data;
+  final List<ChartDataMockup> data;
   final Color color;
   final String type;
 
@@ -52,8 +52,8 @@ class Graph extends StatelessWidget {
             onRendererCreated: (ChartSeriesController controller) {
               myController = controller;
             },
-            xValueMapper: (ChartData data, _) => data.counter,
-            yValueMapper: (ChartData data, _) => data.value)
+            xValueMapper: (ChartDataMockup data, _) => data.counter,
+            yValueMapper: (ChartDataMockup data, _) => data.value)
       ],
     );
   }
