@@ -38,6 +38,8 @@ class MonitorController extends GetxController {
 
   List<Map<String, Object>> initialGraphs = [
     {
+      // type is used as a key, probably could use key property of widgets but 
+      // there were issues passing <Key> to children
       "type": "1",
       "data": List.filled(30, ChartData(DateTime.now(), 0, 0)).obs,
       "color": Colors.green
