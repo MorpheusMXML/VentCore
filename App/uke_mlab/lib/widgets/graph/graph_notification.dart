@@ -7,11 +7,15 @@ class GraphNotification extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final monitorController = Get.find<MonitorController>();
+    return GetBuilder<MonitorController>(
+        init: MonitorController(),
+        builder: (controller) => getWidget(controller));
+  }
 
-    if (false) {
+  getWidget(controller) {
+    if (controller.muted) {
       return ElevatedButton(
-        onPressed: () {},
+        onPressed: () => controller.invertMuted(),
         style: ElevatedButton.styleFrom(
           primary: Colors.grey[800],
           fixedSize: const Size(80, 80),
@@ -21,7 +25,7 @@ class GraphNotification extends StatelessWidget {
       );
     } else {
       return ElevatedButton(
-        onPressed: () {},
+        onPressed: () => controller.invertMuted(),
         style: ElevatedButton.styleFrom(
           primary: Colors.grey[800],
           fixedSize: const Size(80, 80),
