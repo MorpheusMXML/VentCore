@@ -11,9 +11,10 @@ class startScreenButton extends StatelessWidget {
   final String name;
   final String image;
   const startScreenButton({
+    Key? key,
     required this.name,
     required this.image,
-  });
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
