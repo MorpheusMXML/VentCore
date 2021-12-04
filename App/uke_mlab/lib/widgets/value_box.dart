@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:uke_mlab/providers/mockup.dart';
 
 class ValueBox extends StatelessWidget {
   final Color textColor;
-  final int value;
+  final List<ChartData> value;
   final Color backgroundColor;
   final String miniTitle;
 
@@ -48,11 +50,13 @@ class ValueBox extends StatelessWidget {
                 ),
               ],
             ),
-            Text(
-              value.toString(),
-              style: TextStyle(
-                color: textColor,
-                fontSize: 50,
+            Obx(
+              () => Text(
+                value[value.length - 2].value.toString(),
+                style: TextStyle(
+                  color: textColor,
+                  fontSize: 50,
+                ),
               ),
             ),
             Row(
