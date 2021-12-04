@@ -30,7 +30,7 @@ class startScreenButton extends StatelessWidget {
         ),
         //Presets Loading
         onPressed: () {
-          print(name);
+          //TODO: Implement Logic to provide presets for the Content on the right side
         },
         //Button content
         child: Row(

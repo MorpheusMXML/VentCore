@@ -45,6 +45,7 @@ class startScreen extends StatelessWidget {
                 height: 320 / MediaQuery.of(context).devicePixelRatio,
                 width: 830 / MediaQuery.of(context).devicePixelRatio,
                 child: Column(
+                  //TODO: implement Logic in these 3 Widgets so that we can work with this data in the following
                   children: const [
                     nameField(),
                     startScreenSlider(name: "Weight"),
@@ -53,6 +54,7 @@ class startScreen extends StatelessWidget {
                 ),
               ),
             ),
+            //TODO: add a "Continue" Button so that if content is changed in "Fetter Container" the button appears and only by pressing continue we will provide/save the configuration
             aedButton(),
             startScreenSkip()
           ],
