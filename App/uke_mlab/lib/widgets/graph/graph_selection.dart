@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:uke_mlab/providers/mockup.dart';
-import 'package:uke_mlab/widgets/value_box.dart';
 
 class GraphSelection extends StatelessWidget {
   final MonitorController controller;
