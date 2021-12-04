@@ -24,22 +24,11 @@ class Monitor extends StatelessWidget {
           child: Container(
             margin: const EdgeInsets.only(left: 8, right: 8),
             child: Column(
-              // Add condition here?
-              // If GraphAdder is tapped, render different children
               children: [
                 GraphContainer(
-                    type: "1",
-                    data: monitorController.data1,
-                    color: _styleController.heartFreqColor),
-                GraphContainer(
-                    type: "2",
-                    data: monitorController.data2,
-                    color: _styleController.oxySatColor),
-                GraphContainer(
-                    type: "3",
-                    data: monitorController.data3,
-                    color: _styleController.co2Color),
-                const Flexible(flex: 1, child: GraphAdder()),
+                  data: monitorController.initialGraphs,
+                ),
+                const GraphAdder(),
               ],
             ),
           ),
@@ -51,36 +40,37 @@ class Monitor extends StatelessWidget {
               Flexible(
                 flex: 1,
                 child: Row(
-                  children: const [
+                  children: [
                     ValueTile(
                       name: "NIDB",
-                      textColor: Color(0xFFDC362E),
-                      backgroundColor: Color(0xFF2A2831),
-                      value: 0,
+                      textColor: const Color(0xFFDC362E),
+                      backgroundColor: const Color(0xFF2A2831),
+                      value: monitorController.initialGraphs[0]["data"] as List<ChartData>,
                     ),
                     ValueTile(
-                        name: "Pulse",
-                        textColor: Color(0xFFFF00E4),
-                        backgroundColor: Color(0xFF2A2831),
-                        value: 0),
+                      name: "Pulse",
+                      textColor: const Color(0xFFFF00E4),
+                      backgroundColor: const Color(0xFF2A2831),
+                      value: monitorController.initialGraphs[0]["data"] as List<ChartData>,
+                    ),
                   ],
                 ),
               ),
               Flexible(
                 flex: 1,
                 child: Row(
-                  children: const [
+                  children: [
                     ValueTile(
                       name: "MVe",
-                      textColor: Color(0xFF0CECDD),
-                      backgroundColor: Color(0xff2A2831),
-                      value: 0,
+                      textColor: const Color(0xFF0CECDD),
+                      backgroundColor: const Color(0xff2A2831),
+                      value: monitorController.initialGraphs[0]["data"] as List<ChartData>,
                     ),
                     ValueTile(
                       name: "Breath. Freq.",
-                      textColor: Color(0xFF0CECDD),
-                      backgroundColor: Color(0xff2A2831),
-                      value: 0,
+                      textColor: const Color(0xFF0CECDD),
+                      backgroundColor: const Color(0xff2A2831),
+                      value: monitorController.initialGraphs[0]["data"] as List<ChartData>,
                     ),
                   ],
                 ),
