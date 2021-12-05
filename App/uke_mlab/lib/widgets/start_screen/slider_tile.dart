@@ -42,7 +42,7 @@ class SliderTile extends StatelessWidget {
             child: Obx(
               () => Slider(
                   min: 0.0,
-                  max: 150.0,
+                  max: 250.0,
                   divisions: 15,
                   value: value.value,
                   label: value.value.round().toString(),
