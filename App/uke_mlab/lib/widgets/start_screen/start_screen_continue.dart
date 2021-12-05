@@ -16,16 +16,20 @@ class StartScreenContinue extends StatelessWidget {
 
   getWidget(controller) {
     return ElevatedButton(
-      style: ButtonStyle(
-        shape: MaterialStateProperty.all(const RoundedRectangleBorder()),
-        backgroundColor: MaterialStateProperty.all(Colors.green),
+      style: ElevatedButton.styleFrom(
+        onSurface: const Color(0xffeeeeee),
+        primary: const Color(0xffeeeeee),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),
       ),
       onPressed: controller.selectedString.toString() != ""
           ? () {
               print("Pass selectedString to Monitor");
             }
           : null,
-      child: const Text('Continue'),
+      child: const Text(
+        'Continue',
+        style: TextStyle(color: Colors.black),
+      ),
     );
   }
 }
