@@ -21,7 +21,7 @@ class StartScreen extends StatelessWidget {
       appBar: AppBar(title: const StatusBar(category: "")),
       body: Row(children: [
         Flexible(
-          flex: 5,
+          flex: 10,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
@@ -34,11 +34,12 @@ class StartScreen extends StatelessWidget {
             ],
           ),
         ),
+        Expanded(flex: 1, child: Container()),
         Flexible(
           flex:
-              3, //von 4 auf 3 damit Patientencontainer wieder auf eine höhe mit Buttons
+              10, //von 4 auf 3 damit Patientencontainer wieder auf eine höhe mit Buttons
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               //Ganzer Container auf einer Höhe mit Buttons darunter
               Align(
