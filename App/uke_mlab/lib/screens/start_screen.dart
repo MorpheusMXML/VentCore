@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:uke_mlab/providers/start_screen_controller.dart';
 import 'package:uke_mlab/widgets/start_screen/name_field.dart';
 import 'package:uke_mlab/widgets/start_screen/slider.dart';
+import 'package:uke_mlab/widgets/start_screen/slider_tile.dart';
 import 'package:uke_mlab/widgets/start_screen/start_screen_button.dart';
 import 'package:uke_mlab/widgets/start_screen/start_screen_continue.dart';
 import 'package:uke_mlab/widgets/start_screen/start_screen_skip.dart';
@@ -14,6 +17,7 @@ class StartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final startScreenController = Get.find<StartScreenController>();
     return Scaffold(
       appBar: AppBar(title: const StatusBar(category: "")),
       body: Row(children: [
@@ -51,10 +55,14 @@ class StartScreen extends StatelessWidget {
                   width: 830 / MediaQuery.of(context).devicePixelRatio,
                   child: Column(
                     //TODO: implement Logic in these 3 Widgets so that we can work with this data in the following
-                    children: const [
-                      nameField(),
-                      startScreenSlider(name: "Weight"),
-                      startScreenSlider(name: "Height"),
+                    children: [
+                      const nameField(),
+                      SliderTile(
+                          name: "Weight",
+                          value: startScreenController.weightValue),
+                      SliderTile(
+                          name: "Height",
+                          value: startScreenController.heightValue),
                     ],
                   ),
                 ),
