@@ -15,34 +15,46 @@ class GraphSelection extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           ElevatedButton(
-              onPressed: () => controller.initialGraphs.add({
-                    "type": "3",
-                    "data":
-                        controller.initialGraphs[0]["data"] as List<ChartDataMockup>,
-                    "color": Colors.yellow
-                  }),
+              onPressed: () {
+                String type = (controller.initialGraphs.length + 1).toString();
+                controller.muted[type] = false;
+                controller.initialGraphs.add({
+                  "type": type,
+                  "data": controller.initialGraphs[0]["data"]
+                      as List<ChartDataMockup>,
+                  "color": Colors.yellow
+                });
+              },
               child: const Text(
                 "Add Graph 1",
                 style: TextStyle(color: Colors.black),
               )),
           ElevatedButton(
-              onPressed: () => controller.initialGraphs.add({
-                    "type": "3",
-                    "data":
-                        controller.initialGraphs[1]["data"] as List<ChartDataMockup>,
-                    "color": Colors.green
-                  }),
+              onPressed: () {
+                String type = (controller.initialGraphs.length + 1).toString();
+                controller.muted[type] = false;
+                controller.initialGraphs.add({
+                  "type": type,
+                  "data": controller.initialGraphs[1]["data"]
+                      as List<ChartDataMockup>,
+                  "color": Colors.yellow
+                });
+              },
               child: const Text(
                 "Add Graph 2",
                 style: TextStyle(color: Colors.black),
               )),
           ElevatedButton(
-              onPressed: () => controller.initialGraphs.add({
-                    "type": "3",
-                    "data":
-                        controller.initialGraphs[2]["data"] as List<ChartDataMockup>,
-                    "color": Colors.brown
-                  }),
+              onPressed: () {
+                String type = (controller.initialGraphs.length + 1).toString();
+                controller.muted[type] = false;
+                controller.initialGraphs.add({
+                  "type": type,
+                  "data": controller.initialGraphs[2]["data"]
+                      as List<ChartDataMockup>,
+                  "color": Colors.yellow
+                });
+              },
               child: const Text(
                 "Add Graph 3",
                 style: TextStyle(color: Colors.black),
