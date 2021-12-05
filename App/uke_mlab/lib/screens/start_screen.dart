@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print, prefer_const_constructors, camel_case_types, use_key_in_widget_constructors, file_names
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:uke_mlab/widgets/start_screen/name_field.dart';
@@ -9,7 +7,11 @@ import 'package:uke_mlab/widgets/start_screen/start_screen_continue.dart';
 import 'package:uke_mlab/widgets/start_screen/start_screen_skip.dart';
 import 'package:uke_mlab/widgets/statusbar.dart';
 
-class startScreen extends StatelessWidget {
+class StartScreen extends StatelessWidget {
+  const StartScreen({
+    Key? key,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +46,7 @@ class startScreen extends StatelessWidget {
                 //Fetter Container
                 child: Container(
                   margin: const EdgeInsets.fromLTRB(0, 0, 65, 12),
-                  color: Color(0xff25232a),
+                  color: const Color(0xff25232a),
                   height: 320 / MediaQuery.of(context).devicePixelRatio,
                   width: 830 / MediaQuery.of(context).devicePixelRatio,
                   child: Column(
@@ -57,8 +59,8 @@ class startScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              StartScreenContinue(),
-              StartScreenSkip()
+              const StartScreenContinue(),
+              const StartScreenSkip()
             ],
           ),
         ),
