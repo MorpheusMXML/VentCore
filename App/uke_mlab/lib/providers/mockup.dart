@@ -63,9 +63,11 @@ class MonitorController extends GetxController {
     update();
   }
 
-  bool muted = false;
-  void invertMuted() {
-    muted = !muted;
+  // TODO: Write prettier @Noah :3
+  Map<String, Object> muted = {"1": false, "2": false, "3": false};
+
+  void invertMuted(String type) {
+    muted[type] = !(muted[type] as bool);
     update();
   }
 
