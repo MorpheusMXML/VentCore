@@ -6,6 +6,7 @@ import 'package:uke_mlab/providers/style_controller.dart';
 
 import 'package:uke_mlab/widgets/graph/graph_container.dart';
 import 'package:uke_mlab/widgets/info/info_tile.dart';
+import 'package:uke_mlab/widgets/mode_toggle_button.dart';
 import 'package:uke_mlab/widgets/setting/setting_tile.dart';
 import 'package:uke_mlab/widgets/statusbar.dart';
 import 'package:uke_mlab/widgets/value_tile.dart';
@@ -61,15 +62,13 @@ class Monitor extends StatelessWidget {
                         name: "NIDB",
                         textColor: const Color(0xFFDC362E),
                         backgroundColor: const Color(0xFF2A2831),
-                        value: monitorController.initialGraphs[0]["data"]
-                            as List<ChartDataMockup>,
+                        value: monitorController.initialGraphs[0]["data"] as List<ChartDataMockup>,
                       ),
                       ValueTile(
                         name: "Pulse",
                         textColor: const Color(0xFFFF00E4),
                         backgroundColor: const Color(0xFF2A2831),
-                        value: monitorController.initialGraphs[0]["data"]
-                            as List<ChartDataMockup>,
+                        value: monitorController.initialGraphs[0]["data"] as List<ChartDataMockup>,
                       ),
                     ],
                   ),
@@ -82,15 +81,13 @@ class Monitor extends StatelessWidget {
                         name: "MVe",
                         textColor: const Color(0xFF0CECDD),
                         backgroundColor: const Color(0xff2A2831),
-                        value: monitorController.initialGraphs[0]["data"]
-                            as List<ChartDataMockup>,
+                        value: monitorController.initialGraphs[0]["data"] as List<ChartDataMockup>,
                       ),
                       ValueTile(
                         name: "Breath. Freq.",
                         textColor: const Color(0xFF0CECDD),
                         backgroundColor: const Color(0xff2A2831),
-                        value: monitorController.initialGraphs[0]["data"]
-                            as List<ChartDataMockup>,
+                        value: monitorController.initialGraphs[0]["data"] as List<ChartDataMockup>,
                       ),
                     ],
                   ),
@@ -115,6 +112,7 @@ class Monitor extends StatelessWidget {
                     ],
                   ),
                 ),
+                const ModeToggleButton(),
               ],
             ),
           )
