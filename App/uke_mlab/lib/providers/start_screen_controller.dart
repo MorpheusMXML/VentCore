@@ -13,8 +13,22 @@ class StartScreenController extends GetxController {
   RxDouble heightValue = 20.0.obs;
 
   void settingsButton(String name) {
-    selectedString = name.obs;
-    update();
+    switch (name) {
+      case "Child":
+        selectedString.value = name;
+        weightValue.value = 47.0;
+        heightValue.value = 156.0;
+        break;
+      case "Infant":
+        selectedString.value = name;
+        weightValue.value = 10.0;
+        heightValue.value = 85.0;
+        break;
+      default:
+        selectedString.value = name;
+        weightValue.value = 77.0;
+        heightValue.value = 172.0;
+    }
   }
 
   setValue(newValue, name) {
