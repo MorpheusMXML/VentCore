@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/start_screen_controller.dart';
 import 'package:uke_mlab/widgets/start_screen/name_field.dart';
-import 'package:uke_mlab/widgets/start_screen/slider.dart';
 import 'package:uke_mlab/widgets/start_screen/slider_tile.dart';
 import 'package:uke_mlab/widgets/start_screen/start_screen_button.dart';
 import 'package:uke_mlab/widgets/start_screen/start_screen_continue.dart';
