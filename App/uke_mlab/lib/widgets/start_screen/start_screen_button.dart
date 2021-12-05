@@ -1,67 +1,64 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:uke_mlab/providers/start_screen_controller.dart';
 
 //Widget for StartScreen Buttons
 //@param name Buttontext
 //@param optional image SVG asset path
-// ignore_for_file: camel_case_types, avoid_print
 
-class startScreenButton extends StatelessWidget {
+class StartScreenButton extends StatelessWidget {
   final String name;
   final String image;
-  const startScreenButton({
+
+  const StartScreenButton({
     Key? key,
     required this.name,
     required this.image,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    return GetBuilder<StartScreenController>(
+        init: StartScreenController(),
+        builder: (controller) => getWidget(controller, context));
+  }
+
+  getWidget(StartScreenController controller, BuildContext context) {
+    if (controller.selected.toString() == name) {
+      return getButton(Colors.blue, context, controller);
+    } else {
+      return getButton(const Color(0xFFEEEEEE), context, controller);
+    }
+  }
+
+  getButton(
+      Color color, BuildContext context, StartScreenController controller) {
     return Container(
-      //Button style
       margin: const EdgeInsets.fromLTRB(65, 0, 0, 12),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           fixedSize: Size(800 / MediaQuery.of(context).devicePixelRatio,
               155 / MediaQuery.of(context).devicePixelRatio),
-          primary: const Color(0xffeeeeee),
+          primary: color,
           onPrimary: Colors.black,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),
         ),
-        //Presets Loading
         onPressed: () {
-          //TODO: Implement Logic to provide presets for the Content on the right side
+          controller.settingsButton(name);
         },
-        //Button content
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Flexible(
-                flex: 2,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SvgPicture.asset(
-                      image,
-                      height: 70,
-                    ),
-                  ],
-                )),
-            Flexible(
-              flex: 3,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    name,
-                    style: const TextStyle(fontSize: 25),
-                  ),
-                ],
-              ),
+            SvgPicture.asset(
+              image,
+              height: 70.0,
             ),
-            Flexible(
-              flex: 2,
-              child: Container(), //Leer damit Button Text zentriert
+            Text(
+              name,
+              style: const TextStyle(fontSize: 25),
             ),
           ],
         ),
