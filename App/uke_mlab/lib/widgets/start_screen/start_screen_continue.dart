@@ -23,7 +23,7 @@ class StartScreenContinue extends StatelessWidget {
       ),
       onPressed: controller.selectedString.toString() != ""
           ? () {
-              print("Pass selectedString to Monitor");
+              Get.toNamed('/monitor', arguments: [controller.selectedString]);
             }
           : null,
       child: const Text(
