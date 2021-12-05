@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:uke_mlab/widgets/start_screen/name_field.dart';
 import 'package:uke_mlab/widgets/start_screen/slider.dart';
 import 'package:uke_mlab/widgets/start_screen/start_screen_button.dart';
+import 'package:uke_mlab/widgets/start_screen/start_screen_continue.dart';
 import 'package:uke_mlab/widgets/start_screen/start_screen_skip.dart';
 import 'package:uke_mlab/widgets/statusbar.dart';
 
@@ -56,7 +57,7 @@ class startScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              //TODO: add a "Continue" Button so that if content is changed in "Fetter Container" the button appears and only by pressing continue we will provide/save the configuration
+              StartScreenContinue(),
               StartScreenSkip()
             ],
           ),
