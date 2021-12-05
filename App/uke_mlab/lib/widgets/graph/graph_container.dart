@@ -25,7 +25,7 @@ class GraphContainer extends StatelessWidget {
                   constraints: const BoxConstraints(maxHeight: 150),
                   child: Row(
                     children: [
-                      const GraphNotification(),
+                      GraphNotification(type: data[index]["type"] as String),
                       Expanded(
                         child: Graph(
                           type: data[index]["type"] as String,
