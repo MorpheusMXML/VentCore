@@ -98,8 +98,8 @@ class Monitor extends StatelessWidget {
                 Flexible(
                   flex: 2,
                   child: Row(
-                    children: const [
-                      Flexible(
+                    children: [
+                      const Flexible(
                         flex: 1,
                         child: InfoTile(data: [
                           {"type": "pPeak", "value": 50.12, "unit": "mBar"},
@@ -110,7 +110,9 @@ class Monitor extends StatelessWidget {
                       ),
                       Flexible(
                         flex: 1,
-                        child: SettingTile(),
+                        child: SettingTile(
+                          controller: monitorController,
+                        ),
                       ),
                     ],
                   ),

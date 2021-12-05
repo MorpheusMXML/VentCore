@@ -56,6 +56,23 @@ class MonitorController extends GetxController {
     }
   ].obs;
 
+  RxInt ippvFreq = 12.obs;
+  RxInt ippvVt = 600.obs;
+  RxDouble ippvPEEP = 5.0.obs;
+
+  void increment(name) {
+    switch (name) {
+      case "Freq.":
+        ippvFreq.value += 1;
+        break;
+      case "Vt":
+        ippvVt.value += 1;
+        break;
+      default:
+        ippvPEEP.value += 1;
+    }
+  }
+
   // handle button click on GraphAdder widget
   bool isAddGraphTapped = false;
   void invert() {
@@ -63,7 +80,6 @@ class MonitorController extends GetxController {
     update();
   }
 
-  // TODO: Write prettier @Noah :3
   Map<String, Object> muted = {"1": false, "2": false, "3": false};
 
   void invertMuted(String type) {

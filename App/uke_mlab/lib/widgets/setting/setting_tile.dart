@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:uke_mlab/providers/mockup.dart';
 import 'package:uke_mlab/widgets/setting/setting.dart';
 
 class SettingTile extends StatelessWidget {
-  const SettingTile({Key? key}) : super(key: key);
+  final MonitorController controller;
+  const SettingTile({Key? key, required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +23,9 @@ class SettingTile extends StatelessWidget {
             onPressed: () {},
           ),
         ),
-        const Setting(),
-        const Setting(),
-        const Setting(),
+        Setting(controller: controller, name: "Freq.", rate: "/min"),
+        Setting(controller: controller, name: "Vt", rate: "ml"),
+        Setting(controller: controller, name: "PEEP", rate: "mBar"),
       ],
     );
   }

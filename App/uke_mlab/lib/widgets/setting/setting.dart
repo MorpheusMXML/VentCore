@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:uke_mlab/providers/mockup.dart';
 import 'package:uke_mlab/widgets/setting/setting_text.dart';
 
 class Setting extends StatelessWidget {
-  const Setting({Key? key}) : super(key: key);
+  final MonitorController controller;
+  final String name;
+  final String rate;
+  const Setting(
+      {Key? key,
+      required this.controller,
+      required this.name,
+      required this.rate})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +30,21 @@ class Setting extends StatelessWidget {
             ),
           ),
         ),
-        const Flexible(flex: 2, child: SettingText()),
+        Flexible(
+          flex: 2,
+          child: SettingText(
+            controller: controller,
+            name: name,
+            rate: rate,
+          ),
+        ),
         Flexible(
           flex: 1,
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              // TODO: find fix to only alter one setting
+              controller.increment(name);
+            },
             child: const Icon(Icons.add),
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
