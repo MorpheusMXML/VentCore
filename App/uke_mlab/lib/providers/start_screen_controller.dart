@@ -8,10 +8,10 @@ class StartScreenBinding extends Bindings {
 }
 
 class StartScreenController extends GetxController {
-  RxString selected = "Adult".obs;
+  RxString selectedString = "".obs;
 
   void settingsButton(String name) {
-    selected = name.obs;
+    selectedString = name.obs;
     update();
   }
 }
