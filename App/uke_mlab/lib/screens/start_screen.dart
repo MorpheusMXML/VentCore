@@ -22,18 +22,15 @@ class StartScreen extends StatelessWidget {
       body: Row(children: [
         Flexible(
           flex: 5,
-          child: Row(
-            children: [
-              Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    StartScreenButton(
-                        name: 'Adult', image: 'assets/icons/adults2.svg'),
-                    StartScreenButton(
-                        name: 'Children', image: 'assets/icons/children.svg'),
-                    StartScreenButton(
-                        name: 'Infant', image: 'assets/icons/newborn.svg'),
-                  ]),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              StartScreenButton(
+                  name: 'Adult', image: 'assets/icons/adults2.svg'),
+              StartScreenButton(
+                  name: 'Child', image: 'assets/icons/children.svg'),
+              StartScreenButton(
+                  name: 'Infant', image: 'assets/icons/newborn.svg'),
             ],
           ),
         ),
