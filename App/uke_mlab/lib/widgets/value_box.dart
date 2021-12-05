@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:uke_mlab/providers/mockup.dart';
+
 import 'package:uke_mlab/utilities/screen_controller.dart';
+
+import 'package:uke_mlab/models/enums.dart';
+import 'package:uke_mlab/models/model.dart';
 
 class ValueBox extends StatelessWidget {
   final Color textColor;
-  final List<ChartDataMockup> value;
   final Color backgroundColor;
   final String miniTitle;
-  //final sensorEnum sensor;
-  final ScreenController screenController = Get.find();
+
+  late List<ChartDataMockup> value;
+  late sensorEnum sensor;
+
+  final bool withModel;
 
   ValueBox({
     Key? key,
@@ -18,17 +25,58 @@ class ValueBox extends StatelessWidget {
     // to be changed
     this.miniTitle = "PP",
     required this.backgroundColor,
-    //required this.sensor,
+    required this.withModel,
+  }) : super(key: key);
+
+  //TODO will finally be standard constructor when both Boxes and graphs work with mockup
+  ValueBox.model({
+    Key? key,
+    required this.textColor,
+    // to be changed
+    this.miniTitle = "PP",
+    required this.backgroundColor,
+    required this.sensor,
+    required this.withModel,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    //final DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
+    late final ScreenController screenController;
+    late final DataModel dataModel;
+    late Obx mainText;
+
+    if (withModel) {
+      //TODO when ready, put to class fields and delete rest
+      dataModel = Get.find<DataModel>(tag: sensor.toString());
+      mainText = Obx(
+        () => Text(
+          dataModel.singleData.value.value.toInt().toString(),
+          style: TextStyle(
+            color: textColor,
+            fontSize: 50,
+          ),
+        ),
+      );
+    } else {
+      screenController = Get.find();
+      mainText = Obx(
+        () => Text(
+          value[value.length - 2].value.toString(),
+          style: TextStyle(
+            color: textColor,
+            fontSize: 50,
+          ),
+        ),
+      );
+    }
 
     void _showSnack() {
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text("Button Tapped")));
-      //dataModel.updateValues(dataModel.singleData.value.value + 1.0); //testing
+      if (withModel) {
+        dataModel
+            .updateValues(dataModel.singleData.value.value + 1.0); //testing
+      }
     }
 
     return AspectRatio(
@@ -59,15 +107,7 @@ class ValueBox extends StatelessWidget {
                 ),
               ],
             ),
-            Obx(
-              () => Text(
-                value[value.length - 2].value.toString(),
-                style: TextStyle(
-                  color: textColor,
-                  fontSize: 50,
-                ),
-              ),
-            ),
+            mainText, // Obx here
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

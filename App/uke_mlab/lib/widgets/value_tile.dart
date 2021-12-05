@@ -7,16 +7,16 @@ import 'package:uke_mlab/widgets/value_box.dart';
 class ValueTile extends StatelessWidget {
   final Color textColor;
   final Color backgroundColor;
-  final List<ChartDataMockup> value;
+  //final List<ChartDataMockup> value;
   final String name;
-  //final sensorEnum sensor;
+  final sensorEnum sensor;
 
   const ValueTile({
     Key? key,
     required this.textColor,
     required this.name,
     required this.backgroundColor,
-    required this.value,
+    required this.sensor,
   }) : super(key: key);
 
   @override
@@ -46,10 +46,11 @@ class ValueTile extends StatelessWidget {
             Flexible(
               // cant decrease --> pixel overflow
               flex: 3,
-              child: ValueBox(
+              child: ValueBox.model(
                 backgroundColor: backgroundColor,
                 textColor: textColor,
-                value: value,
+                withModel: true,
+                sensor: sensor,
               ),
             ),
           ],

@@ -22,6 +22,7 @@ class StartScreenSkip extends StatelessWidget {
         child: const Text('Skip', style: TextStyle(fontSize: 20)),
         onPressed: () {
           Navigator.pushNamed(context, '/monitor');
+          //TODO update systemState to monitor
         },
       ),
     );

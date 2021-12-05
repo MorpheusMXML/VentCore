@@ -8,7 +8,10 @@ import 'package:uke_mlab/widgets/info/info_tile.dart';
 import 'package:uke_mlab/widgets/setting/setting_tile.dart';
 import 'package:uke_mlab/widgets/value_tile.dart';
 import 'package:uke_mlab/widgets/graph/graph_adder.dart';
+
 import 'package:uke_mlab/models/model.dart';
+import 'package:uke_mlab/models/enums.dart';
+
 import 'package:uke_mlab/utilities/screen_controller.dart';
 
 class Monitor extends StatelessWidget {
@@ -45,20 +48,18 @@ class Monitor extends StatelessWidget {
               Flexible(
                 flex: 1,
                 child: Row(
-                  children: [
+                  children: const [
                     ValueTile(
                       name: "NIDB",
-                      textColor: const Color(0xFFDC362E),
-                      backgroundColor: const Color(0xFF2A2831),
-                      value: monitorController.initialGraphs[0]["data"]
-                          as List<ChartDataMockup>,
+                      textColor: Color(0xFFDC362E),
+                      backgroundColor: Color(0xFF2A2831),
+                      sensor: sensorEnum.nibd,
                     ),
                     ValueTile(
                       name: "Pulse",
-                      textColor: const Color(0xFFFF00E4),
-                      backgroundColor: const Color(0xFF2A2831),
-                      value: monitorController.initialGraphs[0]["data"]
-                          as List<ChartDataMockup>,
+                      textColor: Color(0xFFFF00E4),
+                      backgroundColor: Color(0xFF2A2831),
+                      sensor: sensorEnum.pulse,
                     ),
                   ],
                 ),
@@ -66,21 +67,18 @@ class Monitor extends StatelessWidget {
               Flexible(
                 flex: 1,
                 child: Row(
-                  children: [
+                  children: const [
                     ValueTile(
                       name: "MVe",
-                      textColor: const Color(0xFF0CECDD),
-                      backgroundColor: const Color(0xff2A2831),
-                      value: monitorController.initialGraphs[0]["data"]
-                          as List<ChartDataMockup>,
+                      textColor: Color(0xFF0CECDD),
+                      backgroundColor: Color(0xff2A2831),
+                      sensor: sensorEnum.mve,
                     ),
                     ValueTile(
-                      name: "Breath. Freq.",
-                      textColor: const Color(0xFF0CECDD),
-                      backgroundColor: const Color(0xff2A2831),
-                      value: monitorController.initialGraphs[0]["data"]
-                          as List<ChartDataMockup>,
-                    ),
+                        name: "Breath. Freq.",
+                        textColor: Color(0xFF0CECDD),
+                        backgroundColor: Color(0xff2A2831),
+                        sensor: sensorEnum.breathFrequency),
                   ],
                 ),
               ),
