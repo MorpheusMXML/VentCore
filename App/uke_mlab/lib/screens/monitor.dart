@@ -30,7 +30,7 @@ class Monitor extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: StatusBar(
-          category: startScreenController.selectedString.toString(),
+          category: Get.arguments[0].value,
         ),
       ),
       body: Row(
