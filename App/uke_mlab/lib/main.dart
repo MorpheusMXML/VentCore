@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
         ),
         GetPage(
           name: "/start_screen",
-          page: () => startScreen(),
+          page: () => const StartScreen(),
           binding: StartScreenBinding(),
         )
       ],
