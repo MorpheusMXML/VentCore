@@ -17,12 +17,13 @@ class StartScreenSkip extends StatelessWidget {
               80 / MediaQuery.of(context).devicePixelRatio),
           primary: const Color(0xffeeeeee),
           onPrimary: Colors.black,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(75),
+          ),
         ),
         child: const Text('Skip', style: TextStyle(fontSize: 20)),
         onPressed: () {
-          Get.toNamed('/monitor');
+          Get.toNamed('/monitor', arguments: ["Adult".obs]);
         },
       ),
     );
