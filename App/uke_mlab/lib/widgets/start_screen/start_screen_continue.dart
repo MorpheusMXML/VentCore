@@ -16,13 +16,13 @@ class StartScreenContinue extends StatelessWidget {
 
   getWidget(controller) {
     return Container(
-      alignment: Alignment.centerRight,
       margin: const EdgeInsets.fromLTRB(0, 0, 65, 12),
       child: Obx(
         () => ElevatedButton(
           style: ElevatedButton.styleFrom(
             onSurface: const Color(0xffeeeeee),
             primary: const Color(0xffeeeeee),
+            onPrimary: Colors.black,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),
           ),
@@ -32,10 +32,7 @@ class StartScreenContinue extends StatelessWidget {
                       arguments: [controller.selectedString]);
                 }
               : null,
-          child: const Text(
-            'Continue',
-            style: TextStyle(color: Colors.black),
-          ),
+          child: const Text('Continue', style: TextStyle(fontSize: 20)),
         ),
       ),
     );

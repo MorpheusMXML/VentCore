@@ -19,33 +19,31 @@ class StartScreen extends StatelessWidget {
     final startScreenController = Get.find<StartScreenController>();
     return Scaffold(
       appBar: AppBar(title: const StatusBar(category: "")),
-      body: Row(children: [
-        Flexible(
-          flex: 10,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              StartScreenButton(
-                  name: 'Adult', image: 'assets/icons/adults2.svg'),
-              StartScreenButton(
-                  name: 'Child', image: 'assets/icons/children.svg'),
-              StartScreenButton(
-                  name: 'Infant', image: 'assets/icons/newborn.svg'),
-            ],
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Flexible(
+            flex: 10,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                StartScreenButton(
+                    name: 'Adult', image: 'assets/icons/adults2.svg'),
+                StartScreenButton(
+                    name: 'Child', image: 'assets/icons/children.svg'),
+                StartScreenButton(
+                    name: 'Infant', image: 'assets/icons/newborn.svg'),
+              ],
+            ),
           ),
-        ),
-        Expanded(flex: 1, child: Container()),
-        Flexible(
-          flex:
-              10, //von 4 auf 3 damit Patientencontainer wieder auf eine höhe mit Buttons
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              //Ganzer Container auf einer Höhe mit Buttons darunter
-              Align(
-                alignment: Alignment.centerRight,
-                //Fetter Container
-                child: Container(
+          Flexible(
+            flex:
+                10, //von 4 auf 3 damit Patientencontainer wieder auf eine höhe mit Buttons
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                //Ganzer Container auf einer Höhe mit Buttons darunter
+                Container(
                   margin: const EdgeInsets.fromLTRB(0, 0, 65, 12),
                   color: const Color(0xff25232a),
                   height: 320 / MediaQuery.of(context).devicePixelRatio,
@@ -63,13 +61,18 @@ class StartScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-              ),
-              const StartScreenContinue(),
-              const StartScreenSkip()
-            ],
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    StartScreenSkip(),
+                    StartScreenContinue(),
+                  ],
+                ),
+              ],
+            ),
           ),
-        ),
-      ]),
+        ],
+      ),
     );
   }
 }
