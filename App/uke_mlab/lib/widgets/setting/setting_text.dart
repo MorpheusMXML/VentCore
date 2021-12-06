@@ -3,18 +3,15 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/providers/mockup.dart';
 
 class SettingText extends StatelessWidget {
-  final MonitorController controller;
   final String name;
   final String rate;
-  const SettingText(
-      {Key? key,
-      required this.controller,
-      required this.name,
-      required this.rate})
+  const SettingText({Key? key, required this.name, required this.rate})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final monitorController = Get.find<MonitorController>();
+
     return Column(children: [
       Text(
         name,
@@ -24,8 +21,10 @@ class SettingText extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Obx(
-            () => Text(controller.ippvFreq.value.toString(),
-                style: const TextStyle(fontSize: 32, color: Colors.white)),
+            () => Text(
+              monitorController.ippvValues[name].toString(),
+              style: const TextStyle(fontSize: 32, color: Colors.white),
+            ),
           ),
           Text(rate, style: const TextStyle(fontSize: 16, color: Colors.white)),
         ],
