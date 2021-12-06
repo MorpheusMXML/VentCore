@@ -43,7 +43,7 @@ class SliderTile extends StatelessWidget {
               () => Slider(
                   min: 0.0,
                   max: 250.0,
-                  divisions: 15,
+                  divisions: 50,
                   value: value.value,
                   label: value.value.round().toString(),
                   onChanged: (newValue) {
