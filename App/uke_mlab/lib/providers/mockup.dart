@@ -56,21 +56,18 @@ class MonitorController extends GetxController {
     }
   ].obs;
 
-  RxInt ippvFreq = 12.obs;
-  RxInt ippvVt = 600.obs;
-  RxDouble ippvPEEP = 5.0.obs;
+  Map<String, RxInt> ippvValues = {
+    "Freq.": 20.obs,
+    "Vt": 40.obs,
+    "PEEP": 60.obs
+  };
 
   void increment(name) {
-    switch (name) {
-      case "Freq.":
-        ippvFreq.value += 1;
-        break;
-      case "Vt":
-        ippvVt.value += 1;
-        break;
-      default:
-        ippvPEEP.value += 1;
-    }
+    ippvValues[name]!.value = ippvValues[name]!.value + 1;
+  }
+
+  void decrement(name) {
+    ippvValues[name]!.value = ippvValues[name]!.value - 1;
   }
 
   // handle button click on GraphAdder widget
