@@ -98,20 +98,26 @@ class Monitor extends StatelessWidget {
                 Flexible(
                   flex: 2,
                   child: Row(
-                    children: [
-                      const Flexible(
+                    children: const [
+                      Flexible(
                         flex: 1,
-                        child: InfoTile(data: [
-                          {"type": "pPeak", "value": 50.12, "unit": "mBar"},
-                          {"type": "pPlat", "value": 4.58, "unit": "mBar"},
-                          {"type": "pMean", "value": 16.58, "unit": "mBar"},
-                          {"type": "MV", "value": 7.2, "unit": "l/min"}
-                        ]),
+                        child: InfoTile(
+                          data: [
+                            {"type": "pPeak", "value": 50.12, "unit": "mBar"},
+                            {"type": "pPlat", "value": 4.58, "unit": "mBar"},
+                            {"type": "pMean", "value": 16.58, "unit": "mBar"},
+                            {"type": "MV", "value": 7.2, "unit": "l/min"}
+                          ],
+                        ),
                       ),
                       Flexible(
                         flex: 1,
                         child: SettingTile(
-                          controller: monitorController,
+                          data: [
+                            {"name": "Freq.", "rate": "/min"},
+                            {"name": "Vt", "rate": "ml"},
+                            {"name": "PEEP", "rate": "mBar"},
+                          ],
                         ),
                       ),
                     ],
