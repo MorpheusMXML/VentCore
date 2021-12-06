@@ -1,3 +1,5 @@
+default:
+  image: ruby:2.6
 stages:
     - build
     - test
