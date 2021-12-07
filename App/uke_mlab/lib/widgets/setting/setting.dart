@@ -23,8 +23,9 @@ class Setting extends StatelessWidget {
               onPressed: () {
                 monitorController.decrement(name);
               },
-              child: const Icon(Icons.remove),
+              child: const Icon(Icons.remove,),
               style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.all(0),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -47,6 +48,7 @@ class Setting extends StatelessWidget {
               },
               child: const Icon(Icons.add),
               style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.all(0),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
