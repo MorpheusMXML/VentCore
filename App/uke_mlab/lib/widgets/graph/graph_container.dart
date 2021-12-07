@@ -36,7 +36,7 @@ class GraphContainer extends StatelessWidget {
     if (controller.isInAlarmState) {
       return const Text("Alarm");
     } else {
-      Container(
+      return Container(
         margin: const EdgeInsets.only(bottom: 8),
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxHeight: 150),
