@@ -34,7 +34,7 @@ class Monitor extends StatelessWidget {
         ),
       ),
       body: Container(
-        margin: const EdgeInsets.only(left: 12, right: 12),
+        margin: const EdgeInsets.only(left: 12, right: 12, top: 12),
         child: Row(
           children: [
             Flexible(
