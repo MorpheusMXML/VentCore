@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/mockup.dart';
 import 'package:uke_mlab/widgets/add_button.dart';
-
 import 'graph_selection.dart';
 
 class GraphAdder extends StatelessWidget {

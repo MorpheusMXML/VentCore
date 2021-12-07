@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:uke_mlab/providers/mockup.dart';
 import 'package:uke_mlab/widgets/setting/setting.dart';
 
 class SettingTile extends StatelessWidget {
-  const SettingTile({Key? key}) : super(key: key);
+  final List<Map<String, Object>> data;
+  const SettingTile({
+    Key? key,
+    required this.data,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +26,22 @@ class SettingTile extends StatelessWidget {
             onPressed: () {},
           ),
         ),
-        const Setting(),
-        const Setting(),
-        const Setting(),
+        Expanded(
+          child: ListView.builder(
+            itemCount: data.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Container(
+                color: const Color(0xFF25232A),
+                padding: const EdgeInsets.all(8),
+                margin: const EdgeInsets.only(right: 8),
+                child: Setting(
+                  name: data[index]["name"].toString(),
+                  rate: data[index]["rate"].toString(),
+                ),
+              );
+            },
+          ),
+        ),
       ],
     );
   }

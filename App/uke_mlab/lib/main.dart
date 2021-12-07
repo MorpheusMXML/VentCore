@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-
+import 'package:uke_mlab/providers/start_screen_controller.dart';
 import 'package:uke_mlab/screens/monitor.dart';
 import 'package:uke_mlab/screens/start_screen.dart';
-import 'package:uke_mlab/widgets/statusbar.dart';
-
 import 'package:uke_mlab/models/model.dart';
 import 'package:uke_mlab/models/system_state.dart';
-
 import 'package:uke_mlab/utilities/alarm_controller.dart';
 import 'package:uke_mlab/utilities/screen_controller.dart';
 
@@ -51,18 +48,14 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(
           name: "/monitor",
-          page: () => Scaffold(
-            appBar: AppBar(title: const StatusBar()),
-            body: Monitor(),
-          ),
+          page: () => Monitor(),
           binding: MonitorBinding(),
         ),
         GetPage(
-            name: "/start_screen",
-            page: () => Scaffold(
-                  appBar: AppBar(title: const StatusBar()),
-                  body: startScreen(),
-                ))
+          name: "/start_screen",
+          page: () => const StartScreen(),
+          binding: StartScreenBinding(),
+        )
       ],
       initialRoute: "/start_screen",
     );

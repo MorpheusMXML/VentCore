@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 
 class StatusBar extends StatelessWidget {
-  const StatusBar({Key? key}) : super(key: key);
+  final String category;
+  const StatusBar({
+    Key? key,
+    required this.category,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: const [
-        Flexible(
+      children: [
+        const Flexible(
           flex: 1,
           child: Icon(Icons.menu, color: Colors.white),
         ),
-        Flexible(
+        const Flexible(
           flex: 5,
           child: Text(
             "Alert Message",
@@ -23,12 +27,12 @@ class StatusBar extends StatelessWidget {
         Flexible(
           flex: 1,
           child: Text(
-            "Adult",
-            style:
-                TextStyle(color: Colors.white, decoration: TextDecoration.none),
+            category,
+            style: const TextStyle(
+                color: Colors.white, decoration: TextDecoration.none),
           ),
         ),
-        Flexible(
+        const Flexible(
           flex: 1,
           child: Text(
             "19:11",
@@ -36,7 +40,7 @@ class StatusBar extends StatelessWidget {
                 TextStyle(color: Colors.white, decoration: TextDecoration.none),
           ),
         ),
-        Flexible(
+        const Flexible(
           flex: 1,
           child: Icon(Icons.battery_full, color: Colors.white),
         )

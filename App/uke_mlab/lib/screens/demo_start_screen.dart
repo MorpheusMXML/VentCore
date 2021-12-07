@@ -1,10 +1,12 @@
-// ignore_for_file: avoid_print, prefer_const_constructors, camel_case_types, use_key_in_widget_constructors, file_names
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:uke_mlab/widgets/demo_screen_button.dart';
 
-class demoScreen extends StatelessWidget {
+class DemoScreen extends StatelessWidget {
+  const DemoScreen({
+    Key? key,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Row(children: [
