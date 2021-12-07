@@ -6,23 +6,21 @@ class StartScreenSkip extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.fromLTRB(0, 0, 65, 12),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          primary: const Color(0xffeeeeee),
-          onPrimary: Colors.black,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(75),
-          ),
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        primary: const Color(0xffeeeeee),
+        onPrimary: Colors.black,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(75),
         ),
-        child: const Text('Skip', style: TextStyle(fontSize: 20)),
-        onPressed: () {
-          Get.toNamed('/monitor', arguments: ["Adult".obs]);
-        },
       ),
+      child: const Text('Skip', style: TextStyle(fontSize: 20)),
+      onPressed: () {
+        Get.toNamed('/monitor', arguments: ["Adult"]);
+      },
     );
   }
 }
