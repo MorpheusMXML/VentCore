@@ -14,19 +14,26 @@ class GraphSelection extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          // TODO BUGFIX: not updated correctly?
+          // 3 graphs --> update function called 3 times
+          // 4 graphs --> update function called 7 times?
           ElevatedButton(
               onPressed: () {
-                String type = (controller.initialGraphs.length + 1).toString();
-                controller.muted[type] = false;
+                Map<String, Object> type = {
+                  "id": "NIBD",
+                  "index": controller.initialGraphs.length
+                };
+                controller.muted[type["id"] as String] = false;
                 controller.initialGraphs.add({
                   "type": type,
                   "data": controller.initialGraphs[0]["data"]
                       as List<ChartDataMockup>,
-                  "color": Colors.yellow
+                  "color": Colors.yellow,
+                  "count": 0
                 });
               },
               child: const Text(
-                "Add Graph 1",
+                "Add NIBD",
                 style: TextStyle(color: Colors.black),
               )),
           ElevatedButton(
@@ -49,7 +56,7 @@ class GraphSelection extends StatelessWidget {
                 String type = (controller.initialGraphs.length + 1).toString();
                 controller.muted[type] = false;
                 controller.initialGraphs.add({
-                  "type": type,
+                  "type": "4",
                   "data": controller.initialGraphs[2]["data"]
                       as List<ChartDataMockup>,
                   "color": Colors.yellow
