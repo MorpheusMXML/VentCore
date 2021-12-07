@@ -18,21 +18,44 @@ class HistoryGraph extends StatelessWidget {
     required this.data,
   }) : super(key: key);
 
+  // More efficient... but Ugly lol
+  double findMax(bool max) {
+    if (max) {
+      List<int> syst = [];
+      data.forEach((element) {
+        syst.add(element.systolicPressure);
+      });
+      syst.sort();
+
+      return syst.last.toDouble();
+    } else {
+      List<int> dist = [];
+
+      data.forEach((element) {
+        dist.add(element.diastolicPressure);
+      });
+
+      dist.sort();
+      return dist.first.toDouble();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SfCartesianChart(
+        tooltipBehavior: TooltipBehavior(enable: true),
         backgroundColor: Theme.of(context).cardColor,
         primaryYAxis: NumericAxis(
           desiredIntervals: 10,
-          maximum: 145,
-          minimum: 55,
-          majorGridLines: MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
+          maximum: (findMax(true) + 5),
+          minimum: (findMax(false) - 5),
+          majorGridLines: MajorGridLines(width: 1, color: Theme.of(context).shadowColor, dashArray: const <double>[2, 3]),
         ),
         primaryXAxis: DateTimeAxis(
           dateFormat: DateFormat.Hm(),
           plotOffset: 10,
           desiredIntervals: 25,
-          majorGridLines: MajorGridLines(width: 1, color: Theme.of(context).shadowColor //Theme.of(context).shadowColor,
+          majorGridLines: MajorGridLines(width: 0, color: Theme.of(context).shadowColor //Theme.of(context).shadowColor,
               ),
         ),
         series: [
@@ -42,26 +65,23 @@ class HistoryGraph extends StatelessWidget {
                 height: 10,
                 width: 10,
                 // Scatter will render in diamond shape
-                shape: DataMarkerType.circle),
+                shape: DataMarkerType.diamond),
+            trendlines: <Trendline>[
+              Trendline(dashArray: <double>[2, 3], type: TrendlineType.movingAverage, color: Colors.redAccent)
+            ],
             color: color,
             dataSource: data,
             xValueMapper: (NIBDdata data, _) => data.timestamp,
             yValueMapper: (NIBDdata data, _) => data.mad,
           ),
-          ErrorBarSeries(
-            dataSource: data,
-            xValueMapper: (NIBDdata data, _) => data.timestamp,
-            yValueMapper: (NIBDdata data, _) => data.mad,
-            type: ErrorBarType.custom,
-            verticalPositiveErrorValue: data[0].systolicPressure.toDouble(),
-          )
-          /*   HiloSeries(
-            dataSource: data,
-            color: Colors.green,
-            xValueMapper: (NIBDdata data, _) => data.timestamp,
-            lowValueMapper: (NIBDdata data, _) => data.diastolicPressure,
-            highValueMapper: (NIBDdata data, _) => data.systolicPressure,
-          ) */
+          HiloSeries(
+              enableTooltip: true,
+              dataSource: data,
+              color: Colors.red,
+              xValueMapper: (NIBDdata data, _) => data.timestamp,
+              lowValueMapper: (NIBDdata data, _) => data.diastolicPressure,
+              highValueMapper: (NIBDdata data, _) => data.systolicPressure,
+              markerSettings: const MarkerSettings(shape: DataMarkerType.horizontalLine, width: 10, isVisible: true)),
         ]);
   }
 }

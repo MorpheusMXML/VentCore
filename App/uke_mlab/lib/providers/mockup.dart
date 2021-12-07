@@ -31,7 +31,7 @@ class MonitorController extends GetxController {
     NIBDdata(DateTime.utc(2021, 12, 7, 11, 15), 110, 75),
     NIBDdata(DateTime.utc(2021, 12, 7, 11, 20), 100, 60),
     NIBDdata(DateTime.utc(2021, 12, 7, 11, 25), 120, 80),
-    NIBDdata(DateTime.utc(2021, 12, 7, 11, 30), 140, 95),
+    NIBDdata(DateTime.utc(2021, 12, 7, 11, 30), 220, 95),
   ];
 
   // every graph has phases for their frequencies
