@@ -7,7 +7,7 @@ import 'package:uke_mlab/providers/mockup.dart';
 class Graph extends StatelessWidget {
   final List<ChartDataMockup> data;
   final Color color;
-  final String type;
+  final Map<String, Object> type;
 
   const Graph({
     Key? key,
@@ -27,7 +27,7 @@ class Graph extends StatelessWidget {
         addedDataIndexes: <int>[data.length - 1],
         removedDataIndexes: <int>[0],
       );
-      monitorController.updateData(type);
+      monitorController.updateData(type["index"] as int);
     });
 
     return SfCartesianChart(
