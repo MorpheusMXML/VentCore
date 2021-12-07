@@ -1,22 +1,20 @@
-// ignore_for_file: camel_case_types
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:uke_mlab/providers/start_screen_controller.dart';
 
-class startScreenSlider extends StatefulWidget {
+class SliderTile extends StatelessWidget {
   final String name;
-  const startScreenSlider({
+  final RxDouble value;
+
+  const SliderTile({
     Key? key,
     required this.name,
+    required this.value,
   }) : super(key: key);
 
   @override
-  _startScreenSlider createState() => _startScreenSlider();
-}
-
-class _startScreenSlider extends State<startScreenSlider> {
-  double _value = 20;
-  @override
   Widget build(BuildContext context) {
+    final startScreenController = Get.find<StartScreenController>();
     return Container(
       margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
       color: const Color(0xff322f37),
@@ -30,7 +28,7 @@ class _startScreenSlider extends State<startScreenSlider> {
             child: Padding(
               padding: const EdgeInsets.only(left: 10),
               child: Text(
-                widget.name,
+                name,
                 style: const TextStyle(
                   fontSize: 17,
                   color: Color(0xffeeeeee),
@@ -41,17 +39,16 @@ class _startScreenSlider extends State<startScreenSlider> {
           //Slider
           Flexible(
             flex: 8,
-            child: Slider(
-              min: 0.0,
-              max: 150.0,
-              divisions: 15,
-              value: _value,
-              label: _value.round().toString(),
-              onChanged: (value) {
-                setState(() {
-                  _value = value;
-                });
-              },
+            child: Obx(
+              () => Slider(
+                  min: 0.0,
+                  max: 250.0,
+                  divisions: 50,
+                  value: value.value,
+                  label: value.value.round().toString(),
+                  onChanged: (newValue) {
+                    startScreenController.setValue(newValue, name);
+                  }),
             ),
           ),
           Container(
@@ -62,7 +59,9 @@ class _startScreenSlider extends State<startScreenSlider> {
             alignment: Alignment.center,
             height: 40 / MediaQuery.of(context).devicePixelRatio,
             width: 90 / MediaQuery.of(context).devicePixelRatio,
-            child: Text(_value.round().toString()),
+            child: Obx(
+              () => Text(value.value.round().toString()),
+            ),
           ),
         ],
       ),
