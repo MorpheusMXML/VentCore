@@ -30,18 +30,21 @@ class MonitorController extends GetxController {
       "data": List.filled(30, ChartDataMockup(DateTime.now(), 0, 0)).obs,
       "color": Colors.green,
       "count": 0,
+      "alarm": false.obs
     },
     {
       "type": {"id": "OxygenSaturation", "index": 1},
       "data": List.filled(30, ChartDataMockup(DateTime.now(), 0, 0)).obs,
       "color": Colors.blue,
       "count": 0,
+      "alarm": false.obs
     },
     {
       "type": {"id": "Sinus", "index": 2},
       "data": List.filled(30, ChartDataMockup(DateTime.now(), 0, 0)).obs,
       "color": Colors.yellow,
       "count": 0,
+      "alarm": false.obs
     }
   ].obs;
 
@@ -80,6 +83,11 @@ class MonitorController extends GetxController {
     update();
   }
 
+  bool isInAlarmState = false;
+  void switchToAlarm(int type) {
+    (initialGraphs[type]["alarm"] as RxBool).value = true;
+  }
+
   // update function called by the timer in Graph class
   updateData(int index) {
     print(index);
@@ -93,6 +101,5 @@ class MonitorController extends GetxController {
     dataRef.removeAt(0);
 
     initialGraphs[index]["count"] = countRef + 1;
-    update();
   }
 }
