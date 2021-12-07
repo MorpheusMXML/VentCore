@@ -45,6 +45,9 @@ class MonitorController extends GetxController {
     }
   ].obs;
 
+  List<ChartDataMockup> initialNIBD =
+      List.filled(30, ChartDataMockup(DateTime.now(), 0, 0)).obs;
+
   Map<String, RxInt> ippvValues = {
     "Freq.": 20.obs,
     "Vt": 40.obs,
