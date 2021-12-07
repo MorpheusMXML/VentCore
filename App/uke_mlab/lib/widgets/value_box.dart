@@ -44,6 +44,8 @@ class ValueBox extends StatelessWidget {
     late final ScreenController screenController;
     late final DataModel dataModel;
     late Obx mainText;
+    late Obx lowerAlarmBound;
+    late Obx upperAlarmBound;
 
     if (withModel) {
       //TODO when ready, put to class fields and delete rest
@@ -57,6 +59,23 @@ class ValueBox extends StatelessWidget {
           ),
         ),
       );
+      lowerAlarmBound = Obx(
+        () => Text(
+          // to be changed
+          dataModel.lowerAlarmBound.value.toString(),
+          style: TextStyle(color: textColor),
+          textAlign: TextAlign.left,
+        ),
+      );
+      upperAlarmBound = Obx(
+        () => Text(
+          // to be changed
+          dataModel.upperAlarmBound.value.toString(),
+          style: TextStyle(
+            color: textColor,
+          ),
+        ),
+      );
     } else {
       screenController = Get.find();
       mainText = Obx(
@@ -65,6 +84,23 @@ class ValueBox extends StatelessWidget {
           style: TextStyle(
             color: textColor,
             fontSize: 50,
+          ),
+        ),
+      );
+      lowerAlarmBound = Obx(
+        () => Text(
+          // to be changed
+          "58".obs.value,
+          style: TextStyle(color: textColor),
+          textAlign: TextAlign.left,
+        ),
+      );
+      upperAlarmBound = Obx(
+        () => Text(
+          // to be changed
+          "120".obs.value,
+          style: TextStyle(
+            color: textColor,
           ),
         ),
       );
@@ -98,25 +134,14 @@ class ValueBox extends StatelessWidget {
                   miniTitle,
                   style: TextStyle(color: textColor),
                 ),
-                Text(
-                  // to be changed
-                  "120",
-                  style: TextStyle(
-                    color: textColor,
-                  ),
-                ),
+                upperAlarmBound,
               ],
             ),
             mainText, // Obx here
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  // to be changed
-                  "58",
-                  style: TextStyle(color: textColor),
-                  textAlign: TextAlign.left,
-                ),
+                lowerAlarmBound,
                 Text(
                   // to be changed
                   "1/ min.",
