@@ -36,12 +36,12 @@ class StartScreenButton extends StatelessWidget {
   getButton(
       Color color, BuildContext context, StartScreenController controller) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(65, 0, 0, 12),
+      margin: const EdgeInsets.fromLTRB(80, 0, 80, 10),
       //Buttonstyle
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          fixedSize: Size(800 / MediaQuery.of(context).devicePixelRatio,
-              155 / MediaQuery.of(context).devicePixelRatio),
+          minimumSize: Size(800 / MediaQuery.of(context).devicePixelRatio,
+              200 / MediaQuery.of(context).devicePixelRatio),
           primary: color,
           onPrimary: Colors.black,
           shape:

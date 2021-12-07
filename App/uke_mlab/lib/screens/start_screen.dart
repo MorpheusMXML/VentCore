@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:uke_mlab/widgets/start_screen/aed_button.dart';
 import 'package:uke_mlab/widgets/start_screen/start_screen_button.dart';
 import 'package:uke_mlab/widgets/start_screen/start_screen_continue.dart';
 import 'package:uke_mlab/widgets/start_screen/start_screen_popup.dart';
@@ -16,10 +17,10 @@ class StartScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const StatusBar(category: "")),
       body: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Flexible(
-            flex: 10,
+            flex: 1,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
@@ -33,17 +34,22 @@ class StartScreen extends StatelessWidget {
             ),
           ),
           Flexible(
-            flex:
-                10, //von 4 auf 3 damit Patientencontainer wieder auf eine höhe mit Buttons
+            flex: 1,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const StartScreenPopup(),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    StartScreenSkip(),
-                    StartScreenContinue(),
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Column(
+                      children: const [
+                        StartScreenContinue(),
+                        StartScreenSkip(),
+                      ],
+                    ),
+                    const aedButton(),
                   ],
                 ),
               ],
