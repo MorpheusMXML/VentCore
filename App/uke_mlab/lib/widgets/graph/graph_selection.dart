@@ -18,24 +18,28 @@ class GraphSelection extends StatelessWidget {
           // 3 graphs --> update function called 3 times
           // 4 graphs --> update function called 7 times?
           ElevatedButton(
-              onPressed: () {
-                Map<String, Object> type = {
-                  "id": "NIBD",
-                  "index": controller.initialGraphs.length
-                };
-                controller.muted[type["id"] as String] = false;
-                controller.initialGraphs.add({
+            onPressed: () {
+              Map<String, Object> type = {
+                "id": "NIBD",
+                "index": controller.initialGraphs.length
+              };
+              controller.muted[type["id"] as String] = false;
+              controller.initialGraphs.add(
+                {
                   "type": type,
-                  "data": controller.initialGraphs[0]["data"]
-                      as List<ChartDataMockup>,
-                  "color": Colors.yellow,
+                  "data": controller.initialNIBD,
+                  "color": Colors.purple,
                   "count": 0
-                });
-              },
-              child: const Text(
-                "Add NIBD",
-                style: TextStyle(color: Colors.black),
-              )),
+                },
+              );
+            },
+            child: const Text(
+              "Add NIBD",
+              style: TextStyle(color: Colors.black),
+            ),
+          ),
+
+          // Hardcoded, later own widget, don't forget to create data in DataProvider
           ElevatedButton(
               onPressed: () {
                 String type = (controller.initialGraphs.length + 1).toString();
