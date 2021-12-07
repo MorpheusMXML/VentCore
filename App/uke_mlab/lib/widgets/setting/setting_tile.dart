@@ -21,13 +21,13 @@ class SettingTile extends StatelessWidget {
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.all(
-                  15), //expands button size to container size, bad practice!
+                  8), //expands button size to container size, bad practice!
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
               primary: const Color(0xFF5AC8FA),
             ),
-            child: const Text("IPPV"),
+            child: const Text("IPPV", style: TextStyle(fontSize: 25),),
             onPressed: () {},
           ),
         ),
