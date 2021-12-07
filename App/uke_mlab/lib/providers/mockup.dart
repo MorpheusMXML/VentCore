@@ -103,3 +103,14 @@ class MonitorController extends GetxController {
     initialGraphs[index]["count"] = countRef + 1;
   }
 }
+
+class NIBDdata {
+  final DateTime? timestamp;
+  final int systolicPressure;
+  final int diastolicPressure;
+  late int mad;
+  NIBDdata(this.timestamp, this.systolicPressure, this.diastolicPressure) {
+    //Formular for Calculating MAD out of systolic and diastolic pressure
+    mad = (diastolicPressure + (1 / 3) * (systolicPressure - diastolicPressure)).toInt();
+  }
+}

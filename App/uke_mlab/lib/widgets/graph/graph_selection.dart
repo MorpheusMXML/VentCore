@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uke_mlab/providers/mockup.dart';
+import 'package:uke_mlab/widgets/graph/history_graph.dart';
 
 class GraphSelection extends StatelessWidget {
   final MonitorController controller;
