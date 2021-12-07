@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/providers/mockup.dart';
 
 class GraphNotification extends StatelessWidget {
-  final String type;
+  final Map<String, Object> type;
 
   const GraphNotification({
     Key? key,
@@ -18,9 +18,9 @@ class GraphNotification extends StatelessWidget {
   }
 
   getWidget(controller) {
-    if (controller.muted[type]) {
+    if (controller.muted[type["id"]]) {
       return ElevatedButton(
-        onPressed: () => controller.invertMuted(type),
+        onPressed: () => controller.invertMuted(type["id"]),
         style: ElevatedButton.styleFrom(
           primary: Colors.grey[800],
           fixedSize: const Size(80, 80),
@@ -30,7 +30,7 @@ class GraphNotification extends StatelessWidget {
       );
     } else {
       return ElevatedButton(
-        onPressed: () => controller.invertMuted(type),
+        onPressed: () => controller.invertMuted(type["id"]),
         style: ElevatedButton.styleFrom(
           primary: Colors.grey[800],
           fixedSize: const Size(80, 80),
