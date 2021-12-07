@@ -124,12 +124,12 @@ class Monitor extends StatelessWidget {
                       ],
                     ),
                   ),
-                ),
-                const ModeToggleButton(),
-              ],
-            ),
-          )
-        ],
+                  const ModeToggleButton(),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
