@@ -26,6 +26,14 @@ class MonitorController extends GetxController {
 
   List<double> factors = [-0.2, -0.1, 0, 0.1, 0.2];
 
+  final List<NIBDdata> nibdMOCKdata = [
+    NIBDdata(DateTime.utc(2021, 12, 7, 11, 10), 122, 80),
+    NIBDdata(DateTime.utc(2021, 12, 7, 11, 15), 110, 75),
+    NIBDdata(DateTime.utc(2021, 12, 7, 11, 20), 100, 60),
+    NIBDdata(DateTime.utc(2021, 12, 7, 11, 25), 120, 80),
+    NIBDdata(DateTime.utc(2021, 12, 7, 11, 30), 140, 95),
+  ];
+
   // every graph has phases for their frequencies
   int phase1 = 0;
   int phase2 = 0;
@@ -44,16 +52,8 @@ class MonitorController extends GetxController {
       "data": List.filled(30, ChartDataMockup(DateTime.now(), 0, 0)).obs,
       "color": Colors.green
     },
-    {
-      "type": "2",
-      "data": List.filled(30, ChartDataMockup(DateTime.now(), 0, 0)).obs,
-      "color": Colors.blue
-    },
-    {
-      "type": "3",
-      "data": List.filled(30, ChartDataMockup(DateTime.now(), 0, 0)).obs,
-      "color": Colors.yellow
-    }
+    {"type": "2", "data": List.filled(30, ChartDataMockup(DateTime.now(), 0, 0)).obs, "color": Colors.blue},
+    {"type": "3", "data": List.filled(30, ChartDataMockup(DateTime.now(), 0, 0)).obs, "color": Colors.yellow}
   ].obs;
 
   // handle button click on GraphAdder widget
@@ -111,8 +111,7 @@ class MonitorController extends GetxController {
           default:
             nextValue1 = 20 + getVariation();
         }
-        (initialGraphs[0]["data"] as List<ChartDataMockup>)
-            .add(ChartDataMockup(DateTime.now(), nextValue1, count1));
+        (initialGraphs[0]["data"] as List<ChartDataMockup>).add(ChartDataMockup(DateTime.now(), nextValue1, count1));
         (initialGraphs[0]["data"] as List<ChartDataMockup>).removeAt(0);
         break;
 
@@ -133,8 +132,7 @@ class MonitorController extends GetxController {
           default:
             nextValue2 = 5 + getVariation();
         }
-        (initialGraphs[1]["data"] as List<ChartDataMockup>)
-            .add(ChartDataMockup(DateTime.now(), nextValue2, count2));
+        (initialGraphs[1]["data"] as List<ChartDataMockup>).add(ChartDataMockup(DateTime.now(), nextValue2, count2));
         (initialGraphs[1]["data"] as List<ChartDataMockup>).removeAt(0);
         break;
 
@@ -149,13 +147,23 @@ class MonitorController extends GetxController {
           default:
             nextValue3 = 10 + getVariation();
         }
-        (initialGraphs[2]["data"] as List<ChartDataMockup>)
-            .add(ChartDataMockup(DateTime.now(), nextValue3, count3));
+        (initialGraphs[2]["data"] as List<ChartDataMockup>).add(ChartDataMockup(DateTime.now(), nextValue3, count3));
         (initialGraphs[2]["data"] as List<ChartDataMockup>).removeAt(0);
         break;
 
       default:
         print("Pain");
     }
+  }
+}
+
+class NIBDdata {
+  final DateTime? timestamp;
+  final int systolicPressure;
+  final int diastolicPressure;
+  late int mad;
+  NIBDdata(this.timestamp, this.systolicPressure, this.diastolicPressure) {
+    //Formular for Calculating MAD out of systolic and diastolic pressure
+    mad = (diastolicPressure + (1 / 3) * (systolicPressure - diastolicPressure)).toInt();
   }
 }
