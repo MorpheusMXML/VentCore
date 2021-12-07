@@ -12,6 +12,8 @@ class StartScreenController extends GetxController {
   RxDouble weightValue = 75.0.obs;
   RxDouble heightValue = 175.0.obs;
 
+  bool isPopupVisible = false;
+
   void settingsButton(String name) {
     switch (name) {
       case "Child":
@@ -30,6 +32,7 @@ class StartScreenController extends GetxController {
         heightValue.value = 175.0;
     }
 
+    isPopupVisible = true;
     update();
   }
 
