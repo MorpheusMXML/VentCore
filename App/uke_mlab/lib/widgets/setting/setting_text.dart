@@ -1,20 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:uke_mlab/providers/mockup.dart';
 
 class SettingText extends StatelessWidget {
-  const SettingText({Key? key}) : super(key: key);
+  final String name;
+  final String rate;
+  const SettingText({Key? key, required this.name, required this.rate})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final monitorController = Get.find<MonitorController>();
+
     return Column(children: [
-      const Text(
-        "Freq",
-        style: TextStyle(fontSize: 16, color: Colors.white),
+      Text(
+        name,
+        style: const TextStyle(fontSize: 16, color: Colors.white),
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          Text("12", style: TextStyle(fontSize: 32, color: Colors.white)),
-          Text("/min", style: TextStyle(fontSize: 16, color: Colors.white)),
+        children: [
+          Obx(
+            () => Text(
+              monitorController.ippvValues[name].toString(),
+              style: const TextStyle(fontSize: 32, color: Colors.white),
+            ),
+          ),
+          Text(rate, style: const TextStyle(fontSize: 16, color: Colors.white)),
         ],
       )
     ]);

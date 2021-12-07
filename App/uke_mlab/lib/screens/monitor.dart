@@ -31,85 +31,98 @@ class Monitor extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: StatusBar(
-          category: startScreenController.selectedString.toString(),
+          category: Get.arguments[0],
         ),
       ),
-      body: Row(
-        children: [
-          Flexible(
-            flex: 4,
-            child: Container(
-              margin: const EdgeInsets.only(left: 8, right: 8),
-              child: Column(
-                children: [
-                  GraphContainer(
-                    data: monitorController.initialGraphs,
-                  ),
-                  const GraphAdder(),
-                ],
+      body: Container(
+        margin: const EdgeInsets.only(left: 12, right: 12, top: 12),
+        child: Row(
+          children: [
+            Flexible(
+              flex: 4,
+              child: Container(
+                margin: const EdgeInsets.only(left: 8, right: 8),
+                child: Column(
+                  children: const [
+                    GraphContainer(),
+                    GraphAdder(),
+                  ],
+                ),
               ),
             ),
-          ),
-          Flexible(
-            flex: 2,
-            child: Column(
-              children: [
-                Flexible(
-                  flex: 1,
-                  child: Row(
-                    children: [
-                      ValueTile(
-                        name: "NIDB",
-                        textColor: const Color(0xFFDC362E),
-                        backgroundColor: const Color(0xFF2A2831),
-                        value: monitorController.initialGraphs[0]["data"] as List<ChartDataMockup>,
-                      ),
-                      ValueTile(
-                        name: "Pulse",
-                        textColor: const Color(0xFFFF00E4),
-                        backgroundColor: const Color(0xFF2A2831),
-                        value: monitorController.initialGraphs[0]["data"] as List<ChartDataMockup>,
-                      ),
-                    ],
+            Flexible(
+              flex: 2,
+              child: Column(
+                children: [
+                  Flexible(
+                    flex: 1,
+                    child: Row(
+                      children: [
+                        ValueTile(
+                          name: "NIDB",
+                          textColor: const Color(0xFFDC362E),
+                          backgroundColor: const Color(0xFF2A2831),
+                          value: monitorController.initialGraphs[0]["data"]
+                              as List<ChartDataMockup>,
+                        ),
+                        ValueTile(
+                          name: "Pulse",
+                          textColor: const Color(0xFFFF00E4),
+                          backgroundColor: const Color(0xFF2A2831),
+                          value: monitorController.initialGraphs[0]["data"]
+                              as List<ChartDataMockup>,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Flexible(
-                  flex: 1,
-                  child: Row(
-                    children: [
-                      ValueTile(
-                        name: "MVe",
-                        textColor: const Color(0xFF0CECDD),
-                        backgroundColor: const Color(0xff2A2831),
-                        value: monitorController.initialGraphs[0]["data"] as List<ChartDataMockup>,
-                      ),
-                      ValueTile(
-                        name: "Breath. Freq.",
-                        textColor: const Color(0xFF0CECDD),
-                        backgroundColor: const Color(0xff2A2831),
-                        value: monitorController.initialGraphs[0]["data"] as List<ChartDataMockup>,
-                      ),
-                    ],
+                  Flexible(
+                    flex: 1,
+                    child: Row(
+                      children: [
+                        ValueTile(
+                          name: "MVe",
+                          textColor: const Color(0xFF0CECDD),
+                          backgroundColor: const Color(0xff2A2831),
+                          value: monitorController.initialGraphs[0]["data"]
+                              as List<ChartDataMockup>,
+                        ),
+                        ValueTile(
+                          name: "Breath. Freq.",
+                          textColor: const Color(0xFF0CECDD),
+                          backgroundColor: const Color(0xff2A2831),
+                          value: monitorController.initialGraphs[0]["data"]
+                              as List<ChartDataMockup>,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Flexible(
-                  flex: 2,
-                  child: Row(
-                    children: const [
-                      Flexible(
-                        flex: 1,
-                        child: InfoTile(data: [
-                          {"type": "pPeak", "value": 50.12, "unit": "mBar"},
-                          {"type": "pPlat", "value": 4.58, "unit": "mBar"},
-                          {"type": "pMean", "value": 16.58, "unit": "mBar"},
-                          {"type": "MV", "value": 7.2, "unit": "l/min"}
-                        ]),
-                      ),
-                      Flexible(
-                        flex: 1,
-                        child: SettingTile(),
-                      ),
-                    ],
+                  Flexible(
+                    flex: 2,
+                    child: Row(
+                      children: const [
+                        Flexible(
+                          flex: 1,
+                          child: InfoTile(
+                            data: [
+                              {"type": "pPeak", "value": 50.12, "unit": "mBar"},
+                              {"type": "pPlat", "value": 4.58, "unit": "mBar"},
+                              {"type": "pMean", "value": 16.58, "unit": "mBar"},
+                              {"type": "MV", "value": 7.2, "unit": "l/min"}
+                            ],
+                          ),
+                        ),
+                        Flexible(
+                          flex: 1,
+                          child: SettingTile(
+                            data: [
+                              {"name": "Freq.", "rate": "/min"},
+                              {"name": "Vt", "rate": "ml"},
+                              {"name": "PEEP", "rate": "mBar"},
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 const ModeToggleButton(),

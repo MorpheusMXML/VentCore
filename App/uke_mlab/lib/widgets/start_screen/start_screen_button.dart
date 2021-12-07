@@ -27,7 +27,7 @@ class StartScreenButton extends StatelessWidget {
 
   getWidget(StartScreenController controller, BuildContext context) {
     if (controller.selectedString.toString() == name) {
-      return getButton(Colors.blue, context, controller);
+      return getButton(const Color(0xFF808B96), context, controller);
     } else {
       return getButton(const Color(0xFFEEEEEE), context, controller);
     }

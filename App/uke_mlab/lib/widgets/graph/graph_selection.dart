@@ -15,26 +15,31 @@ class GraphSelection extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          // TODO BUGFIX: not updated correctly?
+          // 3 graphs --> update function called 3 times
+          // 4 graphs --> update function called 7 times?
+          // TODO: create widget for this button (it'll be reused)
           ElevatedButton(
-              onPressed: () =>
-                  controller.initialGraphs.add({"type": "3", "data": controller.initialGraphs[0]["data"] as List<ChartDataMockup>, "color": Colors.yellow}),
-              child: const Text(
-                "Add Graph 1",
-                style: TextStyle(color: Colors.black),
-              )),
-          ElevatedButton(
-              onPressed: () =>
-                  controller.initialGraphs.add({"type": "3", "data": controller.initialGraphs[1]["data"] as List<ChartDataMockup>, "color": Colors.green}),
-              child: const Text(
-                "Add Graph 2",
-                style: TextStyle(color: Colors.black),
-              )),
-          ElevatedButton(
-              onPressed: () => controller.initialGraphs.add({"type": "4", "data": controller.nibdMOCKdata, "color": Colors.red}),
-              child: const Text(
-                "Add NIBD History",
-                style: TextStyle(color: Colors.black),
-              ))
+            onPressed: () {
+              Map<String, Object> type = {
+                "id": "NIBD",
+                "index": controller.initialGraphs.length
+              };
+              controller.muted[type["id"] as String] = false;
+              controller.initialGraphs.add(
+                {
+                  "type": type,
+                  "data": controller.initialNIBD,
+                  "color": Colors.purple,
+                  "count": 0
+                },
+              );
+            },
+            child: const Text(
+              "Add NIBD",
+              style: TextStyle(color: Colors.black),
+            ),
+          ),
         ],
       ),
     );
