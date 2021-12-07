@@ -17,6 +17,7 @@ class GraphSelection extends StatelessWidget {
           // TODO BUGFIX: not updated correctly?
           // 3 graphs --> update function called 3 times
           // 4 graphs --> update function called 7 times?
+          // TODO: create widget for this button (it'll be reused)
           ElevatedButton(
             onPressed: () {
               Map<String, Object> type = {
@@ -38,38 +39,6 @@ class GraphSelection extends StatelessWidget {
               style: TextStyle(color: Colors.black),
             ),
           ),
-
-          // Hardcoded, later own widget, don't forget to create data in DataProvider
-          ElevatedButton(
-              onPressed: () {
-                String type = (controller.initialGraphs.length + 1).toString();
-                controller.muted[type] = false;
-                controller.initialGraphs.add({
-                  "type": type,
-                  "data": controller.initialGraphs[1]["data"]
-                      as List<ChartDataMockup>,
-                  "color": Colors.yellow
-                });
-              },
-              child: const Text(
-                "Add Graph 2",
-                style: TextStyle(color: Colors.black),
-              )),
-          ElevatedButton(
-              onPressed: () {
-                String type = (controller.initialGraphs.length + 1).toString();
-                controller.muted[type] = false;
-                controller.initialGraphs.add({
-                  "type": "4",
-                  "data": controller.initialGraphs[2]["data"]
-                      as List<ChartDataMockup>,
-                  "color": Colors.yellow
-                });
-              },
-              child: const Text(
-                "Add Graph 3",
-                style: TextStyle(color: Colors.black),
-              ))
         ],
       ),
     );
