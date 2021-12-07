@@ -37,6 +37,7 @@ class StartScreenButton extends StatelessWidget {
       Color color, BuildContext context, StartScreenController controller) {
     return Container(
       margin: const EdgeInsets.fromLTRB(65, 0, 0, 12),
+      //Buttonstyle
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           fixedSize: Size(800 / MediaQuery.of(context).devicePixelRatio,
@@ -46,20 +47,41 @@ class StartScreenButton extends StatelessWidget {
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),
         ),
+        //get weight and height for chosen preset
         onPressed: () {
           controller.settingsButton(name);
         },
+        //button content
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SvgPicture.asset(
-              image,
-              height: 70.0,
+            Flexible(
+              flex: 2,
+              //center svg within flexible
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    image,
+                    height: 70,
+                  ),
+                ],
+              ),
             ),
-            Text(
-              name,
-              style: const TextStyle(fontSize: 25),
+            Flexible(
+              flex: 3,
+              //center text within flexible
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    name,
+                    style: const TextStyle(fontSize: 25),
+                  ),
+                ],
+              ),
             ),
+            //empty container in flexible to center text within in button (not best practice)
+            Flexible(flex: 2, child: Container())
           ],
         ),
       ),
