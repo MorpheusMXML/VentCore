@@ -13,10 +13,15 @@ class SettingTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
+        Container(
+          margin: const EdgeInsets.only(
+              right: 8), //button was to wide on the right side
+          color: const Color(0xFF25232A), //TODO: check with styleTheme?
           width: double.infinity,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
+              padding: const EdgeInsets.all(
+                  15), //expands button size to container size, bad practice!
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
