@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 class aedButton extends StatelessWidget {
   const aedButton({
@@ -22,7 +23,9 @@ class aedButton extends StatelessWidget {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           ),
-          onPressed: () {},
+          onPressed: () {
+            Get.toNamed('/monitor', arguments: ["Adult"]);
+          },
           child: Column(
             children: [
               SvgPicture.asset(
