@@ -107,10 +107,10 @@ class Monitor extends StatelessWidget {
                           flex: 1,
                           child: InfoTile(
                             data: [
-                              {"type": "pPeak", "value": 50.12, "unit": "mBar"},
-                              {"type": "pPlat", "value": 4.58, "unit": "mBar"},
-                              {"type": "pMean", "value": 16.58, "unit": "mBar"},
-                              {"type": "MV", "value": 7.2, "unit": "l/min"}
+                              {"type": "pPeak", "value": 50.12, "unit": " mBar"},
+                              {"type": "pPlat", "value": 4.58, "unit": " mBar"},
+                              {"type": "pMean", "value": 16.58, "unit": " mBar"},
+                              {"type": "MV", "value": 7.2, "unit": " l/min"}
                             ],
                           ),
                         ),

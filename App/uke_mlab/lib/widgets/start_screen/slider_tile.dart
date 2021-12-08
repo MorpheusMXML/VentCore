@@ -16,9 +16,9 @@ class SliderTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final startScreenController = Get.find<StartScreenController>();
     return Container(
+      height: 100 / MediaQuery.of(context).devicePixelRatio,
       margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
       color: const Color(0xff322f37),
-      height: 80 / MediaQuery.of(context).devicePixelRatio,
       child: Row(
         children: [
           //Text
