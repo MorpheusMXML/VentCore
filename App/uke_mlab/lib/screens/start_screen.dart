@@ -17,7 +17,6 @@ class StartScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const StatusBar(category: "")),
       body: Row(
-        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Flexible(
             flex: 1,
