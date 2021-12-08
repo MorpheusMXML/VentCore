@@ -60,18 +60,20 @@ class Monitor extends StatelessWidget {
                   Flexible(
                     flex: 1,
                     child: Row(
-                      children: const [
+                      children: [
                         ValueTile(
                           name: "NIDB",
-                          textColor: Color(0xFFDC362E),
-                          backgroundColor: Color(0xFF2A2831),
-                          sensor: sensorEnum.nibd,
+                          textColor: const Color(0xFFDC362E),
+                          backgroundColor: const Color(0xFF2A2831),
+                          value: monitorController.nidbValue,
+                          withModel: false,
                         ),
-                        ValueTile(
+                        ValueTile.model(
                           name: "Pulse",
-                          textColor: Color(0xFFFF00E4),
-                          backgroundColor: Color(0xFF2A2831),
+                          textColor: const Color(0xFFFF00E4),
+                          backgroundColor: const Color(0xFF2A2831),
                           sensor: sensorEnum.pulse,
+                          withModel: true,
                         ),
                       ],
                     ),
@@ -79,18 +81,20 @@ class Monitor extends StatelessWidget {
                   Flexible(
                     flex: 1,
                     child: Row(
-                      children: const [
+                      children: [
                         ValueTile(
                           name: "MVe",
                           textColor: const Color(0xFF0CECDD),
                           backgroundColor: const Color(0xff2A2831),
-                          sensor: sensorEnum.mve,
+                          value: monitorController.mveValue,
+                          withModel: false,
                         ),
                         ValueTile(
                           name: "Breath. Freq.",
                           textColor: const Color(0xFF0CECDD),
                           backgroundColor: const Color(0xff2A2831),
-                          sensor: sensorEnum.breathFrequency,
+                          value: monitorController.breathFreqValue,
+                          withModel: false,
                         ),
                       ],
                     ),
