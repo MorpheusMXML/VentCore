@@ -41,26 +41,37 @@ class GraphContainer extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 8),
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxHeight: 150),
-          child: Row(
-            children: [
-              GraphNotification(type: typeRef),
-              Container(width: 8),
-              Expanded(
-                child: Graph(
-                  type: typeRef,
-                  data: graphRef["data"] as List<ChartDataMockup>,
-                  color: graphRef["color"] as Color,
+          child: (typeRef["id"] == "NIBD")
+              ? Row(children: [
+                  GraphNotification(type: typeRef),
+                  Container(width: 8),
+                  Expanded(
+                    child: HistoryGraph(
+                      data: graphRef["data"] as List<NIBDdata>,
+                      color: graphRef["color"] as Color,
+                    ),
+                  ),
+                ])
+              : Row(
+                  children: [
+                    GraphNotification(type: typeRef),
+                    Container(width: 8),
+                    Expanded(
+                      child: Graph(
+                        type: typeRef,
+                        data: graphRef["data"] as List<ChartDataMockup>,
+                        color: graphRef["color"] as Color,
+                      ),
+                    ),
+                    Container(width: 8),
+                    ValueBox(
+                      value: graphRef["data"] as List<ChartDataMockup>,
+                      textColor: graphRef["color"] as Color,
+                      backgroundColor: const Color(0xFF2A2831),
+                      withModel: false,
+                    ),
+                  ],
                 ),
-              ),
-              Container(width: 8),
-              ValueBox(
-                value: graphRef["data"] as List<ChartDataMockup>,
-                textColor: graphRef["color"] as Color,
-                backgroundColor: const Color(0xFF2A2831),
-                withModel: false,
-              ),
-            ],
-          ),
         ),
       );
     }

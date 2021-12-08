@@ -8,12 +8,10 @@ import 'package:uke_mlab/providers/mockup.dart';
 
 class HistoryGraph extends StatelessWidget {
   final Color color;
-  final String type;
   final List<NIBDdata> data;
 
   const HistoryGraph({
     Key? key,
-    required this.type,
     required this.color,
     required this.data,
   }) : super(key: key);
@@ -49,13 +47,19 @@ class HistoryGraph extends StatelessWidget {
           desiredIntervals: 10,
           maximum: (findMax(true) + 5),
           minimum: (findMax(false) - 5),
-          majorGridLines: MajorGridLines(width: 1, color: Theme.of(context).shadowColor, dashArray: const <double>[2, 3]),
+          majorGridLines: MajorGridLines(
+              width: 1,
+              color: Theme.of(context).shadowColor,
+              dashArray: const <double>[2, 3]),
         ),
         primaryXAxis: DateTimeAxis(
           dateFormat: DateFormat.Hm(),
           plotOffset: 10,
           desiredIntervals: 25,
-          majorGridLines: MajorGridLines(width: 0, color: Theme.of(context).shadowColor //Theme.of(context).shadowColor,
+          majorGridLines: MajorGridLines(
+              width: 0,
+              color:
+                  Theme.of(context).shadowColor //Theme.of(context).shadowColor,
               ),
         ),
         series: [
@@ -67,7 +71,10 @@ class HistoryGraph extends StatelessWidget {
                 // Scatter will render in diamond shape
                 shape: DataMarkerType.diamond),
             trendlines: <Trendline>[
-              Trendline(dashArray: <double>[2, 3], type: TrendlineType.movingAverage, color: Colors.redAccent)
+              Trendline(
+                  dashArray: <double>[2, 3],
+                  type: TrendlineType.movingAverage,
+                  color: Colors.redAccent)
             ],
             color: color,
             dataSource: data,
@@ -81,7 +88,10 @@ class HistoryGraph extends StatelessWidget {
               xValueMapper: (NIBDdata data, _) => data.timestamp,
               lowValueMapper: (NIBDdata data, _) => data.diastolicPressure,
               highValueMapper: (NIBDdata data, _) => data.systolicPressure,
-              markerSettings: const MarkerSettings(shape: DataMarkerType.horizontalLine, width: 10, isVisible: true)),
+              markerSettings: const MarkerSettings(
+                  shape: DataMarkerType.horizontalLine,
+                  width: 10,
+                  isVisible: true)),
         ]);
   }
 }

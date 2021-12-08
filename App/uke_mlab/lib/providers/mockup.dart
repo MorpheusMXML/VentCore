@@ -49,8 +49,13 @@ class MonitorController extends GetxController {
     },
   ].obs;
 
-  List<ChartDataMockup> initialNIBD =
-      List.filled(30, ChartDataMockup(DateTime.now(), 0, 0)).obs;
+  List<NIBDdata> initialNIBD = [
+    NIBDdata(DateTime.utc(2021, 12, 9, 11, 00), 120, 80),
+    NIBDdata(DateTime.utc(2021, 12, 9, 11, 05), 140, 95),
+    NIBDdata(DateTime.utc(2021, 12, 9, 11, 10), 180, 100),
+    NIBDdata(DateTime.utc(2021, 12, 9, 11, 15), 185, 75),
+    NIBDdata(DateTime.utc(2021, 12, 9, 11, 20), 200, 110),
+  ];
 
   Map<String, RxInt> ippvValues = {
     "Freq.": 20.obs,
@@ -100,20 +105,21 @@ class MonitorController extends GetxController {
   // update function called by the timer in Graph class
   updateData(int index) {
     //print(index);
+    if (index != 3) {
+      Map<String, Object> ref = initialGraphs[index];
+      List<ChartDataMockup> dataRef = ref["data"] as List<ChartDataMockup>;
+      int countRef = ref["count"] as int;
 
-    Map<String, Object> ref = initialGraphs[index];
-    List<ChartDataMockup> dataRef = ref["data"] as List<ChartDataMockup>;
-    int countRef = ref["count"] as int;
+      dataRef.add(ChartDataMockup(
+          DateTime.now(), DataProvider.data[index][countRef % 1000], countRef));
+      dataRef.removeAt(0);
 
-    dataRef.add(ChartDataMockup(
-        DateTime.now(), DataProvider.data[index][countRef % 1000], countRef));
-    dataRef.removeAt(0);
+      initialGraphs[index]["count"] = countRef + 1;
 
-    initialGraphs[index]["count"] = countRef + 1;
-
-    //bit hacky, but hey its mocked
-    if (index == 0) {
-      updateBoxValue();
+      //bit hacky, but hey its mocked
+      if (index == 0) {
+        updateBoxValue();
+      }
     }
   }
 

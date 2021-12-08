@@ -30,7 +30,7 @@ class GraphSelection extends StatelessWidget {
                 {
                   "type": type,
                   "data": controller.initialNIBD,
-                  "color": Colors.purple,
+                  "color": Colors.red,
                   "count": 0
                 },
               );
