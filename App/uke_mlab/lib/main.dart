@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-
 import 'package:uke_mlab/providers/start_screen_controller.dart';
 import 'package:uke_mlab/screens/monitor.dart';
 import 'package:uke_mlab/screens/start_screen.dart';
-
 import 'package:uke_mlab/models/model.dart';
 import 'package:uke_mlab/models/system_state.dart';
-
 import 'package:uke_mlab/utilities/alarm_controller.dart';
 import 'package:uke_mlab/utilities/screen_controller.dart';
-
-import 'package:uke_mlab/widgets/statusbar.dart';
 
 import 'providers/mockup.dart';
 
@@ -27,11 +22,10 @@ void main() {
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeRight,
     DeviceOrientation.landscapeLeft,
-  ]).then((value) => runApp(const MyApp()));
+  ]).then((value) => runApp(MyApp()));
 }
 
 class MyApp extends StatelessWidget {
-
   final SystemState systemState = Get.put(SystemState());
   final ModelManager modelManager = Get.put(ModelManager());
 
