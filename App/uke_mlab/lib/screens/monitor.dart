@@ -11,7 +11,10 @@ import 'package:uke_mlab/widgets/setting/setting_tile.dart';
 import 'package:uke_mlab/widgets/statusbar.dart';
 import 'package:uke_mlab/widgets/value_tile.dart';
 import 'package:uke_mlab/widgets/graph/graph_adder.dart';
+
 import 'package:uke_mlab/models/model.dart';
+import 'package:uke_mlab/models/enums.dart';
+
 import 'package:uke_mlab/utilities/screen_controller.dart';
 
 class Monitor extends StatelessWidget {
@@ -62,15 +65,15 @@ class Monitor extends StatelessWidget {
                           name: "NIDB",
                           textColor: const Color(0xFFDC362E),
                           backgroundColor: const Color(0xFF2A2831),
-                          value: monitorController.initialGraphs[0]["data"]
-                              as List<ChartDataMockup>,
+                          value: monitorController.nidbValue,
+                          withModel: false,
                         ),
-                        ValueTile(
+                        ValueTile.model(
                           name: "Pulse",
                           textColor: const Color(0xFFFF00E4),
                           backgroundColor: const Color(0xFF2A2831),
-                          value: monitorController.initialGraphs[0]["data"]
-                              as List<ChartDataMockup>,
+                          sensor: sensorEnum.pulse,
+                          withModel: true,
                         ),
                       ],
                     ),
@@ -83,15 +86,15 @@ class Monitor extends StatelessWidget {
                           name: "MVe",
                           textColor: const Color(0xFF0CECDD),
                           backgroundColor: const Color(0xff2A2831),
-                          value: monitorController.initialGraphs[0]["data"]
-                              as List<ChartDataMockup>,
+                          value: monitorController.mveValue,
+                          withModel: false,
                         ),
                         ValueTile(
                           name: "Breath. Freq.",
                           textColor: const Color(0xFF0CECDD),
                           backgroundColor: const Color(0xff2A2831),
-                          value: monitorController.initialGraphs[0]["data"]
-                              as List<ChartDataMockup>,
+                          value: monitorController.breathFreqValue,
+                          withModel: false,
                         ),
                       ],
                     ),

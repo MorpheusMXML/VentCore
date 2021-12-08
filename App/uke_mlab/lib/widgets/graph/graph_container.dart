@@ -57,6 +57,7 @@ class GraphContainer extends StatelessWidget {
                 value: graphRef["data"] as List<ChartDataMockup>,
                 textColor: graphRef["color"] as Color,
                 backgroundColor: const Color(0xFF2A2831),
+                withModel: false,
               ),
             ],
           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/mockup_data.dart';
+import 'dart:math';
 
 // DataClass used by the Graphs
 // x: DateTime, y: value (HF, SpO2, ...)
@@ -45,7 +46,7 @@ class MonitorController extends GetxController {
       "color": Colors.yellow,
       "count": 0,
       "alarm": false.obs
-    }
+    },
   ].obs;
 
   List<ChartDataMockup> initialNIBD =
@@ -56,6 +57,14 @@ class MonitorController extends GetxController {
     "Vt": 40.obs,
     "PEEP": 60.obs
   };
+
+  final RxList<ChartDataMockup> nidbValue =
+      List.filled(1, ChartDataMockup(DateTime.now(), 0, 0)).obs;
+  final RxList<ChartDataMockup> mveValue =
+      List.filled(1, ChartDataMockup(DateTime.now(), 0, 0)).obs;
+  final RxList<ChartDataMockup> breathFreqValue =
+      List.filled(1, ChartDataMockup(DateTime.now(), 0, 0)).obs;
+  final Random random = Random();
 
   void increment(name) {
     ippvValues[name]!.value = ippvValues[name]!.value + 1;
@@ -90,7 +99,7 @@ class MonitorController extends GetxController {
 
   // update function called by the timer in Graph class
   updateData(int index) {
-    print(index);
+    //print(index);
 
     Map<String, Object> ref = initialGraphs[index];
     List<ChartDataMockup> dataRef = ref["data"] as List<ChartDataMockup>;
@@ -101,6 +110,23 @@ class MonitorController extends GetxController {
     dataRef.removeAt(0);
 
     initialGraphs[index]["count"] = countRef + 1;
+
+    //bit hacky, but hey its mocked
+    if (index == 0) {
+      updateBoxValue();
+    }
+  }
+
+  updateBoxValue() {
+    int randomInt = random.nextInt(100);
+    nidbValue[0] =
+        ChartDataMockup(DateTime.now(), randomInt, nidbValue[0].counter + 1);
+    randomInt = random.nextInt(100);
+    mveValue[0] =
+        ChartDataMockup(DateTime.now(), randomInt, mveValue[0].counter + 1);
+    randomInt = random.nextInt(100);
+    breathFreqValue[0] = ChartDataMockup(
+        DateTime.now(), randomInt, breathFreqValue[0].counter + 1);
   }
 }
 
@@ -111,6 +137,7 @@ class NIBDdata {
   late int mad;
   NIBDdata(this.timestamp, this.systolicPressure, this.diastolicPressure) {
     //Formular for Calculating MAD out of systolic and diastolic pressure
-    mad = (diastolicPressure + (1 / 3) * (systolicPressure - diastolicPressure)).toInt();
+    mad = (diastolicPressure + (1 / 3) * (systolicPressure - diastolicPressure))
+        .toInt();
   }
 }

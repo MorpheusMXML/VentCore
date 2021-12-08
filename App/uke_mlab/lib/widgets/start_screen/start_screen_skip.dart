@@ -6,7 +6,6 @@ class StartScreenSkip extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,6 +25,11 @@ class StartScreenSkip extends StatelessWidget {
           Get.toNamed('/monitor', arguments: ["Adult"]);
         },
       ),
+      child: const Text('Skip', style: TextStyle(fontSize: 20)),
+      onPressed: () {
+        //TODO update systemState to monitor + use a screenController function for this
+        Get.toNamed('/monitor', arguments: ["Adult"]);
+      },
     );
   }
 }
