@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 
 //Widget for StartScreen Buttons
 //@param name Buttontext
-//@param optional image SVG asset path
-// ignore_for_file: camel_case_types, avoid_print
 
 class DemoScreenButton extends StatelessWidget {
   final String name;
@@ -26,10 +24,8 @@ class DemoScreenButton extends StatelessWidget {
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),
         ),
-        //Presets Loading
-        onPressed: () {
-          print(name);
-        },
+        //TODO: Scenario Loading
+        onPressed: () {},
         //Button content
         child: Text(
           name,

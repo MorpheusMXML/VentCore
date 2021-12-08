@@ -19,14 +19,21 @@ class SettingText extends StatelessWidget {
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment:
+            CrossAxisAlignment.baseline, //gets text in same line
+        textBaseline: TextBaseline.ideographic, //gets text in same line
         children: [
           Obx(
             () => Text(
               monitorController.ippvValues[name].toString(),
-              style: const TextStyle(fontSize: 32, color: Colors.white),
+              style: const TextStyle(
+                fontSize: 32,
+                color: Colors.white,
+              ),
             ),
           ),
-          Text(rate, style: const TextStyle(fontSize: 16, color: Colors.white)),
+          Text(" " + rate,
+              style: const TextStyle(fontSize: 12, color: Colors.white)),
         ],
       )
     ]);

@@ -16,20 +16,25 @@ class StartScreenContinue extends StatelessWidget {
 
   getWidget(controller) {
     return Obx(
-      () => ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          onSurface: const Color(0xffeeeeee),
-          primary: const Color(0xffeeeeee),
-          onPrimary: Colors.black,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),
+      () => Container(
+        alignment: Alignment.centerRight,
+        margin: const EdgeInsets.fromLTRB(0, 0, 10, 12),
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            fixedSize: const Size(200, 60),
+            onSurface: const Color(0xffeeeeee),
+            primary: const Color(0xffeeeeee),
+            onPrimary: Colors.black,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),
+          ),
+          onPressed: controller.selectedString.toString() != ""
+              ? () {
+                  Get.toNamed('/monitor', arguments: [controller.selectedString.value]);
+                }
+              : null,
+          child: const Text('Continue', style: TextStyle(fontSize: 20)),
         ),
-        onPressed: controller.selectedString.toString() != ""
-            ? () {
-                Get.toNamed('/monitor', arguments: [controller.selectedString.value]);
-              }
-            : null,
-        child: const Text('Continue', style: TextStyle(fontSize: 20)),
       ),
     );
   }

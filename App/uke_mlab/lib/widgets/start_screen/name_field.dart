@@ -11,7 +11,7 @@ class nameField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.all(10),
-      height: 80 / MediaQuery.of(context).devicePixelRatio,
+      height: 100 / MediaQuery.of(context).devicePixelRatio,
       color: const Color(0xff322f37),
       child: Row(
         children: const [
