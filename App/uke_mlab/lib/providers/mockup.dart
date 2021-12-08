@@ -111,7 +111,10 @@ class MonitorController extends GetxController {
 
     initialGraphs[index]["count"] = countRef + 1;
 
-    updateBoxValue();
+    //bit hacky, but hey its mocked
+    if (index == 0) {
+      updateBoxValue();
+    }
   }
 
   updateBoxValue() {
