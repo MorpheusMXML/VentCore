@@ -13,7 +13,7 @@ class StartScreenSkip extends StatelessWidget {
       margin: const EdgeInsets.fromLTRB(0, 0, 10, 12),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          fixedSize: const Size(200,60),
+          fixedSize: const Size(200, 60),
           primary: const Color(0xffeeeeee),
           onPrimary: Colors.black,
           shape: RoundedRectangleBorder(
@@ -25,11 +25,6 @@ class StartScreenSkip extends StatelessWidget {
           Get.toNamed('/monitor', arguments: ["Adult"]);
         },
       ),
-      child: const Text('Skip', style: TextStyle(fontSize: 20)),
-      onPressed: () {
-        //TODO update systemState to monitor + use a screenController function for this
-        Get.toNamed('/monitor', arguments: ["Adult"]);
-      },
     );
   }
 }
