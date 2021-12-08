@@ -6,6 +6,7 @@ import 'package:uke_mlab/providers/style_controller.dart';
 
 import 'package:uke_mlab/widgets/graph/graph_container.dart';
 import 'package:uke_mlab/widgets/info/info_tile.dart';
+import 'package:uke_mlab/widgets/mode_toggle_button.dart';
 import 'package:uke_mlab/widgets/setting/setting_tile.dart';
 import 'package:uke_mlab/widgets/statusbar.dart';
 import 'package:uke_mlab/widgets/value_tile.dart';
@@ -122,6 +123,7 @@ class Monitor extends StatelessWidget {
                       ],
                     ),
                   ),
+                  const ModeToggleButton(),
                 ],
               ),
             )
