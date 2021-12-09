@@ -27,21 +27,21 @@ class MonitorController extends GetxController {
   // there were issues passing <Key> to children
   List<Map<String, Object>> initialGraphs = [
     {
-      "type": {"id": "HeartFrequency", "index": 0},
+      "type": {"abbr": "HF", "id": "HeartFrequency", "index": 0},
       "data": List.filled(30, ChartDataMockup(DateTime.now(), 0, 0)).obs,
       "color": Colors.green,
       "count": 0,
       "alarm": false.obs
     },
     {
-      "type": {"id": "OxygenSaturation", "index": 1},
+      "type": {"abbr": "SPO2", "id": "OxygenSaturation", "index": 1},
       "data": List.filled(30, ChartDataMockup(DateTime.now(), 0, 0)).obs,
       "color": Colors.blue,
       "count": 0,
       "alarm": false.obs
     },
     {
-      "type": {"id": "Sinus", "index": 2},
+      "type": {"abbr": "CO2", "id": "Sinus", "index": 2},
       "data": List.filled(30, ChartDataMockup(DateTime.now(), 0, 0)).obs,
       "color": Colors.yellow,
       "count": 0,
@@ -63,7 +63,7 @@ class MonitorController extends GetxController {
     "PEEP": 60.obs
   };
 
-  final RxList<ChartDataMockup> nidbValue =
+  final RxList<ChartDataMockup> nibdValue =
       List.filled(1, ChartDataMockup(DateTime.now(), 0, 0)).obs;
   final RxList<ChartDataMockup> mveValue =
       List.filled(1, ChartDataMockup(DateTime.now(), 0, 0)).obs;
@@ -97,10 +97,11 @@ class MonitorController extends GetxController {
     update();
   }
 
-  bool isInAlarmState = false;
   void switchToAlarm(int type) {
     (initialGraphs[type]["alarm"] as RxBool).value = true;
   }
+
+  RxString alarmMessage = "".obs;
 
   // update function called by the timer in Graph class
   updateData(int index) {
@@ -125,8 +126,8 @@ class MonitorController extends GetxController {
 
   updateBoxValue() {
     int randomInt = random.nextInt(100);
-    nidbValue[0] =
-        ChartDataMockup(DateTime.now(), randomInt, nidbValue[0].counter + 1);
+    nibdValue[0] =
+        ChartDataMockup(DateTime.now(), randomInt, nibdValue[0].counter + 1);
     randomInt = random.nextInt(100);
     mveValue[0] =
         ChartDataMockup(DateTime.now(), randomInt, mveValue[0].counter + 1);
