@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: "/start_screen",
           page: () => const StartScreen(),
-          binding: StartScreenBinding(),
+          bindings: [StartScreenBinding(), MonitorBinding()],
         )
       ],
       initialRoute: "/start_screen",
