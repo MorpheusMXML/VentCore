@@ -22,7 +22,6 @@ class ValueBox extends StatelessWidget {
     Key? key,
     required this.textColor,
     required this.value,
-    // to be changed
     this.miniTitle = "PP",
     required this.backgroundColor,
     required this.withModel,
@@ -43,6 +42,7 @@ class ValueBox extends StatelessWidget {
   Widget build(BuildContext context) {
     late final ScreenController screenController;
     late final DataModel dataModel;
+    final monitorController = Get.find<MonitorController>();
     late Obx mainText;
     late Obx lowerAlarmBound;
     late Obx upperAlarmBound;
@@ -50,6 +50,7 @@ class ValueBox extends StatelessWidget {
     if (withModel) {
       //TODO when ready, put to class fields and delete rest
       dataModel = Get.find<DataModel>(tag: sensor.toString());
+
       mainText = Obx(
         () => Text(
           dataModel.singleData.value.value.toInt().toString(),
@@ -106,15 +107,6 @@ class ValueBox extends StatelessWidget {
       );
     }
 
-    void _showSnack() {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text("Button Tapped")));
-      if (withModel) {
-        dataModel
-            .updateValues(dataModel.singleData.value.value + 1.0); //testing
-      }
-    }
-
     return AspectRatio(
       aspectRatio: 1,
       child: ElevatedButton(
@@ -122,7 +114,14 @@ class ValueBox extends StatelessWidget {
           shape: MaterialStateProperty.all(const RoundedRectangleBorder()),
           backgroundColor: MaterialStateProperty.all(backgroundColor),
         ),
-        onPressed: _showSnack,
+        onPressed: () {
+          if (withModel) {
+            dataModel.updateValues(dataModel.singleData.value.value + 1.0);
+            if (dataModel.singleData.value.value.toInt() > 10) {
+              monitorController.alarmMessage.value = "High pulse!";
+            }
+          } //testing
+        },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,

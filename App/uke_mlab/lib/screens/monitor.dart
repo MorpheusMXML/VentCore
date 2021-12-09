@@ -62,14 +62,16 @@ class Monitor extends StatelessWidget {
                     child: Row(
                       children: [
                         ValueTile(
-                          name: "NIDB",
+                          name: "NIBD",
+                          miniTitle: "SYS",
                           textColor: const Color(0xFFDC362E),
                           backgroundColor: const Color(0xFF2A2831),
-                          value: monitorController.nidbValue,
+                          value: monitorController.nibdValue,
                           withModel: false,
                         ),
                         ValueTile.model(
                           name: "Pulse",
+                          miniTitle: "PP",
                           textColor: const Color(0xFFFF00E4),
                           backgroundColor: const Color(0xFF2A2831),
                           sensor: sensorEnum.pulse,
@@ -84,6 +86,7 @@ class Monitor extends StatelessWidget {
                       children: [
                         ValueTile(
                           name: "MVe",
+                          miniTitle: "MVe",
                           textColor: const Color(0xFF0CECDD),
                           backgroundColor: const Color(0xff2A2831),
                           value: monitorController.mveValue,
@@ -91,6 +94,7 @@ class Monitor extends StatelessWidget {
                         ),
                         ValueTile(
                           name: "Breath. Freq.",
+                          miniTitle: "AF",
                           textColor: const Color(0xFF0CECDD),
                           backgroundColor: const Color(0xff2A2831),
                           value: monitorController.breathFreqValue,
@@ -107,9 +111,17 @@ class Monitor extends StatelessWidget {
                           flex: 1,
                           child: InfoTile(
                             data: [
-                              {"type": "pPeak", "value": 50.12, "unit": " mBar"},
+                              {
+                                "type": "pPeak",
+                                "value": 50.12,
+                                "unit": " mBar"
+                              },
                               {"type": "pPlat", "value": 4.58, "unit": " mBar"},
-                              {"type": "pMean", "value": 16.58, "unit": " mBar"},
+                              {
+                                "type": "pMean",
+                                "value": 16.58,
+                                "unit": " mBar"
+                              },
                               {"type": "MV", "value": 7.2, "unit": " l/min"}
                             ],
                           ),

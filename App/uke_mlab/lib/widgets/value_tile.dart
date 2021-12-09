@@ -8,6 +8,7 @@ class ValueTile extends StatelessWidget {
   final Color textColor;
   final Color backgroundColor;
   final String name;
+  final String miniTitle;
 
   late List<ChartDataMockup> value;
   late sensorEnum sensor;
@@ -17,6 +18,7 @@ class ValueTile extends StatelessWidget {
     Key? key,
     required this.textColor,
     required this.name,
+    required this.miniTitle,
     required this.backgroundColor,
     required this.value,
     required this.withModel,
@@ -26,6 +28,7 @@ class ValueTile extends StatelessWidget {
     Key? key,
     required this.textColor,
     required this.name,
+    required this.miniTitle,
     required this.backgroundColor,
     required this.sensor,
     required this.withModel,
@@ -38,12 +41,14 @@ class ValueTile extends StatelessWidget {
       valueBox = ValueBox.model(
         backgroundColor: backgroundColor,
         textColor: textColor,
+        miniTitle: miniTitle,
         withModel: true,
         sensor: sensor,
       );
     } else {
       valueBox = ValueBox(
           textColor: textColor,
+          miniTitle: miniTitle,
           value: value,
           backgroundColor: backgroundColor,
           withModel: false);

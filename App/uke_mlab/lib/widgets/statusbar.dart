@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:uke_mlab/providers/mockup.dart';
 
 class StatusBar extends StatelessWidget {
   final String category;
@@ -9,6 +11,8 @@ class StatusBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final monitorController = Get.find<MonitorController>();
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -16,12 +20,17 @@ class StatusBar extends StatelessWidget {
           flex: 1,
           child: Icon(Icons.menu, color: Colors.white),
         ),
-        const Flexible(
+        Flexible(
           flex: 5,
-          child: Text(
-            "Alert Message",
-            style:
-                TextStyle(color: Colors.white, decoration: TextDecoration.none),
+          child: Obx(
+            () => Text(
+              monitorController.alarmMessage.value,
+              style: TextStyle(
+                  color: monitorController.alarmMessage.value == ""
+                      ? Colors.white
+                      : Colors.red,
+                  decoration: TextDecoration.none),
+            ),
           ),
         ),
         Flexible(
@@ -35,7 +44,7 @@ class StatusBar extends StatelessWidget {
         const Flexible(
           flex: 1,
           child: Text(
-            "19:11",
+            "14:23",
             style:
                 TextStyle(color: Colors.white, decoration: TextDecoration.none),
           ),
