@@ -70,30 +70,22 @@ const App = () => {
     const randomO2 = Math.round(Math.random() * 5);
     const randomHF = Math.round(Math.random() * 10);
 
-    let HF;
+    let HF, HF1, HF2, HF3, HF4, HF5, HF6;
     let O2;
 
     switch (heartFreqPhase) {
       case(1):
-        HF = 70 + randomHF;
-        break;
-      case(2):
-        HF = 30 + randomHF;
-        break;
-      case(3):
-        HF = 120 + randomHF;
-        break;
-      case(4):
-        HF = 30 + randomHF;
-        break;
-      case(5):
-        HF = 70 + randomHF;
-        break;
-      case(6):
-        HF = 50 + randomHF;
+        HF1 = 70 + randomHF;
+        HF2 = 30 + randomHF;
+        HF3 = 120 + randomHF;
+        HF4 = 30 + randomHF;
+        HF5 = 70 + randomHF;
+        HF6 = 50 + randomHF;
+        setHeartFreq(heartFreq.slice(6).concat(HF1).concat(HF2).concat(HF3).concat(HF4).concat(HF5).concat(HF6));
         break;
       default:
         HF = 50 + randomHF;
+        setHeartFreq(heartFreq.slice(2).concat(HF).concat(HF));
         break;
     }
 
@@ -112,16 +104,15 @@ const App = () => {
         break;
     }
 
-    setHeartFreqPhase((heartFreqPhase + 1) % 9);
+    setHeartFreqPhase((heartFreqPhase + 1) % 2);
     setOxySatPhase((oxySat + 1) % 4);
 
-    setHeartFreq(heartFreq.slice(1).concat(HF));
     setOxySat(oxySat.slice(1).concat(randomO2));
     setXAxis(xAxis.slice(1).concat(new Date()));
 
     updatePatient({
       id: "1",
-      heartFrequency: HF,
+      heartFrequency: heartFreqPhase === 1 ? heartFreq[29]: heartFreq[28],
       spO2: O2
     });
   }, 1000);
