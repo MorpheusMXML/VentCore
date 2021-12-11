@@ -12,32 +12,24 @@ class GraphNotification extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<MonitorController>(
-        init: MonitorController(),
-        builder: (controller) => getWidget(controller));
+    final monitorController = Get.find<MonitorController>();
+
+    return ElevatedButton(
+      onPressed: () => monitorController.invertMuted(type["id"] as String),
+      style: ElevatedButton.styleFrom(
+        primary: Colors.grey[800],
+        fixedSize: const Size(80, 80),
+        shape: const CircleBorder(),
+      ),
+      child: getWidget(monitorController),
+    );
   }
 
-  getWidget(controller) {
-    if (controller.muted[type["id"]]) {
-      return ElevatedButton(
-        onPressed: () => controller.invertMuted(type["id"]),
-        style: ElevatedButton.styleFrom(
-          primary: Colors.grey[800],
-          fixedSize: const Size(80, 80),
-          shape: const CircleBorder(),
-        ),
-        child: const Icon(Icons.notifications_off, size: 40),
-      );
-    } else {
-      return ElevatedButton(
-        onPressed: () => controller.invertMuted(type["id"]),
-        style: ElevatedButton.styleFrom(
-          primary: Colors.grey[800],
-          fixedSize: const Size(80, 80),
-          shape: const CircleBorder(),
-        ),
-        child: const Icon(Icons.notifications, size: 40),
-      );
-    }
+  getWidget(MonitorController monitorController) {
+    return Obx(
+      () => (monitorController.muted[type["id"]] as RxBool).value
+          ? const Icon(Icons.notifications_off, size: 40)
+          : const Icon(Icons.notifications, size: 40),
+    );
   }
 }
