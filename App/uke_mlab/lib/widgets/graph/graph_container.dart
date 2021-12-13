@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/mockup.dart';
-import 'package:uke_mlab/widgets/graph/graph_notification.dart';
 import 'package:uke_mlab/widgets/graph/history_graph.dart';
 import 'package:uke_mlab/widgets/value_box/value_box.dart';
 import 'package:uke_mlab/widgets/graph/graph.dart';
@@ -30,14 +29,8 @@ class GraphContainer extends StatelessWidget {
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          (graphData["alarm"] as RxString).value = "suppressed";
-                        },
-                        child: const Text("Confirm"),
-                      ),
-                      const Text(
+                    children: const [
+                      Text(
                         "ALARM MESSAGE",
                         style: TextStyle(
                           color: Colors.white,
@@ -59,32 +52,65 @@ class GraphContainer extends StatelessWidget {
   getGraphRow() {
     return ConstrainedBox(
       constraints: const BoxConstraints(maxHeight: 150),
-      child: Row(
-        children: [
-          GraphNotification(graphData: graphData),
-          Container(width: 8),
-          Expanded(
-            child: (graphData["type"] as Map<String, Object>)["id"] == "NIBD"
-                ? HistoryGraph(
-                    color: Colors.red,
-                    data: graphData["data"] as List<NIBDdata>)
-                : Graph(
-                    graphData: graphData,
-                  ),
-          ),
-          Container(width: 8),
-          (graphData["type"] as Map<String, Object>)["id"] == "NIBD"
-              ? Container()
-              : ValueBox(
-                  value: graphData["data"] as List<ChartDataMockup>,
-                  miniTitle: (graphData["type"] as Map<String, Object>)["abbr"]
-                      as String,
-                  textColor: graphData["color"] as Color,
-                  backgroundColor: const Color(0xFF2A2831),
-                  withModel: false,
+      child: ((graphData["alarm"] as RxString).value == "alarm")
+          ? Row(
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    (graphData["alarm"] as RxString).value = "suppressed";
+                  },
+                  child: const Text("Confirm"),
                 ),
-        ],
-      ),
+                Container(width: 8),
+                Expanded(
+                  child:
+                      (graphData["type"] as Map<String, Object>)["id"] == "NIBD"
+                          ? HistoryGraph(
+                              color: Colors.red,
+                              data: graphData["data"] as List<NIBDdata>)
+                          : Graph(
+                              graphData: graphData,
+                            ),
+                ),
+                Container(width: 8),
+                (graphData["type"] as Map<String, Object>)["id"] == "NIBD"
+                    ? Container()
+                    : ValueBox(
+                        value: graphData["data"] as List<ChartDataMockup>,
+                        miniTitle: (graphData["type"]
+                            as Map<String, Object>)["abbr"] as String,
+                        textColor: graphData["color"] as Color,
+                        backgroundColor: const Color(0xFF2A2831),
+                        withModel: false,
+                      ),
+              ],
+            )
+          : Row(
+              children: [
+                Container(width: 8),
+                Expanded(
+                  child:
+                      (graphData["type"] as Map<String, Object>)["id"] == "NIBD"
+                          ? HistoryGraph(
+                              color: Colors.red,
+                              data: graphData["data"] as List<NIBDdata>)
+                          : Graph(
+                              graphData: graphData,
+                            ),
+                ),
+                Container(width: 8),
+                (graphData["type"] as Map<String, Object>)["id"] == "NIBD"
+                    ? Container()
+                    : ValueBox(
+                        value: graphData["data"] as List<ChartDataMockup>,
+                        miniTitle: (graphData["type"]
+                            as Map<String, Object>)["abbr"] as String,
+                        textColor: graphData["color"] as Color,
+                        backgroundColor: const Color(0xFF2A2831),
+                        withModel: false,
+                      ),
+              ],
+            ),
     );
   }
 }
