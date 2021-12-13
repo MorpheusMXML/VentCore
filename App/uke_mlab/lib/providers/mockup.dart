@@ -14,7 +14,7 @@ class MonitorBinding extends Bindings {
   }
 }
 
-// don't know how else to use controllers in initialGraphs 
+// don't know how else to use controllers in initialGraphs
 // (can't initialize them there)
 class ControllerList {
   ChartSeriesController? controller1;
@@ -39,7 +39,7 @@ class MonitorController extends GetxController {
       "data": List.filled(30, ChartDataMockup(DateTime.now(), 0, 0)).obs,
       "color": Colors.green,
       "count": 0,
-      "alarm": false.obs,
+      "alarm": "none".obs,
       "visible": true.obs,
       "muted": false.obs,
       "controller": ControllerList().controller1
@@ -53,7 +53,7 @@ class MonitorController extends GetxController {
       "data": List.filled(30, ChartDataMockup(DateTime.now(), 0, 0)).obs,
       "color": Colors.blue,
       "count": 0,
-      "alarm": false.obs,
+      "alarm": "none".obs,
       "visible": true.obs,
       "muted": false.obs,
       "controller": ControllerList().controller2
@@ -67,7 +67,7 @@ class MonitorController extends GetxController {
       "data": List.filled(30, ChartDataMockup(DateTime.now(), 0, 0)).obs,
       "color": Colors.yellow,
       "count": 0,
-      "alarm": false.obs,
+      "alarm": "none".obs,
       "visible": true.obs,
       "muted": false.obs,
       "controller": ControllerList().controller3,
@@ -81,7 +81,7 @@ class MonitorController extends GetxController {
       "data": List.filled(30, ChartDataMockup(DateTime.now(), 0, 0)).obs,
       "color": Colors.purple,
       "count": 0,
-      "alarm": false.obs,
+      "alarm": "none".obs,
       "visible": false.obs,
       "muted": false.obs,
       "controller": ControllerList().controller4,
@@ -101,7 +101,7 @@ class MonitorController extends GetxController {
       ].obs,
       "color": Colors.red,
       "count": 0,
-      "alarm": false.obs,
+      "alarm": "none".obs,
       "visible": false.obs,
       "muted": false.obs,
       "controller": ControllerList().controller5,
@@ -159,7 +159,7 @@ class MonitorController extends GetxController {
   }
 
   void switchToAlarm(int type) {
-    (initialGraphs[type]["alarm"] as RxBool).value = true;
+    (initialGraphs[type]["alarm"] as RxString).value = "alarm";
   }
 
   RxString alarmMessage = "".obs;
@@ -179,8 +179,8 @@ class MonitorController extends GetxController {
     if (index == 0) {
       // test visual alarm
       if (DataProvider.data[0][(initialGraphs[0]["count"] as int) % 1000] >
-          60) {
-        //switchToAlarm(0);
+          70) {
+        switchToAlarm(0);
       }
 
       //bit hacky, but hey its mocked
