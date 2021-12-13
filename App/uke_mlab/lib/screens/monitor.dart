@@ -30,6 +30,7 @@ class Monitor extends StatelessWidget {
     final monitorController = Get.find<MonitorController>();
     //final styleController = Get.put(StyleController());
     //final startScreenController = Get.find<StartScreenController>();
+    monitorController.updater();
     var graphList = monitorController.initialGraphs;
 
     return Scaffold(
