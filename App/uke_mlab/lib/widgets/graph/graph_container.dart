@@ -17,13 +17,36 @@ class GraphContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => ((graphData["alarm"] as RxBool).value)
+      () => ((graphData["alarm"] as RxString).value == "alarm")
           ? Container(
               color: Colors.red,
-              padding: const EdgeInsets.all(12),
-              child: Container(
-                margin: const EdgeInsets.only(bottom: 8),
-                child: getGraphRow(),
+              padding: const EdgeInsets.only(
+                  top: 12, left: 12, right: 12, bottom: 24),
+              child: Column(
+                children: [
+                  Container(
+                    child: getGraphRow(),
+                    margin: const EdgeInsets.only(bottom: 8),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          (graphData["alarm"] as RxString).value = "suppressed";
+                        },
+                        child: const Text("Confirm"),
+                      ),
+                      const Text(
+                        "ALARM MESSAGE",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             )
           : Container(
