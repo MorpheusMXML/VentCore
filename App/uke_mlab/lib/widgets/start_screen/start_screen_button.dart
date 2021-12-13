@@ -20,69 +20,59 @@ class StartScreenButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<StartScreenController>(
-        init: StartScreenController(),
-        builder: (controller) => getWidget(controller, context));
-  }
+    final startScreenController = Get.find<StartScreenController>();
 
-  getWidget(StartScreenController controller, BuildContext context) {
-    if (controller.selectedString.toString() == name) {
-      return getButton(const Color(0xFF808B96), context, controller);
-    } else {
-      return getButton(const Color(0xFFEEEEEE), context, controller);
-    }
-  }
-
-  getButton(
-      Color color, BuildContext context, StartScreenController controller) {
     return Container(
       margin: const EdgeInsets.fromLTRB(80, 0, 80, 10),
-      //Buttonstyle
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          minimumSize: Size(800 / MediaQuery.of(context).devicePixelRatio,
-              200 / MediaQuery.of(context).devicePixelRatio),
-          primary: color,
-          onPrimary: Colors.black,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),
-        ),
-        //get weight and height for chosen preset
-        onPressed: () {
-          controller.settingsButton(name);
-        },
-        //button content
-        child: Row(
-          children: [
-            Flexible(
-              flex: 2,
-              //center svg within flexible
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SvgPicture.asset(
-                    image,
-                    height: 70,
-                  ),
-                ],
+      child: Obx(
+        () => ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            minimumSize: Size(800 / MediaQuery.of(context).devicePixelRatio,
+                200 / MediaQuery.of(context).devicePixelRatio),
+            primary: startScreenController.selectedString.toString() == name
+                ? const Color(0xFF808B96)
+                : const Color(0xFFEEEEEE),
+            onPrimary: Colors.black,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),
+          ),
+          //get weight and height for chosen preset
+          onPressed: () {
+            startScreenController.settingsButton(name);
+          },
+          //button content
+          child: Row(
+            children: [
+              Flexible(
+                flex: 2,
+                //center svg within flexible
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SvgPicture.asset(
+                      image,
+                      height: 70,
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Flexible(
-              flex: 3,
-              //center text within flexible
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    name,
-                    style: const TextStyle(fontSize: 25),
-                  ),
-                ],
+              Flexible(
+                flex: 3,
+                //center text within flexible
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      name,
+                      style: const TextStyle(fontSize: 25),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            //empty container in flexible to center text within in button (not best practice)
-            Flexible(flex: 2, child: Container())
-          ],
+              //empty container in flexible to center text within in button (not best practice)
+              Flexible(flex: 2, child: Container())
+            ],
+          ),
         ),
       ),
     );
