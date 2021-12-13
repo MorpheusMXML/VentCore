@@ -87,7 +87,6 @@ class GraphContainer extends StatelessWidget {
             )
           : Row(
               children: [
-                Container(width: 8),
                 Expanded(
                   child:
                       (graphData["type"] as Map<String, Object>)["id"] == "NIBD"
