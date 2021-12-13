@@ -6,10 +6,10 @@ import 'package:uke_mlab/providers/style_controller.dart';
 
 import 'package:uke_mlab/widgets/graph/graph_container.dart';
 import 'package:uke_mlab/widgets/info/info_tile.dart';
-import 'package:uke_mlab/widgets/mode_toggle_button.dart';
+import 'package:uke_mlab/widgets/toggle/mode_toggle_button.dart';
 import 'package:uke_mlab/widgets/setting/setting_tile.dart';
-import 'package:uke_mlab/widgets/statusbar.dart';
-import 'package:uke_mlab/widgets/value_tile.dart';
+import 'package:uke_mlab/widgets/statusbar/statusbar.dart';
+import 'package:uke_mlab/widgets/value_box/value_tile.dart';
 import 'package:uke_mlab/widgets/graph/graph_adder.dart';
 
 import 'package:uke_mlab/models/model.dart';
@@ -28,8 +28,10 @@ class Monitor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final monitorController = Get.find<MonitorController>();
-    final styleController = Get.put(StyleController());
-    final startScreenController = Get.find<StartScreenController>();
+    //final styleController = Get.put(StyleController());
+    //final startScreenController = Get.find<StartScreenController>();
+    monitorController.updater();
+    var graphList = monitorController.initialGraphs;
 
     return Scaffold(
       appBar: AppBar(
@@ -46,9 +48,23 @@ class Monitor extends StatelessWidget {
               child: Container(
                 margin: const EdgeInsets.only(left: 8, right: 8),
                 child: Column(
-                  children: const [
-                    GraphContainer(),
-                    GraphAdder(),
+                  children: [
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: graphList.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Obx(
+                            () => Visibility(
+                              child:
+                                  GraphContainer(graphData: graphList[index]),
+                              visible:
+                                  (graphList[index]["visible"] as RxBool).value,
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    const GraphAdder(),
                   ],
                 ),
               ),

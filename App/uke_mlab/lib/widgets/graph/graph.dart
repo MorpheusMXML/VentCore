@@ -1,35 +1,17 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:uke_mlab/providers/mockup.dart';
 
 class Graph extends StatelessWidget {
-  final List<ChartDataMockup> data;
-  final Color color;
-  final Map<String, Object> type;
+  final Map<String, Object?> graphData;
 
   const Graph({
     Key? key,
-    required this.data,
-    required this.type,
-    required this.color,
+    required this.graphData,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final monitorController = Get.find<MonitorController>();
-    ChartSeriesController? myController;
-
-    // execute every 1000 milliseconds
-    Timer.periodic(const Duration(milliseconds: 1000), (timer) {
-      myController?.updateDataSource(
-        addedDataIndexes: <int>[data.length - 1],
-        removedDataIndexes: <int>[0],
-      );
-      monitorController.updateData(type["index"] as int);
-    });
-
     return SfCartesianChart(
       backgroundColor: Theme.of(context).cardColor,
       primaryYAxis: NumericAxis(
@@ -39,18 +21,15 @@ class Graph extends StatelessWidget {
             MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
       ),
       primaryXAxis: NumericAxis(
-        majorGridLines: MajorGridLines(
-            width: 1,
-            color:
-                Theme.of(context).shadowColor //Theme.of(context).shadowColor,
-            ),
+        majorGridLines:
+            MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
       ),
       series: [
         SplineSeries(
-            color: color,
-            dataSource: data,
+            color: graphData["color"] as Color,
+            dataSource: graphData["data"] as List<ChartDataMockup>,
             onRendererCreated: (ChartSeriesController controller) {
-              myController = controller;
+              graphData["controller"] = controller;
             },
             xValueMapper: (ChartDataMockup data, _) => data.counter,
             yValueMapper: (ChartDataMockup data, _) => data.value)
