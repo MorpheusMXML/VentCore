@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:uke_mlab/providers/mockup.dart';
 
 import 'package:uke_mlab/models/enums.dart';
-import 'package:uke_mlab/widgets/value_box.dart';
+import 'package:uke_mlab/widgets/value_box/value_box.dart';
 
 class ValueTile extends StatelessWidget {
   final Color textColor;

@@ -3,77 +3,64 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/providers/mockup.dart';
 import 'package:uke_mlab/widgets/graph/graph_notification.dart';
 import 'package:uke_mlab/widgets/graph/history_graph.dart';
-import 'package:uke_mlab/widgets/value_box.dart';
+import 'package:uke_mlab/widgets/value_box/value_box.dart';
 import 'package:uke_mlab/widgets/graph/graph.dart';
 
 class GraphContainer extends StatelessWidget {
+  final Map<String, Object?> graphData;
+
   const GraphContainer({
     Key? key,
+    required this.graphData,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final monitorController = Get.find<MonitorController>();
-    List<Map<String, Object>> dataRef = monitorController.initialGraphs;
-
-    return Expanded(
-      child: Obx(
-        () => ListView.builder(
-          itemCount: dataRef.length,
-          itemBuilder: (BuildContext context, int index) {
-            Map<String, Object> graphRef = dataRef[index];
-            Map<String, Object> typeRef =
-                graphRef["type"] as Map<String, Object>;
-
-            return getWidget(monitorController, typeRef, graphRef);
-          },
-        ),
-      ),
+    return Obx(
+      () => ((graphData["alarm"] as RxBool).value)
+          ? Container(
+              color: Colors.red,
+              padding: const EdgeInsets.all(12),
+              child: Container(
+                margin: const EdgeInsets.only(bottom: 8),
+                child: getGraphRow(),
+              ),
+            )
+          : Container(
+              margin: const EdgeInsets.only(bottom: 8),
+              child: getGraphRow(),
+            ),
     );
   }
 
-  getWidget(MonitorController controller, Map<String, Object> typeRef,
-      Map<String, Object> graphRef) {
-    //if ((graphRef["alarm"] as RxBool).value) {
-    //  return const Text("Alarm");
-    //} else {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 8),
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(maxHeight: 150),
-        child: (typeRef["id"] == "NIBD")
-            ? Row(children: [
-                GraphNotification(type: typeRef),
-                Container(width: 8),
-                Expanded(
-                  child: HistoryGraph(
-                    data: graphRef["data"] as List<NIBDdata>,
-                    color: graphRef["color"] as Color,
+  getGraphRow() {
+    return ConstrainedBox(
+      constraints: const BoxConstraints(maxHeight: 150),
+      child: Row(
+        children: [
+          GraphNotification(graphData: graphData),
+          Container(width: 8),
+          Expanded(
+            child: (graphData["type"] as Map<String, Object>)["id"] == "NIBD"
+                ? HistoryGraph(
+                    color: Colors.red,
+                    data: graphData["data"] as List<NIBDdata>)
+                : Graph(
+                    graphData: graphData,
                   ),
+          ),
+          Container(width: 8),
+          (graphData["type"] as Map<String, Object>)["id"] == "NIBD"
+              ? Container()
+              : ValueBox(
+                  value: graphData["data"] as List<ChartDataMockup>,
+                  miniTitle: (graphData["type"] as Map<String, Object>)["abbr"]
+                      as String,
+                  textColor: graphData["color"] as Color,
+                  backgroundColor: const Color(0xFF2A2831),
+                  withModel: false,
                 ),
-              ])
-            : Row(
-                children: [
-                  GraphNotification(type: typeRef),
-                  Container(width: 8),
-                  Expanded(
-                    child: Graph(
-                      type: typeRef,
-                      data: graphRef["data"] as List<ChartDataMockup>,
-                      color: graphRef["color"] as Color,
-                    ),
-                  ),
-                  Container(width: 8),
-                  ValueBox(
-                    value: graphRef["data"] as List<ChartDataMockup>,
-                    miniTitle: (graphRef["type"] as Map<String, Object>)["abbr"]
-                        as String,
-                    textColor: graphRef["color"] as Color,
-                    backgroundColor: const Color(0xFF2A2831),
-                    withModel: false,
-                  ),
-                ],
-              ),
+        ],
       ),
     );
   }
