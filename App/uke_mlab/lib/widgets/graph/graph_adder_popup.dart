@@ -16,7 +16,7 @@ class GraphAdderPopup extends StatelessWidget {
         fixedSize: const Size(500, 150),
         primary: const Color(0xFF2A2831),
       ),
-      onPressed: () => monitorController.invert(),
+      onPressed: () => monitorController.invertGraphAdder(),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -35,8 +35,8 @@ class GraphAdderPopup extends StatelessWidget {
           primary: Colors.grey[50],
           onPrimary: Colors.black),
       onPressed: () {
-        monitorController.invert();
-        (monitorController.initialGraphs[4]["visible"] as RxBool).value = true;
+        monitorController.invertGraphAdder();
+        (monitorController.allGraphs[4]["visible"] as RxBool).value = true;
       },
       child: const Text(
         "Add NIBD",
@@ -54,8 +54,8 @@ class GraphAdderPopup extends StatelessWidget {
           primary: Colors.grey[50],
           onPrimary: Colors.black),
       onPressed: () {
-        monitorController.invert();
-        (monitorController.initialGraphs[3]["visible"] as RxBool).value = true;
+        monitorController.invertGraphAdder();
+        (monitorController.allGraphs[3]["visible"] as RxBool).value = true;
       },
       child: const Text(
         "Add A",

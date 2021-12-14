@@ -1,10 +1,11 @@
+import 'dart:math';
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+
 import 'package:uke_mlab/providers/mockup_data.dart';
-import 'dart:math';
 
 // GetX requires Bindings for Controllers
 class MonitorBinding extends Bindings {
@@ -14,22 +15,13 @@ class MonitorBinding extends Bindings {
   }
 }
 
-// don't know how else to use controllers in initialGraphs
-// (can't initialize them there)
-class ControllerList {
-  ChartSeriesController? controller1;
-  ChartSeriesController? controller2;
-  ChartSeriesController? controller3;
-  ChartSeriesController? controller4;
-  ChartSeriesController? controller5;
-}
-
-// GetX Controller contains variables used by other widgets
-// Sample Data, update function for graphs and tap detection
+/// GetX Controller contains variables used by other widgets
+/// Sample Data, update function for graphs and tap detection
 class MonitorController extends GetxController {
-  // type is used as a key, probably could use key property of widgets but
-  // there were issues passing <Key> to children
-  List<Map<String, Object?>> initialGraphs = [
+  // Random number generation
+  final Random random = Random();
+  // Contains a list with information about each graph that can be displayed
+  List<Map<String, Object?>> allGraphs = [
     {
       "type": {
         "abbr": "HF",
@@ -108,65 +100,53 @@ class MonitorController extends GetxController {
     },
   ].obs;
 
+  // Maps ippvValue Names to their value
   Map<String, RxInt> ippvValues = {
     "Freq.": 20.obs,
     "Vt": 40.obs,
     "PEEP": 60.obs
   };
 
-  void updater() {
-    Timer.periodic(const Duration(milliseconds: 1000), (timer) {
-      for (var i = 0; i <= initialGraphs.length - 1; i++) {
-        if (initialGraphs[i]["controller"] != null) {
-          (initialGraphs[i]["controller"] as ChartSeriesController)
-              .updateDataSource(
-            addedDataIndexes: <int>[
-              (initialGraphs[i]["data"] as List).length - 1
-            ],
-            removedDataIndexes: <int>[0],
-          );
-          updateData(i);
-        }
-      }
-    });
-  }
-
+  // Data used by Value Boxes
   final RxList<ChartDataMockup> nibdValue =
       List.filled(1, ChartDataMockup(DateTime.now(), 0, 0)).obs;
   final RxList<ChartDataMockup> mveValue =
       List.filled(1, ChartDataMockup(DateTime.now(), 0, 0)).obs;
   final RxList<ChartDataMockup> breathFreqValue =
       List.filled(1, ChartDataMockup(DateTime.now(), 0, 0)).obs;
-  final Random random = Random();
 
-  void increment(name) {
-    ippvValues[name]!.value = ippvValues[name]!.value + 1;
-  }
-
-  void decrement(name) {
-    ippvValues[name]!.value = ippvValues[name]!.value - 1;
-  }
-
-  // handle button click on GraphAdder widget
+  // State for Graph Adder Button
   RxBool isAddGraphTapped = false.obs;
-  void invert() {
-    isAddGraphTapped.value = !isAddGraphTapped.value;
-  }
 
-  void invertMuted(int index) {
-    (initialGraphs[index]["muted"] as RxBool).value =
-        !(initialGraphs[index]["muted"] as RxBool).value;
-  }
-
-  void switchToAlarm(int type) {
-    (initialGraphs[type]["alarm"] as RxString).value = "alarm";
-  }
-
+  // Alarm Message that is displayed in the App Bar
   RxString alarmMessage = "".obs;
 
-  // update function called by the timer in Graph class
+  // This method should only be called once(!) in the programm
+  // Starts a timer which updates the graphs each 50ms
+  void activateTimer() {
+    Timer.periodic(
+      const Duration(milliseconds: 50),
+      (timer) {
+        for (var graph = 0; graph <= allGraphs.length - 1; graph++) {
+          if (allGraphs[graph]["controller"] != null) {
+            (allGraphs[graph]["controller"] as ChartSeriesController)
+                .updateDataSource(
+              addedDataIndexes: <int>[
+                (allGraphs[graph]["data"] as List).length - 1
+              ],
+              removedDataIndexes: <int>[0],
+            );
+            updateData(graph);
+          }
+        }
+      },
+    );
+  }
+
+  // Called for each graph
+  // Updates displayed data for a given graph
   updateData(int index) {
-    var ref = initialGraphs[index];
+    var ref = allGraphs[index];
     List<ChartDataMockup> dataRef = ref["data"] as List<ChartDataMockup>;
     int countRef = ref["count"] as int;
 
@@ -174,12 +154,11 @@ class MonitorController extends GetxController {
         DateTime.now(), DataProvider.data[index][countRef % 1000], countRef));
     dataRef.removeAt(0);
 
-    initialGraphs[index]["count"] = countRef + 1;
+    allGraphs[index]["count"] = countRef + 1;
 
     if (index == 0) {
       // test visual alarm
-      if (DataProvider.data[0][(initialGraphs[0]["count"] as int) % 1000] >
-          70) {
+      if (DataProvider.data[0][(allGraphs[0]["count"] as int) % 1000] > 70) {
         switchToAlarm(0);
       }
 
@@ -198,6 +177,31 @@ class MonitorController extends GetxController {
     randomInt = random.nextInt(100);
     breathFreqValue[0] = ChartDataMockup(
         DateTime.now(), randomInt, breathFreqValue[0].counter + 1);
+  }
+
+  // Increments the ippv Value [name]
+  void incrementIPPV(name) {
+    ippvValues[name]!.value = ippvValues[name]!.value + 1;
+  }
+
+  // Decrements the ippv Value [name]
+  void decrementIPPV(name) {
+    ippvValues[name]!.value = ippvValues[name]!.value - 1;
+  }
+
+  // Inverts the graph adder's state
+  void invertGraphAdder() {
+    isAddGraphTapped.value = !isAddGraphTapped.value;
+  }
+
+  // Dead code for Graph Notification
+  void invertMuted(int index) {
+    (allGraphs[index]["muted"] as RxBool).value =
+        !(allGraphs[index]["muted"] as RxBool).value;
+  }
+
+  void switchToAlarm(int type) {
+    (allGraphs[type]["alarm"] as RxString).value = "alarm";
   }
 }
 
@@ -220,4 +224,14 @@ class ChartDataMockup {
   final DateTime time;
   final int value;
   final int counter;
+}
+
+// don't know how else to use controllers in initialGraphs
+// (can't initialize them there)
+class ControllerList {
+  ChartSeriesController? controller1;
+  ChartSeriesController? controller2;
+  ChartSeriesController? controller3;
+  ChartSeriesController? controller4;
+  ChartSeriesController? controller5;
 }

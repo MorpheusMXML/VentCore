@@ -16,7 +16,7 @@ class GraphAdder extends StatelessWidget {
       () => monitorController.isAddGraphTapped.value
           ? const GraphAdderPopup()
           : ElevatedButton(
-              onPressed: () => monitorController.invert(),
+              onPressed: () => monitorController.invertGraphAdder(),
               style: ElevatedButton.styleFrom(
                 primary: Colors.grey[800],
                 fixedSize: const Size(80, 80),

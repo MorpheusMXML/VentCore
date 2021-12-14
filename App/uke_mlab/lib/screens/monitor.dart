@@ -30,8 +30,8 @@ class Monitor extends StatelessWidget {
     final monitorController = Get.find<MonitorController>();
     //final styleController = Get.put(StyleController());
     //final startScreenController = Get.find<StartScreenController>();
-    monitorController.updater();
-    var graphList = monitorController.initialGraphs;
+    monitorController.activateTimer();
+    var graphList = monitorController.allGraphs;
 
     return Scaffold(
       appBar: AppBar(
@@ -155,7 +155,7 @@ class Monitor extends StatelessWidget {
                       ],
                     ),
                   ),
-                   ModeToggleButton(),
+                  ModeToggleButton(),
                 ],
               ),
             )
