@@ -155,7 +155,7 @@ class Monitor extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const ModeToggleButton(),
+                   ModeToggleButton(),
                 ],
               ),
             )
