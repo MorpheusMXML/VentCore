@@ -1,11 +1,11 @@
+import 'dart:convert';
 import 'dart:math';
 import 'dart:async';
 
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-
-import 'package:uke_mlab/providers/mockup_data.dart';
 
 // GetX requires Bindings for Controllers
 class MonitorBinding extends Bindings {
@@ -18,6 +18,22 @@ class MonitorBinding extends Bindings {
 /// GetX Controller contains variables used by other widgets
 /// Sample Data, update function for graphs and tap detection
 class MonitorController extends GetxController {
+  var dataList = [].obs;
+  var loading = true.obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    readJson();
+  }
+
+  Future readJson() async {
+    var jsonString = await rootBundle.loadString('assets/data.json');
+    var source = await jsonDecode(jsonString.toString())["data"];
+    dataList.value = source;
+    loading.value = false;
+  }
+
   // Random number generation
   final Random random = Random();
   // Contains a list with information about each graph that can be displayed
@@ -28,7 +44,7 @@ class MonitorController extends GetxController {
         "id": "HeartFrequency",
         "index": 0,
       },
-      "data": List.filled(30, ChartDataMockup(DateTime.now(), 0, 0)).obs,
+      "data": List.filled(200, ChartDataMockup(DateTime.now(), 0, 0)).obs,
       "color": Colors.green,
       "count": 0,
       "alarm": "none".obs,
@@ -42,7 +58,7 @@ class MonitorController extends GetxController {
         "id": "OxygenSaturation",
         "index": 1,
       },
-      "data": List.filled(30, ChartDataMockup(DateTime.now(), 0, 0)).obs,
+      "data": List.filled(200, ChartDataMockup(DateTime.now(), 0, 0)).obs,
       "color": Colors.blue,
       "count": 0,
       "alarm": "none".obs,
@@ -56,7 +72,7 @@ class MonitorController extends GetxController {
         "id": "Sinus",
         "index": 2,
       },
-      "data": List.filled(30, ChartDataMockup(DateTime.now(), 0, 0)).obs,
+      "data": List.filled(200, ChartDataMockup(DateTime.now(), 0, 0)).obs,
       "color": Colors.yellow,
       "count": 0,
       "alarm": "none".obs,
@@ -70,7 +86,7 @@ class MonitorController extends GetxController {
         "id": "A",
         "index": 3,
       },
-      "data": List.filled(30, ChartDataMockup(DateTime.now(), 0, 0)).obs,
+      "data": List.filled(200, ChartDataMockup(DateTime.now(), 0, 0)).obs,
       "color": Colors.purple,
       "count": 0,
       "alarm": "none".obs,
@@ -127,16 +143,20 @@ class MonitorController extends GetxController {
     Timer.periodic(
       const Duration(milliseconds: 50),
       (timer) {
-        for (var graph = 0; graph <= allGraphs.length - 1; graph++) {
-          if (allGraphs[graph]["controller"] != null) {
-            (allGraphs[graph]["controller"] as ChartSeriesController)
-                .updateDataSource(
-              addedDataIndexes: <int>[
-                (allGraphs[graph]["data"] as List).length - 1
-              ],
-              removedDataIndexes: <int>[0],
-            );
-            updateData(graph);
+        if (loading.value) {
+          print("loading");
+        } else {
+          for (var graph = 0; graph <= allGraphs.length - 1; graph++) {
+            if (allGraphs[graph]["controller"] != null) {
+              (allGraphs[graph]["controller"] as ChartSeriesController)
+                  .updateDataSource(
+                addedDataIndexes: <int>[
+                  (allGraphs[graph]["data"] as List).length - 1
+                ],
+                removedDataIndexes: <int>[0],
+              );
+              updateData(graph);
+            }
           }
         }
       },
@@ -151,14 +171,14 @@ class MonitorController extends GetxController {
     int countRef = ref["count"] as int;
 
     dataRef.add(ChartDataMockup(
-        DateTime.now(), DataProvider.data[index][countRef % 1000], countRef));
+        DateTime.now(), dataList[index]["data"][countRef], countRef));
     dataRef.removeAt(0);
 
     allGraphs[index]["count"] = countRef + 1;
 
     if (index == 0) {
       // test visual alarm
-      if (DataProvider.data[0][(allGraphs[0]["count"] as int) % 1000] > 70) {
+      if (dataList[0]["data"][(allGraphs[0]["count"] as double)] > 10) {
         switchToAlarm(0);
       }
 
@@ -169,14 +189,14 @@ class MonitorController extends GetxController {
 
   updateBoxValue() {
     int randomInt = random.nextInt(100);
-    nibdValue[0] =
-        ChartDataMockup(DateTime.now(), randomInt, nibdValue[0].counter + 1);
+    nibdValue[0] = ChartDataMockup(
+        DateTime.now(), randomInt.toDouble(), nibdValue[0].counter + 1);
     randomInt = random.nextInt(100);
-    mveValue[0] =
-        ChartDataMockup(DateTime.now(), randomInt, mveValue[0].counter + 1);
+    mveValue[0] = ChartDataMockup(
+        DateTime.now(), randomInt.toDouble(), mveValue[0].counter + 1);
     randomInt = random.nextInt(100);
     breathFreqValue[0] = ChartDataMockup(
-        DateTime.now(), randomInt, breathFreqValue[0].counter + 1);
+        DateTime.now(), randomInt.toDouble(), breathFreqValue[0].counter + 1);
   }
 
   // Increments the ippv Value [name]
@@ -222,7 +242,7 @@ class NIBDdata {
 class ChartDataMockup {
   ChartDataMockup(this.time, this.value, this.counter);
   final DateTime time;
-  final int value;
+  final double value;
   final int counter;
 }
 
