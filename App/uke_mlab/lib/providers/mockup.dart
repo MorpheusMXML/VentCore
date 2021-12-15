@@ -28,7 +28,8 @@ class MonitorController extends GetxController {
   }
 
   Future readJson() async {
-    var jsonString = await rootBundle.loadString('assets/data.json');
+    var jsonString =
+        await rootBundle.loadString('assets/ventilation_data.json');
     var source = await jsonDecode(jsonString.toString())["data"];
     dataList.value = source;
     loading.value = false;
@@ -44,7 +45,7 @@ class MonitorController extends GetxController {
         "id": "HeartFrequency",
         "index": 0,
       },
-      "data": List.filled(200, ChartDataMockup(DateTime.now(), 0, 0)).obs,
+      "data": List.filled(1500, ChartDataMockup(DateTime.now(), 0, 0)).obs,
       "color": Colors.green,
       "count": 0,
       "alarm": "none".obs,
@@ -58,7 +59,7 @@ class MonitorController extends GetxController {
         "id": "OxygenSaturation",
         "index": 1,
       },
-      "data": List.filled(200, ChartDataMockup(DateTime.now(), 0, 0)).obs,
+      "data": List.filled(1500, ChartDataMockup(DateTime.now(), 0, 0)).obs,
       "color": Colors.blue,
       "count": 0,
       "alarm": "none".obs,
@@ -72,7 +73,7 @@ class MonitorController extends GetxController {
         "id": "Sinus",
         "index": 2,
       },
-      "data": List.filled(200, ChartDataMockup(DateTime.now(), 0, 0)).obs,
+      "data": List.filled(1500, ChartDataMockup(DateTime.now(), 0, 0)).obs,
       "color": Colors.yellow,
       "count": 0,
       "alarm": "none".obs,
@@ -86,7 +87,7 @@ class MonitorController extends GetxController {
         "id": "A",
         "index": 3,
       },
-      "data": List.filled(200, ChartDataMockup(DateTime.now(), 0, 0)).obs,
+      "data": List.filled(1500, ChartDataMockup(DateTime.now(), 0, 0)).obs,
       "color": Colors.purple,
       "count": 0,
       "alarm": "none".obs,
@@ -137,11 +138,14 @@ class MonitorController extends GetxController {
   // Alarm Message that is displayed in the App Bar
   RxString alarmMessage = "".obs;
 
+  var addedDataIndexes = <int>[for (var i = 1400; i <= 1499; i++) i];
+  var removedDataIndexes = <int>[for (var i = 0; i <= 99; i++) i];
+
   // This method should only be called once(!) in the programm
   // Starts a timer which updates the graphs each 50ms
   void activateTimer() {
     Timer.periodic(
-      const Duration(milliseconds: 50),
+      const Duration(milliseconds: 2000),
       (timer) {
         if (loading.value) {
           print("loading");
@@ -150,10 +154,8 @@ class MonitorController extends GetxController {
             if (allGraphs[graph]["controller"] != null) {
               (allGraphs[graph]["controller"] as ChartSeriesController)
                   .updateDataSource(
-                addedDataIndexes: <int>[
-                  (allGraphs[graph]["data"] as List).length - 1
-                ],
-                removedDataIndexes: <int>[0],
+                addedDataIndexes: addedDataIndexes,
+                removedDataIndexes: removedDataIndexes,
               );
               updateData(graph);
             }
@@ -170,15 +172,20 @@ class MonitorController extends GetxController {
     List<ChartDataMockup> dataRef = ref["data"] as List<ChartDataMockup>;
     int countRef = ref["count"] as int;
 
-    dataRef.add(ChartDataMockup(
-        DateTime.now(), dataList[index]["data"][countRef], countRef));
-    dataRef.removeAt(0);
+    for (var i = 0; i <= 99; i++) {
+      dataRef.add(ChartDataMockup(
+          DateTime.now(), dataList[index]["data"][countRef + i], countRef + i));
+    }
 
-    allGraphs[index]["count"] = countRef + 1;
+    for (var i = 0; i <= 99; i++) {
+      dataRef.removeAt(0);
+    }
+
+    allGraphs[index]["count"] = countRef + 100;
 
     if (index == 0) {
       // test visual alarm
-      if (dataList[0]["data"][(allGraphs[0]["count"] as double)] > 10) {
+      if (dataList[0]["data"][allGraphs[0]["count"]] > 5) {
         switchToAlarm(0);
       }
 
@@ -221,7 +228,9 @@ class MonitorController extends GetxController {
   }
 
   void switchToAlarm(int type) {
-    (allGraphs[type]["alarm"] as RxString).value = "alarm";
+    if ((allGraphs[type]["alarm"] as RxString).value == "none") {
+      (allGraphs[type]["alarm"] as RxString).value = "alarm";
+    }
   }
 }
 
