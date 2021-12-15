@@ -29,3 +29,9 @@ enum screenStatusEnum {
   ventilationScreen,
   defibrillationScreen
 }
+
+enum patientTypeEnum {
+  adult,
+  child,
+  infant,
+}

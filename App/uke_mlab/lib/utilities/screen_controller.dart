@@ -1,5 +1,6 @@
 import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/models/model.dart';
+import 'package:uke_mlab/models/model_manager.dart';
 
 // basic controller to interact with model
 // (at the moment) just boundary update
