@@ -70,6 +70,7 @@ flutter:
     - assets/data.json
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
+  - assets/jsons/default_boundaries.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

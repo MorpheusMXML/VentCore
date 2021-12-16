@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:uke_mlab/models/enums.dart';
+import 'package:uke_mlab/models/model_manager.dart';
 import 'package:uke_mlab/providers/start_screen_controller.dart';
+import 'package:uke_mlab/utilities/screen_controller.dart';
 
 class StartScreenContinue extends StatelessWidget {
   const StartScreenContinue({
@@ -26,8 +29,11 @@ class StartScreenContinue extends StatelessWidget {
           ),
           onPressed: startScreenController.selectedString.toString() != ""
               ? () {
-                  Get.toNamed('/monitor',
-                      arguments: [startScreenController.selectedString.value]);
+                  Get.toNamed(
+                      Get.find<ScreenController>().changeScreen2(
+                          screenChangeButtonEnum.continueButton,
+                          controller.selectedString.value),
+                      arguments: [controller.selectedString.value]);
                 }
               : null,
           child: const Text('Continue', style: TextStyle(fontSize: 20)),

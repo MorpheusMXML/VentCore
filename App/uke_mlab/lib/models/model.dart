@@ -1,26 +1,8 @@
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/models/system_state.dart';
+import 'package:uke_mlab/models/model_manager.dart';
 import 'package:uke_mlab/utilities/alarm_controller.dart';
-
-class ModelManager {
-  late final AlarmController _alarmController;
-
-  ModelManager() {
-    for (var sensor in sensorEnum.values) {
-      //TODO read standard values from somewhere
-      Get.put(DataModel(sensor, 10, 0, this), tag: sensor.toString());
-    }
-  }
-
-  void registerAlarmController(AlarmController newController) {
-    _alarmController = newController;
-  }
-
-  AlarmController getAlarmController() {
-    return _alarmController;
-  }
-}
 
 // graphData INCLUDES the singleData value at the end
 // Alarm evaluation is done in alarm_controller
@@ -31,8 +13,8 @@ class DataModel extends GetxController {
   final RxInt upperAlarmBound = 0.obs;
   final RxInt lowerAlarmBound = 0.obs;
 
-  late final int initialUpperBound;
-  late final int initialLowerBound;
+  late int initialUpperBound;
+  late int initialLowerBound;
 
   late final Rx<ChartData> singleData;
 

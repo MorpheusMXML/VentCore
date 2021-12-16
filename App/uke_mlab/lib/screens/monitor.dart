@@ -15,6 +15,7 @@ import 'package:uke_mlab/widgets/graph/graph_adder.dart';
 
 import 'package:uke_mlab/models/model.dart';
 import 'package:uke_mlab/models/enums.dart';
+import 'package:uke_mlab/models/model_manager.dart';
 
 import 'package:uke_mlab/utilities/screen_controller.dart';
 
