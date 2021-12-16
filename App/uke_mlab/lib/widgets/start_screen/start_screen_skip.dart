@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:uke_mlab/models/enums.dart';
+import 'package:uke_mlab/models/model_manager.dart';
+import 'package:uke_mlab/models/system_state.dart';
+import 'package:uke_mlab/utilities/screen_controller.dart';
 
 class StartScreenSkip extends StatelessWidget {
   const StartScreenSkip({
@@ -22,6 +26,8 @@ class StartScreenSkip extends StatelessWidget {
         ),
         child: const Text('Skip', style: TextStyle(fontSize: 20)),
         onPressed: () {
+          Get.find<ScreenController>()
+              .changeScreen1(screenChangeButtonEnum.aedButton);
           Get.toNamed('/monitor', arguments: ["Adult"]);
         },
       ),

@@ -35,9 +35,12 @@ class ModelManager {
     return _alarmController;
   }
 
+  //Loads default valus for alarm boundaries to DataModel if patientType changed
+  //NOT TO BE CALLED WITH patientTypeEnum.none, since that has no pre defined values
   void loadPatientPresets(patientTypeEnum patientType) {
     for (var sensor in sensorEnum.values) {
       DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
+
       dataModel.resetDataModel();
       switch (patientType) {
         case patientTypeEnum.adult:
@@ -70,7 +73,9 @@ class ModelManager {
           dataModel.lowerAlarmBound.value =
               defaultValues[sensor.toString()]["infant"]["lowerBound"];
           break;
-        default: //throw error
+        default:
+          throw Exception(
+              "loadingPatientPresets called with wrong parameter (most likeley patientTypeEnum.none)");
       }
     }
   }

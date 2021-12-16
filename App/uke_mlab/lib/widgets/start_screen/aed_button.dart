@@ -4,6 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+import 'package:uke_mlab/models/model_manager.dart';
+import 'package:uke_mlab/models/system_state.dart';
+import 'package:uke_mlab/models/enums.dart';
+
+import 'package:uke_mlab/utilities/screen_controller.dart';
+
 class aedButton extends StatelessWidget {
   const aedButton({
     Key? key,
@@ -24,6 +30,9 @@ class aedButton extends StatelessWidget {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           ),
           onPressed: () {
+            //If aed is pressed + no prior patient type selected => load adult presets (could be confusing, subject to change?)
+            Get.find<ScreenController>()
+                .changeScreen1(screenChangeButtonEnum.aedButton);
             Get.toNamed('/monitor', arguments: ["Adult"]);
           },
           child: Column(

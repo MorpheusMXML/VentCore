@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/models/model_manager.dart';
 import 'package:uke_mlab/providers/start_screen_controller.dart';
+import 'package:uke_mlab/utilities/screen_controller.dart';
 
 class StartScreenContinue extends StatelessWidget {
   const StartScreenContinue({
@@ -32,14 +33,9 @@ class StartScreenContinue extends StatelessWidget {
           ),
           onPressed: controller.selectedString.toString() != ""
               ? () {
-                  final ModelManager modelManager = Get.find<ModelManager>();
-                  if (controller.selectedString.value == "Adult") {
-                    modelManager.loadPatientPresets(patientTypeEnum.adult);
-                  } else if (controller.selectedString.value == "Child") {
-                    modelManager.loadPatientPresets(patientTypeEnum.child);
-                  } else if (controller.selectedString.value == "Infant") {
-                    modelManager.loadPatientPresets(patientTypeEnum.infant);
-                  }
+                  Get.find<ScreenController>().changeScreen2(
+                      screenChangeButtonEnum.continueButton,
+                      controller.selectedString.value);
                   Get.toNamed('/monitor',
                       arguments: [controller.selectedString.value]);
                 }
