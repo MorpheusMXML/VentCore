@@ -21,9 +21,11 @@ class Setting extends StatelessWidget {
             flex: 1,
             child: ElevatedButton(
               onPressed: () {
-                monitorController.decrement(name);
+                monitorController.decrementIPPV(name);
               },
-              child: const Icon(Icons.remove,),
+              child: const Icon(
+                Icons.remove,
+              ),
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.all(0),
                 shape: RoundedRectangleBorder(
@@ -44,7 +46,7 @@ class Setting extends StatelessWidget {
             flex: 1,
             child: ElevatedButton(
               onPressed: () {
-                monitorController.increment(name);
+                monitorController.incrementIPPV(name);
               },
               child: const Icon(Icons.add),
               style: ElevatedButton.styleFrom(

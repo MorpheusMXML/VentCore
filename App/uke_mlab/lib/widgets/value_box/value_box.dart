@@ -81,7 +81,7 @@ class ValueBox extends StatelessWidget {
       screenController = Get.find();
       mainText = Obx(
         () => Text(
-          value[value.length - 1].value.toString(),
+          value[value.length - 1].value.round().toString(),
           style: TextStyle(
             color: textColor,
             fontSize: 50,

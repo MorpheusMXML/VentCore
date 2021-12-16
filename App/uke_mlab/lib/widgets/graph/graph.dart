@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:uke_mlab/providers/mockup.dart';
@@ -15,8 +17,6 @@ class Graph extends StatelessWidget {
     return SfCartesianChart(
       backgroundColor: Theme.of(context).cardColor,
       primaryYAxis: NumericAxis(
-        minimum: 0,
-        maximum: 100,
         majorGridLines:
             MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
       ),
