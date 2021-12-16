@@ -15,38 +15,46 @@ class GraphContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => ((graphData["alarm"] as RxString).value == "alarm")
-          ? Container(
-              color: Colors.red,
-              padding: const EdgeInsets.only(
-                  top: 12, left: 12, right: 12, bottom: 24),
-              child: Column(
-                children: [
-                  Container(
-                    child: getGraphRow(),
-                    margin: const EdgeInsets.only(bottom: 8),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text(
-                        "ALARM MESSAGE",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                        ),
-                      ),
-                    ],
+    return Obx(() {
+      if ((graphData["alarm"] as RxString).value == "alarm") {
+        return Container(
+          color: Colors.red,
+          margin: const EdgeInsets.only(bottom: 8),
+          padding:
+              const EdgeInsets.only(top: 12, left: 12, right: 12, bottom: 24),
+          child: Column(
+            children: [
+              getGraphRow(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Text(
+                    "ALARM MESSAGE",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
                   ),
                 ],
               ),
-            )
-          : Container(
-              margin: const EdgeInsets.only(bottom: 8),
-              child: getGraphRow(),
-            ),
-    );
+            ],
+          ),
+        );
+      } else if ((graphData["alarm"] as RxString).value == "suppressed") {
+        return Container(
+          color: Colors.red,
+          padding:
+              const EdgeInsets.only(top: 12, left: 12, right: 12, bottom: 12),
+          child: getGraphRow(),
+          margin: const EdgeInsets.only(bottom: 8),
+        );
+      } else {
+        return Container(
+          margin: const EdgeInsets.only(bottom: 8),
+          child: getGraphRow(),
+        );
+      }
+    });
   }
 
   getGraphRow() {
