@@ -24,18 +24,24 @@ class GraphContainer extends StatelessWidget {
               const EdgeInsets.only(top: 12, left: 12, right: 12, bottom: 24),
           child: Column(
             children: [
-              getGraphRow(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text(
-                    "ALARM MESSAGE",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
+              ConstrainedBox(
+                constraints: const BoxConstraints(maxHeight: 150),
+                child: Row(
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        (graphData["alarm"] as RxString).value = "suppressed";
+                      },
+                      child: const Text("Confirm"),
                     ),
-                  ),
-                ],
+                    ...getGraphRow(),
+                  ],
+                ),
+              ),
+              Container(height: 8),
+              const Text(
+                "ALARM MESSAGE",
+                style: TextStyle(color: Colors.white, fontSize: 20),
               ),
             ],
           ),
@@ -45,79 +51,43 @@ class GraphContainer extends StatelessWidget {
           color: Colors.red,
           padding:
               const EdgeInsets.only(top: 12, left: 12, right: 12, bottom: 12),
-          child: getGraphRow(),
+          child: ConstrainedBox(
+              constraints: const BoxConstraints(maxHeight: 150),
+              child: Row(children: [...getGraphRow()])),
           margin: const EdgeInsets.only(bottom: 8),
         );
       } else {
         return Container(
           margin: const EdgeInsets.only(bottom: 8),
-          child: getGraphRow(),
+          child: ConstrainedBox(
+              constraints: const BoxConstraints(maxHeight: 150),
+              child: Row(children: [...getGraphRow()])),
         );
       }
     });
   }
 
-  getGraphRow() {
-    return ConstrainedBox(
-      constraints: const BoxConstraints(maxHeight: 150),
-      child: ((graphData["alarm"] as RxString).value == "alarm")
-          ? Row(
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    (graphData["alarm"] as RxString).value = "suppressed";
-                  },
-                  child: const Text("Confirm"),
-                ),
-                Container(width: 8),
-                Expanded(
-                  child:
-                      (graphData["type"] as Map<String, Object>)["id"] == "NIBD"
-                          ? HistoryGraph(
-                              color: Colors.red,
-                              data: graphData["data"] as List<NIBDdata>)
-                          : Graph(
-                              graphData: graphData,
-                            ),
-                ),
-                Container(width: 8),
-                (graphData["type"] as Map<String, Object>)["id"] == "NIBD"
-                    ? Container()
-                    : ValueBox(
-                        value: graphData["data"] as List<ChartDataMockup>,
-                        miniTitle: (graphData["type"]
-                            as Map<String, Object>)["abbr"] as String,
-                        textColor: graphData["color"] as Color,
-                        backgroundColor: const Color(0xFF2A2831),
-                        withModel: false,
-                      ),
-              ],
-            )
-          : Row(
-              children: [
-                Expanded(
-                  child:
-                      (graphData["type"] as Map<String, Object>)["id"] == "NIBD"
-                          ? HistoryGraph(
-                              color: Colors.red,
-                              data: graphData["data"] as List<NIBDdata>)
-                          : Graph(
-                              graphData: graphData,
-                            ),
-                ),
-                Container(width: 8),
-                (graphData["type"] as Map<String, Object>)["id"] == "NIBD"
-                    ? Container()
-                    : ValueBox(
-                        value: graphData["data"] as List<ChartDataMockup>,
-                        miniTitle: (graphData["type"]
-                            as Map<String, Object>)["abbr"] as String,
-                        textColor: graphData["color"] as Color,
-                        backgroundColor: const Color(0xFF2A2831),
-                        withModel: false,
-                      ),
-              ],
-            ),
-    );
+  List<Widget> getGraphRow() {
+    List<Widget> graphrow = [];
+    graphrow.add(Container(width: 8));
+
+    if ((graphData["type"] as Map<String, Object>)["id"] == "NIBD") {
+      graphrow.add(HistoryGraph(
+          color: Colors.red, data: graphData["data"] as List<NIBDdata>));
+    } else {
+      graphrow.add(Expanded(child: Graph(graphData: graphData)));
+      graphrow.add(Container(width: 8));
+      graphrow.add(
+        ValueBox(
+          value: graphData["data"] as List<ChartDataMockup>,
+          miniTitle:
+              (graphData["type"] as Map<String, Object>)["abbr"] as String,
+          textColor: graphData["color"] as Color,
+          backgroundColor: const Color(0xFF2A2831),
+          withModel: false,
+        ),
+      );
+    }
+    return graphrow;
   }
 }
