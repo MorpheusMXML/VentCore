@@ -28,8 +28,7 @@ class MonitorController extends GetxController {
   }
 
   Future readJson() async {
-    var jsonString =
-        await rootBundle.loadString('assets/ventilation_data.json');
+    var jsonString = await rootBundle.loadString('assets/data.json');
     var source = await jsonDecode(jsonString.toString())["data"];
     dataList.value = source;
     loading.value = false;
