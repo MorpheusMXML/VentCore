@@ -12,11 +12,7 @@ class ToggleController extends GetxController {
 
   void setSelected(int index) {
     for (var i = 0; i <= isSelected.length - 1; i++) {
-      if (index == i) {
-        isSelected[i] = true;
-      } else {
-        isSelected[i] = false;
-      }
+      index == i ? isSelected[i] = true : isSelected[i] = false;
     }
   }
 }
