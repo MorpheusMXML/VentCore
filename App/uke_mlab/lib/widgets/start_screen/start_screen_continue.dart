@@ -9,12 +9,8 @@ class StartScreenContinue extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<StartScreenController>(
-        init: StartScreenController(),
-        builder: (controller) => getWidget(controller));
-  }
+    final startScreenController = Get.find<StartScreenController>();
 
-  getWidget(controller) {
     return Obx(
       () => Container(
         alignment: Alignment.centerRight,
@@ -28,9 +24,10 @@ class StartScreenContinue extends StatelessWidget {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),
           ),
-          onPressed: controller.selectedString.toString() != ""
+          onPressed: startScreenController.selectedString.toString() != ""
               ? () {
-                  Get.toNamed('/monitor', arguments: [controller.selectedString.value]);
+                  Get.toNamed('/monitor',
+                      arguments: [startScreenController.selectedString.value]);
                 }
               : null,
           child: const Text('Continue', style: TextStyle(fontSize: 20)),
