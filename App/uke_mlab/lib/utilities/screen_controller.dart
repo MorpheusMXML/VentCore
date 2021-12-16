@@ -19,14 +19,14 @@ class ScreenController {
   void loadPatientPresets(patientTypeEnum patientType) {}
 
   // Wrapper for easier usage, since certain sadly require additional information
-  void changeScreen1(screenChangeButtonEnum sourceButton) {
-    changeScreen2(sourceButton, "");
+  String changeScreen1(screenChangeButtonEnum sourceButton) {
+    return changeScreen2(sourceButton, "");
   }
 
   // OVERLOADING NOT SUPPORTED?! => parameter number at the end
   // additionalInfo can be Null
   // Since each button for screen change has 1 target, this is used for finding direction
-  void changeScreen2(
+  String changeScreen2(
       screenChangeButtonEnum sourceButton, String additionalInfo) {
     SystemState systemState = Get.find<SystemState>();
     ModelManager modelManager = Get.find<ModelManager>();
@@ -54,7 +54,7 @@ class ScreenController {
               "additionalInformation is not Adult, Child or Infant on screenChangeButton call from Continue Button");
         }
         systemState.screenStatus = screenStatusEnum.monitoringScreen;
-        break;
+        return '/monitor';
 
       case screenChangeButtonEnum.aedButton:
         // Add behaviour
@@ -63,7 +63,7 @@ class ScreenController {
         }
         systemState.patientType = patientTypeEnum.adult;
         systemState.screenStatus = screenStatusEnum.defibrillationScreen;
-        break;
+        return '/monitor';
 
       case screenChangeButtonEnum.skipButton:
         // Add behaviour
@@ -72,27 +72,27 @@ class ScreenController {
         }
         systemState.patientType = patientTypeEnum.adult;
         systemState.screenStatus = screenStatusEnum.monitoringScreen;
-        break;
+        return '/monitor';
 
       case screenChangeButtonEnum.toTopLevelButton:
         // Add behaviour
         systemState.screenStatus = screenStatusEnum.topLevelScreen;
-        break;
+        return "";
 
       case screenChangeButtonEnum.ventilationButton:
         // Add behaviour
         systemState.screenStatus = screenStatusEnum.ventilationScreen;
-        break;
+        return "";
 
       case screenChangeButtonEnum.defiButton:
         // Add behaviour
         systemState.screenStatus = screenStatusEnum.defibrillationScreen;
-        break;
+        return "";
 
       case screenChangeButtonEnum.monitoringButton:
         // Add behaviour
         systemState.screenStatus = screenStatusEnum.monitoringScreen;
-        break;
+        return "";
 
       default:
         throw Exception("No Button " +

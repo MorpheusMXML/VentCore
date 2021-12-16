@@ -33,10 +33,10 @@ class StartScreenContinue extends StatelessWidget {
           ),
           onPressed: controller.selectedString.toString() != ""
               ? () {
-                  Get.find<ScreenController>().changeScreen2(
-                      screenChangeButtonEnum.continueButton,
-                      controller.selectedString.value);
-                  Get.toNamed('/monitor',
+                  Get.toNamed(
+                      Get.find<ScreenController>().changeScreen2(
+                          screenChangeButtonEnum.continueButton,
+                          controller.selectedString.value),
                       arguments: [controller.selectedString.value]);
                 }
               : null,

@@ -30,10 +30,10 @@ class aedButton extends StatelessWidget {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           ),
           onPressed: () {
-            //If aed is pressed + no prior patient type selected => load adult presets (could be confusing, subject to change?)
-            Get.find<ScreenController>()
-                .changeScreen1(screenChangeButtonEnum.aedButton);
-            Get.toNamed('/monitor', arguments: ["Adult"]);
+            Get.toNamed(
+                Get.find<ScreenController>()
+                    .changeScreen1(screenChangeButtonEnum.aedButton),
+                arguments: ["Adult"]);
           },
           child: Column(
             children: [

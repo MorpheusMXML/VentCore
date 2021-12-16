@@ -26,9 +26,10 @@ class StartScreenSkip extends StatelessWidget {
         ),
         child: const Text('Skip', style: TextStyle(fontSize: 20)),
         onPressed: () {
-          Get.find<ScreenController>()
-              .changeScreen1(screenChangeButtonEnum.aedButton);
-          Get.toNamed('/monitor', arguments: ["Adult"]);
+          Get.toNamed(
+              Get.find<ScreenController>()
+                  .changeScreen1(screenChangeButtonEnum.aedButton),
+              arguments: ["Adult"]);
         },
       ),
     );
