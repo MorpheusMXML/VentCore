@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/start_screen_controller.dart';
+import 'package:uke_mlab/providers/toggle_controller.dart';
 import 'package:uke_mlab/screens/monitor.dart';
 import 'package:uke_mlab/screens/start_screen.dart';
 import 'package:uke_mlab/models/model.dart';
 import 'package:uke_mlab/models/system_state.dart';
+import 'package:uke_mlab/models/model_manager.dart';
 import 'package:uke_mlab/utilities/alarm_controller.dart';
 import 'package:uke_mlab/utilities/screen_controller.dart';
 
@@ -49,7 +51,7 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: "/monitor",
           page: () => Monitor(),
-          binding: MonitorBinding(),
+          bindings: [ToggleBinding(), MonitorBinding()],
         ),
         GetPage(
           name: "/start_screen",

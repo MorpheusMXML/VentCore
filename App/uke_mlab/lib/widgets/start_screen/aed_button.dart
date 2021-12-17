@@ -4,6 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+import 'package:uke_mlab/models/model_manager.dart';
+import 'package:uke_mlab/models/system_state.dart';
+import 'package:uke_mlab/models/enums.dart';
+
+import 'package:uke_mlab/utilities/screen_controller.dart';
+
 class aedButton extends StatelessWidget {
   const aedButton({
     Key? key,
@@ -24,7 +30,10 @@ class aedButton extends StatelessWidget {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           ),
           onPressed: () {
-            Get.toNamed('/monitor', arguments: ["Adult"]);
+            Get.toNamed(
+                Get.find<ScreenController>()
+                    .changeScreen1(screenChangeButtonEnum.aedButton),
+                arguments: ["Adult"]);
           },
           child: Column(
             children: [

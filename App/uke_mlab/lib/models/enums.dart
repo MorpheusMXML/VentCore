@@ -29,3 +29,20 @@ enum screenStatusEnum {
   ventilationScreen,
   defibrillationScreen
 }
+
+enum patientTypeEnum {
+  adult,
+  child,
+  infant,
+  none,
+}
+
+enum screenChangeButtonEnum {
+  aedButton,
+  continueButton,
+  skipButton,
+  toTopLevelButton,
+  ventilationButton,
+  defiButton,
+  monitoringButton,
+}
