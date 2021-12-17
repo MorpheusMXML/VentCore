@@ -1,0 +1,93 @@
+{   
+    "sensorEnum.heartFrequency": 
+    {
+        "adult":{
+            "upperBound": 180,
+            "lowerBound": 80
+        },
+        "child":{
+            "upperBound": 140,
+            "lowerBound": 90
+        },
+        "infant":{
+            "upperBound": 120,
+            "lowerBound": 100
+        }
+    },
+    "sensorEnum.spo2":
+    {
+        "adult":{
+            "upperBound": 180,
+            "lowerBound": 80
+        },
+        "child":{
+            "upperBound": 140,
+            "lowerBound": 90
+        },
+        "infant":{
+            "upperBound": 120,
+            "lowerBound": 100
+        }
+    },
+    "sensorEnum.pulse":
+    {
+        "adult":{
+            "upperBound": 200,
+            "lowerBound": 40
+        },
+        "child":{
+            "upperBound": 170,
+            "lowerBound": 50
+        },
+        "infant":{
+            "upperBound": 120,
+            "lowerBound": 60
+        }
+    },
+    "sensorEnum.breathFrequency":
+    {
+        "adult":{
+            "upperBound": 200,
+            "lowerBound": 40
+        },
+        "child":{
+            "upperBound": 170,
+            "lowerBound": 50
+        },
+        "infant":{
+            "upperBound": 120,
+            "lowerBound": 60
+        }
+    },
+    "sensorEnum.nibd":
+    {
+        "adult":{
+            "upperBound": 200,
+            "lowerBound": 40
+        },
+        "child":{
+            "upperBound": 170,
+            "lowerBound": 50
+        },
+        "infant":{
+            "upperBound": 120,
+            "lowerBound": 60
+        }
+    },
+    "sensorEnum.mve":
+    {
+        "adult":{
+            "upperBound": 200,
+            "lowerBound": 40
+        },
+        "child":{
+            "upperBound": 170,
+            "lowerBound": 50
+        },
+        "infant":{
+            "upperBound": 120,
+            "lowerBound": 60
+        }
+    }
+    
+}

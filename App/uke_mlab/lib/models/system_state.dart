@@ -5,6 +5,7 @@ import 'package:uke_mlab/models/enums.dart';
 
 class SystemState {
   screenStatusEnum screenStatus = screenStatusEnum.topLevelScreen;
+  patientTypeEnum patientType = patientTypeEnum.none;
   final Map<sensorEnum, boundaryStateEnum> violationStates = {};
   bool scenarioStarted = false;
 

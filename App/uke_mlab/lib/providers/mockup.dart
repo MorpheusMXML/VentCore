@@ -1,10 +1,11 @@
+import 'dart:convert';
+import 'dart:math';
 import 'dart:async';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:uke_mlab/providers/mockup_data.dart';
-import 'dart:math';
 
 // GetX requires Bindings for Controllers
 class MonitorBinding extends Bindings {
@@ -14,32 +15,39 @@ class MonitorBinding extends Bindings {
   }
 }
 
-// don't know how else to use controllers in initialGraphs 
-// (can't initialize them there)
-class ControllerList {
-  ChartSeriesController? controller1;
-  ChartSeriesController? controller2;
-  ChartSeriesController? controller3;
-  ChartSeriesController? controller4;
-  ChartSeriesController? controller5;
-}
-
-// GetX Controller contains variables used by other widgets
-// Sample Data, update function for graphs and tap detection
+/// GetX Controller contains variables used by other widgets
+/// Sample Data, update function for graphs and tap detection
 class MonitorController extends GetxController {
-  // type is used as a key, probably could use key property of widgets but
-  // there were issues passing <Key> to children
-  List<Map<String, Object?>> initialGraphs = [
+  var dataList = [].obs;
+  var loading = true.obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    readJson();
+  }
+
+  Future readJson() async {
+    var jsonString = await rootBundle.loadString('assets/data.json');
+    var source = await jsonDecode(jsonString.toString())["data"];
+    dataList.value = source;
+    loading.value = false;
+  }
+
+  // Random number generation
+  final Random random = Random();
+  // Contains a list with information about each graph that can be displayed
+  List<Map<String, Object?>> allGraphs = [
     {
       "type": {
         "abbr": "HF",
         "id": "HeartFrequency",
         "index": 0,
       },
-      "data": List.filled(30, ChartDataMockup(DateTime.now(), 0, 0)).obs,
+      "data": List.filled(1500, ChartDataMockup(DateTime.now(), 0, 0)).obs,
       "color": Colors.green,
       "count": 0,
-      "alarm": false.obs,
+      "alarm": "none".obs,
       "visible": true.obs,
       "muted": false.obs,
       "controller": ControllerList().controller1
@@ -50,10 +58,10 @@ class MonitorController extends GetxController {
         "id": "OxygenSaturation",
         "index": 1,
       },
-      "data": List.filled(30, ChartDataMockup(DateTime.now(), 0, 0)).obs,
+      "data": List.filled(1500, ChartDataMockup(DateTime.now(), 0, 0)).obs,
       "color": Colors.blue,
       "count": 0,
-      "alarm": false.obs,
+      "alarm": "none".obs,
       "visible": true.obs,
       "muted": false.obs,
       "controller": ControllerList().controller2
@@ -64,10 +72,10 @@ class MonitorController extends GetxController {
         "id": "Sinus",
         "index": 2,
       },
-      "data": List.filled(30, ChartDataMockup(DateTime.now(), 0, 0)).obs,
+      "data": List.filled(1500, ChartDataMockup(DateTime.now(), 0, 0)).obs,
       "color": Colors.yellow,
       "count": 0,
-      "alarm": false.obs,
+      "alarm": "none".obs,
       "visible": true.obs,
       "muted": false.obs,
       "controller": ControllerList().controller3,
@@ -78,10 +86,10 @@ class MonitorController extends GetxController {
         "id": "A",
         "index": 3,
       },
-      "data": List.filled(30, ChartDataMockup(DateTime.now(), 0, 0)).obs,
+      "data": List.filled(1500, ChartDataMockup(DateTime.now(), 0, 0)).obs,
       "color": Colors.purple,
       "count": 0,
-      "alarm": false.obs,
+      "alarm": "none".obs,
       "visible": false.obs,
       "muted": false.obs,
       "controller": ControllerList().controller4,
@@ -101,86 +109,83 @@ class MonitorController extends GetxController {
       ].obs,
       "color": Colors.red,
       "count": 0,
-      "alarm": false.obs,
+      "alarm": "none".obs,
       "visible": false.obs,
       "muted": false.obs,
       "controller": ControllerList().controller5,
     },
   ].obs;
 
+  // Maps ippvValue Names to their value
   Map<String, RxInt> ippvValues = {
     "Freq.": 20.obs,
     "Vt": 40.obs,
     "PEEP": 60.obs
   };
 
-  void updater() {
-    Timer.periodic(const Duration(milliseconds: 1000), (timer) {
-      for (var i = 0; i <= initialGraphs.length - 1; i++) {
-        if (initialGraphs[i]["controller"] != null) {
-          (initialGraphs[i]["controller"] as ChartSeriesController)
-              .updateDataSource(
-            addedDataIndexes: <int>[
-              (initialGraphs[i]["data"] as List).length - 1
-            ],
-            removedDataIndexes: <int>[0],
-          );
-          updateData(i);
-        }
-      }
-    });
-  }
-
+  // Data used by Value Boxes
   final RxList<ChartDataMockup> nibdValue =
       List.filled(1, ChartDataMockup(DateTime.now(), 0, 0)).obs;
   final RxList<ChartDataMockup> mveValue =
       List.filled(1, ChartDataMockup(DateTime.now(), 0, 0)).obs;
   final RxList<ChartDataMockup> breathFreqValue =
       List.filled(1, ChartDataMockup(DateTime.now(), 0, 0)).obs;
-  final Random random = Random();
 
-  void increment(name) {
-    ippvValues[name]!.value = ippvValues[name]!.value + 1;
-  }
-
-  void decrement(name) {
-    ippvValues[name]!.value = ippvValues[name]!.value - 1;
-  }
-
-  // handle button click on GraphAdder widget
+  // State for Graph Adder Button
   RxBool isAddGraphTapped = false.obs;
-  void invert() {
-    isAddGraphTapped.value = !isAddGraphTapped.value;
-  }
 
-  void invertMuted(int index) {
-    (initialGraphs[index]["muted"] as RxBool).value =
-        !(initialGraphs[index]["muted"] as RxBool).value;
-  }
-
-  void switchToAlarm(int type) {
-    (initialGraphs[type]["alarm"] as RxBool).value = true;
-  }
-
+  // Alarm Message that is displayed in the App Bar
   RxString alarmMessage = "".obs;
 
-  // update function called by the timer in Graph class
+  var addedDataIndexes = <int>[for (var i = 1400; i <= 1499; i++) i];
+  var removedDataIndexes = <int>[for (var i = 0; i <= 99; i++) i];
+
+  // This method should only be called once(!) in the programm
+  // Starts a timer which updates the graphs each 50ms
+  void activateTimer() {
+    Timer.periodic(
+      const Duration(milliseconds: 2000),
+      (timer) {
+        if (loading.value) {
+          print("loading");
+        } else {
+          for (var graph = 0; graph <= allGraphs.length - 1; graph++) {
+            if (allGraphs[graph]["controller"] != null) {
+              (allGraphs[graph]["controller"] as ChartSeriesController)
+                  .updateDataSource(
+                addedDataIndexes: addedDataIndexes,
+                removedDataIndexes: removedDataIndexes,
+              );
+              updateData(graph);
+            }
+          }
+        }
+      },
+    );
+  }
+
+  // Called for each graph
+  // Updates displayed data for a given graph
   updateData(int index) {
-    var ref = initialGraphs[index];
+    var ref = allGraphs[index];
     List<ChartDataMockup> dataRef = ref["data"] as List<ChartDataMockup>;
     int countRef = ref["count"] as int;
 
-    dataRef.add(ChartDataMockup(
-        DateTime.now(), DataProvider.data[index][countRef % 1000], countRef));
-    dataRef.removeAt(0);
+    for (var i = 0; i <= 99; i++) {
+      dataRef.add(ChartDataMockup(
+          DateTime.now(), dataList[index]["data"][countRef + i], countRef + i));
+    }
 
-    initialGraphs[index]["count"] = countRef + 1;
+    for (var i = 0; i <= 99; i++) {
+      dataRef.removeAt(0);
+    }
+
+    allGraphs[index]["count"] = countRef + 100;
 
     if (index == 0) {
       // test visual alarm
-      if (DataProvider.data[0][(initialGraphs[0]["count"] as int) % 1000] >
-          60) {
-        //switchToAlarm(0);
+      if (dataList[0]["data"][allGraphs[0]["count"]] > 5) {
+        switchToAlarm(0);
       }
 
       //bit hacky, but hey its mocked
@@ -190,14 +195,41 @@ class MonitorController extends GetxController {
 
   updateBoxValue() {
     int randomInt = random.nextInt(100);
-    nibdValue[0] =
-        ChartDataMockup(DateTime.now(), randomInt, nibdValue[0].counter + 1);
+    nibdValue[0] = ChartDataMockup(
+        DateTime.now(), randomInt.toDouble(), nibdValue[0].counter + 1);
     randomInt = random.nextInt(100);
-    mveValue[0] =
-        ChartDataMockup(DateTime.now(), randomInt, mveValue[0].counter + 1);
+    mveValue[0] = ChartDataMockup(
+        DateTime.now(), randomInt.toDouble(), mveValue[0].counter + 1);
     randomInt = random.nextInt(100);
     breathFreqValue[0] = ChartDataMockup(
-        DateTime.now(), randomInt, breathFreqValue[0].counter + 1);
+        DateTime.now(), randomInt.toDouble(), breathFreqValue[0].counter + 1);
+  }
+
+  // Increments the ippv Value [name]
+  void incrementIPPV(name) {
+    ippvValues[name]!.value = ippvValues[name]!.value + 1;
+  }
+
+  // Decrements the ippv Value [name]
+  void decrementIPPV(name) {
+    ippvValues[name]!.value = ippvValues[name]!.value - 1;
+  }
+
+  // Inverts the graph adder's state
+  void invertGraphAdder() {
+    isAddGraphTapped.value = !isAddGraphTapped.value;
+  }
+
+  // Dead code for Graph Notification
+  void invertMuted(int index) {
+    (allGraphs[index]["muted"] as RxBool).value =
+        !(allGraphs[index]["muted"] as RxBool).value;
+  }
+
+  void switchToAlarm(int type) {
+    if ((allGraphs[type]["alarm"] as RxString).value == "none") {
+      (allGraphs[type]["alarm"] as RxString).value = "alarm";
+    }
   }
 }
 
@@ -218,6 +250,16 @@ class NIBDdata {
 class ChartDataMockup {
   ChartDataMockup(this.time, this.value, this.counter);
   final DateTime time;
-  final int value;
+  final double value;
   final int counter;
+}
+
+// don't know how else to use controllers in initialGraphs
+// (can't initialize them there)
+class ControllerList {
+  ChartSeriesController? controller1;
+  ChartSeriesController? controller2;
+  ChartSeriesController? controller3;
+  ChartSeriesController? controller4;
+  ChartSeriesController? controller5;
 }
