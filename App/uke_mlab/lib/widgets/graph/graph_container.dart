@@ -20,8 +20,7 @@ class GraphContainer extends StatelessWidget {
         return Container(
           color: Colors.red,
           margin: const EdgeInsets.only(bottom: 8),
-          padding:
-              const EdgeInsets.only(top: 12, left: 12, right: 12, bottom: 24),
+          padding: const EdgeInsets.fromLTRB(12, 12, 12, 24),
           child: Column(
             children: [
               ConstrainedBox(
@@ -34,7 +33,8 @@ class GraphContainer extends StatelessWidget {
                       },
                       child: const Text("Confirm"),
                     ),
-                    ...getGraphRow(),
+                    Container(width: 8),
+                    ...getRowElements(),
                   ],
                 ),
               ),
@@ -52,42 +52,46 @@ class GraphContainer extends StatelessWidget {
           padding:
               const EdgeInsets.only(top: 12, left: 12, right: 12, bottom: 12),
           child: ConstrainedBox(
-              constraints: const BoxConstraints(maxHeight: 150),
-              child: Row(children: [...getGraphRow()])),
+            constraints: const BoxConstraints(maxHeight: 150),
+            child: Row(children: getRowElements()),
+          ),
           margin: const EdgeInsets.only(bottom: 8),
         );
       } else {
         return Container(
           margin: const EdgeInsets.only(bottom: 8),
           child: ConstrainedBox(
-              constraints: const BoxConstraints(maxHeight: 150),
-              child: Row(children: [...getGraphRow()])),
+            constraints: const BoxConstraints(maxHeight: 150),
+            child: Row(children: getRowElements()),
+          ),
         );
       }
     });
   }
 
-  List<Widget> getGraphRow() {
+  List<Widget> getRowElements() {
     List<Widget> graphrow = [];
-    graphrow.add(Container(width: 8));
 
-    if ((graphData["type"] as Map<String, Object>)["id"] == "NIBD") {
-      graphrow.add(HistoryGraph(
-          color: Colors.red, data: graphData["data"] as List<NIBDdata>));
-    } else {
-      graphrow.add(Expanded(child: Graph(graphData: graphData)));
-      graphrow.add(Container(width: 8));
-      graphrow.add(
-        ValueBox(
-          value: graphData["data"] as List<ChartDataMockup>,
-          miniTitle:
-              (graphData["type"] as Map<String, Object>)["abbr"] as String,
-          textColor: graphData["color"] as Color,
-          backgroundColor: const Color(0xFF2A2831),
-          withModel: false,
-        ),
-      );
+    switch ((graphData["type"] as Map<String, Object>)["id"]) {
+      case "NIBD":
+        graphrow.add(Expanded(child: HistoryGraph(graphData: graphData)));
+        break;
+      default:
+        graphrow.add(Expanded(child: Graph(graphData: graphData)));
+        graphrow.add(Container(width: 8));
+        graphrow.add(
+          ValueBox(
+            value: graphData["data"] as List<ChartDataMockup>,
+            miniTitle:
+                (graphData["type"] as Map<String, Object>)["abbr"] as String,
+            textColor: graphData["color"] as Color,
+            backgroundColor: const Color(0xFF2A2831),
+            withModel: false,
+          ),
+        );
+        break;
     }
+
     return graphrow;
   }
 }
