@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/mockup.dart';
-import 'package:uke_mlab/providers/start_screen_controller.dart';
 import 'package:uke_mlab/providers/style_controller.dart';
 import 'package:uke_mlab/providers/toggle_controller.dart';
 
@@ -13,7 +12,6 @@ import 'package:uke_mlab/widgets/statusbar/statusbar.dart';
 import 'package:uke_mlab/widgets/value_box/value_tile.dart';
 import 'package:uke_mlab/widgets/graph/graph_adder.dart';
 
-import 'package:uke_mlab/models/model.dart';
 import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/models/model_manager.dart';
 
@@ -45,130 +43,142 @@ class Monitor extends StatelessWidget {
 
   getToggledScreen() {
     if (toggleController.isSelected[1]) {
-      return ModeToggleButton();
+      return getVentilationScreen();
     } else if (toggleController.isSelected[2]) {
-      return ModeToggleButton();
+      return getDefibrillationScreen();
     } else {
       return getMonitorScreen();
     }
   }
 
   Widget getMonitorScreen() {
-    var graphList = monitorController.allGraphs;
-
     return Container(
       margin: const EdgeInsets.only(left: 12, right: 12, top: 12),
       child: Row(
         children: [
-          Flexible(
-            flex: 4,
-            child: Container(
-              margin: const EdgeInsets.only(left: 8, right: 8),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: graphList.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Obx(
-                          () => Visibility(
-                            child: GraphContainer(graphData: graphList[index]),
-                            visible:
-                                (graphList[index]["visible"] as RxBool).value,
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                  const GraphAdder(),
-                ],
-              ),
-            ),
-          ),
-          Flexible(
-            flex: 2,
-            child: Column(
-              children: [
-                Flexible(
-                  flex: 1,
-                  child: Row(
-                    children: [
-                      ValueTile(
-                        name: "NIBD",
-                        miniTitle: "SYS",
-                        textColor: const Color(0xFFDC362E),
-                        backgroundColor: const Color(0xFF2A2831),
-                        value: monitorController.nibdValue,
-                        withModel: false,
-                      ),
-                      ValueTile.model(
-                        name: "Pulse",
-                        miniTitle: "PP",
-                        textColor: const Color(0xFFFF00E4),
-                        backgroundColor: const Color(0xFF2A2831),
-                        sensor: sensorEnum.pulse,
-                        withModel: true,
-                      ),
-                    ],
-                  ),
-                ),
-                Flexible(
-                  flex: 1,
-                  child: Row(
-                    children: [
-                      ValueTile(
-                        name: "MVe",
-                        miniTitle: "MVe",
-                        textColor: const Color(0xFF0CECDD),
-                        backgroundColor: const Color(0xff2A2831),
-                        value: monitorController.mveValue,
-                        withModel: false,
-                      ),
-                      ValueTile(
-                        name: "Breath. Freq.",
-                        miniTitle: "AF",
-                        textColor: const Color(0xFF0CECDD),
-                        backgroundColor: const Color(0xff2A2831),
-                        value: monitorController.breathFreqValue,
-                        withModel: false,
-                      ),
-                    ],
-                  ),
-                ),
-                Flexible(
-                  flex: 2,
-                  child: Row(
-                    children: const [
-                      Flexible(
-                        flex: 1,
-                        child: InfoTile(
-                          data: [
-                            {"type": "pPeak", "value": 50.12, "unit": " mBar"},
-                            {"type": "pPlat", "value": 4.58, "unit": " mBar"},
-                            {"type": "pMean", "value": 16.58, "unit": " mBar"},
-                            {"type": "MV", "value": 7.2, "unit": " l/min"}
-                          ],
-                        ),
-                      ),
-                      Flexible(
-                        flex: 1,
-                        child: SettingTile(
-                          data: [
-                            {"name": "Freq.", "rate": "/min"},
-                            {"name": "Vt", "rate": "ml"},
-                            {"name": "PEEP", "rate": "mBar"},
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                ModeToggleButton(),
-              ],
-            ),
-          )
+          Flexible(flex: 4, child: graphView()),
+          Flexible(flex: 2, child: toggleView())
         ],
       ),
+    );
+  }
+
+  Widget getVentilationScreen() {
+    return Container(
+      margin: const EdgeInsets.only(left: 12, right: 12, top: 12),
+      child: Row(
+        children: [
+          Flexible(flex: 4, child: graphView()),
+          Flexible(flex: 2, child: ModeToggleButton())
+        ],
+      ),
+    );
+  }
+
+  Widget getDefibrillationScreen() {
+    return Container(
+      margin: const EdgeInsets.only(left: 12, right: 12, top: 12),
+      child: Row(
+        children: [
+          Flexible(flex: 4, child: graphView()),
+          Flexible(flex: 2, child: ModeToggleButton())
+        ],
+      ),
+    );
+  }
+
+  graphView() {
+    var graphList = monitorController.allGraphs;
+
+    return Container(
+      margin: const EdgeInsets.only(left: 8, right: 8),
+      child: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              itemCount: graphList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Obx(
+                  () => Visibility(
+                    child: GraphContainer(graphData: graphList[index]),
+                    visible: (graphList[index]["visible"] as RxBool).value,
+                  ),
+                );
+              },
+            ),
+          ),
+          const GraphAdder(),
+        ],
+      ),
+    );
+  }
+
+  toggleView() {
+    return Column(
+      children: [
+        Flexible(
+          flex: 1,
+          child: Row(
+            children: [
+              ValueTile(
+                name: "NIBD",
+                miniTitle: "SYS",
+                textColor: const Color(0xFFDC362E),
+                backgroundColor: const Color(0xFF2A2831),
+                value: monitorController.nibdValue,
+                withModel: false,
+              ),
+              ValueTile.model(
+                name: "Pulse",
+                miniTitle: "PP",
+                textColor: const Color(0xFFFF00E4),
+                backgroundColor: const Color(0xFF2A2831),
+                sensor: sensorEnum.pulse,
+                withModel: true,
+              ),
+            ],
+          ),
+        ),
+        Flexible(
+          flex: 1,
+          child: Row(
+            children: [
+              ValueTile(
+                name: "MVe",
+                miniTitle: "MVe",
+                textColor: const Color(0xFF0CECDD),
+                backgroundColor: const Color(0xff2A2831),
+                value: monitorController.mveValue,
+                withModel: false,
+              ),
+              ValueTile(
+                name: "Breath. Freq.",
+                miniTitle: "AF",
+                textColor: const Color(0xFF0CECDD),
+                backgroundColor: const Color(0xff2A2831),
+                value: monitorController.breathFreqValue,
+                withModel: false,
+              ),
+            ],
+          ),
+        ),
+        Flexible(
+          flex: 2,
+          child: Row(
+            children: [
+              Flexible(
+                flex: 1,
+                child: InfoTile(data: monitorController.info),
+              ),
+              Flexible(
+                flex: 1,
+                child: SettingTile(data: monitorController.settings),
+              ),
+            ],
+          ),
+        ),
+        ModeToggleButton(),
+      ],
     );
   }
 }
