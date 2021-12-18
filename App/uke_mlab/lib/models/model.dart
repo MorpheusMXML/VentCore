@@ -4,9 +4,9 @@ import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/models/model_manager.dart';
 import 'package:uke_mlab/utilities/alarm_controller.dart';
 
-// graphData INCLUDES the singleData value at the end
-// Alarm evaluation is done in alarm_controller
-// graphDataMaxLength is initialized with 100, can be manipulated
+/// graphData INCLUDES the singleData value at the end
+/// Alarm evaluation is done in alarm_controller
+/// graphDataMaxLength is initialized with 100, can be manipulated
 class DataModel extends GetxController {
   late final sensorEnum sensorKey;
 
@@ -18,8 +18,8 @@ class DataModel extends GetxController {
 
   late final Rx<ChartData> singleData;
 
-  final graphData =
-      [].obs; //variable list, maybe fill up to _graphDataMaxLength?
+  final List<ChartData> graphData =
+      <ChartData>[]; //variable list, maybe fill up to _graphDataMaxLength?
   int graphDataMaxLength = 100;
 
   late final ModelManager modelManager;
@@ -37,18 +37,20 @@ class DataModel extends GetxController {
 
     modelManager = modelManager;
 
-    singleData = ChartData(DateTime.now(), 0.0).obs;
+    singleData = ChartData(DateTime.now(), 0.0, 0).obs;
   }
 
   // updates singleDate with a new value, puts singleData at the end of the list
   // if graphData would exceed maxLenght, remove first (oldest) element
   // graphData is sorted by oldest at pos 0 to latest element
   void updateValues(double newValue) {
-    singleData.value = ChartData(DateTime.now(), newValue);
+    singleData.value =
+        ChartData(DateTime.now(), newValue, singleData.value.counter + 1);
     if (graphData.length + 1 > graphDataMaxLength) {
       graphData.removeAt(0);
     }
     graphData.add(singleData.value);
+    print(graphData.length.toString());
 
     //evaluates whether update violated alarm boundaries or returns into boundaries
     if (singleData.value.value > upperAlarmBound.value) {
@@ -79,7 +81,7 @@ class DataModel extends GetxController {
     upperAlarmBound.value = initialUpperBound;
     lowerAlarmBound.value = initialLowerBound;
     //reset singleData to 0 entry
-    singleData.value = ChartData(DateTime.now(), 0.0);
+    singleData.value = ChartData(DateTime.now(), 0.0, 0);
     //clear historical data
     graphData.clear();
   }
@@ -89,6 +91,7 @@ class DataModel extends GetxController {
 class ChartData {
   final DateTime time;
   final double value;
+  final int counter;
 
-  ChartData(this.time, this.value);
+  ChartData(this.time, this.value, this.counter);
 }

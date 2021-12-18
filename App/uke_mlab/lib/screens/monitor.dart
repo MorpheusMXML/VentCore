@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:uke_mlab/providers/mockup.dart';
 import 'package:uke_mlab/providers/start_screen_controller.dart';
 import 'package:uke_mlab/providers/style_controller.dart';
@@ -67,6 +68,7 @@ class Monitor extends StatelessWidget {
               child: Column(
                 children: [
                   Expanded(
+                    /*
                     child: ListView.builder(
                       itemCount: graphList.length,
                       itemBuilder: (BuildContext context, int index) {
@@ -78,8 +80,11 @@ class Monitor extends StatelessWidget {
                           ),
                         );
                       },
-                    ),
+                      */
+                    child: GraphContainer.withModel(
+                        sensor: sensorEnum.breathFrequency),
                   ),
+                  //),
                   const GraphAdder(),
                 ],
               ),
