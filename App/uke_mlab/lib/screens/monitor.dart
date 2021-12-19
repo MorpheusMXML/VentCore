@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:uke_mlab/models/system_state.dart';
 
 import 'package:uke_mlab/providers/mockup.dart';
 import 'package:uke_mlab/providers/start_screen_controller.dart';
@@ -56,6 +57,9 @@ class Monitor extends StatelessWidget {
 
   Widget getMonitorScreen() {
     var graphList = monitorController.allGraphs;
+    SystemState systemState = Get.find<SystemState>();
+    DataModel dataModel =
+        Get.find<DataModel>(tag: sensorEnum.breathFrequency.toString());
 
     return Container(
       margin: const EdgeInsets.only(left: 12, right: 12, top: 12),
@@ -68,23 +72,14 @@ class Monitor extends StatelessWidget {
               child: Column(
                 children: [
                   Expanded(
-                    /*
                     child: ListView.builder(
-                      itemCount: graphList.length,
+                      itemCount: systemState.graphList.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return Obx(
-                          () => Visibility(
-                            child: GraphContainer(graphData: graphList[index]),
-                            visible:
-                                (graphList[index]["visible"] as RxBool).value,
-                          ),
-                        );
+                        return GraphContainer.withModel(
+                            sensor: systemState.graphList[index]);
                       },
-                      */
-                    child: GraphContainer.withModel(
-                        sensor: sensorEnum.breathFrequency),
+                    ),
                   ),
-                  //),
                   const GraphAdder(),
                 ],
               ),

@@ -39,43 +39,50 @@ class ModelManager {
   //NOT TO BE CALLED WITH patientTypeEnum.none, since that has no pre defined values
   void loadPatientPresets(patientTypeEnum patientType) {
     for (var sensor in sensorEnum.values) {
-      DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
+      if (defaultValues.containsKey(sensor.toString())) {
+        DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
 
-      dataModel.resetDataModel();
-      switch (patientType) {
-        case patientTypeEnum.adult:
-          dataModel.initialUpperBound =
-              defaultValues[sensor.toString()]["adult"]["upperBound"];
-          dataModel.upperAlarmBound.value =
-              defaultValues[sensor.toString()]["adult"]["upperBound"];
-          dataModel.initialLowerBound =
-              defaultValues[sensor.toString()]["adult"]["lowerBound"];
-          dataModel.lowerAlarmBound.value =
-              defaultValues[sensor.toString()]["adult"]["lowerBound"];
-          break;
-        case patientTypeEnum.child:
-          dataModel.initialUpperBound =
-              defaultValues[sensor.toString()]["child"]["upperBound"];
-          dataModel.upperAlarmBound.value =
-              defaultValues[sensor.toString()]["child"]["upperBound"];
-          dataModel.initialLowerBound =
-              defaultValues[sensor.toString()]["child"]["lowerBound"];
-          dataModel.lowerAlarmBound.value =
-              defaultValues[sensor.toString()]["child"]["lowerBound"];
-          break;
-        case patientTypeEnum.infant:
-          dataModel.initialUpperBound =
-              defaultValues[sensor.toString()]["infant"]["upperBound"];
-          dataModel.upperAlarmBound.value =
-              defaultValues[sensor.toString()]["infant"]["upperBound"];
-          dataModel.initialLowerBound =
-              defaultValues[sensor.toString()]["infant"]["lowerBound"];
-          dataModel.lowerAlarmBound.value =
-              defaultValues[sensor.toString()]["infant"]["lowerBound"];
-          break;
-        default:
-          throw Exception(
-              "loadingPatientPresets called with wrong parameter (most likeley patientTypeEnum.none)");
+        dataModel.resetDataModel();
+        switch (patientType) {
+          case patientTypeEnum.adult:
+            dataModel.initialUpperBound =
+                defaultValues[sensor.toString()]["adult"]["upperBound"];
+            dataModel.upperAlarmBound.value =
+                defaultValues[sensor.toString()]["adult"]["upperBound"];
+            dataModel.initialLowerBound =
+                defaultValues[sensor.toString()]["adult"]["lowerBound"];
+            dataModel.lowerAlarmBound.value =
+                defaultValues[sensor.toString()]["adult"]["lowerBound"];
+            break;
+          case patientTypeEnum.child:
+            dataModel.initialUpperBound =
+                defaultValues[sensor.toString()]["child"]["upperBound"];
+            dataModel.upperAlarmBound.value =
+                defaultValues[sensor.toString()]["child"]["upperBound"];
+            dataModel.initialLowerBound =
+                defaultValues[sensor.toString()]["child"]["lowerBound"];
+            dataModel.lowerAlarmBound.value =
+                defaultValues[sensor.toString()]["child"]["lowerBound"];
+            break;
+          case patientTypeEnum.infant:
+            dataModel.initialUpperBound =
+                defaultValues[sensor.toString()]["infant"]["upperBound"];
+            dataModel.upperAlarmBound.value =
+                defaultValues[sensor.toString()]["infant"]["upperBound"];
+            dataModel.initialLowerBound =
+                defaultValues[sensor.toString()]["infant"]["lowerBound"];
+            dataModel.lowerAlarmBound.value =
+                defaultValues[sensor.toString()]["infant"]["lowerBound"];
+            break;
+          default:
+            throw Exception(
+                "loadingPatientPresets called with wrong parameter (most likeley patientTypeEnum.none)");
+        }
+      } else {
+        printInfo(
+            info: "WARNING: Sensor " +
+                sensor.toString() +
+                " has no default Values in default_boundaries.json, please add those.");
       }
     }
   }
