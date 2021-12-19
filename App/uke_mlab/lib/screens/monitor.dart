@@ -26,10 +26,7 @@ class Monitor extends StatelessWidget {
   final monitorController = Get.find<MonitorController>();
   final styleController = Get.put(StyleController());
   final toggleController = Get.find<ToggleController>();
-
-  SystemState systemState = Get.find<SystemState>();
-  DataModel dataModel =
-      Get.find<DataModel>(tag: sensorEnum.breathFrequency.toString());
+  final SystemState systemState = Get.find<SystemState>();
 
   Monitor({
     Key? key,
@@ -40,76 +37,43 @@ class Monitor extends StatelessWidget {
     monitorController.activateTimer();
 
     return Scaffold(
-        appBar: AppBar(
-          title: StatusBar(
-            category: Get.arguments[0],
-          ),
-        ),
-        body: Obx(() => getToggledScreen()));
+        appBar: AppBar(title: StatusBar(category: Get.arguments[0])),
+        body: Container(
+            margin: const EdgeInsets.only(left: 12, right: 12, top: 12),
+            child: Obx(() => getToggledScreen())));
   }
 
   Widget getToggledScreen() {
     if (toggleController.isSelected[1]) {
-      return getVentilationScreen();
+      // Ventilation
+      return Row(children: [getGraphView(), ModeToggleButton()]);
     } else if (toggleController.isSelected[2]) {
-      return getDefibrillationScreen();
+      // Defibrillation
+      return Row(children: [getGraphView(), ModeToggleButton()]);
     } else {
-      return getMonitorScreen();
+      // Monitoring
+      return Row(children: [getGraphView(), getToggleView()]);
     }
   }
 
-  Widget getMonitorScreen() {
-    return Container(
-      margin: const EdgeInsets.only(left: 12, right: 12, top: 12),
-      child: Row(
-        children: [
-          Flexible(flex: 4, child: getGraphView()),
-          Flexible(flex: 2, child: getToggleView())
-        ],
-      ),
-    );
-  }
-
-  Widget getVentilationScreen() {
-    return Container(
-      margin: const EdgeInsets.only(left: 12, right: 12, top: 12),
-      child: Row(
-        children: [
-          Flexible(flex: 4, child: getGraphView()),
-          Flexible(flex: 2, child: ModeToggleButton())
-        ],
-      ),
-    );
-  }
-
-  Widget getDefibrillationScreen() {
-    return Container(
-      margin: const EdgeInsets.only(left: 12, right: 12, top: 12),
-      child: Row(
-        children: [
-          Flexible(flex: 4, child: getGraphView()),
-          Flexible(flex: 2, child: ModeToggleButton())
-        ],
-      ),
-    );
-  }
-
   Widget getGraphView() {
-    return Container(
-      margin: const EdgeInsets.only(left: 8, right: 8),
-      child: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              itemCount: systemState.graphList.length,
-              itemBuilder: (BuildContext context, int index) {
-                return GraphContainer.withModel(
-                    sensor: systemState.graphList[index]);
-              },
+    return Flexible(
+      flex: 4,
+      child: Container(
+        margin: const EdgeInsets.only(left: 8, right: 8),
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                itemCount: systemState.graphList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return GraphContainer(sensor: systemState.graphList[index]);
+                },
+              ),
             ),
-          ),
-          const GraphAdder(),
-        ],
+            const GraphAdder(),
+          ],
+        ),
       ),
     );
   }
@@ -128,59 +92,58 @@ class Monitor extends StatelessWidget {
       {"name": "PEEP", "rate": "mBar"},
     ];
 
-    return Column(
-      children: [
-        Flexible(
-          flex: 1,
-          child: Row(
-            children: [
-              ValueTile.model(
-                backgroundColor: const Color(0xFF2A2831),
-                sensor: sensorEnum.nibd,
-              ),
-              ValueTile.model(
-                backgroundColor: const Color(0xFF2A2831),
-                sensor: sensorEnum.pulse,
-              ),
-            ],
-          ),
-        ),
-        Flexible(
-          flex: 1,
-          child: Row(
-            children: [
-              ValueTile.model(
-                backgroundColor: const Color(0xff2A2831),
-                sensor: sensorEnum.mve,
-              ),
-              ValueTile.model(
-                backgroundColor: const Color(0xff2A2831),
-                sensor: sensorEnum.breathFrequency,
-              ),
-            ],
-          ),
-        ),
-        Flexible(
-          flex: 2,
-          child: Row(
-            children: [
-              Flexible(
-                flex: 1,
-                child: InfoTile(
-                  data: infoData,
+    return Flexible(
+      flex: 2,
+      child: Column(
+        children: [
+          Flexible(
+            flex: 1,
+            child: Row(
+              children: const [
+                ValueTile(
+                  sensor: sensorEnum.nibd,
                 ),
-              ),
-              Flexible(
-                flex: 1,
-                child: SettingTile(
-                  data: settingData,
+                ValueTile(
+                  sensor: sensorEnum.pulse,
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        ModeToggleButton(),
-      ],
+          Flexible(
+            flex: 1,
+            child: Row(
+              children: const [
+                ValueTile(
+                  sensor: sensorEnum.mve,
+                ),
+                ValueTile(
+                  sensor: sensorEnum.breathFrequency,
+                ),
+              ],
+            ),
+          ),
+          Flexible(
+            flex: 2,
+            child: Row(
+              children: [
+                Flexible(
+                  flex: 1,
+                  child: InfoTile(
+                    data: infoData,
+                  ),
+                ),
+                Flexible(
+                  flex: 1,
+                  child: SettingTile(
+                    data: settingData,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          ModeToggleButton(),
+        ],
+      ),
     );
   }
 }
