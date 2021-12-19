@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:uke_mlab/models/system_state.dart';
+
 import 'package:uke_mlab/providers/mockup.dart';
 import 'package:uke_mlab/providers/start_screen_controller.dart';
 import 'package:uke_mlab/providers/style_controller.dart';
@@ -55,6 +57,9 @@ class Monitor extends StatelessWidget {
 
   Widget getMonitorScreen() {
     var graphList = monitorController.allGraphs;
+    SystemState systemState = Get.find<SystemState>();
+    DataModel dataModel =
+        Get.find<DataModel>(tag: sensorEnum.breathFrequency.toString());
 
     return Container(
       margin: const EdgeInsets.only(left: 12, right: 12, top: 12),
@@ -68,15 +73,10 @@ class Monitor extends StatelessWidget {
                 children: [
                   Expanded(
                     child: ListView.builder(
-                      itemCount: graphList.length,
+                      itemCount: systemState.graphList.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return Obx(
-                          () => Visibility(
-                            child: GraphContainer(graphData: graphList[index]),
-                            visible:
-                                (graphList[index]["visible"] as RxBool).value,
-                          ),
-                        );
+                        return GraphContainer.withModel(
+                            sensor: systemState.graphList[index]);
                       },
                     ),
                   ),
@@ -93,21 +93,18 @@ class Monitor extends StatelessWidget {
                   flex: 1,
                   child: Row(
                     children: [
-                      ValueTile(
-                        name: "NIBD",
-                        miniTitle: "SYS",
-                        textColor: const Color(0xFFDC362E),
+                      ValueTile.model(
                         backgroundColor: const Color(0xFF2A2831),
-                        value: monitorController.nibdValue,
-                        withModel: false,
+                        sensor: sensorEnum.nibd,
+                        // withModel: false,
                       ),
                       ValueTile.model(
-                        name: "Pulse",
-                        miniTitle: "PP",
-                        textColor: const Color(0xFFFF00E4),
+                        //name: "Pulse",
+                        //miniTitle: "PP",
+                        //textColor: const Color(0xFFFF00E4),
                         backgroundColor: const Color(0xFF2A2831),
                         sensor: sensorEnum.pulse,
-                        withModel: true,
+                        //withModel: true,
                       ),
                     ],
                   ),
@@ -116,21 +113,15 @@ class Monitor extends StatelessWidget {
                   flex: 1,
                   child: Row(
                     children: [
-                      ValueTile(
-                        name: "MVe",
-                        miniTitle: "MVe",
-                        textColor: const Color(0xFF0CECDD),
+                      ValueTile.model(
                         backgroundColor: const Color(0xff2A2831),
-                        value: monitorController.mveValue,
-                        withModel: false,
+                        sensor: sensorEnum.mve,
+                        // withModel: false,
                       ),
-                      ValueTile(
-                        name: "Breath. Freq.",
-                        miniTitle: "AF",
-                        textColor: const Color(0xFF0CECDD),
+                      ValueTile.model(
                         backgroundColor: const Color(0xff2A2831),
-                        value: monitorController.breathFreqValue,
-                        withModel: false,
+                        sensor: sensorEnum.breathFrequency,
+                        // withModel: false,
                       ),
                     ],
                   ),

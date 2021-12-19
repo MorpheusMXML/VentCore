@@ -68,7 +68,7 @@ flutter:
   assets:
     - assets/icons/
     - assets/data.json
-    - assets/jsons/default_boundaries.json
+    - assets/jsons/sensor_default_values.json
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

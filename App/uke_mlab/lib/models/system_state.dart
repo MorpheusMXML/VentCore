@@ -8,6 +8,11 @@ class SystemState {
   patientTypeEnum patientType = patientTypeEnum.none;
   final Map<sensorEnum, boundaryStateEnum> violationStates = {};
   bool scenarioStarted = false;
+  List<sensorEnum> graphList = [
+    sensorEnum.heartFrequency,
+    sensorEnum.spo2,
+    sensorEnum.co2
+  ];
 
   // SystemState initated with no violations at place and screenStatus as topLevelScreen
   SystemState() {
