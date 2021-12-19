@@ -45,7 +45,7 @@ class MonitorController extends GetxController {
         "index": 0,
       },
       "data": List.filled(1500, ChartDataMockup(DateTime.now(), 0, 0)).obs,
-      "color": Colors.green,
+      "color": Colors.purple,
       "count": 0,
       "alarm": "none".obs,
       "visible": true.obs,

@@ -4,7 +4,8 @@ enum sensorEnum {
   pulse,
   breathFrequency,
   nibd,
-  mve
+  mve,
+  co2
   //TODO expand
 }
 
