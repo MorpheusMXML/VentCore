@@ -87,8 +87,9 @@ class GraphContainer extends StatelessWidget {
     }
   }
 
-  List<Widget> getRowElements() {
+  List<Widget> getGraphRow() {
     List<Widget> graphrow = [];
+    graphrow.add(Container(width: 8));
 
     if (withModel) {
       //if ((graphData["type"] as Map<String, Object>)["id"] == "NIBD") {
@@ -107,7 +108,7 @@ class GraphContainer extends StatelessWidget {
     } else {
       if ((graphData["type"] as Map<String, Object>)["id"] == "NIBD") {
         graphrow.add(HistoryGraph(
-            color: Colors.red, data: graphData["data"] as List<NIBDdata>));
+             graphData: graphData));
       } else {
         graphrow.add(Expanded(child: Graph(graphData: graphData)));
         graphrow.add(Container(width: 8));
@@ -123,7 +124,6 @@ class GraphContainer extends StatelessWidget {
         );
       }
     }
-
     return graphrow;
   }
 }
