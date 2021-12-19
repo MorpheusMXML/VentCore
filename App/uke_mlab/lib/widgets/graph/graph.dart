@@ -30,26 +30,28 @@ class Graph extends StatelessWidget {
   Widget build(BuildContext context) {
     if (withModel) {
       DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
-      return SfCartesianChart(
-        backgroundColor: Theme.of(context).cardColor,
-        primaryYAxis: NumericAxis(
-          majorGridLines:
-              MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
+      return Obx(
+        () => SfCartesianChart(
+          backgroundColor: Theme.of(context).cardColor,
+          primaryYAxis: NumericAxis(
+            majorGridLines:
+                MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
+          ),
+          primaryXAxis: NumericAxis(
+            majorGridLines:
+                MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
+          ),
+          series: [
+            SplineSeries(
+                color: Colors.yellow,
+                dataSource: dataModel.graphData.value,
+                onRendererCreated: (ChartSeriesController controller) {
+                  chartController = controller;
+                },
+                xValueMapper: (ChartData data, _) => data.counter,
+                yValueMapper: (ChartData data, _) => data.value)
+          ],
         ),
-        primaryXAxis: NumericAxis(
-          majorGridLines:
-              MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
-        ),
-        series: [
-          SplineSeries(
-              color: Colors.yellow,
-              dataSource: dataModel.graphData,
-              onRendererCreated: (ChartSeriesController controller) {
-                chartController = controller;
-              },
-              xValueMapper: (ChartData data, _) => data.counter,
-              yValueMapper: (ChartData data, _) => data.value)
-        ],
       );
     } else {
       return SfCartesianChart(

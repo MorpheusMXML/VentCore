@@ -18,8 +18,8 @@ class DataModel extends GetxController {
 
   late final Rx<ChartData> singleData;
 
-  final List<ChartData> graphData =
-      <ChartData>[]; //variable list, maybe fill up to _graphDataMaxLength?
+  final RxList<ChartData> graphData =
+      <ChartData>[].obs; //variable list, maybe fill up to _graphDataMaxLength?
   int graphDataMaxLength = 100;
 
   late final ModelManager modelManager;
