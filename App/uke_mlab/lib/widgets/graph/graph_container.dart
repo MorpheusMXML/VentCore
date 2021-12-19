@@ -87,9 +87,8 @@ class GraphContainer extends StatelessWidget {
     }
   }
 
-  List<Widget> getGraphRow() {
+  List<Widget> getRowElements() {
     List<Widget> graphrow = [];
-    graphrow.add(Container(width: 8));
 
     if (withModel) {
       //if ((graphData["type"] as Map<String, Object>)["id"] == "NIBD") {
@@ -124,6 +123,7 @@ class GraphContainer extends StatelessWidget {
         );
       }
     }
+
     return graphrow;
   }
 }

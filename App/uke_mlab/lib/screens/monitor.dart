@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
 
 import 'package:uke_mlab/providers/mockup.dart';
-import 'package:uke_mlab/providers/start_screen_controller.dart';
 import 'package:uke_mlab/providers/style_controller.dart';
 import 'package:uke_mlab/providers/toggle_controller.dart';
 
@@ -15,7 +14,6 @@ import 'package:uke_mlab/widgets/statusbar/statusbar.dart';
 import 'package:uke_mlab/widgets/value_box/value_tile.dart';
 import 'package:uke_mlab/widgets/graph/graph_adder.dart';
 
-import 'package:uke_mlab/models/model.dart';
 import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/models/model_manager.dart';
 
@@ -47,9 +45,9 @@ class Monitor extends StatelessWidget {
 
   getToggledScreen() {
     if (toggleController.isSelected[1]) {
-      return ModeToggleButton();
+      return getVentilationScreen();
     } else if (toggleController.isSelected[2]) {
-      return ModeToggleButton();
+      return getDefibrillationScreen();
     } else {
       return getMonitorScreen();
     }
@@ -61,6 +59,7 @@ class Monitor extends StatelessWidget {
     DataModel dataModel =
         Get.find<DataModel>(tag: sensorEnum.breathFrequency.toString());
 
+  Widget getDefibrillationScreen() {
     return Container(
       margin: const EdgeInsets.only(left: 12, right: 12, top: 12),
       child: Row(
@@ -80,9 +79,8 @@ class Monitor extends StatelessWidget {
                       },
                     ),
                   ),
-                  const GraphAdder(),
-                ],
-              ),
+                );
+              },
             ),
           ),
           Flexible(
@@ -160,6 +158,75 @@ class Monitor extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+
+  toggleView() {
+    return Column(
+      children: [
+        Flexible(
+          flex: 1,
+          child: Row(
+            children: [
+              ValueTile(
+                name: "NIBD",
+                miniTitle: "SYS",
+                textColor: const Color(0xFFDC362E),
+                backgroundColor: const Color(0xFF2A2831),
+                value: monitorController.nibdValue,
+                withModel: false,
+              ),
+              ValueTile.model(
+                name: "Pulse",
+                miniTitle: "PP",
+                textColor: const Color(0xFFFF00E4),
+                backgroundColor: const Color(0xFF2A2831),
+                sensor: sensorEnum.pulse,
+                withModel: true,
+              ),
+            ],
+          ),
+        ),
+        Flexible(
+          flex: 1,
+          child: Row(
+            children: [
+              ValueTile(
+                name: "MVe",
+                miniTitle: "MVe",
+                textColor: const Color(0xFF0CECDD),
+                backgroundColor: const Color(0xff2A2831),
+                value: monitorController.mveValue,
+                withModel: false,
+              ),
+              ValueTile(
+                name: "Breath. Freq.",
+                miniTitle: "AF",
+                textColor: const Color(0xFF0CECDD),
+                backgroundColor: const Color(0xff2A2831),
+                value: monitorController.breathFreqValue,
+                withModel: false,
+              ),
+            ],
+          ),
+        ),
+        Flexible(
+          flex: 2,
+          child: Row(
+            children: [
+              Flexible(
+                flex: 1,
+                child: InfoTile(data: monitorController.info),
+              ),
+              Flexible(
+                flex: 1,
+                child: SettingTile(data: monitorController.settings),
+              ),
+            ],
+          ),
+        ),
+        ModeToggleButton(),
+      ],
     );
   }
 }

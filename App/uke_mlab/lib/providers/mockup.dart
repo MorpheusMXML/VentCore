@@ -123,6 +123,19 @@ class MonitorController extends GetxController {
     "PEEP": 60.obs
   };
 
+  List<Map<String, String>> settings = [
+    {"name": "Freq.", "rate": "/min"},
+    {"name": "Vt", "rate": "ml"},
+    {"name": "PEEP", "rate": "mBar"}
+  ];
+
+  List<Map<String, Object>> info = [
+    {"type": "pPeak", "value": 50.12, "unit": " mBar"},
+    {"type": "pPlat", "value": 4.58, "unit": " mBar"},
+    {"type": "pMean", "value": 16.58, "unit": " mBar"},
+    {"type": "MV", "value": 7.2, "unit": " l/min"}
+  ];
+
   // Data used by Value Boxes
   final RxList<ChartDataMockup> nibdValue =
       List.filled(1, ChartDataMockup(DateTime.now(), 0, 0)).obs;
@@ -184,7 +197,7 @@ class MonitorController extends GetxController {
 
     if (index == 0) {
       // test visual alarm
-      if (dataList[0]["data"][allGraphs[0]["count"]] > 5) {
+      if (dataList[0]["data"][allGraphs[0]["count"]] > 0) {
         switchToAlarm(0);
       }
 
@@ -234,11 +247,11 @@ class MonitorController extends GetxController {
 }
 
 class NIBDdata {
-  final DateTime? timestamp;
+  final DateTime time;
   final int systolicPressure;
   final int diastolicPressure;
   late int mad;
-  NIBDdata(this.timestamp, this.systolicPressure, this.diastolicPressure) {
+  NIBDdata(this.time, this.systolicPressure, this.diastolicPressure) {
     //Formular for Calculating MAD out of systolic and diastolic pressure
     mad = (diastolicPressure + (1 / 3) * (systolicPressure - diastolicPressure))
         .toInt();
@@ -248,10 +261,10 @@ class NIBDdata {
 // DataClass used by the Graphs
 // x: DateTime, y: value (HF, SpO2, ...)
 class ChartDataMockup {
-  ChartDataMockup(this.time, this.value, this.counter);
   final DateTime time;
   final double value;
   final int counter;
+  ChartDataMockup(this.time, this.value, this.counter);
 }
 
 // don't know how else to use controllers in initialGraphs
