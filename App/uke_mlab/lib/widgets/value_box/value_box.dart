@@ -9,118 +9,64 @@ import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/models/model.dart';
 
 class ValueBox extends StatelessWidget {
-  late Color textColor;
-  final Color backgroundColor;
-  late String miniTitle;
+  final sensorEnum sensor;
 
-  late List<ChartDataMockup> value;
-  late sensorEnum sensor;
-
-  final bool withModel;
-
-  ValueBox({
+  const ValueBox({
     Key? key,
-    required this.textColor,
-    required this.value,
-    this.miniTitle = "PP",
-    required this.backgroundColor,
-    this.withModel = false,
-  }) : super(key: key);
-
-  //TODO will finally be standard constructor when both Boxes and graphs work with mockup
-  ValueBox.model({
-    Key? key,
-    // to be changed
-    required this.backgroundColor,
     required this.sensor,
-    this.withModel = true,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     late final ScreenController screenController;
     late final DataModel dataModel;
-    final monitorController = Get.find<MonitorController>();
     late Obx mainText;
     late Obx lowerAlarmBound;
     late Obx upperAlarmBound;
 
-    if (withModel) {
-      //TODO when ready, put to class fields and delete rest
-      dataModel = Get.find<DataModel>(tag: sensor.toString());
-      textColor = dataModel.color;
-      miniTitle = dataModel.miniTitle;
+    dataModel = Get.find<DataModel>(tag: sensor.toString());
+    var textColor = dataModel.color;
+    var miniTitle = dataModel.miniTitle;
 
-      mainText = Obx(
-        () => Text(
-          dataModel.singleData.value.value.toInt().toString(),
-          style: TextStyle(
-            color: textColor,
-            fontSize: 50,
-          ),
+    mainText = Obx(
+      () => Text(
+        dataModel.singleData.value.value.toInt().toString(),
+        style: TextStyle(
+          color: textColor,
+          fontSize: 50,
         ),
-      );
-      lowerAlarmBound = Obx(
-        () => Text(
-          // to be changed
-          dataModel.lowerAlarmBound.value.toString(),
-          style: TextStyle(color: textColor),
-          textAlign: TextAlign.left,
+      ),
+    );
+    lowerAlarmBound = Obx(
+      () => Text(
+        // to be changed
+        dataModel.lowerAlarmBound.value.toString(),
+        style: TextStyle(color: textColor),
+        textAlign: TextAlign.left,
+      ),
+    );
+    upperAlarmBound = Obx(
+      () => Text(
+        // to be changed
+        dataModel.upperAlarmBound.value.toString(),
+        style: TextStyle(
+          color: textColor,
         ),
-      );
-      upperAlarmBound = Obx(
-        () => Text(
-          // to be changed
-          dataModel.upperAlarmBound.value.toString(),
-          style: TextStyle(
-            color: textColor,
-          ),
-        ),
-      );
-    } else {
-      screenController = Get.find();
-      mainText = Obx(
-        () => Text(
-          value[value.length - 1].value.round().toString(),
-          style: TextStyle(
-            color: textColor,
-            fontSize: 50,
-          ),
-        ),
-      );
-      lowerAlarmBound = Obx(
-        () => Text(
-          // to be changed
-          "58".obs.value,
-          style: TextStyle(color: textColor),
-          textAlign: TextAlign.left,
-        ),
-      );
-      upperAlarmBound = Obx(
-        () => Text(
-          // to be changed
-          "120".obs.value,
-          style: TextStyle(
-            color: textColor,
-          ),
-        ),
-      );
-    }
+      ),
+    );
 
     return AspectRatio(
       aspectRatio: 1,
       child: ElevatedButton(
         style: ButtonStyle(
           shape: MaterialStateProperty.all(const RoundedRectangleBorder()),
-          backgroundColor: MaterialStateProperty.all(backgroundColor),
+          backgroundColor: MaterialStateProperty.all(const Color(0xFF2A2831)),
         ),
         onPressed: () {
-          if (withModel) {
-            dataModel.updateValues(dataModel.singleData.value.value + 1.0);
-            if (dataModel.singleData.value.value.toInt() > 10) {
-              monitorController.alarmMessage.value = "High pulse!";
-            }
-          } //testing
+          dataModel.updateValues();
+          if (dataModel.singleData.value.value.toInt() > 10) {
+            // monitorController.alarmMessage.value = "High pulse!";
+          }
         },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -142,7 +88,6 @@ class ValueBox extends StatelessWidget {
               children: [
                 lowerAlarmBound,
                 Text(
-                  // to be changed
                   "1/ min.",
                   style: TextStyle(
                     color: textColor,
