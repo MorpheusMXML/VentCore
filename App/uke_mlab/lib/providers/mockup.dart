@@ -101,11 +101,11 @@ class MonitorController extends GetxController {
         "index": 4,
       },
       "data": [
-        NIBDdata(DateTime.utc(2021, 12, 9, 11, 00), 120, 80),
-        NIBDdata(DateTime.utc(2021, 12, 9, 11, 05), 140, 95),
-        NIBDdata(DateTime.utc(2021, 12, 9, 11, 10), 180, 100),
-        NIBDdata(DateTime.utc(2021, 12, 9, 11, 15), 185, 75),
-        NIBDdata(DateTime.utc(2021, 12, 9, 11, 20), 200, 110),
+        NIBDdataMockup(DateTime.utc(2021, 12, 9, 11, 00), 120, 80),
+        NIBDdataMockup(DateTime.utc(2021, 12, 9, 11, 05), 140, 95),
+        NIBDdataMockup(DateTime.utc(2021, 12, 9, 11, 10), 180, 100),
+        NIBDdataMockup(DateTime.utc(2021, 12, 9, 11, 15), 185, 75),
+        NIBDdataMockup(DateTime.utc(2021, 12, 9, 11, 20), 200, 110),
       ].obs,
       "color": Colors.red,
       "count": 0,
@@ -246,12 +246,12 @@ class MonitorController extends GetxController {
   }
 }
 
-class NIBDdata {
+class NIBDdataMockup {
   final DateTime time;
   final int systolicPressure;
   final int diastolicPressure;
   late int mad;
-  NIBDdata(this.time, this.systolicPressure, this.diastolicPressure) {
+  NIBDdataMockup(this.time, this.systolicPressure, this.diastolicPressure) {
     //Formular for Calculating MAD out of systolic and diastolic pressure
     mad = (diastolicPressure + (1 / 3) * (systolicPressure - diastolicPressure))
         .toInt();
