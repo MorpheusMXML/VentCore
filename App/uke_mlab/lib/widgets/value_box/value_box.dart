@@ -9,9 +9,9 @@ import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/models/model.dart';
 
 class ValueBox extends StatelessWidget {
-  final Color textColor;
+  late Color textColor;
   final Color backgroundColor;
-  final String miniTitle;
+  late String miniTitle;
 
   late List<ChartDataMockup> value;
   late sensorEnum sensor;
@@ -24,18 +24,16 @@ class ValueBox extends StatelessWidget {
     required this.value,
     this.miniTitle = "PP",
     required this.backgroundColor,
-    required this.withModel,
+    this.withModel = false,
   }) : super(key: key);
 
   //TODO will finally be standard constructor when both Boxes and graphs work with mockup
   ValueBox.model({
     Key? key,
-    required this.textColor,
     // to be changed
-    this.miniTitle = "PP",
     required this.backgroundColor,
     required this.sensor,
-    required this.withModel,
+    this.withModel = true,
   }) : super(key: key);
 
   @override
@@ -50,6 +48,8 @@ class ValueBox extends StatelessWidget {
     if (withModel) {
       //TODO when ready, put to class fields and delete rest
       dataModel = Get.find<DataModel>(tag: sensor.toString());
+      textColor = dataModel.color;
+      miniTitle = dataModel.miniTitle;
 
       mainText = Obx(
         () => Text(

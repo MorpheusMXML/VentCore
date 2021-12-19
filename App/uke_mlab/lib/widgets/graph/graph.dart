@@ -43,7 +43,7 @@ class Graph extends StatelessWidget {
           ),
           series: [
             SplineSeries(
-                color: Colors.yellow,
+                color: dataModel.color,
                 dataSource: dataModel.graphData.value,
                 onRendererCreated: (ChartSeriesController controller) {
                   chartController = controller;

@@ -100,10 +100,8 @@ class GraphContainer extends StatelessWidget {
       graphrow.add(Container(width: 8));
       graphrow.add(
         ValueBox.model(
-          textColor: Colors.yellow,
           backgroundColor: const Color(0xFF2A2831),
           sensor: sensor,
-          withModel: true,
         ),
       );
       //}

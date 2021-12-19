@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:uke_mlab/models/model.dart';
 import 'package:uke_mlab/providers/mockup.dart';
 
 import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/widgets/value_box/value_box.dart';
 
 class ValueTile extends StatelessWidget {
-  final Color textColor;
+  late Color textColor;
   final Color backgroundColor;
-  final String name;
-  final String miniTitle;
+  late String name;
+  late String miniTitle;
 
   late List<ChartDataMockup> value;
   late sensorEnum sensor;
@@ -21,28 +23,25 @@ class ValueTile extends StatelessWidget {
     required this.miniTitle,
     required this.backgroundColor,
     required this.value,
-    required this.withModel,
+    this.withModel = false,
   }) : super(key: key);
 
   ValueTile.model({
     Key? key,
-    required this.textColor,
-    required this.name,
-    required this.miniTitle,
     required this.backgroundColor,
     required this.sensor,
-    required this.withModel,
+    this.withModel = true,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final ValueBox valueBox;
     if (withModel) {
+      DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
+      name = dataModel.title;
+      textColor = dataModel.color;
       valueBox = ValueBox.model(
         backgroundColor: backgroundColor,
-        textColor: textColor,
-        miniTitle: miniTitle,
-        withModel: true,
         sensor: sensor,
       );
     } else {

@@ -93,21 +93,18 @@ class Monitor extends StatelessWidget {
                   flex: 1,
                   child: Row(
                     children: [
-                      ValueTile(
-                        name: "NIBD",
-                        miniTitle: "SYS",
-                        textColor: const Color(0xFFDC362E),
+                      ValueTile.model(
                         backgroundColor: const Color(0xFF2A2831),
-                        value: monitorController.nibdValue,
-                        withModel: false,
+                        sensor: sensorEnum.nibd,
+                        // withModel: false,
                       ),
                       ValueTile.model(
-                        name: "Pulse",
-                        miniTitle: "PP",
-                        textColor: const Color(0xFFFF00E4),
+                        //name: "Pulse",
+                        //miniTitle: "PP",
+                        //textColor: const Color(0xFFFF00E4),
                         backgroundColor: const Color(0xFF2A2831),
                         sensor: sensorEnum.pulse,
-                        withModel: true,
+                        //withModel: true,
                       ),
                     ],
                   ),
@@ -116,21 +113,15 @@ class Monitor extends StatelessWidget {
                   flex: 1,
                   child: Row(
                     children: [
-                      ValueTile(
-                        name: "MVe",
-                        miniTitle: "MVe",
-                        textColor: const Color(0xFF0CECDD),
+                      ValueTile.model(
                         backgroundColor: const Color(0xff2A2831),
-                        value: monitorController.mveValue,
-                        withModel: false,
+                        sensor: sensorEnum.mve,
+                        // withModel: false,
                       ),
-                      ValueTile(
-                        name: "Breath. Freq.",
-                        miniTitle: "AF",
-                        textColor: const Color(0xFF0CECDD),
+                      ValueTile.model(
                         backgroundColor: const Color(0xff2A2831),
-                        value: monitorController.breathFreqValue,
-                        withModel: false,
+                        sensor: sensorEnum.breathFrequency,
+                        // withModel: false,
                       ),
                     ],
                   ),

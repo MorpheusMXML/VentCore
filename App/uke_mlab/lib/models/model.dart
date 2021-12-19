@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/models/system_state.dart';
@@ -9,6 +11,10 @@ import 'package:uke_mlab/utilities/alarm_controller.dart';
 /// graphDataMaxLength is initialized with 100, can be manipulated
 class DataModel extends GetxController {
   late final sensorEnum sensorKey;
+
+  Color color = Colors.white;
+  String title = "No Default Info";
+  String miniTitle = "NoInfo";
 
   final RxInt upperAlarmBound = 0.obs;
   final RxInt lowerAlarmBound = 0.obs;

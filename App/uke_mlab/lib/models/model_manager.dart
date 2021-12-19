@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/enums.dart';
@@ -11,6 +12,8 @@ import 'package:uke_mlab/utilities/alarm_controller.dart';
 class ModelManager {
   late final AlarmController _alarmController;
   late final Map<String, dynamic> defaultValues;
+
+  bool stylesTraitsLoaded = false;
 
   ModelManager() {
     for (var sensor in sensorEnum.values) {
@@ -23,7 +26,7 @@ class ModelManager {
 
   void onInit() async {
     var defaultString =
-        await rootBundle.loadString('assets/jsons/default_boundaries.json');
+        await rootBundle.loadString('assets/jsons/sensor_default_values.json');
     defaultValues = await jsonDecode(defaultString.toString());
   }
 
@@ -38,11 +41,16 @@ class ModelManager {
   //Loads default valus for alarm boundaries to DataModel if patientType changed
   //NOT TO BE CALLED WITH patientTypeEnum.none, since that has no pre defined values
   void loadPatientPresets(patientTypeEnum patientType) {
-    for (var sensor in sensorEnum.values) {
-      if (defaultValues.containsKey(sensor.toString())) {
-        DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
+    if (!stylesTraitsLoaded) {
+      loadStyleInfo();
+    }
 
-        dataModel.resetDataModel();
+    for (var sensor in sensorEnum.values) {
+      DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
+
+      dataModel.resetDataModel();
+
+      if (defaultValues.containsKey(sensor.toString())) {
         switch (patientType) {
           case patientTypeEnum.adult:
             dataModel.initialUpperBound =
@@ -82,8 +90,27 @@ class ModelManager {
         printInfo(
             info: "WARNING: Sensor " +
                 sensor.toString() +
-                " has no default Values in default_boundaries.json, please add those.");
+                " has no default Values for AlarmBoundaries.");
       }
     }
+  }
+
+  void loadStyleInfo() {
+    for (var sensor in sensorEnum.values) {
+      if (defaultValues.containsKey(sensor.toString())) {
+        DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
+        dataModel.color =
+            Color(int.parse(defaultValues[sensor.toString()]["color"]));
+        dataModel.title = defaultValues[sensor.toString()]["title"];
+        dataModel.miniTitle = defaultValues[sensor.toString()]["minititle"];
+        print(dataModel.title + ": " + dataModel.color.toString());
+      } else {
+        printInfo(
+            info: "WARNING: Sensor " +
+                sensor.toString() +
+                " has no default Values for style data.");
+      }
+    }
+    stylesTraitsLoaded = true;
   }
 }
