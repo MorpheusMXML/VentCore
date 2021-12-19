@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/models/system_state.dart';
@@ -10,6 +13,21 @@ import 'package:uke_mlab/utilities/alarm_controller.dart';
 /// Alarm evaluation is done in alarm_controller
 /// graphDataMaxLength is initialized with 100, can be manipulated
 class DataModel extends GetxController {
+  var dataList = [].obs;
+  var loading = true.obs;
+  @override
+  void onInit() {
+    super.onInit();
+    readJson();
+  }
+
+  Future readJson() async {
+    var jsonString = await rootBundle.loadString('assets/data.json');
+    var source = await jsonDecode(jsonString.toString())["data"];
+    dataList.value = source;
+    loading.value = false;
+  }
+
   late final sensorEnum sensorKey;
 
   Color color = Colors.white;
@@ -49,9 +67,11 @@ class DataModel extends GetxController {
   // updates singleDate with a new value, puts singleData at the end of the list
   // if graphData would exceed maxLenght, remove first (oldest) element
   // graphData is sorted by oldest at pos 0 to latest element
-  void updateValues(double newValue) {
-    singleData.value =
-        ChartData(DateTime.now(), newValue, singleData.value.counter + 1);
+  void updateValues() {
+    singleData.value = ChartData(
+        DateTime.now(),
+        dataList[0]["data"][singleData.value.counter],
+        singleData.value.counter + 1);
     if (graphData.length + 1 > graphDataMaxLength) {
       graphData.removeAt(0);
     }
@@ -100,4 +120,16 @@ class ChartData {
   final int counter;
 
   ChartData(this.time, this.value, this.counter);
+}
+
+class NIBDdata {
+  final DateTime time;
+  final int systolicPressure;
+  final int diastolicPressure;
+  late int mad;
+  NIBDdata(this.time, this.systolicPressure, this.diastolicPressure) {
+    //Formular for Calculating MAD out of systolic and diastolic pressure
+    mad = (diastolicPressure + (1 / 3) * (systolicPressure - diastolicPressure))
+        .toInt();
+  }
 }
