@@ -14,8 +14,6 @@ class Graph extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ChartSeriesController? chartController;
-
     DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
     return Obx(
       () => SfCartesianChart(
@@ -33,7 +31,7 @@ class Graph extends StatelessWidget {
               color: dataModel.color,
               dataSource: dataModel.graphData.value,
               onRendererCreated: (ChartSeriesController controller) {
-                chartController = controller;
+                dataModel.chartController = controller;
               },
               xValueMapper: (ChartData data, _) => data.counter,
               yValueMapper: (ChartData data, _) => data.value)
