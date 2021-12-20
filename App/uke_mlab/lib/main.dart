@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    systemState.activateTimer();
     return GetMaterialApp(
       title: 'MLab UKE',
       // TODO: Custom theme

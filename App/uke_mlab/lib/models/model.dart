@@ -4,10 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/models/model_manager.dart';
 import 'package:uke_mlab/utilities/alarm_controller.dart';
+import 'package:uke_mlab/widgets/graph/graph.dart';
 
 /// graphData INCLUDES the singleData value at the end
 /// Alarm evaluation is done in alarm_controller
@@ -40,6 +42,8 @@ class DataModel extends GetxController {
   late int initialUpperBound;
   late int initialLowerBound;
 
+  ChartSeriesController? chartController;
+
   late final Rx<ChartData> singleData;
 
   final RxList<ChartData> graphData =
@@ -68,23 +72,35 @@ class DataModel extends GetxController {
   // if graphData would exceed maxLenght, remove first (oldest) element
   // graphData is sorted by oldest at pos 0 to latest element
   void updateValues() {
-    singleData.value = ChartData(
-        DateTime.now(),
-        dataList[0]["data"][singleData.value.counter],
-        singleData.value.counter + 1);
-    if (graphData.length + 1 > graphDataMaxLength) {
-      graphData.removeAt(0);
-    }
-    graphData.add(singleData.value);
-    print(graphData.length.toString());
+    List<int> addedIndexes = [graphData.length - 1];
+    bool remove = false;
 
-    //evaluates whether update violated alarm boundaries or returns into boundaries
-    if (singleData.value.value > upperAlarmBound.value) {
-      evaluateBoundaryChange(boundaryStateEnum.upperBoundaryViolated);
-    } else if (singleData.value.value < lowerAlarmBound.value) {
-      evaluateBoundaryChange(boundaryStateEnum.lowerBoundaryViolated);
+    if (loading.value) {
+      print("loading");
     } else {
-      evaluateBoundaryChange(boundaryStateEnum.inBoundaries);
+      singleData.value = ChartData(
+          DateTime.now(),
+          dataList[0]["data"][singleData.value.counter],
+          singleData.value.counter + 1);
+      if (graphData.length + 1 > graphDataMaxLength) {
+        remove = true;
+        graphData.removeAt(0);
+      }
+      graphData.add(singleData.value);
+
+      chartController?.updateDataSource(
+        addedDataIndexes: addedIndexes,
+        removedDataIndexes: remove ? <int>[0] : null,
+      );
+
+      //evaluates whether update violated alarm boundaries or returns into boundaries
+      if (singleData.value.value > upperAlarmBound.value) {
+        evaluateBoundaryChange(boundaryStateEnum.upperBoundaryViolated);
+      } else if (singleData.value.value < lowerAlarmBound.value) {
+        evaluateBoundaryChange(boundaryStateEnum.lowerBoundaryViolated);
+      } else {
+        evaluateBoundaryChange(boundaryStateEnum.inBoundaries);
+      }
     }
   }
 
