@@ -17,12 +17,14 @@ import 'package:uke_mlab/widgets/graph/graph.dart';
 class DataModel extends GetxController {
   var dataList = [].obs;
   var loading = true.obs;
+  
   @override
   void onInit() {
     super.onInit();
     readJson();
   }
 
+  // Use FutureBuilder?
   Future readJson() async {
     var jsonString = await rootBundle.loadString('assets/data.json');
     var source = await jsonDecode(jsonString.toString())["data"];
@@ -39,6 +41,8 @@ class DataModel extends GetxController {
   final RxInt upperAlarmBound = 0.obs;
   final RxInt lowerAlarmBound = 0.obs;
 
+  final RxBool tapped = false.obs;
+
   late int initialUpperBound;
   late int initialLowerBound;
 
@@ -48,7 +52,7 @@ class DataModel extends GetxController {
 
   final RxList<ChartData> graphData =
       <ChartData>[].obs; //variable list, maybe fill up to _graphDataMaxLength?
-  int graphDataMaxLength = 100;
+  int graphDataMaxLength = 1500;
 
   late final ModelManager modelManager;
   final SystemState _systemState = Get.find<SystemState>();
@@ -75,18 +79,16 @@ class DataModel extends GetxController {
     List<int> addedIndexes = [graphData.length - 1];
     bool remove = false;
 
-    if (loading.value) {
-      print("loading");
-    } else {
+    if (!loading.value) {
       singleData.value = ChartData(
           DateTime.now(),
           dataList[0]["data"][singleData.value.counter],
           singleData.value.counter + 1);
+      graphData.add(singleData.value);
       if (graphData.length + 1 > graphDataMaxLength) {
         remove = true;
         graphData.removeAt(0);
       }
-      graphData.add(singleData.value);
 
       chartController?.updateDataSource(
         addedDataIndexes: addedIndexes,
