@@ -39,7 +39,6 @@ class ValueBox extends StatelessWidget {
     );
     lowerAlarmBound = Obx(
       () => Text(
-        // to be changed
         dataModel.lowerAlarmBound.value.toString(),
         style: TextStyle(color: textColor),
         textAlign: TextAlign.left,
@@ -47,7 +46,6 @@ class ValueBox extends StatelessWidget {
     );
     upperAlarmBound = Obx(
       () => Text(
-        // to be changed
         dataModel.upperAlarmBound.value.toString(),
         style: TextStyle(
           color: textColor,
@@ -55,50 +53,65 @@ class ValueBox extends StatelessWidget {
       ),
     );
 
-    return AspectRatio(
-      aspectRatio: 1,
-      child: ElevatedButton(
-        style: ButtonStyle(
-          shape: MaterialStateProperty.all(const RoundedRectangleBorder()),
-          backgroundColor: MaterialStateProperty.all(const Color(0xFF2A2831)),
-        ),
-        onPressed: () {
-          dataModel.updateValues();
-          if (dataModel.singleData.value.value.toInt() > 10) {
-            // monitorController.alarmMessage.value = "High pulse!";
-          }
-        },
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  miniTitle,
-                  style: TextStyle(color: textColor),
+    return Obx(
+      () => dataModel.tapped.value
+          ? Container(
+              color: Colors.white,
+              height: 150,
+              width: 150,
+              child: ListWheelScrollView(
+                controller: ScrollController(initialScrollOffset: 2000.0),
+                children: [for (var i = 0; i <= 100; i++) Text(i.toString())],
+                diameterRatio: 1.5,
+                useMagnifier: true,
+                magnification: 1.5,
+                itemExtent: 40,
+              ),
+            )
+          : AspectRatio(
+              aspectRatio: 1,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  shape:
+                      MaterialStateProperty.all(const RoundedRectangleBorder()),
+                  backgroundColor:
+                      MaterialStateProperty.all(const Color(0xFF2A2831)),
                 ),
-                upperAlarmBound,
-              ],
-            ),
-            mainText, // Obx here
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                lowerAlarmBound,
-                Text(
-                  "1/ min.",
-                  style: TextStyle(
-                    color: textColor,
-                  ),
-                  textAlign: TextAlign.right,
+                onPressed: () {
+                  dataModel.tapped.value = !dataModel.tapped.value;
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          miniTitle,
+                          style: TextStyle(color: textColor),
+                        ),
+                        upperAlarmBound,
+                      ],
+                    ),
+                    mainText, // Obx here
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        lowerAlarmBound,
+                        Text(
+                          "1/ min.",
+                          style: TextStyle(
+                            color: textColor,
+                          ),
+                          textAlign: TextAlign.right,
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ],
-        ),
-      ),
     );
   }
 }
