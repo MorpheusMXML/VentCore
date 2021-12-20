@@ -46,34 +46,40 @@ class Monitor extends StatelessWidget {
   Widget getToggledScreen() {
     if (toggleController.isSelected[1]) {
       // Ventilation
-      return Row(children: [getGraphView(), ModeToggleButton()]);
+      return Row(children: [
+        Flexible(flex: 4, child: getGraphView()),
+        Flexible(flex: 2, child: ModeToggleButton())
+      ]);
     } else if (toggleController.isSelected[2]) {
       // Defibrillation
-      return Row(children: [getGraphView(), ModeToggleButton()]);
+      return Row(children: [
+        Flexible(flex: 4, child: getGraphView()),
+        Flexible(flex: 2, child: ModeToggleButton())
+      ]);
     } else {
       // Monitoring
-      return Row(children: [getGraphView(), getToggleView()]);
+      return Row(children: [
+        Flexible(flex: 4, child: getGraphView()),
+        Flexible(flex: 2, child: getToggleView())
+      ]);
     }
   }
 
   Widget getGraphView() {
-    return Flexible(
-      flex: 4,
-      child: Container(
-        margin: const EdgeInsets.only(left: 8, right: 8),
-        child: Column(
-          children: [
-            Expanded(
-              child: ListView.builder(
-                itemCount: systemState.graphList.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return GraphContainer(sensor: systemState.graphList[index]);
-                },
-              ),
+    return Container(
+      margin: const EdgeInsets.only(left: 8, right: 8),
+      child: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              itemCount: systemState.graphList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return GraphContainer(sensor: systemState.graphList[index]);
+              },
             ),
-            const GraphAdder(),
-          ],
-        ),
+          ),
+          const GraphAdder(),
+        ],
       ),
     );
   }
@@ -92,58 +98,55 @@ class Monitor extends StatelessWidget {
       {"name": "PEEP", "rate": "mBar"},
     ];
 
-    return Flexible(
-      flex: 2,
-      child: Column(
-        children: [
-          Flexible(
-            flex: 1,
-            child: Row(
-              children: const [
-                ValueTile(
-                  sensor: sensorEnum.nibd,
-                ),
-                ValueTile(
-                  sensor: sensorEnum.pulse,
-                ),
-              ],
-            ),
+    return Column(
+      children: [
+        Flexible(
+          flex: 1,
+          child: Row(
+            children: const [
+              ValueTile(
+                sensor: sensorEnum.nibd,
+              ),
+              ValueTile(
+                sensor: sensorEnum.pulse,
+              ),
+            ],
           ),
-          Flexible(
-            flex: 1,
-            child: Row(
-              children: const [
-                ValueTile(
-                  sensor: sensorEnum.mve,
-                ),
-                ValueTile(
-                  sensor: sensorEnum.breathFrequency,
-                ),
-              ],
-            ),
+        ),
+        Flexible(
+          flex: 1,
+          child: Row(
+            children: const [
+              ValueTile(
+                sensor: sensorEnum.mve,
+              ),
+              ValueTile(
+                sensor: sensorEnum.breathFrequency,
+              ),
+            ],
           ),
-          Flexible(
-            flex: 2,
-            child: Row(
-              children: [
-                Flexible(
-                  flex: 1,
-                  child: InfoTile(
-                    data: infoData,
-                  ),
+        ),
+        Flexible(
+          flex: 2,
+          child: Row(
+            children: [
+              Flexible(
+                flex: 1,
+                child: InfoTile(
+                  data: infoData,
                 ),
-                Flexible(
-                  flex: 1,
-                  child: SettingTile(
-                    data: settingData,
-                  ),
+              ),
+              Flexible(
+                flex: 1,
+                child: SettingTile(
+                  data: settingData,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          ModeToggleButton(),
-        ],
-      ),
+        ),
+        ModeToggleButton(),
+      ],
     );
   }
 }
