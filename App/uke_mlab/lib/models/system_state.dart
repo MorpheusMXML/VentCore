@@ -1,5 +1,9 @@
+import 'dart:async';
+
+import 'package:get/get.dart';
 import 'package:uke_mlab/models/enums.dart';
-// Atm unsused
+import 'package:uke_mlab/models/model.dart';
+// Atm unused
 // TODO address in DataModel update/set methods
 // TODO use in use in AlarmController
 
@@ -13,6 +17,15 @@ class SystemState {
     sensorEnum.spo2,
     sensorEnum.co2
   ];
+
+  void activateTimer() {
+    for (var sensor in sensorEnum.values) {
+      DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
+      Timer.periodic(const Duration(milliseconds: 500), (timer) {
+        dataModel.updateValues();
+      });
+    }
+  }
 
   // SystemState initated with no violations at place and screenStatus as topLevelScreen
   SystemState() {
