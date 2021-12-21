@@ -10,6 +10,7 @@ enum sensorEnum {
 }
 
 enum scenariosEnum {
+  standardScenario,
   scenario1,
   scenario2,
   scenario3a,
