@@ -55,10 +55,15 @@ class ValueBox extends StatelessWidget {
 
     return Obx(
       () => dataModel.tapped.value
-          ? Container(
-              color: Colors.white,
-              height: 150,
-              width: 150,
+          ? ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                maximumSize: const Size(150, 150),
+                primary: Colors.white,
+                onPrimary: Colors.black,
+              ),
+              onPressed: () {
+                dataModel.tapped.value = !dataModel.tapped.value;
+              },
               child: ListWheelScrollView(
                 controller: ScrollController(initialScrollOffset: 2000.0),
                 children: [for (var i = 0; i <= 100; i++) Text(i.toString())],
