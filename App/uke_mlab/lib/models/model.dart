@@ -15,9 +15,9 @@ import 'package:uke_mlab/widgets/graph/graph.dart';
 /// Alarm evaluation is done in alarm_controller
 /// graphDataMaxLength is initialized with 100, can be manipulated
 class DataModel extends GetxController {
-  var dataList = [].obs;
+  var dataMap = {}.obs;
   var loading = true.obs;
-  
+
   @override
   void onInit() {
     super.onInit();
@@ -28,7 +28,15 @@ class DataModel extends GetxController {
   Future readJson() async {
     var jsonString = await rootBundle.loadString('assets/data.json');
     var source = await jsonDecode(jsonString.toString())["data"];
-    dataList.value = source;
+    dataMap.value = {
+      sensorEnum.breathFrequency: source[0],
+      sensorEnum.co2: source[1],
+      sensorEnum.heartFrequency: source[8],
+      sensorEnum.mve: source[3],
+      sensorEnum.nibd: source[4],
+      sensorEnum.pulse: source[5],
+      sensorEnum.spo2: source[7]
+    };
     loading.value = false;
   }
 
@@ -52,7 +60,7 @@ class DataModel extends GetxController {
 
   final RxList<ChartData> graphData =
       <ChartData>[].obs; //variable list, maybe fill up to _graphDataMaxLength?
-  int graphDataMaxLength = 1500;
+  int graphDataMaxLength = 30;
 
   late final ModelManager modelManager;
   final SystemState _systemState = Get.find<SystemState>();
@@ -76,23 +84,28 @@ class DataModel extends GetxController {
   // if graphData would exceed maxLenght, remove first (oldest) element
   // graphData is sorted by oldest at pos 0 to latest element
   void updateValues() {
-    List<int> addedIndexes = [graphData.length - 1];
+    List<int> addedIndexes = <int>[graphData.length];
+    List<int> removedIndexes = <int>[0];
     bool remove = false;
 
     if (!loading.value) {
       singleData.value = ChartData(
           DateTime.now(),
-          dataList[0]["data"][singleData.value.counter],
+          dataMap[sensorKey]["data"][singleData.value.counter],
           singleData.value.counter + 1);
       graphData.add(singleData.value);
+      
       if (graphData.length + 1 > graphDataMaxLength) {
         remove = true;
         graphData.removeAt(0);
       }
 
+      print(sensorKey.toString() + " " + singleData.value.counter.toString());
+
+      // update only added/removed indexes instead of the whole chart (efficient)
       chartController?.updateDataSource(
-        addedDataIndexes: addedIndexes,
-        removedDataIndexes: remove ? <int>[0] : null,
+        addedDataIndexes: remove ? <int>[graphData.length - 1] : addedIndexes,
+        removedDataIndexes: remove ? removedIndexes : null,
       );
 
       //evaluates whether update violated alarm boundaries or returns into boundaries
