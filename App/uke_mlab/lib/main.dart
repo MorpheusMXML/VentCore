@@ -10,6 +10,7 @@ import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/models/model_manager.dart';
 import 'package:uke_mlab/utilities/alarm_controller.dart';
 import 'package:uke_mlab/utilities/screen_controller.dart';
+import 'package:uke_mlab/widgets/statusbar/statusbar.dart';
 
 import 'providers/mockup.dart';
 
@@ -32,9 +33,12 @@ class MyApp extends StatelessWidget {
   final ModelManager modelManager = Get.put(ModelManager());
 
   MyApp({Key? key}) : super(key: key) {
+    // TODO: Create Binding Class for alarmcontroller and bind to the respective
+    // pages, maybe create a new starting screen (loading screen) that navigates
+    // to the current start page when all controllers are initialized, jsons,
+    // svgs are loaded and screens are given bindings?
     final AlarmController alarmController =
         Get.put(AlarmController(modelManager));
-    final ScreenController screenController = Get.put(ScreenController());
   }
 
   @override
@@ -51,16 +55,62 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(
           name: "/monitor",
-          page: () => Monitor(),
-          bindings: [ToggleBinding(), MonitorBinding()],
+          page: () => getScaffold(Monitor()),
+          bindings: [
+            StartScreenBinding(),
+            ToggleBinding(),
+            MonitorBinding(),
+            ScreenBinding(),
+          ],
         ),
         GetPage(
           name: "/start_screen",
-          page: () => const StartScreen(),
-          bindings: [StartScreenBinding(), MonitorBinding()],
+          page: () => getScaffold(const StartScreen()),
+          bindings: [
+            StartScreenBinding(),
+            MonitorBinding(),
+            ScreenBinding(),
+          ],
         )
       ],
       initialRoute: "/start_screen",
     );
+  }
+
+  Widget getScaffold(Widget screenWidget) {
+    return Scaffold(
+        drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              const DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
+                child: Text('Menu'),
+              ),
+              ListTile(
+                title: const Text('Patient Settings'),
+                onTap: () => Get.currentRoute == "patient_settings"
+                    ? null
+                    : Get.toNamed("/patient_settings"),
+              ),
+              ListTile(
+                title: const Text('Alarm Limits'),
+                onTap: () => Get.currentRoute == "/alarm_limits"
+                    ? null
+                    : Get.toNamed("/alarm_limits"),
+              ),
+              ListTile(
+                title: const Text('Demo Scenarios'),
+                onTap: () => Get.currentRoute == "/demo_scenarios"
+                    ? null
+                    : Get.toNamed("/demo_scenarios"),
+              ),
+            ],
+          ),
+        ),
+        appBar: AppBar(title: const StatusBar()),
+        body: screenWidget);
   }
 }
