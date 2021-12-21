@@ -14,48 +14,45 @@ class StartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const StatusBar(category: "")),
-      body: Row(
-        children: [
-          Flexible(
-            flex: 1,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                StartScreenButton(
-                    name: 'Adult', image: 'assets/icons/adults2.svg'),
-                StartScreenButton(
-                    name: 'Child', image: 'assets/icons/children.svg'),
-                StartScreenButton(
-                    name: 'Infant', image: 'assets/icons/newborn.svg'),
-              ],
-            ),
+    return Row(
+      children: [
+        Flexible(
+          flex: 1,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              StartScreenButton(
+                  name: 'Adult', image: 'assets/icons/adults2.svg'),
+              StartScreenButton(
+                  name: 'Child', image: 'assets/icons/children.svg'),
+              StartScreenButton(
+                  name: 'Infant', image: 'assets/icons/newborn.svg'),
+            ],
           ),
-          Flexible(
-            flex: 1,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const StartScreenPopup(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Column(
-                      children: const [
-                        StartScreenContinue(),
-                        StartScreenSkip(),
-                      ],
-                    ),
-                    const aedButton(),
-                  ],
-                ),
-              ],
-            ),
+        ),
+        Flexible(
+          flex: 1,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const StartScreenPopup(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Column(
+                    children: const [
+                      StartScreenContinue(),
+                      StartScreenSkip(),
+                    ],
+                  ),
+                  const aedButton(),
+                ],
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
