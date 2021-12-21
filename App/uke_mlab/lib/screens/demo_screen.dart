@@ -11,9 +11,8 @@ class DemoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const StatusBar(category: "")),
-      body: Row(children: [
+    return Row(
+      children: [
         Flexible(
           flex: 3,
           child: Row(
@@ -38,7 +37,7 @@ class DemoScreen extends StatelessWidget {
             ],
           ),
         ),
-      ]),
+      ],
     );
   }
 }

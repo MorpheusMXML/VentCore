@@ -94,13 +94,13 @@ class DataModel extends GetxController {
           dataMap[sensorKey]["data"][singleData.value.counter],
           singleData.value.counter + 1);
       graphData.add(singleData.value);
-      
+
       if (graphData.length + 1 > graphDataMaxLength) {
         remove = true;
         graphData.removeAt(0);
       }
 
-      print(sensorKey.toString() + " " + singleData.value.counter.toString());
+      // print(sensorKey.toString() + " " + singleData.value.counter.toString());
 
       // update only added/removed indexes instead of the whole chart (efficient)
       chartController?.updateDataSource(
@@ -128,8 +128,8 @@ class DataModel extends GetxController {
 
   //informs alarmController about change via call
   void informAlarmController(boundaryStateEnum boundaryState) {
-    //TODO implememt instead of just printing
-    print("$sensorKey had boundary change to $boundaryState");
+    //TODO implement instead of just printing
+    // print("$sensorKey had boundary change to $boundaryState");
     //requires information about own state
   }
 
