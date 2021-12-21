@@ -6,8 +6,11 @@ import 'package:uke_mlab/widgets/setting/setting_text.dart';
 class Setting extends StatelessWidget {
   final String name;
   final String rate;
-  const Setting({Key? key, required this.name, required this.rate})
-      : super(key: key);
+  const Setting({
+    Key? key,
+    required this.name,
+    required this.rate,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
