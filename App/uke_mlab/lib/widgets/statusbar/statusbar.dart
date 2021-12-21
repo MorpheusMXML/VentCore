@@ -1,25 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/mockup.dart';
+import 'package:uke_mlab/providers/start_screen_controller.dart';
 
 class StatusBar extends StatelessWidget {
-  final String category;
   const StatusBar({
     Key? key,
-    required this.category,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final monitorController = Get.find<MonitorController>();
+    final startScreenController = Get.find<StartScreenController>();
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Flexible(
-          flex: 1,
-          child: Icon(Icons.menu, color: Colors.white),
-        ),
         Flexible(
           flex: 5,
           child: Obx(
@@ -36,9 +32,11 @@ class StatusBar extends StatelessWidget {
         Flexible(
           flex: 1,
           child: Text(
-            category,
+            startScreenController.selectedString.toString(),
             style: const TextStyle(
-                color: Colors.white, decoration: TextDecoration.none),
+              color: Colors.white,
+              decoration: TextDecoration.none,
+            ),
           ),
         ),
         const Flexible(
