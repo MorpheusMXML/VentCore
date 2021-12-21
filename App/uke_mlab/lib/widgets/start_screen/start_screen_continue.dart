@@ -12,6 +12,7 @@ class StartScreenContinue extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final startScreenController = Get.find<StartScreenController>();
+    final screenController = Get.find<ScreenController>();
 
     return Obx(
       () => Container(
@@ -27,13 +28,9 @@ class StartScreenContinue extends StatelessWidget {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),
           ),
           onPressed: startScreenController.selectedString.toString() != ""
-              ? () {
-                  Get.toNamed(
-                      Get.find<ScreenController>().changeScreen2(
-                          screenChangeButtonEnum.continueButton,
-                          startScreenController.selectedString.value),
-                      arguments: [startScreenController.selectedString.value]);
-                }
+              ? () => Get.offNamed(screenController.changeScreen2(
+                  screenChangeButtonEnum.continueButton,
+                  startScreenController.selectedString.value))
               : null,
           child: const Text('Continue', style: TextStyle(fontSize: 20)),
         ),
