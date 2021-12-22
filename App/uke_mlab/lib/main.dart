@@ -6,14 +6,11 @@ import 'package:uke_mlab/providers/toggle_controller.dart';
 import 'package:uke_mlab/screens/demo_screen.dart';
 import 'package:uke_mlab/screens/monitor.dart';
 import 'package:uke_mlab/screens/start_screen.dart';
-import 'package:uke_mlab/models/model.dart';
 import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/models/model_manager.dart';
 import 'package:uke_mlab/utilities/alarm_controller.dart';
 import 'package:uke_mlab/utilities/screen_controller.dart';
 import 'package:uke_mlab/widgets/statusbar/statusbar.dart';
-
-import 'providers/mockup.dart';
 
 void main() {
   // We need to call it manually,
@@ -34,7 +31,7 @@ class MyApp extends StatelessWidget {
   final ModelManager modelManager = Get.put(ModelManager());
 
   MyApp({Key? key}) : super(key: key) {
-    // TODO: Create Binding Class for alarmcontroller and bind to the respective
+    // Create Binding Class for alarmcontroller and bind to the respective
     // pages, maybe create a new starting screen (loading screen) that navigates
     // to the current start page when all controllers are initialized, jsons,
     // svgs are loaded and screens are given bindings?
@@ -45,6 +42,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     systemState.activateTimer();
+
     return GetMaterialApp(
       title: 'MLab UKE',
       // TODO: Custom theme
@@ -60,7 +58,6 @@ class MyApp extends StatelessWidget {
           bindings: [
             StartScreenBinding(),
             ToggleBinding(),
-            MonitorBinding(),
             ScreenBinding(),
           ],
         ),
@@ -69,14 +66,15 @@ class MyApp extends StatelessWidget {
           page: () => getScaffold(const StartScreen()),
           bindings: [
             StartScreenBinding(),
-            MonitorBinding(),
             ScreenBinding(),
           ],
         ),
         GetPage(
           name: "/demo_scenarios",
           page: () => getScaffold(const DemoScreen()),
-          bindings: [StartScreenBinding()],
+          bindings: [
+            StartScreenBinding(),
+          ],
         )
       ],
       initialRoute: "/start_screen",

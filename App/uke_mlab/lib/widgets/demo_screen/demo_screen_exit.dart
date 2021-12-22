@@ -6,7 +6,6 @@ class DemoScreenExit extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -14,7 +13,7 @@ class DemoScreenExit extends StatelessWidget {
       margin: const EdgeInsets.fromLTRB(0, 0, 50, 50),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          fixedSize: const Size(200,60),
+          fixedSize: const Size(200, 60),
           primary: const Color(0xffeeeeee),
           onPrimary: Colors.black,
           shape: RoundedRectangleBorder(
@@ -23,7 +22,7 @@ class DemoScreenExit extends StatelessWidget {
         ),
         child: const Text('Exit', style: TextStyle(fontSize: 20)),
         onPressed: () {
-          Get.toNamed('/start_screen'); //TODO: Navigation!
+          Get.offNamed('/start_screen');
         },
       ),
     );

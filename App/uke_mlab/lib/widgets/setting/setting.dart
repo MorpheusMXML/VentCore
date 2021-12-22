@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uke_mlab/providers/mockup.dart';
+import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/widgets/setting/setting_text.dart';
 
 class Setting extends StatelessWidget {
@@ -14,7 +14,7 @@ class Setting extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final monitorController = Get.find<MonitorController>();
+    final systemState = Get.find<SystemState>();
 
     return Container(
       color: const Color(0xFF2A2831),
@@ -29,7 +29,7 @@ class Setting extends StatelessWidget {
           ),
           Flexible(
             child: ElevatedButton(
-              onPressed: () => monitorController.decrementIPPV(name),
+              onPressed: () => systemState.decrementIPPV(name),
               child: const Icon(
                 Icons.remove,
               ),
@@ -43,7 +43,7 @@ class Setting extends StatelessWidget {
           ),
           Flexible(
             child: ElevatedButton(
-              onPressed: () => monitorController.incrementIPPV(name),
+              onPressed: () => systemState.incrementIPPV(name),
               child: const Icon(Icons.add),
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(

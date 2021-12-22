@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uke_mlab/providers/mockup.dart';
+import 'package:uke_mlab/models/system_state.dart';
 
 class SettingText extends StatelessWidget {
   final String name;
   final String rate;
-  const SettingText({Key? key, required this.name, required this.rate})
-      : super(key: key);
+  const SettingText({
+    Key? key,
+    required this.name,
+    required this.rate,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final monitorController = Get.find<MonitorController>();
+    final systemState = Get.find<SystemState>();
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -26,7 +29,7 @@ class SettingText extends StatelessWidget {
         ),
         Obx(
           () => Text(
-            monitorController.ippvValues[name].toString(),
+            systemState.ippvValues[name],
             style: const TextStyle(
               fontSize: 32,
               color: Colors.white,

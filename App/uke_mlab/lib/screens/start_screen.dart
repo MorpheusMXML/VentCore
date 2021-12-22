@@ -5,7 +5,6 @@ import 'package:uke_mlab/widgets/start_screen/start_screen_button.dart';
 import 'package:uke_mlab/widgets/start_screen/start_screen_continue.dart';
 import 'package:uke_mlab/widgets/start_screen/start_screen_popup.dart';
 import 'package:uke_mlab/widgets/start_screen/start_screen_skip.dart';
-import 'package:uke_mlab/widgets/statusbar/statusbar.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({

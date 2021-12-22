@@ -1,11 +1,9 @@
-import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/enums.dart';
-import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/models/model.dart';
 import 'package:uke_mlab/utilities/alarm_controller.dart';
 
@@ -103,7 +101,7 @@ class ModelManager {
             Color(int.parse(defaultValues[sensor.toString()]["color"]));
         dataModel.title = defaultValues[sensor.toString()]["title"];
         dataModel.miniTitle = defaultValues[sensor.toString()]["minititle"];
-        print(dataModel.title + ": " + dataModel.color.toString());
+        // print(dataModel.title + ": " + dataModel.color.toString());
       } else {
         printInfo(
             info: "WARNING: Sensor " +

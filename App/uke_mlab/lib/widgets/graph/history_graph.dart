@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
-
-import 'package:uke_mlab/providers/mockup.dart';
+import 'package:uke_mlab/models/model.dart';
 
 class HistoryGraph extends StatelessWidget {
   final Map<String, Object?> graphData;
@@ -16,7 +15,7 @@ class HistoryGraph extends StatelessWidget {
   double findMax(bool max) {
     if (max) {
       List<int> syst = [];
-      for (var element in (graphData["data"] as List<NIBDdataMockup>)) {
+      for (var element in (graphData["data"] as List<NIBDdata>)) {
         syst.add(element.systolicPressure);
       }
       syst.sort();
@@ -25,7 +24,7 @@ class HistoryGraph extends StatelessWidget {
     } else {
       List<int> dist = [];
 
-      for (var element in (graphData["data"] as List<NIBDdataMockup>)) {
+      for (var element in (graphData["data"] as List<NIBDdata>)) {
         dist.add(element.diastolicPressure);
       }
 
@@ -71,17 +70,17 @@ class HistoryGraph extends StatelessWidget {
                 color: Colors.redAccent)
           ],
           color: graphData["color"] as Color,
-          dataSource: graphData["data"] as List<NIBDdataMockup>,
-          xValueMapper: (NIBDdataMockup data, _) => data.time,
-          yValueMapper: (NIBDdataMockup data, _) => data.mad,
+          dataSource: graphData["data"] as List<NIBDdata>,
+          xValueMapper: (NIBDdata data, _) => data.time,
+          yValueMapper: (NIBDdata data, _) => data.mad,
         ),
         HiloSeries(
           enableTooltip: true,
-          dataSource: graphData["data"] as List<NIBDdataMockup>,
+          dataSource: graphData["data"] as List<NIBDdata>,
           color: Colors.red,
-          xValueMapper: (NIBDdataMockup data, _) => data.time,
-          lowValueMapper: (NIBDdataMockup data, _) => data.diastolicPressure,
-          highValueMapper: (NIBDdataMockup data, _) => data.systolicPressure,
+          xValueMapper: (NIBDdata data, _) => data.time,
+          lowValueMapper: (NIBDdata data, _) => data.diastolicPressure,
+          highValueMapper: (NIBDdata data, _) => data.systolicPressure,
           markerSettings: const MarkerSettings(
               shape: DataMarkerType.horizontalLine, width: 10, isVisible: true),
         ),

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:uke_mlab/providers/mockup.dart';
-
 import 'package:uke_mlab/utilities/screen_controller.dart';
 
 import 'package:uke_mlab/models/enums.dart';

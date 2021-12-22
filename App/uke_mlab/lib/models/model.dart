@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -8,8 +7,6 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/models/model_manager.dart';
-import 'package:uke_mlab/utilities/alarm_controller.dart';
-import 'package:uke_mlab/widgets/graph/graph.dart';
 
 /// graphData INCLUDES the singleData value at the end
 /// Alarm evaluation is done in alarm_controller

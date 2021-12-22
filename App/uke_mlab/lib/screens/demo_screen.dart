@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:uke_mlab/widgets/demo_screen/demo_screen_button.dart';
 import 'package:uke_mlab/widgets/demo_screen/demo_screen_exit.dart';
-import 'package:uke_mlab/widgets/statusbar/statusbar.dart';
 
 class DemoScreen extends StatelessWidget {
   const DemoScreen({
