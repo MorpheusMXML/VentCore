@@ -28,9 +28,14 @@ class StartScreenContinue extends StatelessWidget {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),
           ),
           onPressed: startScreenController.selectedString.toString() != ""
-              ? () => Get.offNamed(screenController.changeScreen2(
-                  screenChangeButtonEnum.continueButton,
-                  startScreenController.selectedString.value))
+              ? () => Get.offNamed(
+                    screenController.changeScreen2(
+                        screenChangeButtonEnum.continueButton,
+                        startScreenController.selectedString.value),
+                    arguments: {
+                      "patientType": startScreenController.selectedString.value
+                    },
+                  )
               : null,
           child: const Text('Continue', style: TextStyle(fontSize: 20)),
         ),

@@ -4,11 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import 'package:uke_mlab/models/model_manager.dart';
-import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/models/enums.dart';
-import 'package:uke_mlab/providers/start_screen_controller.dart';
-
 import 'package:uke_mlab/utilities/screen_controller.dart';
 
 class aedButton extends StatelessWidget {
@@ -18,7 +14,6 @@ class aedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final startScreenController = Get.find<StartScreenController>();
     final screenController = Get.find<ScreenController>();
 
     return Container(
@@ -36,8 +31,8 @@ class aedButton extends StatelessWidget {
           onPressed: () {
             Get.offNamed(
               screenController.changeScreen1(screenChangeButtonEnum.aedButton),
+              arguments: {"patientType": "Adult"},
             );
-            startScreenController.selectedString.value = "Adult";
           },
           child: Column(
             children: [
