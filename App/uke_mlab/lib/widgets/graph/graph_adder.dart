@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uke_mlab/providers/mockup.dart';
+import 'package:uke_mlab/models/system_state.dart';
 import 'graph_adder_popup.dart';
 
 class GraphAdder extends StatelessWidget {
@@ -10,13 +10,13 @@ class GraphAdder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final monitorController = Get.find<MonitorController>();
+    final SystemState systemState = Get.find<SystemState>();
 
     return Obx(
-      () => monitorController.isAddGraphTapped.value
-          ? const GraphAdderPopup()
+      () => systemState.addGraph.value
+          ? GraphAdderPopup()
           : ElevatedButton(
-              onPressed: () => monitorController.invertGraphAdder(),
+              onPressed: () => systemState.addGraph.toggle(),
               style: ElevatedButton.styleFrom(
                 primary: Colors.grey[800],
                 fixedSize: const Size(80, 80),
