@@ -29,7 +29,7 @@ class SettingText extends StatelessWidget {
         ),
         Obx(
           () => Text(
-            systemState.ippvValues[name],
+            systemState.ippvValues[name].toString(),
             style: const TextStyle(
               fontSize: 32,
               color: Colors.white,
