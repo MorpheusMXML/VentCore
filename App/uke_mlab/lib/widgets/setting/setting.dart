@@ -19,41 +19,21 @@ class Setting extends StatelessWidget {
     return Container(
       color: const Color(0xFF2A2831),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Flexible(
-            flex: 1,
-            child: ElevatedButton(
-              onPressed: () {
-                monitorController.decrementIPPV(name);
-              },
-              child: const Icon(
-                Icons.remove,
-              ),
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.all(0),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                primary: const Color(0xFF5AC8FA),
-              ),
-            ),
-          ),
-          Flexible(
-            flex: 2,
             child: SettingText(
               name: name,
               rate: rate,
             ),
           ),
           Flexible(
-            flex: 1,
             child: ElevatedButton(
-              onPressed: () {
-                monitorController.incrementIPPV(name);
-              },
-              child: const Icon(Icons.add),
+              onPressed: () => monitorController.decrementIPPV(name),
+              child: const Icon(
+                Icons.remove,
+              ),
               style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.all(0),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -61,6 +41,18 @@ class Setting extends StatelessWidget {
               ),
             ),
           ),
+          Flexible(
+            child: ElevatedButton(
+              onPressed: () => monitorController.incrementIPPV(name),
+              child: const Icon(Icons.add),
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                primary: const Color(0xFF5AC8FA),
+              ),
+            ),
+          )
         ],
       ),
     );
