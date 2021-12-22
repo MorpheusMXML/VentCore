@@ -81,31 +81,14 @@ class Monitor extends StatelessWidget {
   }
 
   Widget monitoringToggleView() {
-    List<Map<String, Object>> infoData = [
-      {"type": "pPeak", "value": 50.12, "unit": " mBar"},
-      {"type": "pPlat", "value": 4.58, "unit": " mBar"},
-      {"type": "pMean", "value": 16.58, "unit": " mBar"},
-      {"type": "MV", "value": 7.2, "unit": " l/min"}
-    ];
-
-    List<Map<String, String>> settingData = [
-      {"name": "Freq.", "rate": "/min"},
-      {"name": "Vt", "rate": "ml"},
-      {"name": "PEEP", "rate": "mBar"},
-    ];
-
     return Column(
       children: [
         Flexible(
           flex: 1,
           child: Row(
             children: const [
-              ValueTile(
-                sensor: sensorEnum.nibd,
-              ),
-              ValueTile(
-                sensor: sensorEnum.pulse,
-              ),
+              ValueTile(sensor: sensorEnum.nibd),
+              ValueTile(sensor: sensorEnum.pulse),
             ],
           ),
         ),
@@ -113,34 +96,12 @@ class Monitor extends StatelessWidget {
           flex: 1,
           child: Row(
             children: const [
-              ValueTile(
-                sensor: sensorEnum.mve,
-              ),
-              ValueTile(
-                sensor: sensorEnum.breathFrequency,
-              ),
+              ValueTile(sensor: sensorEnum.mve),
+              ValueTile(sensor: sensorEnum.breathFrequency),
             ],
           ),
         ),
-        Flexible(
-          flex: 2,
-          child: Row(
-            children: [
-              Flexible(
-                flex: 1,
-                child: InfoTile(
-                  data: infoData,
-                ),
-              ),
-              Flexible(
-                flex: 1,
-                child: SettingTile(
-                  data: settingData,
-                ),
-              ),
-            ],
-          ),
-        ),
+        const Spacer(flex: 2),
         ModeToggleButton(),
       ],
     );
