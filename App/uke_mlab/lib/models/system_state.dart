@@ -12,16 +12,41 @@ class SystemState {
   patientTypeEnum patientType = patientTypeEnum.none;
   final Map<sensorEnum, boundaryStateEnum> violationStates = {};
   bool scenarioStarted = false;
-  List<sensorEnum> graphList = [
+
+  // More or less copy pasted from old mockup class
+  RxList<sensorEnum> graphList = [
     sensorEnum.heartFrequency,
     sensorEnum.spo2,
-    sensorEnum.co2
-  ];
+    sensorEnum.co2,
+  ].obs;
+
+  RxBool addGraph = false.obs;
+
+  Map<String, RxInt> ippvValues = {
+    "Freq.": 20.obs,
+    "Vt": 40.obs,
+    "PEEP": 60.obs
+  };
+
+  RxString alarmMessage = "".obs;
+
+  void incrementIPPV(name) {
+    ippvValues[name]!.value = ippvValues[name]!.value + 1;
+  }
+
+  void decrementIPPV(name) {
+    ippvValues[name]!.value = ippvValues[name]!.value - 1;
+  }
+
+  void switchToAlarm(int type) {
+    // if ((allGraphs[type]["alarm"] as RxString).value == "none") {
+    //   (allGraphs[type]["alarm"] as RxString).value = "alarm";
+  }
 
   void activateTimer() {
     for (var sensor in sensorEnum.values) {
       DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
-      Timer.periodic(const Duration(milliseconds: 500), (timer) {
+      Timer.periodic(const Duration(milliseconds: 2000), (timer) {
         dataModel.updateValues();
       });
     }
