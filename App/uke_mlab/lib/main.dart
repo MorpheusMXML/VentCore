@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/start_screen_controller.dart';
 import 'package:uke_mlab/providers/toggle_controller.dart';
+import 'package:uke_mlab/screens/demo_screen.dart';
 import 'package:uke_mlab/screens/monitor.dart';
 import 'package:uke_mlab/screens/start_screen.dart';
 import 'package:uke_mlab/models/model.dart';
@@ -71,6 +72,11 @@ class MyApp extends StatelessWidget {
             MonitorBinding(),
             ScreenBinding(),
           ],
+        ),
+        GetPage(
+          name: "/demo_scenarios",
+          page: () => getScaffold(const DemoScreen()),
+          bindings: [StartScreenBinding()],
         )
       ],
       initialRoute: "/start_screen",
@@ -81,7 +87,6 @@ class MyApp extends StatelessWidget {
     return Scaffold(
         drawer: Drawer(
           child: ListView(
-            padding: EdgeInsets.zero,
             children: [
               const DrawerHeader(
                 decoration: BoxDecoration(
@@ -91,21 +96,15 @@ class MyApp extends StatelessWidget {
               ),
               ListTile(
                 title: const Text('Patient Settings'),
-                onTap: () => Get.currentRoute == "patient_settings"
-                    ? null
-                    : Get.toNamed("/patient_settings"),
+                onTap: () => Get.toNamed("/patient_settings"),
               ),
               ListTile(
                 title: const Text('Alarm Limits'),
-                onTap: () => Get.currentRoute == "/alarm_limits"
-                    ? null
-                    : Get.toNamed("/alarm_limits"),
+                onTap: () => Get.toNamed("/alarm_limits"),
               ),
               ListTile(
                 title: const Text('Demo Scenarios'),
-                onTap: () => Get.currentRoute == "/demo_scenarios"
-                    ? null
-                    : Get.toNamed("/demo_scenarios"),
+                onTap: () => Get.toNamed("/demo_scenarios"),
               ),
             ],
           ),
