@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uke_mlab/providers/mockup.dart';
+import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/providers/start_screen_controller.dart';
 
 class StatusBar extends StatelessWidget {
@@ -10,7 +10,7 @@ class StatusBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final monitorController = Get.find<MonitorController>();
+    final systemState = Get.find<SystemState>();
     final startScreenController = Get.find<StartScreenController>();
 
     return Row(
@@ -20,9 +20,9 @@ class StatusBar extends StatelessWidget {
           flex: 5,
           child: Obx(
             () => Text(
-              monitorController.alarmMessage.value,
+              systemState.alarmMessage.value,
               style: TextStyle(
-                  color: monitorController.alarmMessage.value == ""
+                  color: systemState.alarmMessage.value == ""
                       ? Colors.white
                       : Colors.red,
                   decoration: TextDecoration.none),
@@ -31,11 +31,13 @@ class StatusBar extends StatelessWidget {
         ),
         Flexible(
           flex: 1,
-          child: Text(
-            startScreenController.selectedString.toString(),
-            style: const TextStyle(
-              color: Colors.white,
-              decoration: TextDecoration.none,
+          child: Obx(
+            () => Text(
+              startScreenController.selectedString.value,
+              style: const TextStyle(
+                color: Colors.white,
+                decoration: TextDecoration.none,
+              ),
             ),
           ),
         ),
@@ -47,10 +49,6 @@ class StatusBar extends StatelessWidget {
                 TextStyle(color: Colors.white, decoration: TextDecoration.none),
           ),
         ),
-        const Flexible(
-          flex: 1,
-          child: Icon(Icons.battery_full, color: Colors.white),
-        )
       ],
     );
   }
