@@ -14,32 +14,43 @@ class GraphAdderPopup extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        fixedSize: const Size(500, 150),
-        primary: const Color(0xFF2A2831),
+        fixedSize: const Size(800, 150),
+        primary: const Color(0xFF2A2831).withOpacity(0.5),
       ),
       onPressed: () => systemState.addGraph.toggle(),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [getAddGraphButton()],
+      child: Obx(
+        () => Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: getAddButtons()),
       ),
     );
   }
 
-  getAddGraphButton() {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-          fixedSize: const Size(130, 60),
-          primary: Colors.grey[50],
-          onPrimary: Colors.black),
-      onPressed: () {
-        systemState.addGraph.toggle();
-        systemState.graphList.add(sensorEnum.nibd);
-      },
-      child: const Text(
-        "Add NIBD",
-        style: TextStyle(fontSize: 18),
-        textAlign: TextAlign.center,
-      ),
-    );
+  List<Widget> getAddButtons() {
+    return sensorEnum.values.map((sensor) {
+      ButtonStyle style;
+
+      systemState.graphList.contains(sensor)
+          ? style = ElevatedButton.styleFrom(
+              fixedSize: const Size(80, 60),
+              // load color from sensors json or model manager?
+              primary: Colors.green,
+              onPrimary: Colors.black)
+          : style = ElevatedButton.styleFrom(
+              fixedSize: const Size(80, 60),
+              primary: Colors.grey[50],
+              onPrimary: Colors.black);
+
+      return ElevatedButton(
+          style: style,
+          onPressed: () => systemState.graphList.contains(sensor)
+              ? systemState.graphList.remove(sensor)
+              : systemState.graphList.add(sensor),
+          child: Text(
+            sensor.name,
+            style: const TextStyle(fontSize: 18),
+            textAlign: TextAlign.center,
+          ));
+    }).toList();
   }
 }
