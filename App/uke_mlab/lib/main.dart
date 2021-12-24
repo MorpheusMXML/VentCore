@@ -65,6 +65,7 @@ class MyApp extends StatelessWidget {
           name: "/start_screen",
           page: () => getScaffold(const StartScreen()),
           bindings: [
+            ToggleBinding(),
             StartScreenBinding(),
             ScreenBinding(),
           ],
@@ -81,7 +82,7 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  Widget getScaffold(Widget screenWidget) {
+  Scaffold getScaffold(Widget screenWidget) {
     return Scaffold(
         drawer: Drawer(
           child: ListView(
