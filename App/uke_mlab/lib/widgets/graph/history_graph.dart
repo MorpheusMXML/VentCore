@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
-
-import 'package:uke_mlab/providers/mockup.dart';
+import 'package:uke_mlab/models/model.dart';
 
 class HistoryGraph extends StatelessWidget {
   final Map<String, Object?> graphData;

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:uke_mlab/screens/alarm_limits.dart';
+import 'package:uke_mlab/screens/app_scaffold.dart';
 import 'package:uke_mlab/providers/start_screen_controller.dart';
 import 'package:uke_mlab/providers/toggle_controller.dart';
+import 'package:uke_mlab/screens/demo_scenarios.dart';
 import 'package:uke_mlab/screens/monitor.dart';
 import 'package:uke_mlab/screens/start_screen.dart';
-import 'package:uke_mlab/models/model.dart';
 import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/models/model_manager.dart';
 import 'package:uke_mlab/utilities/alarm_controller.dart';
 import 'package:uke_mlab/utilities/screen_controller.dart';
-
-import 'providers/mockup.dart';
 
 void main() {
   // We need to call it manually,
@@ -32,13 +32,18 @@ class MyApp extends StatelessWidget {
   final ModelManager modelManager = Get.put(ModelManager());
 
   MyApp({Key? key}) : super(key: key) {
+    // Create Binding Class for alarmcontroller and bind to the respective
+    // pages, maybe create a new starting screen (loading screen) that navigates
+    // to the current start page when all controllers are initialized, jsons,
+    // svgs are loaded and screens are given bindings?
     final AlarmController alarmController =
         Get.put(AlarmController(modelManager));
-    final ScreenController screenController = Get.put(ScreenController());
   }
 
   @override
   Widget build(BuildContext context) {
+    systemState.activateTimer();
+
     return GetMaterialApp(
       title: 'MLab UKE',
       // TODO: Custom theme
@@ -50,13 +55,35 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(
           name: "/monitor",
-          page: () => Monitor(),
-          bindings: [ToggleBinding(), MonitorBinding()],
+          page: () => AppScaffold(screen: Monitor()),
+          bindings: [
+            StartScreenBinding(),
+            ToggleBinding(),
+            ScreenBinding(),
+          ],
         ),
         GetPage(
           name: "/start_screen",
-          page: () => const StartScreen(),
-          bindings: [StartScreenBinding(), MonitorBinding()],
+          page: () => const AppScaffold(screen: StartScreen()),
+          bindings: [
+            ToggleBinding(),
+            StartScreenBinding(),
+            ScreenBinding(),
+          ],
+        ),
+        GetPage(
+          name: "/demo_scenarios",
+          page: () => const AppScaffold(screen: DemoScenarios()),
+          bindings: [
+            StartScreenBinding(),
+          ],
+        ),
+        GetPage(
+          name: "/alarm_limits",
+          page: () => const AppScaffold(screen: AlarmLimits()),
+          bindings: [
+            StartScreenBinding(),
+          ],
         )
       ],
       initialRoute: "/start_screen",

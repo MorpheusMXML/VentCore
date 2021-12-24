@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 //Widget for StartScreen Buttons
@@ -9,7 +8,7 @@ class DemoScreenButton extends StatelessWidget {
   const DemoScreenButton({
     Key? key,
     required this.name,
-  }): super(key: key);
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(

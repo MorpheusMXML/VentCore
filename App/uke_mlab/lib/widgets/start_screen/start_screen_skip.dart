@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/enums.dart';
-import 'package:uke_mlab/models/model_manager.dart';
-import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/utilities/screen_controller.dart';
 
 class StartScreenSkip extends StatelessWidget {
@@ -12,6 +10,8 @@ class StartScreenSkip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenController = Get.find<ScreenController>();
+
     return Container(
       alignment: Alignment.centerRight,
       margin: const EdgeInsets.fromLTRB(0, 0, 10, 12),
@@ -26,10 +26,12 @@ class StartScreenSkip extends StatelessWidget {
         ),
         child: const Text('Skip', style: TextStyle(fontSize: 20)),
         onPressed: () {
-          Get.toNamed(
-              Get.find<ScreenController>()
-                  .changeScreen1(screenChangeButtonEnum.aedButton),
-              arguments: ["Adult"]);
+          // TODO: [BUGFIX] Currently using arguments instead of changing value
+          // of observable variable selectedSetting used in statusbar because
+          // startScreenController is deleted after page navigation?
+          Get.offNamed(
+              screenController.changeScreen1(screenChangeButtonEnum.aedButton),
+              arguments: {"patientType": "Adult"});
         },
       ),
     );

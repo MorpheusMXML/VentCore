@@ -3,7 +3,13 @@ import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/models/model.dart';
 import 'package:uke_mlab/models/model_manager.dart';
 import 'package:uke_mlab/models/system_state.dart';
-import 'package:uke_mlab/widgets/start_screen/aed_button.dart';
+
+class ScreenBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.put(ScreenController());
+  }
+}
 
 // basic controller to interact with model
 // (at the moment) just boundary update

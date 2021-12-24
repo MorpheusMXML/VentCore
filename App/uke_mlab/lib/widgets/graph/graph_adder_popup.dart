@@ -1,67 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uke_mlab/providers/mockup.dart';
+import 'package:uke_mlab/models/enums.dart';
+import 'package:uke_mlab/models/system_state.dart';
 
 class GraphAdderPopup extends StatelessWidget {
-  const GraphAdderPopup({
+  final SystemState systemState = Get.find<SystemState>();
+
+  GraphAdderPopup({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final monitorController = Get.find<MonitorController>();
-
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        fixedSize: const Size(500, 150),
-        primary: const Color(0xFF2A2831),
+        fixedSize: const Size(800, 150),
+        primary: const Color(0xFF2A2831).withOpacity(0.5),
       ),
-      onPressed: () => monitorController.invertGraphAdder(),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          getAddGraphButton(monitorController),
-          Container(width: 12),
-          getAddGraphButton2(monitorController)
-        ],
+      onPressed: () => systemState.addGraph.toggle(),
+      child: Obx(
+        () => Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: getAddButtons()),
       ),
     );
   }
 
-  getAddGraphButton(MonitorController monitorController) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-          fixedSize: const Size(130, 60),
-          primary: Colors.grey[50],
-          onPrimary: Colors.black),
-      onPressed: () {
-        monitorController.invertGraphAdder();
-        (monitorController.allGraphs[4]["visible"] as RxBool).value = true;
-      },
-      child: const Text(
-        "Add NIBD",
-        style: TextStyle(fontSize: 18),
-        textAlign: TextAlign.center,
-      ),
-    );
-  }
+  List<Widget> getAddButtons() {
+    return sensorEnum.values.map((sensor) {
+      ButtonStyle style;
 
-  // Testing adding another graph
-  getAddGraphButton2(MonitorController monitorController) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-          fixedSize: const Size(130, 60),
-          primary: Colors.grey[50],
-          onPrimary: Colors.black),
-      onPressed: () {
-        monitorController.invertGraphAdder();
-        (monitorController.allGraphs[3]["visible"] as RxBool).value = true;
-      },
-      child: const Text(
-        "Add A",
-        style: TextStyle(fontSize: 18),
-        textAlign: TextAlign.center,
-      ),
-    );
+      systemState.graphList.contains(sensor)
+          ? style = ElevatedButton.styleFrom(
+              fixedSize: const Size(80, 60),
+              // load color from sensors json or model manager?
+              primary: Colors.green,
+              onPrimary: Colors.black)
+          : style = ElevatedButton.styleFrom(
+              fixedSize: const Size(80, 60),
+              primary: Colors.grey[50],
+              onPrimary: Colors.black);
+
+      return ElevatedButton(
+          style: style,
+          onPressed: () => systemState.graphList.contains(sensor)
+              ? systemState.graphList.remove(sensor)
+              : systemState.graphList.add(sensor),
+          child: Text(
+            sensor.name,
+            style: const TextStyle(fontSize: 18),
+            textAlign: TextAlign.center,
+          ));
+    }).toList();
   }
 }

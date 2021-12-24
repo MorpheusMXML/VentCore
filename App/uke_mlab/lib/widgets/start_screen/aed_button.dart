@@ -4,10 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import 'package:uke_mlab/models/model_manager.dart';
-import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/models/enums.dart';
-
+import 'package:uke_mlab/models/system_state.dart';
+import 'package:uke_mlab/providers/toggle_controller.dart';
 import 'package:uke_mlab/utilities/screen_controller.dart';
 
 class aedButton extends StatelessWidget {
@@ -17,6 +16,9 @@ class aedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenController = Get.find<ScreenController>();
+    final toggleController = Get.find<ToggleController>();
+
     return Container(
       alignment: Alignment.centerRight,
       margin: const EdgeInsets.fromLTRB(0, 0, 65, 12),
@@ -30,10 +32,13 @@ class aedButton extends StatelessWidget {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           ),
           onPressed: () {
-            Get.toNamed(
-                Get.find<ScreenController>()
-                    .changeScreen1(screenChangeButtonEnum.aedButton),
-                arguments: ["Adult"]);
+            // TODO: Why does GetX delete ToggleController after navigation?
+            // may be useful: https://stackoverflow.com/questions/66138542/
+            toggleController.isSelected.value = [false, false, true];
+            Get.offNamed(
+              screenController.changeScreen1(screenChangeButtonEnum.aedButton),
+              arguments: {"patientType": "Adult"},
+            );
           },
           child: Column(
             children: [
