@@ -38,14 +38,12 @@ class ValueTile extends StatelessWidget {
                     decoration: TextDecoration.none,
                     color: dataModel.color,
                     fontSize: 20,
-                    // temp fix for long names
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ),
             ),
             Flexible(
-              // cant decrease --> pixel overflow
               flex: 3,
               child: valueBox,
             ),

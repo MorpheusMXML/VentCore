@@ -8,113 +8,93 @@ import 'package:uke_mlab/models/model.dart';
 
 class ValueBox extends StatelessWidget {
   final sensorEnum sensor;
+  late DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
 
-  const ValueBox({
+  ValueBox({
     Key? key,
     required this.sensor,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    late final ScreenController screenController;
-    late final DataModel dataModel;
-    late Obx mainText;
-    late Obx lowerAlarmBound;
-    late Obx upperAlarmBound;
-
-    dataModel = Get.find<DataModel>(tag: sensor.toString());
-    var textColor = dataModel.color;
-    var miniTitle = dataModel.miniTitle;
-
-    mainText = Obx(
-      () => Text(
-        dataModel.singleData.value.value.toInt().toString(),
-        style: TextStyle(
-          color: textColor,
-          fontSize: 50,
-        ),
-      ),
-    );
-    lowerAlarmBound = Obx(
-      () => Text(
-        dataModel.lowerAlarmBound.value.toString(),
-        style: TextStyle(color: textColor),
-        textAlign: TextAlign.left,
-      ),
-    );
-    upperAlarmBound = Obx(
-      () => Text(
-        dataModel.upperAlarmBound.value.toString(),
-        style: TextStyle(
-          color: textColor,
-        ),
-      ),
-    );
+    final ScreenController screenController;
 
     return Obx(
       () => dataModel.tapped.value
-          ? ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                maximumSize: const Size(150, 150),
-                primary: Colors.white,
-                onPrimary: Colors.black,
-              ),
-              onPressed: () {
-                dataModel.tapped.value = !dataModel.tapped.value;
-              },
-              child: ListWheelScrollView(
-                controller: ScrollController(initialScrollOffset: 2000.0),
-                children: [for (var i = 0; i <= 100; i++) Text(i.toString())],
-                diameterRatio: 1.5,
-                useMagnifier: true,
-                magnification: 1.5,
-                itemExtent: 40,
-              ),
+          ? Stack(
+              clipBehavior: Clip.none,
+              children: [
+                getValueBox(),
+                Positioned(child: getOptions(), left: 100, top: 50,),
+                Positioned(child: getOptions(), right: 100, bottom: 50,),
+              ],
             )
-          : AspectRatio(
-              aspectRatio: 1,
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  shape:
-                      MaterialStateProperty.all(const RoundedRectangleBorder()),
-                  backgroundColor:
-                      MaterialStateProperty.all(const Color(0xFF2A2831)),
-                ),
-                onPressed: () {
-                  dataModel.tapped.value = !dataModel.tapped.value;
-                },
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Row(
+          : getValueBox(),
+    );
+  }
+
+  Widget getValueBox() {
+    return AspectRatio(
+        aspectRatio: 1,
+        child: ElevatedButton(
+            style: ButtonStyle(
+                shape:
+                    MaterialStateProperty.all(const RoundedRectangleBorder()),
+                backgroundColor:
+                    MaterialStateProperty.all(const Color(0xFF2A2831))),
+            onPressed: () => dataModel.tapped.toggle(),
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  // Can we take away Obx here since the whole widget is wrapped in Obx?
+                  Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          miniTitle,
-                          style: TextStyle(color: textColor),
-                        ),
-                        upperAlarmBound,
-                      ],
-                    ),
-                    mainText, // Obx here
-                    Row(
+                        getText(dataModel.miniTitle),
+                        Obx(() => getText(dataModel.upperAlarmBound.toString()))
+                      ]),
+                  Obx(() => getText(
+                      dataModel.singleData.value.value.toInt().toString(),
+                      fontSize: 50.0)),
+                  Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        lowerAlarmBound,
-                        Text(
-                          "1/ min.",
-                          style: TextStyle(
-                            color: textColor,
-                          ),
-                          textAlign: TextAlign.right,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
+                        Obx(() =>
+                            getText(dataModel.lowerAlarmBound.toString())),
+                        getText("1/min")
+                      ]),
+                ])));
+  }
+
+  Widget getOptions() {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        maximumSize: const Size(70, 100),
+        primary: Colors.white.withOpacity(0.3),
+        onPrimary: Colors.black,
+      ),
+      onPressed: () => dataModel.tapped.toggle(),
+      child: ListWheelScrollView(
+        controller: ScrollController(initialScrollOffset: 2000.0),
+        children: [
+          for (var i = 0; i <= 100; i++) Text(i.toString()),
+        ],
+        diameterRatio: 1.5,
+        useMagnifier: true,
+        magnification: 1.5,
+        itemExtent: 40,
+      ),
+    );
+  }
+
+  Widget getText(String text, {fontSize = 14.0}) {
+    return Text(
+      text,
+      style: TextStyle(
+        color: dataModel.color,
+        fontSize: fontSize,
+      ),
     );
   }
 }
