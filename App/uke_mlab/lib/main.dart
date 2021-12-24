@@ -94,15 +94,21 @@ class MyApp extends StatelessWidget {
               ),
               ListTile(
                 title: const Text('Patient Settings'),
-                onTap: () => Get.toNamed("/patient_settings"),
+                onTap: Get.currentRoute != "/patient_settings"
+                    ? () => Get.toNamed("/patient_settings")
+                    : null,
               ),
               ListTile(
                 title: const Text('Alarm Limits'),
-                onTap: () => Get.toNamed("/alarm_limits"),
+                onTap: Get.currentRoute != "/alarm_limits"
+                    ? () => Get.toNamed("/alarm_limits")
+                    : null,
               ),
               ListTile(
                 title: const Text('Demo Scenarios'),
-                onTap: () => Get.toNamed("/demo_scenarios"),
+                onTap: Get.currentRoute != "/demo_scenarios"
+                    ? () => Get.toNamed("/demo_scenarios")
+                    : null,
               ),
             ],
           ),
