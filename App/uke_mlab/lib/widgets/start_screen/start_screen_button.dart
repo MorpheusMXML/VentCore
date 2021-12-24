@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/start_screen_controller.dart';
@@ -10,7 +10,7 @@ import 'package:uke_mlab/providers/start_screen_controller.dart';
 
 class StartScreenButton extends StatelessWidget {
   final String name;
-  final String image;
+  final SvgPicture image;
 
   const StartScreenButton({
     Key? key,
@@ -20,6 +20,7 @@ class StartScreenButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     final startScreenController = Get.find<StartScreenController>();
 
     return Container(
@@ -49,10 +50,7 @@ class StartScreenButton extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SvgPicture.asset(
-                      image,
-                      height: 70,
-                    ),
+                    image,
                   ],
                 ),
               ),

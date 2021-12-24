@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:uke_mlab/widgets/start_screen/aed_button.dart';
 import 'package:uke_mlab/widgets/start_screen/start_screen_button.dart';
 import 'package:uke_mlab/widgets/start_screen/start_screen_continue.dart';
@@ -19,13 +20,27 @@ class StartScreen extends StatelessWidget {
           flex: 1,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
+            children: [
+              // precache images so loading doesn't take so long
+              // https://stackoverflow.com/questions/66872111/
               StartScreenButton(
-                  name: 'Adult', image: 'assets/icons/adults2.svg'),
+                  name: 'Adult',
+                  image: SvgPicture.asset(
+                    'assets/icons/adults2.svg',
+                    height: 70,
+                  )),
               StartScreenButton(
-                  name: 'Child', image: 'assets/icons/children.svg'),
+                  name: 'Child',
+                  image: SvgPicture.asset(
+                    'assets/icons/children.svg',
+                    height: 70,
+                  )),
               StartScreenButton(
-                  name: 'Infant', image: 'assets/icons/newborn.svg'),
+                  name: 'Infant',
+                  image: SvgPicture.asset(
+                    'assets/icons/newborn.svg',
+                    height: 70,
+                  )),
             ],
           ),
         ),
