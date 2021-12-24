@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:uke_mlab/screens/alarm_limits.dart';
+import 'package:uke_mlab/screens/app_scaffold.dart';
 import 'package:uke_mlab/providers/start_screen_controller.dart';
 import 'package:uke_mlab/providers/toggle_controller.dart';
-import 'package:uke_mlab/screens/demo_screen.dart';
+import 'package:uke_mlab/screens/demo_scenarios.dart';
 import 'package:uke_mlab/screens/monitor.dart';
 import 'package:uke_mlab/screens/start_screen.dart';
 import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/models/model_manager.dart';
 import 'package:uke_mlab/utilities/alarm_controller.dart';
 import 'package:uke_mlab/utilities/screen_controller.dart';
-import 'package:uke_mlab/widgets/statusbar/statusbar.dart';
 
 void main() {
   // We need to call it manually,
@@ -54,7 +55,7 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(
           name: "/monitor",
-          page: () => getScaffold(Monitor()),
+          page: () => AppScaffold(screen: Monitor()),
           bindings: [
             StartScreenBinding(),
             ToggleBinding(),
@@ -63,7 +64,7 @@ class MyApp extends StatelessWidget {
         ),
         GetPage(
           name: "/start_screen",
-          page: () => getScaffold(const StartScreen()),
+          page: () => const AppScaffold(screen: StartScreen()),
           bindings: [
             ToggleBinding(),
             StartScreenBinding(),
@@ -72,7 +73,14 @@ class MyApp extends StatelessWidget {
         ),
         GetPage(
           name: "/demo_scenarios",
-          page: () => getScaffold(const DemoScreen()),
+          page: () => const AppScaffold(screen: DemoScenarios()),
+          bindings: [
+            StartScreenBinding(),
+          ],
+        ),
+        GetPage(
+          name: "/alarm_limits",
+          page: () => const AppScaffold(screen: AlarmLimits()),
           bindings: [
             StartScreenBinding(),
           ],
@@ -80,41 +88,5 @@ class MyApp extends StatelessWidget {
       ],
       initialRoute: "/start_screen",
     );
-  }
-
-  Scaffold getScaffold(Widget screenWidget) {
-    return Scaffold(
-        drawer: Drawer(
-          child: ListView(
-            children: [
-              const DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                ),
-                child: Text('Menu'),
-              ),
-              ListTile(
-                title: const Text('Patient Settings'),
-                onTap: Get.currentRoute != "/patient_settings"
-                    ? () => Get.toNamed("/patient_settings")
-                    : null,
-              ),
-              ListTile(
-                title: const Text('Alarm Limits'),
-                onTap: Get.currentRoute != "/alarm_limits"
-                    ? () => Get.toNamed("/alarm_limits")
-                    : null,
-              ),
-              ListTile(
-                title: const Text('Demo Scenarios'),
-                onTap: Get.currentRoute != "/demo_scenarios"
-                    ? () => Get.toNamed("/demo_scenarios")
-                    : null,
-              ),
-            ],
-          ),
-        ),
-        appBar: AppBar(title: const StatusBar()),
-        body: screenWidget);
   }
 }
