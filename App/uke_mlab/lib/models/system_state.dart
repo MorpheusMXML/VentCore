@@ -14,11 +14,7 @@ class SystemState {
   bool scenarioStarted = false;
 
   // More or less copy pasted from old mockup class
-  RxList<sensorEnum> graphList = [
-    sensorEnum.heartFrequency,
-    sensorEnum.spo2,
-    sensorEnum.co2,
-  ].obs;
+  RxList<sensorEnum> graphList = <sensorEnum>[].obs;
 
   RxBool addGraph = false.obs;
 

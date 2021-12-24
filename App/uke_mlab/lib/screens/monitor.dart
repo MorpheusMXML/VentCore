@@ -2,28 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/providers/start_screen_controller.dart';
-
-import 'package:uke_mlab/providers/style_controller.dart';
-import 'package:uke_mlab/providers/toggle_controller.dart';
-
-import 'package:uke_mlab/widgets/graph/graph_container.dart';
-import 'package:uke_mlab/widgets/info/info_tile.dart';
-import 'package:uke_mlab/widgets/toggle/mode_toggle_button.dart';
-import 'package:uke_mlab/widgets/setting/setting_tile.dart';
-import 'package:uke_mlab/widgets/value_box/value_tile.dart';
-import 'package:uke_mlab/widgets/graph/graph_adder.dart';
-
 import 'package:uke_mlab/models/enums.dart';
-import 'package:uke_mlab/models/model_manager.dart';
 
-import 'package:uke_mlab/utilities/screen_controller.dart';
+import 'package:uke_mlab/providers/toggle_controller.dart';
+import 'package:uke_mlab/widgets/graph/graph_view.dart';
+
+import 'package:uke_mlab/widgets/toggle/toggled_defibrillation.dart';
+import 'package:uke_mlab/widgets/toggle/toggled_monitoring.dart';
+import 'package:uke_mlab/widgets/toggle/toggled_ventilation.dart';
 
 class Monitor extends StatelessWidget {
-  final ModelManager modelManager = Get.find();
-  final ScreenController screenController = Get.find();
-  final styleController = Get.put(StyleController());
-  final toggleController = Get.find<ToggleController>();
   final SystemState systemState = Get.find<SystemState>();
+  final toggleController = Get.find<ToggleController>();
   final StartScreenController startScreenController =
       Get.find<StartScreenController>();
 
@@ -45,127 +35,41 @@ class Monitor extends StatelessWidget {
       child: Obx(() {
         if (toggleController.isSelected[1]) {
           // Ventilation
-          return Row(children: [
-            Flexible(flex: 4, child: getGraphView()),
-            Flexible(flex: 2, child: ventilationToggleView())
+
+          systemState.graphList.value = [
+            sensorEnum.mve,
+            sensorEnum.breathFrequency,
+          ];
+          return Row(children: const [
+            Flexible(flex: 2, child: GraphView()),
+            Flexible(flex: 1, child: ToggledVentilation())
           ]);
         } else if (toggleController.isSelected[2]) {
           // Defibrillation
-          return Row(children: [
-            Flexible(flex: 4, child: getGraphView()),
-            Flexible(flex: 2, child: defibrillationToggleView())
+
+          systemState.graphList.value = [
+            sensorEnum.heartFrequency,
+            sensorEnum.co2,
+            sensorEnum.nibd
+          ];
+          return Row(children: const [
+            Flexible(flex: 2, child: GraphView()),
+            Flexible(flex: 1, child: ToggledDefibrillation())
           ]);
         } else {
           // Monitoring
-          return Row(children: [
-            Flexible(flex: 4, child: getGraphView()),
-            Flexible(flex: 2, child: monitoringToggleView())
+
+          systemState.graphList.value = [
+            sensorEnum.heartFrequency,
+            sensorEnum.co2,
+            sensorEnum.pulse
+          ];
+          return Row(children: const [
+            Flexible(flex: 2, child: GraphView()),
+            Flexible(flex: 1, child: ToggledMonitoring())
           ]);
         }
       }),
     );
-  }
-
-  Widget getGraphView() {
-    return Container(
-      margin: const EdgeInsets.only(left: 8, right: 8),
-      child: Column(
-        children: [
-          Expanded(
-            child: Obx(
-              () => ListView.builder(
-                itemCount: systemState.graphList.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return GraphContainer(sensor: systemState.graphList[index]);
-                },
-              ),
-            ),
-          ),
-          const GraphAdder(),
-        ],
-      ),
-    );
-  }
-
-  Widget monitoringToggleView() {
-    return Column(
-      children: [
-        Flexible(
-          flex: 1,
-          child: Row(
-            children: const [
-              ValueTile(sensor: sensorEnum.nibd),
-              ValueTile(sensor: sensorEnum.pulse),
-            ],
-          ),
-        ),
-        Flexible(
-          flex: 1,
-          child: Row(
-            children: const [
-              ValueTile(sensor: sensorEnum.mve),
-              ValueTile(sensor: sensorEnum.breathFrequency),
-            ],
-          ),
-        ),
-        const Spacer(flex: 2),
-        ModeToggleButton(),
-      ],
-    );
-  }
-
-  Widget ventilationToggleView() {
-    List<Map<String, Object>> infoData = [
-      {"type": "pPeak", "value": 50.12, "unit": " mBar"},
-      {"type": "pPlat", "value": 4.58, "unit": " mBar"},
-      {"type": "pMean", "value": 16.58, "unit": " mBar"},
-      {"type": "MV", "value": 7.2, "unit": " l/min"}
-    ];
-
-    List<Map<String, String>> settingData = [
-      {"name": "Freq.", "rate": "/min"},
-      {"name": "Vt", "rate": "ml"},
-      {"name": "PEEP", "rate": "mBar"},
-    ];
-
-    return Column(
-      children: [
-        Flexible(
-          flex: 1,
-          child: Row(
-            children: const [
-              ValueTile(
-                sensor: sensorEnum.mve,
-              ),
-              ValueTile(
-                sensor: sensorEnum.breathFrequency,
-              ),
-            ],
-          ),
-        ),
-        Flexible(
-          flex: 1,
-          child: Row(
-            children: [
-              Expanded(child: InfoTile(data: infoData)),
-              const ValueTile(
-                sensor: sensorEnum.breathFrequency,
-              ),
-            ],
-          ),
-        ),
-        Flexible(
-          flex: 2,
-          child: SettingTile(
-            data: settingData,
-          ),
-        ),
-        ModeToggleButton(),
-      ],
-    );
-  }
-
-  Widget defibrillationToggleView() {
-    return ModeToggleButton();
   }
 }
