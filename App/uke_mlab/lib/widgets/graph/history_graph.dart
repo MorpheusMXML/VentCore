@@ -15,7 +15,7 @@ class HistoryGraph extends StatelessWidget {
   double findMax(bool max) {
     if (max) {
       List<int> syst = [];
-      for (var element in (graphData["data"] as List<NIBDdata>)) {
+      for (var element in (graphData['data'] as List<NIBDdata>)) {
         syst.add(element.systolicPressure);
       }
       syst.sort();
@@ -24,7 +24,7 @@ class HistoryGraph extends StatelessWidget {
     } else {
       List<int> dist = [];
 
-      for (var element in (graphData["data"] as List<NIBDdata>)) {
+      for (var element in (graphData['data'] as List<NIBDdata>)) {
         dist.add(element.diastolicPressure);
       }
 
@@ -69,14 +69,14 @@ class HistoryGraph extends StatelessWidget {
                 type: TrendlineType.movingAverage,
                 color: Colors.redAccent)
           ],
-          color: graphData["color"] as Color,
-          dataSource: graphData["data"] as List<NIBDdata>,
+          color: graphData['color'] as Color,
+          dataSource: graphData['data'] as List<NIBDdata>,
           xValueMapper: (NIBDdata data, _) => data.time,
           yValueMapper: (NIBDdata data, _) => data.mad,
         ),
         HiloSeries(
           enableTooltip: true,
-          dataSource: graphData["data"] as List<NIBDdata>,
+          dataSource: graphData['data'] as List<NIBDdata>,
           color: Colors.red,
           xValueMapper: (NIBDdata data, _) => data.time,
           lowValueMapper: (NIBDdata data, _) => data.diastolicPressure,
