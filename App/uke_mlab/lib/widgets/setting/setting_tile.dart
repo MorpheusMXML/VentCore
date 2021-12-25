@@ -21,17 +21,17 @@ class SettingTile extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12)),
               primary: const Color(0xFF5AC8FA),
             ),
-            child: const Text("IPPV", style: TextStyle(fontSize: 25)),
+            child: const Text('IPPV', style: TextStyle(fontSize: 25)),
             onPressed: () {},
           ),
         ),
         ...data
-            .map((e) => Container(
+            .map((entry) => Container(
                   color: const Color(0xFF25232A),
                   padding: const EdgeInsets.all(8),
                   child: Setting(
-                    name: e["name"].toString(),
-                    rate: e["rate"].toString(),
+                    name: entry['name'].toString(),
+                    rate: entry['rate'].toString(),
                   ),
                 ))
             .toList()

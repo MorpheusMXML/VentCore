@@ -25,8 +25,16 @@ class ValueBox extends StatelessWidget {
               clipBehavior: Clip.none,
               children: [
                 getValueBox(),
-                Positioned(child: getOptions(), left: 100, top: 50,),
-                Positioned(child: getOptions(), right: 100, bottom: 50,),
+                Positioned(
+                  child: getOptions(),
+                  left: 130,
+                  bottom: 80,
+                ),
+                Positioned(
+                  child: getOptions(),
+                  right: 130,
+                  top: 80,
+                ),
               ],
             )
           : getValueBox(),
@@ -62,7 +70,7 @@ class ValueBox extends StatelessWidget {
                       children: [
                         Obx(() =>
                             getText(dataModel.lowerAlarmBound.toString())),
-                        getText("1/min")
+                        getText('1/min')
                       ]),
                 ])));
   }
@@ -75,14 +83,14 @@ class ValueBox extends StatelessWidget {
         onPrimary: Colors.black,
       ),
       onPressed: () => dataModel.tapped.toggle(),
-      child: ListWheelScrollView(
+      child: ListWheelScrollView( // doesn't detect scrolling sometimes :(
         controller: ScrollController(initialScrollOffset: 2000.0),
         children: [
           for (var i = 0; i <= 100; i++) Text(i.toString()),
         ],
         diameterRatio: 1.5,
         useMagnifier: true,
-        magnification: 1.5,
+        magnification: 1.5, 
         itemExtent: 40,
       ),
     );
