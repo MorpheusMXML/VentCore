@@ -24,7 +24,7 @@ class DataModel extends GetxController {
   // Use FutureBuilder?
   Future readJson() async {
     var jsonString = await rootBundle.loadString('assets/data.json');
-    var source = await jsonDecode(jsonString.toString())["data"];
+    var source = await jsonDecode(jsonString.toString())['data'];
     dataMap.value = {
       sensorEnum.breathFrequency: source[0],
       sensorEnum.co2: source[1],
@@ -40,8 +40,8 @@ class DataModel extends GetxController {
   late final sensorEnum sensorKey;
 
   Color color = Colors.white;
-  String title = "No Default Info";
-  String miniTitle = "NoInfo";
+  String title = 'No Default Info';
+  String miniTitle = 'NoInfo';
 
   final RxInt upperAlarmBound = 0.obs;
   final RxInt lowerAlarmBound = 0.obs;
@@ -55,9 +55,8 @@ class DataModel extends GetxController {
 
   late final Rx<ChartData> singleData;
 
-  final RxList<ChartData> graphData =
-      <ChartData>[].obs; //variable list, maybe fill up to _graphDataMaxLength?
-  int graphDataMaxLength = 30;
+  final RxList<ChartData> graphData = <ChartData>[].obs;
+  int graphDataMaxLength = 1500;
 
   late final ModelManager modelManager;
   final SystemState _systemState = Get.find<SystemState>();
@@ -81,28 +80,30 @@ class DataModel extends GetxController {
   // if graphData would exceed maxLenght, remove first (oldest) element
   // graphData is sorted by oldest at pos 0 to latest element
   void updateValues() {
-    List<int> addedIndexes = <int>[graphData.length];
-    List<int> removedIndexes = <int>[0];
-    bool remove = false;
-
     if (!loading.value) {
-      singleData.value = ChartData(
-          DateTime.now(),
-          dataMap[sensorKey]["data"][singleData.value.counter],
-          singleData.value.counter + 1);
-      graphData.add(singleData.value);
+      List<int> addedIndexes = <int>[
+        for (var i = graphData.length - 100; i <= graphData.length - 1; i++) i
+      ];
+      List<int> removedIndexes = <int>[for (var i = 0; i <= 99; i++) i];
 
-      if (graphData.length + 1 > graphDataMaxLength) {
-        remove = true;
-        graphData.removeAt(0);
+      for (var i = 0; i <= 99; i++) {
+        singleData.value = ChartData(
+            DateTime.now(),
+            dataMap[sensorKey]['data'][singleData.value.counter],
+            singleData.value.counter + 1);
+        graphData.add(singleData.value);
       }
 
-      // print(sensorKey.toString() + " " + singleData.value.counter.toString());
+      if (graphData.length + 1 > graphDataMaxLength) {
+        for (var i = 0; i <= 99; i++) {
+          graphData.removeAt(0);
+        }
+      }
 
       // update only added/removed indexes instead of the whole chart (efficient)
       chartController?.updateDataSource(
-        addedDataIndexes: remove ? <int>[graphData.length - 1] : addedIndexes,
-        removedDataIndexes: remove ? removedIndexes : null,
+        addedDataIndexes: addedIndexes,
+        removedDataIndexes: removedIndexes,
       );
 
       //evaluates whether update violated alarm boundaries or returns into boundaries
@@ -126,7 +127,7 @@ class DataModel extends GetxController {
   //informs alarmController about change via call
   void informAlarmController(boundaryStateEnum boundaryState) {
     //TODO implement instead of just printing
-    // print("$sensorKey had boundary change to $boundaryState");
+    // print('$sensorKey had boundary change to $boundaryState');
     //requires information about own state
   }
 

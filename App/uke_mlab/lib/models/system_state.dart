@@ -19,12 +19,12 @@ class SystemState {
   RxBool addGraph = false.obs;
 
   Map<String, RxInt> ippvValues = {
-    "Freq.": 20.obs,
-    "Vt": 40.obs,
-    "PEEP": 60.obs
+    'Freq.': 20.obs,
+    'Vt': 40.obs,
+    'PEEP': 60.obs
   };
 
-  RxString alarmMessage = "".obs;
+  RxString alarmMessage = ''.obs;
 
   void incrementIPPV(name) {
     ippvValues[name]!.value = ippvValues[name]!.value + 1;
@@ -35,8 +35,8 @@ class SystemState {
   }
 
   void switchToAlarm(int type) {
-    // if ((allGraphs[type]["alarm"] as RxString).value == "none") {
-    //   (allGraphs[type]["alarm"] as RxString).value = "alarm";
+    // if ((allGraphs[type]['alarm'] as RxString).value == 'none') {
+    //   (allGraphs[type]['alarm'] as RxString).value = 'alarm';
   }
 
   void activateTimer() {

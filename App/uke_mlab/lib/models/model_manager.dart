@@ -7,6 +7,8 @@ import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/models/model.dart';
 import 'package:uke_mlab/utilities/alarm_controller.dart';
 
+// TODO: Why sensor.toString() instead of sensor.name?
+
 class ModelManager {
   late final AlarmController _alarmController;
   late final Map<String, dynamic> defaultValues;
@@ -36,8 +38,8 @@ class ModelManager {
     return _alarmController;
   }
 
-  //Loads default valus for alarm boundaries to DataModel if patientType changed
-  //NOT TO BE CALLED WITH patientTypeEnum.none, since that has no pre defined values
+  //Loads default values for alarm boundaries to DataModel if patientType changed
+  //NOT TO BE CALLED WITH patientTypeEnum.none, since that has no predefined values
   void loadPatientPresets(patientTypeEnum patientType) {
     if (!stylesTraitsLoaded) {
       loadStyleInfo();
@@ -52,43 +54,43 @@ class ModelManager {
         switch (patientType) {
           case patientTypeEnum.adult:
             dataModel.initialUpperBound =
-                defaultValues[sensor.toString()]["adult"]["upperBound"];
+                defaultValues[sensor.toString()]['adult']['upperBound'];
             dataModel.upperAlarmBound.value =
-                defaultValues[sensor.toString()]["adult"]["upperBound"];
+                defaultValues[sensor.toString()]['adult']['upperBound'];
             dataModel.initialLowerBound =
-                defaultValues[sensor.toString()]["adult"]["lowerBound"];
+                defaultValues[sensor.toString()]['adult']['lowerBound'];
             dataModel.lowerAlarmBound.value =
-                defaultValues[sensor.toString()]["adult"]["lowerBound"];
+                defaultValues[sensor.toString()]['adult']['lowerBound'];
             break;
           case patientTypeEnum.child:
             dataModel.initialUpperBound =
-                defaultValues[sensor.toString()]["child"]["upperBound"];
+                defaultValues[sensor.toString()]['child']['upperBound'];
             dataModel.upperAlarmBound.value =
-                defaultValues[sensor.toString()]["child"]["upperBound"];
+                defaultValues[sensor.toString()]['child']['upperBound'];
             dataModel.initialLowerBound =
-                defaultValues[sensor.toString()]["child"]["lowerBound"];
+                defaultValues[sensor.toString()]['child']['lowerBound'];
             dataModel.lowerAlarmBound.value =
-                defaultValues[sensor.toString()]["child"]["lowerBound"];
+                defaultValues[sensor.toString()]['child']['lowerBound'];
             break;
           case patientTypeEnum.infant:
             dataModel.initialUpperBound =
-                defaultValues[sensor.toString()]["infant"]["upperBound"];
+                defaultValues[sensor.toString()]['infant']['upperBound'];
             dataModel.upperAlarmBound.value =
-                defaultValues[sensor.toString()]["infant"]["upperBound"];
+                defaultValues[sensor.toString()]['infant']['upperBound'];
             dataModel.initialLowerBound =
-                defaultValues[sensor.toString()]["infant"]["lowerBound"];
+                defaultValues[sensor.toString()]['infant']['lowerBound'];
             dataModel.lowerAlarmBound.value =
-                defaultValues[sensor.toString()]["infant"]["lowerBound"];
+                defaultValues[sensor.toString()]['infant']['lowerBound'];
             break;
           default:
             throw Exception(
-                "loadingPatientPresets called with wrong parameter (most likeley patientTypeEnum.none)");
+                'loadingPatientPresets called with wrong parameter (most likeley patientTypeEnum.none)');
         }
       } else {
         printInfo(
-            info: "WARNING: Sensor " +
+            info: 'WARNING: Sensor ' +
                 sensor.toString() +
-                " has no default Values for AlarmBoundaries.");
+                ' has no default Values for AlarmBoundaries.');
       }
     }
   }
@@ -98,15 +100,15 @@ class ModelManager {
       if (defaultValues.containsKey(sensor.toString())) {
         DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
         dataModel.color =
-            Color(int.parse(defaultValues[sensor.toString()]["color"]));
-        dataModel.title = defaultValues[sensor.toString()]["title"];
-        dataModel.miniTitle = defaultValues[sensor.toString()]["minititle"];
-        // print(dataModel.title + ": " + dataModel.color.toString());
+            Color(int.parse(defaultValues[sensor.toString()]['color']));
+        dataModel.title = defaultValues[sensor.toString()]['title'];
+        dataModel.miniTitle = defaultValues[sensor.toString()]['minititle'];
+        // print(dataModel.title + ': ' + dataModel.color.toString());
       } else {
         printInfo(
-            info: "WARNING: Sensor " +
+            info: 'WARNING: Sensor ' +
                 sensor.toString() +
-                " has no default Values for style data.");
+                ' has no default Values for style data.');
       }
     }
     stylesTraitsLoaded = true;
