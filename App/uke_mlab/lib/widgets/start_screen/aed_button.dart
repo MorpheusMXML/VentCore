@@ -1,5 +1,3 @@
-// ignore_for_file: camel_case_types
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -9,8 +7,8 @@ import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/providers/toggle_controller.dart';
 import 'package:uke_mlab/utilities/screen_controller.dart';
 
-class aedButton extends StatelessWidget {
-  const aedButton({
+class AEDButton extends StatelessWidget {
+  const AEDButton({
     Key? key,
   }) : super(key: key);
 
@@ -37,16 +35,14 @@ class aedButton extends StatelessWidget {
             toggleController.isSelected.value = [false, false, true];
             Get.offNamed(
               screenController.changeScreen1(screenChangeButtonEnum.aedButton),
-              arguments: {"patientType": "Adult"},
+              arguments: {'patientType': 'Adult'},
             );
           },
           child: Column(
             children: [
               SvgPicture.asset(
                 'assets/icons/AED2.svg', //smaller than AED.svg
-                height: 250 /
-                    MediaQuery.of(context)
-                        .devicePixelRatio, //responsive for different Screens
+                height: 250 / MediaQuery.of(context).devicePixelRatio,
                 color: const Color(0xff34c759),
               ),
               const Text('AED')
