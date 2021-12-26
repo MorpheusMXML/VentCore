@@ -1,3 +1,5 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -10,6 +12,7 @@ import 'package:uke_mlab/screens/start_screen.dart';
 import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/models/model_manager.dart';
 import 'package:uke_mlab/utilities/alarm_controller.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/utilities/screen_controller.dart';
 import 'package:uke_mlab/widgets/appbar/statusbar.dart';
 import 'package:uke_mlab/widgets/menu/menu.dart';
@@ -19,9 +22,11 @@ void main() {
   ErrorWidget.builder = (FlutterErrorDetails details) {
     return Container(
       alignment: Alignment.center,
+      margin: const EdgeInsets.all(32),
       child: Text(
-        'Error!\n${details.exception}',
-        style: const TextStyle(color: Colors.blue, fontSize: 18),
+        'Error!\n\n${details.exception}',
+        style: const TextStyle(color: Colors.blue, fontSize: 24),
+        softWrap: true,
         textAlign: TextAlign.center,
         textDirection: TextDirection.ltr,
       ),
@@ -57,13 +62,8 @@ class MyApp extends StatelessWidget {
 
     return GetMaterialApp(
       title: 'MLab UKE',
-      // TODO: Custom theme
       // TODO: Replace every Colors.<color> with const (static) Colors
-      theme: ThemeData(
-          appBarTheme: const AppBarTheme(backgroundColor: Color(0xFF1D192B)),
-          scaffoldBackgroundColor: const Color(0xFF1C1C1E),
-          cardColor: const Color(0xFF2A2831),
-          shadowColor: const Color(0xFF49454F)),
+      theme: AppTheme.darkTheme,
       getPages: [
         GetPage(
           name: '/main_screen',
