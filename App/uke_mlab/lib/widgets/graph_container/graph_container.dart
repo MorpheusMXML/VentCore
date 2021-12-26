@@ -3,7 +3,8 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/models/model.dart';
 import 'package:uke_mlab/widgets/graph/history_graph.dart';
-import 'package:uke_mlab/widgets/graph_container/alarm_container.dart';
+import 'package:uke_mlab/widgets/graph_container/alarm_confirm_button.dart';
+import 'package:uke_mlab/widgets/graph_container/graph_alarm_message.dart';
 import 'package:uke_mlab/widgets/value_box/value_box.dart';
 import 'package:uke_mlab/widgets/graph/graph.dart';
 
@@ -17,37 +18,79 @@ class GraphContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> graphrow = [];
+    final DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
+
+    return Obx(() {
+      switch (dataModel.alarmState.value) {
+        case 'alarm':
+          return Container(
+            color: Colors.red,
+            margin: const EdgeInsets.only(bottom: 8),
+            padding: const EdgeInsets.fromLTRB(12, 12, 12, 24),
+            child: Column(
+              children: [
+                ConstrainedBox(
+                  constraints: const BoxConstraints(maxHeight: 150),
+                  child: Row(
+                    children: [
+                      AlarmConfirmButton(sensor: sensor),
+                      const SizedBox(width: 8),
+                      ...getGraphRow(),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 8),
+                const GraphAlarmMessage(),
+              ],
+            ),
+          );
+        case 'suppressed':
+          return Container(
+            color: Colors.red,
+            padding: const EdgeInsets.all(12),
+            margin: const EdgeInsets.only(bottom: 8),
+            child: ConstrainedBox(
+                constraints: const BoxConstraints(maxHeight: 150),
+                child: Row(
+                  children: getGraphRow(),
+                )),
+          );
+        default:
+          return Container(
+            margin: const EdgeInsets.only(bottom: 8),
+            child: ConstrainedBox(
+                constraints: const BoxConstraints(maxHeight: 150),
+                child: Row(
+                  children: getGraphRow(),
+                )),
+          );
+      }
+    });
+  }
+
+  List<Widget> getGraphRow() {
+    List<Widget> graphRow = [];
 
     if (sensor == sensorEnum.nibd) {
       // TODO: more or less hardcoded here
-      graphrow.add(Expanded(
+      graphRow.add(Expanded(
         child: HistoryGraph(graphData: {
-          "type": const {
-            "abbr": "NIBD",
-            "id": "NIBD",
-            "index": 4,
-          },
-          "data": [
+          'data': [
             NIBDdata(DateTime.utc(2021, 12, 9, 11, 00), 120, 80),
             NIBDdata(DateTime.utc(2021, 12, 9, 11, 05), 140, 95),
             NIBDdata(DateTime.utc(2021, 12, 9, 11, 10), 180, 100),
             NIBDdata(DateTime.utc(2021, 12, 9, 11, 15), 185, 75),
             NIBDdata(DateTime.utc(2021, 12, 9, 11, 20), 200, 110),
           ].obs,
-          "color": Colors.red,
-          "count": 0,
-          "alarm": "none".obs,
-          "visible": false.obs,
-          "muted": false.obs,
+          'color': Colors.red,
         }),
       ));
     } else {
-      graphrow.add(Expanded(child: Graph(sensor: sensor)));
-      graphrow.add(Container(width: 8));
-      graphrow.add(ValueBox(sensor: sensor));
+      graphRow.add(Expanded(child: Graph(sensor: sensor)));
+      graphRow.add(const SizedBox(width: 8));
+      graphRow.add(ValueBox(sensor: sensor));
     }
 
-    return AlarmContainer(graphContainer: Row(children: graphrow));
+    return graphRow;
   }
 }
