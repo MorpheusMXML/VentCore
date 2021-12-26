@@ -40,7 +40,7 @@ class GraphAdderPopup extends StatelessWidget {
                         ? systemState.graphList.remove(sensor)
                         : systemState.graphList.add(sensor),
                     child: Text(
-                      sensor.name,
+                      sensor.toString(),
                       style: const TextStyle(fontSize: 18),
                       textAlign: TextAlign.center,
                     ));
