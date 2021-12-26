@@ -1,41 +1,65 @@
 import 'package:flutter/material.dart';
-import 'package:uke_mlab/widgets/setting/setting.dart';
+import 'package:get/get.dart';
+import 'package:uke_mlab/models/system_state.dart';
+import 'package:uke_mlab/widgets/setting/setting_text.dart';
 
 class SettingTile extends StatelessWidget {
-  final List<Map<String, Object>> data;
+  final String name;
+  final String rate;
+  
   const SettingTile({
     Key? key,
-    required this.data,
+    required this.name,
+    required this.rate,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          color: const Color(0xFF25232A),
-          width: double.infinity,
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12)),
-              primary: const Color(0xFF5AC8FA),
+    final systemState = Get.find<SystemState>();
+
+    return Container(
+      color: const Color(0xFF25232A),
+      padding: const EdgeInsets.all(8),
+      child: Container(
+        color: const Color(0xFF2A2831),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Flexible(
+              child: SettingText(
+                name: name,
+                rate: rate,
+              ),
             ),
-            child: const Text('IPPV', style: TextStyle(fontSize: 25)),
-            onPressed: () {},
-          ),
-        ),
-        ...data
-            .map((entry) => Container(
-                  color: const Color(0xFF25232A),
-                  padding: const EdgeInsets.all(8),
-                  child: Setting(
-                    name: entry['name'].toString(),
-                    rate: entry['rate'].toString(),
+            Flexible(
+              child: ElevatedButton(
+                onPressed: () => systemState.decrementIPPV(name),
+                child: const Icon(
+                  Icons.remove,
+                ),
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                ))
-            .toList()
-      ],
+                  primary: const Color(0xFF5AC8FA),
+                ),
+              ),
+            ),
+            Flexible(
+              child: ElevatedButton(
+                onPressed: () => systemState.incrementIPPV(name),
+                child: const Icon(Icons.add),
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  primary: const Color(0xFF5AC8FA),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
