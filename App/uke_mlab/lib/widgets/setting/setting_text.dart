@@ -15,29 +15,31 @@ class SettingText extends StatelessWidget {
   Widget build(BuildContext context) {
     final systemState = Get.find<SystemState>();
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.baseline, //gets text in same line
-      textBaseline: TextBaseline.ideographic, //gets text in same line
-      children: [
-        Text(
-          name,
-          style: const TextStyle(
-            fontSize: 16,
-            color: Colors.white,
-          ),
-        ),
-        Obx(
-          () => Text(
-            systemState.ippvValues[name].toString(),
+    return Flexible(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.baseline, //gets text in same line
+        textBaseline: TextBaseline.ideographic, //gets text in same line
+        children: [
+          Text(
+            name,
             style: const TextStyle(
-              fontSize: 32,
+              fontSize: 16,
               color: Colors.white,
             ),
           ),
-        ),
-        Text(rate, style: const TextStyle(fontSize: 12, color: Colors.white)),
-      ],
+          Obx(
+            () => Text(
+              systemState.ippvValues[name].toString(),
+              style: const TextStyle(
+                fontSize: 32,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          Text(rate, style: const TextStyle(fontSize: 12, color: Colors.white)),
+        ],
+      ),
     );
   }
 }
