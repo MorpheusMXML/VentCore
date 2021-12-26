@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/widgets/graph/graph_adder.dart';
+import 'package:uke_mlab/widgets/graph/graph_adder_popup.dart';
 import 'graph_container.dart';
 
 class GraphView extends StatelessWidget {
@@ -28,7 +29,11 @@ class GraphView extends StatelessWidget {
               ),
             ),
           ),
-          const GraphAdder(),
+          Obx(
+            () => systemState.addGraph.value
+                ? GraphAdderPopup()
+                : const GraphAdder(),
+          ),
         ],
       ),
     );

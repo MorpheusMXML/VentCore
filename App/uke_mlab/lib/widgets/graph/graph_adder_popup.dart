@@ -13,44 +13,38 @@ class GraphAdderPopup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        fixedSize: const Size(800, 150),
-        primary: const Color(0xFF2A2831).withOpacity(0.5),
-      ),
-      onPressed: () => systemState.addGraph.toggle(),
-      child: Obx(
-        () => Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: getAddButtons()),
-      ),
-    );
-  }
+        style: ElevatedButton.styleFrom(
+          fixedSize: const Size(800, 150),
+          primary: const Color(0xFF2A2831).withOpacity(0.5),
+        ),
+        onPressed: () => systemState.addGraph.toggle(),
+        child: Obx(
+          () => Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: sensorEnum.values.map((sensor) {
+                ButtonStyle style;
+                systemState.graphList.contains(sensor)
+                    ? style = ElevatedButton.styleFrom(
+                        fixedSize: const Size(80, 60),
+                        // load color from sensors json or model manager?
+                        primary: Colors.green,
+                        onPrimary: Colors.black)
+                    : style = ElevatedButton.styleFrom(
+                        fixedSize: const Size(80, 60),
+                        primary: Colors.grey[50],
+                        onPrimary: Colors.black);
 
-  List<Widget> getAddButtons() {
-    return sensorEnum.values.map((sensor) {
-      ButtonStyle style;
-
-      systemState.graphList.contains(sensor)
-          ? style = ElevatedButton.styleFrom(
-              fixedSize: const Size(80, 60),
-              // load color from sensors json or model manager?
-              primary: Colors.green,
-              onPrimary: Colors.black)
-          : style = ElevatedButton.styleFrom(
-              fixedSize: const Size(80, 60),
-              primary: Colors.grey[50],
-              onPrimary: Colors.black);
-
-      return ElevatedButton(
-          style: style,
-          onPressed: () => systemState.graphList.contains(sensor)
-              ? systemState.graphList.remove(sensor)
-              : systemState.graphList.add(sensor),
-          child: Text(
-            sensor.name,
-            style: const TextStyle(fontSize: 18),
-            textAlign: TextAlign.center,
-          ));
-    }).toList();
+                return ElevatedButton(
+                    style: style,
+                    onPressed: () => systemState.graphList.contains(sensor)
+                        ? systemState.graphList.remove(sensor)
+                        : systemState.graphList.add(sensor),
+                    child: Text(
+                      sensor.name,
+                      style: const TextStyle(fontSize: 18),
+                      textAlign: TextAlign.center,
+                    ));
+              }).toList()),
+        ));
   }
 }
