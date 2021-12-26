@@ -16,6 +16,8 @@ class SystemState {
   // More or less copy pasted from old mockup class
   RxList<sensorEnum> graphList = <sensorEnum>[].obs;
 
+  
+
   RxBool addGraph = false.obs;
 
   Map<String, RxInt> ippvValues = {
