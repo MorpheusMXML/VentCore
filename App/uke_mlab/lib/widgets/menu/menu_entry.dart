@@ -17,7 +17,6 @@ class AppMenuEntry extends StatelessWidget {
             title: Text(
               name,
               style: const TextStyle(
-                color: Colors.black,
                 fontSize: 20,
               ),
             ),

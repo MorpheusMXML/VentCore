@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:uke_mlab/widgets/menu/menu_entry.dart';
+import 'package:uke_mlab/widgets/menu/toggle_theme_button.dart';
 
 class AppMenu extends StatelessWidget {
   const AppMenu({Key? key}) : super(key: key);
@@ -21,7 +23,8 @@ class AppMenu extends StatelessWidget {
             ),
             child: Text('Menu', style: TextStyle(fontSize: 28)),
           ),
-          ...routes.map((entry) => AppMenuEntry(name: entry)).toList()
+          ...routes.map((entry) => AppMenuEntry(name: entry)).toList(),
+          const ToggleThemeButton()
         ],
       ),
     );
