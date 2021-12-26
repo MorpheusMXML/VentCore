@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:uke_mlab/widgets/info/info_tile.dart';
-import 'package:uke_mlab/widgets/setting/setting_tile.dart';
+import 'package:uke_mlab/widgets/info/info_container.dart';
+import 'package:uke_mlab/widgets/setting/setting_container.dart';
 import 'package:uke_mlab/widgets/toggle/toggle_mode_button.dart';
 import 'package:uke_mlab/widgets/value_box/value_tile.dart';
 import 'package:uke_mlab/models/enums.dart';
-
 
 class VentilationMode extends StatelessWidget {
   const VentilationMode({
@@ -13,6 +12,8 @@ class VentilationMode extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: Move to a controller
+
     List<Map<String, Object>> infoData = [
       {'type': 'pPeak', 'value': 50.12, 'unit': 'mBar'},
       {'type': 'pPlat', 'value': 4.58, 'unit': 'mBar'},
@@ -32,12 +33,8 @@ class VentilationMode extends StatelessWidget {
           flex: 1,
           child: Row(
             children: const [
-              ValueTile(
-                sensor: sensorEnum.mve,
-              ),
-              ValueTile(
-                sensor: sensorEnum.breathFrequency,
-              ),
+              ValueTile(sensor: sensorEnum.mve),
+              ValueTile(sensor: sensorEnum.breathFrequency),
             ],
           ),
         ),
@@ -45,18 +42,14 @@ class VentilationMode extends StatelessWidget {
           flex: 1,
           child: Row(
             children: [
-              Expanded(child: InfoTile(data: infoData)),
-              const ValueTile(
-                sensor: sensorEnum.breathFrequency,
-              ),
+              Expanded(child: InfoContainer(data: infoData)),
+              const ValueTile(sensor: sensorEnum.breathFrequency),
             ],
           ),
         ),
         Flexible(
           flex: 2,
-          child: SettingTile(
-            data: settingData,
-          ),
+          child: SettingContainer(data: settingData),
         ),
         ToggleModeButton(),
       ],
