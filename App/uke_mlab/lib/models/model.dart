@@ -12,8 +12,8 @@ import 'package:uke_mlab/models/model_manager.dart';
 /// Alarm evaluation is done in alarm_controller
 /// graphDataMaxLength is initialized with 100, can be manipulated
 class DataModel extends GetxController {
-  var dataMap = {}.obs;
-  var loading = true.obs;
+  RxMap dataMap = {}.obs;
+  RxBool loading = true.obs;
 
   @override
   void onInit() {
@@ -47,6 +47,7 @@ class DataModel extends GetxController {
   final RxInt lowerAlarmBound = 0.obs;
 
   final RxBool tapped = false.obs;
+  final RxString alarmState = 'alarm'.obs;
 
   late int initialUpperBound;
   late int initialLowerBound;
