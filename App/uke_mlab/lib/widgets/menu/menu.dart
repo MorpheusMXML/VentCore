@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:uke_mlab/widgets/menu/menu_entry.dart';
 import 'package:uke_mlab/widgets/menu/toggle_theme_button.dart';
 
