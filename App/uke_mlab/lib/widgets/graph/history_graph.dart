@@ -1,37 +1,32 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
-
-import 'package:uke_mlab/providers/mockup.dart';
+import 'package:uke_mlab/models/model.dart';
 
 class HistoryGraph extends StatelessWidget {
-  final Color color;
-  final List<NIBDdata> data;
+  final Map<String, Object?> graphData;
 
   const HistoryGraph({
     Key? key,
-    required this.color,
-    required this.data,
+    required this.graphData,
   }) : super(key: key);
 
   // More efficient... but Ugly lol
   double findMax(bool max) {
     if (max) {
       List<int> syst = [];
-      data.forEach((element) {
+      for (var element in (graphData['data'] as List<NIBDdata>)) {
         syst.add(element.systolicPressure);
-      });
+      }
       syst.sort();
 
       return syst.last.toDouble();
     } else {
       List<int> dist = [];
 
-      data.forEach((element) {
+      for (var element in (graphData['data'] as List<NIBDdata>)) {
         dist.add(element.diastolicPressure);
-      });
+      }
 
       dist.sort();
       return dist.first.toDouble();
@@ -41,57 +36,55 @@ class HistoryGraph extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SfCartesianChart(
-        tooltipBehavior: TooltipBehavior(enable: true),
-        backgroundColor: Theme.of(context).cardColor,
-        primaryYAxis: NumericAxis(
-          desiredIntervals: 10,
-          maximum: (findMax(true) + 5),
-          minimum: (findMax(false) - 5),
-          majorGridLines: MajorGridLines(
-              width: 1,
-              color: Theme.of(context).shadowColor,
-              dashArray: const <double>[2, 3]),
+      tooltipBehavior: TooltipBehavior(enable: true),
+      backgroundColor: Theme.of(context).cardColor,
+      primaryYAxis: NumericAxis(
+        desiredIntervals: 10,
+        maximum: (findMax(true) + 5),
+        minimum: (findMax(false) - 5),
+        majorGridLines: MajorGridLines(
+          width: 1,
+          color: Theme.of(context).shadowColor,
+          dashArray: const <double>[2, 3],
         ),
-        primaryXAxis: DateTimeAxis(
-          dateFormat: DateFormat.Hm(),
-          plotOffset: 10,
-          desiredIntervals: 25,
-          majorGridLines: MajorGridLines(
-              width: 0,
-              color:
-                  Theme.of(context).shadowColor //Theme.of(context).shadowColor,
-              ),
+      ),
+      primaryXAxis: DateTimeAxis(
+        dateFormat: DateFormat.Hm(),
+        plotOffset: 10,
+        desiredIntervals: 25,
+        majorGridLines:
+            MajorGridLines(width: 0, color: Theme.of(context).shadowColor),
+      ),
+      series: [
+        // Renders scatter chart
+        ScatterSeries(
+          markerSettings: const MarkerSettings(
+              height: 10,
+              width: 10,
+              // Scatter will render in diamond shape
+              shape: DataMarkerType.diamond),
+          trendlines: <Trendline>[
+            Trendline(
+                dashArray: <double>[2, 3],
+                type: TrendlineType.movingAverage,
+                color: Colors.redAccent)
+          ],
+          color: graphData['color'] as Color,
+          dataSource: graphData['data'] as List<NIBDdata>,
+          xValueMapper: (NIBDdata data, _) => data.time,
+          yValueMapper: (NIBDdata data, _) => data.mad,
         ),
-        series: [
-          // Renders scatter chart
-          ScatterSeries(
-            markerSettings: const MarkerSettings(
-                height: 10,
-                width: 10,
-                // Scatter will render in diamond shape
-                shape: DataMarkerType.diamond),
-            trendlines: <Trendline>[
-              Trendline(
-                  dashArray: <double>[2, 3],
-                  type: TrendlineType.movingAverage,
-                  color: Colors.redAccent)
-            ],
-            color: color,
-            dataSource: data,
-            xValueMapper: (NIBDdata data, _) => data.timestamp,
-            yValueMapper: (NIBDdata data, _) => data.mad,
-          ),
-          HiloSeries(
-              enableTooltip: true,
-              dataSource: data,
-              color: Colors.red,
-              xValueMapper: (NIBDdata data, _) => data.timestamp,
-              lowValueMapper: (NIBDdata data, _) => data.diastolicPressure,
-              highValueMapper: (NIBDdata data, _) => data.systolicPressure,
-              markerSettings: const MarkerSettings(
-                  shape: DataMarkerType.horizontalLine,
-                  width: 10,
-                  isVisible: true)),
-        ]);
+        HiloSeries(
+          enableTooltip: true,
+          dataSource: graphData['data'] as List<NIBDdata>,
+          color: Colors.red,
+          xValueMapper: (NIBDdata data, _) => data.time,
+          lowValueMapper: (NIBDdata data, _) => data.diastolicPressure,
+          highValueMapper: (NIBDdata data, _) => data.systolicPressure,
+          markerSettings: const MarkerSettings(
+              shape: DataMarkerType.horizontalLine, width: 10, isVisible: true),
+        ),
+      ],
+    );
   }
 }

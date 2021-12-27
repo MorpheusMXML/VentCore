@@ -7,4 +7,5 @@
 - W07 Slides - Arne Struck - Usability for Mobile [PDF](Deliverables/Presentations/W07-System and Object Design.pdf)
 - W08 Slides - Corvin Biebach - Usability for Mobile [PDF](Deliverables/Presentations/W08-Testing and Quality Management.pdf)
 - W09 Slides - M2 - Design Review [PDF](Deliverables/Presentations/W09-M2 Design Review.pdf)
+- W10 Slides - Fynn Menk - Build and Release Management[PDF](/Deliverables/Presentations/W10-Build_and_Release_Management.pdf)
 ...

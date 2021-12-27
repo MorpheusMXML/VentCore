@@ -1,44 +1,63 @@
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/models/system_state.dart';
-import 'package:uke_mlab/utilities/alarm_controller.dart';
+import 'package:uke_mlab/models/model_manager.dart';
 
-class ModelManager {
-  late final AlarmController _alarmController;
-
-  ModelManager() {
-    for (var sensor in sensorEnum.values) {
-      //TODO read standard values from somewhere
-      Get.put(DataModel(sensor, 10, 0, this), tag: sensor.toString());
-    }
-  }
-
-  void registerAlarmController(AlarmController newController) {
-    _alarmController = newController;
-  }
-
-  AlarmController getAlarmController() {
-    return _alarmController;
-  }
-}
-
-// graphData INCLUDES the singleData value at the end
-// Alarm evaluation is done in alarm_controller
-// graphDataMaxLength is initialized with 100, can be manipulated
+/// graphData INCLUDES the singleData value at the end
+/// Alarm evaluation is done in alarm_controller
+/// graphDataMaxLength is initialized with 100, can be manipulated
 class DataModel extends GetxController {
+  RxMap dataMap = {}.obs;
+  RxBool loading = true.obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    readJson();
+  }
+
+  // Use FutureBuilder?
+  Future readJson() async {
+    var jsonString = await rootBundle.loadString('assets/data.json');
+    var source = await jsonDecode(jsonString.toString())['data'];
+    dataMap.value = {
+      sensorEnum.breathFrequency: source[0],
+      sensorEnum.co2: source[1],
+      sensorEnum.heartFrequency: source[8],
+      sensorEnum.mve: source[3],
+      sensorEnum.nibd: source[4],
+      sensorEnum.pulse: source[5],
+      sensorEnum.spo2: source[7]
+    };
+    loading.value = false;
+  }
+
   late final sensorEnum sensorKey;
+
+  Color color = Colors.white;
+  String title = 'No Default Info';
+  String miniTitle = 'NoInfo';
 
   final RxInt upperAlarmBound = 0.obs;
   final RxInt lowerAlarmBound = 0.obs;
 
-  late final int initialUpperBound;
-  late final int initialLowerBound;
+  final RxBool tapped = false.obs;
+  final RxString alarmState = 'alarm'.obs;
+
+  late int initialUpperBound;
+  late int initialLowerBound;
+
+  ChartSeriesController? chartController;
 
   late final Rx<ChartData> singleData;
 
-  final graphData =
-      [].obs; //variable list, maybe fill up to _graphDataMaxLength?
-  int graphDataMaxLength = 100;
+  final RxList<ChartData> graphData = <ChartData>[].obs;
+  int graphDataMaxLength = 1500;
 
   late final ModelManager modelManager;
   final SystemState _systemState = Get.find<SystemState>();
@@ -55,26 +74,47 @@ class DataModel extends GetxController {
 
     modelManager = modelManager;
 
-    singleData = ChartData(DateTime.now(), 0.0).obs;
+    singleData = ChartData(DateTime.now(), 0.0, 0).obs;
   }
 
   // updates singleDate with a new value, puts singleData at the end of the list
   // if graphData would exceed maxLenght, remove first (oldest) element
   // graphData is sorted by oldest at pos 0 to latest element
-  void updateValues(double newValue) {
-    singleData.value = ChartData(DateTime.now(), newValue);
-    if (graphData.length + 1 > graphDataMaxLength) {
-      graphData.removeAt(0);
-    }
-    graphData.add(singleData.value);
+  void updateValues() {
+    if (!loading.value) {
+      List<int> addedIndexes = <int>[
+        for (var i = graphData.length - 100; i <= graphData.length - 1; i++) i
+      ];
+      List<int> removedIndexes = <int>[for (var i = 0; i <= 99; i++) i];
 
-    //evaluates whether update violated alarm boundaries or returns into boundaries
-    if (singleData.value.value > upperAlarmBound.value) {
-      evaluateBoundaryChange(boundaryStateEnum.upperBoundaryViolated);
-    } else if (singleData.value.value < lowerAlarmBound.value) {
-      evaluateBoundaryChange(boundaryStateEnum.lowerBoundaryViolated);
-    } else {
-      evaluateBoundaryChange(boundaryStateEnum.inBoundaries);
+      for (var i = 0; i <= 99; i++) {
+        singleData.value = ChartData(
+            DateTime.now(),
+            dataMap[sensorKey]['data'][singleData.value.counter],
+            singleData.value.counter + 1);
+        graphData.add(singleData.value);
+      }
+
+      if (graphData.length + 1 > graphDataMaxLength) {
+        for (var i = 0; i <= 99; i++) {
+          graphData.removeAt(0);
+        }
+      }
+
+      // update only added/removed indexes instead of the whole chart (efficient)
+      chartController?.updateDataSource(
+        addedDataIndexes: addedIndexes,
+        removedDataIndexes: removedIndexes,
+      );
+
+      //evaluates whether update violated alarm boundaries or returns into boundaries
+      if (singleData.value.value > upperAlarmBound.value) {
+        evaluateBoundaryChange(boundaryStateEnum.upperBoundaryViolated);
+      } else if (singleData.value.value < lowerAlarmBound.value) {
+        evaluateBoundaryChange(boundaryStateEnum.lowerBoundaryViolated);
+      } else {
+        evaluateBoundaryChange(boundaryStateEnum.inBoundaries);
+      }
     }
   }
 
@@ -87,8 +127,8 @@ class DataModel extends GetxController {
 
   //informs alarmController about change via call
   void informAlarmController(boundaryStateEnum boundaryState) {
-    //TODO implememt instead of just printing
-    print("$sensorKey had boundary change to $boundaryState");
+    //TODO implement instead of just printing
+    // print('$sensorKey had boundary change to $boundaryState');
     //requires information about own state
   }
 
@@ -97,7 +137,7 @@ class DataModel extends GetxController {
     upperAlarmBound.value = initialUpperBound;
     lowerAlarmBound.value = initialLowerBound;
     //reset singleData to 0 entry
-    singleData.value = ChartData(DateTime.now(), 0.0);
+    singleData.value = ChartData(DateTime.now(), 0.0, 0);
     //clear historical data
     graphData.clear();
   }
@@ -107,6 +147,19 @@ class DataModel extends GetxController {
 class ChartData {
   final DateTime time;
   final double value;
+  final int counter;
 
-  ChartData(this.time, this.value);
+  ChartData(this.time, this.value, this.counter);
+}
+
+class NIBDdata {
+  final DateTime time;
+  final int systolicPressure;
+  final int diastolicPressure;
+  late int mad;
+  NIBDdata(this.time, this.systolicPressure, this.diastolicPressure) {
+    //Formular for Calculating MAD out of systolic and diastolic pressure
+    mad = (diastolicPressure + (1 / 3) * (systolicPressure - diastolicPressure))
+        .toInt();
+  }
 }
