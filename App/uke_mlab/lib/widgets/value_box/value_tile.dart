@@ -8,22 +8,9 @@ import 'package:uke_mlab/widgets/value_box/value_box.dart';
 class ValueTile extends StatelessWidget {
   final sensorEnum sensor;
 
-  late List<ChartDataMockup> value;
-  late sensorEnum sensor;
-  late bool withModel;
-
-  ValueTile({
+  const ValueTile({
     Key? key,
     required this.sensor,
-  }) : super(key: key);
-
-  ValueTile.model({
-    Key? key,
-    required this.textColor,
-    required this.name,
-    required this.backgroundColor,
-    required this.sensor,
-    required this.withModel,
   }) : super(key: key);
 
   @override
