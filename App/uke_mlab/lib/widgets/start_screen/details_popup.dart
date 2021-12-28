@@ -29,10 +29,7 @@ class DetailsPopup extends StatelessWidget {
               ),
             )
           : Container(
-              height: 100 / MediaQuery.of(context).devicePixelRatio +
-                  100 / MediaQuery.of(context).devicePixelRatio +
-                  100 / MediaQuery.of(context).devicePixelRatio +
-                  100 / MediaQuery.of(context).devicePixelRatio,
+              height: 400 / MediaQuery.of(context).devicePixelRatio,
               margin: const EdgeInsets.fromLTRB(0, 0, 65, 12),
             ),
     );
