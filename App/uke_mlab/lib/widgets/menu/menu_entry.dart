@@ -18,6 +18,7 @@ class AppMenuEntry extends StatelessWidget {
               name,
               style: const TextStyle(
                 fontSize: 20,
+                color: Colors.blue,
               ),
             ),
             onTap: () => Get.toNamed(navigateTo))

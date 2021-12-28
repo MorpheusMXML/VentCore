@@ -22,7 +22,13 @@ class AppMenu extends StatelessWidget {
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: const [
-                  Text('Menu', style: TextStyle(fontSize: 28)),
+                  Text(
+                    'Menu',
+                    style: TextStyle(
+                      fontSize: 28,
+                      color: Colors.blue,
+                    ),
+                  ),
                   ToggleThemeButton()
                 ]),
           ),
