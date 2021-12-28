@@ -43,7 +43,6 @@ class StartScreen extends StatelessWidget {
               const DetailsPopup(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Column(
                     children: const [
