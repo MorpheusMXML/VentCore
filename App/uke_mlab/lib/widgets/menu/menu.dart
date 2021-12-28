@@ -3,7 +3,9 @@ import 'package:uke_mlab/widgets/menu/menu_entry.dart';
 import 'package:uke_mlab/widgets/menu/toggle_theme_button.dart';
 
 class AppMenu extends StatelessWidget {
-  const AppMenu({Key? key}) : super(key: key);
+  const AppMenu({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,14 +18,15 @@ class AppMenu extends StatelessWidget {
     return Drawer(
       child: ListView(
         children: [
-          const DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.grey,
-            ),
-            child: Text('Menu', style: TextStyle(fontSize: 28)),
+          DrawerHeader(
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text('Menu', style: TextStyle(fontSize: 28)),
+                  ToggleThemeButton()
+                ]),
           ),
           ...routes.map((entry) => AppMenuEntry(name: entry)).toList(),
-          const ToggleThemeButton()
         ],
       ),
     );
