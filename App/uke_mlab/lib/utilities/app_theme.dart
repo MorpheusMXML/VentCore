@@ -5,7 +5,23 @@ const Color appBarBackgroundColor = Color(0xFF1D192B);
 
 class AppTheme {
   static ThemeData get darkTheme {
+    ThemeData(fontFamily: 'Jura');
     return ThemeData.dark().copyWith(
+        textTheme: const TextTheme(
+          bodyText1: TextStyle(fontFamily: 'Jura'),
+          bodyText2: TextStyle(fontFamily: 'Jura'),
+          button: TextStyle(fontFamily: 'Jura'),
+          caption: TextStyle(fontFamily: 'Jura'),
+          headline1: TextStyle(fontFamily: 'Jura'),
+          headline2: TextStyle(fontFamily: 'Jura'),
+          headline3: TextStyle(fontFamily: 'Jura'),
+          headline4: TextStyle(fontFamily: 'Jura'),
+          headline5: TextStyle(fontFamily: 'Jura'),
+          headline6: TextStyle(fontFamily: 'Jura'),
+          overline: TextStyle(fontFamily: 'Jura'),
+          subtitle1: TextStyle(fontFamily: 'Jura'),
+          subtitle2: TextStyle(fontFamily: 'Jura'),
+        ),
         appBarTheme: const AppBarTheme(backgroundColor: appBarBackgroundColor),
         scaffoldBackgroundColor: scaffoldBackgroundColor,
         /*elevatedButtonTheme: ElevatedButtonThemeData(
@@ -22,6 +38,21 @@ class AppTheme {
   }
 
   static ThemeData get lightTheme {
-    return ThemeData.light().copyWith();
+    return ThemeData.light().copyWith(
+        textTheme: const TextTheme(
+      bodyText1: TextStyle(fontFamily: 'Jura'),
+      bodyText2: TextStyle(fontFamily: 'Jura'),
+      button: TextStyle(fontFamily: 'Jura'),
+      caption: TextStyle(fontFamily: 'Jura'),
+      headline1: TextStyle(fontFamily: 'Jura'),
+      headline2: TextStyle(fontFamily: 'Jura'),
+      headline3: TextStyle(fontFamily: 'Jura'),
+      headline4: TextStyle(fontFamily: 'Jura'),
+      headline5: TextStyle(fontFamily: 'Jura'),
+      headline6: TextStyle(fontFamily: 'Jura'),
+      overline: TextStyle(fontFamily: 'Jura'),
+      subtitle1: TextStyle(fontFamily: 'Jura'),
+      subtitle2: TextStyle(fontFamily: 'Jura'),
+    ));
   }
 }
