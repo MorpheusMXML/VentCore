@@ -5,7 +5,7 @@ import 'package:uke_mlab/models/model.dart';
 import 'package:uke_mlab/widgets/graph/history_graph.dart';
 import 'package:uke_mlab/widgets/graph_container/alarm_confirm_button.dart';
 import 'package:uke_mlab/widgets/graph_container/graph_alarm_message.dart';
-import 'package:uke_mlab/widgets/value_box/value_box.dart';
+import 'package:uke_mlab/widgets/value_box/value_box_container.dart';
 import 'package:uke_mlab/widgets/graph/graph.dart';
 
 class GraphContainer extends StatelessWidget {
@@ -88,7 +88,7 @@ class GraphContainer extends StatelessWidget {
     } else {
       graphRow.add(Expanded(child: Graph(sensor: sensor)));
       graphRow.add(const SizedBox(width: 8));
-      graphRow.add(ValueBox(sensor: sensor));
+      graphRow.add(ValueBoxContainer(sensor: sensor));
     }
 
     return graphRow;

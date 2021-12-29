@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/models/model.dart';
 
 import 'package:uke_mlab/models/enums.dart';
-import 'package:uke_mlab/widgets/value_box/value_box.dart';
+import 'package:uke_mlab/widgets/value_box/value_box_container.dart';
 
 class ValueTile extends StatelessWidget {
   final sensorEnum sensor;
@@ -15,10 +15,10 @@ class ValueTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ValueBox valueBox;
+    final ValueBoxContainer valueBox;
 
     DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
-    valueBox = ValueBox(
+    valueBox = ValueBoxContainer(
       sensor: sensor,
     );
 
