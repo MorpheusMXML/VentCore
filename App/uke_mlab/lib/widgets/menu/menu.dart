@@ -26,7 +26,6 @@ class AppMenu extends StatelessWidget {
                     'Menu',
                     style: TextStyle(
                       fontSize: 28,
-                      color: Colors.blue,
                     ),
                   ),
                   ToggleThemeButton()
