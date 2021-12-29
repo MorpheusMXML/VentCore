@@ -18,6 +18,7 @@ class ToggleController extends GetxController {
     }
   }
 
+  // TODO: Save differently? Use local storage to permanently save this setting?
   RxBool isDarkMode = true.obs;
   Rx<Icon> icon = const Icon(Icons.dark_mode).obs;
 
