@@ -5,7 +5,7 @@ import 'package:uke_mlab/utilities/screen_controller.dart';
 
 import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/models/model.dart';
-import 'package:uke_mlab/widgets/value_box/value_box.dart';
+import 'package:uke_mlab/widgets/value_box/value_box_contents.dart';
 import 'package:uke_mlab/widgets/value_box/value_box_settings.dart';
 
 class ValueBoxContainer extends StatelessWidget {
@@ -39,7 +39,7 @@ class ValueBoxContainer extends StatelessWidget {
                             backgroundColor: MaterialStateProperty.all(
                                 const Color(0xFF2A2831))),
                         onPressed: () => dataModel.tapped.toggle(),
-                        child: ValueBox(dataModel: dataModel),
+                        child: ValueBoxContents(dataModel: dataModel),
                       )),
                   ValueBoxSettings(dataModel: dataModel, type: 'upper'),
                 ],
@@ -54,7 +54,7 @@ class ValueBoxContainer extends StatelessWidget {
                     backgroundColor:
                         MaterialStateProperty.all(const Color(0xFF2A2831))),
                 onPressed: () => dataModel.tapped.toggle(),
-                child: ValueBox(dataModel: dataModel),
+                child: ValueBoxContents(dataModel: dataModel),
               ),
             ),
     );
