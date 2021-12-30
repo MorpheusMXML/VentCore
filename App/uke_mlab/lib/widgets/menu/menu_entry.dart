@@ -24,8 +24,8 @@ class AppMenuEntry extends StatelessWidget {
         : ListTile(
             title: Text(
               name,
-              style: const TextStyle(
-                color: Colors.grey,
+              style: TextStyle(
+                color: Theme.of(context).disabledColor,
                 fontSize: 20,
               ),
             ),
