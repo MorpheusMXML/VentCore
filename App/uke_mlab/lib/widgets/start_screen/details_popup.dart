@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/start_screen_controller.dart';
-import 'package:uke_mlab/widgets/start_screen/slider_tile.dart';
-import 'name_field.dart';
+import 'package:uke_mlab/widgets/start_screen/details_popup_slider.dart';
+import 'details_popup_name_field.dart';
 
-class StartScreenPopup extends StatelessWidget {
-  const StartScreenPopup({
+class DetailsPopup extends StatelessWidget {
+  const DetailsPopup({
     Key? key,
   }) : super(key: key);
 
@@ -20,16 +20,16 @@ class StartScreenPopup extends StatelessWidget {
               color: const Color(0xff25232a),
               child: Column(
                 children: [
-                  const nameField(),
-                  SliderTile(
-                      name: "Weight", value: startScreenController.weightValue),
-                  SliderTile(
-                      name: "Height", value: startScreenController.heightValue),
+                  const PopupNameField(),
+                  PopupSlider(
+                      name: 'Weight', value: startScreenController.weightValue),
+                  PopupSlider(
+                      name: 'Height', value: startScreenController.heightValue),
                 ],
               ),
             )
           : Container(
-              height: 188,
+              height: 400 / MediaQuery.of(context).devicePixelRatio,
               margin: const EdgeInsets.fromLTRB(0, 0, 65, 12),
             ),
     );

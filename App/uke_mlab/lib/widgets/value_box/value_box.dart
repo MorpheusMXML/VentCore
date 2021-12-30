@@ -1,159 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'package:uke_mlab/providers/mockup.dart';
-
-import 'package:uke_mlab/utilities/screen_controller.dart';
-
-import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/models/model.dart';
 
 class ValueBox extends StatelessWidget {
-  late Color textColor;
-  final Color backgroundColor;
-  late String miniTitle;
-
-  late List<ChartDataMockup> value;
-  late sensorEnum sensor;
-
-  final bool withModel;
-
-  ValueBox({
+  final DataModel dataModel;
+  const ValueBox({
     Key? key,
-    required this.textColor,
-    required this.value,
-    this.miniTitle = "PP",
-    required this.backgroundColor,
-    this.withModel = false,
-  }) : super(key: key);
-
-  //TODO will finally be standard constructor when both Boxes and graphs work with mockup
-  ValueBox.model({
-    Key? key,
-    // to be changed
-    required this.backgroundColor,
-    required this.sensor,
-    this.withModel = true,
+    required this.dataModel,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    late final ScreenController screenController;
-    late final DataModel dataModel;
-    final monitorController = Get.find<MonitorController>();
-    late Obx mainText;
-    late Obx lowerAlarmBound;
-    late Obx upperAlarmBound;
-
-    if (withModel) {
-      //TODO when ready, put to class fields and delete rest
-      dataModel = Get.find<DataModel>(tag: sensor.toString());
-      textColor = dataModel.color;
-      miniTitle = dataModel.miniTitle;
-
-      mainText = Obx(
-        () => Text(
-          dataModel.singleData.value.value.toInt().toString(),
-          style: TextStyle(
-            color: textColor,
-            fontSize: 50,
-          ),
-        ),
-      );
-      lowerAlarmBound = Obx(
-        () => Text(
-          // to be changed
-          dataModel.lowerAlarmBound.value.toString(),
-          style: TextStyle(color: textColor),
-          textAlign: TextAlign.left,
-        ),
-      );
-      upperAlarmBound = Obx(
-        () => Text(
-          // to be changed
-          dataModel.upperAlarmBound.value.toString(),
-          style: TextStyle(
-            color: textColor,
-          ),
-        ),
-      );
-    } else {
-      screenController = Get.find();
-      mainText = Obx(
-        () => Text(
-          value[value.length - 1].value.round().toString(),
-          style: TextStyle(
-            color: textColor,
-            fontSize: 50,
-          ),
-        ),
-      );
-      lowerAlarmBound = Obx(
-        () => Text(
-          // to be changed
-          "58".obs.value,
-          style: TextStyle(color: textColor),
-          textAlign: TextAlign.left,
-        ),
-      );
-      upperAlarmBound = Obx(
-        () => Text(
-          // to be changed
-          "120".obs.value,
-          style: TextStyle(
-            color: textColor,
-          ),
-        ),
-      );
-    }
-
-    return AspectRatio(
-      aspectRatio: 1,
-      child: ElevatedButton(
-        style: ButtonStyle(
-          shape: MaterialStateProperty.all(const RoundedRectangleBorder()),
-          backgroundColor: MaterialStateProperty.all(backgroundColor),
-        ),
-        onPressed: () {
-          if (withModel) {
-            dataModel.updateValues(dataModel.singleData.value.value + 1.0);
-            if (dataModel.singleData.value.value.toInt() > 10) {
-              monitorController.alarmMessage.value = "High pulse!";
-            }
-          } //testing
-        },
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  miniTitle,
-                  style: TextStyle(color: textColor),
-                ),
-                upperAlarmBound,
-              ],
+    return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          // Can we take away Obx here since the whole widget is wrapped in Obx?
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Text(
+              dataModel.miniTitle,
+              style: TextStyle(color: dataModel.color),
             ),
-            mainText, // Obx here
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                lowerAlarmBound,
-                Text(
-                  // to be changed
-                  "1/ min.",
-                  style: TextStyle(
-                    color: textColor,
-                  ),
-                  textAlign: TextAlign.right,
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
+            Obx(() => Text(dataModel.upperAlarmBound.toString(),
+                style: TextStyle(
+                  color: dataModel.color,
+                )))
+          ]),
+          Obx(() => Text(
+                dataModel.singleData.value.value.toInt().toString(),
+                style: TextStyle(color: dataModel.color, fontSize: 50.0),
+              )),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Obx(() => Text(dataModel.lowerAlarmBound.toString(),
+                style: TextStyle(
+                  color: dataModel.color,
+                ))),
+            Text('1/min',
+                style: TextStyle(
+                  color: dataModel.color,
+                ))
+          ]),
+        ]);
   }
 }

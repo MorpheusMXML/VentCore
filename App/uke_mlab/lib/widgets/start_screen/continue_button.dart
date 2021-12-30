@@ -4,14 +4,15 @@ import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/providers/start_screen_controller.dart';
 import 'package:uke_mlab/utilities/screen_controller.dart';
 
-class StartScreenContinue extends StatelessWidget {
-  const StartScreenContinue({
+class ContinueButton extends StatelessWidget {
+  const ContinueButton({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final startScreenController = Get.find<StartScreenController>();
+    final screenController = Get.find<ScreenController>();
 
     return Obx(
       () => Container(
@@ -26,14 +27,15 @@ class StartScreenContinue extends StatelessWidget {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),
           ),
-          onPressed: startScreenController.selectedString.toString() != ""
-              ? () {
-                  Get.toNamed(
-                      Get.find<ScreenController>().changeScreen2(
-                          screenChangeButtonEnum.continueButton,
-                          startScreenController.selectedString.value),
-                      arguments: [startScreenController.selectedString.value]);
-                }
+          onPressed: startScreenController.selectedString.toString() != ''
+              ? () => Get.offNamed(
+                    screenController.changeScreen2(
+                        screenChangeButtonEnum.continueButton,
+                        startScreenController.selectedString.value),
+                    arguments: {
+                      'patientType': startScreenController.selectedString.value
+                    },
+                  )
               : null,
           child: const Text('Continue', style: TextStyle(fontSize: 20)),
         ),

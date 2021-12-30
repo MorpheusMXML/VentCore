@@ -3,7 +3,13 @@ import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/models/model.dart';
 import 'package:uke_mlab/models/model_manager.dart';
 import 'package:uke_mlab/models/system_state.dart';
-import 'package:uke_mlab/widgets/start_screen/aed_button.dart';
+
+class ScreenBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.put(ScreenController());
+  }
+}
 
 // basic controller to interact with model
 // (at the moment) just boundary update
@@ -20,7 +26,7 @@ class ScreenController {
 
   // Wrapper for easier usage, since certain sadly require additional information
   String changeScreen1(screenChangeButtonEnum sourceButton) {
-    return changeScreen2(sourceButton, "");
+    return changeScreen2(sourceButton, '');
   }
 
   // OVERLOADING NOT SUPPORTED?! => parameter number at the end
@@ -34,27 +40,27 @@ class ScreenController {
     switch (sourceButton) {
       case screenChangeButtonEnum.continueButton:
         // Add behaviour
-        if (additionalInfo == "Adult") {
+        if (additionalInfo == 'Adult') {
           if (systemState.patientType != patientTypeEnum.adult) {
             modelManager.loadPatientPresets(patientTypeEnum.adult);
             systemState.patientType = patientTypeEnum.adult;
           }
-        } else if (additionalInfo == "Child") {
+        } else if (additionalInfo == 'Child') {
           if (systemState.patientType != patientTypeEnum.child) {
             modelManager.loadPatientPresets(patientTypeEnum.child);
             systemState.patientType = patientTypeEnum.child;
           }
-        } else if (additionalInfo == "Infant") {
+        } else if (additionalInfo == 'Infant') {
           if (systemState.patientType != patientTypeEnum.infant) {
             modelManager.loadPatientPresets(patientTypeEnum.infant);
             systemState.patientType = patientTypeEnum.infant;
           }
         } else {
           throw Exception(
-              "additionalInformation is not Adult, Child or Infant on screenChangeButton call from Continue Button");
+              'additionalInformation is not Adult, Child or Infant on screenChangeButton call from Continue Button');
         }
         systemState.screenStatus = screenStatusEnum.monitoringScreen;
-        return '/monitor';
+        return '/main_screen';
 
       case screenChangeButtonEnum.aedButton:
         // Add behaviour
@@ -63,7 +69,7 @@ class ScreenController {
         }
         systemState.patientType = patientTypeEnum.adult;
         systemState.screenStatus = screenStatusEnum.defibrillationScreen;
-        return '/monitor';
+        return '/main_screen';
 
       case screenChangeButtonEnum.skipButton:
         // Add behaviour
@@ -72,32 +78,32 @@ class ScreenController {
         }
         systemState.patientType = patientTypeEnum.adult;
         systemState.screenStatus = screenStatusEnum.monitoringScreen;
-        return '/monitor';
+        return '/main_screen';
 
       case screenChangeButtonEnum.toTopLevelButton:
         // Add behaviour
         systemState.screenStatus = screenStatusEnum.topLevelScreen;
-        return "";
+        return '';
 
       case screenChangeButtonEnum.ventilationButton:
         // Add behaviour
         systemState.screenStatus = screenStatusEnum.ventilationScreen;
-        return "";
+        return '';
 
       case screenChangeButtonEnum.defiButton:
         // Add behaviour
         systemState.screenStatus = screenStatusEnum.defibrillationScreen;
-        return "";
+        return '';
 
       case screenChangeButtonEnum.monitoringButton:
         // Add behaviour
         systemState.screenStatus = screenStatusEnum.monitoringScreen;
-        return "";
+        return '';
 
       default:
-        throw Exception("No Button " +
+        throw Exception('No Button ' +
             sourceButton.toString() +
-            " given for screen change known");
+            ' given for screen change known');
     }
   }
 
@@ -128,7 +134,7 @@ class ScreenController {
         break;
       case scenariosEnum.scenario4:
       //start scenario 4
-      default: // return Error "no scenario with such a number found" vs start one of the scenarios with a hint
+      default: // return Error 'no scenario with such a number found' vs start one of the scenarios with a hint
     }
   }
 

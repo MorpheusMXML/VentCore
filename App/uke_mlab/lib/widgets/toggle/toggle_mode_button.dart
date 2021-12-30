@@ -3,8 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/toggle_controller.dart';
 
-class ModeToggleButton extends StatelessWidget {
-  ModeToggleButton({Key? key}) : super(key: key);
+class ToggleModeButton extends StatelessWidget {
+  ToggleModeButton({Key? key}) : super(key: key);
 
   final toggleController = Get.find<ToggleController>();
   final Map<String, String> iconLocationMap = {

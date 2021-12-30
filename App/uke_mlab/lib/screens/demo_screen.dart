@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:uke_mlab/widgets/demo_screen/demo_screen_button.dart';
-import 'package:uke_mlab/widgets/demo_screen/demo_screen_exit.dart';
-import 'package:uke_mlab/widgets/statusbar/statusbar.dart';
+import 'package:uke_mlab/widgets/demo_screen/scenario_button.dart';
+import 'package:uke_mlab/widgets/demo_screen/exit_button.dart';
 
 class DemoScreen extends StatelessWidget {
   const DemoScreen({
@@ -11,21 +10,21 @@ class DemoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const StatusBar(category: "")),
-      body: Row(children: [
+    return Row(
+      children: [
         Flexible(
           flex: 3,
           child: Row(
             children: [
               Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    DemoScreenButton(name: "Scenario 1"),
-                    DemoScreenButton(name: "Scenario 2"),
-                    DemoScreenButton(name: "Scenario 3"),
-                    DemoScreenButton(name: "Scenario 4"),
-                  ]),
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  ScenarioButton(name: 'Scenario 1'),
+                  ScenarioButton(name: 'Scenario 2'),
+                  ScenarioButton(name: 'Scenario 3'),
+                  ScenarioButton(name: 'Scenario 4'),
+                ],
+              ),
             ],
           ),
         ),
@@ -34,11 +33,11 @@ class DemoScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: const [
-              DemoScreenExit(),
+              ExitButton(),
             ],
           ),
         ),
-      ]),
+      ],
     );
   }
 }

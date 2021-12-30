@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/start_screen_controller.dart';
@@ -8,11 +8,11 @@ import 'package:uke_mlab/providers/start_screen_controller.dart';
 //@param name Buttontext
 //@param optional image SVG asset path
 
-class StartScreenButton extends StatelessWidget {
+class PatientTypeButton extends StatelessWidget {
   final String name;
-  final String image;
+  final SvgPicture image;
 
-  const StartScreenButton({
+  const PatientTypeButton({
     Key? key,
     required this.name,
     required this.image,
@@ -49,10 +49,7 @@ class StartScreenButton extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SvgPicture.asset(
-                      image,
-                      height: 70,
-                    ),
+                    image,
                   ],
                 ),
               ),

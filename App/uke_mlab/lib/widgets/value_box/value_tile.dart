@@ -1,57 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/model.dart';
-import 'package:uke_mlab/providers/mockup.dart';
 
 import 'package:uke_mlab/models/enums.dart';
-import 'package:uke_mlab/widgets/value_box/value_box.dart';
+import 'package:uke_mlab/widgets/value_box/value_box_container.dart';
 
 class ValueTile extends StatelessWidget {
-  late Color textColor;
-  final Color backgroundColor;
-  late String name;
-  late String miniTitle;
+  final sensorEnum sensor;
 
-  late List<ChartDataMockup> value;
-  late sensorEnum sensor;
-  late bool withModel;
-
-  ValueTile({
+  const ValueTile({
     Key? key,
-    required this.textColor,
-    required this.name,
-    required this.miniTitle,
-    required this.backgroundColor,
-    required this.value,
-    this.withModel = false,
-  }) : super(key: key);
-
-  ValueTile.model({
-    Key? key,
-    required this.backgroundColor,
     required this.sensor,
-    this.withModel = true,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final ValueBox valueBox;
-    if (withModel) {
-      DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
-      name = dataModel.title;
-      textColor = dataModel.color;
-      valueBox = ValueBox.model(
-        backgroundColor: backgroundColor,
-        sensor: sensor,
-      );
-    } else {
-      valueBox = ValueBox(
-          textColor: textColor,
-          miniTitle: miniTitle,
-          value: value,
-          backgroundColor: backgroundColor,
-          withModel: false);
-    }
+    final ValueBoxContainer valueBox;
+
+    DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
+    valueBox = ValueBoxContainer(
+      sensor: sensor,
+    );
 
     return Expanded(
       child: Container(
@@ -64,19 +33,17 @@ class ValueTile extends StatelessWidget {
               child: Container(
                 margin: const EdgeInsets.only(top: 4, bottom: 4),
                 child: Text(
-                  name,
+                  dataModel.title,
                   style: TextStyle(
                     decoration: TextDecoration.none,
-                    color: textColor,
+                    color: dataModel.color,
                     fontSize: 20,
-                    // temp fix for long names
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ),
             ),
             Flexible(
-              // cant decrease --> pixel overflow
               flex: 3,
               child: valueBox,
             ),

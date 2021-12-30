@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/start_screen_controller.dart';
 
-class SliderTile extends StatelessWidget {
+class PopupSlider extends StatelessWidget {
   final String name;
   final RxDouble value;
 
-  const SliderTile({
+  const PopupSlider({
     Key? key,
     required this.name,
     required this.value,
@@ -15,13 +15,13 @@ class SliderTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final startScreenController = Get.find<StartScreenController>();
+
     return Container(
       height: 100 / MediaQuery.of(context).devicePixelRatio,
       margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
       color: const Color(0xff322f37),
       child: Row(
         children: [
-          //Text
           Flexible(
             flex: 2,
             fit: FlexFit.tight,
@@ -36,7 +36,6 @@ class SliderTile extends StatelessWidget {
               ),
             ),
           ),
-          //Slider
           Flexible(
             flex: 8,
             child: Obx(

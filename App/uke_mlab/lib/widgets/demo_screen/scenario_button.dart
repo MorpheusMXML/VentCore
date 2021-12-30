@@ -1,15 +1,14 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 //Widget for StartScreen Buttons
 //@param name Buttontext
 
-class DemoScreenButton extends StatelessWidget {
+class ScenarioButton extends StatelessWidget {
   final String name;
-  const DemoScreenButton({
+  const ScenarioButton({
     Key? key,
     required this.name,
-  }): super(key: key);
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(

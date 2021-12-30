@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class DemoScreenExit extends StatelessWidget {
-  const DemoScreenExit({
+class ExitButton extends StatelessWidget {
+  const ExitButton({
     Key? key,
   }) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
@@ -14,17 +13,15 @@ class DemoScreenExit extends StatelessWidget {
       margin: const EdgeInsets.fromLTRB(0, 0, 50, 50),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          fixedSize: const Size(200,60),
-          primary: const Color(0xffeeeeee),
+          fixedSize: const Size(200, 60),
+          primary: const Color(0xFFEEEEEE),
           onPrimary: Colors.black,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(75),
           ),
         ),
         child: const Text('Exit', style: TextStyle(fontSize: 20)),
-        onPressed: () {
-          Get.toNamed('/start_screen'); //TODO: Navigation!
-        },
+        onPressed: () => Get.offNamed('/start_screen'),
       ),
     );
   }
