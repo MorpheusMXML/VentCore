@@ -26,7 +26,7 @@ class GraphAdderPopup extends StatelessWidget {
                 systemState.graphList.contains(sensor)
                     ? style = ElevatedButton.styleFrom(
                         fixedSize: const Size(80, 60),
-                        // load color from sensors json or model manager?
+                        // TODO: load color from sensors json or model manager?
                         primary: Colors.green,
                         onPrimary: Colors.black)
                     : style = ElevatedButton.styleFrom(
@@ -40,7 +40,8 @@ class GraphAdderPopup extends StatelessWidget {
                         ? systemState.graphList.remove(sensor)
                         : systemState.graphList.add(sensor),
                     child: Text(
-                      sensor.toString(),
+                      // TODO: temporary solution is to remove '.sensorEnum'
+                      '$sensor'.substring(11).toUpperCase(),
                       style: const TextStyle(fontSize: 18),
                       textAlign: TextAlign.center,
                     ));
