@@ -12,23 +12,13 @@ import 'package:uke_mlab/models/model_manager.dart';
 import 'package:uke_mlab/utilities/alarm_controller.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/utilities/screen_controller.dart';
-import 'package:uke_mlab/widgets/appbar/statusbar.dart';
-import 'package:uke_mlab/widgets/menu/menu.dart';
+import 'package:uke_mlab/widgets/misc/app_scaffold.dart';
+import 'package:uke_mlab/widgets/misc/error_message.dart';
 
 void main() {
   // Set the ErrorWidget's builder before the app is started.
   ErrorWidget.builder = (FlutterErrorDetails details) {
-    return Container(
-      alignment: Alignment.center,
-      margin: const EdgeInsets.all(32),
-      child: Text(
-        'Error!\n\n${details.exception}',
-        style: const TextStyle(color: Colors.blue, fontSize: 24),
-        softWrap: true,
-        textAlign: TextAlign.center,
-        textDirection: TextDirection.ltr,
-      ),
-    );
+    return ErrorMessage(details: details);
   };
 
   WidgetsFlutterBinding.ensureInitialized();
@@ -60,7 +50,6 @@ class MyApp extends StatelessWidget {
 
     return GetMaterialApp(
       title: 'MLab UKE',
-      // TODO: Replace every Colors.<color> with const (static) Colors
       theme: AppTheme.darkTheme,
       getPages: [
         GetPage(
@@ -98,22 +87,5 @@ class MyApp extends StatelessWidget {
       ],
       initialRoute: '/start_screen',
     );
-  }
-}
-
-class AppScaffold extends StatelessWidget {
-  final Widget screen;
-
-  const AppScaffold({
-    Key? key,
-    required this.screen,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        drawer: const AppMenu(),
-        appBar: AppBar(title: const StatusBar()),
-        body: screen);
   }
 }
