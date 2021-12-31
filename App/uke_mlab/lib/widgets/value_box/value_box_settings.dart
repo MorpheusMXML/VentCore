@@ -7,31 +7,44 @@ class ValueBoxSettings extends StatelessWidget {
   final DataModel dataModel;
   final String type;
 
-  const ValueBoxSettings({
+  const ValueBoxSettings.lower({
     Key? key,
     required this.dataModel,
-    required this.type,
+    this.type = 'lower',
+  }) : super(key: key);
+
+  const ValueBoxSettings.upper({
+    Key? key,
+    required this.dataModel,
+    this.type = 'upper',
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final screenController = Get.find<ScreenController>();
+    void Function(DataModel, int) setFunction;
+    int startItem;
+
+    if (type == 'upper') {
+      startItem = dataModel.upperAlarmBound.value;
+      setFunction = screenController.setUpperBoundary;
+    } else {
+      startItem = dataModel.lowerAlarmBound.value;
+      setFunction = screenController.setLowerBoundary;
+    }
 
     return SizedBox(
         width: 60,
         height: 100,
         child: ListWheelScrollView(
-            // onSelectedItemChange doesn't work with ScrollController 😡
-            // controller: ScrollController(initialScrollOffset: 200),
+            controller: FixedExtentScrollController(initialItem: startItem),
             physics: const BouncingScrollPhysics(),
             overAndUnderCenterOpacity: 0.2,
             squeeze: 1,
             itemExtent: 40,
             diameterRatio: 1.5,
             magnification: 1.5,
-            onSelectedItemChanged: (value) => type == 'upper'
-                ? screenController.setUpperBoundary(dataModel, value)
-                : screenController.setLowerBoundary(dataModel, value),
-            children: List.generate(200, (index) => Text('$index'))));
+            onSelectedItemChanged: (value) => setFunction(dataModel, value),
+            children: List.generate(400, (index) => Text('$index'))));
   }
 }

@@ -29,7 +29,7 @@ class ValueBoxContainer extends StatelessWidget {
               color: const Color(0xFF49454F),
               child: Row(
                 children: [
-                  ValueBoxSettings(dataModel: dataModel, type: 'lower'),
+                  ValueBoxSettings.lower(dataModel: dataModel),
                   AspectRatio(
                       aspectRatio: 1,
                       child: ElevatedButton(
@@ -41,7 +41,7 @@ class ValueBoxContainer extends StatelessWidget {
                         onPressed: () => dataModel.tapped.toggle(),
                         child: ValueBoxContents(dataModel: dataModel),
                       )),
-                  ValueBoxSettings(dataModel: dataModel, type: 'upper'),
+                  ValueBoxSettings.upper(dataModel: dataModel),
                 ],
               ),
             )
