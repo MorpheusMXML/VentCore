@@ -16,8 +16,6 @@ class SystemState {
   // More or less copy pasted from old mockup class
   RxList<sensorEnum> graphList = <sensorEnum>[].obs;
 
-  
-
   RxBool addGraph = false.obs;
 
   Map<String, RxInt> ippvValues = {
@@ -28,12 +26,8 @@ class SystemState {
 
   RxString alarmMessage = ''.obs;
 
-  void incrementIPPV(name) {
-    ippvValues[name]!.value = ippvValues[name]!.value + 1;
-  }
-
-  void decrementIPPV(name) {
-    ippvValues[name]!.value = ippvValues[name]!.value - 1;
+  void updateIPPVValue(String name, int value) {
+    ippvValues[name]!.value = ippvValues[name]!.value + value;
   }
 
   void switchToAlarm(int type) {

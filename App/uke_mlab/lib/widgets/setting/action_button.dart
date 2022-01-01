@@ -2,11 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
 
-class IncrementButton extends StatelessWidget {
+class ActionButton extends StatelessWidget {
   final String name;
-  const IncrementButton({
+  final Icon icon;
+  final int value;
+
+  const ActionButton.increment({
     Key? key,
     required this.name,
+    this.icon = const Icon(Icons.add),
+    this.value = 1,
+  }) : super(key: key);
+
+  const ActionButton.decrement({
+    Key? key,
+    required this.name,
+    this.icon = const Icon(Icons.remove),
+    this.value = -1,
   }) : super(key: key);
 
   @override
@@ -15,8 +27,8 @@ class IncrementButton extends StatelessWidget {
 
     return Flexible(
       child: ElevatedButton(
-        onPressed: () => systemState.incrementIPPV(name),
-        child: const Icon(Icons.add),
+        onPressed: () => systemState.updateIPPVValue(name, value),
+        child: icon,
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
