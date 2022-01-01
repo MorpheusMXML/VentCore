@@ -81,6 +81,7 @@ class DataModel extends GetxController {
   // if graphData would exceed maxLenght, remove first (oldest) element
   // graphData is sorted by oldest at pos 0 to latest element
   void updateValues() {
+    final stopwatch = Stopwatch()..start();
     if (!loading.value) {
       List<int> addedIndexes = <int>[
         for (var i = graphData.length - 100; i <= graphData.length - 1; i++) i
@@ -116,6 +117,7 @@ class DataModel extends GetxController {
         evaluateBoundaryChange(boundaryStateEnum.inBoundaries);
       }
     }
+    print('$sensorKey in ${stopwatch.elapsed}');
   }
 
   void evaluateBoundaryChange(boundaryState) {
