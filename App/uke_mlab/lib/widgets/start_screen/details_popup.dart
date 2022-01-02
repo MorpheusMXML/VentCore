@@ -22,9 +22,9 @@ class DetailsPopup extends StatelessWidget {
                 children: [
                   const PopupNameField(),
                   PopupSlider(
-                      name: 'Weight', value: startScreenController.weightValue),
+                      name: 'Weight', unit: "kg", value: startScreenController.weightValue),
                   PopupSlider(
-                      name: 'Height', value: startScreenController.heightValue),
+                      name: 'Height', unit: "cm", value: startScreenController.heightValue),
                 ],
               ),
             )
