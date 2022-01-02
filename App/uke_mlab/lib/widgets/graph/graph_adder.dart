@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uke_mlab/providers/mockup.dart';
-import 'package:uke_mlab/widgets/add_button.dart';
-import 'graph_selection.dart';
+import 'package:uke_mlab/models/system_state.dart';
 
 class GraphAdder extends StatelessWidget {
   const GraphAdder({
@@ -11,16 +9,16 @@ class GraphAdder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<MonitorController>(
-        init: MonitorController(),
-        builder: (controller) => getWidget(controller));
-  }
+    final SystemState systemState = Get.find<SystemState>();
 
-  getWidget(controller) {
-    if (controller.isAddGraphTapped) {
-      return GraphSelection(controller: controller);
-    } else {
-      return AddButton(controller: controller);
-    }
+    return ElevatedButton(
+      onPressed: () => systemState.addGraph.toggle(),
+      style: ElevatedButton.styleFrom(
+        primary: Colors.grey[800],
+        fixedSize: const Size(80, 80),
+        shape: const CircleBorder(),
+      ),
+      child: const Icon(Icons.add, size: 40),
+    );
   }
 }

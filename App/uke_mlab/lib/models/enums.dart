@@ -4,7 +4,8 @@ enum sensorEnum {
   pulse,
   breathFrequency,
   nibd,
-  mve
+  mve,
+  co2
   //TODO expand
 }
 
@@ -28,4 +29,21 @@ enum screenStatusEnum {
   monitoringScreen,
   ventilationScreen,
   defibrillationScreen
+}
+
+enum patientTypeEnum {
+  adult,
+  child,
+  infant,
+  none,
+}
+
+enum screenChangeButtonEnum {
+  aedButton,
+  continueButton,
+  skipButton,
+  toTopLevelButton,
+  ventilationButton,
+  defiButton,
+  monitoringButton,
 }

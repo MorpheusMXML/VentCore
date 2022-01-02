@@ -1,0 +1,111 @@
+{   
+    "sensorEnum.heartFrequency": 
+    {
+        "adult":{
+            "upperBound": 170,
+            "lowerBound": 70
+        },
+        "child":{
+            "upperBound": 130,
+            "lowerBound": 80
+        },
+        "infant":{
+            "upperBound": 110,
+            "lowerBound": 90
+        },
+        "title": "Heart Frequency",
+        "minititle": "HF",
+        "color": "0xFF4CAF50"
+    },
+    "sensorEnum.spo2":
+    {
+        "adult":{
+            "upperBound": 180,
+            "lowerBound": 80
+        },
+        "child":{
+            "upperBound": 140,
+            "lowerBound": 90
+        },
+        "infant":{
+            "upperBound": 120,
+            "lowerBound": 100
+        },
+        "title": "Espiratorial O2",
+        "minititle": "SpO2",
+        "color": "0xFF2196F3"
+    },
+    "sensorEnum.pulse":
+    {
+        "adult":{
+            "upperBound": 210,
+            "lowerBound": 50
+        },
+        "child":{
+            "upperBound": 180,
+            "lowerBound": 60
+        },
+        "infant":{
+            "upperBound": 130,
+            "lowerBound": 70
+        },
+        "title": "Pulse",
+        "minititle": "PP",
+        "color": "0xFF9C27B0"
+    },
+    "sensorEnum.breathFrequency":
+    {
+        "adult":{
+            "upperBound": 200,
+            "lowerBound": 40
+        },
+        "child":{
+            "upperBound": 170,
+            "lowerBound": 50
+        },
+        "infant":{
+            "upperBound": 120,
+            "lowerBound": 60
+        },
+        "title": "Breath. Freq.",
+        "minititle": "AF",
+        "color": "0xFF0CECDD"
+    },
+    "sensorEnum.nibd":
+    {
+        "adult":{
+            "upperBound": 220,
+            "lowerBound": 70
+        },
+        "child":{
+            "upperBound": 170,
+            "lowerBound": 60
+        },
+        "infant":{
+            "upperBound": 120,
+            "lowerBound": 50
+        },
+        "title": "NIBD",
+        "minititle": "NIBD",
+        "color": "0xFFDC362E"
+    },
+    "sensorEnum.mve":
+    {
+        "adult":{
+            "upperBound": 230,
+            "lowerBound": 80
+        },
+        "child":{
+            "upperBound": 170,
+            "lowerBound": 70
+        },
+        "infant":{
+            "upperBound": 120,
+            "lowerBound": 60
+        },
+        "title": "MVE",
+        "minititle": "MVE",
+        "color": "0xFF0CECDD"
+    }
+    
+}

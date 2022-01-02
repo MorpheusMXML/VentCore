@@ -1,60 +1,42 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:uke_mlab/providers/mockup.dart';
+import 'package:uke_mlab/models/enums.dart';
+import 'package:uke_mlab/models/model.dart';
 
 class Graph extends StatelessWidget {
-  final List<ChartDataMockup> data;
-  final Color color;
-  final Map<String, Object> type;
+  final sensorEnum sensor;
 
   const Graph({
     Key? key,
-    required this.data,
-    required this.type,
-    required this.color,
+    required this.sensor,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final monitorController = Get.find<MonitorController>();
-    ChartSeriesController? myController;
-
-    // execute every 1000 milliseconds
-    Timer.periodic(const Duration(milliseconds: 1000), (timer) {
-      myController?.updateDataSource(
-        addedDataIndexes: <int>[data.length - 1],
-        removedDataIndexes: <int>[0],
-      );
-      monitorController.updateData(type["index"] as int);
-    });
-
-    return SfCartesianChart(
-      backgroundColor: Theme.of(context).cardColor,
-      primaryYAxis: NumericAxis(
-        minimum: 0,
-        maximum: 100,
-        majorGridLines:
-            MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
+    DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
+    return Obx(
+      () => SfCartesianChart(
+        backgroundColor: Theme.of(context).cardColor,
+        primaryYAxis: NumericAxis(
+          majorGridLines:
+              MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
+        ),
+        primaryXAxis: NumericAxis(
+          majorGridLines:
+              MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
+        ),
+        series: [
+          SplineSeries(
+              color: dataModel.color,
+              dataSource: dataModel.graphData.value,
+              onRendererCreated: (ChartSeriesController controller) {
+                dataModel.chartController = controller;
+              },
+              xValueMapper: (ChartData data, _) => data.counter,
+              yValueMapper: (ChartData data, _) => data.value)
+        ],
       ),
-      primaryXAxis: NumericAxis(
-        majorGridLines: MajorGridLines(
-            width: 1,
-            color:
-                Theme.of(context).shadowColor //Theme.of(context).shadowColor,
-            ),
-      ),
-      series: [
-        SplineSeries(
-            color: color,
-            dataSource: data,
-            onRendererCreated: (ChartSeriesController controller) {
-              myController = controller;
-            },
-            xValueMapper: (ChartDataMockup data, _) => data.counter,
-            yValueMapper: (ChartDataMockup data, _) => data.value)
-      ],
     );
   }
 }
