@@ -62,7 +62,7 @@ class PopupSlider extends StatelessWidget {
             width: 90 / MediaQuery.of(context).devicePixelRatio,
             child: Obx(
               () => Text(
-                value.value.round().toString() + " " + unit,
+                value.value.round().toString() + unit,
                 style: const TextStyle(color: Colors.black),
               ),
             ),
