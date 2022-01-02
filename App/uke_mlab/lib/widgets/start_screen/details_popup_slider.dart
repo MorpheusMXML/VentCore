@@ -4,11 +4,13 @@ import 'package:uke_mlab/providers/start_screen_controller.dart';
 
 class PopupSlider extends StatelessWidget {
   final String name;
+  final String unit;
   final RxDouble value;
 
   const PopupSlider({
     Key? key,
     required this.name,
+    required this.unit,
     required this.value,
   }) : super(key: key);
 
@@ -42,7 +44,7 @@ class PopupSlider extends StatelessWidget {
               () => Slider(
                   min: 0.0,
                   max: 250.0,
-                  divisions: 50,
+                  divisions: 25,
                   value: value.value,
                   label: value.value.round().toString(),
                   onChanged: (newValue) {
@@ -59,7 +61,10 @@ class PopupSlider extends StatelessWidget {
             height: 40 / MediaQuery.of(context).devicePixelRatio,
             width: 90 / MediaQuery.of(context).devicePixelRatio,
             child: Obx(
-              () => Text(value.value.round().toString()),
+              () => Text(
+                value.value.round().toString() + " " + unit,
+                style: const TextStyle(color: Colors.black),
+              ),
             ),
           ),
         ],
