@@ -10,6 +10,7 @@ enum sensorEnum {
 }
 
 enum scenariosEnum {
+  standardScenario,
   scenario1,
   scenario2,
   scenario3a,
@@ -24,18 +25,18 @@ enum boundaryStateEnum {
   upperBoundaryViolated
 }
 
-enum screenStatusEnum {
-  topLevelScreen,
-  monitoringScreen,
-  ventilationScreen,
-  defibrillationScreen
-}
-
 enum patientTypeEnum {
   adult,
   child,
   infant,
   none,
+}
+
+enum screenStatusEnum {
+  topLevelScreen,
+  monitoringScreen,
+  ventilationScreen,
+  defibrillationScreen
 }
 
 enum screenChangeButtonEnum {

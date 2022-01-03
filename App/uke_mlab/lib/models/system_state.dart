@@ -35,15 +35,6 @@ class SystemState {
     //   (allGraphs[type]['alarm'] as RxString).value = 'alarm';
   }
 
-  void activateTimer() {
-    for (var sensor in sensorEnum.values) {
-      DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
-      Timer.periodic(const Duration(milliseconds: 2000), (timer) {
-        dataModel.updateValues();
-      });
-    }
-  }
-
   // SystemState initated with no violations at place and screenStatus as topLevelScreen
   SystemState() {
     for (var sensor in sensorEnum.values) {

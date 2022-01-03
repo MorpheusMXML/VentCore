@@ -20,43 +20,49 @@ class StartScreen extends StatelessWidget {
       'Infant': 'assets/icons/newborn.svg',
     };
 
-    return Row(
-      children: [
-        Flexible(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children:
-                // TODO: precache images so loading doesn't take so long
-                // https://stackoverflow.com/questions/66872111/
-                imageMap.entries
-                    .map((entry) => PatientTypeButton(
-                          name: entry.key,
-                          image: SvgPicture.asset(entry.value, height: 70),
-                        ))
-                    .toList(),
-          ),
-        ),
-        Flexible(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const DetailsPopup(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+    return SingleChildScrollView(
+      child: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: Row(
+          children: [
+            Flexible(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children:
+                    // TODO: precache images so loading doesn't take so long
+                    // https://stackoverflow.com/questions/66872111/
+                    imageMap.entries
+                        .map((entry) => PatientTypeButton(
+                              name: entry.key,
+                              image: SvgPicture.asset(entry.value, height: 70),
+                            ))
+                        .toList(),
+              ),
+            ),
+            Flexible(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Column(
-                    children: const [
-                      ContinueButton(),
-                      SkipButton(),
+                  const DetailsPopup(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Column(
+                        children: const [
+                          ContinueButton(),
+                          SkipButton(),
+                        ],
+                      ),
+                      const AEDButton(),
                     ],
                   ),
-                  const AEDButton(),
                 ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }
