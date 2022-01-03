@@ -26,12 +26,8 @@ class SystemState {
 
   RxString alarmMessage = ''.obs;
 
-  void incrementIPPV(name) {
-    ippvValues[name]!.value = ippvValues[name]!.value + 1;
-  }
-
-  void decrementIPPV(name) {
-    ippvValues[name]!.value = ippvValues[name]!.value - 1;
+  void updateIPPVValue(String name, int value) {
+    ippvValues[name]!.value = ippvValues[name]!.value + value;
   }
 
   void switchToAlarm(int type) {

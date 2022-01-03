@@ -11,6 +11,10 @@ class AppMenuEntry extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String navigateTo = '/' + name.replaceAll(RegExp(r' '), '_').toLowerCase();
+    // TODO: Temp fix, Patient Settings = Start Screen?
+    if (name == 'Patient Settings') {
+      navigateTo = '/start_screen';
+    }
 
     return Get.currentRoute != navigateTo
         ? ListTile(

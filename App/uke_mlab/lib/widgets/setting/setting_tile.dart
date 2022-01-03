@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:uke_mlab/models/system_state.dart';
-import 'package:uke_mlab/widgets/setting/decrement_button.dart';
-import 'package:uke_mlab/widgets/setting/increment_button.dart';
+import 'package:uke_mlab/widgets/setting/action_button.dart';
 import 'package:uke_mlab/widgets/setting/setting_text.dart';
 
 class SettingTile extends StatelessWidget {
@@ -26,8 +23,8 @@ class SettingTile extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             SettingText(name: name, rate: rate),
-            DecrementButton(name: name),
-            IncrementButton(name: name)
+            ActionButton.decrement(name: name),
+            ActionButton.increment(name: name)
           ],
         ),
       ),
