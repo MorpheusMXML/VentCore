@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  // TODO: Finish
+  // TODO: Finish; Replace every Colors.<color> with const (static) Colors
+  // https://stackoverflow.com/questions/49172746
+  // https://github.com/flutter/flutter/issues/31522
+  // mixin example but without own fields: https://github.com/jogeanmcf/tetris_game/blob/8a6202f3f7ceb7d7c2d3e73d2dcdb4edb7f136cc/lib/theme.dart
 
   static ThemeData get darkTheme {
     return ThemeData(

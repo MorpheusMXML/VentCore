@@ -32,10 +32,6 @@ class ValueBoxSettings extends StatelessWidget {
             onSelectedItemChanged: (value) => type == 'upper'
                 ? screenController.setUpperBoundary(dataModel, value)
                 : screenController.setLowerBoundary(dataModel, value),
-            children: List.generate(
-                200,
-                (index) => Text(
-                      '$index'.padLeft(2, '0'),
-                    ))));
+            children: List.generate(200, (index) => Text('$index'))));
   }
 }
