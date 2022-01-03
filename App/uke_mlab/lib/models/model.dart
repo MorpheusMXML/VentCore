@@ -58,9 +58,9 @@ class DataModel extends GetxController {
   // graphData is sorted by oldest at pos 0 to latest element
   void updateValues(double value) {
     List<int> addedIndexes = <int>[
-      for (var i = graphData.length - 100; i <= graphData.length - 1; i++) i
+      for (int i = graphData.length - 2; i <= graphData.length - 1; i++) i
     ];
-    List<int> removedIndexes = <int>[for (var i = 0; i <= 99; i++) i];
+    List<int> removedIndexes = <int>[for (var i = 0; i <= 1; i++) i];
 
     singleData.value =
         ChartData(DateTime.now(), value, singleData.value.counter + 1);
@@ -68,6 +68,43 @@ class DataModel extends GetxController {
 
     if (graphData.length + 1 > graphDataMaxLength) {
       graphData.removeAt(0);
+    }
+
+    // update only added/removed indexes instead of the whole chart (efficient)
+    chartController?.updateDataSource(
+      addedDataIndexes: addedIndexes,
+      removedDataIndexes: removedIndexes,
+    );
+
+    //evaluates whether update violated alarm boundaries or returns into boundaries
+    if (singleData.value.value > upperAlarmBound.value) {
+      evaluateBoundaryChange(boundaryStateEnum.upperBoundaryViolated);
+    } else if (singleData.value.value < lowerAlarmBound.value) {
+      evaluateBoundaryChange(boundaryStateEnum.lowerBoundaryViolated);
+    } else {
+      evaluateBoundaryChange(boundaryStateEnum.inBoundaries);
+    }
+  }
+
+  void updateValueList(List<dynamic> valueList) {
+    List<int> addedIndexes = <int>[
+      for (int i = graphData.length - valueList.length;
+          i < graphData.length;
+          i++)
+        i
+    ];
+    List<int> removedIndexes = <int>[for (var i = 0; i <= 1; i++) i];
+
+    for (int i = 0; i < valueList.length; i++) {
+      singleData.value =
+          ChartData(DateTime.now(), valueList[i], singleData.value.counter + 1);
+      graphData.add(singleData.value);
+    }
+
+    if (graphData.length + 1 > graphDataMaxLength) {
+      for (var i = 0; i < valueList.length; i++) {
+        graphData.removeAt(0);
+      }
     }
 
     // update only added/removed indexes instead of the whole chart (efficient)

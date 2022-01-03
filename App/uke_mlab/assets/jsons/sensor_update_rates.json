@@ -1,9 +1,9 @@
 {
-    "sensorEnum.heartFrequency": 500, 
+    "sensorEnum.heartFrequency": 300, 
     "sensorEnum.spo2": 500,
     "sensorEnum.pulse": 500,
     "sensorEnum.breathFrequency": 500,
     "sensorEnum.nibd": 500,
     "sensorEnum.mve": 500,
-    "sensorEnum.co2": 500
+    "sensorEnum.co2": 1000
 }

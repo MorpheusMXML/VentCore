@@ -42,9 +42,10 @@ class StandardScenario extends AbstractScenario {
         if (!scenarioRunning) {
           timer.cancel();
         }
-        //TODO load actual values for update
-        dataModel
-            .updateValues(dataMap[sensor]![dataModel.singleData.value.counter]);
+        dataModel.updateValueList(dataMap[sensor]!.sublist(
+            dataModel.singleData.value.counter,
+            dataModel.singleData.value.counter + 100));
+        //dataModel.updateValues(dataMap[sensor]![dataModel.singleData.value.counter]);
       });
     }
   }
