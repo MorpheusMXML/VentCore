@@ -16,8 +16,6 @@ class SystemState {
   // More or less copy pasted from old mockup class
   RxList<sensorEnum> graphList = <sensorEnum>[].obs;
 
-  
-
   RxBool addGraph = false.obs;
 
   Map<String, RxInt> ippvValues = {
@@ -39,15 +37,6 @@ class SystemState {
   void switchToAlarm(int type) {
     // if ((allGraphs[type]['alarm'] as RxString).value == 'none') {
     //   (allGraphs[type]['alarm'] as RxString).value = 'alarm';
-  }
-
-  void activateTimer() {
-    for (var sensor in sensorEnum.values) {
-      DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
-      Timer.periodic(const Duration(milliseconds: 2000), (timer) {
-        dataModel.updateValues();
-      });
-    }
   }
 
   // SystemState initated with no violations at place and screenStatus as topLevelScreen

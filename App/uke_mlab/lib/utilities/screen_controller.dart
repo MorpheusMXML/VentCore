@@ -3,6 +3,8 @@ import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/models/model.dart';
 import 'package:uke_mlab/models/model_manager.dart';
 import 'package:uke_mlab/models/system_state.dart';
+import 'package:uke_mlab/scenarios/abstract_scenario.dart';
+import 'package:uke_mlab/scenarios/standard_scenario.dart';
 
 class ScreenBinding extends Bindings {
   @override
@@ -14,6 +16,8 @@ class ScreenBinding extends Bindings {
 // basic controller to interact with model
 // (at the moment) just boundary update
 class ScreenController {
+  AbstractScenario? runningScenario;
+
   void setUpperBoundary(DataModel dataModel, int value) {
     dataModel.upperAlarmBound.value = value;
   }
@@ -60,6 +64,7 @@ class ScreenController {
               'additionalInformation is not Adult, Child or Infant on screenChangeButton call from Continue Button');
         }
         systemState.screenStatus = screenStatusEnum.monitoringScreen;
+        startScenario(scenariosEnum.standardScenario);
         return '/main_screen';
 
       case screenChangeButtonEnum.aedButton:
@@ -69,7 +74,8 @@ class ScreenController {
         }
         systemState.patientType = patientTypeEnum.adult;
         systemState.screenStatus = screenStatusEnum.defibrillationScreen;
-        return '/main_screen';
+        startScenario(scenariosEnum.standardScenario);
+        return '/main_screen'; //TODO change target screen to defi
 
       case screenChangeButtonEnum.skipButton:
         // Add behaviour
@@ -78,6 +84,7 @@ class ScreenController {
         }
         systemState.patientType = patientTypeEnum.adult;
         systemState.screenStatus = screenStatusEnum.monitoringScreen;
+        startScenario(scenariosEnum.standardScenario);
         return '/main_screen';
 
       case screenChangeButtonEnum.toTopLevelButton:
@@ -117,6 +124,15 @@ class ScreenController {
   void startScenario(scenariosEnum scenario) {
     Get.find<SystemState>().scenarioStarted = true;
     switch (scenario) {
+      case scenariosEnum.standardScenario:
+        if (runningScenario is AbstractScenario) {
+          if (runningScenario!.scenarioRunning) {
+            runningScenario!.stopScenario();
+          }
+        }
+        runningScenario = StandardScenario();
+        runningScenario!.startScenario();
+        break;
       case scenariosEnum.scenario1:
         //start scenario 1
         break;

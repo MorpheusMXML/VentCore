@@ -46,8 +46,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    systemState.activateTimer();
-
     return GetMaterialApp(
       title: 'MLab UKE',
       theme: AppTheme.darkTheme,

@@ -12,31 +12,6 @@ import 'package:uke_mlab/models/model_manager.dart';
 /// Alarm evaluation is done in alarm_controller
 /// graphDataMaxLength is initialized with 100, can be manipulated
 class DataModel extends GetxController {
-  RxMap dataMap = {}.obs;
-  RxBool loading = true.obs;
-
-  @override
-  void onInit() {
-    super.onInit();
-    readJson();
-  }
-
-  // Use FutureBuilder?
-  Future readJson() async {
-    var jsonString = await rootBundle.loadString('assets/data.json');
-    var source = await jsonDecode(jsonString.toString())['data'];
-    dataMap.value = {
-      sensorEnum.breathFrequency: source[0],
-      sensorEnum.co2: source[1],
-      sensorEnum.heartFrequency: source[8],
-      sensorEnum.mve: source[3],
-      sensorEnum.nibd: source[4],
-      sensorEnum.pulse: source[5],
-      sensorEnum.spo2: source[7]
-    };
-    loading.value = false;
-  }
-
   late final sensorEnum sensorKey;
 
   Color color = Colors.white;
@@ -47,7 +22,8 @@ class DataModel extends GetxController {
   final RxInt lowerAlarmBound = 0.obs;
 
   final RxBool tapped = false.obs;
-  final RxString alarmState = 'alarm'.obs;
+  final RxString alarmState = 'none'
+      .obs; // TODO use system state for this (find the widgets using it and delete the line)
 
   late int initialUpperBound;
   late int initialLowerBound;
@@ -80,41 +56,33 @@ class DataModel extends GetxController {
   // updates singleDate with a new value, puts singleData at the end of the list
   // if graphData would exceed maxLenght, remove first (oldest) element
   // graphData is sorted by oldest at pos 0 to latest element
-  void updateValues() {
-    if (!loading.value) {
-      List<int> addedIndexes = <int>[
-        for (var i = graphData.length - 100; i <= graphData.length - 1; i++) i
-      ];
-      List<int> removedIndexes = <int>[for (var i = 0; i <= 99; i++) i];
+  void updateValues(double value) {
+    List<int> addedIndexes = <int>[
+      for (var i = graphData.length - 100; i <= graphData.length - 1; i++) i
+    ];
+    List<int> removedIndexes = <int>[for (var i = 0; i <= 99; i++) i];
 
-      for (var i = 0; i <= 99; i++) {
-        singleData.value = ChartData(
-            DateTime.now(),
-            dataMap[sensorKey]['data'][singleData.value.counter],
-            singleData.value.counter + 1);
-        graphData.add(singleData.value);
-      }
+    singleData.value =
+        ChartData(DateTime.now(), value, singleData.value.counter + 1);
+    graphData.add(singleData.value);
 
-      if (graphData.length + 1 > graphDataMaxLength) {
-        for (var i = 0; i <= 99; i++) {
-          graphData.removeAt(0);
-        }
-      }
+    if (graphData.length + 1 > graphDataMaxLength) {
+      graphData.removeAt(0);
+    }
 
-      // update only added/removed indexes instead of the whole chart (efficient)
-      chartController?.updateDataSource(
-        addedDataIndexes: addedIndexes,
-        removedDataIndexes: removedIndexes,
-      );
+    // update only added/removed indexes instead of the whole chart (efficient)
+    chartController?.updateDataSource(
+      addedDataIndexes: addedIndexes,
+      removedDataIndexes: removedIndexes,
+    );
 
-      //evaluates whether update violated alarm boundaries or returns into boundaries
-      if (singleData.value.value > upperAlarmBound.value) {
-        evaluateBoundaryChange(boundaryStateEnum.upperBoundaryViolated);
-      } else if (singleData.value.value < lowerAlarmBound.value) {
-        evaluateBoundaryChange(boundaryStateEnum.lowerBoundaryViolated);
-      } else {
-        evaluateBoundaryChange(boundaryStateEnum.inBoundaries);
-      }
+    //evaluates whether update violated alarm boundaries or returns into boundaries
+    if (singleData.value.value > upperAlarmBound.value) {
+      evaluateBoundaryChange(boundaryStateEnum.upperBoundaryViolated);
+    } else if (singleData.value.value < lowerAlarmBound.value) {
+      evaluateBoundaryChange(boundaryStateEnum.lowerBoundaryViolated);
+    } else {
+      evaluateBoundaryChange(boundaryStateEnum.inBoundaries);
     }
   }
 

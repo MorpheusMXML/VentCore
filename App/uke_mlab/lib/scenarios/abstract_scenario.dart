@@ -9,11 +9,11 @@ import 'package:uke_mlab/models/model.dart';
 abstract class AbstractScenario {
   bool scenarioRunning = false;
   bool loading = true;
+
   late final Map<String, dynamic> updateRates;
 
   AbstractScenario() {
     loadUpdateRates();
-    loadData();
   }
 
   void loadUpdateRates() async {
@@ -24,19 +24,18 @@ abstract class AbstractScenario {
 
   void startScenario() {
     scenarioRunning = true;
-    //TODO: add wait until !loading
-    runScenario();
+    loadData().then((dataMap) => runScenario(dataMap));
   }
 
   //to be overwritten, behaviour depending on concrete scenario
-  void runScenario();
+  void runScenario(Map<sensorEnum, List<dynamic>> dataMap);
 
   void stopScenario() {
     scenarioRunning = false;
   }
 
   //to be implemented in respect to scenario
-  Future<void> loadData();
+  Future<Map<sensorEnum, List<dynamic>>> loadData();
 
   //maybe subject to deletion depending on future decisions
   void updateData(sensorEnum sensor, double value) {
