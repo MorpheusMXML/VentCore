@@ -10,7 +10,8 @@ import 'package:uke_mlab/models/model.dart';
 class SystemState {
   screenStatusEnum screenStatus = screenStatusEnum.topLevelScreen;
   patientTypeEnum patientType = patientTypeEnum.none;
-  final Map<sensorEnum, boundaryStateEnum> violationStates = {};
+  final RxMap<sensorEnum, boundaryStateEnum> violationStates =
+      <sensorEnum, boundaryStateEnum>{}.obs;
   bool scenarioStarted = false;
 
   // More or less copy pasted from old mockup class
