@@ -73,6 +73,7 @@ class MyApp extends StatelessWidget {
           page: () => const AppScaffold(screen: DemoScreen()),
           bindings: [
             StartScreenBinding(),
+            ToggleBinding(),
           ],
         ),
         GetPage(
@@ -80,6 +81,7 @@ class MyApp extends StatelessWidget {
           page: () => const AppScaffold(screen: AlarmLimitScreen()),
           bindings: [
             StartScreenBinding(),
+            ToggleBinding(),
           ],
         )
       ],
