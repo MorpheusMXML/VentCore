@@ -59,7 +59,7 @@ class ScreenController {
               'additionalInformation is not Adult, Child or Infant on screenChangeButton call from Continue Button');
         }
         systemState.screenStatus = screenStatusEnum.mainScreen;
-        startScenario(scenariosEnum.standardScenario);
+        changeScenario(scenariosEnum.standardScenario);
         return '/main_screen';
 
       case screenChangeButtonEnum.aedButton:
@@ -69,7 +69,7 @@ class ScreenController {
         }
         systemState.patientType = patientTypeEnum.adult;
         systemState.screenStatus = screenStatusEnum.defibrillationScreen;
-        startScenario(scenariosEnum.standardScenario);
+        changeScenario(scenariosEnum.standardScenario);
         return '/main_screen'; //TODO change target screen to defi
 
       case screenChangeButtonEnum.skipButton:
@@ -79,7 +79,7 @@ class ScreenController {
         }
         systemState.patientType = patientTypeEnum.adult;
         systemState.screenStatus = screenStatusEnum.mainScreen;
-        startScenario(scenariosEnum.standardScenario);
+        changeScenario(scenariosEnum.standardScenario);
         return '/main_screen';
 
       case screenChangeButtonEnum.toTopLevelButton:
@@ -102,6 +102,39 @@ class ScreenController {
         systemState.screenStatus = screenStatusEnum.mainScreen;
         return '';
 
+      case screenChangeButtonEnum.standardScenario:
+        runningScenario = StandardScenario();
+        runningScenario!.startScenario();
+        if (systemState.patientType == patientTypeEnum.none) {
+          modelManager.loadPatientPresets(patientTypeEnum.adult);
+          systemState.patientType = patientTypeEnum.adult;
+        }
+        return '/main_screen';
+
+      case screenChangeButtonEnum.scenario1:
+        //start scenario 1
+        return '/main_screen';
+
+      case screenChangeButtonEnum.scenario2:
+        //start scenario 2
+        return '/main_screen';
+
+      case screenChangeButtonEnum.scenario3a:
+        //start scenario 3a
+        return '/main_screen';
+
+      case screenChangeButtonEnum.scenario3b:
+        //start scenario 3b
+        return '/main_screen';
+
+      case screenChangeButtonEnum.scenario3c:
+        //start scenario 3c
+        return '/main_screen';
+
+      case screenChangeButtonEnum.scenario4:
+        //start scenario 4
+        return '/main_screen';
+
       default:
         throw Exception('No Button ' +
             sourceButton.toString() +
@@ -116,37 +149,12 @@ class ScreenController {
   void acknowledgeAlarm() {}
 
   //TODO add interaction with scenarios when scenarios are present
-  void startScenario(scenariosEnum scenario) {
+  void changeScenario(scenariosEnum scenario) {
     Get.find<SystemState>().scenarioStarted = true;
     if (runningScenario is AbstractScenario) {
       if (runningScenario!.scenarioRunning) {
         runningScenario!.stopScenario();
       }
-    }
-
-    switch (scenario) {
-      case scenariosEnum.standardScenario:
-        runningScenario = StandardScenario();
-        runningScenario!.startScenario();
-        break;
-      case scenariosEnum.scenario1:
-        //start scenario 1
-        break;
-      case scenariosEnum.scenario2:
-        //start scenario 2
-        break;
-      case scenariosEnum.scenario3a:
-        //start scenario 3a
-        break;
-      case scenariosEnum.scenario3b:
-        //start scenario 3b
-        break;
-      case scenariosEnum.scenario3c:
-        //start scenario 3c
-        break;
-      case scenariosEnum.scenario4:
-      //start scenario 4
-      default: // return Error 'no scenario with such a number found' vs start one of the scenarios with a hint
     }
   }
 

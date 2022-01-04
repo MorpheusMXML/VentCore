@@ -19,6 +19,7 @@ class DemoScreen extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
+                  ScenarioButton(name: 'Standard Scenario'),
                   ScenarioButton(name: 'Scenario 1'),
                   ScenarioButton(name: 'Scenario 2'),
                   ScenarioButton(name: 'Scenario 3'),

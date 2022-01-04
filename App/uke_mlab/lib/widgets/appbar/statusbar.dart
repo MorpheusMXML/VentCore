@@ -14,7 +14,7 @@ class StatusBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final systemState = Get.find<SystemState>();
     // TODO: Use ScreenController instead (AdditionalInfo = selectedString)
-    final startScreenController = Get.find<StartScreenController>();
+    // final startScreenController = Get.find<StartScreenController>();
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -35,13 +35,13 @@ class StatusBar extends StatelessWidget {
         ),
         Flexible(
           flex: 1,
-          child: Obx(
-            () => Text(
-              startScreenController.selectedString.value,
-              style: const TextStyle(
-                color: Colors.white,
-                decoration: TextDecoration.none,
-              ),
+          child: Text(
+            systemState.patientType.toString() == 'patientTypeEnum.none'
+                ? ''
+                : systemState.patientType.name,
+            style: const TextStyle(
+              color: Colors.white,
+              decoration: TextDecoration.none,
             ),
           ),
         ),
