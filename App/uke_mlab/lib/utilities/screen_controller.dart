@@ -103,12 +103,11 @@ class ScreenController {
         return '';
 
       case screenChangeButtonEnum.standardScenario:
-        runningScenario = StandardScenario();
-        runningScenario!.startScenario();
         if (systemState.patientType == patientTypeEnum.none) {
           modelManager.loadPatientPresets(patientTypeEnum.adult);
           systemState.patientType = patientTypeEnum.adult;
         }
+        changeScenario(scenariosEnum.standardScenario);
         return '/main_screen';
 
       case screenChangeButtonEnum.scenario1:
@@ -142,22 +141,50 @@ class ScreenController {
     }
   }
 
+  //Changes playing scenario based on input paramenter, stops currently playing scenario on call
+  void changeScenario(scenariosEnum scenario) {
+    Get.find<SystemState>().scenarioStarted = true;
+
+    if (runningScenario is AbstractScenario) {
+      print("runningScenario is abstractScenario");
+      if (runningScenario!.scenarioRunning) {
+        print("stop running scenario");
+        runningScenario!.stopScenario();
+      }
+    } else {
+      print("runningScenario is NOT abstractScenario\\" +
+          runningScenario.runtimeType.toString());
+    }
+
+    switch (scenario) {
+      case scenariosEnum.standardScenario:
+        runningScenario = StandardScenario();
+        runningScenario!.startScenario();
+        break;
+      case scenariosEnum.scenario1:
+        break;
+      case scenariosEnum.scenario2:
+        break;
+      case scenariosEnum.scenario3a:
+        break;
+      case scenariosEnum.scenario3b:
+        break;
+      case scenariosEnum.scenario3c:
+        break;
+      case scenariosEnum.scenario4:
+        break;
+      default:
+        throw Exception('No scenario for ' + scenario.toString() + ' known');
+    }
+  }
+
   //TODO implement
   void muteAlarm() {}
 
   //TODO implement
   void acknowledgeAlarm() {}
 
-  //TODO add interaction with scenarios when scenarios are present
-  void changeScenario(scenariosEnum scenario) {
-    Get.find<SystemState>().scenarioStarted = true;
-    if (runningScenario is AbstractScenario) {
-      if (runningScenario!.scenarioRunning) {
-        runningScenario!.stopScenario();
-      }
-    }
-  }
-
+  //TODO implement
   void nextStep() {
     if (Get.find<SystemState>().scenarioStarted) {
       // go to the next stopping point in simmulation data (see patient stories)
@@ -165,6 +192,7 @@ class ScreenController {
     // else case for throwing some kind of error message?
   }
 
+  //TODO delete/implement
   void endScenario(ModelManager manager) {
     SystemState systemState = Get.find<SystemState>();
     if (systemState.scenarioStarted) {

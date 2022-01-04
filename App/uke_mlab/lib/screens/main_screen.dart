@@ -23,12 +23,6 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // temporary Bugfix for simulation on Chrome
-    Get.arguments != null
-        ? startScreenController.selectedString.value =
-            Get.arguments['patientType']
-        : print('Can\'t access patientType because of refresh');
-
     return Container(
       margin: const EdgeInsets.only(left: 12, right: 12, top: 12),
 

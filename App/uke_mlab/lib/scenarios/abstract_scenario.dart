@@ -8,7 +8,7 @@ import 'package:uke_mlab/models/model.dart';
 
 abstract class AbstractScenario {
   bool scenarioRunning = false;
-  bool loading = true;
+  late scenariosEnum scenarioType;
 
   late final Map<String, dynamic> updateRates;
 
@@ -32,6 +32,7 @@ abstract class AbstractScenario {
 
   void stopScenario() {
     scenarioRunning = false;
+    print("scenarioStopped");
   }
 
   //to be implemented in respect to scenario
