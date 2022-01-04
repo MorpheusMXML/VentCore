@@ -24,7 +24,7 @@ class AppMenuEntry extends StatelessWidget {
                 fontSize: 20,
               ),
             ),
-            onTap: () => Get.toNamed(navigateTo))
+            onTap: () => Get.offNamed(navigateTo))
         : ListTile(
             title: Text(
               name,

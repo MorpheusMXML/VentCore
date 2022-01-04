@@ -23,9 +23,6 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: [BUGFIX] Child --> Continue --> Menu --> Demo Scenarios --> Exit
-    // --> Skip --> ERROR
-
     // temporary Bugfix for simulation on Chrome
     Get.arguments != null
         ? startScreenController.selectedString.value =
@@ -35,7 +32,7 @@ class MainScreen extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(left: 12, right: 12, top: 12),
 
-      // maybe change the default graphList elsewhere (Mode Screens?)
+      // TODO: maybe change the default graphList elsewhere (Mode Screens?)
       child: Obx(() {
         // Ventilation
         if (toggleController.isSelected[1]) {
