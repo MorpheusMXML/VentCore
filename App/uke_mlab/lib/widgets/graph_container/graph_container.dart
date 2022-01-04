@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/models/model.dart';
+import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/widgets/graph/history_graph.dart';
 import 'package:uke_mlab/widgets/graph_container/alarm_confirm_button.dart';
 import 'package:uke_mlab/widgets/graph_container/graph_alarm_message.dart';
@@ -18,11 +19,11 @@ class GraphContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
+    final SystemState systemState = Get.find<SystemState>();
 
     return Obx(() {
-      switch (dataModel.alarmState.value) {
-        case 'alarm':
+      switch (systemState.violationStates[sensor]) {
+        case boundaryStateEnum.lowerBoundaryViolated:
           return Container(
             color: Colors.red,
             margin: const EdgeInsets.only(bottom: 8),
@@ -44,7 +45,7 @@ class GraphContainer extends StatelessWidget {
               ],
             ),
           );
-        case 'suppressed':
+        case boundaryStateEnum.suppressed:
           return Container(
             color: Colors.red,
             padding: const EdgeInsets.all(12),
