@@ -22,8 +22,6 @@ class DataModel extends GetxController {
   final RxInt lowerAlarmBound = 0.obs;
 
   final RxBool tapped = false.obs;
-  final RxString alarmState = 'none'
-      .obs; // TODO use system state for this (find the widgets using it and delete the line)
 
   late int initialUpperBound;
   late int initialLowerBound;
