@@ -13,6 +13,7 @@ class StatusBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final systemState = Get.find<SystemState>();
+    // TODO: Use ScreenController instead (AdditionalInfo = selectedString)
     final startScreenController = Get.find<StartScreenController>();
 
     return Row(
