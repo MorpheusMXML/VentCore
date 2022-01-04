@@ -30,7 +30,7 @@ class SkipButton extends StatelessWidget {
           // of observable variable selectedSetting used in statusbar because
           // startScreenController is deleted after page navigation?
           Get.offNamed(
-              screenController.changeScreen1(screenChangeButtonEnum.aedButton),
+              screenController.changeScreen(screenChangeButtonEnum.aedButton),
               arguments: {'patientType': 'Adult'});
         },
       ),

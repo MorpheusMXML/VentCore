@@ -34,7 +34,7 @@ class AEDButton extends StatelessWidget {
             // may be useful: https://stackoverflow.com/questions/66138542/
             toggleController.isSelected.value = [false, false, true];
             Get.offNamed(
-              screenController.changeScreen1(screenChangeButtonEnum.aedButton),
+              screenController.changeScreen(screenChangeButtonEnum.aedButton),
               arguments: {'patientType': 'Adult'},
             );
           },
