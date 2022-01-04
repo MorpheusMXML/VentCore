@@ -28,16 +28,11 @@ class ScreenController {
 
   void loadPatientPresets(patientTypeEnum patientType) {}
 
-  // Wrapper for easier usage, since certain sadly require additional information
-  String changeScreen1(screenChangeButtonEnum sourceButton) {
-    return changeScreen2(sourceButton, '');
-  }
-
   // OVERLOADING NOT SUPPORTED?! => parameter number at the end
   // additionalInfo can be Null
   // Since each button for screen change has 1 target, this is used for finding direction
-  String changeScreen2(
-      screenChangeButtonEnum sourceButton, String additionalInfo) {
+  String changeScreen(screenChangeButtonEnum sourceButton,
+      {String additionalInfo = ''}) {
     SystemState systemState = Get.find<SystemState>();
     ModelManager modelManager = Get.find<ModelManager>();
 
@@ -63,7 +58,7 @@ class ScreenController {
           throw Exception(
               'additionalInformation is not Adult, Child or Infant on screenChangeButton call from Continue Button');
         }
-        systemState.screenStatus = screenStatusEnum.monitoringScreen;
+        systemState.screenStatus = screenStatusEnum.mainScreen;
         startScenario(scenariosEnum.standardScenario);
         return '/main_screen';
 
@@ -83,7 +78,7 @@ class ScreenController {
           modelManager.loadPatientPresets(patientTypeEnum.adult);
         }
         systemState.patientType = patientTypeEnum.adult;
-        systemState.screenStatus = screenStatusEnum.monitoringScreen;
+        systemState.screenStatus = screenStatusEnum.mainScreen;
         startScenario(scenariosEnum.standardScenario);
         return '/main_screen';
 
@@ -102,9 +97,9 @@ class ScreenController {
         systemState.screenStatus = screenStatusEnum.defibrillationScreen;
         return '';
 
-      case screenChangeButtonEnum.monitoringButton:
+      case screenChangeButtonEnum.mainButton:
         // Add behaviour
-        systemState.screenStatus = screenStatusEnum.monitoringScreen;
+        systemState.screenStatus = screenStatusEnum.mainScreen;
         return '';
 
       default:
@@ -123,13 +118,14 @@ class ScreenController {
   //TODO add interaction with scenarios when scenarios are present
   void startScenario(scenariosEnum scenario) {
     Get.find<SystemState>().scenarioStarted = true;
+    if (runningScenario is AbstractScenario) {
+      if (runningScenario!.scenarioRunning) {
+        runningScenario!.stopScenario();
+      }
+    }
+
     switch (scenario) {
       case scenariosEnum.standardScenario:
-        if (runningScenario is AbstractScenario) {
-          if (runningScenario!.scenarioRunning) {
-            runningScenario!.stopScenario();
-          }
-        }
         runningScenario = StandardScenario();
         runningScenario!.startScenario();
         break;

@@ -34,7 +34,7 @@ enum patientTypeEnum {
 
 enum screenStatusEnum {
   topLevelScreen,
-  monitoringScreen,
+  mainScreen,
   ventilationScreen,
   defibrillationScreen
 }
@@ -46,5 +46,5 @@ enum screenChangeButtonEnum {
   toTopLevelButton,
   ventilationButton,
   defiButton,
-  monitoringButton,
+  mainButton,
 }

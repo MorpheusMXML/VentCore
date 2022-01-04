@@ -93,7 +93,7 @@ class DataModel extends GetxController {
           i++)
         i
     ];
-    List<int> removedIndexes = <int>[for (var i = 0; i <= 1; i++) i];
+    List<int> removedIndexes = <int>[for (int i = 0; i <= 1; i++) i];
 
     for (int i = 0; i < valueList.length; i++) {
       singleData.value =
