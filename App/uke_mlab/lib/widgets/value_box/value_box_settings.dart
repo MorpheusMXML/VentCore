@@ -6,16 +6,22 @@ import 'package:uke_mlab/utilities/screen_controller.dart';
 class ValueBoxSettings extends StatelessWidget {
   final DataModel dataModel;
   final String type;
+  final double width;
+  final double height;
 
   const ValueBoxSettings.lower({
     Key? key,
     required this.dataModel,
+    required this.width,
+    required this.height,
     this.type = 'lower',
   }) : super(key: key);
 
   const ValueBoxSettings.upper({
     Key? key,
     required this.dataModel,
+    required this.width,
+    required this.height,
     this.type = 'upper',
   }) : super(key: key);
 
@@ -33,9 +39,8 @@ class ValueBoxSettings extends StatelessWidget {
       setFunction = screenController.setLowerBoundary;
     }
 
-    return SizedBox(
-        width: 60,
-        height: 100,
+    return ConstrainedBox(
+        constraints: BoxConstraints(maxHeight: height, maxWidth: width),
         child: ListWheelScrollView(
             controller: FixedExtentScrollController(initialItem: startItem),
             physics: const BouncingScrollPhysics(),

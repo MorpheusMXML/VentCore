@@ -6,8 +6,8 @@ import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/widgets/graph/history_graph.dart';
 import 'package:uke_mlab/widgets/graph_container/alarm_confirm_button.dart';
 import 'package:uke_mlab/widgets/graph_container/graph_alarm_message.dart';
-import 'package:uke_mlab/widgets/value_box/value_box_container.dart';
 import 'package:uke_mlab/widgets/graph/graph.dart';
+import 'package:uke_mlab/widgets/value_box/value_box_tile.dart';
 
 class GraphContainer extends StatelessWidget {
   final sensorEnum sensor;
@@ -22,7 +22,9 @@ class GraphContainer extends StatelessWidget {
     final SystemState systemState = Get.find<SystemState>();
 
     return Obx(() {
-      switch (systemState.violationStates[sensor]) {
+      boundaryStateEnum? alarmType = systemState.violationStates[sensor];
+
+      switch (alarmType) {
         case boundaryStateEnum.lowerBoundaryViolated:
           return Container(
             color: Colors.red,
@@ -41,7 +43,29 @@ class GraphContainer extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 8),
-                const GraphAlarmMessage(),
+                GraphAlarmMessage(message: alarmType),
+              ],
+            ),
+          );
+        case boundaryStateEnum.upperBoundaryViolated:
+          return Container(
+            color: Colors.red,
+            margin: const EdgeInsets.only(bottom: 8),
+            padding: const EdgeInsets.fromLTRB(12, 12, 12, 24),
+            child: Column(
+              children: [
+                ConstrainedBox(
+                  constraints: const BoxConstraints(maxHeight: 150),
+                  child: Row(
+                    children: [
+                      AlarmConfirmButton(sensor: sensor),
+                      const SizedBox(width: 8),
+                      ...getGraphRow(),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 8),
+                GraphAlarmMessage(message: alarmType),
               ],
             ),
           );
@@ -89,7 +113,7 @@ class GraphContainer extends StatelessWidget {
     } else {
       graphRow.add(Expanded(child: Graph(sensor: sensor)));
       graphRow.add(const SizedBox(width: 8));
-      graphRow.add(ValueBoxContainer(sensor: sensor));
+      graphRow.add(ValueBoxTile(sensor: sensor));
     }
 
     return graphRow;

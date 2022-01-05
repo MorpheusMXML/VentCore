@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:uke_mlab/models/enums.dart';
+import 'package:uke_mlab/models/system_state.dart';
 
 class GraphAlarmMessage extends StatelessWidget {
-  const GraphAlarmMessage({Key? key}) : super(key: key);
+  final boundaryStateEnum? message;
+
+  const GraphAlarmMessage({
+    Key? key,
+    required this.message,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Text(
-      "ALARM MESSAGE",
-      style: TextStyle(color: Colors.white, fontSize: 20),
+    final SystemState systemState = Get.find<SystemState>();
+
+    return Text(
+      message.toString(),
+      style: const TextStyle(color: Colors.white, fontSize: 20),
     );
   }
 }
