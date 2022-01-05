@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uke_mlab/widgets/toggle/toggle_mode_button.dart';
-import 'package:uke_mlab/widgets/value_box/value_tile.dart';
+import 'package:uke_mlab/widgets/value_box/value_box_tile.dart';
 import 'package:uke_mlab/models/enums.dart';
 
 class MonitoringMode extends StatelessWidget {
@@ -16,8 +16,8 @@ class MonitoringMode extends StatelessWidget {
           flex: 1,
           child: Row(
             children: const [
-              ValueTile(sensor: sensorEnum.nibd),
-              ValueTile(sensor: sensorEnum.pulse),
+              ValueBoxTile.withHeadline(sensor: sensorEnum.nibd),
+              ValueBoxTile.withHeadline(sensor: sensorEnum.pulse),
             ],
           ),
         ),
@@ -25,8 +25,8 @@ class MonitoringMode extends StatelessWidget {
           flex: 1,
           child: Row(
             children: const [
-              ValueTile(sensor: sensorEnum.mve),
-              ValueTile(sensor: sensorEnum.breathFrequency),
+              ValueBoxTile.withHeadline(sensor: sensorEnum.mve),
+              ValueBoxTile.withHeadline(sensor: sensorEnum.breathFrequency),
             ],
           ),
         ),
