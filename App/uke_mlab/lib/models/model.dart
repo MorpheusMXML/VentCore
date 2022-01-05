@@ -1,7 +1,4 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:uke_mlab/models/enums.dart';
@@ -111,13 +108,17 @@ class DataModel extends GetxController {
       removedDataIndexes: removedIndexes,
     );
 
-    //evaluates whether update violated alarm boundaries or returns into boundaries
-    if (singleData.value.value > upperAlarmBound.value) {
-      evaluateBoundaryChange(boundaryStateEnum.upperBoundaryViolated);
-    } else if (singleData.value.value < lowerAlarmBound.value) {
-      evaluateBoundaryChange(boundaryStateEnum.lowerBoundaryViolated);
-    } else {
-      evaluateBoundaryChange(boundaryStateEnum.inBoundaries);
+    // evaluates whether update violated alarm boundaries or returns into boundaries
+    // TODO: write smarter?
+    if (_systemState.violationStates[sensorKey] !=
+        boundaryStateEnum.suppressed) {
+      if (singleData.value.value > upperAlarmBound.value) {
+        evaluateBoundaryChange(boundaryStateEnum.upperBoundaryViolated);
+      } else if (singleData.value.value < lowerAlarmBound.value) {
+        evaluateBoundaryChange(boundaryStateEnum.lowerBoundaryViolated);
+      } else {
+        evaluateBoundaryChange(boundaryStateEnum.inBoundaries);
+      }
     }
   }
 
