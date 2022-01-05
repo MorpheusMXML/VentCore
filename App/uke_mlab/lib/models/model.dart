@@ -109,7 +109,7 @@ class DataModel extends GetxController {
     );
 
     // evaluates whether update violated alarm boundaries or returns into boundaries
-    // TODO: write smarter?
+    // write smarter?
     if (_systemState.violationStates[sensorKey] !=
         boundaryStateEnum.suppressed) {
       if (singleData.value.value > upperAlarmBound.value) {

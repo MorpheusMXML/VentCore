@@ -29,10 +29,8 @@ class ContinueButton extends StatelessWidget {
           ),
           onPressed: startScreenController.selectedString.toString() != ''
               ? () => Get.toNamed(
-                    screenController.changeScreen(
-                        screenChangeButtonEnum.continueButton,
-                        additionalInfo:
-                            startScreenController.selectedString.value),
+                    screenController.continueButton(
+                        startScreenController.selectedString.value),
                     arguments: {
                       'patientType': startScreenController.selectedString.value
                     },

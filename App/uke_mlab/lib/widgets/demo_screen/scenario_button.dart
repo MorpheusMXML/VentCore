@@ -8,9 +8,11 @@ import 'package:uke_mlab/utilities/screen_controller.dart';
 
 class ScenarioButton extends StatelessWidget {
   final String name;
+  final scenariosEnum scenario;
   const ScenarioButton({
     Key? key,
     required this.name,
+    required this.scenario,
   }) : super(key: key);
 
   @override
@@ -31,9 +33,7 @@ class ScenarioButton extends StatelessWidget {
         ),
         //TODO: Scenario Loading
         onPressed: () {
-          Get.toNamed(screenController.changeScreen(
-              screenChangeButtonEnum.standardScenario,
-              additionalInfo: 'Adult'));
+          Get.toNamed(screenController.scenarioButton(scenario));
         },
         //Button content
         child: Text(

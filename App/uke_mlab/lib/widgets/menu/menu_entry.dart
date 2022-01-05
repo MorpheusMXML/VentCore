@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:uke_mlab/utilities/screen_controller.dart';
 
 class AppMenuEntry extends StatelessWidget {
   final String name;
@@ -13,7 +14,7 @@ class AppMenuEntry extends StatelessWidget {
     String navigateTo = '/' + name.replaceAll(RegExp(r' '), '_').toLowerCase();
     // TODO: Temp fix, Patient Settings = Start Screen?
     if (name == 'Patient Settings') {
-      navigateTo = '/start_screen';
+      navigateTo = Get.find<ScreenController>().patientSettingButton();
     }
 
     return Get.currentRoute != navigateTo

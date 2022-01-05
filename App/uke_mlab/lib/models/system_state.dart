@@ -1,12 +1,8 @@
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/enums.dart';
-import 'package:uke_mlab/models/model.dart';
-// Atm unused
-// TODO address in DataModel update/set methods
-// TODO use in use in AlarmController
 
 class SystemState {
-  screenStatusEnum screenStatus = screenStatusEnum.topLevelScreen;
+  screenStatusEnum screenStatus = screenStatusEnum.patientSettingScreen;
   patientTypeEnum patientType = patientTypeEnum.none;
   final RxMap<sensorEnum, boundaryStateEnum> violationStates =
       <sensorEnum, boundaryStateEnum>{}.obs;

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/widgets/demo_screen/scenario_button.dart';
 import 'package:uke_mlab/widgets/demo_screen/exit_button.dart';
 
@@ -19,11 +20,18 @@ class DemoScreen extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
-                  ScenarioButton(name: 'Standard Scenario'),
-                  ScenarioButton(name: 'Scenario 1'),
-                  ScenarioButton(name: 'Scenario 2'),
-                  ScenarioButton(name: 'Scenario 3'),
-                  ScenarioButton(name: 'Scenario 4'),
+                  ScenarioButton(
+                    name: 'Standard Scenario',
+                    scenario: scenariosEnum.standardScenario,
+                  ),
+                  ScenarioButton(
+                      name: 'Scenario 1', scenario: scenariosEnum.scenario1),
+                  ScenarioButton(
+                      name: 'Scenario 2', scenario: scenariosEnum.scenario2),
+                  ScenarioButton(
+                      name: 'Scenario 3', scenario: scenariosEnum.scenario3a),
+                  ScenarioButton(
+                      name: 'Scenario 4', scenario: scenariosEnum.scenario4),
                 ],
               ),
             ],
