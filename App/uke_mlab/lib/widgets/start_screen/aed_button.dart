@@ -32,7 +32,7 @@ class AEDButton extends StatelessWidget {
             // TODO: Why does GetX delete ToggleController after navigation?
             // may be useful: https://stackoverflow.com/questions/66138542/
             toggleController.isSelected.value = [false, false, true];
-            Get.offNamed(
+            Get.toNamed(
               screenController.changeScreen(screenChangeButtonEnum.aedButton),
               arguments: {'patientType': 'Adult'},
             );

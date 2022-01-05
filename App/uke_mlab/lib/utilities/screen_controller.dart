@@ -144,16 +144,13 @@ class ScreenController {
   //Changes playing scenario based on input paramenter, stops currently playing scenario on call
   void changeScenario(scenariosEnum scenario) {
     Get.find<SystemState>().scenarioStarted = true;
+    
 
     if (runningScenario is AbstractScenario) {
-      print("runningScenario is abstractScenario");
       if (runningScenario!.scenarioRunning) {
-        print("stop running scenario");
         runningScenario!.stopScenario();
+        Get.find<ModelManager>().resetAllModels();
       }
-    } else {
-      print("runningScenario is NOT abstractScenario\\" +
-          runningScenario.runtimeType.toString());
     }
 
     switch (scenario) {

@@ -31,7 +31,7 @@ class ScenarioButton extends StatelessWidget {
         ),
         //TODO: Scenario Loading
         onPressed: () {
-          Get.offNamed(screenController.changeScreen(
+          Get.toNamed(screenController.changeScreen(
               screenChangeButtonEnum.standardScenario,
               additionalInfo: 'Adult'));
         },

@@ -32,7 +32,6 @@ abstract class AbstractScenario {
 
   void stopScenario() {
     scenarioRunning = false;
-    print("scenarioStopped");
   }
 
   //to be implemented in respect to scenario

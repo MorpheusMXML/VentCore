@@ -28,7 +28,7 @@ class ContinueButton extends StatelessWidget {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),
           ),
           onPressed: startScreenController.selectedString.toString() != ''
-              ? () => Get.offNamed(
+              ? () => Get.toNamed(
                     screenController.changeScreen(
                         screenChangeButtonEnum.continueButton,
                         additionalInfo:

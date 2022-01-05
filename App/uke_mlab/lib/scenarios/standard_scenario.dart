@@ -8,7 +8,9 @@ import 'package:uke_mlab/models/model.dart';
 import 'package:uke_mlab/scenarios/abstract_scenario.dart';
 
 class StandardScenario extends AbstractScenario {
-  StandardScenario({scenarioType = scenariosEnum.standardScenario}) : super();
+  StandardScenario({
+    scenarioType = scenariosEnum.standardScenario,
+  }) : super();
 
   //TODO put into abstract class if we get values => use path as argument
   @override
@@ -40,6 +42,7 @@ class StandardScenario extends AbstractScenario {
       }
       Timer.periodic(Duration(milliseconds: updateRate), (timer) {
         if (!scenarioRunning) {
+          print('[Standard Scenario] scenarioRunning is false');
           timer.cancel();
         }
         dataModel.updateValueList(dataMap[sensor]!.sublist(
