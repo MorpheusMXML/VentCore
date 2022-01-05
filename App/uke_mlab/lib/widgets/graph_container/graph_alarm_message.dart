@@ -4,19 +4,20 @@ import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/models/system_state.dart';
 
 class GraphAlarmMessage extends StatelessWidget {
-  final boundaryStateEnum? message;
+  final sensorEnum sensor;
 
   const GraphAlarmMessage({
     Key? key,
-    required this.message,
+    required this.sensor,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final SystemState systemState = Get.find<SystemState>();
+    var alarmType = systemState.violationStates[sensor] as boundaryStateEnum;
 
     return Text(
-      message.toString(),
+      '${alarmType.name}: ${sensor.toDisplayString()}',
       style: const TextStyle(color: Colors.white, fontSize: 20),
     );
   }

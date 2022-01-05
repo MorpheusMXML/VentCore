@@ -43,7 +43,7 @@ class GraphContainer extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 8),
-                GraphAlarmMessage(message: alarmType),
+                GraphAlarmMessage(sensor: sensor),
               ],
             ),
           );
@@ -65,7 +65,7 @@ class GraphContainer extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 8),
-                GraphAlarmMessage(message: alarmType),
+                GraphAlarmMessage(sensor: sensor),
               ],
             ),
           );

@@ -57,3 +57,27 @@ enum screenChangeButtonEnum {
   scenario3c,
   scenario4
 }
+
+// TODO: Write extensions for other enums 
+extension ParseToString on sensorEnum {
+  String toDisplayString() {
+    switch (this) {
+      case sensorEnum.heartFrequency:
+        return 'Heart Frequency';
+      case sensorEnum.breathFrequency:
+        return 'Breath Frequency';
+      case sensorEnum.co2:
+        return 'CO2';
+      case sensorEnum.mve:
+        return 'MVE';
+      case sensorEnum.nibd:
+        return 'NIBD';
+      case sensorEnum.pulse:
+        return 'Pulse';
+      case sensorEnum.spo2:
+        return 'SpO2';
+      default:
+        return '';
+    }
+  }
+}
