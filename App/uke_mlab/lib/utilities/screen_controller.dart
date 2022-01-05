@@ -113,6 +113,7 @@ class ScreenController {
           'additionalInformation is not Adult, Child or Infant on screenChangeButton call from Continue Button');
     }
     systemState.screenStatus = screenStatusEnum.monitorScreen;
+    print("${systemState.screenStatus}");
     changeScenario(scenariosEnum.standardScenario);
     return '/main_screen';
   }
@@ -179,7 +180,19 @@ class ScreenController {
 
   //TODO implement
   String scenarioMenuExitButton() {
-    return '/start_screen';
+    print("${systemState.screenStatus}");
+    switch (systemState.screenStatus) {
+      case screenStatusEnum.patientSettingScreen:
+        return '/start_screen';
+      case screenStatusEnum.monitorScreen:
+        return '/main_screen';
+      case screenStatusEnum.ventilationScreen:
+        return '/main_screen';
+      case screenStatusEnum.defibrillationScreen:
+        return '/main_screen';
+      default:
+        throw Exception('unkown previous screen exiting Demo/Scenario Screen');
+    }
   }
 
   String scenarioButton(scenariosEnum scenario) {
