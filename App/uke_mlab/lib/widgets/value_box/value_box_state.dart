@@ -25,7 +25,7 @@ class ValueBoxState extends StatelessWidget {
     required this.dataModel,
     this.type = 'withHeadline',
     this.settingsHeight = 100,
-    this.settingsWidth = 45,
+    this.settingsWidth = 30,
   }) : super(key: key);
 
   @override
