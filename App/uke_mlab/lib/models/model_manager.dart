@@ -113,4 +113,12 @@ class ModelManager {
     }
     stylesTraitsLoaded = true;
   }
+
+  void resetAllModels() {
+    for (var sensor in sensorEnum.values) {
+      DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
+
+      dataModel.resetDataModel();
+    }
+  }
 }
