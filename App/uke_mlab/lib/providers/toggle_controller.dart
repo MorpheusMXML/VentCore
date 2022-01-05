@@ -2,13 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 
-class ToggleBinding extends Bindings {
-  @override
-  void dependencies() {
-    Get.put(ToggleController());
-  }
-}
-
 class ToggleController extends GetxController {
   RxList<bool> isSelected = [true, false, false].obs;
 

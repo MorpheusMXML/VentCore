@@ -6,13 +6,6 @@ import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/scenarios/abstract_scenario.dart';
 import 'package:uke_mlab/scenarios/standard_scenario.dart';
 
-class ScreenBinding extends Bindings {
-  @override
-  void dependencies() {
-    Get.put(ScreenController());
-  }
-}
-
 // basic controller to interact with model
 // (at the moment) just boundary update
 class ScreenController {
