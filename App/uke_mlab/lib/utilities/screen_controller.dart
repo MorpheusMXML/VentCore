@@ -29,6 +29,7 @@ class ScreenController {
       if (runningScenario!.scenarioRunning) {
         runningScenario!.stopScenario();
         modelManager.resetAllModels();
+        systemState.resetToggleView();
       }
     }
 
@@ -85,7 +86,7 @@ class ScreenController {
     // else case for throwing some kind of error message?
   }
 
-  String continueButton(String additionalInfo) {
+  Future? continueButton(String additionalInfo) {
     if (additionalInfo == 'Adult') {
       if (systemState.patientType != patientTypeEnum.adult) {
         modelManager.loadPatientPresets(patientTypeEnum.adult);
@@ -107,61 +108,61 @@ class ScreenController {
     }
     systemState.screenStatus = screenStatusEnum.monitorScreen;
     changeScenario(scenariosEnum.standardScenario);
-    return '/main_screen';
+    return Get.toNamed('/main_screen');
   }
 
-  String skipButton() {
+  Future? skipButton() {
     if (systemState.patientType == patientTypeEnum.none) {
       modelManager.loadPatientPresets(patientTypeEnum.adult);
     }
     systemState.patientType = patientTypeEnum.adult;
     systemState.screenStatus = screenStatusEnum.monitorScreen;
     changeScenario(scenariosEnum.standardScenario);
-    return '/main_screen';
+    return Get.toNamed('/main_screen');
   }
 
-  String aedButton() {
+  Future? aedButton() {
     if (systemState.patientType == patientTypeEnum.none) {
       modelManager.loadPatientPresets(patientTypeEnum.adult);
     }
     systemState.patientType = patientTypeEnum.adult;
     systemState.screenStatus = screenStatusEnum.defibrillationScreen;
     changeScenario(scenariosEnum.standardScenario);
-    //TODO set toggle controller to defi
-    return '/main_screen';
+    systemState.selectedToggleView.value = [false, false, true];
+    return Get.toNamed('/main_screen');
   }
 
-  String patientSettingButton() {
+  Future? patientSettingButton() {
     systemState.screenStatus = screenStatusEnum.patientSettingScreen;
-    return '/start_screen';
+    return Get.offNamed('/start_screen');
   }
 
-  String demoScreenButton() {
-    return '/demo_screen';
+  Future? demoScreenButton() {
+    return Get.offNamed('/demo_screen');
   }
 
   //TODO use and implement
   void monitorButton() {
     systemState.screenStatus = screenStatusEnum.monitorScreen;
-    //set toggle controller to monitorScreen
+    systemState.selectedToggleView.value = [true, false, false];
   }
 
   //TODO use and implement
   void ventilationButton() {
     systemState.screenStatus = screenStatusEnum.ventilationScreen;
-    //set toggle controller to ventilationScreen
+    systemState.selectedToggleView.value = [false, true, false];
   }
 
   //TODO use and implement
   void defiButton() {
     systemState.screenStatus = screenStatusEnum.defibrillationScreen;
-    //set toggle controller to ventilationScreen
+    systemState.selectedToggleView.value = [false, false, true];
   }
 
   //TODO use and implement
-  String alarmSettingsButton() {
+  Future? alarmSettingsButton() {
     //system state should stay the same here
-    return "";
+    return Get.offNamed('/alarm_limit_screen');
   }
 
   //TODO use and implement
@@ -175,27 +176,27 @@ class ScreenController {
   }
 
   //TODO implement
-  String scenarioMenuExitButton() {
+  Future? scenarioMenuExitButton() {
     switch (systemState.screenStatus) {
       case screenStatusEnum.patientSettingScreen:
-        return '/start_screen';
+        return Get.toNamed('/start_screen');
       case screenStatusEnum.monitorScreen:
-        return '/main_screen';
+        return Get.toNamed('/main_screen');
       case screenStatusEnum.ventilationScreen:
-        return '/main_screen';
+        return Get.toNamed('/main_screen');
       case screenStatusEnum.defibrillationScreen:
-        return '/main_screen';
+        return Get.toNamed('/main_screen');
       default:
         throw Exception('unkown previous screen exiting Demo/Scenario Screen');
     }
   }
 
-  String scenarioButton(scenariosEnum scenario) {
+  Future? scenarioButton(scenariosEnum scenario) {
     if (systemState.patientType == patientTypeEnum.none) {
       modelManager.loadPatientPresets(patientTypeEnum.adult);
       systemState.patientType = patientTypeEnum.adult;
     }
     changeScenario(scenario);
-    return '/main_screen';
+    return Get.toNamed('/main_screen');
   }
 }

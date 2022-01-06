@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import 'package:uke_mlab/models/enums.dart';
-import 'package:uke_mlab/providers/toggle_controller.dart';
 import 'package:uke_mlab/utilities/screen_controller.dart';
 
 class AEDButton extends StatelessWidget {
@@ -13,8 +11,7 @@ class AEDButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenController = Get.find<ScreenController>();
-    final toggleController = Get.find<ToggleController>();
+    final ScreenController screenController = Get.find<ScreenController>();
 
     return Container(
       alignment: Alignment.centerRight,
@@ -28,15 +25,7 @@ class AEDButton extends StatelessWidget {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           ),
-          onPressed: () {
-            // TODO: Why does GetX delete ToggleController after navigation?
-            // may be useful: https://stackoverflow.com/questions/66138542/
-            toggleController.isSelected.value = [false, false, true];
-            Get.toNamed(
-              screenController.aedButton(),
-              arguments: {'patientType': 'Adult'},
-            );
-          },
+          onPressed: () => screenController.aedButton(),
           child: Column(
             children: [
               SvgPicture.asset(

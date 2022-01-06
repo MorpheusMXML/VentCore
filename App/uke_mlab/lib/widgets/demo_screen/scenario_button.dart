@@ -32,9 +32,7 @@ class ScenarioButton extends StatelessWidget {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),
         ),
         //TODO: Scenario Loading
-        onPressed: () {
-          Get.toNamed(screenController.scenarioButton(scenario));
-        },
+        onPressed: () => screenController.scenarioButton(scenario),
         //Button content
         child: Text(
           name,

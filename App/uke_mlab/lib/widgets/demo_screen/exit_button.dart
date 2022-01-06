@@ -23,7 +23,7 @@ class ExitButton extends StatelessWidget {
         ),
         child: const Text('Exit', style: TextStyle(fontSize: 20)),
         onPressed: () =>
-            Get.toNamed(Get.find<ScreenController>().scenarioMenuExitButton()),
+            Get.find<ScreenController>().scenarioMenuExitButton(),
       ),
     );
   }

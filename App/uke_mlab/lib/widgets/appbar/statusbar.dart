@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
-import 'package:uke_mlab/providers/start_screen_controller.dart';
 import 'package:intl/intl.dart';
 
 class StatusBar extends StatelessWidget {
@@ -13,8 +12,6 @@ class StatusBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final systemState = Get.find<SystemState>();
-    // TODO: Use ScreenController instead (AdditionalInfo = selectedString)
-    // final startScreenController = Get.find<StartScreenController>();
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,

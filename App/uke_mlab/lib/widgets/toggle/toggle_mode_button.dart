@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:uke_mlab/providers/toggle_controller.dart';
+import 'package:uke_mlab/models/system_state.dart';
 
 class ToggleModeButton extends StatelessWidget {
   ToggleModeButton({Key? key}) : super(key: key);
 
-  final toggleController = Get.find<ToggleController>();
+  final SystemState systemState = Get.find<SystemState>();
   final Map<String, String> iconLocationMap = {
     'Monitoring': 'assets/icons/monitoring.svg',
     'Ventilation': 'assets/icons/VentilatorIcon.svg',
@@ -43,9 +43,9 @@ class ToggleModeButton extends StatelessWidget {
             ),
           ],
           onPressed: (int index) {
-            toggleController.setSelected(index);
+            systemState.setSelectedToggleView(index);
           },
-          isSelected: toggleController.isSelected,
+          isSelected: systemState.selectedToggleView,
         ),
       ),
     );
@@ -54,7 +54,7 @@ class ToggleModeButton extends StatelessWidget {
   getToggleButton(int index, String path) {
     return Container(
       decoration: BoxDecoration(
-          color: toggleController.isSelected[index] ? active : background),
+          color: systemState.selectedToggleView[index] ? active : background),
       width: 100,
       child: Padding(
         padding: const EdgeInsets.all(5),
@@ -62,7 +62,7 @@ class ToggleModeButton extends StatelessWidget {
           path,
           height: 40.0,
           color:
-              toggleController.isSelected[index] ? Colors.white : inactiveIcon,
+              systemState.selectedToggleView[index] ? Colors.white : inactiveIcon,
         ),
       ),
     );

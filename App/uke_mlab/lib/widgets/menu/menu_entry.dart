@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/utilities/screen_controller.dart';
 
 class AppMenuEntry extends StatelessWidget {
@@ -26,13 +25,13 @@ class AppMenuEntry extends StatelessWidget {
             onTap: () {
               switch (name) {
                 case 'Start Screen':
-                  Get.offNamed(screenController.patientSettingButton());
+                  screenController.patientSettingButton();
                   break;
                 case 'Demo Screen':
-                  Get.offNamed(screenController.demoScreenButton());
+                  screenController.demoScreenButton();
                   break;
                 case 'Alarm Limit Screen':
-                  Get.offNamed(screenController.alarmSettingsButton());
+                  screenController.alarmSettingsButton();
                   break;
               }
             })

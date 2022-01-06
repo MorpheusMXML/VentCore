@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/utilities/screen_controller.dart';
 
 class SkipButton extends StatelessWidget {
@@ -25,13 +24,7 @@ class SkipButton extends StatelessWidget {
           ),
         ),
         child: const Text('Skip', style: TextStyle(fontSize: 20)),
-        onPressed: () {
-          // TODO: [BUGFIX] Currently using arguments instead of changing value
-          // of observable variable selectedSetting used in statusbar because
-          // startScreenController is deleted after page navigation?
-          Get.toNamed(screenController.skipButton(),
-              arguments: {'patientType': 'Adult'});
-        },
+        onPressed: () => screenController.skipButton(),
       ),
     );
   }
