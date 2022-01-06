@@ -58,26 +58,17 @@ enum screenChangeButtonEnum {
   scenario4
 }
 
-// TODO: Write extensions for other enums 
-extension ParseToString on sensorEnum {
-  String toDisplayString() {
-    switch (this) {
-      case sensorEnum.heartFrequency:
-        return 'Heart Frequency';
-      case sensorEnum.breathFrequency:
-        return 'Breath Frequency';
-      case sensorEnum.co2:
-        return 'CO2';
-      case sensorEnum.mve:
-        return 'MVE';
-      case sensorEnum.nibd:
-        return 'NIBD';
-      case sensorEnum.pulse:
-        return 'Pulse';
-      case sensorEnum.spo2:
-        return 'SpO2';
-      default:
-        return '';
-    }
-  }
+// TODO: Write extensions for other enums
+extension ParseToString on sensorEnum{
+  static const displayStrings = {
+    sensorEnum.heartFrequency: 'Heart Frequency',
+    sensorEnum.breathFrequency: 'Breath Frequency',
+    sensorEnum.co2: 'CO2',
+    sensorEnum.mve: 'MVE',
+    sensorEnum.nibd: 'NIBD',
+    sensorEnum.pulse: 'Pulse',
+    sensorEnum.spo2: 'SpO2',
+  };
+
+  String get displayString => displayStrings[this] as String;
 }
