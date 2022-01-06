@@ -42,7 +42,6 @@ class StandardScenario extends AbstractScenario {
       }
       Timer.periodic(Duration(milliseconds: updateRate), (timer) {
         if (!scenarioRunning) {
-          print('[Standard Scenario] scenarioRunning is false');
           timer.cancel();
         }
         dataModel.updateValueList(dataMap[sensor]!.sublist(
