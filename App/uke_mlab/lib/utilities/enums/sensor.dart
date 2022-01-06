@@ -18,6 +18,7 @@ extension SensorAttributes on sensorEnum {
       'displayShortString': 'Heart Freq.',
       'abbreviation': 'HF',
       'color': Color(0xFF4CAF50),
+      'updateRate': 10,
       'upperBound': {
         'adult': 170,
         'child': 130,
@@ -34,6 +35,7 @@ extension SensorAttributes on sensorEnum {
       'displayShortString': 'Breath Freq.',
       'abbreviation': 'AF',
       'color': Color(0xFF0CECDD),
+      'updateRate': 10,
       'upperBound': {
         'adult': 200,
         'child': 170,
@@ -50,6 +52,7 @@ extension SensorAttributes on sensorEnum {
       'displayShortString': 'CO2',
       'abbreviation': 'CO2',
       'color': Color(0xFFAf52DE),
+      'updateRate': 10,
       'upperBound': {
         'adult': 200,
         'child': 170,
@@ -66,6 +69,7 @@ extension SensorAttributes on sensorEnum {
       'displayShortString': 'MVE',
       'abbreviation': 'MVE',
       'color': Color(0xFF0CECDD),
+      'updateRate': 5,
       'upperBound': {
         'adult': 230,
         'child': 170,
@@ -82,6 +86,7 @@ extension SensorAttributes on sensorEnum {
       'displayShortString': 'NIBD',
       'abbreviation': 'NIBD',
       'color': Color(0xFFDC362E),
+      'updateRate': 5,
       'upperBound': {
         'adult': 220,
         'child': 170,
@@ -98,6 +103,7 @@ extension SensorAttributes on sensorEnum {
       'displayShortString': 'Pulse',
       'abbreviation': 'PP',
       'color': Color(0xFF9C27B0),
+      'updateRate': 10,
       'upperBound': {
         'adult': 210,
         'child': 180,
@@ -114,6 +120,7 @@ extension SensorAttributes on sensorEnum {
       'displayShortString': 'Esp. O2',
       'abbreviation': 'SpO2',
       'color': Color(0xFF2196F3),
+      'updateRate': 5,
       'upperBound': {
         'adult': 180,
         'child': 140,
@@ -131,6 +138,7 @@ extension SensorAttributes on sensorEnum {
   get displayShortString => attributes[this]!['displayShortString'] as String;
   get abbreviation => attributes[this]!['abbreviation'] as String;
   get color => attributes[this]!['color'] as Color;
+  get updateRate => attributes[this]!['updateRate'] as int;
   get lowerBound => attributes[this]!['lowerBound'] as Map<String, int>;
   get upperBound => attributes[this]!['upperBound'] as Map<String, int>;
 }

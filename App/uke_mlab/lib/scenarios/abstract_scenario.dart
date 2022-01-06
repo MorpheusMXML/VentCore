@@ -11,18 +11,6 @@ abstract class AbstractScenario {
   bool scenarioRunning = false;
   late scenariosEnum scenarioType;
 
-  late final Map<String, dynamic> updateRates;
-
-  AbstractScenario() {
-    loadUpdateRates();
-  }
-
-  void loadUpdateRates() async {
-    var updateRateString =
-        await rootBundle.loadString('assets/jsons/sensor_update_rates.json');
-    updateRates = await jsonDecode(updateRateString.toString());
-  }
-
   void startScenario() {
     scenarioRunning = true;
     loadData().then((dataMap) => runScenario(dataMap));

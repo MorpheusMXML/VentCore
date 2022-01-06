@@ -1,9 +1,0 @@
-{
-    "sensorEnum.heartFrequency": 10, 
-    "sensorEnum.spo2": 5,
-    "sensorEnum.pulse": 10,
-    "sensorEnum.breathFrequency": 10,
-    "sensorEnum.nibd": 5,
-    "sensorEnum.mve": 5,
-    "sensorEnum.co2": 10
-}

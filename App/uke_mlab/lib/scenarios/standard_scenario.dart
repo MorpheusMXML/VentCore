@@ -13,14 +13,14 @@ class StandardScenario extends AbstractScenario {
     scenarioType = scenariosEnum.standardScenario,
   }) : super();
 
-  //TODO put into abstract class if we get values => use path as argument
+  //TODO: put into abstract class if we get values => use path as argument
   @override
   Future<Map<sensorEnum, List<dynamic>>> loadData() async {
     Map<sensorEnum, List<dynamic>> returnMap = {};
-    var jsonString = await rootBundle.loadString('assets/data.json');
+    var jsonString = await rootBundle.loadString('assets/jsons/data.json');
     var source = await jsonDecode(jsonString.toString())["data"];
     returnMap = {
-      //numbers dont match sensors at the moment
+      //TODO: numbers dont match sensors at the moment
       sensorEnum.breathFrequency: source[0]["data"],
       sensorEnum.co2: source[1]["data"],
       sensorEnum.heartFrequency: source[8]["data"],
@@ -35,15 +35,11 @@ class StandardScenario extends AbstractScenario {
   @override
   void runScenario(Map<sensorEnum, List<dynamic>> dataMap) {
     for (var sensor in sensorEnum.values) {
-      int updateRate = 500;
       DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
 
-      if (updateRates.containsKey(sensor.toString())) {
-        updateRate = updateRates[sensor.toString()];
-      }
-      Timer.periodic(Duration(milliseconds: updateRate * 100), (timer) {
+      Timer.periodic(Duration(milliseconds: sensor.updateRate * 100), (timer) {
         var dataList = dataMap[sensor]!;
-        
+
         if (!scenarioRunning) {
           timer.cancel();
         }
