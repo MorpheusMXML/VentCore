@@ -16,9 +16,17 @@ class AlarmConfirmButton extends StatelessWidget {
     final SystemState systemState = Get.find<SystemState>();
 
     return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(75),
+        ),
+        fixedSize: const Size(70, 70),
+        primary: Theme.of(context).shadowColor,
+        onPrimary: Theme.of(context).dividerColor,
+      ),
       onPressed: () =>
           systemState.violationStates[sensor] = boundaryStateEnum.suppressed,
-      child: const Text("Confirm"),
+      child: const Icon(Icons.check),
     );
   }
 }
