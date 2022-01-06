@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
+import 'package:uke_mlab/utilities/screen_controller.dart';
 
 class ToggleModeButton extends StatelessWidget {
   ToggleModeButton({Key? key}) : super(key: key);
@@ -43,7 +44,7 @@ class ToggleModeButton extends StatelessWidget {
             ),
           ],
           onPressed: (int index) {
-            systemState.setSelectedToggleView(index);
+            Get.find<ScreenController>().setSelectedToggleView(index);
           },
           isSelected: systemState.selectedToggleView,
         ),
@@ -61,8 +62,9 @@ class ToggleModeButton extends StatelessWidget {
         child: SvgPicture.asset(
           path,
           height: 40.0,
-          color:
-              systemState.selectedToggleView[index] ? Colors.white : inactiveIcon,
+          color: systemState.selectedToggleView[index]
+              ? Colors.white
+              : inactiveIcon,
         ),
       ),
     );
