@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/enums.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 
 class SystemState {
   screenStatusEnum screenStatus = screenStatusEnum.patientSettingScreen;
@@ -25,9 +27,32 @@ class SystemState {
     ippvValues[name]!.value = ippvValues[name]!.value + value;
   }
 
-  void switchToAlarm(int type) {
-    // if ((allGraphs[type]['alarm'] as RxString).value == 'none') {
-    //   (allGraphs[type]['alarm'] as RxString).value = 'alarm';
+  RxList<bool> selectedToggleView = [true, false, false].obs;
+
+  void setSelectedToggleView(int index) {
+    for (var i = 0; i <= selectedToggleView.length - 1; i++) {
+      index == i ? selectedToggleView[i] = true : selectedToggleView[i] = false;
+    }
+  }
+
+  void resetToggleView() {
+    selectedToggleView.value = [true, false, false];
+  }
+
+  // TODO: Save differently? Use local storage to permanently save this setting?
+  RxBool isDarkMode = true.obs;
+  Rx<Icon> icon = const Icon(Icons.dark_mode).obs;
+
+  void toggleTheme() {
+    if (isDarkMode.value) {
+      Get.changeTheme(AppTheme.lightTheme);
+      isDarkMode.toggle();
+      icon.value = const Icon(Icons.light_mode_rounded);
+    } else {
+      Get.changeTheme(AppTheme.darkTheme);
+      isDarkMode.toggle();
+      icon.value = const Icon(Icons.dark_mode_rounded);
+    }
   }
 
   // SystemState initated with no violations at place and screenStatus as topLevelScreen
