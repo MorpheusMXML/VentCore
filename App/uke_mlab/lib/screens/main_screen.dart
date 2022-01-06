@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/providers/start_screen_controller.dart';
-import 'package:uke_mlab/models/enums.dart';
+import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 import 'package:uke_mlab/widgets/graph_container/graph_view.dart';
 

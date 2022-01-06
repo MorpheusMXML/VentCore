@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:uke_mlab/models/enums.dart';
+import 'package:uke_mlab/utilities/enums/scenarios.dart';
 import 'package:uke_mlab/widgets/demo_screen/scenario_button.dart';
 import 'package:uke_mlab/widgets/demo_screen/exit_button.dart';
 

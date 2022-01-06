@@ -3,7 +3,8 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:uke_mlab/models/enums.dart';
+import 'package:uke_mlab/utilities/enums/sensor.dart';
+import 'package:uke_mlab/utilities/enums/scenarios.dart';
 import 'package:uke_mlab/models/model.dart';
 import 'package:uke_mlab/scenarios/abstract_scenario.dart';
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
-import 'package:uke_mlab/utilities/screen_controller.dart';
+import 'package:uke_mlab/providers/screen_controller.dart';
 
 class ToggleModeButton extends StatelessWidget {
   ToggleModeButton({Key? key}) : super(key: key);

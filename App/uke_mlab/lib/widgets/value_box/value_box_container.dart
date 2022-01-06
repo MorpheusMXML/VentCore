@@ -25,7 +25,7 @@ class ValueBoxContainer extends StatelessWidget {
           children: [
             // Top
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              Text(dataModel.miniTitle,
+              Text(dataModel.abbreviation,
                   style: TextStyle(color: dataModel.color)),
               Obx(() => Text(dataModel.upperAlarmBound.toString(),
                   style: TextStyle(color: dataModel.color)))

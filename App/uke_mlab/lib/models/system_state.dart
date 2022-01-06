@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uke_mlab/models/enums.dart';
+import 'package:uke_mlab/utilities/enums/sensor.dart';
+import 'package:uke_mlab/utilities/enums/boundary_state.dart';
+import 'package:uke_mlab/utilities/enums/screen_status.dart';
+import 'package:uke_mlab/utilities/enums/patient_type.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 
 class SystemState {

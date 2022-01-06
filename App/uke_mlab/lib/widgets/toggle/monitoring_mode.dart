@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uke_mlab/widgets/toggle/toggle_mode_button.dart';
 import 'package:uke_mlab/widgets/value_box/value_box_tile.dart';
-import 'package:uke_mlab/models/enums.dart';
+import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 class MonitoringMode extends StatelessWidget {
   const MonitoringMode({

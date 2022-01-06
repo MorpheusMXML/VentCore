@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:uke_mlab/utilities/screen_controller.dart';
+import 'package:uke_mlab/providers/screen_controller.dart';
 import 'package:uke_mlab/models/model.dart';
 import 'package:uke_mlab/widgets/value_box/value_box_container.dart';
 import 'package:uke_mlab/widgets/value_box/value_box_settings.dart';

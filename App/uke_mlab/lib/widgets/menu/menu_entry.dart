@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uke_mlab/utilities/screen_controller.dart';
+import 'package:uke_mlab/providers/screen_controller.dart';
 
 class AppMenuEntry extends StatelessWidget {
   final String name;

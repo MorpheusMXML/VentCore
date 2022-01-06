@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uke_mlab/models/enums.dart';
+import 'package:uke_mlab/utilities/enums/sensor.dart';
+import 'package:uke_mlab/utilities/enums/boundary_state.dart';
 import 'package:uke_mlab/models/system_state.dart';
 
 class GraphAlarmMessage extends StatelessWidget {
