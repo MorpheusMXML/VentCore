@@ -29,16 +29,6 @@ class SystemState {
 
   RxList<bool> selectedToggleView = [true, false, false].obs;
 
-  void setSelectedToggleView(int index) {
-    for (var i = 0; i <= selectedToggleView.length - 1; i++) {
-      index == i ? selectedToggleView[i] = true : selectedToggleView[i] = false;
-    }
-  }
-
-  void resetToggleView() {
-    selectedToggleView.value = [true, false, false];
-  }
-
   // TODO: Save differently? Use local storage to permanently save this setting?
   RxBool isDarkMode = true.obs;
   Rx<Icon> icon = const Icon(Icons.dark_mode).obs;

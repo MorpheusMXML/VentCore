@@ -29,7 +29,7 @@ class ScreenController {
       if (runningScenario!.scenarioRunning) {
         runningScenario!.stopScenario();
         modelManager.resetAllModels();
-        systemState.resetToggleView();
+        resetToggleView();
       }
     }
 
@@ -114,8 +114,9 @@ class ScreenController {
   Future? skipButton() {
     if (systemState.patientType == patientTypeEnum.none) {
       modelManager.loadPatientPresets(patientTypeEnum.adult);
+      systemState.patientType = patientTypeEnum.adult;
     }
-    systemState.patientType = patientTypeEnum.adult;
+    //systemState.patientType = patientTypeEnum.adult;
     systemState.screenStatus = screenStatusEnum.monitorScreen;
     changeScenario(scenariosEnum.standardScenario);
     return Get.toNamed('/main_screen');
@@ -124,8 +125,9 @@ class ScreenController {
   Future? aedButton() {
     if (systemState.patientType == patientTypeEnum.none) {
       modelManager.loadPatientPresets(patientTypeEnum.adult);
+      systemState.patientType = patientTypeEnum.adult;
     }
-    systemState.patientType = patientTypeEnum.adult;
+    //systemState.patientType = patientTypeEnum.adult;
     systemState.screenStatus = screenStatusEnum.defibrillationScreen;
     changeScenario(scenariosEnum.standardScenario);
     systemState.selectedToggleView.value = [false, false, true];
@@ -141,25 +143,27 @@ class ScreenController {
     return Get.offNamed('/demo_screen');
   }
 
-  //TODO use and implement
-  void monitorButton() {
-    systemState.screenStatus = screenStatusEnum.monitorScreen;
+  void setSelectedToggleView(int index) {
+    for (var i = 0; i <= systemState.selectedToggleView.length - 1; i++) {
+      index == i
+          ? systemState.selectedToggleView[i] = true
+          : systemState.selectedToggleView[i] = false;
+    }
+    if (index == 0) {
+      systemState.screenStatus = screenStatusEnum.monitorScreen;
+    } else if (index == 1) {
+      systemState.screenStatus = screenStatusEnum.ventilationScreen;
+    } else if (index == 2) {
+      systemState.screenStatus = screenStatusEnum.defibrillationScreen;
+    } else {
+      throw Exception("No screen $index known in toggle view");
+    }
+  }
+
+  void resetToggleView() {
     systemState.selectedToggleView.value = [true, false, false];
   }
 
-  //TODO use and implement
-  void ventilationButton() {
-    systemState.screenStatus = screenStatusEnum.ventilationScreen;
-    systemState.selectedToggleView.value = [false, true, false];
-  }
-
-  //TODO use and implement
-  void defiButton() {
-    systemState.screenStatus = screenStatusEnum.defibrillationScreen;
-    systemState.selectedToggleView.value = [false, false, true];
-  }
-
-  //TODO use and implement
   Future? alarmSettingsButton() {
     //system state should stay the same here
     return Get.offNamed('/alarm_limit_screen');
@@ -170,12 +174,6 @@ class ScreenController {
     return "";
   }
 
-  //TODO use and implement
-  String scenarioMenuButton() {
-    return "";
-  }
-
-  //TODO implement
   Future? scenarioMenuExitButton() {
     switch (systemState.screenStatus) {
       case screenStatusEnum.patientSettingScreen:
