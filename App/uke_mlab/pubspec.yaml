@@ -68,7 +68,6 @@ flutter:
   assets:
     - assets/icons/
     - assets/data.json
-    - assets/jsons/sensor_default_values.json
     - assets/jsons/sensor_update_rates.json
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
