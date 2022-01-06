@@ -49,7 +49,7 @@ extension SensorAttributes on sensorEnum {
       'displayString': 'CO2',
       'displayShortString': 'CO2',
       'abbreviation': 'CO2',
-      'color': Color(0xFFFFFFFF),
+      'color': Color(0xFFAf52DE),
       'upperBound': {
         'adult': 200,
         'child': 170,
