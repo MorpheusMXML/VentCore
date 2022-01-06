@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uke_mlab/providers/toggle_controller.dart';
+import 'package:uke_mlab/models/system_state.dart';
 
 class ToggleThemeButton extends StatelessWidget {
   const ToggleThemeButton({
@@ -9,11 +9,11 @@ class ToggleThemeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ToggleController toggleController = Get.find<ToggleController>();
+    SystemState systemState = Get.find<SystemState>();
 
     return IconButton(
-      onPressed: () => toggleController.toggleTheme(),
-      icon: Obx(() => toggleController.icon.value),
+      onPressed: () => systemState.toggleTheme(),
+      icon: Obx(() => systemState.icon.value),
     );
   }
 }

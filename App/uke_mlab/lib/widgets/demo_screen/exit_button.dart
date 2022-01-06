@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:uke_mlab/utilities/screen_controller.dart';
 
 class ExitButton extends StatelessWidget {
   const ExitButton({
@@ -21,7 +22,8 @@ class ExitButton extends StatelessWidget {
           ),
         ),
         child: const Text('Exit', style: TextStyle(fontSize: 20)),
-        onPressed: () => Get.offNamed('/start_screen'),
+        onPressed: () =>
+            Get.find<ScreenController>().scenarioMenuExitButton(),
       ),
     );
   }

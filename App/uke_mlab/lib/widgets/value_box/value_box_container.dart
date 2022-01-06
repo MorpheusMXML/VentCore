@@ -1,62 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'package:uke_mlab/utilities/screen_controller.dart';
-
-import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/models/model.dart';
-import 'package:uke_mlab/widgets/value_box/value_box_contents.dart';
-import 'package:uke_mlab/widgets/value_box/value_box_settings.dart';
 
 class ValueBoxContainer extends StatelessWidget {
-  final sensorEnum sensor;
-
+  final DataModel dataModel;
   const ValueBoxContainer({
     Key? key,
-    required this.sensor,
+    required this.dataModel,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final ScreenController screenController;
-    final DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
+    return AspectRatio(
+      aspectRatio: 1,
+      child: ElevatedButton(
+        style: ButtonStyle(
+            shape: MaterialStateProperty.all(const RoundedRectangleBorder()),
+            backgroundColor:
+                MaterialStateProperty.all(const Color(0xFF2A2831))),
+        onPressed: () => dataModel.tapped.toggle(),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // Top
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+              Text(dataModel.miniTitle,
+                  style: TextStyle(color: dataModel.color)),
+              Obx(() => Text(dataModel.upperAlarmBound.toString(),
+                  style: TextStyle(color: dataModel.color)))
+            ]),
 
-    // TODO: Also check for alarms here (red container)
+            // Middle
+            Obx(() => Text(dataModel.singleData.value.value.toInt().toString(),
+                style: TextStyle(color: dataModel.color, fontSize: 50.0))),
 
-    return Obx(
-      () => dataModel.tapped.value
-          ? Container(
-              color: const Color(0xFF49454F),
-              child: Row(
-                children: [
-                  ValueBoxSettings(dataModel: dataModel, type: 'lower'),
-                  AspectRatio(
-                      aspectRatio: 1,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                            shape: MaterialStateProperty.all(
-                                const RoundedRectangleBorder()),
-                            backgroundColor: MaterialStateProperty.all(
-                                const Color(0xFF2A2831))),
-                        onPressed: () => dataModel.tapped.toggle(),
-                        child: ValueBoxContents(dataModel: dataModel),
-                      )),
-                  ValueBoxSettings(dataModel: dataModel, type: 'upper'),
-                ],
-              ),
-            )
-          : AspectRatio(
-              aspectRatio: 1,
-              child: ElevatedButton(
-                style: ButtonStyle(
-                    shape: MaterialStateProperty.all(
-                        const RoundedRectangleBorder()),
-                    backgroundColor:
-                        MaterialStateProperty.all(const Color(0xFF2A2831))),
-                onPressed: () => dataModel.tapped.toggle(),
-                child: ValueBoxContents(dataModel: dataModel),
-              ),
-            ),
+            // Bottom
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+              Obx(() => Text(dataModel.lowerAlarmBound.toString(),
+                  style: TextStyle(color: dataModel.color))),
+              Text('1/min', style: TextStyle(color: dataModel.color))
+            ]),
+          ],
+        ),
+      ),
     );
   }
 }

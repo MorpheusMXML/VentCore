@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/enums.dart';
-import 'package:uke_mlab/models/model.dart';
+import 'package:uke_mlab/models/system_state.dart';
 
 class AlarmConfirmButton extends StatelessWidget {
   final sensorEnum sensor;
@@ -12,10 +12,11 @@ class AlarmConfirmButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
-    
+    final SystemState systemState = Get.find<SystemState>();
+
     return ElevatedButton(
-      onPressed: () => dataModel.alarmState.value = 'suppressed',
+      onPressed: () =>
+          systemState.violationStates[sensor] = boundaryStateEnum.suppressed,
       child: const Text("Confirm"),
     );
   }

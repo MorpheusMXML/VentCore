@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
-import 'package:uke_mlab/providers/start_screen_controller.dart';
+import 'package:intl/intl.dart';
 
 class StatusBar extends StatelessWidget {
   const StatusBar({
@@ -11,7 +12,6 @@ class StatusBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final systemState = Get.find<SystemState>();
-    final startScreenController = Get.find<StartScreenController>();
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -32,26 +32,29 @@ class StatusBar extends StatelessWidget {
         ),
         Flexible(
           flex: 1,
-          child: Obx(
-            () => Text(
-              startScreenController.selectedString.value,
-              style: const TextStyle(
-                color: Colors.white,
-                decoration: TextDecoration.none,
-              ),
-            ),
-          ),
-        ),
-        const Flexible(
-          flex: 1,
           child: Text(
-            '14:23',
-            style: TextStyle(
+            systemState.patientType.toString() == 'patientTypeEnum.none'
+                ? ''
+                : systemState.patientType.name,
+            style: const TextStyle(
               color: Colors.white,
               decoration: TextDecoration.none,
             ),
           ),
         ),
+        Flexible(
+          flex: 1,
+          child: Text(
+            DateFormat.Hm().format(DateTime.now()),
+            style: const TextStyle(
+              color: Colors.white,
+              decoration: TextDecoration.none,
+            ),
+          ),
+        ),
+        Flexible(
+          child: SvgPicture.asset('assets/icons/OxygenBottle.svg', height: 20),
+        )
       ],
     );
   }

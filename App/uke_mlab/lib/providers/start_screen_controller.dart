@@ -1,12 +1,5 @@
 import 'package:get/get.dart';
 
-class StartScreenBinding extends Bindings {
-  @override
-  void dependencies() {
-    Get.put(StartScreenController());
-  }
-}
-
 class StartScreenController extends GetxController {
   RxString selectedString = ''.obs;
   RxDouble weightValue = 75.0.obs;

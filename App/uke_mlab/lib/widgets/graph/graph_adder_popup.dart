@@ -40,8 +40,7 @@ class GraphAdderPopup extends StatelessWidget {
                         ? systemState.graphList.remove(sensor)
                         : systemState.graphList.add(sensor),
                     child: Text(
-                      // TODO: temporary solution is to remove '.sensorEnum'
-                      '$sensor'.substring(11).toUpperCase(),
+                      sensor.displayString,
                       style: const TextStyle(fontSize: 18),
                       textAlign: TextAlign.center,
                     ));

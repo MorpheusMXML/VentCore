@@ -3,17 +3,16 @@ import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/models/model.dart';
 import 'package:uke_mlab/models/model_manager.dart';
 import 'package:uke_mlab/models/system_state.dart';
-
-class ScreenBinding extends Bindings {
-  @override
-  void dependencies() {
-    Get.put(ScreenController());
-  }
-}
+import 'package:uke_mlab/scenarios/abstract_scenario.dart';
+import 'package:uke_mlab/scenarios/standard_scenario.dart';
 
 // basic controller to interact with model
 // (at the moment) just boundary update
 class ScreenController {
+  AbstractScenario? runningScenario;
+  SystemState systemState = Get.find<SystemState>();
+  ModelManager modelManager = Get.find<ModelManager>();
+
   void setUpperBoundary(DataModel dataModel, int value) {
     dataModel.upperAlarmBound.value = value;
   }
@@ -22,88 +21,43 @@ class ScreenController {
     dataModel.lowerAlarmBound.value = value;
   }
 
-  void loadPatientPresets(patientTypeEnum patientType) {}
+  //Changes playing scenario based on input paramenter, stops currently playing scenario on call
+  void changeScenario(scenariosEnum scenario) {
+    systemState.scenarioStarted = true;
 
-  // Wrapper for easier usage, since certain sadly require additional information
-  String changeScreen1(screenChangeButtonEnum sourceButton) {
-    return changeScreen2(sourceButton, '');
-  }
+    if (runningScenario is AbstractScenario) {
+      if (runningScenario!.scenarioRunning) {
+        runningScenario!.stopScenario();
+        modelManager.resetAllModels();
+        resetToggleView();
+      }
+    }
 
-  // OVERLOADING NOT SUPPORTED?! => parameter number at the end
-  // additionalInfo can be Null
-  // Since each button for screen change has 1 target, this is used for finding direction
-  String changeScreen2(
-      screenChangeButtonEnum sourceButton, String additionalInfo) {
-    SystemState systemState = Get.find<SystemState>();
-    ModelManager modelManager = Get.find<ModelManager>();
-
-    switch (sourceButton) {
-      case screenChangeButtonEnum.continueButton:
-        // Add behaviour
-        if (additionalInfo == 'Adult') {
-          if (systemState.patientType != patientTypeEnum.adult) {
-            modelManager.loadPatientPresets(patientTypeEnum.adult);
-            systemState.patientType = patientTypeEnum.adult;
-          }
-        } else if (additionalInfo == 'Child') {
-          if (systemState.patientType != patientTypeEnum.child) {
-            modelManager.loadPatientPresets(patientTypeEnum.child);
-            systemState.patientType = patientTypeEnum.child;
-          }
-        } else if (additionalInfo == 'Infant') {
-          if (systemState.patientType != patientTypeEnum.infant) {
-            modelManager.loadPatientPresets(patientTypeEnum.infant);
-            systemState.patientType = patientTypeEnum.infant;
-          }
-        } else {
-          throw Exception(
-              'additionalInformation is not Adult, Child or Infant on screenChangeButton call from Continue Button');
-        }
-        systemState.screenStatus = screenStatusEnum.monitoringScreen;
-        return '/main_screen';
-
-      case screenChangeButtonEnum.aedButton:
-        // Add behaviour
-        if (systemState.patientType == patientTypeEnum.none) {
-          modelManager.loadPatientPresets(patientTypeEnum.adult);
-        }
-        systemState.patientType = patientTypeEnum.adult;
-        systemState.screenStatus = screenStatusEnum.defibrillationScreen;
-        return '/main_screen';
-
-      case screenChangeButtonEnum.skipButton:
-        // Add behaviour
-        if (systemState.patientType == patientTypeEnum.none) {
-          modelManager.loadPatientPresets(patientTypeEnum.adult);
-        }
-        systemState.patientType = patientTypeEnum.adult;
-        systemState.screenStatus = screenStatusEnum.monitoringScreen;
-        return '/main_screen';
-
-      case screenChangeButtonEnum.toTopLevelButton:
-        // Add behaviour
-        systemState.screenStatus = screenStatusEnum.topLevelScreen;
-        return '';
-
-      case screenChangeButtonEnum.ventilationButton:
-        // Add behaviour
-        systemState.screenStatus = screenStatusEnum.ventilationScreen;
-        return '';
-
-      case screenChangeButtonEnum.defiButton:
-        // Add behaviour
-        systemState.screenStatus = screenStatusEnum.defibrillationScreen;
-        return '';
-
-      case screenChangeButtonEnum.monitoringButton:
-        // Add behaviour
-        systemState.screenStatus = screenStatusEnum.monitoringScreen;
-        return '';
-
+    switch (scenario) {
+      case scenariosEnum.standardScenario:
+        runningScenario = StandardScenario();
+        runningScenario!.startScenario();
+        break;
+      case scenariosEnum.scenario1:
+        print("start Scenario 1 here");
+        break;
+      case scenariosEnum.scenario2:
+        print("start Scenario 2 here");
+        break;
+      case scenariosEnum.scenario3a:
+        print("start Scenario 3a here");
+        break;
+      case scenariosEnum.scenario3b:
+        print("start Scenario 3b here");
+        break;
+      case scenariosEnum.scenario3c:
+        print("start Scenario 3c here");
+        break;
+      case scenariosEnum.scenario4:
+        print("start Scenario 4 here");
+        break;
       default:
-        throw Exception('No Button ' +
-            sourceButton.toString() +
-            ' given for screen change known');
+        throw Exception('No scenario for ' + scenario.toString() + ' known');
     }
   }
 
@@ -113,31 +67,7 @@ class ScreenController {
   //TODO implement
   void acknowledgeAlarm() {}
 
-  //TODO add interaction with scenarios when scenarios are present
-  void startScenario(scenariosEnum scenario) {
-    Get.find<SystemState>().scenarioStarted = true;
-    switch (scenario) {
-      case scenariosEnum.scenario1:
-        //start scenario 1
-        break;
-      case scenariosEnum.scenario2:
-        //start scenario 2
-        break;
-      case scenariosEnum.scenario3a:
-        //start scenario 3a
-        break;
-      case scenariosEnum.scenario3b:
-        //start scenario 3b
-        break;
-      case scenariosEnum.scenario3c:
-        //start scenario 3c
-        break;
-      case scenariosEnum.scenario4:
-      //start scenario 4
-      default: // return Error 'no scenario with such a number found' vs start one of the scenarios with a hint
-    }
-  }
-
+  //TODO implement
   void nextStep() {
     if (Get.find<SystemState>().scenarioStarted) {
       // go to the next stopping point in simmulation data (see patient stories)
@@ -145,6 +75,7 @@ class ScreenController {
     // else case for throwing some kind of error message?
   }
 
+  //TODO delete/implement
   void endScenario(ModelManager manager) {
     SystemState systemState = Get.find<SystemState>();
     if (systemState.scenarioStarted) {
@@ -153,5 +84,117 @@ class ScreenController {
       systemState.scenarioStarted = false;
     }
     // else case for throwing some kind of error message?
+  }
+
+  Future? continueButton(String additionalInfo) {
+    if (additionalInfo == 'Adult') {
+      if (systemState.patientType != patientTypeEnum.adult) {
+        modelManager.loadPatientPresets(patientTypeEnum.adult);
+        systemState.patientType = patientTypeEnum.adult;
+      }
+    } else if (additionalInfo == 'Child') {
+      if (systemState.patientType != patientTypeEnum.child) {
+        modelManager.loadPatientPresets(patientTypeEnum.child);
+        systemState.patientType = patientTypeEnum.child;
+      }
+    } else if (additionalInfo == 'Infant') {
+      if (systemState.patientType != patientTypeEnum.infant) {
+        modelManager.loadPatientPresets(patientTypeEnum.infant);
+        systemState.patientType = patientTypeEnum.infant;
+      }
+    } else {
+      throw Exception(
+          'additionalInformation is not Adult, Child or Infant on screenChangeButton call from Continue Button');
+    }
+    systemState.screenStatus = screenStatusEnum.monitorScreen;
+    changeScenario(scenariosEnum.standardScenario);
+    return Get.toNamed('/main_screen');
+  }
+
+  Future? skipButton() {
+    if (systemState.patientType == patientTypeEnum.none) {
+      modelManager.loadPatientPresets(patientTypeEnum.adult);
+      systemState.patientType = patientTypeEnum.adult;
+    }
+    //systemState.patientType = patientTypeEnum.adult;
+    systemState.screenStatus = screenStatusEnum.monitorScreen;
+    changeScenario(scenariosEnum.standardScenario);
+    return Get.toNamed('/main_screen');
+  }
+
+  Future? aedButton() {
+    if (systemState.patientType == patientTypeEnum.none) {
+      modelManager.loadPatientPresets(patientTypeEnum.adult);
+      systemState.patientType = patientTypeEnum.adult;
+    }
+    //systemState.patientType = patientTypeEnum.adult;
+    systemState.screenStatus = screenStatusEnum.defibrillationScreen;
+    changeScenario(scenariosEnum.standardScenario);
+    systemState.selectedToggleView.value = [false, false, true];
+    return Get.toNamed('/main_screen');
+  }
+
+  Future? patientSettingButton() {
+    systemState.screenStatus = screenStatusEnum.patientSettingScreen;
+    return Get.offNamed('/start_screen');
+  }
+
+  Future? demoScreenButton() {
+    return Get.offNamed('/demo_screen');
+  }
+
+  void setSelectedToggleView(int index) {
+    for (var i = 0; i <= systemState.selectedToggleView.length - 1; i++) {
+      index == i
+          ? systemState.selectedToggleView[i] = true
+          : systemState.selectedToggleView[i] = false;
+    }
+    if (index == 0) {
+      systemState.screenStatus = screenStatusEnum.monitorScreen;
+    } else if (index == 1) {
+      systemState.screenStatus = screenStatusEnum.ventilationScreen;
+    } else if (index == 2) {
+      systemState.screenStatus = screenStatusEnum.defibrillationScreen;
+    } else {
+      throw Exception("No screen $index known in toggle view");
+    }
+  }
+
+  void resetToggleView() {
+    systemState.selectedToggleView.value = [true, false, false];
+  }
+
+  Future? alarmSettingsButton() {
+    //system state should stay the same here
+    return Get.offNamed('/alarm_limit_screen');
+  }
+
+  //TODO use and implement
+  String alarmSettingsExitButton() {
+    return "";
+  }
+
+  Future? scenarioMenuExitButton() {
+    switch (systemState.screenStatus) {
+      case screenStatusEnum.patientSettingScreen:
+        return Get.toNamed('/start_screen');
+      case screenStatusEnum.monitorScreen:
+        return Get.toNamed('/main_screen');
+      case screenStatusEnum.ventilationScreen:
+        return Get.toNamed('/main_screen');
+      case screenStatusEnum.defibrillationScreen:
+        return Get.toNamed('/main_screen');
+      default:
+        throw Exception('unkown previous screen exiting Demo/Scenario Screen');
+    }
+  }
+
+  Future? scenarioButton(scenariosEnum scenario) {
+    if (systemState.patientType == patientTypeEnum.none) {
+      modelManager.loadPatientPresets(patientTypeEnum.adult);
+      systemState.patientType = patientTypeEnum.adult;
+    }
+    changeScenario(scenario);
+    return Get.toNamed('/main_screen');
   }
 }

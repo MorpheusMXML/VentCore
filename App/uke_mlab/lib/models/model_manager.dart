@@ -17,11 +17,9 @@ class ModelManager {
 
   ModelManager() {
     for (var sensor in sensorEnum.values) {
-      //TODO read standard values from somewhere
       Get.put(DataModel(sensor, 10, 0, this), tag: sensor.toString());
     }
     onInit();
-    //loadPatientPresets(patientTypeEnum.adult);
   }
 
   void onInit() async {
@@ -112,5 +110,13 @@ class ModelManager {
       }
     }
     stylesTraitsLoaded = true;
+  }
+
+  void resetAllModels() {
+    for (var sensor in sensorEnum.values) {
+      DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
+
+      dataModel.resetDataModel();
+    }
   }
 }

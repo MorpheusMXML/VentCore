@@ -1,22 +1,17 @@
-import 'dart:async';
-
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/enums.dart';
-import 'package:uke_mlab/models/model.dart';
-// Atm unused
-// TODO address in DataModel update/set methods
-// TODO use in use in AlarmController
+import 'package:uke_mlab/utilities/app_theme.dart';
 
 class SystemState {
-  screenStatusEnum screenStatus = screenStatusEnum.topLevelScreen;
+  screenStatusEnum screenStatus = screenStatusEnum.patientSettingScreen;
   patientTypeEnum patientType = patientTypeEnum.none;
-  final Map<sensorEnum, boundaryStateEnum> violationStates = {};
+  final RxMap<sensorEnum, boundaryStateEnum> violationStates =
+      <sensorEnum, boundaryStateEnum>{}.obs;
   bool scenarioStarted = false;
 
   // More or less copy pasted from old mockup class
   RxList<sensorEnum> graphList = <sensorEnum>[].obs;
-
-  
 
   RxBool addGraph = false.obs;
 
@@ -28,25 +23,25 @@ class SystemState {
 
   RxString alarmMessage = ''.obs;
 
-  void incrementIPPV(name) {
-    ippvValues[name]!.value = ippvValues[name]!.value + 1;
+  void updateIPPVValue(String name, int value) {
+    ippvValues[name]!.value = ippvValues[name]!.value + value;
   }
 
-  void decrementIPPV(name) {
-    ippvValues[name]!.value = ippvValues[name]!.value - 1;
-  }
+  RxList<bool> selectedToggleView = [true, false, false].obs;
 
-  void switchToAlarm(int type) {
-    // if ((allGraphs[type]['alarm'] as RxString).value == 'none') {
-    //   (allGraphs[type]['alarm'] as RxString).value = 'alarm';
-  }
+  // TODO: Save differently? Use local storage to permanently save this setting?
+  RxBool isDarkMode = true.obs;
+  Rx<Icon> icon = const Icon(Icons.dark_mode).obs;
 
-  void activateTimer() {
-    for (var sensor in sensorEnum.values) {
-      DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
-      Timer.periodic(const Duration(milliseconds: 2000), (timer) {
-        dataModel.updateValues();
-      });
+  void toggleTheme() {
+    if (isDarkMode.value) {
+      Get.changeTheme(AppTheme.lightTheme);
+      isDarkMode.toggle();
+      icon.value = const Icon(Icons.light_mode_rounded);
+    } else {
+      Get.changeTheme(AppTheme.darkTheme);
+      isDarkMode.toggle();
+      icon.value = const Icon(Icons.dark_mode_rounded);
     }
   }
 
