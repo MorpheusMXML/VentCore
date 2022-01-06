@@ -15,7 +15,7 @@ class GraphAdderPopup extends StatelessWidget {
     return ElevatedButton(
         style: ElevatedButton.styleFrom(
           fixedSize: const Size(800, 150),
-          primary: const Color(0xFF2A2831).withOpacity(0.5),
+          primary: Theme.of(context).cardColor.withOpacity(0.5),
         ),
         onPressed: () => systemState.addGraph.toggle(),
         child: Obx(
@@ -26,9 +26,9 @@ class GraphAdderPopup extends StatelessWidget {
                 systemState.graphList.contains(sensor)
                     ? style = ElevatedButton.styleFrom(
                         fixedSize: const Size(80, 60),
-                        // TODO: load color from sensors json or model manager?
-                        primary: Colors.green,
-                        onPrimary: Colors.black)
+                        side: const BorderSide(width: 2, color: Colors.white),
+                        primary: sensor.color,
+                        onPrimary: Colors.white)
                     : style = ElevatedButton.styleFrom(
                         fixedSize: const Size(80, 60),
                         primary: Colors.grey[50],
@@ -40,7 +40,7 @@ class GraphAdderPopup extends StatelessWidget {
                         ? systemState.graphList.remove(sensor)
                         : systemState.graphList.add(sensor),
                     child: Text(
-                      sensor.displayString,
+                      sensor.abbreviation,
                       style: const TextStyle(fontSize: 18),
                       textAlign: TextAlign.center,
                     ));
