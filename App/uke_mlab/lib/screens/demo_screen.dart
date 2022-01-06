@@ -29,7 +29,11 @@ class DemoScreen extends StatelessWidget {
                   ScenarioButton(
                       name: 'Scenario 2', scenario: scenariosEnum.scenario2),
                   ScenarioButton(
-                      name: 'Scenario 3', scenario: scenariosEnum.scenario3a),
+                      name: 'Scenario 3a', scenario: scenariosEnum.scenario3a),
+                  ScenarioButton(
+                      name: 'Scenario 3b', scenario: scenariosEnum.scenario3b),
+                  ScenarioButton(
+                      name: 'Scenario 3c', scenario: scenariosEnum.scenario3c),
                   ScenarioButton(
                       name: 'Scenario 4', scenario: scenariosEnum.scenario4),
                 ],
