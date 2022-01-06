@@ -40,14 +40,16 @@ class StandardScenario extends AbstractScenario {
       if (updateRates.containsKey(sensor.toString())) {
         updateRate = updateRates[sensor.toString()];
       }
-      Timer.periodic(Duration(milliseconds: updateRate), (timer) {
+      Timer.periodic(Duration(milliseconds: updateRate * 100), (timer) {
+        var dataList = dataMap[sensor]!;
+        
         if (!scenarioRunning) {
           print('[Standard Scenario] scenarioRunning is false');
           timer.cancel();
         }
-        dataModel.updateValueList(dataMap[sensor]!.sublist(
+        dataModel.updateValueList(dataList.sublist(
             dataModel.singleData.value.counter,
-            dataModel.singleData.value.counter + 50));
+            (dataModel.singleData.value.counter + 100) % dataList.length));
         //dataModel.updateValues(dataMap[sensor]![dataModel.singleData.value.counter]);
       });
     }
