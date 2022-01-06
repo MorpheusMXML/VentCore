@@ -12,8 +12,8 @@ class PopupNameField extends StatelessWidget {
       height: 100 / MediaQuery.of(context).devicePixelRatio,
       color: const Color(0xff322f37),
       child: Row(
-        children: const [
-          Flexible(
+        children: [
+          const Flexible(
             flex: 2,
             fit: FlexFit.tight,
             child: Padding(
@@ -25,23 +25,24 @@ class PopupNameField extends StatelessWidget {
           Flexible(
               flex: 8,
               child: Padding(
-                padding: EdgeInsets.only(right: 10),
+                padding: const EdgeInsets.only(right: 10),
                 child: TextField(
-                  style: TextStyle(color: Colors.black),
+                  style: const TextStyle(color: Colors.black),
                   cursorColor: Colors.black,
                   maxLines: 1,
                   decoration: InputDecoration(
                       filled: true,
-                      fillColor: Colors.white,
+                      fillColor: Theme.of(context).dividerColor,
                       floatingLabelBehavior: FloatingLabelBehavior.never,
                       focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)),
-                      constraints: BoxConstraints(
+                          borderSide: BorderSide(
+                              color: Theme.of(context).dividerColor)),
+                      constraints: const BoxConstraints(
                         maxHeight: 25,
                       ),
-                      border: OutlineInputBorder(),
+                      border: const OutlineInputBorder(),
                       labelText: 'Patient Name',
-                      labelStyle: TextStyle(color: Color(0xff8a8a8e))),
+                      labelStyle: const TextStyle(color: Color(0xff8a8a8e))),
                 ),
               ))
         ],

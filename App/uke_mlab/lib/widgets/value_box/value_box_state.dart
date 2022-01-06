@@ -37,7 +37,7 @@ class ValueBoxState extends StatelessWidget {
     return Obx(
       () => dataModel.tapped.value
           ? Container(
-              color: const Color(0xFF49454F),
+              color: Theme.of(context).shadowColor,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

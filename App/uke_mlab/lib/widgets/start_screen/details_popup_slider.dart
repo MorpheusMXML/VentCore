@@ -54,9 +54,9 @@ class PopupSlider extends StatelessWidget {
           ),
           Container(
             margin: const EdgeInsets.fromLTRB(0, 5, 10, 5),
-            decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(3))),
+            decoration: BoxDecoration(
+                color: Theme.of(context).dividerColor,
+                borderRadius: const BorderRadius.all(Radius.circular(3))),
             alignment: Alignment.center,
             height: 40 / MediaQuery.of(context).devicePixelRatio,
             width: 90 / MediaQuery.of(context).devicePixelRatio,

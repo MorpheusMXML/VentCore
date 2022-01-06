@@ -16,9 +16,9 @@ class InfoText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(12),
-      decoration: const BoxDecoration(
-        color: Color(0xFF2A2831),
-        borderRadius: BorderRadius.all(Radius.circular(8)),
+      decoration: BoxDecoration(
+        color: Theme.of(context).cardColor,
+        borderRadius: const BorderRadius.all(Radius.circular(8)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -27,16 +27,19 @@ class InfoText extends StatelessWidget {
           Expanded(
             child: Text(
               type,
-              style: const TextStyle(fontSize: 16, color: Colors.white),
+              style: TextStyle(
+                  fontSize: 16, color: Theme.of(context).dividerColor),
             ),
           ),
           Text(
             value.toString(),
-            style: const TextStyle(fontSize: 16, color: Colors.white),
+            style:
+                TextStyle(fontSize: 16, color: Theme.of(context).dividerColor),
           ),
           Text(
             unit,
-            style: const TextStyle(fontSize: 10, color: Colors.white),
+            style:
+                TextStyle(fontSize: 10, color: Theme.of(context).dividerColor),
           ),
         ],
       ),

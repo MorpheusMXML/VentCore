@@ -32,7 +32,7 @@ class ValueBoxTile extends StatelessWidget {
         ? ValueBoxState(dataModel: dataModel)
         : Expanded(
             child: Container(
-              color: const Color(0xFF25232A),
+              color: Theme.of(context).focusColor,
               margin: const EdgeInsets.only(right: 8, bottom: 8),
               child: Column(
                 children: [

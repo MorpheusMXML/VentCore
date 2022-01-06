@@ -15,7 +15,7 @@ class InfoContainer extends StatelessWidget {
       itemCount: data.length,
       itemBuilder: (BuildContext context, int index) {
         return Container(
-          color: const Color(0xFF25232A),
+          color: Theme.of(context).focusColor,
           padding: const EdgeInsets.all(8),
           margin: const EdgeInsets.only(right: 8),
           child: InfoText(
