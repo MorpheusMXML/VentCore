@@ -44,7 +44,6 @@ class StandardScenario extends AbstractScenario {
         var dataList = dataMap[sensor]!;
         
         if (!scenarioRunning) {
-          print('[Standard Scenario] scenarioRunning is false');
           timer.cancel();
         }
         dataModel.updateValueList(dataList.sublist(
