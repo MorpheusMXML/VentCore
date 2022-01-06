@@ -17,7 +17,7 @@ class GraphAlarmMessage extends StatelessWidget {
     var alarmType = systemState.violationStates[sensor] as boundaryStateEnum;
 
     return Text(
-      '${alarmType.name}: ${sensor.toDisplayString()}',
+      '${alarmType.name}: ${sensor.displayString}',
       style: const TextStyle(color: Colors.white, fontSize: 20),
     );
   }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/utilities/screen_controller.dart';
 
 class ExitButton extends StatelessWidget {

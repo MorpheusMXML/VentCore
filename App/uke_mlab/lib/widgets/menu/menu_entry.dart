@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/utilities/screen_controller.dart';
 
 class AppMenuEntry extends StatelessWidget {
@@ -11,11 +12,8 @@ class AppMenuEntry extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ScreenController screenController = Get.find<ScreenController>();
     String navigateTo = '/' + name.replaceAll(RegExp(r' '), '_').toLowerCase();
-    // TODO: Temp fix, Patient Settings = Start Screen?
-    if (name == 'Patient Settings') {
-      navigateTo = Get.find<ScreenController>().patientSettingButton();
-    }
 
     return Get.currentRoute != navigateTo
         ? ListTile(
@@ -25,7 +23,19 @@ class AppMenuEntry extends StatelessWidget {
                 fontSize: 20,
               ),
             ),
-            onTap: () => Get.offNamed(navigateTo))
+            onTap: () {
+              switch (name) {
+                case 'Start Screen':
+                  Get.offNamed(screenController.patientSettingButton());
+                  break;
+                case 'Demo Screen':
+                  Get.offNamed(screenController.demoScreenButton());
+                  break;
+                case 'Alarm Limit Screen':
+                  Get.offNamed(screenController.alarmSettingsButton());
+                  break;
+              }
+            })
         : ListTile(
             title: Text(
               name,

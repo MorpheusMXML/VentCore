@@ -133,8 +133,14 @@ class ScreenController {
   }
 
   String patientSettingButton() {
+    print('[patientSettingsButton] ${systemState.screenStatus}');
     systemState.screenStatus = screenStatusEnum.patientSettingScreen;
     return '/start_screen';
+  }
+
+  String demoScreenButton() {
+    print('[demoScreenButton] ${systemState.screenStatus}');
+    return '/demo_screen';
   }
 
   //TODO use and implement
