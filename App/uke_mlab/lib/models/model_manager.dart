@@ -4,8 +4,6 @@ import 'package:uke_mlab/utilities/enums/patient_type.dart';
 import 'package:uke_mlab/models/model.dart';
 import 'package:uke_mlab/providers/alarm_controller.dart';
 
-// TODO: Why sensor.toString() instead of sensor.name?
-
 class ModelManager {
   late final AlarmController _alarmController;
 
@@ -13,7 +11,7 @@ class ModelManager {
 
   ModelManager() {
     for (var sensor in sensorEnum.values) {
-      Get.put(DataModel(sensor, 10, 0, this), tag: sensor.toString());
+      Get.put(DataModel(sensor, 10, 0, this), tag: sensor.name);
     }
   }
 
@@ -33,7 +31,7 @@ class ModelManager {
     }
 
     for (var sensor in sensorEnum.values) {
-      DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
+      DataModel dataModel = Get.find<DataModel>(tag: sensor.name);
       dataModel.resetDataModel();
 
       switch (patientType) {
@@ -64,7 +62,7 @@ class ModelManager {
 
   void loadStyleInfo() {
     for (var sensor in sensorEnum.values) {
-      DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
+      DataModel dataModel = Get.find<DataModel>(tag: sensor.name);
       dataModel.color = sensor.color;
       dataModel.displayString = sensor.displayString;
       dataModel.displayShortString = sensor.displayShortString;
@@ -74,7 +72,7 @@ class ModelManager {
 
   void resetAllModels() {
     for (var sensor in sensorEnum.values) {
-      DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
+      DataModel dataModel = Get.find<DataModel>(tag: sensor.name);
       dataModel.resetDataModel();
     }
   }

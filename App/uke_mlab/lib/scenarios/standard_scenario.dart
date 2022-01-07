@@ -35,7 +35,7 @@ class StandardScenario extends AbstractScenario {
   @override
   void runScenario(Map<sensorEnum, List<dynamic>> dataMap) {
     for (var sensor in sensorEnum.values) {
-      DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
+      DataModel dataModel = Get.find<DataModel>(tag: sensor.name);
 
       Timer.periodic(Duration(milliseconds: sensor.updateRate * 100), (timer) {
         var dataList = dataMap[sensor]!;

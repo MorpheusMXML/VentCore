@@ -59,7 +59,7 @@ class ScreenController {
         print("start Scenario 4 here");
         break;
       default:
-        throw Exception('No scenario for ' + scenario.toString() + ' known');
+        throw Exception('No scenario for ' + scenario.name + ' known');
     }
   }
 

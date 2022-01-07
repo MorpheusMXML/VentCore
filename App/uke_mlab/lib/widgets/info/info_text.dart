@@ -32,7 +32,7 @@ class InfoText extends StatelessWidget {
             ),
           ),
           Text(
-            value.toString(),
+            value,
             style:
                 TextStyle(fontSize: 16, color: Theme.of(context).dividerColor),
           ),

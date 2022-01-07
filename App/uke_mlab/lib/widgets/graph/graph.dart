@@ -14,7 +14,7 @@ class Graph extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
+    DataModel dataModel = Get.find<DataModel>(tag: sensor.name);
     return Obx(
       () => SfCartesianChart(
         backgroundColor: Theme.of(context).cardColor,

@@ -28,6 +28,6 @@ abstract class AbstractScenario {
 
   //maybe subject to deletion depending on future decisions
   void updateData(sensorEnum sensor, double value) {
-    Get.find<DataModel>(tag: sensor.toString()).updateValues(value);
+    Get.find<DataModel>(tag: sensor.name).updateValues(value);
   }
 }

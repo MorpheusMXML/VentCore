@@ -26,7 +26,7 @@ class ContinueButton extends StatelessWidget {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),
           ),
-          onPressed: startScreenController.selectedString.toString() != ''
+          onPressed: startScreenController.selectedString.value != ''
               ? () => screenController
                   .continueButton(startScreenController.selectedString.value)
               : null,

@@ -26,7 +26,7 @@ class ValueBoxTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
+    DataModel dataModel = Get.find<DataModel>(tag: sensor.name);
 
     return type == 'regular'
         ? ValueBoxState(dataModel: dataModel)
