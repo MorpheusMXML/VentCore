@@ -14,9 +14,12 @@ class AlarmLimitScreen extends StatelessWidget {
       children: [
         SizedBox(
           height: 150,
-          child: Row(children: getBoxes()),
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: getBoxes()),
         ),
         // TODO: Display bottom right, maybe new file?
+        const Spacer(),
         const ExitButton()
       ],
     );
@@ -27,9 +30,6 @@ class AlarmLimitScreen extends StatelessWidget {
 
     for (var i = 0; i < sensorEnum.values.length; i++) {
       widgets.add(ValueBoxTile(sensor: sensorEnum.values[i]));
-      if (i % 3 == 0) {
-        widgets.add(Container(width: 20));
-      }
     }
 
     return widgets;
