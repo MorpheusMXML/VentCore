@@ -44,9 +44,8 @@ class StandardScenario extends AbstractScenario {
           timer.cancel();
         }
         dataModel.updateValueList(dataList.sublist(
-            dataModel.singleData.value.counter,
-            (dataModel.singleData.value.counter + 100) % dataList.length));
-        //dataModel.updateValues(dataMap[sensor]![dataModel.singleData.value.counter]);
+            dataModel.singleData.value.counter % dataList.length - 1,
+            (dataModel.singleData.value.counter + 100) % dataList.length - 1));
       });
     }
   }
