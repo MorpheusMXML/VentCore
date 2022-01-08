@@ -55,7 +55,7 @@ class ModelManager {
           break;
         default:
           throw Exception(
-              'loadingPatientPresets called with wrong parameter (most likeley patientTypeEnum.none)');
+              'loadingPatientPresets called with wrong parameter (most likely patientTypeEnum.none)');
       }
     }
   }
