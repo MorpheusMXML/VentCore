@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:uke_mlab/utilities/screen_controller.dart';
+import 'package:uke_mlab/providers/screen_controller.dart';
 import 'package:uke_mlab/models/model.dart';
 import 'package:uke_mlab/widgets/value_box/value_box_container.dart';
 import 'package:uke_mlab/widgets/value_box/value_box_settings.dart';
@@ -37,7 +37,7 @@ class ValueBoxState extends StatelessWidget {
     return Obx(
       () => dataModel.tapped.value
           ? Container(
-              color: const Color(0xFF49454F),
+              color: Theme.of(context).shadowColor,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

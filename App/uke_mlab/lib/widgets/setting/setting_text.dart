@@ -18,26 +18,29 @@ class SettingText extends StatelessWidget {
     return Flexible(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.baseline, //gets text in same line
+        crossAxisAlignment:
+            CrossAxisAlignment.baseline, //gets text in same line
         textBaseline: TextBaseline.ideographic, //gets text in same line
         children: [
           Text(
             name,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 16,
-              color: Colors.white,
+              color: Theme.of(context).dividerColor,
             ),
           ),
           Obx(
             () => Text(
               systemState.ippvValues[name].toString(),
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 32,
-                color: Colors.white,
+                color: Theme.of(context).dividerColor,
               ),
             ),
           ),
-          Text(rate, style: const TextStyle(fontSize: 12, color: Colors.white)),
+          Text(rate,
+              style: TextStyle(
+                  fontSize: 12, color: Theme.of(context).dividerColor)),
         ],
       ),
     );

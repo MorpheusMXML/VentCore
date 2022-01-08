@@ -1,26 +1,12 @@
-import 'package:flutter/services.dart';
-import 'dart:convert';
-
 import 'package:get/get.dart';
 
-import 'package:uke_mlab/models/enums.dart';
+import 'package:uke_mlab/utilities/enums/scenarios.dart';
+import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/models/model.dart';
 
 abstract class AbstractScenario {
   bool scenarioRunning = false;
   late scenariosEnum scenarioType;
-
-  late final Map<String, dynamic> updateRates;
-
-  AbstractScenario() {
-    loadUpdateRates();
-  }
-
-  void loadUpdateRates() async {
-    var updateRateString =
-        await rootBundle.loadString('assets/jsons/sensor_update_rates.json');
-    updateRates = await jsonDecode(updateRateString.toString());
-  }
 
   void startScenario() {
     scenarioRunning = true;
@@ -39,6 +25,6 @@ abstract class AbstractScenario {
 
   //maybe subject to deletion depending on future decisions
   void updateData(sensorEnum sensor, double value) {
-    Get.find<DataModel>(tag: sensor.toString()).updateValues(value);
+    Get.find<DataModel>(tag: sensor.name).updateValues(value);
   }
 }

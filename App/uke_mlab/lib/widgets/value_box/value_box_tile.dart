@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/model.dart';
 
-import 'package:uke_mlab/models/enums.dart';
+import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/widgets/value_box/value_box_state.dart';
 
 // highest level widget that is always called when ValueBox is needed
@@ -26,13 +26,13 @@ class ValueBoxTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
+    DataModel dataModel = Get.find<DataModel>(tag: sensor.name);
 
     return type == 'regular'
         ? ValueBoxState(dataModel: dataModel)
         : Expanded(
             child: Container(
-              color: const Color(0xFF25232A),
+              color: Theme.of(context).focusColor,
               margin: const EdgeInsets.only(right: 8, bottom: 8),
               child: Column(
                 children: [
@@ -41,7 +41,7 @@ class ValueBoxTile extends StatelessWidget {
                     child: Container(
                       margin: const EdgeInsets.only(top: 4, bottom: 4),
                       child: Text(
-                        dataModel.title,
+                        dataModel.displayShortString,
                         style: TextStyle(
                           decoration: TextDecoration.none,
                           color: dataModel.color,

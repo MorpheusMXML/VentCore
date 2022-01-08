@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:uke_mlab/models/enums.dart';
+import 'package:uke_mlab/utilities/enums/sensor.dart';
+import 'package:uke_mlab/utilities/enums/boundary_state.dart';
 import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/models/model_manager.dart';
 
@@ -12,8 +13,9 @@ class DataModel extends GetxController {
   late final sensorEnum sensorKey;
 
   Color color = Colors.white;
-  String title = 'No Default Info';
-  String miniTitle = 'NoInfo';
+  String displayString = 'No Default Info';
+  String displayShortString = 'No Default';
+  String abbreviation = 'NoInfo';
 
   final RxInt upperAlarmBound = 0.obs;
   final RxInt lowerAlarmBound = 0.obs;

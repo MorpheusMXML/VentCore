@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 import 'package:uke_mlab/providers/start_screen_controller.dart';
-import 'package:uke_mlab/utilities/screen_controller.dart';
+import 'package:uke_mlab/providers/screen_controller.dart';
 
 class ControllerBindings extends Bindings {
   @override

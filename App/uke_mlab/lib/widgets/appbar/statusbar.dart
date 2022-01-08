@@ -23,7 +23,7 @@ class StatusBar extends StatelessWidget {
               systemState.alarmMessage.value,
               style: TextStyle(
                 color: systemState.alarmMessage.value == ''
-                    ? Colors.white
+                    ? Theme.of(context).dividerColor
                     : Colors.red,
                 decoration: TextDecoration.none,
               ),
@@ -36,8 +36,8 @@ class StatusBar extends StatelessWidget {
             systemState.patientType.toString() == 'patientTypeEnum.none'
                 ? ''
                 : systemState.patientType.name,
-            style: const TextStyle(
-              color: Colors.white,
+            style: TextStyle(
+              color: Theme.of(context).dividerColor,
               decoration: TextDecoration.none,
             ),
           ),
@@ -46,8 +46,8 @@ class StatusBar extends StatelessWidget {
           flex: 1,
           child: Text(
             DateFormat.Hm().format(DateTime.now()),
-            style: const TextStyle(
-              color: Colors.white,
+            style: TextStyle(
+              color: Theme.of(context).dividerColor,
               decoration: TextDecoration.none,
             ),
           ),

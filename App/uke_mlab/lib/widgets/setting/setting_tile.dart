@@ -15,10 +15,10 @@ class SettingTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color(0xFF25232A),
+      color: Theme.of(context).focusColor,
       padding: const EdgeInsets.all(8),
       child: Container(
-        color: const Color(0xFF2A2831),
+        color: Theme.of(context).cardColor,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [

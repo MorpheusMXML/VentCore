@@ -16,18 +16,8 @@ class AppTheme {
   final Color pawColor = const Color(0xFFEF5DA8);
   final Color tempColor = const Color(0xFFFF6482);
   final Color nibdColor = const Color(0xFFDC362E);
-
   final Color backgroundColor = const Color(0xFF1C1B1F);
   final Color appBar = const Color(0xFF1d192B);
-
-  // Graph
-  final Color graphBackgroundColor = const Color(0xFF2A2831);
-  final Color gridLineColor = const Color(0xFF49454F);
-  final MajorGridLines gridLineStyle =
-      const MajorGridLines(width: 1, color: Color(0xFF49454F));
-
-  // Value Tile
-  final Color valueTileBackgroundColor = const Color(0xFF2A2831);
 
   static ThemeData get darkTheme {
     return ThemeData(
@@ -37,6 +27,16 @@ class AppTheme {
       appBarTheme: const AppBarTheme(backgroundColor: Color(0xFF1D192B)),
       cardColor: const Color(0xFF2A2831),
       shadowColor: const Color(0xFF49454F),
+      focusColor: const Color(0xFF25232A),
+      dividerColor: const Color(0xFFFFFFFF),
+      toggleButtonsTheme: ToggleButtonsThemeData(
+        borderColor: Colors.grey[800],
+        borderWidth: 0.5,
+        selectedBorderColor: const Color(0xFFFFFFFF),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(25),
+        ),
+      ),
     );
   }
 
@@ -45,9 +45,19 @@ class AppTheme {
       brightness: Brightness.light,
       fontFamily: 'Jura',
       scaffoldBackgroundColor: Colors.amber[50],
-      appBarTheme: const AppBarTheme(backgroundColor: Color(0xFF1D192B)),
-      cardColor: const Color(0xFF2A2831),
-      shadowColor: const Color(0xFF49454F),
+      appBarTheme: AppBarTheme(backgroundColor: Colors.amber[400]),
+      cardColor: Colors.amber[100],
+      shadowColor: Colors.amber[200],
+      focusColor: Colors.amber[150],
+      dividerColor: const Color(0xFF000000),
+      toggleButtonsTheme: ToggleButtonsThemeData(
+        borderColor: Colors.grey[800],
+        borderWidth: 0.5,
+        selectedBorderColor: const Color(0xFF000000),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(25),
+        ),
+      ),
     );
   }
 }

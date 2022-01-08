@@ -17,7 +17,7 @@ class ValueBoxContainer extends StatelessWidget {
         style: ButtonStyle(
             shape: MaterialStateProperty.all(const RoundedRectangleBorder()),
             backgroundColor:
-                MaterialStateProperty.all(const Color(0xFF2A2831))),
+                MaterialStateProperty.all(Theme.of(context).cardColor)),
         onPressed: () => dataModel.tapped.toggle(),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -25,7 +25,7 @@ class ValueBoxContainer extends StatelessWidget {
           children: [
             // Top
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              Text(dataModel.miniTitle,
+              Text(dataModel.abbreviation,
                   style: TextStyle(color: dataModel.color)),
               Obx(() => Text(dataModel.upperAlarmBound.toString(),
                   style: TextStyle(color: dataModel.color)))

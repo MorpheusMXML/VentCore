@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
-import 'package:uke_mlab/models/enums.dart';
+import 'package:uke_mlab/utilities/enums/scenarios.dart';
+import 'package:uke_mlab/utilities/enums/patient_type.dart';
+import 'package:uke_mlab/utilities/enums/screen_status.dart';
 import 'package:uke_mlab/models/model.dart';
 import 'package:uke_mlab/models/model_manager.dart';
 import 'package:uke_mlab/models/system_state.dart';
@@ -57,7 +59,7 @@ class ScreenController {
         print("start Scenario 4 here");
         break;
       default:
-        throw Exception('No scenario for ' + scenario.toString() + ' known');
+        throw Exception('No scenario for ' + scenario.name + ' known');
     }
   }
 
