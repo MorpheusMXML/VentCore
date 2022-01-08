@@ -5,10 +5,12 @@ import 'package:uke_mlab/models/model.dart';
 import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/widgets/value_box/value_box_state.dart';
 
-// highest level widget that is always called when ValueBox is needed
-// --> initialize DataModel here and give attributes to children
-
 class ValueBoxTile extends StatelessWidget {
+  /// highest level widget that is always called when a ValueBox is needed
+  ///
+  /// [DataModel] is initialized here and attributes provided for children
+  /// Categorize ValueBox in "regular" and "withHeadline"
+  /// "withHeadline" uses [Flexible] to position a readable Headline onto the actual [ValueBoxTile]
   final sensorEnum sensor;
   final String type;
 

@@ -37,7 +37,7 @@ abstract class AbstractScenario {
   //to be implemented in respect to scenario
   Future<Map<sensorEnum, List<dynamic>>> loadData();
 
-  //maybe subject to deletion depending on future decisions
+  // TODO: Evaluate Deletion @Arne "maybe subject to deletion depending on future decisions"
   void updateData(sensorEnum sensor, double value) {
     Get.find<DataModel>(tag: sensor.toString()).updateValues(value);
   }

@@ -88,7 +88,9 @@ class DataModel extends GetxController {
           i++)
         i
     ];
-    List<int> removedIndexes = <int>[for (int i = 0; i <= 1; i++) i];
+    List<int> removedIndexes = <int>[
+      for (int i = 0; i <= valueList.length; i++) i
+    ];
 
     for (int i = 0; i < valueList.length; i++) {
       singleData.value =
@@ -103,11 +105,9 @@ class DataModel extends GetxController {
     }
 
     // update only added/removed indexes instead of the whole chart (efficient)
-    chartController?.updateDataSource(
-      addedDataIndexes: addedIndexes,
-      removedDataIndexes: removedIndexes,
-    );
-
+    chartController?.updateDataSource(updatedDataIndexes: [
+      for (int i = 0; i <= graphData.length - 1; i++) i
+    ]);
     // evaluates whether update violated alarm boundaries or returns into boundaries
     // write smarter?
     if (_systemState.violationStates[sensorKey] !=
@@ -132,7 +132,7 @@ class DataModel extends GetxController {
   //informs alarmController about change via call
   void informAlarmController(boundaryStateEnum boundaryState) {
     //TODO implement instead of just printing
-    // print('$sensorKey had boundary change to $boundaryState');
+    //print('$sensorKey had boundary change to $boundaryState');
     //requires information about own state
   }
 
