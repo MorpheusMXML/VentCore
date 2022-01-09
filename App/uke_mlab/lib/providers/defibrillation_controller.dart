@@ -1,9 +1,14 @@
 import 'package:get/get.dart';
 
 class DefibrillationController extends GetxController {
-  RxString selected = 'Auto'.obs;
+  RxString selectedDefiButton = 'Auto'.obs;
+  RxString selectedSynchronicityButton = 'Sync'.obs;
 
-  void setSelected(String name) {
-    selected.value = name;
+  void setSelectedDefiButton(String name) {
+    selectedDefiButton.value = name;
+  }
+
+  void setSelectedSynchronicityButton(String name) {
+    selectedSynchronicityButton.value = name;
   }
 }
