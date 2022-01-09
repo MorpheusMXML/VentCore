@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/defibrillation_controller.dart';
 
-class DefibrillationButton extends StatelessWidget {
+class SynchronicityButton extends StatelessWidget {
   final String name;
-  const DefibrillationButton.auto({
+  const SynchronicityButton.sync({
     Key? key,
-    this.name = 'Auto',
+    this.name = 'Sync',
   }) : super(key: key);
 
-  const DefibrillationButton.manual({
+  const SynchronicityButton.async({
     Key? key,
-    this.name = 'Manual',
+    this.name = 'Async',
   }) : super(key: key);
 
   @override
@@ -24,7 +24,7 @@ class DefibrillationButton extends StatelessWidget {
           margin: const EdgeInsets.all(8),
           child: Obx(() {
             ButtonStyle buttonStyle;
-            defibrillationController.selectedDefiButton.value != name
+            defibrillationController.selectedSynchronicityButton.value != name
                 ? buttonStyle = ElevatedButton.styleFrom(
                     primary: Theme.of(context).cardColor,
                     onPrimary: Theme.of(context).dividerColor)
@@ -36,9 +36,12 @@ class DefibrillationButton extends StatelessWidget {
             return ElevatedButton(
               style: buttonStyle,
               child: Text(name),
-              onPressed: defibrillationController.selectedDefiButton.value != name
-                  ? () => defibrillationController.setSelectedDefiButton(name)
-                  : null,
+              onPressed:
+                  defibrillationController.selectedSynchronicityButton.value !=
+                          name
+                      ? () => defibrillationController
+                          .setSelectedSynchronicityButton(name)
+                      : null,
             );
           })),
     );

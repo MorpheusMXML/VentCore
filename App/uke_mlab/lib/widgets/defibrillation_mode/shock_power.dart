@@ -7,17 +7,18 @@ class ShockPower extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Theme.of(context).shadowColor,
+      margin: const EdgeInsets.only(left: 8, right: 8),
       child: Row(
         children: const [
-          Flexible(
+          Expanded(
             flex: 3,
             child: Text("Shock Power"),
           ),
-          Flexible(
+          Expanded(
             flex: 2,
             child: Text("200"),
           ),
-          Flexible(
+          Expanded(
             flex: 1,
             child: Text("J"),
           )
