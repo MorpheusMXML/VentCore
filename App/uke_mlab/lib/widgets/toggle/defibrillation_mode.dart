@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:uke_mlab/widgets/defibrillation_mode/defibrilattion_button.dart';
+import 'package:uke_mlab/widgets/defibrillation_mode/defibrillation_button.dart';
 import 'package:uke_mlab/widgets/defibrillation_mode/shock_power.dart';
 import 'package:uke_mlab/widgets/defibrillation_mode/synchronicity_button.dart';
 import 'package:uke_mlab/widgets/toggle/toggle_mode_button.dart';
