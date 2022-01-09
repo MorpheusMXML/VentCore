@@ -1,13 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:uke_mlab/utilities/enums/sensor.dart';
+import 'package:uke_mlab/utilities/enums/boundary_state.dart';
+import 'package:uke_mlab/models/system_state.dart';
 
 class GraphAlarmMessage extends StatelessWidget {
-  const GraphAlarmMessage({Key? key}) : super(key: key);
+  final sensorEnum sensor;
+
+  const GraphAlarmMessage({
+    Key? key,
+    required this.sensor,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Text(
-      "ALARM MESSAGE",
-      style: TextStyle(color: Colors.white, fontSize: 20),
+    final SystemState systemState = Get.find<SystemState>();
+    var alarmType = systemState.violationStates[sensor] as boundaryStateEnum;
+
+    return Text(
+      '${alarmType.message}: ${sensor.displayString}',
+      style: const TextStyle(
+        color: Colors.white,
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+      ),
     );
   }
 }

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:uke_mlab/widgets/info/info_container.dart';
 import 'package:uke_mlab/widgets/setting/setting_container.dart';
 import 'package:uke_mlab/widgets/toggle/toggle_mode_button.dart';
-import 'package:uke_mlab/widgets/value_box/value_tile.dart';
-import 'package:uke_mlab/models/enums.dart';
+import 'package:uke_mlab/widgets/value_box/value_box_tile.dart';
+import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 class VentilationMode extends StatelessWidget {
   const VentilationMode({
@@ -33,8 +33,8 @@ class VentilationMode extends StatelessWidget {
           flex: 1,
           child: Row(
             children: const [
-              ValueTile(sensor: sensorEnum.mve),
-              ValueTile(sensor: sensorEnum.breathFrequency),
+              ValueBoxTile.withHeadline(sensor: sensorEnum.mve),
+              ValueBoxTile.withHeadline(sensor: sensorEnum.breathFrequency),
             ],
           ),
         ),
@@ -43,7 +43,7 @@ class VentilationMode extends StatelessWidget {
           child: Row(
             children: [
               Expanded(child: InfoContainer(data: infoData)),
-              const ValueTile(sensor: sensorEnum.breathFrequency),
+              const ValueBoxTile.withHeadline(sensor: sensorEnum.breathFrequency),
             ],
           ),
         ),

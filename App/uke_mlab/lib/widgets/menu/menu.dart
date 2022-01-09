@@ -10,7 +10,7 @@ class AppMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<String> routes = [
-      'Patient Settings',
+      'Start Screen',
       'Alarm Limit Screen',
       'Demo Screen',
     ];

@@ -29,7 +29,7 @@ class PatientTypeButton extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             minimumSize: Size(800 / MediaQuery.of(context).devicePixelRatio,
                 200 / MediaQuery.of(context).devicePixelRatio),
-            primary: startScreenController.selectedString.toString() == name
+            primary: startScreenController.selectedString.value == name
                 ? const Color(0xFF808B96)
                 : const Color(0xFFEEEEEE),
             onPrimary: Colors.black,

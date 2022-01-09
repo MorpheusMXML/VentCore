@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/providers/start_screen_controller.dart';
-import 'package:uke_mlab/utilities/screen_controller.dart';
+import 'package:uke_mlab/providers/screen_controller.dart';
 
 class ContinueButton extends StatelessWidget {
   const ContinueButton({
@@ -27,15 +26,9 @@ class ContinueButton extends StatelessWidget {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),
           ),
-          onPressed: startScreenController.selectedString.toString() != ''
-              ? () => Get.offNamed(
-                    screenController.changeScreen2(
-                        screenChangeButtonEnum.continueButton,
-                        startScreenController.selectedString.value),
-                    arguments: {
-                      'patientType': startScreenController.selectedString.value
-                    },
-                  )
+          onPressed: startScreenController.selectedString.value != ''
+              ? () => screenController
+                  .continueButton(startScreenController.selectedString.value)
               : null,
           child: const Text('Continue', style: TextStyle(fontSize: 20)),
         ),

@@ -6,7 +6,7 @@ class IPPVButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color(0xFF25232A),
+      color: Theme.of(context).cardColor,
       width: double.infinity,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(

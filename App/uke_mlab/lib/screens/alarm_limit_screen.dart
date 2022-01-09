@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:uke_mlab/models/enums.dart';
-import 'package:uke_mlab/widgets/value_box/value_tile.dart';
+import 'package:uke_mlab/utilities/enums/sensor.dart';
+import 'package:uke_mlab/widgets/demo_screen/exit_button.dart';
+import 'package:uke_mlab/widgets/value_box/value_box_tile.dart';
 
 class AlarmLimitScreen extends StatelessWidget {
   const AlarmLimitScreen({
@@ -9,12 +10,21 @@ class AlarmLimitScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 150,
-      child: Row(
-          children: sensorEnum.values
-              .map((sensor) => ValueTile(sensor: sensor))
-              .toList()),
+    return Column(
+      children: [
+        SizedBox(
+          height: 150,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: sensorEnum.values
+                .map((sensor) => ValueBoxTile(sensor: sensor))
+                .toList(),
+          ),
+        ),
+        const Spacer(),
+        // TODO: maybe new file?
+        const ExitButton()
+      ],
     );
   }
 }

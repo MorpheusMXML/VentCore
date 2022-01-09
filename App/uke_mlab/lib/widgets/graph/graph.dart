@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:uke_mlab/models/enums.dart';
+import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/models/model.dart';
 
 class Graph extends StatelessWidget {
@@ -14,7 +14,7 @@ class Graph extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
+    DataModel dataModel = Get.find<DataModel>(tag: sensor.name);
     return Obx(
       () => SfCartesianChart(
         backgroundColor: Theme.of(context).cardColor,

@@ -25,7 +25,7 @@ class GraphView extends StatelessWidget {
                 itemCount: systemState.graphList.length,
                 itemBuilder: (BuildContext context, int index) {
                   return GraphContainer(sensor: systemState.graphList[index]);
-                },
+                }, 
               ),
             ),
           ),
