@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:uke_mlab/widgets/defibrillation_mode/defibrilattion_button.dart';
+import 'package:uke_mlab/widgets/defibrillation_mode/shock_power.dart';
 import 'package:uke_mlab/widgets/toggle/toggle_mode_button.dart';
 
 class DefibrillationMode extends StatelessWidget {
@@ -8,6 +10,24 @@ class DefibrillationMode extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ToggleModeButton();
+    return Column(
+      children: [
+        Flexible(
+          flex: 1,
+          child: Row(
+            children: const [
+              DefibrillationButton.auto(),
+              DefibrillationButton.manual(),
+            ],
+          ),
+        ),
+        const Flexible(
+          flex: 1,
+          child: ShockPower(),
+        ),
+        const Spacer(flex: 2),
+        ToggleModeButton(),
+      ],
+    );
   }
 }
