@@ -39,14 +39,18 @@ class StandardScenario extends AbstractScenario {
 
       Timer.periodic(Duration(milliseconds: sensor.updateRate * 100), (timer) {
         var dataList = dataMap[sensor]!;
+        var dataListLength = dataList.length - 1;
+
+        var start = dataModel.singleData.value.counter % dataListLength;
+        var end = ((start + 100) % dataListLength) > start
+            ? (start + 100)
+            : dataListLength;
 
         if (!scenarioRunning) {
           timer.cancel();
         }
-        dataModel.updateValueList(dataList.sublist(
-            dataModel.singleData.value.counter % (dataList.length - 1),
-            (dataModel.singleData.value.counter + 100) %
-                (dataList.length - 1)));
+
+        dataModel.updateValueList(dataList.sublist(start, end));
       });
     }
   }

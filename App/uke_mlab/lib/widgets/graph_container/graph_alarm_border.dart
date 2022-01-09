@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/models/system_state.dart';
+import 'package:uke_mlab/utilities/enums/boundary_state.dart';
+import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 import 'package:uke_mlab/widgets/graph_container/alarm_confirm_button.dart';
 import 'package:uke_mlab/widgets/graph_container/graph_alarm_message.dart';
@@ -21,7 +22,7 @@ class GraphAlarmBorder extends StatelessWidget {
   Widget build(BuildContext context) {
     final SystemState systemState = Get.find<SystemState>();
     return Obx(() {
-      ///evaluate alarmTypes and see which Boundary is violated 
+      ///evaluate alarmTypes and see which Boundary is violated
       boundaryStateEnum? alarmType = systemState.violationStates[sensor];
       switch (alarmType) {
         case boundaryStateEnum.lowerBoundaryViolated:
