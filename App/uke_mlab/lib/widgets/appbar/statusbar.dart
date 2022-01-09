@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
 import 'package:intl/intl.dart';
+import 'package:uke_mlab/utilities/enums/patient_type.dart';
 
 class StatusBar extends StatelessWidget {
   const StatusBar({
@@ -33,9 +34,8 @@ class StatusBar extends StatelessWidget {
         Flexible(
           flex: 1,
           child: Text(
-            systemState.patientType.toString() == 'patientTypeEnum.none'
-                ? ''
-                : systemState.patientType.name,
+            // TODO: reset this value after scenario ends?
+            systemState.patientType.displayString,
             style: TextStyle(
               color: Theme.of(context).dividerColor,
               decoration: TextDecoration.none,
