@@ -134,11 +134,12 @@ extension SensorAttributes on sensorEnum {
     },
   };
 
-  get displayString => attributes[this]!['displayString'] as String;
-  get displayShortString => attributes[this]!['displayShortString'] as String;
-  get abbreviation => attributes[this]!['abbreviation'] as String;
-  get color => attributes[this]!['color'] as Color;
-  get updateRate => attributes[this]!['updateRate'] as int;
-  get lowerBound => attributes[this]!['lowerBound'] as Map<String, int>;
-  get upperBound => attributes[this]!['upperBound'] as Map<String, int>;
+  String get displayString => attributes[this]!['displayString'] as String;
+  String get displayShortString =>
+      attributes[this]!['displayShortString'] as String;
+  String get abbreviation => attributes[this]!['abbreviation'] as String;
+  Color get color => attributes[this]!['color'] as Color;
+  int get updateRate => attributes[this]!['updateRate'] as int;
+  Map get lowerBound => attributes[this]!['lowerBound'] as Map<String, int>;
+  Map get upperBound => attributes[this]!['upperBound'] as Map<String, int>;
 }
