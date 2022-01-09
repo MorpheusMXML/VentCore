@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 import 'package:uke_mlab/widgets/graph_container/graph_alarm_border.dart';
+=======
+import 'package:uke_mlab/models/enums.dart';
+
+import 'package:uke_mlab/widgets/graph_container/graph_alarm_border.dart';
+
+>>>>>>> 69bb643906e4966fe34c86b17a496a8763648e15
 import 'package:uke_mlab/widgets/graph_container/graph_row.dart';
 
 class GraphContainer extends StatelessWidget {
