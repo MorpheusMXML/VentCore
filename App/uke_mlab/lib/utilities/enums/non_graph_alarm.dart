@@ -65,7 +65,7 @@ extension NonGraphAlarmAttributes on nonGraphAlarmEnum {
       'message': 'SR à Puls check',
     },
     nonGraphAlarmEnum.cprFeedback: {
-      'message': 'SR à Puls check',
+      'message': 'CPR feedback',
     },
   };
 

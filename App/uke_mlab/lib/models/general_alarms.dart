@@ -26,6 +26,7 @@ class GeneralAlarms {
       }
     }
 
+    //TODO sort list does not work
     alarmList.toList().sort((a, b) => a.priority.compareTo(b.priority));
   }
 
