@@ -14,8 +14,7 @@ class GeneralAlarms {
   // only one alarm of each type can be present at the same time => remove if no longer in place!!!
   // the highest alarm priority persists if an alarm is added and one of the same type is already present
   void addAlarm(nonGraphAlarmEnum alarm, int priority) {
-    int index =
-        alarmList.toList().indexWhere((element) => element.alarm == alarm);
+    int index = alarmList.indexWhere((element) => element.alarm == alarm);
     if (index == -1) {
       //same as does not exist
       alarmList.add(AlarmListEntry(alarm: alarm, priority: priority));
@@ -26,14 +25,12 @@ class GeneralAlarms {
       }
     }
 
-    //TODO sort list does not work
-    alarmList.toList().sort((a, b) => a.priority.compareTo(b.priority));
+    alarmList.sort((a, b) => b.priority.compareTo(a.priority));
   }
 
   // if alarm of type nonGraphAlarmEnum does exist in List, it is removed from list
   void removeAlarm(nonGraphAlarmEnum alarm) {
-    int index =
-        alarmList.toList().indexWhere((element) => element.alarm == alarm);
+    int index = alarmList.indexWhere((element) => element.alarm == alarm);
     if (index != -1) {
       alarmList.removeAt(index);
     }
@@ -41,8 +38,7 @@ class GeneralAlarms {
 
   // checks whether an alarm of type nonGraphAlarmEnum is contained in List
   bool checkForAlarm(nonGraphAlarmEnum alarm) {
-    return alarmList.toList().indexWhere((element) => element.alarm == alarm) ==
-        -1;
+    return alarmList.indexWhere((element) => element.alarm == alarm) == -1;
   }
 }
 
