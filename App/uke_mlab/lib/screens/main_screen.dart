@@ -40,7 +40,7 @@ class MainScreen extends StatelessWidget {
         // Defibrillation
         else if (systemState.selectedToggleView[2]) {
           systemState.graphList.value = [
-            sensorEnum.heartFrequency,
+            sensorEnum.ecg,
             sensorEnum.co2,
             sensorEnum.nibd
           ];
@@ -52,7 +52,7 @@ class MainScreen extends StatelessWidget {
         // Monitoring
         else {
           systemState.graphList.value = [
-            sensorEnum.heartFrequency,
+            sensorEnum.ecg,
             sensorEnum.co2,
             sensorEnum.pulse
           ];
