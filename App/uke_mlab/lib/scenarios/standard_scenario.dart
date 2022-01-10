@@ -15,8 +15,8 @@ class StandardScenario extends AbstractScenario {
 
   //TODO: put into abstract class if we get values => use path as argument
   @override
-  Future<Map<sensorEnum, List<dynamic>>> loadData() async {
-    Map<sensorEnum, List<dynamic>> returnMap = {};
+  Future<Map<sensorEnum, Map<dynamic, dynamic>>> loadData() async {
+    Map<sensorEnum, Map<dynamic, dynamic>> returnMap = {};
     var jsonString = await rootBundle.loadString('assets/jsons/data.json');
     var source = await jsonDecode(jsonString.toString())["data"];
     returnMap = {
@@ -33,12 +33,12 @@ class StandardScenario extends AbstractScenario {
   }
 
   @override
-  void runScenario(Map<sensorEnum, List<dynamic>> dataMap) {
+  void runScenario(Map<sensorEnum, Map<dynamic, dynamic>> dataMap) {
     for (var sensor in sensorEnum.values) {
       DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
 
       Timer.periodic(Duration(milliseconds: sensor.updateRate * 100), (timer) {
-        var dataList = dataMap[sensor]!;
+        var dataList = dataMap[sensor]!['data'];
 
         if (!scenarioRunning) {
           timer.cancel();
