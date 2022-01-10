@@ -1,8 +1,19 @@
 import 'package:get/get.dart';
 
 class DefibrillationController extends GetxController {
+  RxString selectedImpedanceButton = 'Low'.obs;
   RxString selectedDefiButton = 'Auto'.obs;
   RxString selectedSynchronicityButton = 'Sync'.obs;
+
+  RxBool metronomeOn = false.obs;
+
+  void toggleMetronome(bool changed) {
+    metronomeOn.value = changed;
+  }
+
+  void setSelectedImpedanceButton(String name) {
+    selectedImpedanceButton.value = name;
+  }
 
   void setSelectedDefiButton(String name) {
     selectedDefiButton.value = name;

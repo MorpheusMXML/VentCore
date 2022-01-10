@@ -5,24 +5,26 @@ class ShockPower extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Theme.of(context).shadowColor,
-      margin: const EdgeInsets.only(left: 8, right: 8),
-      child: Row(
-        children: const [
-          Expanded(
-            flex: 3,
-            child: Text("Shock Power"),
-          ),
-          Expanded(
-            flex: 2,
-            child: Text("200"),
-          ),
-          Expanded(
-            flex: 1,
-            child: Text("J"),
-          )
-        ],
+    return Flexible(
+      child: Container(
+        color: Theme.of(context).shadowColor,
+        margin: const EdgeInsets.only(left: 8, right: 8),
+        child: Row(
+          children: const [
+            Expanded(
+              flex: 3,
+              child: Text("Shock Power"),
+            ),
+            Expanded(
+              flex: 2,
+              child: Text("200"),
+            ),
+            Expanded(
+              flex: 1,
+              child: Text("J"),
+            )
+          ],
+        ),
       ),
     );
   }
