@@ -23,7 +23,7 @@ class StandardScenario extends AbstractScenario {
       //TODO: numbers dont match sensors at the moment
       sensorEnum.breathFrequency: source[0]["data"],
       sensorEnum.co2: source[1]["data"],
-      sensorEnum.heartFrequency: source[8]["data"],
+      sensorEnum.ecg: source[8]["data"],
       sensorEnum.mve: source[3]["data"],
       sensorEnum.nibd: source[4]["data"],
       sensorEnum.pulse: source[5]["data"],
