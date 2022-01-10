@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:uke_mlab/scenarios/scenario_1.dart';
 import 'package:uke_mlab/utilities/enums/scenarios.dart';
 import 'package:uke_mlab/utilities/enums/patient_type.dart';
 import 'package:uke_mlab/utilities/enums/screen_status.dart';
@@ -41,7 +42,8 @@ class ScreenController {
         runningScenario!.startScenario();
         break;
       case scenariosEnum.scenario1:
-        print("start Scenario 1 here");
+        runningScenario = Scenario1();
+        runningScenario!.startScenario();
         break;
       case scenariosEnum.scenario2:
         print("start Scenario 2 here");
