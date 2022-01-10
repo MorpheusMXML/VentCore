@@ -8,7 +8,17 @@ enum sensorEnum {
   nibd,
   mve,
   co2,
-  ecg
+  ecg,
+  paw,
+  flow,
+  pleth,
+  hfAbsolute,
+  ecgCh1,
+  ecgCh2,
+  tempAbsolute,
+  nibdAbsolute,
+  spo2Absolute,
+  co2Absolute
   //TODO expand
 }
 
@@ -138,6 +148,186 @@ extension SensorAttributes on sensorEnum {
       'abbreviation': 'ECG Ch.2',
       'color': Color(0xFF4CAF50),
       'updateRate': 10,
+      'upperBound': {
+        'adult': 180,
+        'child': 140,
+        'infant': 120,
+      },
+      'lowerBound': {
+        'adult': 80,
+        'child': 90,
+        'infant': 100,
+      },
+    },
+    sensorEnum.paw: {
+      'displayString': 'ECG Channel 2',
+      'displayShortString': 'ECG Ch.2',
+      'abbreviation': 'ECG Ch.2',
+      'updateRate': 10,
+      'color': Color(0xFF4CAF50),
+      'upperBound': {
+        'adult': 180,
+        'child': 140,
+        'infant': 120,
+      },
+      'lowerBound': {
+        'adult': 80,
+        'child': 90,
+        'infant': 100,
+      },
+    },
+    sensorEnum.flow: {
+      'displayString': 'ECG Channel 2',
+      'displayShortString': 'ECG Ch.2',
+      'abbreviation': 'ECG Ch.2',
+      'updateRate': 10,
+      'color': Color(0xFF4CAF50),
+      'upperBound': {
+        'adult': 180,
+        'child': 140,
+        'infant': 120,
+      },
+      'lowerBound': {
+        'adult': 80,
+        'child': 90,
+        'infant': 100,
+      },
+    },
+    sensorEnum.pleth: {
+      'displayString': 'ECG Channel 2',
+      'displayShortString': 'ECG Ch.2',
+      'abbreviation': 'ECG Ch.2',
+      'updateRate': 10,
+      'color': Color(0xFF4CAF50),
+      'upperBound': {
+        'adult': 180,
+        'child': 140,
+        'infant': 120,
+      },
+      'lowerBound': {
+        'adult': 80,
+        'child': 90,
+        'infant': 100,
+      },
+    },
+    sensorEnum.hfAbsolute: {
+      'displayString': 'ECG Channel 2',
+      'displayShortString': 'ECG Ch.2',
+      'abbreviation': 'ECG Ch.2',
+      'updateRate': 10,
+      'color': Color(0xFF4CAF50),
+      'upperBound': {
+        'adult': 180,
+        'child': 140,
+        'infant': 120,
+      },
+      'lowerBound': {
+        'adult': 80,
+        'child': 90,
+        'infant': 100,
+      },
+    },
+    sensorEnum.ecgCh1: {
+      'displayString': 'ECG Channel 2',
+      'displayShortString': 'ECG Ch.2',
+      'abbreviation': 'ECG Ch.2',
+      'updateRate': 10,
+      'color': Color(0xFF4CAF50),
+      'upperBound': {
+        'adult': 180,
+        'child': 140,
+        'infant': 120,
+      },
+      'lowerBound': {
+        'adult': 80,
+        'child': 90,
+        'infant': 100,
+      },
+    },
+    sensorEnum.ecgCh2: {
+      'displayString': 'ECG Channel 2',
+      'displayShortString': 'ECG Ch.2',
+      'abbreviation': 'ECG Ch.2',
+      'updateRate': 10,
+      'color': Color(0xFF4CAF50),
+      'upperBound': {
+        'adult': 180,
+        'child': 140,
+        'infant': 120,
+      },
+      'lowerBound': {
+        'adult': 80,
+        'child': 90,
+        'infant': 100,
+      },
+    },
+    sensorEnum.tempAbsolute: {
+      'displayString': 'ECG Channel 2',
+      'displayShortString': 'ECG Ch.2',
+      'abbreviation': 'ECG Ch.2',
+      'updateRate': 10,
+      'color': Color(0xFF4CAF50),
+      'upperBound': {
+        'adult': 180,
+        'child': 140,
+        'infant': 120,
+      },
+      'lowerBound': {
+        'adult': 80,
+        'child': 90,
+        'infant': 100,
+      },
+    },
+    sensorEnum.nibdAbsolute: {
+      'displayString': 'ECG Channel 2',
+      'displayShortString': 'ECG Ch.2',
+      'abbreviation': 'ECG Ch.2',
+      'updateRate': 10,
+      'color': Color(0xFF4CAF50),
+      'upperBound': {
+        'adult': 180,
+        'child': 140,
+        'infant': 120,
+      },
+      'lowerBound': {
+        'adult': 80,
+        'child': 90,
+        'infant': 100,
+      },
+    },
+    sensorEnum.spo2Absolute: {
+      'displayString': 'ECG Channel 2',
+      'displayShortString': 'ECG Ch.2',
+      'abbreviation': 'ECG Ch.2',
+      'updateRate': 10,
+      'color': Color(0xFF4CAF50),
+      'upperBound': {
+        'adult': 180,
+        'child': 140,
+        'infant': 120,
+      },
+      'lowerBound': {
+        'adult': 80,
+        'child': 90,
+        'infant': 100,
+      },
+    },
+    sensorEnum.co2Absolute: {
+      'displayString': 'ECG Channel 2',
+      'displayShortString': 'ECG Ch.2',
+      'abbreviation': 'ECG Ch.2',
+      'updateRate': 10,
+      'color': Color(0xFF4CAF50),
+      'upperBound': {
+        'adult': 180,
+        'child': 140,
+        'infant': 120,
+      },
+      'lowerBound': {
+        'adult': 80,
+        'child': 90,
+        'infant': 100,
+      },
     },
   };
 
