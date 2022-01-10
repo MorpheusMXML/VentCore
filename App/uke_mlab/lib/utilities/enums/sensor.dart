@@ -7,7 +7,8 @@ enum sensorEnum {
   breathFrequency,
   nibd,
   mve,
-  co2
+  co2,
+  ecg
   //TODO expand
 }
 
@@ -131,6 +132,13 @@ extension SensorAttributes on sensorEnum {
         'child': 90,
         'infant': 100,
       },
+    },
+    sensorEnum.ecg: {
+      'displayString': 'ECG Channel 2',
+      'displayShortString': 'ECG Ch.2',
+      'abbreviation': 'ECG Ch.2',
+      'color': Color(0xFF4CAF50),
+      'updateRate': 10,
     },
   };
 
