@@ -13,18 +13,19 @@ abstract class AbstractScenario {
 
   void startScenario() {
     scenarioRunning = true;
+    print("scenario gestartet");
     loadData().then((dataMap) => runScenario(dataMap));
   }
 
   //to be overwritten, behaviour depending on concrete scenario
-  void runScenario(Map<sensorEnum, List<dynamic>> dataMap);
+  void runScenario(Map<sensorEnum, Map<dynamic, dynamic>> dataMap);
 
   void stopScenario() {
     scenarioRunning = false;
   }
 
   //to be implemented in respect to scenario
-  Future<Map<sensorEnum, List<dynamic>>> loadData();
+  Future<Map<sensorEnum, Map<dynamic, dynamic>>> loadData();
 
   //maybe subject to deletion depending on future decisions
   void updateData(sensorEnum sensor, double value) {
