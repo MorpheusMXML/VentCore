@@ -53,4 +53,11 @@ class AlarmListEntry {
     required this.alarm,
     required this.priority,
   });
+
+  Color toColor() {
+    if (priority > 50) {
+      return Colors.red;
+    }
+    return Colors.yellow;
+  }
 }
