@@ -19,16 +19,15 @@ extension SensorAttributes on sensorEnum {
       'displayShortString': 'Heart Freq.',
       'abbreviation': 'HF',
       'color': Color(0xFF4CAF50),
-      'updateRate': 10,
       'upperBound': {
-        'adult': 170,
-        'child': 130,
-        'infant': 110,
+        'adult': 120,
+        'child': 125,
+        'infant': 135,
       },
       'lowerBound': {
         'adult': 70,
         'child': 80,
-        'infant': 90,
+        'infant': 100,
       },
     },
     sensorEnum.breathFrequency: {
