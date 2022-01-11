@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
-import 'package:intl/intl.dart';
 import 'package:uke_mlab/widgets/appbar/alarm_expansion_tile.dart';
 
 import 'alarm_counter_tile.dart';
@@ -43,16 +42,6 @@ class StatusBar extends StatelessWidget {
             systemState.patientType.toString() == 'patientTypeEnum.none'
                 ? ''
                 : systemState.patientType.name,
-            style: TextStyle(
-              color: Theme.of(context).dividerColor,
-              decoration: TextDecoration.none,
-            ),
-          ),
-        ),
-        Flexible(
-          flex: 1,
-          child: Text(
-            DateFormat.Hm().format(DateTime.now()),
             style: TextStyle(
               color: Theme.of(context).dividerColor,
               decoration: TextDecoration.none,
