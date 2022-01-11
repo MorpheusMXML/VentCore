@@ -5,7 +5,10 @@ import 'package:uke_mlab/models/system_state.dart';
 import 'package:intl/intl.dart';
 import 'package:uke_mlab/widgets/appbar/alarm_expansion_tile.dart';
 
+import 'alarm_counter_tile.dart';
+
 class StatusBar extends StatelessWidget {
+  /// constructs the status bar for usage over the whole project
   const StatusBar({
     Key? key,
   }) : super(key: key);
@@ -17,10 +20,23 @@ class StatusBar extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Flexible(
-          flex: 5,
-          child: AlarmExpansionTile(),
-        ),
+        Flexible(
+            flex: 7,
+            fit: FlexFit.loose,
+            child: Row(
+              children: const [
+                Flexible(
+                  flex: 5,
+                  fit: FlexFit.tight,
+                  child: AlarmExpansionTile(),
+                ),
+                Flexible(
+                  flex: 2,
+                  fit: FlexFit.loose,
+                  child: AlarmCounterTile(),
+                ),
+              ],
+            )),
         Flexible(
           flex: 1,
           child: Text(
