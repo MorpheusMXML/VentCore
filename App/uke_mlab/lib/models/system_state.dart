@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:uke_mlab/models/general_alarms.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/utilities/enums/boundary_state.dart';
 import 'package:uke_mlab/utilities/enums/screen_status.dart';
@@ -24,7 +25,7 @@ class SystemState {
     'PEEP': 60.obs
   };
 
-  RxString alarmMessage = ''.obs;
+  final GeneralAlarms generalAlarms = GeneralAlarms();
 
   void updateIPPVValue(String name, int value) {
     ippvValues[name]!.value = ippvValues[name]!.value + value;
