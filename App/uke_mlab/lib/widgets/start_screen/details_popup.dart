@@ -17,14 +17,18 @@ class DetailsPopup extends StatelessWidget {
       () => startScreenController.isPopupVisible.value
           ? Container(
               margin: const EdgeInsets.fromLTRB(0, 22, 65, 12),
-              color: const Color(0xff25232a),
+              color: Theme.of(context).focusColor,
               child: Column(
                 children: [
                   const PopupNameField(),
                   PopupSlider(
-                      name: 'Weight', unit: "kg", value: startScreenController.weightValue),
+                      name: 'Weight',
+                      unit: 'kg',
+                      value: startScreenController.weightValue),
                   PopupSlider(
-                      name: 'Height', unit: "cm", value: startScreenController.heightValue),
+                      name: 'Height',
+                      unit: 'cm',
+                      value: startScreenController.heightValue),
                 ],
               ),
             )
