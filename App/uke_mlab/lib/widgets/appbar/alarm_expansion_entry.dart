@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:uke_mlab/utilities/enums/non_graph_alarm.dart';
 
 class AlarmExpansionEntry extends StatelessWidget {
+  /// describes an entry for the possible dropDownButton menu in [AlarmExpansionTile]
   final AlarmListEntry data;
   const AlarmExpansionEntry({
     Key? key,

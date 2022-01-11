@@ -42,10 +42,6 @@ class MyApp extends StatelessWidget {
     // svgs are loaded and screens are given bindings?
     final AlarmController alarmController =
         Get.put(AlarmController(modelManager));
-
-    systemState.generalAlarms.addAlarm(nonGraphAlarmEnum.ekgArtifact, 90);
-    systemState.generalAlarms.addAlarm(nonGraphAlarmEnum.cprFeedback, 0);
-    systemState.generalAlarms.addAlarm(nonGraphAlarmEnum.o2empty, 80);
   }
 
   @override

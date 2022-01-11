@@ -20,22 +20,26 @@ class StatusBar extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Flexible(
-            flex: 7,
-            fit: FlexFit.loose,
-            child: Row(
-              children: const [
-                Flexible(
-                  flex: 5,
-                  fit: FlexFit.tight,
-                  child: AlarmExpansionTile(),
-                ),
-                Flexible(
-                  flex: 2,
-                  fit: FlexFit.loose,
-                  child: AlarmCounterTile(),
-                ),
-              ],
-            )),
+          flex: 7,
+          fit: FlexFit.loose,
+          child: Row(
+            children: const [
+              //DropDown Menu (AlarmExpansionTile)
+              Flexible(
+                flex: 5,
+                fit: FlexFit.tight,
+                child: AlarmExpansionTile(),
+              ),
+              //Info about Alarm amount (AlarmCounterTile)
+              Flexible(
+                flex: 2,
+                fit: FlexFit.loose,
+                child: AlarmCounterTile(),
+              ),
+            ],
+          ),
+        ),
+        // PatientType display
         Flexible(
           flex: 1,
           child: Text(
@@ -48,10 +52,13 @@ class StatusBar extends StatelessWidget {
             ),
           ),
         ),
+        // O2 bottly display
         Flexible(
           flex: 1,
-          child: SvgPicture.asset('assets/icons/OxygenBottle.svg', height: 20),
-        )
+          child: Center(
+              child: SvgPicture.asset('assets/icons/OxygenBottle.svg',
+                  height: 20)),
+        ),
       ],
     );
   }

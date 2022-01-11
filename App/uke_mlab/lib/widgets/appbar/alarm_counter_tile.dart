@@ -11,43 +11,37 @@ class AlarmCounterTile extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemState systemState = Get.find<SystemState>();
     const double fSize = 25;
+    String alarmText = systemState.generalAlarms.alarmList.length.toString();
+
     return Obx(
       () {
         switch (systemState.generalAlarms.alarmList.length) {
           case 0:
             return Container();
           case 1:
-            return Container(
-              height: 50,
-              margin: const EdgeInsets.only(left: 5),
-              color: systemState.generalAlarms.alarmList[0].toColor(),
-              child: Center(
-                child: Text(
-                  '${systemState.generalAlarms.alarmList.length} general Alarm',
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: fSize,
-                  ),
-                ),
-              ),
-            );
+            alarmText = alarmText + " general Alarm";
+            break;
           default:
-            return Container(
-              height: 50,
-              margin: const EdgeInsets.only(left: 5),
-              color: systemState.generalAlarms.alarmList[0].toColor(),
-              child: Center(
-                child: Text(
-                  '${systemState.generalAlarms.alarmList.length} general Alarms',
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: fSize,
-                  ),
-                ),
-              ),
-            );
+            alarmText = alarmText + " general Alarms";
         }
+        return Container(
+          height: 50,
+          margin: const EdgeInsets.only(left: 5),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(7),
+            color: systemState.generalAlarms.alarmList[0].toColor(),
+          ),
+          child: Center(
+            child: Text(
+              alarmText,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: Colors.black,
+                fontSize: fSize,
+              ),
+            ),
+          ),
+        );
       },
     );
   }

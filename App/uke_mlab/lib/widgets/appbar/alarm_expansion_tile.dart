@@ -18,12 +18,16 @@ class AlarmExpansionTile extends StatelessWidget {
           ? Container()
           : Container(
               height: 50,
-              color: systemState.generalAlarms.alarmList[0].toColor(),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(7),
+                color: systemState.generalAlarms.alarmList[0].toColor(),
+              ),
               child: DropdownButtonHideUnderline(
                 child: ButtonTheme(
                   alignedDropdown: true,
                   child: DropdownButton<dynamic>(
                     isExpanded: true,
+                    borderRadius: BorderRadius.circular(7),
                     hint: AlarmExpansionEntry(
                         data: systemState.generalAlarms.alarmList[0]),
                     value: null,
@@ -41,7 +45,10 @@ class AlarmExpansionTile extends StatelessWidget {
                           value: value,
                           child: Container(
                             margin: const EdgeInsets.only(top: 4),
-                            color: value.toColor(),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(7),
+                              color: value.toColor(),
+                            ),
                             child: AlarmExpansionEntry(data: value),
                           ),
                         );
