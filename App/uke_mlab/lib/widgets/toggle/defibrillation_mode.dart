@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uke_mlab/widgets/defibrillation_mode/defibrillation_container.dart';
 import 'package:uke_mlab/widgets/defibrillation_mode/impedance_container.dart';
+import 'package:uke_mlab/widgets/defibrillation_mode/load_button.dart';
 import 'package:uke_mlab/widgets/defibrillation_mode/metronome_container.dart';
 import 'package:uke_mlab/widgets/defibrillation_mode/shock_power.dart';
 import 'package:uke_mlab/widgets/defibrillation_mode/sync_container.dart';
@@ -15,12 +16,22 @@ class DefibrillationMode extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const MetronomeContainer(),
         const DefibrillationContainer(),
         const ShockPower(),
-        const ImpedanceContainer(),
-        const SyncContainer(),
-        const Spacer(flex: 2),
+        Flexible(
+          child: Row(
+            children: [
+              Flexible(
+                child: Column(children: const [
+                  MetronomeContainer(),
+                  ImpedanceContainer(),
+                  SyncContainer(),
+                ]),
+              ),
+              const LoadButton(),
+            ],
+          ),
+        ),
         ToggleModeButton(),
       ],
     );
