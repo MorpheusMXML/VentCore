@@ -10,7 +10,6 @@ abstract class AbstractScenario {
 
   void startScenario() {
     scenarioRunning = true;
-    print("scenario gestartet");
     loadData().then((dataMap) => runScenario(dataMap));
   }
 
