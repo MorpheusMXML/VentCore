@@ -28,8 +28,6 @@ class Scenario1 extends AbstractScenario {
       Map<dynamic, dynamic> info = currentChannel['channel_information'];
 
       for (int j = 0; j < sensorEnum.values.length; j++) {
-        print(sensorEnum.values[j]);
-        print(info['enum_identifier']);
         //TODO: differentiate between graph and absolute?
         if (sensorEnum.values[j].name == info['enum_identifier']) {
           key = sensorEnum.values[j];
