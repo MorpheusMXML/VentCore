@@ -27,6 +27,9 @@ class AlarmExpansionTile extends StatelessWidget {
                     hint: AlarmExpansionEntry(
                         data: systemState.generalAlarms.alarmList[0]),
                     value: null,
+                    icon: systemState.generalAlarms.alarmList.length == 1
+                        ? Container()
+                        : const Icon(Icons.arrow_drop_down),
                     onChanged: systemState.generalAlarms.alarmList.length == 1
                         ? null
                         : (value) {},
