@@ -17,8 +17,7 @@ class Scenario1 extends AbstractScenario {
   Future<Map<sensorEnum, Map<String, dynamic>>> loadData() async {
     Map<sensorEnum, Map<String, dynamic>> returnMap = {};
 
-    var jsonString =
-        await rootBundle.loadString('assets/jsons/standard_scenario.json');
+    var jsonString = await rootBundle.loadString('assets/jsons/standard_scenario.json');
     var channelList = await jsonDecode(jsonString.toString())["channel_list"];
 
     for (int i = 0; i < channelList.length; i++) {
@@ -44,13 +43,9 @@ class Scenario1 extends AbstractScenario {
     for (var sensor in dataMap.keys) {
       DataModel dataModel = Get.find<DataModel>(tag: sensor.name);
       int batchSize = 1;
-      double resolution = dataMap[sensor]!['channel_information']['resolution']
-              ['value']
-          .toDouble();
+      double resolution = dataMap[sensor]!['channel_information']['resolution']['value'].toDouble();
 
-      Timer.periodic(
-          calculateUpdateRate(batchSize: batchSize, resolution: resolution),
-          (timer) {
+      Timer.periodic(calculateUpdateRate(batchSize: batchSize, resolution: resolution), (timer) {
         var dataList = dataMap[sensor]!['data'];
         var dataListLength = dataList.length;
 
@@ -58,14 +53,12 @@ class Scenario1 extends AbstractScenario {
           timer.cancel();
         }
         dataModel.updateValueList(dataList.sublist(
-            dataModel.singleData.value.counter % (dataListLength - 1),
-            (dataModel.singleData.value.counter + batchSize) %
-                (dataListLength - 1)));
+            dataModel.singleData.value.counter % (dataListLength - 1), (dataModel.singleData.value.counter + batchSize) % (dataListLength - 1)));
       });
     }
   }
 
-  /// Calculates the update rate using [batchSize] and [batchSize] and returns a [Duration] in milliseconds.
+  /// Calculates the update rate using [batchSize] and [resolution] and returns a [Duration] in milliseconds.
   ///
   /// Where [batchSize] is the amount of values to be updated in one go and
   /// [resolution] is the frequency in Hz that the data is recorded in.
@@ -73,8 +66,7 @@ class Scenario1 extends AbstractScenario {
   /// ```dart
   /// int millisTillNextBatch = ((1 / resolution) * 1000) * batchSize;
   /// ```
-  Duration calculateUpdateRate(
-      {required int batchSize, required double resolution}) {
+  Duration calculateUpdateRate({required int batchSize, required double resolution}) {
     int millisTillNextDatapoint = ((1 / resolution) * 1000).toInt();
     int millisTillNextBatch = millisTillNextDatapoint * batchSize;
     return Duration(milliseconds: millisTillNextBatch);
