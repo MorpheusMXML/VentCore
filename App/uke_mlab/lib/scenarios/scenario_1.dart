@@ -14,15 +14,15 @@ class Scenario1 extends AbstractScenario {
   }) : super();
 
   @override
-  Future<Map<sensorEnum, Map<dynamic, dynamic>>> loadData() async {
-    Map<sensorEnum, Map<dynamic, dynamic>> returnMap = {};
+  Future<Map<sensorEnum, Map<String, dynamic>>> loadData() async {
+    Map<sensorEnum, Map<String, dynamic>> returnMap = {};
 
     var jsonString =
         await rootBundle.loadString('assets/jsons/standard_scenario.json');
     var channelList = await jsonDecode(jsonString.toString())["channel_list"];
 
     for (int i = 0; i < channelList.length; i++) {
-      var currentChannel = channelList[i];
+      Map<String, dynamic> currentChannel = channelList[i];
       //intermediate key, breathFreq. will be overidden
       sensorEnum key = sensorEnum.breathFrequency;
       Map<dynamic, dynamic> info = currentChannel['channel_information'];
@@ -40,30 +40,43 @@ class Scenario1 extends AbstractScenario {
   }
 
   @override
-  void runScenario(Map<sensorEnum, Map<dynamic, dynamic>> dataMap) {
+  void runScenario(Map<sensorEnum, Map<String, dynamic>> dataMap) {
     for (var sensor in dataMap.keys) {
       DataModel dataModel = Get.find<DataModel>(tag: sensor.name);
+      int batchSize = 1;
+      double resolution = dataMap[sensor]!['channel_information']['resolution']
+              ['value']
+          .toDouble();
 
-      var impulseach =
-          (1 / dataMap[sensor]!['channel_information']['resolution']['value']);
-      Duration duration;
-
-      if (impulseach < 1) {
-        duration = Duration(milliseconds: (impulseach * 1000).toInt());
-      } else {
-        duration = Duration(seconds: impulseach.toInt());
-      }
-
-      Timer.periodic(duration, (timer) {
+      Timer.periodic(
+          calculateUpdateRate(batchSize: batchSize, resolution: resolution),
+          (timer) {
         var dataList = dataMap[sensor]!['data'];
+        var dataListLength = dataList.length;
 
         if (!scenarioRunning) {
           timer.cancel();
         }
         dataModel.updateValueList(dataList.sublist(
-            dataModel.singleData.value.counter % (dataList.length - 1),
-            (dataModel.singleData.value.counter + 1) % (dataList.length - 1)));
+            dataModel.singleData.value.counter % (dataListLength - 1),
+            (dataModel.singleData.value.counter + batchSize) %
+                (dataListLength - 1)));
       });
     }
+  }
+
+  /// Calculates the update rate using [batchSize] and [batchSize] and returns a [Duration] in milliseconds.
+  ///
+  /// Where [batchSize] is the amount of values to be updated in one go and
+  /// [resolution] is the frequency in Hz that the data is recorded in.
+  /// For example 500Hz [resolution] means we have 500 datapoints a second.
+  /// ```dart
+  /// int millisTillNextBatch = ((1 / resolution) * 1000) * batchSize;
+  /// ```
+  Duration calculateUpdateRate(
+      {required int batchSize, required double resolution}) {
+    int millisTillNextDatapoint = ((1 / resolution) * 1000).toInt();
+    int millisTillNextBatch = millisTillNextDatapoint * batchSize;
+    return Duration(milliseconds: millisTillNextBatch);
   }
 }
