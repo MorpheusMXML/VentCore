@@ -21,5 +21,5 @@ extension BoundaryAttributes on boundaryStateEnum {
     },
   };
 
-  get message => attributes[this]!['message'] as String;
+  String get message => attributes[this]!['message'] as String;
 }
