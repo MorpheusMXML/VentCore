@@ -14,14 +14,14 @@ abstract class AbstractScenario {
   }
 
   //to be overwritten, behaviour depending on concrete scenario
-  void runScenario(Map<sensorEnum, Map<dynamic, dynamic>> dataMap);
+  void runScenario(Map<sensorEnum, Map<String, dynamic>> dataMap);
 
   void stopScenario() {
     scenarioRunning = false;
   }
 
   //to be implemented in respect to scenario
-  Future<Map<sensorEnum, Map<dynamic, dynamic>>> loadData();
+  Future<Map<sensorEnum, Map<String, dynamic>>> loadData();
 
   // TODO: Evaluate Deletion @Arne "maybe subject to deletion depending on future decisions"
   void updateData(sensorEnum sensor, double value) {
