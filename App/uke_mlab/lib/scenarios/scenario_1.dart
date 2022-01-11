@@ -42,15 +42,14 @@ class Scenario1 extends AbstractScenario {
   @override
   void runScenario(Map<sensorEnum, Map<dynamic, dynamic>> dataMap) {
     for (var sensor in dataMap.keys) {
-      // why sensor.toString() and not sensor.name -> problem?
-      DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
+      DataModel dataModel = Get.find<DataModel>(tag: sensor.name);
 
       var impulseach =
           (1 / dataMap[sensor]!['channel_information']['resolution']['value']);
       Duration duration;
 
       if (impulseach < 1) {
-        duration = Duration(milliseconds: (impulseach * 100).toInt());
+        duration = Duration(milliseconds: (impulseach * 1000).toInt());
       } else {
         duration = Duration(seconds: impulseach.toInt());
       }
@@ -61,11 +60,9 @@ class Scenario1 extends AbstractScenario {
         if (!scenarioRunning) {
           timer.cancel();
         }
-        //TODO: understand what happens here
         dataModel.updateValueList(dataList.sublist(
             dataModel.singleData.value.counter % (dataList.length - 1),
-            (dataModel.singleData.value.counter + 100) %
-                (dataList.length - 1)));
+            (dataModel.singleData.value.counter + 1) % (dataList.length - 1)));
       });
     }
   }
