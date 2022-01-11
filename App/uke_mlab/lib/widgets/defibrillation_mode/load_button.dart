@@ -12,8 +12,10 @@ class LoadButton extends StatelessWidget {
         Get.find<DefibrillationController>();
 
     return Obx(
-      () => defibrillationController.loaded.value
-          ? ElevatedButton(
+      () {
+        switch (defibrillationController.loaded.value) {
+          case 'Loaded':
+            return ElevatedButton(
               style: ElevatedButton.styleFrom(
                 primary: Theme.of(context).shadowColor,
                 onPrimary: Colors.green,
@@ -21,7 +23,7 @@ class LoadButton extends StatelessWidget {
                   color: Colors.green,
                 ),
               ),
-              onPressed: () => defibrillationController.toggleLoaded(),
+              onPressed: () => defibrillationController.toggleLoaded('Shock'),
               child: Column(
                 children: [
                   Flexible(
@@ -37,13 +39,40 @@ class LoadButton extends StatelessWidget {
                   ),
                 ],
               ),
-            )
-          : ElevatedButton(
+            );
+          case 'Loading':
+            return ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Theme.of(context).shadowColor,
+                onPrimary: Colors.green,
+                side: const BorderSide(
+                  color: Colors.green,
+                ),
+              ),
+              onPressed: () => defibrillationController.toggleLoaded('Shock'),
+              child: Column(
+                children: [
+                  Flexible(
+                    flex: 3,
+                    child: Container(
+                      child: SvgPicture.asset('assets/icons/Battery.svg'),
+                      padding: const EdgeInsets.all(8),
+                    ),
+                  ),
+                  const Flexible(
+                    flex: 1,
+                    child: Text('Loading...'),
+                  ),
+                ],
+              ),
+            );
+          case 'Shock':
+            return ElevatedButton(
               style: ElevatedButton.styleFrom(
                   primary: Colors.red,
                   onPrimary: Colors.black,
                   side: const BorderSide(color: Colors.white)),
-              onPressed: () => defibrillationController.toggleLoaded(),
+              onPressed: () => defibrillationController.toggleLoaded('Loaded'),
               child: Column(
                 children: [
                   Flexible(
@@ -59,7 +88,11 @@ class LoadButton extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
+            );
+          default:
+            return const Text('Error');
+        }
+      },
     );
   }
 }
