@@ -6,6 +6,11 @@ class DefibrillationController extends GetxController {
   RxString selectedSynchronicityButton = 'Sync'.obs;
 
   RxBool metronomeOn = false.obs;
+  RxBool loaded = true.obs;
+
+  void toggleLoaded() {
+    loaded.toggle();
+  }
 
   void toggleMetronome(bool changed) {
     metronomeOn.value = changed;
