@@ -90,6 +90,7 @@ class LoadButton extends StatelessWidget {
               ),
             );
           default:
+            // TODO; Return Error widget here?
             return const Text('Error');
         }
       },
