@@ -15,6 +15,7 @@ class AlarmLimitScreen extends StatelessWidget {
         SizedBox(
           height: 150,
           child: Row(
+<<<<<<< HEAD
             mainAxisAlignment: MainAxisAlignment.center,
             children: sensorEnum.values
                 .map((sensor) => ValueBoxTile(sensor: sensor))
@@ -23,8 +24,28 @@ class AlarmLimitScreen extends StatelessWidget {
         ),
         const Spacer(),
         // TODO: maybe new file?
+=======
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: getBoxes()),
+        ),
+        // TODO: Display bottom right, maybe new file?
+        const Spacer(),
+>>>>>>> issue-94
         const ExitButton()
       ],
     );
   }
+<<<<<<< HEAD
+=======
+
+  List<Widget> getBoxes() {
+    List<Widget> widgets = [];
+
+    for (var i = 0; i < sensorEnum.values.length; i++) {
+      widgets.add(ValueBoxTile(sensor: sensorEnum.values[i]));
+    }
+
+    return widgets;
+  }
+>>>>>>> issue-94
 }
