@@ -23,8 +23,7 @@ class AlarmCounterTile extends StatelessWidget {
               color: systemState.generalAlarms.alarmList[0].toColor(),
               child: Center(
                 child: Text(
-                  systemState.generalAlarms.alarmList.length.toString() +
-                      " general Alarm",
+                  '${systemState.generalAlarms.alarmList.length} general Alarm',
                   style: const TextStyle(
                     color: Colors.black,
                     fontSize: fSize,
@@ -39,8 +38,7 @@ class AlarmCounterTile extends StatelessWidget {
               color: systemState.generalAlarms.alarmList[0].toColor(),
               child: Center(
                 child: Text(
-                  systemState.generalAlarms.alarmList.length.toString() +
-                      " general Alarms",
+                  '${systemState.generalAlarms.alarmList.length} general Alarms',
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     color: Colors.black,
