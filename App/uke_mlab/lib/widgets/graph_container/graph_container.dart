@@ -10,7 +10,7 @@ class GraphContainer extends StatelessWidget {
   ///
   /// Includes standard sizes i.e. [ConstrainedBox] as a Container
   /// Uses a Stack to divide [GraphAlarmBorder] and the [GraphRow]
-  final sensorEnum sensor;
+  final sensorEnumGraph sensor;
 
   const GraphContainer({
     Key? key,
@@ -23,9 +23,7 @@ class GraphContainer extends StatelessWidget {
       constraints: const BoxConstraints(maxHeight: 200),
       child: Stack(
         children: [
-          GraphAlarmBorder(
-            sensor: sensor,
-          ),
+          evaluateGraphAlarmBorder(),
           Container(
             margin: const EdgeInsets.only(top: 10.0),
             padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
@@ -36,5 +34,16 @@ class GraphContainer extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  /// evaluates whether the corresponding graph can throw errors with our mocked data, if not => set a container as background
+  Widget evaluateGraphAlarmBorder() {
+    if (SensorMapping.sensorMap[sensor] == null) {
+      return Container();
+    } else {
+      return GraphAlarmBorder(
+        sensor: SensorMapping.sensorMap[sensor] as sensorEnumAbsolute,
+      );
+    }
   }
 }

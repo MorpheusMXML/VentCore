@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uke_mlab/models/model.dart';
+import 'package:uke_mlab/models/model_absolute.dart';
 
 class ValueBoxContainer extends StatelessWidget {
-  final DataModel dataModel;
+  final DataModelAbsolute dataModel;
   const ValueBoxContainer({
     Key? key,
     required this.dataModel,
@@ -32,7 +32,7 @@ class ValueBoxContainer extends StatelessWidget {
             ]),
 
             // Middle
-            Obx(() => Text(dataModel.singleData.value.value.toInt().toString(),
+            Obx(() => Text(dataModel.absoluteValue.value.toInt().toString(),
                 style: TextStyle(color: dataModel.color, fontSize: 50.0))),
 
             // Bottom

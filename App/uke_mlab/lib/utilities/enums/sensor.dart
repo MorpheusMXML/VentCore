@@ -14,9 +14,26 @@ enum sensorEnumGraph {
 enum sensorEnumAbsolute {
   hfAbsolute, // heartfrequency
   tempAbsolute, // temprerature in °C
-  nibdAbsolute,
   spo2Absolute,
-  co2Absolute
+  co2Absolute,
+  // pulse,
+  // mve
+}
+
+enum sensorEnumNibd {
+  nibdAbsolute,
+}
+
+class SensorMapping {
+  static const Map<sensorEnumGraph, sensorEnumAbsolute?> sensorMap = {
+    sensorEnumGraph.paw: null,
+    sensorEnumGraph.flow: null,
+    sensorEnumGraph.co2: sensorEnumAbsolute.co2Absolute,
+    sensorEnumGraph.pleth: sensorEnumAbsolute.spo2Absolute,
+    sensorEnumGraph.ecgCh1: sensorEnumAbsolute.hfAbsolute,
+    sensorEnumGraph.ecgCh2: sensorEnumAbsolute.hfAbsolute,
+    sensorEnumGraph.cpr: null,
+  };
 }
 
 extension SensorGraphAttributes on sensorEnumGraph {
@@ -68,7 +85,7 @@ extension SensorGraphAttributes on sensorEnumGraph {
   String get graphTitle => attributes[this]!['graphTitle'] as String;
   String get yAxisUnit => attributes[this]!['yAxisUnit'] as String;
   String get xAxisUnit => attributes[this]!['xAxisUnit'] as String;
-  Color get graphColor => attributes[this]!['color'] as Color;
+  Color get color => attributes[this]!['color'] as Color;
 }
 
 extension SensorAbsoluteAttributes on sensorEnumAbsolute {
@@ -97,33 +114,14 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
       'unit': '°C',
       'color': AppTheme.tempColor,
       'upperBound': {
-        'adult': 37.4,
-        'child': 37.4,
-        'infant': 37.4,
+        'adult': 37, // 'adult': 37.4,
+        'child': 37, // 'child': 37.4,
+        'infant': 37, // 'infant': 37.4
       },
       'lowerBound': {
-        'adult': 36.5,
-        'child': 36.5,
-        'infant': 36.5,
-      },
-    },
-    sensorEnumAbsolute.nibdAbsolute: {
-      'displayString':
-          'Non Invasive Blood Pressure', // german abbreviation is NIBD (nicht invasiver blutdruck)
-      'displayShortString': 'NIBD',
-      'abbreviation': 'NIBD',
-      'unit': 'mmHg',
-      'color': AppTheme.nibdColor,
-      'upperBound': {
-        // upper&lower bounds vor [SYS,DIA]
-        'adult': [130, 90],
-        'child': [100, 75],
-        'infant': [85, 60], // dia for infant no info found
-      },
-      'lowerBound': {
-        'adult': [120, 80],
-        'child': [85, 60],
-        'infant': [70, 50],
+        'adult': 36, // 'adult': 36.5,
+        'child': 36, // 'child': 36.5,
+        'infant': 36, // 'infant': 36.5,
       },
     },
     sensorEnumAbsolute.spo2Absolute: {
@@ -162,6 +160,38 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
     },
   };
 
+  String get displayString => attributes[this]!['displayString'] as String;
+  String get displayShortString =>
+      attributes[this]!['displayShortString'] as String;
+  String get abbreviation => attributes[this]!['abbreviation'] as String;
+  String get unit => attributes[this]!['unit'] as String;
+  Color get color => attributes[this]!['color'] as Color;
+  Map get upperBound => attributes[this]!['upperBound'] as Map<String, dynamic>;
+  Map get lowerBound => attributes[this]!['lowerBound'] as Map<String, dynamic>;
+}
+
+extension SensorNibdAttributes on sensorEnumNibd {
+  static const Map<sensorEnumNibd, Map<String, dynamic>> attributes = {
+    sensorEnumNibd.nibdAbsolute: {
+      'displayString':
+          'Non Invasive Blood Pressure', // german abbreviation is NIBD (nicht invasiver blutdruck)
+      'displayShortString': 'NIBD',
+      'abbreviation': 'NIBD',
+      'unit': 'mmHg',
+      'color': AppTheme.nibdColor,
+      'upperBound': {
+        // upper&lower bounds vor [SYS,DIA]
+        'adult': [130, 90],
+        'child': [100, 75],
+        'infant': [85, 60], // dia for infant no info found
+      },
+      'lowerBound': {
+        'adult': [120, 80],
+        'child': [85, 60],
+        'infant': [70, 50],
+      },
+    },
+  };
   String get displayString => attributes[this]!['displayString'] as String;
   String get displayShortString =>
       attributes[this]!['displayShortString'] as String;

@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
+import 'package:uke_mlab/models/model_absolute.dart';
 import 'package:uke_mlab/scenarios/scenario_1.dart';
 import 'package:uke_mlab/utilities/enums/scenarios.dart';
 import 'package:uke_mlab/utilities/enums/patient_type.dart';
 import 'package:uke_mlab/utilities/enums/screen_status.dart';
-import 'package:uke_mlab/models/model.dart';
 import 'package:uke_mlab/models/model_manager.dart';
 import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/scenarios/abstract_scenario.dart';
@@ -16,11 +16,11 @@ class ScreenController {
   SystemState systemState = Get.find<SystemState>();
   ModelManager modelManager = Get.find<ModelManager>();
 
-  void setUpperBoundary(DataModel dataModel, int value) {
+  void setUpperBoundary(DataModelAbsolute dataModel, int value) {
     dataModel.upperAlarmBound.value = value;
   }
 
-  void setLowerBoundary(DataModel dataModel, int value) {
+  void setLowerBoundary(DataModelAbsolute dataModel, int value) {
     dataModel.lowerAlarmBound.value = value;
   }
 

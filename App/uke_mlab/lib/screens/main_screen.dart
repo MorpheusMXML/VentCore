@@ -28,9 +28,10 @@ class MainScreen extends StatelessWidget {
       child: Obx(() {
         // Ventilation
         if (systemState.selectedToggleView[1]) {
+          // TODO set standard graphs for ventilation
           systemState.graphList.value = [
-            sensorEnum.mve,
-            sensorEnum.breathFrequency,
+            sensorEnumGraph.flow,
+            sensorEnumGraph.paw,
           ];
           return Row(children: const [
             Flexible(flex: 2, child: GraphView()),
@@ -39,10 +40,9 @@ class MainScreen extends StatelessWidget {
         }
         // Defibrillation
         else if (systemState.selectedToggleView[2]) {
+          // TODO set standard graphs for defibrillation
           systemState.graphList.value = [
-            sensorEnum.ecg,
-            sensorEnum.co2,
-            sensorEnum.nibd
+            sensorEnumGraph.cpr,
           ];
           return Row(children: const [
             Flexible(flex: 2, child: GraphView()),
@@ -52,9 +52,9 @@ class MainScreen extends StatelessWidget {
         // Monitoring
         else {
           systemState.graphList.value = [
-            sensorEnum.ecg,
-            sensorEnum.co2,
-            sensorEnum.pulse
+            sensorEnumGraph.ecgCh1,
+            sensorEnumGraph.co2,
+            sensorEnumGraph.pleth,
           ];
           return Row(children: const [
             Flexible(flex: 2, child: GraphView()),

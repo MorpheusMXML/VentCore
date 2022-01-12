@@ -14,7 +14,9 @@ abstract class AbstractScenario {
   }
 
   //to be overwritten, behaviour depending on concrete scenario
-  void runScenario(Map<sensorEnum, Map<String, dynamic>> dataMap);
+  void runScenario(
+      Map<sensorEnumAbsolute, Map<String, dynamic>> dataMapAbsolute,
+      Map<sensorEnumGraph, Map<String, dynamic>> dataMapGraph);
 
   void stopScenario() {
     scenarioRunning = false;

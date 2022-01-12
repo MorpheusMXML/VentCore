@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uke_mlab/models/model.dart';
+import 'package:uke_mlab/models/model_absolute.dart';
 import 'package:uke_mlab/providers/screen_controller.dart';
 
 class ValueBoxSettings extends StatelessWidget {
-  final DataModel dataModel;
+  final DataModelAbsolute dataModel;
   final String type;
   final double width;
   final double height;
@@ -28,7 +28,7 @@ class ValueBoxSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenController = Get.find<ScreenController>();
-    void Function(DataModel, int) setFunction;
+    void Function(DataModelAbsolute, int) setFunction;
     int startItem;
 
     if (type == 'upper') {

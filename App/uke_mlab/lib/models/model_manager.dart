@@ -1,10 +1,13 @@
 import 'package:get/get.dart';
+import 'package:uke_mlab/models/model_absolute.dart';
+import 'package:uke_mlab/models/model_graph.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/utilities/enums/patient_type.dart';
-import 'package:uke_mlab/models/model.dart';
+import 'package:uke_mlab/models/model_absolute.dart';
+import 'package:uke_mlab/models/model_graph.dart';
 import 'package:uke_mlab/providers/alarm_controller.dart';
 
-/// creates [DataModel]s and offers management operations
+/// creates [DataModelAbsolute]s and [DataModelGraph]s and offers management operations for them
 class ModelManager {
   /// [AlarmController] of the system (this is due to race conditions during creation)
   late final AlarmController _alarmController;
@@ -12,10 +15,23 @@ class ModelManager {
   /// signals whether style loading process is complete
   bool stylesTraitsLoaded = false;
 
-  /// initializes for each entry of [sensorEnum] a [DataModel]
+  /// initializes for each entry of [sensorEnumAbsolute] a [DataModelAbsolute] and for each entry of [sensorEnumGraph] a [DataModelGraph]
   ModelManager() {
-    for (var sensor in sensorEnum.values) {
-      Get.put(DataModel(sensor, 10, 0, this), tag: sensor.name);
+    for (var sensor in sensorEnumAbsolute.values) {
+      Get.put(
+          DataModelAbsolute(
+            sensorKey: sensor,
+            initialLowerBound: 0,
+            initialUpperBound: 10,
+          ),
+          tag: sensor.name);
+    }
+    for (var sensor in sensorEnumGraph.values) {
+      Get.put(
+          DataModelGraph(
+            sensorKey: sensor,
+          ),
+          tag: sensor.name);
     }
   }
 
@@ -31,16 +47,18 @@ class ModelManager {
     return _alarmController;
   }
 
-  /// loads default alarm boundaries into [DataModel]
+  /// loads default alarm boundaries into [DataModelAbsolute]
   ///
   /// NOT TO BE CALLED WITH patientTypeEnum.none, since that has no predefined values
+  /// [DataModelGraph] does not have boundary values due to the datas nature
   void loadPatientPresets(patientTypeEnum patientType) {
     if (!stylesTraitsLoaded) {
       loadStyleInfo();
     }
 
-    for (var sensor in sensorEnum.values) {
-      DataModel dataModel = Get.find<DataModel>(tag: sensor.name);
+    for (var sensor in sensorEnumAbsolute.values) {
+      DataModelAbsolute dataModel =
+          Get.find<DataModelAbsolute>(tag: sensor.name);
       dataModel.resetDataModel();
 
       switch (patientType) {
@@ -70,18 +88,32 @@ class ModelManager {
   }
 
   void loadStyleInfo() {
-    for (var sensor in sensorEnum.values) {
-      DataModel dataModel = Get.find<DataModel>(tag: sensor.name);
+    for (var sensor in sensorEnumAbsolute.values) {
+      DataModelAbsolute dataModel =
+          Get.find<DataModelAbsolute>(tag: sensor.name);
       dataModel.color = sensor.color;
       dataModel.displayString = sensor.displayString;
       dataModel.displayShortString = sensor.displayShortString;
       dataModel.abbreviation = sensor.abbreviation;
+      dataModel.unit = sensor.unit;
+    }
+    for (var sensor in sensorEnumGraph.values) {
+      DataModelGraph dataModel = Get.find<DataModelGraph>(tag: sensor.name);
+      dataModel.color = sensor.color;
+      dataModel.xAxisTitle = sensor.xAxisUnit;
+      dataModel.yAxisTitle = sensor.yAxisUnit;
+      dataModel.graphTitle = sensor.graphTitle;
     }
   }
 
   void resetAllModels() {
-    for (var sensor in sensorEnum.values) {
-      DataModel dataModel = Get.find<DataModel>(tag: sensor.name);
+    for (var sensor in sensorEnumAbsolute.values) {
+      DataModelAbsolute dataModel =
+          Get.find<DataModelAbsolute>(tag: sensor.name);
+      dataModel.resetDataModel();
+    }
+    for (var sensor in sensorEnumGraph.values) {
+      DataModelGraph dataModel = Get.find<DataModelGraph>(tag: sensor.name);
       dataModel.resetDataModel();
     }
   }

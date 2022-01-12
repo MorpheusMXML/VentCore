@@ -15,18 +15,23 @@ class MonitoringMode extends StatelessWidget {
         Flexible(
           flex: 1,
           child: Row(
-            children: const [
-              ValueBoxTile.withHeadline(sensor: sensorEnum.nibd),
-              ValueBoxTile.withHeadline(sensor: sensorEnum.pulse),
+            children: [
+              // ValueBoxTile.withHeadline(sensor: sensorEnumNibd.nibd), // TODO requires multiple constructors in  ValueBoxTile to display special elements
+              Container(),
+              // ValueBoxTile.withHeadline(sensor: sensorEnumAbsolute.pulse), // TODO requires pulse value in sensorEnumAbsolute
+              Container(),
             ],
           ),
         ),
         Flexible(
           flex: 1,
           child: Row(
-            children: const [
-              ValueBoxTile.withHeadline(sensor: sensorEnum.mve),
-              ValueBoxTile.withHeadline(sensor: sensorEnum.breathFrequency),
+            children: [
+              Container(),
+              //ValueBoxTile.withHeadline(sensor: sensorEnumAbsolute.mve), // TODO requires mve value in sensorEnumAbsolute
+              const ValueBoxTile.withHeadline(
+                  sensor:
+                      sensorEnumAbsolute.hfAbsolute), //TODO BreathFreq here?
             ],
           ),
         ),
