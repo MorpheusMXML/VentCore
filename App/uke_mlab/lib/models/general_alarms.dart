@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:uke_mlab/models/model.dart';
 import 'package:uke_mlab/utilities/enums/non_graph_alarm.dart';
 
-/// offers a sorted list of general alarms for being displayed in [AppBar]
+/// offers a sorted list of general alarms for being displayed in [StatusBar]
 class GeneralAlarms {
   final RxList<AlarmListEntry> alarmList = <AlarmListEntry>[].obs;
 
@@ -11,12 +12,12 @@ class GeneralAlarms {
   /// adds an alarm to [alarmList]
   ///
   /// * requires a suitable alarm type and a priority of said alarm
-  /// * only one alarm of each type can be present at the same time => remove if alarm is no longer in place!!!
+  /// * only one alarm of each type can be present at the same time => remove if alarm is no longer in place
   /// * the highest alarm priority persists if an alarm is added and one of the same type is already present
   void addAlarm(nonGraphAlarmEnum alarm, int priority) {
     int index = alarmList.indexWhere((element) => element.alarm == alarm);
     if (index == -1) {
-      //same as does not exist
+      // same as does not exist
       alarmList.add(AlarmListEntry(alarm: alarm, priority: priority));
     } else {
       if (alarmList[index].priority <= priority) {
