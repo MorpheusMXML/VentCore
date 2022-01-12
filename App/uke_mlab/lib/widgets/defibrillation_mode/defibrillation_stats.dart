@@ -16,21 +16,47 @@ class DefibrillationStats extends StatelessWidget {
       child: Column(
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: const [
-              Text('last'),
-              Text('# Shocks'),
-              Text('Timer'),
+              Expanded(
+                  child: Text(
+                'Last Shock',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 18),
+              )),
+              Expanded(
+                  child: Text(
+                '# Shocks',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 18),
+              )),
+              Expanded(
+                  child: Text(
+                'Timer',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 18),
+              )),
             ],
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Obx(() => Text(defibrillationController.lastTimerString.value)),
-              Obx(() => Text('${defibrillationController.numberOfShocks}')),
-              Obx(
-                () => Text(defibrillationController.startTimerString.value),
-              ),
+              Expanded(
+                  child: Obx(() => Text(
+                        defibrillationController.lastTimerString.value,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(fontSize: 24),
+                      ))),
+              Expanded(
+                  child: Obx(() => Text(
+                        '${defibrillationController.numberOfShocks}',
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(fontSize: 24),
+                      ))),
+              Expanded(
+                  child: Obx(() => Text(
+                        defibrillationController.startTimerString.value,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(fontSize: 24),
+                      ))),
             ],
           ),
         ],
