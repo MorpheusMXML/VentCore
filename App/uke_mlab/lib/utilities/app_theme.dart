@@ -47,8 +47,8 @@ class AppTheme {
       scaffoldBackgroundColor: Colors.amber[50],
       appBarTheme: AppBarTheme(backgroundColor: Colors.amber[400]),
       cardColor: Colors.amber[100],
-      shadowColor: Colors.amber[200],
-      focusColor: Colors.amber[150],
+      shadowColor: Colors.amber[300],
+      focusColor: Colors.amber[200],
       dividerColor: const Color(0xFF000000),
       toggleButtonsTheme: ToggleButtonsThemeData(
         borderColor: Colors.grey[800],
