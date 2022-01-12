@@ -5,8 +5,15 @@ import 'package:get/get.dart';
 class DefibrillationController extends GetxController {
   Stopwatch timerWatch = Stopwatch();
   Stopwatch lastWatch = Stopwatch();
+
   Timer? timerTimer;
   Timer? lastTimer;
+
+  int startTimerCount = 0;
+  int lastTimerCount = 0;
+
+  RxString startTimerString = ''.obs;
+  RxString lastTimerString = 'none'.obs;
 
   RxString selectedImpedanceButton = 'Low'.obs;
   RxString selectedDefiButton = 'Auto'.obs;
@@ -20,17 +27,11 @@ class DefibrillationController extends GetxController {
 
   RxInt numberOfShocks = 0.obs;
 
-  int startTimerCount = 0;
-  int lastTimerCount = 0;
-
-  RxString startTimerString = ''.obs;
-  RxString lastTimerString = 'none'.obs;
-
   void startTimerWatch() {
     timerWatch.start();
     timerTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
       startTimerCount++;
-      startTimerString.value = '$startTimerCount';
+      startTimerString.value = timerToString(startTimerCount);
     });
   }
 
@@ -39,17 +40,24 @@ class DefibrillationController extends GetxController {
       lastTimer?.cancel();
       lastWatch.stop();
       lastTimerCount = 0;
-      lastTimerString.value = '0';
+      lastTimerString.value = timerToString(lastTimerCount);
     }
     lastWatch.start();
 
     lastTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
       lastTimerCount++;
-      lastTimerString.value = '$lastTimerCount';
+      lastTimerString.value = timerToString(lastTimerCount);
     });
   }
 
-  void timerToString() {}
+  String timerToString(int seconds) {
+    Duration duration = Duration(seconds: seconds);
+
+    String twoDigits(int n) => n.toString().padLeft(2, "0");
+    String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
+    String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
+    return '$twoDigitMinutes:$twoDigitSeconds';
+  }
 
   void toggleLoaded(String value) async {
     if (loaded.value == 'Shock') {

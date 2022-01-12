@@ -73,8 +73,8 @@ class LoadButton extends StatelessWidget {
                   onPrimary: Colors.black,
                   side: const BorderSide(color: Colors.white)),
               onPressed: () {
-                defibrillationController.toggleLoaded('Loaded');
                 defibrillationController.startLastWatch();
+                defibrillationController.toggleLoaded('Loaded');
               },
               child: Column(
                 children: [
