@@ -43,7 +43,8 @@ class VentilationMode extends StatelessWidget {
           child: Row(
             children: [
               Expanded(child: InfoContainer(data: infoData)),
-              const ValueBoxTile.withHeadline(sensor: sensorEnum.breathFrequency),
+              const ValueBoxTile.withHeadline(
+                  sensor: sensorEnum.breathFrequency),
             ],
           ),
         ),
