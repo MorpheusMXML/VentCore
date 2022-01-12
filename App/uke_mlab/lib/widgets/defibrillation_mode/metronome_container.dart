@@ -6,12 +6,16 @@ class MetronomeContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: const [
-        Text("Metronome"),
-        MetronomeSwitch(),
-      ],
+    return Container(
+      margin: const EdgeInsets.all(8),
+      color: Theme.of(context).cardColor,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: const [
+          Text("Metronome"),
+          MetronomeSwitch(),
+        ],
+      ),
     );
   }
 }

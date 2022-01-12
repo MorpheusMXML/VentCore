@@ -11,7 +11,7 @@ class ImpedanceButton extends StatelessWidget {
 
   const ImpedanceButton.medium({
     Key? key,
-    this.name = 'Medium',
+    this.name = 'OK',
   }) : super(key: key);
 
   const ImpedanceButton.high({
@@ -26,7 +26,7 @@ class ImpedanceButton extends StatelessWidget {
 
     return Expanded(
       child: Container(
-          margin: const EdgeInsets.all(8),
+          margin: const EdgeInsets.all(2),
           child: Obx(() {
             ButtonStyle buttonStyle;
             defibrillationController.selectedImpedanceButton.value != name
@@ -40,7 +40,7 @@ class ImpedanceButton extends StatelessWidget {
                   );
             return ElevatedButton(
               style: buttonStyle,
-              child: Text(name),
+              child: Text(name, style: const TextStyle(fontSize: 12)),
               onPressed:
                   defibrillationController.selectedImpedanceButton.value != name
                       ? () => defibrillationController
