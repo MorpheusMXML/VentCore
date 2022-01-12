@@ -13,53 +13,57 @@ class DefibrillationStats extends StatelessWidget {
     defibrillationController.startTimerWatch();
 
     return Flexible(
-      child: Column(
-        children: [
-          Row(
-            children: const [
-              Expanded(
-                  child: Text(
-                'Last Shock',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 18),
-              )),
-              Expanded(
-                  child: Text(
-                '# Shocks',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 18),
-              )),
-              Expanded(
-                  child: Text(
-                'Timer',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 18),
-              )),
-            ],
-          ),
-          Row(
-            children: [
-              Expanded(
-                  child: Obx(() => Text(
-                        defibrillationController.lastTimerString.value,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(fontSize: 24),
-                      ))),
-              Expanded(
-                  child: Obx(() => Text(
-                        '${defibrillationController.numberOfShocks}',
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(fontSize: 24),
-                      ))),
-              Expanded(
-                  child: Obx(() => Text(
-                        defibrillationController.startTimerString.value,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(fontSize: 24),
-                      ))),
-            ],
-          ),
-        ],
+      child: Container(
+        color: Theme.of(context).cardColor,
+        margin: const EdgeInsets.all(8),
+        child: Column(
+          children: [
+            Row(
+              children: const [
+                Expanded(
+                    child: Text(
+                  'Last Shock',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 18),
+                )),
+                Expanded(
+                    child: Text(
+                  '# Shocks',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 18),
+                )),
+                Expanded(
+                    child: Text(
+                  'Timer',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 18),
+                )),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                    child: Obx(() => Text(
+                          defibrillationController.lastTimerString.value,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(fontSize: 24),
+                        ))),
+                Expanded(
+                    child: Obx(() => Text(
+                          '${defibrillationController.numberOfShocks}',
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(fontSize: 24),
+                        ))),
+                Expanded(
+                    child: Obx(() => Text(
+                          defibrillationController.startTimerString.value,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(fontSize: 24),
+                        ))),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

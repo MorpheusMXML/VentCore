@@ -19,8 +19,10 @@ class DefibrillationMode extends StatelessWidget {
     return Column(
       children: [
         Flexible(
-          flex: 3,
+          flex: 4,
           child: Container(
+            width: MediaQuery.of(context).size.width / 4,
+            margin: const EdgeInsets.only(top: 12),
             color: Theme.of(context).focusColor,
             child: Column(
               children: [
@@ -28,7 +30,7 @@ class DefibrillationMode extends StatelessWidget {
                 const DefibrillationContainer(),
                 const ShockPower(),
                 Flexible(
-                  flex: 2,
+                  flex: 3,
                   child: Row(
                     children: [
                       Flexible(

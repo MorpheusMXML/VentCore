@@ -10,7 +10,9 @@ class SystemDiagnosis extends StatelessWidget {
     DefibrillationController defibrillationController =
         Get.find<DefibrillationController>();
 
-    return Flexible(
+    return Container(
+      color: Theme.of(context).cardColor,
+      margin: const EdgeInsets.all(8),
       child: Obx(
         () => Text(
           '${defibrillationController.systemDiagnosis}',

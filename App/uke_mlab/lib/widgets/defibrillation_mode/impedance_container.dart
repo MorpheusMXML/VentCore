@@ -6,20 +6,24 @@ class ImpedanceContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          "Impedance",
-          style: TextStyle(color: Theme.of(context).dividerColor),
-        ),
-        Row(
-          children: const [
-            ImpedanceButton.low(),
-            ImpedanceButton.medium(),
-            ImpedanceButton.high(),
-          ],
-        )
-      ],
+    return Container(
+      color: Theme.of(context).cardColor,
+      margin: const EdgeInsets.all(6),
+      child: Column(
+        children: [
+          Text(
+            "Impedance",
+            style: TextStyle(color: Theme.of(context).dividerColor),
+          ),
+          Row(
+            children: const [
+              ImpedanceButton.low(),
+              ImpedanceButton.medium(),
+              ImpedanceButton.high(),
+            ],
+          )
+        ],
+      ),
     );
   }
 }
