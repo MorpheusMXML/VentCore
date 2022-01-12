@@ -9,7 +9,8 @@ class DefibrillationStats extends StatelessWidget {
   Widget build(BuildContext context) {
     DefibrillationController defibrillationController =
         Get.find<DefibrillationController>();
-    defibrillationController.timer.value.start();
+
+    defibrillationController.startTimerWatch();
 
     return Flexible(
       child: Column(
@@ -25,11 +26,10 @@ class DefibrillationStats extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Obx(() => Text('${defibrillationController.lastShock}')),
+              Obx(() => Text(defibrillationController.lastTimerString.value)),
               Obx(() => Text('${defibrillationController.numberOfShocks}')),
               Obx(
-                () => Text(
-                    '${defibrillationController.timer.value.elapsed.inSeconds}'),
+                () => Text(defibrillationController.startTimerString.value),
               ),
             ],
           ),

@@ -3,6 +3,11 @@ import 'dart:async';
 import 'package:get/get.dart';
 
 class DefibrillationController extends GetxController {
+  Stopwatch timerWatch = Stopwatch();
+  Stopwatch lastWatch = Stopwatch();
+  Timer? timerTimer;
+  Timer? lastTimer;
+
   RxString selectedImpedanceButton = 'Low'.obs;
   RxString selectedDefiButton = 'Auto'.obs;
   RxString selectedSynchronicityButton = 'Sync'.obs;
@@ -13,9 +18,38 @@ class DefibrillationController extends GetxController {
   RxInt shockPower = 200.obs;
   RxString systemDiagnosis = 'Placeholder Diagnosis'.obs;
 
-  RxString lastShock = ''.obs;
   RxInt numberOfShocks = 0.obs;
-  Rx<Stopwatch> timer = Stopwatch().obs;
+
+  int startTimerCount = 0;
+  int lastTimerCount = 0;
+
+  RxString startTimerString = ''.obs;
+  RxString lastTimerString = 'none'.obs;
+
+  void startTimerWatch() {
+    timerWatch.start();
+    timerTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      startTimerCount++;
+      startTimerString.value = '$startTimerCount';
+    });
+  }
+
+  void startLastWatch() {
+    if (lastWatch.isRunning) {
+      lastTimer?.cancel();
+      lastWatch.stop();
+      lastTimerCount = 0;
+      lastTimerString.value = '0';
+    }
+    lastWatch.start();
+
+    lastTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      lastTimerCount++;
+      lastTimerString.value = '$lastTimerCount';
+    });
+  }
+
+  void timerToString() {}
 
   void toggleLoaded(String value) async {
     if (loaded.value == 'Shock') {
