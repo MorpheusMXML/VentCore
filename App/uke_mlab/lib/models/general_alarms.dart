@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/utilities/enums/non_graph_alarm.dart';
 
+/// offers a sorted list of general alarms for being displayed in [AppBar]
 class GeneralAlarms {
-  /// offers a sorted list of general alarms for being displayed in [AppBar]
-
   final RxList<AlarmListEntry> alarmList = <AlarmListEntry>[].obs;
 
   GeneralAlarms();
 
-  // adds an alarm to list, needs a suitable alarm type and a priority of said alarm
-  // only one alarm of each type can be present at the same time => remove if no longer in place!!!
-  // the highest alarm priority persists if an alarm is added and one of the same type is already present
+  /// adds an alarm to [alarmList]
+  ///
+  /// * requires a suitable alarm type and a priority of said alarm
+  /// * only one alarm of each type can be present at the same time => remove if alarm is no longer in place!!!
+  /// * the highest alarm priority persists if an alarm is added and one of the same type is already present
   void addAlarm(nonGraphAlarmEnum alarm, int priority) {
     int index = alarmList.indexWhere((element) => element.alarm == alarm);
     if (index == -1) {
@@ -28,7 +28,9 @@ class GeneralAlarms {
     alarmList.sort((a, b) => b.priority.compareTo(a.priority));
   }
 
-  // if alarm of type nonGraphAlarmEnum does exist in List, it is removed from list
+  /// remove [alarm] from list
+  ///
+  /// if alarm of type [nonGraphAlarmEnum] does not exist in [alarmList] the call does nothing
   void removeAlarm(nonGraphAlarmEnum alarm) {
     int index = alarmList.indexWhere((element) => element.alarm == alarm);
     if (index != -1) {
@@ -36,17 +38,21 @@ class GeneralAlarms {
     }
   }
 
-  // checks whether an alarm of type nonGraphAlarmEnum is contained in List
+  /// checks whether an [alarm] is contained in [alarmList]
   bool checkForAlarm(nonGraphAlarmEnum alarm) {
     return alarmList.indexWhere((element) => element.alarm == alarm) == -1;
   }
 }
 
+/// Represents an entry for [GeneralAlarms.alarmList]
 class AlarmListEntry {
-  /// an entry for [GeneralAlarms] alarm List, contained in [SystemState] and displayed in [AppBar]
-
+  /// represents alarms not directly associated with numeric values in [DataModel]
   final nonGraphAlarmEnum alarm;
+
+  /// time the alarm occured
   final DateTime time = DateTime.now();
+
+  /// priority of the alarm, should be between 0 and 100
   final int priority;
 
   AlarmListEntry({
@@ -54,6 +60,7 @@ class AlarmListEntry {
     required this.priority,
   });
 
+  /// translates the [priority] to a associated color
   Color toColor() {
     if (priority > 50) {
       return Colors.red;
