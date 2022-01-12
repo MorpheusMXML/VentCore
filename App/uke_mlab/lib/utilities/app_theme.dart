@@ -8,14 +8,14 @@ class AppTheme {
   // mixin example but without own fields: https://github.com/jogeanmcf/tetris_game/blob/8a6202f3f7ceb7d7c2d3e73d2dcdb4edb7f136cc/lib/theme.dart
 
   // Moved here from StyleController
-  final Color heartFreqColor = const Color(0xFF34C759);
-  final Color breathFreqColor = const Color(0xFF0CECDD);
-  final Color oxySatColor = const Color(0xFF007AFF);
-  final Color co2Color = const Color(0xFFAf52DE);
+  static const Color heartFreqColor = Color(0xFF34C759);
+  static const Color flowColor = Color(0xFF0CECDD);
+  static const Color plethColor = Color(0xFF007AFF);
+  static const Color co2Color = Color(0xFFAf52DE);
   final Color pulseColor = const Color(0xFFFF00E4);
-  final Color pawColor = const Color(0xFFEF5DA8);
-  final Color tempColor = const Color(0xFFFF6482);
-  final Color nibdColor = const Color(0xFFDC362E);
+  static const Color pawColor = Color(0xFFEF5DA8);
+  static const Color tempColor = Color(0xFFFF6482);
+  static const Color nibdColor = Color(0xFFDC362E);
   final Color backgroundColor = const Color(0xFF1C1B1F);
   final Color appBar = const Color(0xFF1d192B);
 
