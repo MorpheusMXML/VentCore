@@ -45,42 +45,49 @@ extension SensorGraphAttributes on sensorEnumGraph {
       'yAxisUnit': 'mBar',
       'xAxisUnit': '',
       'color': AppTheme.pawColor,
+      'graphLength': 1500,
     },
     sensorEnumGraph.flow: {
       'graphTitle': 'Flow',
       'yAxisUnit': 'l/min',
       'xAxisUnit': '',
       'color': AppTheme.flowColor,
+      'graphLength': 1500,
     },
     sensorEnumGraph.co2: {
       'graphTitle': 'CO2',
       'yAxisUnit': 'mmHg',
       'xAxisUnit': '',
       'color': AppTheme.co2Color,
+      'graphLength': 1500,
     },
     sensorEnumGraph.pleth: {
       'graphTitle': 'Pleth',
       'yAxisUnit': '%',
       'xAxisUnit': '',
       'color': AppTheme.plethColor,
+      'graphLength': 500,
     },
     sensorEnumGraph.ecgCh1: {
       'graphTitle': 'ECG Channel 1',
       'yAxisUnit': 'mV',
       'xAxisUnit': '',
       'color': AppTheme.heartFreqColor,
+      'graphLength': 1500,
     },
     sensorEnumGraph.ecgCh2: {
       'graphTitle': 'ECG Channel 2',
       'yAxisUnit': 'mV',
       'xAxisUnit': '',
       'color': AppTheme.heartFreqColor,
+      'graphLength': 1500,
     },
     sensorEnumGraph.cpr: {
       'graphTitle': 'CPR',
       'yAxisUnit': 'cm',
       'xAxisUnit': '',
       'color': AppTheme.heartFreqColor,
+      'graphLength': 1500,
     },
   };
 
@@ -88,6 +95,7 @@ extension SensorGraphAttributes on sensorEnumGraph {
   String get yAxisUnit => attributes[this]!['yAxisUnit'] as String;
   String get xAxisUnit => attributes[this]!['xAxisUnit'] as String;
   Color get color => attributes[this]!['color'] as Color;
+  int get graphLength => attributes[this]!['graphLength'];
 }
 
 extension SensorAbsoluteAttributes on sensorEnumAbsolute {

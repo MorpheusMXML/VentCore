@@ -53,7 +53,7 @@ class ModelManager {
   /// [DataModelGraph] does not have boundary values due to the datas nature
   void loadPatientPresets(patientTypeEnum patientType) {
     if (!stylesTraitsLoaded) {
-      loadStyleInfo();
+      loadDataModelEnvironmentValues();
     }
 
     for (var sensor in sensorEnumAbsolute.values) {
@@ -87,7 +87,7 @@ class ModelManager {
     }
   }
 
-  void loadStyleInfo() {
+  void loadDataModelEnvironmentValues() {
     for (var sensor in sensorEnumAbsolute.values) {
       DataModelAbsolute dataModel =
           Get.find<DataModelAbsolute>(tag: sensor.name);
@@ -103,6 +103,7 @@ class ModelManager {
       dataModel.xAxisTitle = sensor.xAxisUnit;
       dataModel.yAxisTitle = sensor.yAxisUnit;
       dataModel.graphTitle = sensor.graphTitle;
+      dataModel.graphDataMaxLength = sensor.graphLength;
     }
   }
 
