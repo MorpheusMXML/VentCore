@@ -17,7 +17,8 @@ enum sensorEnumAbsolute {
   spo2Absolute,
   co2Absolute,
   // pulse,
-  // mve
+  // mve,
+  // breathfrequency
 }
 
 enum sensorEnumNibd {
@@ -32,7 +33,7 @@ class SensorMapping {
     sensorEnumGraph.pleth: sensorEnumAbsolute.spo2Absolute,
     sensorEnumGraph.ecgCh1: sensorEnumAbsolute.hfAbsolute,
     sensorEnumGraph.ecgCh2: sensorEnumAbsolute.hfAbsolute,
-    sensorEnumGraph.cpr: null,
+    sensorEnumGraph.cpr: sensorEnumAbsolute.hfAbsolute,
   };
 }
 
