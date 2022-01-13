@@ -79,57 +79,74 @@ This Course was held during the WS 2021/2022 by the MAST Team of University of H
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![VentCore][product-screenshot]](./ReadMeFiles/ScreenshotMonitoring.png)
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email`, `email_client`, `project_title`, `project_description`
+This is the Repository for the UKE M-Lab Prototype of VentCore. A Mock-Up for a possible 3-in-1 Medical device which combines a patient Monitor, Defibrillator and Ventilator.
+The App in this Repository demonstrates the User-Interface and Alarm Management for such a device in a Tablet Application. This Tablet Application was Designed for a 10" Inch Screen with the Flutter SDK to run on both, Android and iOS.
+
+The Prototype is build with Simulation data designed to mimic real Emergency Scenarios that where provided by Emergency doctors and the friendly Help of [WEINMANN](https://www.weinmann-emergency.com/de/).
+
+The following Sections will guide you through the Installation Proces, Documentation and Functionalities of the Code, The Design and Style Guide used as well as the Data used an how it was processed.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Built With
 
+As mentioned, this is a Flutter Tablet application written in [dart]. For the Data Processing and creation we used Python.
+
 * [Flutter](https://flutter.dev/)
 * [Dart](https://dart.dev/)
 * [Python](https://www.python.org/)
-
-
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+To start the Application and Simulate the Scenarios follow the upcoming steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
+Please make sure, that you've installed a stable Version of the Flutter SDK. Please consider [this link](https://docs.flutter.dev/get-started/install).
 
-* npm
+* Verify your working Installation with:
 
   ```sh
-  npm install npm@latest -g
+  flutter doctor
   ```
+
+Depending on your operating System make sure to have the Simulator(macOS) or Android Emulator(Windows) Installed and working.
+
+#### Device Recommendations
+
+Since this App was designed with a Requirement of a 10" Inch Tablet Screen with a Resolution of 1920x1200 Pixels, we recommend to use one of the following Emulation Devices:
+
+* **macOS**
+
+``` sh
+iPad Pro (3rd generation)
+iOS Version 15.2
+```
++ **Windows**
+# \\TODO: Add Android Version
+```sh
+Pixel C 
+Android Version XXXX 
+```
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-
+1. Clone the Repository.
    ```sh
-   git clone https://github.com/github_username/repo_name.git
+   git clone https://git.informatik.uni-hamburg.de/mast/teaching/mlab/wt202122/uke
    ```
 
-3. Install NPM packages
+2. Start the Emulator you want to use. [Device Recommendations](#device)
+
+3. Run Application with Terminal in the Location on your Disk:
 
    ```sh
-   npm install
-   ```
-
-4. Enter your API in `config.js`
-
-   ```js
-   const API_KEY = 'ENTER YOUR API';
+   flutter run lib/main.dart
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -146,38 +163,35 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- Design -->
 ## Design
 
+For the Design created in Figma please follow this Link:
+* [Design Clickdummy](https://www.figma.com/file/ase69ABWTPP8L2kVJdHuzq/MLab---UKE-Protoype-UI?node-id=892%3A6578)
+
+Also have a look at our StyleGuide for the Colors used in the Prototype.
+
 * [Style Guide](../documentation/uke-styleguide.md)
-
-* [] Feature 1
-* [] Feature 2
-* [] Feature 3
-  * [] Nested Feature
-
-See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- AlarmHandling -->
 ## Alarm Handling
 
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
+//TODO: Add Description of Alarm Handling Rules
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- DataProcessing -->
 ## Data Processing
 
+
 <!-- LICENSE -->
 ## Documentation
+
+Please refer to our [Code Documentation](//TODO: add Link to Code Documentation).
+
+<!-- KNOWN ISSUES -->
+## Known Issues
+
+1. Issue 1
+2. Issue 3
 
 <!-- LICENSE -->
 ## License
@@ -189,18 +203,30 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+##### Project Supervisor
+Tim Puhlfrüß - [<tim.puhlfuerss@uni-hamburg.de>](mailto:tim.puhlfuerss@uni-hamburg.de)
 
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
+##### Development Team
+- Maximilian Brosius - [<mail@maxbrosius.de>](mailto:mail@maxbrosius.de)
+- Noah Scheld - [ <nickels12er@gmail.com>](mailto: <nickels12er@gmail.com>)
+- Mudassar Zahid - [mudassar.zahid@studium.uni-hamburg.de](mailto:mudassar.zahid@studium.uni-hamburg.de) 
+- Anni Reinert - [anni@rb-reinert.de](mailto:anni@rb-reinert.de)
+- Arne Struck - [<arne.struck@studium.uni-hamburg.de>](mailto:<arne.struck@studium.uni-hamburg.de>)
+- Fynn Menk - [fynn.menk@gmail.com](mailto:fynn.menk@gmail.com)
+
+Project Link: [https://git.informatik.uni-hamburg.de/mast/teaching/mlab/wt202122/uke](https://git.informatik.uni-hamburg.de/mast/teaching/mlab/wt202122/uke)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
+Special Thanks for the friendly help for the Requirements Elicitation to:
+* [Dr. Mahler]() - Emergency Doctor @ UKE Hamburg
+* [Dr. Reip]() - Emergency Doctor @ UKE Hamburg
+* [Dr. Sasu]() - Emergency Doctor @ UKE Hamburg
 
-* []()
-* []()
-* []()
+And also for providing Simulation / real Patient Data and helping with DataGeneration for the Showcase.
+* [Christian Neuhaus](mailto:<C.Neuhaus@weinmann-emt.de>) - WEINAMM Emergency
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -218,6 +244,4 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 [license-url]: https://github.com/github_username/repo_name/blob/master/LICENSE.txt
 [website-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [website-url]: https://linkedin.com/in/linkedin_username
-[product-screenshot]: images/screenshot.png
-
-
+[product-screenshot]: ./ReadMeFiles/ScreenshotMonitoring.png
