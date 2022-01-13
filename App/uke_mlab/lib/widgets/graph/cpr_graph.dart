@@ -50,17 +50,26 @@ class CprGraph extends StatelessWidget {
         ),
       ),
       primaryXAxis: DateTimeAxis(
+        // TODO: Green line
+        plotBands: <PlotBand>[
+          PlotBand(
+            isVisible: true,
+            start: DateTime.utc(2022, 01, 12, 12, 57),
+            end: DateTime.utc(2022, 01, 12, 13, 14),
+          )
+        ],
         dateFormat: DateFormat.Hm(),
         plotOffset: 10,
         desiredIntervals: 25,
-        majorGridLines: MajorGridLines(width: 0, color: Theme.of(context).shadowColor),
+        majorGridLines:
+            MajorGridLines(width: 0, color: Theme.of(context).shadowColor),
       ),
       series: <ColumnSeries<CPRData, dynamic>>[
         ColumnSeries<CPRData, dynamic>(
-          dataSource: graphData,
-          yValueMapper: (CPRData graphData, _) => graphData.xvalue,
-          xValueMapper: (CPRData graphData, _) => graphData.dateTime,
-        )
+            dataSource: graphData,
+            yValueMapper: (CPRData graphData, _) => graphData.xvalue,
+            xValueMapper: (CPRData graphData, _) => graphData.dateTime,
+            pointColorMapper: (CPRData graphData, _) => graphData.color)
       ],
     );
   }
@@ -69,6 +78,9 @@ class CprGraph extends StatelessWidget {
 class CPRData {
   final DateTime dateTime;
   final int xvalue;
+  late Color color;
 
-  CPRData(this.dateTime, this.xvalue);
+  CPRData(this.dateTime, this.xvalue) {
+    color = xvalue >= 5 ? Colors.green : Colors.red;
+  }
 }
