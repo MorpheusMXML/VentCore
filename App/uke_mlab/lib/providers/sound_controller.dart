@@ -18,6 +18,7 @@ import 'package:audioplayers/audioplayers.dart';
 /// + [saturationHfBeep(int BPM, int spO2)] calculates according to specified BPM when and how often the ECG Sound should be played.
 ///
 class SoundController {
+  ///Loads AudioAlarm Files into Cache and Provides functionality to Play, Stop them. Also provides ECG Sound per Minute and O2 Saturation.
   static AudioCache alarmPlayer = AudioCache(prefix: 'assets/sounds/');
   static AudioCache ecgPlayer = AudioCache(prefix: 'assets/sounds/');
   static Timer? timer;
