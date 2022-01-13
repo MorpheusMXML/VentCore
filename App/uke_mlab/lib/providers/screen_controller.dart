@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/model_absolute.dart';
-import 'package:uke_mlab/scenarios/scenario_1.dart';
+import 'package:uke_mlab/scenarios/patient_scenario.dart';
 import 'package:uke_mlab/utilities/enums/scenarios.dart';
 import 'package:uke_mlab/utilities/enums/patient_type.dart';
 import 'package:uke_mlab/utilities/enums/screen_status.dart';
