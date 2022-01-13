@@ -17,9 +17,13 @@ class MonitoringMode extends StatelessWidget {
           child: Row(
             children: [
               // ValueBoxTile.withHeadline(sensor: sensorEnumNibd.nibd), // TODO requires multiple constructors in  ValueBoxTile to display special elements
-              Container(),
-              // ValueBoxTile.withHeadline(sensor: sensorEnumAbsolute.pulse), // TODO requires pulse value in sensorEnumAbsolute
-              Container(),
+              Expanded(
+                // This is a placeholder for nibd tile
+                flex: 1,
+                child: Container(),
+              ),
+              const ValueBoxTile.withHeadline(
+                  sensorAbsolute: sensorEnumAbsolute.pulse),
             ],
           ),
         ),
@@ -27,11 +31,13 @@ class MonitoringMode extends StatelessWidget {
           flex: 1,
           child: Row(
             children: [
-              Container(),
-              //ValueBoxTile.withHeadline(sensor: sensorEnumAbsolute.mve), // TODO requires mve value in sensorEnumAbsolute
               const ValueBoxTile.withHeadline(
-                  sensorAbsolute:
-                      sensorEnumAbsolute.hfAbsolute), //TODO BreathFreq here?
+                  sensorAbsolute: sensorEnumAbsolute.tempAbsolute),
+              Expanded(
+                // This is a placeholder to ensure uniformity
+                flex: 1,
+                child: Container(),
+              ),
             ],
           ),
         ),

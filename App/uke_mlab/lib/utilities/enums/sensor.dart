@@ -16,9 +16,9 @@ enum sensorEnumAbsolute {
   tempAbsolute, // temprerature in °C
   spo2Absolute,
   co2Absolute,
-  // pulse,
-  // mve,
-  // breathfrequency
+  pulse,
+  mve,
+  breathfrequency,
 }
 
 enum sensorEnumNibd {
@@ -158,6 +158,58 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
         'adult': 35,
         'child': 35,
         'infant': 35,
+      },
+    },
+    sensorEnumAbsolute.pulse: {
+      'displayString': 'Pulse',
+      'displayShortString': 'Pulse',
+      'abbreviation': 'PP',
+      'unit': 'bpm',
+      'color': AppTheme.pulseColor,
+      'upperBound': {
+        'adult': 85,
+        'child': 125,
+        'infant': 145,
+      },
+      'lowerBound': {
+        'adult': 55,
+        'child': 85,
+        'infant': 110,
+      },
+    },
+    // next to temp another float case
+    sensorEnumAbsolute.mve: {
+      'displayString': 'MVe',
+      'displayShortString': 'MVe',
+      'abbreviation': 'MVe',
+      'unit': 'l/min',
+      'color': AppTheme.mveColor,
+      'upperBound': {
+        'adult': 8, // 8.4
+        'child': 8,
+        'infant': 7,
+      },
+      'lowerBound': {
+        'adult': 5, // 5.0
+        'child': 5,
+        'infant': 5,
+      },
+    },
+    sensorEnumAbsolute.breathfrequency: {
+      'displayString': 'Breath. Freq.',
+      'displayShortString': 'Br. Freq.',
+      'abbreviation': 'AF',
+      'unit': 'br/min',
+      'color': AppTheme.breathFrequencyColor,
+      'upperBound': {
+        'adult': 35,
+        'child': 35,
+        'infant': 35,
+      },
+      'lowerBound': {
+        'adult': 20,
+        'child': 20,
+        'infant': 20,
       },
     },
   };

@@ -10,12 +10,14 @@ class AppTheme {
   // Moved here from StyleController
   static const Color heartFreqColor = Color(0xFF34C759);
   static const Color flowColor = Color(0xFF0CECDD);
+  static const Color mveColor = Color(0xFFFFEE58);
   static const Color plethColor = Color(0xFF007AFF);
   static const Color co2Color = Color(0xFFAf52DE);
-  final Color pulseColor = const Color(0xFFFF00E4);
+  static const Color pulseColor = Color(0xFFFF00E4);
   static const Color pawColor = Color(0xFFEF5DA8);
   static const Color tempColor = Color(0xFFFF6482);
   static const Color nibdColor = Color(0xFFDC362E);
+  static const Color breathFrequencyColor = Color(0xFF009688);
   final Color backgroundColor = const Color(0xFF1C1B1F);
   final Color appBar = const Color(0xFF1d192B);
 
