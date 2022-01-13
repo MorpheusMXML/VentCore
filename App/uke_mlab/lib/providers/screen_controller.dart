@@ -39,26 +39,31 @@ class ScreenController {
     switch (scenario) {
       case scenariosEnum.standardScenario:
         runningScenario = StandardScenario();
-        runningScenario!.startScenario();
+        runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
         break;
       case scenariosEnum.scenario1:
-        runningScenario = Scenario1();
-        runningScenario!.startScenario();
+        runningScenario = PatientScenario();
+        runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
         break;
       case scenariosEnum.scenario2:
-        print("start Scenario 2 here");
+        runningScenario = PatientScenario();
+        runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
         break;
       case scenariosEnum.scenario3a:
-        print("start Scenario 3a here");
+        runningScenario = PatientScenario();
+        runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
         break;
       case scenariosEnum.scenario3b:
-        print("start Scenario 3b here");
+        runningScenario = PatientScenario();
+        runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
         break;
       case scenariosEnum.scenario3c:
-        print("start Scenario 3c here");
+        runningScenario = PatientScenario();
+        runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
         break;
       case scenariosEnum.scenario4:
-        print("start Scenario 4 here");
+        runningScenario = PatientScenario();
+        runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
         break;
       default:
         throw Exception('No scenario for ' + scenario.name + ' known');
