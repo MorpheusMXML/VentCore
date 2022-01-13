@@ -26,6 +26,8 @@ class ValueBoxContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     const double aspectRatio =
         1.1; // TODO: should be 1 but then we have a pixel overflow -> 255 and others are too big in current configuration
+    const double fontSize = 17;
+    const double fontSizeCenter = 50;
     if (dataModelGraph == null) {
       return AspectRatio(
         aspectRatio: aspectRatio,
@@ -41,24 +43,53 @@ class ValueBoxContainer extends StatelessWidget {
             children: [
               // Top
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                Text(dataModelAbsolute!.abbreviation,
-                    style: TextStyle(color: dataModelAbsolute!.color)),
-                Obx(() => Text(dataModelAbsolute!.upperAlarmBound.toString(),
-                    style: TextStyle(color: dataModelAbsolute!.color)))
+                Text(
+                  dataModelAbsolute!.abbreviation,
+                  style: TextStyle(
+                    color: dataModelAbsolute!.color,
+                    fontSize: fontSize,
+                  ),
+                ),
+                Obx(
+                  () => Text(
+                    dataModelAbsolute!.upperAlarmBound.toString(),
+                    style: TextStyle(
+                      color: dataModelAbsolute!.color,
+                      fontSize: fontSize,
+                    ),
+                  ),
+                )
               ]),
 
               // Middle
-              Obx(() => Text(
+              Obx(
+                () => Text(
                   dataModelAbsolute!.absoluteValue.value.toInt().toString(),
                   style: TextStyle(
-                      color: dataModelAbsolute!.color, fontSize: 50.0))),
+                    color: dataModelAbsolute!.color,
+                    fontSize: fontSizeCenter,
+                  ),
+                ),
+              ),
 
               // Bottom
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                Obx(() => Text(dataModelAbsolute!.lowerAlarmBound.toString(),
-                    style: TextStyle(color: dataModelAbsolute!.color))),
-                Text(dataModelAbsolute!.unit,
-                    style: TextStyle(color: dataModelAbsolute!.color))
+                Obx(
+                  () => Text(
+                    dataModelAbsolute!.lowerAlarmBound.toString(),
+                    style: TextStyle(
+                      color: dataModelAbsolute!.color,
+                      fontSize: fontSize,
+                    ),
+                  ),
+                ),
+                Text(
+                  dataModelAbsolute!.unit,
+                  style: TextStyle(
+                    color: dataModelAbsolute!.color,
+                    fontSize: fontSize,
+                  ),
+                )
               ]),
             ],
           ),
@@ -79,27 +110,52 @@ class ValueBoxContainer extends StatelessWidget {
               // Top
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 Container(
-                  margin: EdgeInsets.only(left: 15),
-                  child: Text(dataModelGraph!.graphTitle,
-                      style: TextStyle(color: dataModelGraph!.color)),
+                  margin: const EdgeInsets.only(left: 15, bottom: fontSize),
+                  child: Text(
+                    dataModelGraph!.graphTitle,
+                    style: TextStyle(
+                      color: dataModelGraph!.color,
+                      fontSize: fontSize,
+                    ),
+                  ),
                 ),
-                Container()
+                Container(
+                  margin: const EdgeInsets.only(right: 15),
+                  child: Text(
+                    "Graph\nValue",
+                    style: TextStyle(
+                      color: dataModelGraph!.color,
+                      fontSize: fontSize,
+                    ),
+                  ),
+                ),
               ]),
 
               // Middle
-              Obx(() => Text(
+
+              Obx(
+                () => Text(
                   dataModelGraph!.singleData.value.value.toInt().toString(),
-                  style:
-                      TextStyle(color: dataModelGraph!.color, fontSize: 50.0))),
+                  style: TextStyle(
+                    color: dataModelGraph!.color,
+                    fontSize: fontSizeCenter,
+                  ),
+                ),
+              ),
 
               // Bottom
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 Container(),
                 Container(
-                  margin: EdgeInsets.only(right: 15),
-                  child: Text(dataModelGraph!.yAxisTitle,
-                      style: TextStyle(color: dataModelGraph!.color)),
-                )
+                  margin: const EdgeInsets.only(right: 15),
+                  child: Text(
+                    dataModelGraph!.yAxisTitle,
+                    style: TextStyle(
+                      color: dataModelGraph!.color,
+                      fontSize: fontSize,
+                    ),
+                  ),
+                ),
               ]),
             ],
           ),
