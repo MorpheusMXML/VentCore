@@ -15,9 +15,11 @@ TODO COMPLETE
 
 <!-- PROJECT LOGO -->
 <br />
-<div align="center" style="font-family: Jura">
-  <a href="https://git.informatik.uni-hamburg.de/mast/teaching/mlab/wt202122/uke">
-    <img src="./ReadMeFiles/LogoVentCore.png" alt="Logo">
+<div align="center">
+  <a href="https://github.com/github_username/repo_name">
+    <img src="./ReadMeFiles/VentCore2.png" alt="Logo">
+        <img src="./ReadMeFiles/VentCore1.png" alt="Logo">
+            <img src="./ReadMeFiles/VentCore3.png" alt="Logo">
   </a>
 
 
