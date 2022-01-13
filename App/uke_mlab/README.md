@@ -26,7 +26,9 @@
 <br />
 <div align="center">
   <a href="https://github.com/github_username/repo_name">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="./ReadMeFiles/VentCore2.png" alt="Logo">
+        <img src="./ReadMeFiles/VentCore1.png" alt="Logo">
+            <img src="./ReadMeFiles/VentCore3.png" alt="Logo">
   </a>
 
 <h3 align="center">VentCore - UKE M-Lab </h3>
