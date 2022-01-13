@@ -10,8 +10,8 @@ class DataModelGraph extends GetxController {
   final sensorEnumGraph sensorKey;
 
   String graphTitle = "No default title";
-  String yAxisTitle = "No default yAxisTitle given";
-  String xAxisTitle = "No default xAxisTitle given";
+  String yAxisTitle = "No default yAxisTitle";
+  String xAxisTitle = "No default xAxisTitle";
   Color color = Colors.white;
 
   ChartSeriesController? chartController;

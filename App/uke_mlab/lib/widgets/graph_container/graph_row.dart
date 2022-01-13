@@ -17,7 +17,7 @@ class GraphRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: solve via constructor
+    // TODO: solve special case via constructor (different enumType)
     /*if (sensor == sensorEnum.nibd) {
       return ConstrainedBox(
         constraints: const BoxConstraints(maxHeight: 150),
@@ -57,10 +57,11 @@ class GraphRow extends StatelessWidget {
 //}
   Widget evaluateValueBoxTile() {
     if (SensorMapping.sensorMap[sensor] == null) {
-      return Container();
+      return ValueBoxTile.withoutAbsolute(sensorGraph: sensor);
     } else {
       return ValueBoxTile(
-          sensor: SensorMapping.sensorMap[sensor] as sensorEnumAbsolute);
+          sensorAbsolute:
+              SensorMapping.sensorMap[sensor] as sensorEnumAbsolute);
     }
   }
 }

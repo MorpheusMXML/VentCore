@@ -31,7 +31,8 @@ class SensorMapping {
     sensorEnumGraph.flow: null,
     sensorEnumGraph.co2: sensorEnumAbsolute.co2Absolute,
     sensorEnumGraph.pleth: sensorEnumAbsolute.spo2Absolute,
-    sensorEnumGraph.ecgCh1: null,
+    sensorEnumGraph.ecgCh1:
+        null, // could/should be null to avoid double representation, but due to customizability (ecgCh1 = only ecg channel) double representation is accepted
     sensorEnumGraph.ecgCh2: sensorEnumAbsolute.hfAbsolute,
     sensorEnumGraph.cpr: sensorEnumAbsolute.hfAbsolute,
   };

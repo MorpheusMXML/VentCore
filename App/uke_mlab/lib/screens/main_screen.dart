@@ -52,7 +52,7 @@ class MainScreen extends StatelessWidget {
         // Monitoring
         else {
           systemState.graphList.value = [
-            sensorEnumGraph.ecgCh1,
+            sensorEnumGraph.ecgCh2, // medical standard ecg channel is channel 2
             sensorEnumGraph.co2,
             sensorEnumGraph.pleth,
           ];

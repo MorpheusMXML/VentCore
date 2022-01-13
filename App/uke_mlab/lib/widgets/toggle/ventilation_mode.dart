@@ -36,7 +36,7 @@ class VentilationMode extends StatelessWidget {
               // ValueBoxTile.withHeadline(sensor: sensorEnum.mve), TODO requires mve value in sensorEnumAbsolute
               Container(),
               const ValueBoxTile.withHeadline(
-                  sensor:
+                  sensorAbsolute:
                       sensorEnumAbsolute.hfAbsolute), //TODO BreathFreq here?
             ],
           ),
@@ -49,7 +49,7 @@ class VentilationMode extends StatelessWidget {
                 child: InfoContainer(data: infoData),
               ),
               const ValueBoxTile.withHeadline(
-                  sensor: sensorEnumAbsolute
+                  sensorAbsolute: sensorEnumAbsolute
                       .hfAbsolute), //TODO BreathFreq here again!?
             ],
           ),

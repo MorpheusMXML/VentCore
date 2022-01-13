@@ -10,6 +10,7 @@ class ValueBoxState extends StatelessWidget {
   final DataModelAbsolute dataModel;
   final double settingsWidth;
   final double settingsHeight;
+  final String? optAbreviationTitle;
   final String type;
 
   const ValueBoxState({
@@ -18,6 +19,7 @@ class ValueBoxState extends StatelessWidget {
     this.type = 'regular',
     this.settingsHeight = 100,
     this.settingsWidth = 60,
+    this.optAbreviationTitle,
   }) : super(key: key);
 
   const ValueBoxState.withHeadline({
@@ -26,12 +28,11 @@ class ValueBoxState extends StatelessWidget {
     this.type = 'withHeadline',
     this.settingsHeight = 100,
     this.settingsWidth = 30,
+    this.optAbreviationTitle,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final ScreenController screenController;
-
     // TODO: Also check for alarms here (red container)
 
     return Obx(
@@ -46,7 +47,10 @@ class ValueBoxState extends StatelessWidget {
                     width: settingsWidth,
                     height: settingsHeight,
                   ),
-                  ValueBoxContainer(dataModel: dataModel),
+                  ValueBoxContainer(
+                    dataModelAbsolute: dataModel,
+                    optAbreviationTitle: optAbreviationTitle,
+                  ),
                   ValueBoxSettings.upper(
                     dataModel: dataModel,
                     height: settingsHeight,
@@ -55,7 +59,10 @@ class ValueBoxState extends StatelessWidget {
                 ],
               ),
             )
-          : ValueBoxContainer(dataModel: dataModel),
+          : ValueBoxContainer(
+              dataModelAbsolute: dataModel,
+              optAbreviationTitle: optAbreviationTitle,
+            ),
     );
   }
 }

@@ -30,7 +30,7 @@ class MonitoringMode extends StatelessWidget {
               Container(),
               //ValueBoxTile.withHeadline(sensor: sensorEnumAbsolute.mve), // TODO requires mve value in sensorEnumAbsolute
               const ValueBoxTile.withHeadline(
-                  sensor:
+                  sensorAbsolute:
                       sensorEnumAbsolute.hfAbsolute), //TODO BreathFreq here?
             ],
           ),
