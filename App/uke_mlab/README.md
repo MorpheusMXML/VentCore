@@ -27,18 +27,15 @@ TODO COMPLETE
 <!-- DESCRIPTION -->
 <h2>UKE M-Lab </h2>
 
-  <p>
-    This is the Repository for the M-Lab Course project VentCore. 
-    This Course was held during the WS 2021/2022 by the MAST Team of University of Hamburg
-
-TODO LINKS:
-<a href=""><strong>Explore the docs »</strong></a>
+<br />
+<a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
 <br />
 <br />
-<a href="">View Trailer</a>
+<a href="https://github.com/github_username/repo_name">View Demo</a>
 ·
-<a href="">Visit Website</a>
+<a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
 ·
+<a href="https://github.com/github_username/repo_name/issues">Request Feature</a>
 </p>
 </div>
 
