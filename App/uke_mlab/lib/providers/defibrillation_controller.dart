@@ -15,11 +15,11 @@ class DefibrillationController extends GetxController {
   RxString startTimerString = ''.obs;
   RxString lastTimerString = 'none'.obs;
 
-  RxString selectedImpedanceButton = 'Low'.obs;
+  RxString selectedImpedanceButton = 'OK'.obs;
   RxString selectedDefiButton = 'Auto'.obs;
   RxString selectedSynchronicityButton = 'Sync'.obs;
 
-  RxBool metronomeOn = false.obs;
+  RxBool metronomeOn = true.obs;
   RxString loaded = 'Loaded'.obs;
 
   RxInt shockPower = 0.obs;
@@ -86,6 +86,11 @@ class DefibrillationController extends GetxController {
   }
 
   void setSelectedDefiButton(String name) {
+    if (name == 'Auto') {
+      toggleMetronome(true);
+      setSelectedImpedanceButton('OK');
+      setSelectedSynchronicityButton('Sync');
+    }
     selectedDefiButton.value = name;
   }
 
