@@ -1,93 +1,95 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:intl/intl.dart';
+import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/models/model.dart';
 
+///This Class returns a [Obx] which in turn consists of a [SfCartesianChart] with two [NumericAxis].
+///The Graph rendered with this displays a history of how good the CPR has been performed in relation to the compression depth.
+///
+///The [sensorEnum] parameter specifies the Sensor this Graph gets it data from.
+///Also a correspondig [DataModel] for the CPR Graph is created with [GetX].
 class CprGraph extends StatelessWidget {
-  const CprGraph({Key? key}) : super(key: key);
+  /// Creates a CPR Bar Graph to Indicate optimum pressure applied during CPR.
+  final sensorEnum sensor;
+
+  ///Creates Instance of the CPR Bar Graph
+  const CprGraph({Key? key, required this.sensor}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    List<CPRData> graphData = [
-      CPRData(DateTime.utc(2022, 01, 12, 12, 50), 6),
-      CPRData(DateTime.utc(2022, 01, 12, 12, 51), 5),
-      CPRData(DateTime.utc(2022, 01, 12, 12, 52), 4),
-      CPRData(DateTime.utc(2022, 01, 12, 12, 53), 2),
-      CPRData(DateTime.utc(2022, 01, 12, 12, 54), 4),
-      CPRData(DateTime.utc(2022, 01, 12, 12, 55), 4),
-      CPRData(DateTime.utc(2022, 01, 12, 12, 56), 5),
-      CPRData(DateTime.utc(2022, 01, 12, 12, 57), 5),
-      CPRData(DateTime.utc(2022, 01, 12, 12, 58), 5),
-      CPRData(DateTime.utc(2022, 01, 12, 12, 59), 5),
-      CPRData(DateTime.utc(2022, 01, 12, 13, 00), 5),
-      CPRData(DateTime.utc(2022, 01, 12, 13, 1), 6),
-      CPRData(DateTime.utc(2022, 01, 12, 13, 2), 6),
-      CPRData(DateTime.utc(2022, 01, 12, 13, 3), 6),
-      CPRData(DateTime.utc(2022, 01, 12, 13, 4), 8),
-      CPRData(DateTime.utc(2022, 01, 12, 13, 5), 9),
-      CPRData(DateTime.utc(2022, 01, 12, 13, 6), 7),
-      CPRData(DateTime.utc(2022, 01, 12, 13, 7), 5),
-      CPRData(DateTime.utc(2022, 01, 12, 13, 8), 5),
-      CPRData(DateTime.utc(2022, 01, 12, 13, 9), 5),
-      CPRData(DateTime.utc(2022, 01, 12, 13, 10), 4),
-      CPRData(DateTime.utc(2022, 01, 12, 13, 11), 6),
-      CPRData(DateTime.utc(2022, 01, 12, 13, 12), 7),
-      CPRData(DateTime.utc(2022, 01, 12, 13, 13), 8),
-      CPRData(DateTime.utc(2022, 01, 12, 13, 14), 5),
-    ];
+    DataModel dataModel = Get.find<DataModel>(tag: sensor.name);
 
-    return SfCartesianChart(
-      tooltipBehavior: TooltipBehavior(enable: true),
-      backgroundColor: Theme.of(context).cardColor,
-      primaryYAxis: NumericAxis(
-        labelStyle: const TextStyle(fontSize: 0.0001),
-        plotBands: <PlotBand>[
-          PlotBand(
-            isVisible: true,
-            start: 5,
-            end: 5,
-            borderWidth: 1,
-            borderColor: Colors.green,
+    return Obx(
+      () => SfCartesianChart(
+        tooltipBehavior: TooltipBehavior(enable: true),
+        backgroundColor: Theme.of(context).cardColor,
+        primaryYAxis: NumericAxis(
+          //Turning off String Labels at the Axis
+          labelStyle: const TextStyle(fontSize: 0.0001),
+
+          ///PlotBands Create the green horizontal Line to Indicate the optimum depth Interval.
+          plotBands: <PlotBand>[
+            PlotBand(
+              isVisible: true,
+              start: 5,
+              end: 5,
+              borderWidth: 1,
+              borderColor: Colors.green,
+            ),
+            PlotBand(
+              isVisible: true,
+              start: 6,
+              end: 6,
+              borderWidth: 1,
+              borderColor: Colors.green,
+            )
+          ],
+          isInversed: true,
+          maximum: 9.5,
+          minimum: 2,
+          majorGridLines: MajorGridLines(
+            width: 1,
+            color: Theme.of(context).shadowColor,
           ),
-          PlotBand(
-            isVisible: true,
-            start: 6,
-            end: 6,
-            borderWidth: 1,
-            borderColor: Colors.green,
-          )
-        ],
-        isInversed: true,
-        maximum: 9.5,
-        minimum: 2,
-        majorGridLines: MajorGridLines(
-          width: 1,
-          color: Theme.of(context).shadowColor,
         ),
+        primaryXAxis: NumericAxis(
+          //Turning off String Labels at the Axis
+          labelStyle: const TextStyle(fontSize: 0.0001),
+          desiredIntervals: 25,
+          majorGridLines: MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
+        ),
+        series: <ColumnSeries<CPRData, dynamic>>[
+          ColumnSeries<CPRData, dynamic>(
+              dataSource: dataModel.graphData.value,
+              yValueMapper: (CPRData graphData, _) => graphData.yvalue,
+              xValueMapper: (CPRData graphData, _) => graphData.xvalue,
+              pointColorMapper: (CPRData graphData, _) => graphData.color)
+        ],
       ),
-      primaryXAxis: DateTimeAxis(
-        labelStyle: const TextStyle(fontSize: 0.0001),
-        desiredIntervals: 25,
-        majorGridLines: MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
-      ),
-      series: <ColumnSeries<CPRData, dynamic>>[
-        ColumnSeries<CPRData, dynamic>(
-            dataSource: graphData,
-            yValueMapper: (CPRData graphData, _) => graphData.xvalue,
-            xValueMapper: (CPRData graphData, _) => graphData.dateTime,
-            pointColorMapper: (CPRData graphData, _) => graphData.color)
-      ],
     );
   }
 }
 
+///This Class represents CPR Data provided for the Scenatios.
+///
+///Holds a [int] for the x- & y-Axis Value. Note that the x-Axis Value is dependent on the Resolution specified in the Scenario Data which influences the Update Rates.
+///Also Specifies a [Color] to signal the Pressure depth of performed CPR Compressions with green for the interval between 5 and 6. Otherwise red is Specified.
+///This color Property is used to Color the Bars in the [CprGraph].
 class CPRData {
-  final DateTime dateTime;
+  ///DataClass for CPR Graph in AED Screen.
+  final int yvalue;
   final int xvalue;
   late Color color;
 
-  CPRData(this.dateTime, this.xvalue) {
-    if (xvalue >= 5 && xvalue <= 6) {
+  ///Constructor for [this]. Sets x- & y-Axis paramets of this DataClass. Also Decides based on the y-Axis value specified, which color the resulting Bar in the CPR Graph should be colored in.
+  ///
+  /// ### General Information about the CPR Depth indicated in red and green.
+  /// Please Consider the recommendations for a optimal CPR to understand why the Colors are set the way they are. (https://www.cprblspros.com/cpr-cheat-sheet-2022)
+  ///
+  CPRData({required this.yvalue, required this.xvalue}) {
+    ///Named Parameter [yvalue] and [xvalue] to initialize the corresponding DataPoints for the Graph.
+    if (yvalue >= 5 && yvalue <= 6) {
       color = Colors.green;
     } else {
       color = Colors.red;
