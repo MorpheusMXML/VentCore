@@ -31,7 +31,7 @@ class SensorMapping {
     sensorEnumGraph.flow: null,
     sensorEnumGraph.co2: sensorEnumAbsolute.co2Absolute,
     sensorEnumGraph.pleth: sensorEnumAbsolute.spo2Absolute,
-    sensorEnumGraph.ecgCh1: sensorEnumAbsolute.hfAbsolute,
+    sensorEnumGraph.ecgCh1: null,
     sensorEnumGraph.ecgCh2: sensorEnumAbsolute.hfAbsolute,
     sensorEnumGraph.cpr: sensorEnumAbsolute.hfAbsolute,
   };

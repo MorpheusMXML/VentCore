@@ -24,7 +24,7 @@ class PatientScenario extends AbstractScenario {
           dataMapAbsolute[sensorAbsolute]!['channel_information']['resolution']
                   ['value']
               .toDouble();
-      List<double> dataList = dataMapAbsolute[sensorAbsolute]!['data'];
+      List<dynamic> dataList = dataMapAbsolute[sensorAbsolute]!['data'];
 
       Timer.periodic(calculateUpdateRateAbsolute(resolution: resolution),
           (timer) {
@@ -36,7 +36,7 @@ class PatientScenario extends AbstractScenario {
         }
 
         dataModelAbsolute
-            .updateValue(dataList[dataModelAbsolute.counter.value]);
+            .updateValue(dataList[dataModelAbsolute.counter.value].toDouble());
       });
     }
 
@@ -47,7 +47,7 @@ class PatientScenario extends AbstractScenario {
       double resolution = dataMapGraph[sensorGraph]!['channel_information']
               ['resolution']['value']
           .toDouble();
-      List<double> dataList = dataMapGraph[sensorGraph]!['data'];
+      List<dynamic> dataList = dataMapGraph[sensorGraph]!['data'];
 
       Timer.periodic(
           calculateUpdateRate(batchSize: batchSize, resolution: resolution),

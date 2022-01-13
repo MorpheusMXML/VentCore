@@ -27,8 +27,8 @@ class DataModelGraph extends GetxController {
 
   void updateValues(List<dynamic> valueList) {
     for (int i = 0; i < valueList.length; i++) {
-      singleData.value =
-          ChartData(DateTime.now(), valueList[i], singleData.value.counter + 1);
+      singleData.value = ChartData(DateTime.now(), valueList[i].toDouble(),
+          singleData.value.counter + 1);
       graphData.add(singleData.value);
     }
 
@@ -39,9 +39,8 @@ class DataModelGraph extends GetxController {
     }
 
     // update only added/removed indexes instead of the whole chart (efficient)
-    chartController?.updateDataSource(updatedDataIndexes: [
-      for (int i = 0; i <= graphData.length - 1; i++) i
-    ]);
+    chartController?.updateDataSource(
+        updatedDataIndexes: [for (int i = 0; i < graphData.length; i++) i]);
 
     // TODO make "little" analysis here and call inform alarmManager to start evaluation
   }

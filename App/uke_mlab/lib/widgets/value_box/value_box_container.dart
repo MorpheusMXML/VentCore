@@ -12,7 +12,8 @@ class ValueBoxContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
-      aspectRatio: 1,
+      // TODO: would be 1 but then we have a pixel overflow -> 255 is too big
+      aspectRatio: 1.1,
       child: ElevatedButton(
         style: ButtonStyle(
             shape: MaterialStateProperty.all(const RoundedRectangleBorder()),

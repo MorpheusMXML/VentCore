@@ -24,7 +24,7 @@ class StandardScenario extends AbstractScenario {
           dataMapAbsolute[sensorAbsolute]!['channel_information']['resolution']
                   ['value']
               .toDouble();
-      List<double> dataList = dataMapAbsolute[sensorAbsolute]!['data'];
+      List<dynamic> dataList = dataMapAbsolute[sensorAbsolute]!['data'];
 
       Timer.periodic(calculateUpdateRateAbsolute(resolution: resolution),
           (timer) {
@@ -37,7 +37,7 @@ class StandardScenario extends AbstractScenario {
         }
 
         dataModelAbsolute
-            .updateValue(dataList[dataModelAbsolute.counter.value]);
+            .updateValue(dataList[dataModelAbsolute.counter.value].toDouble());
       });
     }
 
@@ -48,7 +48,7 @@ class StandardScenario extends AbstractScenario {
       double resolution = dataMapGraph[sensorGraph]!['channel_information']
               ['resolution']['value']
           .toDouble();
-      List<double> dataList = dataMapGraph[sensorGraph]!['data'];
+      List<dynamic> dataList = dataMapGraph[sensorGraph]!['data'];
 
       Timer.periodic(
           calculateUpdateRate(batchSize: batchSize, resolution: resolution),

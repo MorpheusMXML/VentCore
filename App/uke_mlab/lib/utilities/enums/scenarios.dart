@@ -10,13 +10,13 @@ enum scenariosEnum {
 
 extension ScenarioEnumAttributes on scenariosEnum {
   static const Map<scenariosEnum, String> attributes = {
-    scenariosEnum.standardScenario: 'assets/jsons/standard_scenario',
-    scenariosEnum.scenario1: 'assets/jsons/scenario1_data',
-    scenariosEnum.scenario2: 'assets/jsons/scenario2_data',
-    scenariosEnum.scenario3a: 'assets/jsons/scenario3_a_data',
-    scenariosEnum.scenario3b: 'assets/jsons/scenario3_b_data',
-    scenariosEnum.scenario3c: 'assets/jsons/scenario3_c_data',
-    scenariosEnum.scenario4: 'assets/jsons/scenario4_data'
+    scenariosEnum.standardScenario: 'assets/jsons/standard_scenario.json',
+    scenariosEnum.scenario1: 'assets/jsons/standard_scenario.json',
+    scenariosEnum.scenario2: 'assets/jsons/scenario2_data.json',
+    scenariosEnum.scenario3a: 'assets/jsons/scenario3_a_data.json',
+    scenariosEnum.scenario3b: 'assets/jsons/scenario3_b_data.json',
+    scenariosEnum.scenario3c: 'assets/jsons/scenario3_c_data.json',
+    scenariosEnum.scenario4: 'assets/jsons/scenario4_data.json'
   };
 
   String get scenarioPath => attributes[this]!;
