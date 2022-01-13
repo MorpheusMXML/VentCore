@@ -40,29 +40,35 @@ class CprGraph extends StatelessWidget {
       tooltipBehavior: TooltipBehavior(enable: true),
       backgroundColor: Theme.of(context).cardColor,
       primaryYAxis: NumericAxis(
+        labelStyle: const TextStyle(fontSize: 0.0001),
+        plotBands: <PlotBand>[
+          PlotBand(
+            isVisible: true,
+            start: 5,
+            end: 5,
+            borderWidth: 1,
+            borderColor: Colors.green,
+          ),
+          PlotBand(
+            isVisible: true,
+            start: 6,
+            end: 6,
+            borderWidth: 1,
+            borderColor: Colors.green,
+          )
+        ],
         isInversed: true,
         maximum: 9.5,
         minimum: 2,
         majorGridLines: MajorGridLines(
           width: 1,
           color: Theme.of(context).shadowColor,
-          dashArray: const <double>[2, 3],
         ),
       ),
       primaryXAxis: DateTimeAxis(
-        // TODO: Green line
-        plotBands: <PlotBand>[
-          PlotBand(
-            isVisible: true,
-            start: DateTime.utc(2022, 01, 12, 12, 57),
-            end: DateTime.utc(2022, 01, 12, 13, 14),
-          )
-        ],
-        dateFormat: DateFormat.Hm(),
-        plotOffset: 10,
+        labelStyle: const TextStyle(fontSize: 0.0001),
         desiredIntervals: 25,
-        majorGridLines:
-            MajorGridLines(width: 0, color: Theme.of(context).shadowColor),
+        majorGridLines: MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
       ),
       series: <ColumnSeries<CPRData, dynamic>>[
         ColumnSeries<CPRData, dynamic>(
@@ -81,6 +87,10 @@ class CPRData {
   late Color color;
 
   CPRData(this.dateTime, this.xvalue) {
-    color = xvalue >= 5 ? Colors.green : Colors.red;
+    if (xvalue >= 5 && xvalue <= 6) {
+      color = Colors.green;
+    } else {
+      color = Colors.red;
+    }
   }
 }
