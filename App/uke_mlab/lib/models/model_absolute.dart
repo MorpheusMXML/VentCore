@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
-import 'package:uke_mlab/providers/alarm_controller.dart';
+
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/utilities/enums/boundary_state.dart';
 import 'package:uke_mlab/models/system_state.dart';
@@ -22,6 +23,7 @@ class DataModelAbsolute extends GetxController {
   late int initialUpperBound;
   late int initialLowerBound;
 
+  final RxInt counter = 0.obs;
   final RxDouble absoluteValue = 0.0.obs;
   final RxList<double> historicValues = <double>[].obs;
 
@@ -39,6 +41,7 @@ class DataModelAbsolute extends GetxController {
   }
 
   void updateValue(double value) {
+    counter.value += 1;
     absoluteValue.value = value;
 
     historicValues.add(value);
