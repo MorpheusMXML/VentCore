@@ -27,7 +27,7 @@ class ValueBoxState extends StatelessWidget {
     required this.dataModel,
     this.type = 'withHeadline',
     this.settingsHeight = 100,
-    this.settingsWidth = 30,
+    this.settingsWidth = 35,
     this.optAbreviationTitle,
   }) : super(key: key);
 

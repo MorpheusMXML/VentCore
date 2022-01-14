@@ -16,11 +16,11 @@ class ScreenController {
   SystemState systemState = Get.find<SystemState>();
   ModelManager modelManager = Get.find<ModelManager>();
 
-  void setUpperBoundary(DataModelAbsolute dataModel, int value) {
+  void setUpperBoundary(DataModelAbsolute dataModel, double value) {
     dataModel.upperAlarmBound.value = value;
   }
 
-  void setLowerBoundary(DataModelAbsolute dataModel, int value) {
+  void setLowerBoundary(DataModelAbsolute dataModel, double value) {
     dataModel.lowerAlarmBound.value = value;
   }
 

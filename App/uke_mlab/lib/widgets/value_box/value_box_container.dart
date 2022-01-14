@@ -28,6 +28,7 @@ class ValueBoxContainer extends StatelessWidget {
         1.1; // TODO: should be 1 but then we have a pixel overflow -> 255 and others are too big in current configuration
     const double fontSize = 17;
     const double fontSizeCenter = 50;
+    // could be done via template pattern for better code quality
     if (dataModelGraph == null) {
       return AspectRatio(
         aspectRatio: aspectRatio,
@@ -52,7 +53,9 @@ class ValueBoxContainer extends StatelessWidget {
                 ),
                 Obx(
                   () => Text(
-                    dataModelAbsolute!.upperAlarmBound.toString(),
+                    dataModelAbsolute!.floatRepresentation
+                        ? dataModelAbsolute!.upperAlarmBound.toString()
+                        : dataModelAbsolute!.upperAlarmBound.toInt().toString(),
                     style: TextStyle(
                       color: dataModelAbsolute!.color,
                       fontSize: fontSize,
@@ -64,7 +67,11 @@ class ValueBoxContainer extends StatelessWidget {
               // Middle
               Obx(
                 () => Text(
-                  dataModelAbsolute!.absoluteValue.value.toInt().toString(),
+                  dataModelAbsolute!.floatRepresentation
+                      ? dataModelAbsolute!.absoluteValue.value.toString()
+                      : dataModelAbsolute!.absoluteValue.value
+                          .toInt()
+                          .toString(),
                   style: TextStyle(
                     color: dataModelAbsolute!.color,
                     fontSize: fontSizeCenter,
@@ -76,7 +83,9 @@ class ValueBoxContainer extends StatelessWidget {
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 Obx(
                   () => Text(
-                    dataModelAbsolute!.lowerAlarmBound.toString(),
+                    dataModelAbsolute!.floatRepresentation
+                        ? dataModelAbsolute!.lowerAlarmBound.toString()
+                        : dataModelAbsolute!.lowerAlarmBound.toInt().toString(),
                     style: TextStyle(
                       color: dataModelAbsolute!.color,
                       fontSize: fontSize,

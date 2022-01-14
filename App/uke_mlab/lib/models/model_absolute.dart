@@ -15,13 +15,15 @@ class DataModelAbsolute extends GetxController {
   String abbreviation = 'NoInfo';
   String unit = 'No Unit';
 
+  bool floatRepresentation = false;
+
   final RxBool tapped = false.obs; // TODO put somewhere else please
 
-  final RxInt upperAlarmBound = 0.obs;
-  final RxInt lowerAlarmBound = 0.obs;
+  final RxDouble upperAlarmBound = 0.0.obs;
+  final RxDouble lowerAlarmBound = 0.0.obs;
 
-  late int initialUpperBound;
-  late int initialLowerBound;
+  late double initialUpperBound;
+  late double initialLowerBound;
 
   final RxInt counter = 0.obs;
   final RxDouble absoluteValue = 0.0.obs;

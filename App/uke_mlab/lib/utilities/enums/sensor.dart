@@ -106,6 +106,7 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
       'abbreviation': 'HF',
       'unit': 'bpm',
       'color': AppTheme.heartFreqColor,
+      'floatRepresentation': false,
       'upperBound': {
         'adult': 85,
         'child': 125,
@@ -123,15 +124,12 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
       'abbreviation': 'Temp',
       'unit': '°C',
       'color': AppTheme.tempColor,
-      'upperBound': {
-        'adult': 37, // 'adult': 37.4,
-        'child': 37, // 'child': 37.4,
-        'infant': 37, // 'infant': 37.4
-      },
+      'floatRepresentation': true,
+      'upperBound': {'adult': 37.4, 'child': 37.4, 'infant': 37.4},
       'lowerBound': {
-        'adult': 36, // 'adult': 36.5,
-        'child': 36, // 'child': 36.5,
-        'infant': 36, // 'infant': 36.5,
+        'adult': 36.5,
+        'child': 36.5,
+        'infant': 36.5,
       },
     },
     sensorEnumAbsolute.spo2Absolute: {
@@ -140,6 +138,7 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
       'abbreviation': 'SpO2',
       'unit': '%',
       'color': AppTheme.plethColor,
+      'floatRepresentation': false,
       'upperBound': {
         'adult': 100,
         'child': 100,
@@ -157,6 +156,7 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
       'abbreviation': 'CO2',
       'unit': 'mmHg',
       'color': AppTheme.co2Color,
+      'floatRepresentation': false,
       'upperBound': {
         'adult': 45,
         'child': 45,
@@ -174,6 +174,7 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
       'abbreviation': 'PP',
       'unit': 'bpm',
       'color': AppTheme.pulseColor,
+      'floatRepresentation': false,
       'upperBound': {
         'adult': 85,
         'child': 125,
@@ -192,15 +193,16 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
       'abbreviation': 'MVe',
       'unit': 'l/min',
       'color': AppTheme.mveColor,
+      'floatRepresentation': true,
       'upperBound': {
-        'adult': 8, // 8.4
-        'child': 8,
-        'infant': 7,
+        'adult': 8.4,
+        'child': 8.0,
+        'infant': 7.0,
       },
       'lowerBound': {
-        'adult': 5, // 5.0
-        'child': 5,
-        'infant': 5,
+        'adult': 5.0,
+        'child': 5.0,
+        'infant': 5.0,
       },
     },
     sensorEnumAbsolute.breathfrequency: {
@@ -209,6 +211,7 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
       'abbreviation': 'AF',
       'unit': 'br/min',
       'color': AppTheme.breathFrequencyColor,
+      'floatRepresentation': false,
       'upperBound': {
         'adult': 35,
         'child': 35,
@@ -230,6 +233,7 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
   Color get color => attributes[this]!['color'] as Color;
   Map get upperBound => attributes[this]!['upperBound'] as Map<String, dynamic>;
   Map get lowerBound => attributes[this]!['lowerBound'] as Map<String, dynamic>;
+  bool get floatRepresentation => attributes[this]!['floatRepresentation'];
 }
 
 extension SensorNibdAttributes on sensorEnumNibd {
