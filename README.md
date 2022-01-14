@@ -1,5 +1,5 @@
-# Example Project
+# M-Lab UKE Project: VentCore
 
-This repository will house your application (`./app`), as well as the deliverables for the course (`./deliverables`).
+This repository provides the [Application](./App), as well as our deliverables for the course [Deliverables](./Deliverables) for the M-Lab UKE project.
 
-Please note that all of your application code must live within the "App" folder above, including the custom "README.md" file you will create for your application. This README will remain as a guide for future visitors to this repository. Feel free to customise it.
+For a short overview of the Application, please read the [Application READMe.md](./App/uke_mlab/README.md)
