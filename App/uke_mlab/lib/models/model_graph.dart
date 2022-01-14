@@ -19,10 +19,11 @@ class DataModelGraph extends GetxController {
   late final Rx<ChartData> singleData;
 
   final RxList<ChartData> graphData = <ChartData>[].obs;
-  int graphDataMaxLength = 1500;
+  int graphDataMaxLength = 0;
 
   DataModelGraph({required this.sensorKey}) {
     singleData = ChartData(DateTime.now(), 0.0, 0).obs;
+    setGraphMaxLength(1500);
   }
 
   void updateValues(List<dynamic> valueList) {
@@ -32,7 +33,7 @@ class DataModelGraph extends GetxController {
       graphData.add(singleData.value);
     }
 
-    if (graphData.length + 1 > graphDataMaxLength) {
+    if (graphData.length > graphDataMaxLength) {
       for (var i = 0; i < valueList.length; i++) {
         graphData.removeAt(0);
       }
@@ -54,6 +55,16 @@ class DataModelGraph extends GetxController {
     singleData.value = ChartData(DateTime.now(), 0.0, 0);
     //clear historical data
     graphData.clear();
+  }
+
+  void setGraphMaxLength(newLength) {
+    graphDataMaxLength = newLength;
+    graphData.clear();
+    for (int i = 0; i < graphDataMaxLength; i++) {
+      singleData.value =
+          ChartData(DateTime.now(), 0.0, singleData.value.counter + 1);
+      graphData.add(singleData.value);
+    }
   }
 }
 

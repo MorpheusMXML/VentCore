@@ -110,7 +110,7 @@ class ModelManager {
       dataModel.xAxisTitle = sensor.xAxisUnit;
       dataModel.yAxisTitle = sensor.yAxisUnit;
       dataModel.graphTitle = sensor.graphTitle;
-      dataModel.graphDataMaxLength = sensor.graphLength;
+      dataModel.setGraphMaxLength(sensor.graphLength);
     }
   }
 
