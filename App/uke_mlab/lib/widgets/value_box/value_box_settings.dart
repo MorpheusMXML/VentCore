@@ -44,6 +44,7 @@ class ValueBoxSettings extends StatelessWidget {
     }
 
     // TODO build sensibleCheck for boundaries (if potentially lower > upper => stop scrollability in one direction)
+    // would also help with the issue that in case the other ListWheelScrollView is not updated accordingly
     return ConstrainedBox(
         constraints: BoxConstraints(maxHeight: height, maxWidth: width),
         child: ListWheelScrollView(

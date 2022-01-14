@@ -52,6 +52,10 @@ class DataModelAbsolute extends GetxController {
       historicValues.removeAt(0);
     }
 
+    evaluateBoundaryViolation();
+  }
+
+  void evaluateBoundaryViolation() {
     //evaluates whether update violated alarm boundaries or returns into boundaries
     if (absoluteValue.value > upperAlarmBound.value) {
       evaluateBoundaryChange(boundaryStateEnum.upperBoundaryViolated);
@@ -74,6 +78,20 @@ class DataModelAbsolute extends GetxController {
     //TODO implement instead of just printing
     //print('$sensorKey had boundary change to $boundaryState');
     //requires information about own state
+  }
+
+  void setUpperAlarmBounadary(double newBoundary) {
+    if (newBoundary >= lowerAlarmBound.value) {
+      upperAlarmBound.value = newBoundary;
+    }
+    evaluateBoundaryViolation();
+  }
+
+  void setLowerAlarmBounadary(double newBoundary) {
+    if (newBoundary <= upperAlarmBound.value) {
+      lowerAlarmBound.value = newBoundary;
+    }
+    evaluateBoundaryViolation();
   }
 
   void resetDataModel() {

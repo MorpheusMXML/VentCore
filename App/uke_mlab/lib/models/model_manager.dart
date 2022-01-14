@@ -64,27 +64,27 @@ class ModelManager {
       switch (patientType) {
         case patientTypeEnum.adult:
           dataModel.initialUpperBound = sensor.upperBound['adult'].toDouble();
-          dataModel.upperAlarmBound.value =
-              sensor.upperBound['adult'].toDouble();
+          dataModel
+              .setUpperAlarmBounadary(sensor.upperBound['adult'].toDouble());
           dataModel.initialLowerBound = sensor.lowerBound['adult'].toDouble();
-          dataModel.lowerAlarmBound.value =
-              sensor.lowerBound['adult'].toDouble();
+          dataModel
+              .setLowerAlarmBounadary(sensor.lowerBound['adult'].toDouble());
           break;
         case patientTypeEnum.child:
           dataModel.initialUpperBound = sensor.upperBound['child'].toDouble();
-          dataModel.upperAlarmBound.value =
-              sensor.upperBound['child'].toDouble();
+          dataModel
+              .setUpperAlarmBounadary(sensor.upperBound['child'].toDouble());
           dataModel.initialLowerBound = sensor.lowerBound['child'].toDouble();
-          dataModel.lowerAlarmBound.value =
-              sensor.lowerBound['child'].toDouble();
+          dataModel
+              .setLowerAlarmBounadary(sensor.lowerBound['child'].toDouble());
           break;
         case patientTypeEnum.infant:
           dataModel.initialUpperBound = sensor.upperBound['infant'].toDouble();
-          dataModel.upperAlarmBound.value =
-              sensor.upperBound['infant'].toDouble();
+          dataModel
+              .setUpperAlarmBounadary(sensor.upperBound['infant'].toDouble());
           dataModel.initialLowerBound = sensor.lowerBound['infant'].toDouble();
-          dataModel.lowerAlarmBound.value =
-              sensor.lowerBound['infant'].toDouble();
+          dataModel
+              .setLowerAlarmBounadary(sensor.lowerBound['infant'].toDouble());
           break;
         default:
           throw Exception(
