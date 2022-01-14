@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/widgets/graph/cpr_graph.dart';
 import 'package:uke_mlab/widgets/start_screen/aed_button.dart';
 import 'package:uke_mlab/widgets/start_screen/patient_type_button.dart';
@@ -26,13 +27,8 @@ class StartScreen extends StatelessWidget {
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: Row(
-          children: const [
+          children: [
             Flexible(
-                child: SizedBox(
-              width: 1000,
-              height: 150,
-              child: CprGraph(),
-            )) /*  Flexible(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:
@@ -65,7 +61,7 @@ class StartScreen extends StatelessWidget {
                   ),
                 ],
               ),
-            ), */
+            ),
           ],
         ),
       ),

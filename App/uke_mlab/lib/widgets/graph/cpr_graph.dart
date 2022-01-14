@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:uke_mlab/models/model_graph.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
-import 'package:uke_mlab/models/model.dart';
+import 'package:uke_mlab/models/model_graphdata.dart';
 
 ///This Class returns a [Obx] which in turn consists of a [SfCartesianChart] with two [NumericAxis].
 ///The Graph rendered with this displays a history of how good the CPR has been performed in relation to the compression depth.
@@ -11,14 +12,14 @@ import 'package:uke_mlab/models/model.dart';
 ///Also a correspondig [DataModel] for the CPR Graph is created with [GetX].
 class CprGraph extends StatelessWidget {
   /// Creates a CPR Bar Graph to Indicate optimum pressure applied during CPR.
-  final sensorEnum sensor;
+  final sensorEnumGraph sensor;
 
   ///Creates Instance of the CPR Bar Graph
   const CprGraph({Key? key, required this.sensor}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    DataModel dataModel = Get.find<DataModel>(tag: sensor.name);
+    DataModelGraph dataModel = Get.find<DataModelGraph>(tag: sensor.name);
 
     return Obx(
       () => SfCartesianChart(
@@ -59,40 +60,17 @@ class CprGraph extends StatelessWidget {
           desiredIntervals: 25,
           majorGridLines: MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
         ),
-        series: <ColumnSeries<CPRData, dynamic>>[
-          ColumnSeries<CPRData, dynamic>(
+        series: <ColumnSeries<ChartData, dynamic>>[
+          ColumnSeries<ChartData, dynamic>(
               dataSource: dataModel.graphData.value,
-              yValueMapper: (CPRData graphData, _) => graphData.yvalue,
-              xValueMapper: (CPRData graphData, _) => graphData.xvalue,
-              pointColorMapper: (CPRData graphData, _) => graphData.color)
+              onRendererCreated: (ChartSeriesController controller) {
+                dataModel.chartController = controller;
+              },
+              yValueMapper: (ChartData graphData, _) => graphData.value,
+              xValueMapper: (ChartData graphData, _) => graphData.counter,
+              pointColorMapper: (ChartData graphData, _) => graphData.color)
         ],
       ),
     );
-  }
-}
-
-///This Class represents CPR Data provided for the Scenatios.
-///
-///Holds a [int] for the x- & y-Axis Value. Note that the x-Axis Value is dependent on the Resolution specified in the Scenario Data which influences the Update Rates.
-///Also Specifies a [Color] to signal the Pressure depth of performed CPR Compressions with green for the interval between 5 and 6. Otherwise red is Specified.
-///This color Property is used to Color the Bars in the [CprGraph].
-class CPRData {
-  ///DataClass for CPR Graph in AED Screen.
-  final int yvalue;
-  final int xvalue;
-  late Color color;
-
-  ///Constructor for [this]. Sets x- & y-Axis paramets of this DataClass. Also Decides based on the y-Axis value specified, which color the resulting Bar in the CPR Graph should be colored in.
-  ///
-  /// ### General Information about the CPR Depth indicated in red and green.
-  /// Please Consider the recommendations for a optimal CPR to understand why the Colors are set the way they are. (https://www.cprblspros.com/cpr-cheat-sheet-2022)
-  ///
-  CPRData({required this.yvalue, required this.xvalue}) {
-    ///Named Parameter [yvalue] and [xvalue] to initialize the corresponding DataPoints for the Graph.
-    if (yvalue >= 5 && yvalue <= 6) {
-      color = Colors.green;
-    } else {
-      color = Colors.red;
-    }
   }
 }

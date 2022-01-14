@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
-import 'package:uke_mlab/models/model_nibd.dart';
+import 'package:uke_mlab/models/model_graphdata.dart';
 
 ///Creates a [SfCartesianChart] to Display a History Graph. Example Use: NIBD History
 ///
@@ -27,8 +27,8 @@ class HistoryGraph extends StatelessWidget {
   double findMax(bool max) {
     if (max) {
       List<int> syst = [];
-      for (var element in (graphData['data'] as List<NIBDdata>)) {
-        syst.add(element.systolicPressure);
+      for (var element in (graphData['data'] as List<ChartData>)) {
+        syst.add(element.systolicPressure!);
       }
       syst.sort();
 
@@ -36,8 +36,8 @@ class HistoryGraph extends StatelessWidget {
     } else {
       List<int> dist = [];
 
-      for (var element in (graphData['data'] as List<NIBDdata>)) {
-        dist.add(element.diastolicPressure);
+      for (var element in (graphData['data'] as List<ChartData>)) {
+        dist.add(element.diastolicPressure!);
       }
 
       dist.sort();
@@ -78,17 +78,17 @@ class HistoryGraph extends StatelessWidget {
             Trendline(dashArray: <double>[2, 3], type: TrendlineType.movingAverage, color: Colors.redAccent)
           ],
           color: graphData['color'] as Color,
-          dataSource: graphData['data'] as List<NIBDdata>,
-          xValueMapper: (NIBDdata data, _) => data.time,
-          yValueMapper: (NIBDdata data, _) => data.mad,
+          dataSource: graphData['data'] as List<ChartData>,
+          xValueMapper: (ChartData data, _) => data.time,
+          yValueMapper: (ChartData data, _) => data.meanArterialPressure,
         ),
         HiloSeries(
           enableTooltip: true,
-          dataSource: graphData['data'] as List<NIBDdata>,
+          dataSource: graphData['data'] as List<ChartData>,
           color: Colors.red,
-          xValueMapper: (NIBDdata data, _) => data.time,
-          lowValueMapper: (NIBDdata data, _) => data.diastolicPressure,
-          highValueMapper: (NIBDdata data, _) => data.systolicPressure,
+          xValueMapper: (ChartData data, _) => data.time,
+          lowValueMapper: (ChartData data, _) => data.diastolicPressure,
+          highValueMapper: (ChartData data, _) => data.systolicPressure,
           markerSettings: const MarkerSettings(shape: DataMarkerType.horizontalLine, width: 10, isVisible: true),
         ),
       ],
