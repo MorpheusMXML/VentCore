@@ -213,14 +213,14 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
       'color': AppTheme.breathFrequencyColor,
       'floatRepresentation': false,
       'upperBound': {
-        'adult': 35,
-        'child': 35,
-        'infant': 35,
+        'adult': 21,
+        'child': 28,
+        'infant': 40,
       },
       'lowerBound': {
-        'adult': 20,
-        'child': 20,
-        'infant': 20,
+        'adult': 9,
+        'child': 13,
+        'infant': 33,
       },
     },
   };
