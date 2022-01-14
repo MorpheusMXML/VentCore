@@ -27,7 +27,7 @@ class ValueBoxContainer extends StatelessWidget {
     const double aspectRatio =
         1.1; // TODO: should be 1 but then we have a pixel overflow -> 255 and others are too big in current configuration
     const double fontSize = 17;
-    const double fontSizeCenter = 50;
+    const double fontSizeCenter = 44;
     // could be done via template pattern for better code quality
     if (dataModelGraph == null) {
       return AspectRatio(

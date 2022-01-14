@@ -43,6 +43,7 @@ class ValueBoxSettings extends StatelessWidget {
       setFunction = screenController.setLowerBoundary;
     }
 
+    // TODO build sensibleCheck for boundaries (if potentially lower > upper => stop scrollability in one direction)
     return ConstrainedBox(
         constraints: BoxConstraints(maxHeight: height, maxWidth: width),
         child: ListWheelScrollView(
@@ -66,7 +67,7 @@ class ValueBoxSettings extends StatelessWidget {
                     for (double i = 0.0; i < 200.1; i = i + 0.1)
                       Text(
                         i.toStringAsFixed(1),
-                        style: TextStyle(fontSize: 12),
+                        style: const TextStyle(fontSize: 12),
                       )
                   ]
                 : List.generate(400, (index) => Text('$index'))));

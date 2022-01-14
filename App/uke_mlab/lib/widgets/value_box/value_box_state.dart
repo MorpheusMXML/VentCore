@@ -33,8 +33,6 @@ class ValueBoxState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Also check for alarms here (red container)
-
     return Obx(
       () => dataModel.tapped.value
           ? Container(

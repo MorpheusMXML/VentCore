@@ -46,6 +46,7 @@ class ValueBoxTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: Also check for alarms here (=>build red container if alarm) + confirmation button above toggle_mode_button
     if (sensorGraph == null) {
       // could also be done via, but the relevant case disctinction here is whether there is a sensorGraph associated or not
       DataModelAbsolute dataModel = Get.find<DataModelAbsolute>(
