@@ -63,7 +63,7 @@ class PatientScenario extends AbstractScenario {
         }
 
         if (endIndex >= dataList.length) {
-          endIndex = dataList.length - 1;
+          endIndex = dataList.length;
           scenarioRunning = false;
         }
         dataModelGraph.updateValues(dataList.sublist(startIndex, endIndex));
