@@ -21,7 +21,7 @@ class GraphAdderPopup extends StatelessWidget {
         child: Obx(
           () => Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: sensorEnum.values.map((sensor) {
+              children: sensorEnumGraph.values.map((sensor) {
                 ButtonStyle style;
                 systemState.graphList.contains(sensor)
                     ? style = ElevatedButton.styleFrom(
@@ -40,7 +40,7 @@ class GraphAdderPopup extends StatelessWidget {
                         ? systemState.graphList.remove(sensor)
                         : systemState.graphList.add(sensor),
                     child: Text(
-                      sensor.abbreviation,
+                      sensor.graphTitle,
                       style: const TextStyle(fontSize: 18),
                       textAlign: TextAlign.center,
                     ));

@@ -12,7 +12,7 @@ class GraphAlarmBorder extends StatelessWidget {
   /// Sets an border which is triggered through the [SystemState]
   ///
   /// Uses a Switch case to divide different alarmTypes read through [boundaryStateEnum]
-  final sensorEnum sensor;
+  final sensorEnumAbsolute sensor;
   const GraphAlarmBorder({
     Key? key,
     required this.sensor,

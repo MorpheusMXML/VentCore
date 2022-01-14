@@ -33,8 +33,9 @@ class VentilationMode extends StatelessWidget {
           flex: 1,
           child: Row(
             children: const [
-              ValueBoxTile.withHeadline(sensor: sensorEnum.mve),
-              ValueBoxTile.withHeadline(sensor: sensorEnum.breathFrequency),
+              ValueBoxTile.withHeadline(
+                  sensorAbsolute: sensorEnumAbsolute.breathfrequency),
+              ValueBoxTile.withHeadline(sensorAbsolute: sensorEnumAbsolute.mve),
             ],
           ),
         ),
@@ -42,8 +43,12 @@ class VentilationMode extends StatelessWidget {
           flex: 1,
           child: Row(
             children: [
-              Expanded(child: InfoContainer(data: infoData)),
-              const ValueBoxTile.withHeadline(sensor: sensorEnum.breathFrequency),
+              Expanded(
+                child: InfoContainer(data: infoData),
+              ),
+              const ValueBoxTile.withHeadline(
+                  sensorAbsolute:
+                      sensorEnumAbsolute.hfAbsolute), // TODO hf here?
             ],
           ),
         ),

@@ -1,135 +1,226 @@
 import 'package:flutter/material.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 
-enum sensorEnum {
-  heartFrequency,
-  spo2,
-  pulse,
-  breathFrequency,
-  nibd,
-  mve,
-  co2
-  //TODO expand
+enum sensorEnumGraph {
+  paw,
+  flow,
+  co2,
+  pleth,
+  ecgCh1,
+  ecgCh2,
+  cpr,
 }
 
-extension SensorAttributes on sensorEnum {
-  static const Map<sensorEnum, Map<String, dynamic>> attributes = {
-    sensorEnum.heartFrequency: {
+enum sensorEnumAbsolute {
+  hfAbsolute, // heartfrequency
+  tempAbsolute, // temprerature in °C
+  spo2Absolute,
+  co2Absolute,
+  pulse,
+  mve,
+  breathfrequency,
+}
+
+enum sensorEnumNibd {
+  nibdAbsolute,
+}
+
+class SensorMapping {
+  static const Map<sensorEnumGraph, sensorEnumAbsolute?> sensorMap = {
+    sensorEnumGraph.paw: null,
+    sensorEnumGraph.flow: null,
+    sensorEnumGraph.co2: sensorEnumAbsolute.co2Absolute,
+    sensorEnumGraph.pleth: sensorEnumAbsolute.spo2Absolute,
+    sensorEnumGraph.ecgCh1:
+        null, // could/should be null to avoid double representation, but due to customizability (ecgCh1 = only ecg channel) double representation is accepted
+    sensorEnumGraph.ecgCh2: sensorEnumAbsolute.hfAbsolute,
+    sensorEnumGraph.cpr: sensorEnumAbsolute.hfAbsolute,
+  };
+}
+
+extension SensorGraphAttributes on sensorEnumGraph {
+  static const Map<sensorEnumGraph, Map<String, dynamic>> attributes = {
+    sensorEnumGraph.paw: {
+      'graphTitle': 'PAW',
+      'yAxisUnit': 'mBar',
+      'xAxisUnit': '',
+      'color': AppTheme.pawColor,
+      'graphLength': 1500,
+    },
+    sensorEnumGraph.flow: {
+      'graphTitle': 'Flow',
+      'yAxisUnit': 'l/min',
+      'xAxisUnit': '',
+      'color': AppTheme.flowColor,
+      'graphLength': 1500,
+    },
+    sensorEnumGraph.co2: {
+      'graphTitle': 'CO2',
+      'yAxisUnit': 'mmHg',
+      'xAxisUnit': '',
+      'color': AppTheme.co2Color,
+      'graphLength': 1500,
+    },
+    sensorEnumGraph.pleth: {
+      'graphTitle': 'Pleth',
+      'yAxisUnit': '%',
+      'xAxisUnit': '',
+      'color': AppTheme.plethColor,
+      'graphLength': 500,
+    },
+    sensorEnumGraph.ecgCh1: {
+      'graphTitle': 'ECG Channel 1',
+      'yAxisUnit': 'mV',
+      'xAxisUnit': '',
+      'color': AppTheme.heartFreqColor,
+      'graphLength': 1500,
+    },
+    sensorEnumGraph.ecgCh2: {
+      'graphTitle': 'ECG Channel 2',
+      'yAxisUnit': 'mV',
+      'xAxisUnit': '',
+      'color': AppTheme.heartFreqColor,
+      'graphLength': 1500,
+    },
+    sensorEnumGraph.cpr: {
+      'graphTitle': 'CPR',
+      'yAxisUnit': 'cm',
+      'xAxisUnit': '',
+      'color': AppTheme.heartFreqColor,
+      'graphLength': 25,
+    },
+  };
+
+  String get graphTitle => attributes[this]!['graphTitle'] as String;
+  String get yAxisUnit => attributes[this]!['yAxisUnit'] as String;
+  String get xAxisUnit => attributes[this]!['xAxisUnit'] as String;
+  Color get color => attributes[this]!['color'] as Color;
+  int get graphLength => attributes[this]!['graphLength'];
+}
+
+extension SensorAbsoluteAttributes on sensorEnumAbsolute {
+  static const Map<sensorEnumAbsolute, Map<String, dynamic>> attributes = {
+    sensorEnumAbsolute.hfAbsolute: {
       'displayString': 'Heart Frequency',
       'displayShortString': 'Heart Freq.',
       'abbreviation': 'HF',
-      'color': Color(0xFF4CAF50),
-      'updateRate': 10,
+      'unit': 'bpm',
+      'color': AppTheme.heartFreqColor,
+      'floatRepresentation': false,
       'upperBound': {
-        'adult': 170,
-        'child': 130,
-        'infant': 110,
+        'adult': 85,
+        'child': 125,
+        'infant': 145,
       },
       'lowerBound': {
-        'adult': 70,
-        'child': 80,
+        'adult': 55,
+        'child': 85,
+        'infant': 110,
+      },
+    },
+    sensorEnumAbsolute.tempAbsolute: {
+      'displayString': 'Temperature',
+      'displayShortString': 'Temp',
+      'abbreviation': 'Temp',
+      'unit': '°C',
+      'color': AppTheme.tempColor,
+      'floatRepresentation': true,
+      'upperBound': {'adult': 37.4, 'child': 37.4, 'infant': 37.4},
+      'lowerBound': {
+        'adult': 36.5,
+        'child': 36.5,
+        'infant': 36.5,
+      },
+    },
+    sensorEnumAbsolute.spo2Absolute: {
+      'displayString': 'Oxygen Saturation',
+      'displayShortString': 'SpO2',
+      'abbreviation': 'SpO2',
+      'unit': '%',
+      'color': AppTheme.plethColor,
+      'floatRepresentation': false,
+      'upperBound': {
+        'adult': 100,
+        'child': 100,
+        'infant': 100,
+      },
+      'lowerBound': {
+        'adult': 90,
+        'child': 90,
         'infant': 90,
       },
     },
-    sensorEnum.breathFrequency: {
-      'displayString': 'Breath Frequency',
-      'displayShortString': 'Breath Freq.',
-      'abbreviation': 'AF',
-      'color': Color(0xFF0CECDD),
-      'updateRate': 10,
-      'upperBound': {
-        'adult': 200,
-        'child': 170,
-        'infant': 120,
-      },
-      'lowerBound': {
-        'adult': 40,
-        'child': 50,
-        'infant': 60,
-      },
-    },
-    sensorEnum.co2: {
+    sensorEnumAbsolute.co2Absolute: {
       'displayString': 'CO2',
       'displayShortString': 'CO2',
       'abbreviation': 'CO2',
-      'color': Color(0xFFAf52DE),
-      'updateRate': 10,
+      'unit': 'mmHg',
+      'color': AppTheme.co2Color,
+      'floatRepresentation': false,
       'upperBound': {
-        'adult': 200,
-        'child': 170,
-        'infant': 120,
+        'adult': 45,
+        'child': 45,
+        'infant': 45,
       },
       'lowerBound': {
-        'adult': 40,
-        'child': 50,
-        'infant': 60,
+        'adult': 35,
+        'child': 35,
+        'infant': 35,
       },
     },
-    sensorEnum.mve: {
-      'displayString': 'MVE',
-      'displayShortString': 'MVE',
-      'abbreviation': 'MVE',
-      'color': Color(0xFF0CECDD),
-      'updateRate': 5,
-      'upperBound': {
-        'adult': 230,
-        'child': 170,
-        'infant': 120,
-      },
-      'lowerBound': {
-        'adult': 80,
-        'child': 70,
-        'infant': 60,
-      },
-    },
-    sensorEnum.nibd: {
-      'displayString': 'NIBD',
-      'displayShortString': 'NIBD',
-      'abbreviation': 'NIBD',
-      'color': Color(0xFFDC362E),
-      'updateRate': 5,
-      'upperBound': {
-        'adult': 220,
-        'child': 170,
-        'infant': 120,
-      },
-      'lowerBound': {
-        'adult': 70,
-        'child': 60,
-        'infant': 50,
-      },
-    },
-    sensorEnum.pulse: {
+    sensorEnumAbsolute.pulse: {
       'displayString': 'Pulse',
       'displayShortString': 'Pulse',
       'abbreviation': 'PP',
-      'color': Color(0xFF9C27B0),
-      'updateRate': 10,
+      'unit': 'bpm',
+      'color': AppTheme.pulseColor,
+      'floatRepresentation': false,
       'upperBound': {
-        'adult': 210,
-        'child': 180,
-        'infant': 130,
+        'adult': 85,
+        'child': 125,
+        'infant': 145,
       },
       'lowerBound': {
-        'adult': 50,
-        'child': 60,
-        'infant': 70,
+        'adult': 55,
+        'child': 85,
+        'infant': 110,
       },
     },
-    sensorEnum.spo2: {
-      'displayString': 'Espiratorial O2',
-      'displayShortString': 'Esp. O2',
-      'abbreviation': 'SpO2',
-      'color': Color(0xFF2196F3),
-      'updateRate': 5,
+    // next to temp another float case
+    sensorEnumAbsolute.mve: {
+      'displayString': 'MVe',
+      'displayShortString': 'MVe',
+      'abbreviation': 'MVe',
+      'unit': 'l/min',
+      'color': AppTheme.mveColor,
+      'floatRepresentation': true,
       'upperBound': {
-        'adult': 180,
-        'child': 140,
-        'infant': 120,
+        'adult': 8.4,
+        'child': 8.0,
+        'infant': 7.0,
       },
       'lowerBound': {
-        'adult': 80,
-        'child': 90,
-        'infant': 100,
+        'adult': 5.0,
+        'child': 5.0,
+        'infant': 5.0,
+      },
+    },
+    sensorEnumAbsolute.breathfrequency: {
+      'displayString': 'Breath. Freq.',
+      'displayShortString': 'Br. Freq.',
+      'abbreviation': 'AF',
+      'unit': 'br/min',
+      'color': AppTheme.breathFrequencyColor,
+      'floatRepresentation': false,
+      'upperBound': {
+        'adult': 20,
+        'child': 28,
+        'infant': 40,
+      },
+      'lowerBound': {
+        'adult': 10,
+        'child': 13,
+        'infant': 33,
       },
     },
   };
@@ -138,8 +229,41 @@ extension SensorAttributes on sensorEnum {
   String get displayShortString =>
       attributes[this]!['displayShortString'] as String;
   String get abbreviation => attributes[this]!['abbreviation'] as String;
+  String get unit => attributes[this]!['unit'] as String;
   Color get color => attributes[this]!['color'] as Color;
-  int get updateRate => attributes[this]!['updateRate'] as int;
-  Map get lowerBound => attributes[this]!['lowerBound'] as Map<String, int>;
-  Map get upperBound => attributes[this]!['upperBound'] as Map<String, int>;
+  Map get upperBound => attributes[this]!['upperBound'] as Map<String, dynamic>;
+  Map get lowerBound => attributes[this]!['lowerBound'] as Map<String, dynamic>;
+  bool get floatRepresentation => attributes[this]!['floatRepresentation'];
+}
+
+extension SensorNibdAttributes on sensorEnumNibd {
+  static const Map<sensorEnumNibd, Map<String, dynamic>> attributes = {
+    sensorEnumNibd.nibdAbsolute: {
+      'displayString':
+          'Non Invasive Blood Pressure', // german abbreviation is NIBD (nicht invasiver blutdruck)
+      'displayShortString': 'NIBD',
+      'abbreviation': 'NIBD',
+      'unit': 'mmHg',
+      'color': AppTheme.nibdColor,
+      'upperBound': {
+        // upper&lower bounds vor [SYS,DIA]
+        'adult': [130, 90],
+        'child': [100, 75],
+        'infant': [85, 60], // dia for infant no info found
+      },
+      'lowerBound': {
+        'adult': [120, 80],
+        'child': [85, 60],
+        'infant': [70, 50],
+      },
+    },
+  };
+  String get displayString => attributes[this]!['displayString'] as String;
+  String get displayShortString =>
+      attributes[this]!['displayShortString'] as String;
+  String get abbreviation => attributes[this]!['abbreviation'] as String;
+  String get unit => attributes[this]!['unit'] as String;
+  Color get color => attributes[this]!['color'] as Color;
+  Map get upperBound => attributes[this]!['upperBound'] as Map<String, dynamic>;
+  Map get lowerBound => attributes[this]!['lowerBound'] as Map<String, dynamic>;
 }

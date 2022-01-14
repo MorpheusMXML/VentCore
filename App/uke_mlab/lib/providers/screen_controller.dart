@@ -1,8 +1,9 @@
 import 'package:get/get.dart';
+import 'package:uke_mlab/models/model_absolute.dart';
+import 'package:uke_mlab/scenarios/patient_scenario.dart';
 import 'package:uke_mlab/utilities/enums/scenarios.dart';
 import 'package:uke_mlab/utilities/enums/patient_type.dart';
 import 'package:uke_mlab/utilities/enums/screen_status.dart';
-import 'package:uke_mlab/models/model.dart';
 import 'package:uke_mlab/models/model_manager.dart';
 import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/scenarios/abstract_scenario.dart';
@@ -15,12 +16,12 @@ class ScreenController {
   SystemState systemState = Get.find<SystemState>();
   ModelManager modelManager = Get.find<ModelManager>();
 
-  void setUpperBoundary(DataModel dataModel, int value) {
-    dataModel.upperAlarmBound.value = value;
+  void setUpperBoundary(DataModelAbsolute dataModel, double value) {
+    dataModel.setUpperAlarmBounadary(value);
   }
 
-  void setLowerBoundary(DataModel dataModel, int value) {
-    dataModel.lowerAlarmBound.value = value;
+  void setLowerBoundary(DataModelAbsolute dataModel, double value) {
+    dataModel.setLowerAlarmBounadary(value);
   }
 
   //Changes playing scenario based on input paramenter, stops currently playing scenario on call
@@ -38,25 +39,31 @@ class ScreenController {
     switch (scenario) {
       case scenariosEnum.standardScenario:
         runningScenario = StandardScenario();
-        runningScenario!.startScenario();
+        runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
         break;
       case scenariosEnum.scenario1:
-        print("start Scenario 1 here");
+        runningScenario = PatientScenario();
+        runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
         break;
       case scenariosEnum.scenario2:
-        print("start Scenario 2 here");
+        runningScenario = PatientScenario();
+        runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
         break;
       case scenariosEnum.scenario3a:
-        print("start Scenario 3a here");
+        runningScenario = PatientScenario();
+        runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
         break;
       case scenariosEnum.scenario3b:
-        print("start Scenario 3b here");
+        runningScenario = PatientScenario();
+        runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
         break;
       case scenariosEnum.scenario3c:
-        print("start Scenario 3c here");
+        runningScenario = PatientScenario();
+        runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
         break;
       case scenariosEnum.scenario4:
-        print("start Scenario 4 here");
+        runningScenario = PatientScenario();
+        runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
         break;
       default:
         throw Exception('No scenario for ' + scenario.name + ' known');

@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:uke_mlab/models/model_absolute.dart';
 
 import 'package:uke_mlab/providers/screen_controller.dart';
-import 'package:uke_mlab/models/model.dart';
 import 'package:uke_mlab/widgets/value_box/value_box_container.dart';
 import 'package:uke_mlab/widgets/value_box/value_box_settings.dart';
 
 class ValueBoxState extends StatelessWidget {
-  final DataModel dataModel;
+  final DataModelAbsolute dataModel;
   final double settingsWidth;
   final double settingsHeight;
+  final String? optAbreviationTitle;
   final String type;
 
   const ValueBoxState({
@@ -18,6 +19,7 @@ class ValueBoxState extends StatelessWidget {
     this.type = 'regular',
     this.settingsHeight = 100,
     this.settingsWidth = 60,
+    this.optAbreviationTitle,
   }) : super(key: key);
 
   const ValueBoxState.withHeadline({
@@ -25,15 +27,12 @@ class ValueBoxState extends StatelessWidget {
     required this.dataModel,
     this.type = 'withHeadline',
     this.settingsHeight = 100,
-    this.settingsWidth = 30,
+    this.settingsWidth = 35,
+    this.optAbreviationTitle,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final ScreenController screenController;
-
-    // TODO: Also check for alarms here (red container)
-
     return Obx(
       () => dataModel.tapped.value
           ? Container(
@@ -46,7 +45,10 @@ class ValueBoxState extends StatelessWidget {
                     width: settingsWidth,
                     height: settingsHeight,
                   ),
-                  ValueBoxContainer(dataModel: dataModel),
+                  ValueBoxContainer(
+                    dataModelAbsolute: dataModel,
+                    optAbreviationTitle: optAbreviationTitle,
+                  ),
                   ValueBoxSettings.upper(
                     dataModel: dataModel,
                     height: settingsHeight,
@@ -55,7 +57,10 @@ class ValueBoxState extends StatelessWidget {
                 ],
               ),
             )
-          : ValueBoxContainer(dataModel: dataModel),
+          : ValueBoxContainer(
+              dataModelAbsolute: dataModel,
+              optAbreviationTitle: optAbreviationTitle,
+            ),
     );
   }
 }
