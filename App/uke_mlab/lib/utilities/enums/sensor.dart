@@ -87,7 +87,7 @@ extension SensorGraphAttributes on sensorEnumGraph {
       'yAxisUnit': 'cm',
       'xAxisUnit': '',
       'color': AppTheme.heartFreqColor,
-      'graphLength': 1500,
+      'graphLength': 25,
     },
   };
 
@@ -223,8 +223,7 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
   };
 
   String get displayString => attributes[this]!['displayString'] as String;
-  String get displayShortString =>
-      attributes[this]!['displayShortString'] as String;
+  String get displayShortString => attributes[this]!['displayShortString'] as String;
   String get abbreviation => attributes[this]!['abbreviation'] as String;
   String get unit => attributes[this]!['unit'] as String;
   Color get color => attributes[this]!['color'] as Color;
@@ -235,8 +234,7 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
 extension SensorNibdAttributes on sensorEnumNibd {
   static const Map<sensorEnumNibd, Map<String, dynamic>> attributes = {
     sensorEnumNibd.nibdAbsolute: {
-      'displayString':
-          'Non Invasive Blood Pressure', // german abbreviation is NIBD (nicht invasiver blutdruck)
+      'displayString': 'Non Invasive Blood Pressure', // german abbreviation is NIBD (nicht invasiver blutdruck)
       'displayShortString': 'NIBD',
       'abbreviation': 'NIBD',
       'unit': 'mmHg',
@@ -255,8 +253,7 @@ extension SensorNibdAttributes on sensorEnumNibd {
     },
   };
   String get displayString => attributes[this]!['displayString'] as String;
-  String get displayShortString =>
-      attributes[this]!['displayShortString'] as String;
+  String get displayShortString => attributes[this]!['displayShortString'] as String;
   String get abbreviation => attributes[this]!['abbreviation'] as String;
   String get unit => attributes[this]!['unit'] as String;
   Color get color => attributes[this]!['color'] as Color;
