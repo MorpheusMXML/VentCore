@@ -29,7 +29,8 @@ class StandardScenario extends AbstractScenario {
       Timer.periodic(calculateUpdateRateAbsolute(resolution: resolution),
           (timer) {
         // TODO: intermediate implementation -> fix later
-        if (dataList.length - 1 == dataModelAbsolute.counter.value) {
+        // if counter outside list -> set counter to 0
+        if (dataList.length == dataModelAbsolute.counter.value) {
           dataModelAbsolute.counter.value = 0;
         }
         if (!scenarioRunning) {
@@ -67,16 +68,19 @@ class StandardScenario extends AbstractScenario {
           List endOfList = dataList.sublist(startIndex, dataList.length);
           // may discard last value
           List startOfList =
-              dataList.sublist(0, endIndex + 1 % dataList.length - 1);
+              dataList.sublist(0, (endIndex + 1) % (dataList.length - 1));
 
           dataModelGraph.updateValues(endOfList + startOfList);
+          // this startIndex is bigger than the last index of this dataList
         } else if (startIndex > dataList.length - 1) {
           dataModelGraph.updateValues(dataList.sublist(
-              startIndex % dataList.length - 1,
-              endIndex + 1 % dataList.length - 1));
+              startIndex % (dataList.length - 1),
+              (endIndex + 1) % (dataList.length - 1)));
         } else {
           dataModelGraph.updateValues(dataList.sublist(startIndex, endIndex));
         }
+        print(
+            "start:$startIndex | end:$endIndex | listlength:${dataList.length} |end%length: ${(endIndex + 1) % (dataList.length - 1)}");
       });
     }
   }

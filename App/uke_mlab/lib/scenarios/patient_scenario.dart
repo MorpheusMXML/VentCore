@@ -28,7 +28,7 @@ class PatientScenario extends AbstractScenario {
 
       Timer.periodic(calculateUpdateRateAbsolute(resolution: resolution),
           (timer) {
-        if (dataList.length - 1 == dataModelAbsolute.counter.value) {
+        if (dataList.length == dataModelAbsolute.counter.value) {
           scenarioRunning = false;
         }
         if (!scenarioRunning) {
@@ -55,7 +55,7 @@ class PatientScenario extends AbstractScenario {
         int startIndex = dataModelGraph.singleData.value.counter;
         int endIndex = dataModelGraph.singleData.value.counter + batchSize;
 
-        if (dataList.length - 1 <= startIndex) {
+        if (dataList.length <= startIndex) {
           scenarioRunning = false;
         }
         if (!scenarioRunning) {
@@ -68,6 +68,9 @@ class PatientScenario extends AbstractScenario {
         }
 
         dataModelGraph.updateValues(dataList.sublist(startIndex, endIndex));
+
+        print(
+            "start:$startIndex | end:$endIndex | listlength:${dataList.length} |end%length: ${(endIndex + 1) % (dataList.length - 1)}");
       });
     }
   }
