@@ -146,7 +146,13 @@ class ValueBoxContainer extends StatelessWidget {
 
               Obx(
                 () => Text(
-                  dataModelGraph!.singleData.value.value.toInt().toString(),
+                  (dataModelGraph!.singleData.value.value > -1.0 &&
+                          dataModelGraph!.singleData.value.value < 1.0)
+                      ? dataModelGraph!.singleData.value.value
+                          .toStringAsFixed(1)
+                      : dataModelGraph!.singleData.value.value
+                          .toInt()
+                          .toString(),
                   style: TextStyle(
                     color: dataModelGraph!.color,
                     fontSize: fontSizeCenter,
