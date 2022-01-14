@@ -87,7 +87,7 @@ extension SensorGraphAttributes on sensorEnumGraph {
       'yAxisUnit': 'cm',
       'xAxisUnit': '',
       'color': AppTheme.heartFreqColor,
-      'graphLength': 1500,
+      'graphLength': 25,
     },
   };
 
@@ -213,12 +213,12 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
       'color': AppTheme.breathFrequencyColor,
       'floatRepresentation': false,
       'upperBound': {
-        'adult': 21,
+        'adult': 20,
         'child': 28,
         'infant': 40,
       },
       'lowerBound': {
-        'adult': 9,
+        'adult': 10,
         'child': 13,
         'infant': 33,
       },

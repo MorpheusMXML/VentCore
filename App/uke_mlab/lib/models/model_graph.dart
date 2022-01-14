@@ -53,16 +53,21 @@ class DataModelGraph extends GetxController {
 
   void resetDataModel() {
     singleData.value = ChartData(DateTime.now(), 0.0, 0);
-    //clear historical data
     graphData.clear();
+    populateGraphList();
   }
 
   void setGraphMaxLength(newLength) {
     graphDataMaxLength = newLength;
     graphData.clear();
+    populateGraphList();
+  }
+
+  void populateGraphList() {
+    //singleData.value = ChartData(DateTime.now(), 0.0, 0);
+    //graphData.add(singleData.value);
     for (int i = 0; i < graphDataMaxLength; i++) {
-      singleData.value =
-          ChartData(DateTime.now(), 0.0, singleData.value.counter + 1);
+      singleData.value = ChartData(DateTime.now(), 0.0, i);
       graphData.add(singleData.value);
     }
   }

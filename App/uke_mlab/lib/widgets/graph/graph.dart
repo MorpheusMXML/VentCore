@@ -33,8 +33,7 @@ class Graph extends StatelessWidget {
               onRendererCreated: (ChartSeriesController controller) {
                 dataModel.chartController = controller;
               },
-              xValueMapper: (ChartData data, _) =>
-                  (data.counter - dataModel.graphDataMaxLength),
+              xValueMapper: (ChartData data, _) => data.counter,
               yValueMapper: (ChartData data, _) => data.value)
         ],
       ),

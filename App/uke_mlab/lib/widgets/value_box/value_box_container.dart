@@ -117,28 +117,30 @@ class ValueBoxContainer extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               // Top
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                Container(
-                  margin: const EdgeInsets.only(left: 15, bottom: fontSize),
-                  child: Text(
-                    dataModelGraph!.graphTitle,
-                    style: TextStyle(
-                      color: dataModelGraph!.color,
-                      fontSize: fontSize,
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(right: 15),
-                  child: Text(
-                    "Graph\nValue",
-                    style: TextStyle(
-                      color: dataModelGraph!.color,
-                      fontSize: fontSize,
-                    ),
-                  ),
-                ),
-              ]),
+              Padding(
+                padding: const EdgeInsets.only(left: 15.0, right: 15.0),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          dataModelGraph!.graphTitle,
+                          style: TextStyle(
+                            color: dataModelGraph!.color,
+                            fontSize: fontSize,
+                          ),
+                        ),
+                      ),
+                      Spacer(),
+                      Text(
+                        "Graph\nValue",
+                        style: TextStyle(
+                          color: dataModelGraph!.color,
+                          fontSize: fontSize,
+                        ),
+                      ),
+                    ]),
+              ),
 
               // Middle
 
@@ -153,19 +155,21 @@ class ValueBoxContainer extends StatelessWidget {
               ),
 
               // Bottom
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                Container(),
-                Container(
-                  margin: const EdgeInsets.only(right: 15),
-                  child: Text(
-                    dataModelGraph!.yAxisTitle,
-                    style: TextStyle(
-                      color: dataModelGraph!.color,
-                      fontSize: fontSize,
-                    ),
-                  ),
-                ),
-              ]),
+              Padding(
+                padding: const EdgeInsets.only(left: 15.0, right: 15.0),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(),
+                      Text(
+                        dataModelGraph!.yAxisTitle,
+                        style: TextStyle(
+                          color: dataModelGraph!.color,
+                          fontSize: fontSize,
+                        ),
+                      ),
+                    ]),
+              ),
             ],
           ),
         ),
