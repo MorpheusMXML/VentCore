@@ -43,12 +43,7 @@ class DataModelGraph extends GetxController {
     //chartController?.updateDataSource(
     //    updatedDataIndexes: [for (int i = 0; i < graphData.length; i++) i]);
 
-    // TODO make "little" analysis here and call inform alarmManager to start evaluation
-  }
-
-  // informs alarmController about change via call
-  void informAlarmController() {
-    // TODO implement
+    // TODO: make "little" analysis here and call inform alarmManager to start evaluation
   }
 
   void resetDataModel() {

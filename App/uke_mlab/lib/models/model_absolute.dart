@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import 'package:uke_mlab/providers/alarm_controller.dart';
+
 import 'package:uke_mlab/utilities/enums/sensor.dart';
-import 'package:uke_mlab/utilities/enums/boundary_state.dart';
-import 'package:uke_mlab/models/system_state.dart';
 
 class DataModelAbsolute extends GetxController {
   late final sensorEnumAbsolute sensorKey;
+  late final AlarmController alarmController;
 
   Color color = Colors.white;
   String displayString = 'No Default Info';
@@ -31,8 +32,6 @@ class DataModelAbsolute extends GetxController {
 
   final int historicValuesMaxLength = 10;
 
-  final SystemState _systemState = Get.find<SystemState>();
-
   DataModelAbsolute({
     required this.sensorKey,
     required this.initialUpperBound,
@@ -52,46 +51,25 @@ class DataModelAbsolute extends GetxController {
       historicValues.removeAt(0);
     }
 
-    evaluateBoundaryViolation();
+    ///Inform [AlarmController] about a value change.
+    alarmController.evaluateAlarm(absoluteValue.value, upperAlarmBound.value,
+        lowerAlarmBound.value, sensorKey);
   }
 
-  void evaluateBoundaryViolation() {
-    //evaluates whether update violated alarm boundaries or returns into boundaries
-    if (absoluteValue.value > upperAlarmBound.value) {
-      evaluateBoundaryChange(boundaryStateEnum.upperBoundaryViolated);
-    } else if (absoluteValue.value < lowerAlarmBound.value) {
-      evaluateBoundaryChange(boundaryStateEnum.lowerBoundaryViolated);
-    } else {
-      evaluateBoundaryChange(boundaryStateEnum.inBoundaries);
-    }
-  }
-
-  void evaluateBoundaryChange(boundaryState) {
-    if (_systemState.violationStates[sensorKey] != boundaryState) {
-      _systemState.violationStates[sensorKey] = boundaryState;
-      informAlarmController(boundaryState);
-    }
-  }
-
-  //informs alarmController about change via call
-  void informAlarmController(boundaryStateEnum boundaryState) {
-    //TODO implement instead of just printing
-    //print('$sensorKey had boundary change to $boundaryState');
-    //requires information about own state
-  }
-
-  void setUpperAlarmBounadary(double newBoundary) {
+  void setUpperAlarmBoundary(double newBoundary) {
     if (newBoundary >= lowerAlarmBound.value) {
       upperAlarmBound.value = newBoundary;
     }
-    evaluateBoundaryViolation();
+    alarmController.evaluateAlarm(absoluteValue.value, upperAlarmBound.value,
+        lowerAlarmBound.value, sensorKey);
   }
 
-  void setLowerAlarmBounadary(double newBoundary) {
+  void setLowerAlarmBoundary(double newBoundary) {
     if (newBoundary <= upperAlarmBound.value) {
       lowerAlarmBound.value = newBoundary;
     }
-    evaluateBoundaryViolation();
+    alarmController.evaluateAlarm(absoluteValue.value, upperAlarmBound.value,
+        lowerAlarmBound.value, sensorKey);
   }
 
   void resetDataModel() {

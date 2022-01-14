@@ -67,7 +67,7 @@ lib/generated_plugin_registrant.dart
 .DS_*
 .idea
 
-### react ###
+### REACT ###
 *.log
 logs
 **/*.backup.*
@@ -78,3 +78,6 @@ bower_components
 psd
 thumb
 sketch
+
+### VisualStudio Code ###
+.vscode/launch.json

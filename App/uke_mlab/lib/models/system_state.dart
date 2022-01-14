@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/general_alarms.dart';
+import 'package:uke_mlab/utilities/enums/alarm_priority.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
-import 'package:uke_mlab/utilities/enums/boundary_state.dart';
 import 'package:uke_mlab/utilities/enums/screen_status.dart';
 import 'package:uke_mlab/utilities/enums/patient_type.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
@@ -12,8 +12,8 @@ class SystemState {
 
   patientTypeEnum patientType = patientTypeEnum.none;
 
-  final RxMap<sensorEnumAbsolute, boundaryStateEnum> violationStates =
-      <sensorEnumAbsolute, boundaryStateEnum>{}.obs;
+  final RxMap<sensorEnumAbsolute, RxMap<String, dynamic>> alarmState =
+      <sensorEnumAbsolute, RxMap<String, dynamic>>{}.obs;
 
   bool scenarioStarted = false;
 
@@ -40,7 +40,11 @@ class SystemState {
   // SystemState initated with no violations at place and screenStatus as topLevelScreen
   SystemState() {
     for (var sensor in sensorEnumAbsolute.values) {
-      violationStates[sensor] = boundaryStateEnum.inBoundaries;
+      alarmState[sensor] = RxMap({
+        "priority": 0,
+        "message": "none",
+        "alarmPriorityEnum": alarmPriority.none
+      });
     }
   }
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:uke_mlab/models/system_state.dart';
-import 'package:uke_mlab/utilities/enums/boundary_state.dart';
+import 'package:uke_mlab/utilities/enums/alarm_priority.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 import 'package:uke_mlab/widgets/graph_container/alarm_confirm_button.dart';
@@ -23,9 +23,9 @@ class GraphAlarmBorder extends StatelessWidget {
     final SystemState systemState = Get.find<SystemState>();
     return Obx(() {
       ///evaluate alarmTypes and see which Boundary is violated
-      boundaryStateEnum? alarmType = systemState.violationStates[sensor];
-      switch (alarmType) {
-        case boundaryStateEnum.lowerBoundaryViolated:
+      alarmPriority? alarm = systemState.alarmState[sensor]!["alarmPriorityEnum"];
+      switch (alarm) {
+        case alarmPriority.high:
           return Column(
             children: [
               Expanded(
@@ -44,12 +44,12 @@ class GraphAlarmBorder extends StatelessWidget {
               ),
             ],
           );
-        case boundaryStateEnum.upperBoundaryViolated:
+        case alarmPriority.middle:
           return Column(
             children: [
               Expanded(
                 child: Container(
-                  color: Colors.red,
+                  color: Colors.yellow,
                   padding: const EdgeInsets.only(bottom: 5),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -63,12 +63,12 @@ class GraphAlarmBorder extends StatelessWidget {
               ),
             ],
           );
-        case boundaryStateEnum.suppressed:
+        case alarmPriority.confirmed:
           return Column(
             children: [
               Expanded(
                 child: Container(
-                  color: Colors.red,
+                  color: Colors.blue,
                   margin: const EdgeInsets.fromLTRB(0, 0, 0, 30),
                 ),
               ),
