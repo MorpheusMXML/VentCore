@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/model_absolute.dart';
 import 'package:uke_mlab/models/model_graph.dart';
+import 'package:uke_mlab/models/model_nibd.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/utilities/enums/patient_type.dart';
 import 'package:uke_mlab/models/model_absolute.dart';
@@ -27,11 +28,19 @@ class ModelManager {
           tag: sensor.name);
     }
     for (var sensor in sensorEnumGraph.values) {
-      Get.put(
-          DataModelGraph(
-            sensorKey: sensor,
-          ),
-          tag: sensor.name);
+      if (sensor == sensorEnumGraph.nibd) {
+        Get.put(
+            DataModelNIBD(
+              sensorKey: sensor,
+            ),
+            tag: sensor.name);
+      } else {
+        Get.put(
+            DataModelGraph(
+              sensorKey: sensor,
+            ),
+            tag: sensor.name);
+      }
     }
   }
 
@@ -97,8 +106,14 @@ class ModelManager {
       dataModel.abbreviation = sensor.abbreviation;
       dataModel.unit = sensor.unit;
     }
+    // bad implementation for deciding which datamodel to find, sorry
+    dynamic dataModel;
     for (var sensor in sensorEnumGraph.values) {
-      DataModelGraph dataModel = Get.find<DataModelGraph>(tag: sensor.name);
+      if (sensor == sensorEnumGraph.nibd) {
+        dataModel = Get.find<DataModelNIBD>(tag: sensor.name);
+      } else {
+        dataModel = Get.find<DataModelGraph>(tag: sensor.name);
+      }
       dataModel.color = sensor.color;
       dataModel.xAxisTitle = sensor.xAxisUnit;
       dataModel.yAxisTitle = sensor.yAxisUnit;
