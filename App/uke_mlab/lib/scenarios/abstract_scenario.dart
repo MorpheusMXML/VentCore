@@ -1,6 +1,9 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
+import 'package:uke_mlab/models/model_absolute.dart';
+import 'package:uke_mlab/models/model_nibd.dart';
 import 'package:uke_mlab/utilities/enums/scenarios.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
@@ -11,17 +14,13 @@ abstract class AbstractScenario {
   void startScenario({required String scenarioPath}) {
     scenarioRunning = true;
     loadData(scenarioPath: scenarioPath).then((dataList) => runScenario(
-        dataMapAbsolute:
-            dataList[0] as Map<sensorEnumAbsolute, Map<String, dynamic>>,
-        dataMapGraph:
-            dataList[1] as Map<sensorEnumGraph, Map<String, dynamic>>));
+        dataMapAbsolute: dataList[0] as Map<sensorEnumAbsolute, Map<String, dynamic>>,
+        dataMapGraph: dataList[1] as Map<sensorEnumGraph, Map<String, dynamic>>));
   }
 
   // runScenario(dataMapAbsolute: list[0], dataMapGraph: list[1]);
   // to be overwritten, behaviour depending on concrete scenario
-  void runScenario(
-      {required Map<sensorEnumAbsolute, Map<String, dynamic>> dataMapAbsolute,
-      required Map<sensorEnumGraph, Map<String, dynamic>> dataMapGraph});
+  void runScenario({required Map<sensorEnumAbsolute, Map<String, dynamic>> dataMapAbsolute, required Map<sensorEnumGraph, Map<String, dynamic>> dataMapGraph});
 
   void stopScenario() {
     scenarioRunning = false;
@@ -29,8 +28,7 @@ abstract class AbstractScenario {
 
   // List of two maps one for graphs and one for absolute
   // first entry should consist of the absolute enum map and the second contains the graph map
-  Future<List<Map<dynamic, Map<String, dynamic>>>> loadData(
-      {required String scenarioPath}) async {
+  Future<List<Map<dynamic, Map<String, dynamic>>>> loadData({required String scenarioPath}) async {
     Map<sensorEnumAbsolute, Map<String, dynamic>> absoluteMap = {};
     Map<sensorEnumGraph, Map<String, dynamic>> graphMap = {};
 
@@ -69,8 +67,7 @@ abstract class AbstractScenario {
   /// ```dart
   /// int millisTillNextBatch = ((1 / resolution) * 1000) * batchSize;
   /// ```
-  Duration calculateUpdateRate(
-      {required int batchSize, required double resolution}) {
+  Duration calculateUpdateRate({required int batchSize, required double resolution}) {
     int millisTillNextDatapoint = ((1 / resolution) * 1000).toInt();
     int millisTillNextBatch = millisTillNextDatapoint * batchSize;
     return Duration(milliseconds: millisTillNextBatch);
