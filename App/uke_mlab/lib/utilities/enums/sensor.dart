@@ -240,6 +240,7 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
       'abbreviation': 'sys',
       'unit': '',
       'color': AppTheme.nibdColor,
+      'floatRepresentation': false,
       'upperBound': {
         'adult': 130,
         'child': 100,
@@ -257,6 +258,7 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
       'abbreviation': 'dia',
       'unit': '',
       'color': AppTheme.nibdColor,
+      'floatRepresentation': false,
       'upperBound': {
         'adult': 90,
         'child': 75,
@@ -276,6 +278,8 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
   String get abbreviation => attributes[this]!['abbreviation'] as String;
   String get unit => attributes[this]!['unit'] as String;
   Color get color => attributes[this]!['color'] as Color;
+  bool get floatRepresentation =>
+      attributes[this]!['floatRepresentation'] as bool;
   Map get upperBound => attributes[this]!['upperBound'] as Map<String, dynamic>;
   Map get lowerBound => attributes[this]!['lowerBound'] as Map<String, dynamic>;
 }

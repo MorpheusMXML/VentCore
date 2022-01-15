@@ -42,61 +42,47 @@ class DataModelGraph extends GetxController {
         graphData.add(singleData.value);
       }
 
-<<<<<<< HEAD
-    if (graphData.length > graphDataMaxLength) {
-      for (var i = 0; i < valueList.length; i++) {
-        graphData.removeAt(0);
-=======
-      if (graphData.length + 1 > graphDataMaxLength) {
+      if (graphData.length > graphDataMaxLength) {
         for (var i = 0; i < valueList.length; i++) {
           graphData.removeAt(0);
         }
-      }
-    } else {
-      for (int i = 0; i < valueList.length; i++) {
-        singleData.value = ChartData(
-            time: DateTime.now(),
-            value: valueList[i].toDouble(),
-            counter: singleData.value.counter + 1);
-        graphData.add(singleData.value);
+      } else {
+        for (int i = 0; i < valueList.length; i++) {
+          singleData.value = ChartData(
+              time: DateTime.now(),
+              value: valueList[i].toDouble(),
+              counter: singleData.value.counter + 1);
+          graphData.add(singleData.value);
+        }
+
+        if (graphData.length + 1 > graphDataMaxLength) {
+          for (var i = 0; i < valueList.length; i++) {
+            graphData.removeAt(0);
+          }
+        }
       }
 
-      if (graphData.length + 1 > graphDataMaxLength) {
-        for (var i = 0; i < valueList.length; i++) {
-          graphData.removeAt(0);
-        }
->>>>>>> Issue-112
-      }
-    } else {
-      for (int i = 0; i < valueList.length; i++) {
-        singleData.value = ChartData(
-            time: DateTime.now(),
-            value: valueList[i].toDouble(),
-            counter: singleData.value.counter + 1);
-        graphData.add(singleData.value);
-      }
+      // update only added/removed indexes instead of the whole chart (efficient)
+      //chartController?.updateDataSource(
+      //    updatedDataIndexes: [for (int i = 0; i < graphData.length; i++) i]);
 
-      if (graphData.length + 1 > graphDataMaxLength) {
-        for (var i = 0; i < valueList.length; i++) {
-          graphData.removeAt(0);
-        }
-      }
+      // TODO make "little" analysis here and call inform alarmManager to start evaluation
     }
-
-    // update only added/removed indexes instead of the whole chart (efficient)
-<<<<<<< HEAD
-    //chartController?.updateDataSource(
-    //    updatedDataIndexes: [for (int i = 0; i < graphData.length; i++) i]);
-=======
-    // chartController?.updateDataSource(updatedDataIndexes: [for (int i = 0; i < graphData.length; i++) i]);
->>>>>>> Issue-112
-
-    // TODO make "little" analysis here and call inform alarmManager to start evaluation
   }
 
   // informs alarmController about change via call
   void informAlarmController() {
     // TODO implement
+  }
+
+  void populateGraphList() {
+    //singleData.value = ChartData(DateTime.now(), 0.0, 0);
+    //graphData.add(singleData.value);
+    for (int i = 0; i < graphDataMaxLength; i++) {
+      singleData.value =
+          ChartData(counter: i, time: DateTime.now(), value: 0.0);
+      graphData.add(singleData.value);
+    }
   }
 
   void resetDataModel() {
@@ -111,17 +97,7 @@ class DataModelGraph extends GetxController {
     graphData.clear();
     populateGraphList();
   }
-
-  void populateGraphList() {
-    //singleData.value = ChartData(DateTime.now(), 0.0, 0);
-    //graphData.add(singleData.value);
-    for (int i = 0; i < graphDataMaxLength; i++) {
-      singleData.value = ChartData(DateTime.now(), 0.0, i);
-      graphData.add(singleData.value);
-    }
-  }
 }
-
 /* // Construct a new data entry tuple
 class ChartData {
   final DateTime time;
