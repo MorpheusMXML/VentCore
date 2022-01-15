@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -42,6 +45,18 @@ class MyApp extends StatelessWidget {
     // svgs are loaded and screens are given bindings?
     final AlarmController alarmController =
         Get.put(AlarmController(modelManager));
+    Timer.periodic(const Duration(seconds: 2), (timer) {
+      if (Random().nextInt(10) > 1) {
+        systemState.generalAlarms.addAlarm(
+            nonGraphAlarmEnum
+                .values[Random().nextInt(nonGraphAlarmEnum.values.length)],
+            Random().nextInt(100));
+      } else {
+        if (systemState.generalAlarms.alarmList.isNotEmpty) {
+          systemState.generalAlarms.alarmList.removeAt(0);
+        }
+      }
+    });
   }
 
   @override
