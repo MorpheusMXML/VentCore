@@ -15,37 +15,56 @@ class StandardScenario extends AbstractScenario {
   }) : super();
 
   @override
-  void runScenario({required Map<sensorEnumAbsolute, Map<String, dynamic>> dataMapAbsolute, required Map<sensorEnumGraph, Map<String, dynamic>> dataMapGraph}) {
+  void runScenario(
+      {required Map<sensorEnumAbsolute, Map<String, dynamic>> dataMapAbsolute,
+      required Map<sensorEnumGraph, Map<String, dynamic>> dataMapGraph}) {
     for (var sensorAbsolute in dataMapAbsolute.keys) {
-      DataModelAbsolute dataModelAbsolute = Get.find<DataModelAbsolute>(tag: sensorAbsolute.name);
-      double resolution = dataMapAbsolute[sensorAbsolute]!['channel_information']['resolution']['value'].toDouble();
-      List<dynamic> dataList = dataMapAbsolute[sensorAbsolute]!['data'];
+      if (sensorAbsolute != sensorEnumAbsolute.sysAbsolute &&
+          sensorAbsolute != sensorEnumAbsolute.diaAbsolute) {
+        DataModelAbsolute dataModelAbsolute =
+            Get.find<DataModelAbsolute>(tag: sensorAbsolute.name);
+        double resolution =
+            dataMapAbsolute[sensorAbsolute]!['channel_information']
+                    ['resolution']['value']
+                .toDouble();
+        List<dynamic> dataList = dataMapAbsolute[sensorAbsolute]!['data'];
 
-      Timer.periodic(calculateUpdateRateAbsolute(resolution: resolution), (timer) {
-        // TODO: intermediate implementation -> fix later
-        // if counter outside list -> set counter to 0
-        if (dataList.length == dataModelAbsolute.counter.value) {
-          dataModelAbsolute.counter.value = 0;
-        }
-        if (!scenarioRunning) {
-          timer.cancel();
-        }
+        Timer.periodic(calculateUpdateRateAbsolute(resolution: resolution),
+            (timer) {
+          // TODO: intermediate implementation -> fix later
+          // if counter outside list -> set counter to 0
+          if (dataList.length == dataModelAbsolute.counter.value) {
+            dataModelAbsolute.counter.value = 0;
+          }
+          if (!scenarioRunning) {
+            timer.cancel();
+          }
 
-        dataModelAbsolute.updateValue(dataList[dataModelAbsolute.counter.value].toDouble());
-      });
+          dataModelAbsolute.updateValue(
+              dataList[dataModelAbsolute.counter.value].toDouble());
+        });
+      }
     }
 
     for (var sensorGraph in dataMapGraph.keys) {
       int batchSize = 1;
-      double resolution = dataMapGraph[sensorGraph]!['channel_information']['resolution']['value'].toDouble();
+      double resolution = dataMapGraph[sensorGraph]!['channel_information']
+              ['resolution']['value']
+          .toDouble();
       List<dynamic> dataList = dataMapGraph[sensorGraph]!['data'];
-      if (sensorGraph == sensorEnumGraph.nibd) {
-        DataModelNIBD dataModelNIBD = Get.find<DataModelNIBD>(tag: sensorGraph.name);
-        DataModelAbsolute sysDataModel = Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.sysAbsolute.name);
-        DataModelAbsolute diaDataModel = Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.diaAbsolute.name);
 
-        List<dynamic> sysDataList = List<dynamic>.generate(dataList.length, (index) => dataList[index][0]);
-        List<dynamic> diaDataList = List<dynamic>.generate(dataList.length, (index) => dataList[index][1]);
+      if (sensorGraph == sensorEnumGraph.nibd) {
+        DataModelNIBD dataModelNIBD =
+            Get.find<DataModelNIBD>(tag: sensorGraph.name);
+        DataModelAbsolute sysDataModel = Get.find<DataModelAbsolute>(
+            tag: sensorEnumAbsolute.sysAbsolute.name);
+        DataModelAbsolute diaDataModel = Get.find<DataModelAbsolute>(
+            tag: sensorEnumAbsolute.diaAbsolute.name);
+
+        List<dynamic> sysDataList = List<dynamic>.generate(
+            dataList.length, (index) => dataList[index][0]);
+        List<dynamic> diaDataList = List<dynamic>.generate(
+            dataList.length, (index) => dataList[index][1]);
 
         updateNIBD(
             batchSize: batchSize,
@@ -57,9 +76,14 @@ class StandardScenario extends AbstractScenario {
             sysDataModel: sysDataModel,
             diaDataModel: diaDataModel);
       } else {
-        DataModelGraph dataModelGraph = Get.find<DataModelGraph>(tag: sensorGraph.name);
+        DataModelGraph dataModelGraph =
+            Get.find<DataModelGraph>(tag: sensorGraph.name);
 
-        updateGraph(batchSize: batchSize, resolution: resolution, dataList: dataList, dataModelGraph: dataModelGraph);
+        updateGraph(
+            batchSize: batchSize,
+            resolution: resolution,
+            dataList: dataList,
+            dataModelGraph: dataModelGraph);
       }
     }
   }
@@ -73,7 +97,9 @@ class StandardScenario extends AbstractScenario {
       required DataModelNIBD dataModelNIBD,
       required DataModelAbsolute sysDataModel,
       required DataModelAbsolute diaDataModel}) {
-    Timer.periodic(calculateUpdateRate(batchSize: batchSize, resolution: resolution), (timer) {
+    Timer.periodic(
+        calculateUpdateRate(batchSize: batchSize, resolution: resolution),
+        (timer) {
       int startIndex = dataModelNIBD.singleData.value.counter;
       int endIndex = dataModelNIBD.singleData.value.counter + batchSize;
 
@@ -83,8 +109,10 @@ class StandardScenario extends AbstractScenario {
         sysDataModel.counter.value = 0;
         diaDataModel.counter.value = 0;
       }
-      sysDataModel.updateValue(sysDataList[sysDataModel.counter.value].toDouble());
-      diaDataModel.updateValue(diaDataList[diaDataModel.counter.value].toDouble());
+      sysDataModel
+          .updateValue(sysDataList[sysDataModel.counter.value].toDouble());
+      diaDataModel
+          .updateValue(diaDataList[diaDataModel.counter.value].toDouble());
 
       if (!scenarioRunning) {
         timer.cancel();
@@ -93,19 +121,28 @@ class StandardScenario extends AbstractScenario {
       if (endIndex > dataList.length - 1 && startIndex < dataList.length - 1) {
         List endOfList = dataList.sublist(startIndex, dataList.length);
         // may discard last value
-        List startOfList = dataList.sublist(0, (endIndex + 1) % (dataList.length - 1));
+        List startOfList =
+            dataList.sublist(0, (endIndex + 1) % (dataList.length - 1));
 
         dataModelNIBD.updateValues(endOfList + startOfList);
       } else if (startIndex > dataList.length - 1) {
-        dataModelNIBD.updateValues(dataList.sublist(startIndex % (dataList.length - 1), (endIndex + 1) % (dataList.length - 1)));
+        dataModelNIBD.updateValues(dataList.sublist(
+            startIndex % (dataList.length - 1),
+            (endIndex + 1) % (dataList.length - 1)));
       } else {
         dataModelNIBD.updateValues(dataList.sublist(startIndex, endIndex));
       }
     });
   }
 
-  void updateGraph({required int batchSize, required double resolution, required List<dynamic> dataList, required DataModelGraph dataModelGraph}) {
-    Timer.periodic(calculateUpdateRate(batchSize: batchSize, resolution: resolution), (timer) {
+  void updateGraph(
+      {required int batchSize,
+      required double resolution,
+      required List<dynamic> dataList,
+      required DataModelGraph dataModelGraph}) {
+    Timer.periodic(
+        calculateUpdateRate(batchSize: batchSize, resolution: resolution),
+        (timer) {
       int startIndex = dataModelGraph.singleData.value.counter;
       int endIndex = dataModelGraph.singleData.value.counter + batchSize;
 
@@ -118,11 +155,14 @@ class StandardScenario extends AbstractScenario {
       if (endIndex > dataList.length - 1 && startIndex < dataList.length - 1) {
         List endOfList = dataList.sublist(startIndex, dataList.length);
         // may discard last value
-        List startOfList = dataList.sublist(0, (endIndex + 1) % (dataList.length - 1));
+        List startOfList =
+            dataList.sublist(0, (endIndex + 1) % (dataList.length - 1));
 
         dataModelGraph.updateValues(endOfList + startOfList);
       } else if (startIndex > dataList.length - 1) {
-        dataModelGraph.updateValues(dataList.sublist(startIndex % (dataList.length - 1), (endIndex + 1) % (dataList.length - 1)));
+        dataModelGraph.updateValues(dataList.sublist(
+            startIndex % (dataList.length - 1),
+            (endIndex + 1) % (dataList.length - 1)));
       } else {
         dataModelGraph.updateValues(dataList.sublist(startIndex, endIndex));
       }
