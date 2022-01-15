@@ -152,13 +152,13 @@ class StandardScenario extends AbstractScenario {
         List endOfList = dataList.sublist(startIndex, dataList.length);
         // may discard last value
         List startOfList =
-            dataList.sublist(0, endIndex + 1 % dataList.length - 1);
+            dataList.sublist(0, (endIndex + 1) % (dataList.length - 1));
 
         dataModelGraph.updateValues(endOfList + startOfList);
       } else if (startIndex > dataList.length - 1) {
         dataModelGraph.updateValues(dataList.sublist(
-            startIndex % dataList.length - 1,
-            endIndex + 1 % dataList.length - 1));
+            startIndex % (dataList.length - 1),
+            (endIndex + 1) % (dataList.length - 1)));
       } else {
         dataModelGraph.updateValues(dataList.sublist(startIndex, endIndex));
       }
