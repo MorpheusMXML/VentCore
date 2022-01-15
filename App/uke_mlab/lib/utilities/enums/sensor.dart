@@ -9,6 +9,7 @@ enum sensorEnumGraph {
   ecgCh1,
   ecgCh2,
   cpr,
+  nibd,
 }
 
 enum sensorEnumAbsolute {
@@ -19,10 +20,12 @@ enum sensorEnumAbsolute {
   pulse,
   mve,
   breathfrequency,
+  sysAbsolute,
+  diaAbsolute,
 }
 
 enum sensorEnumNibd {
-  nibdAbsolute,
+  none,
 }
 
 class SensorMapping {
@@ -35,6 +38,7 @@ class SensorMapping {
         null, // could/should be null to avoid double representation, but due to customizability (ecgCh1 = only ecg channel) double representation is accepted
     sensorEnumGraph.ecgCh2: sensorEnumAbsolute.hfAbsolute,
     sensorEnumGraph.cpr: sensorEnumAbsolute.hfAbsolute,
+    sensorEnumGraph.nibd: null,
   };
 }
 
@@ -89,13 +93,20 @@ extension SensorGraphAttributes on sensorEnumGraph {
       'color': AppTheme.heartFreqColor,
       'graphLength': 25,
     },
+    sensorEnumGraph.nibd: {
+      'graphTitle': 'NIBD',
+      'yAxisUnit': '',
+      'xAxisUnit': '',
+      'color': AppTheme.nibdColor,
+      'graphLength': 10, // intermediate value to be changed or something
+    }
   };
 
   String get graphTitle => attributes[this]!['graphTitle'] as String;
   String get yAxisUnit => attributes[this]!['yAxisUnit'] as String;
   String get xAxisUnit => attributes[this]!['xAxisUnit'] as String;
   Color get color => attributes[this]!['color'] as Color;
-  int get graphLength => attributes[this]!['graphLength'];
+  int get graphLength => attributes[this]!['graphLength'] as int;
 }
 
 extension SensorAbsoluteAttributes on sensorEnumAbsolute {
@@ -220,43 +231,80 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
         'infant': 20,
       },
     },
-  };
-
-  String get displayString => attributes[this]!['displayString'] as String;
-  String get displayShortString => attributes[this]!['displayShortString'] as String;
-  String get abbreviation => attributes[this]!['abbreviation'] as String;
-  String get unit => attributes[this]!['unit'] as String;
-  Color get color => attributes[this]!['color'] as Color;
-  Map get upperBound => attributes[this]!['upperBound'] as Map<String, dynamic>;
-  Map get lowerBound => attributes[this]!['lowerBound'] as Map<String, dynamic>;
-}
-
-extension SensorNibdAttributes on sensorEnumNibd {
-  static const Map<sensorEnumNibd, Map<String, dynamic>> attributes = {
-    sensorEnumNibd.nibdAbsolute: {
-      'displayString': 'Non Invasive Blood Pressure', // german abbreviation is NIBD (nicht invasiver blutdruck)
-      'displayShortString': 'NIBD',
-      'abbreviation': 'NIBD',
-      'unit': 'mmHg',
+    sensorEnumAbsolute.sysAbsolute: {
+      'displayString': 'Systolic Blood Pressure',
+      'displayShortString': 'Systolic',
+      'abbreviation': 'sys',
+      'unit': '',
       'color': AppTheme.nibdColor,
       'upperBound': {
-        // upper&lower bounds vor [SYS,DIA]
-        'adult': [130, 90],
-        'child': [100, 75],
-        'infant': [85, 60], // dia for infant no info found
+        'adult': 130,
+        'child': 100,
+        'infant': 85,
       },
       'lowerBound': {
-        'adult': [120, 80],
-        'child': [85, 60],
-        'infant': [70, 50],
+        'adult': 120,
+        'child': 85,
+        'infant': 70,
+      },
+    },
+    sensorEnumAbsolute.diaAbsolute: {
+      'displayString': 'Diastolic Blood Pressure',
+      'displayShortString': 'Diastolic',
+      'abbreviation': 'dia',
+      'unit': '',
+      'color': AppTheme.nibdColor,
+      'upperBound': {
+        'adult': 90,
+        'child': 75,
+        'infant': 60,
+      },
+      'lowerBound': {
+        'adult': 80,
+        'child': 60,
+        'infant': 50,
       },
     },
   };
+
   String get displayString => attributes[this]!['displayString'] as String;
-  String get displayShortString => attributes[this]!['displayShortString'] as String;
+  String get displayShortString =>
+      attributes[this]!['displayShortString'] as String;
   String get abbreviation => attributes[this]!['abbreviation'] as String;
   String get unit => attributes[this]!['unit'] as String;
   Color get color => attributes[this]!['color'] as Color;
   Map get upperBound => attributes[this]!['upperBound'] as Map<String, dynamic>;
   Map get lowerBound => attributes[this]!['lowerBound'] as Map<String, dynamic>;
 }
+
+//extension SensorNibdAttributes on sensorEnumNibd {
+//  static const Map<sensorEnumNibd, Map<String, dynamic>> attributes = {
+//    sensorEnumNibd.nibdAbsolute: {
+//      'displayString':
+//          'Non Invasive Blood Pressure', // german abbreviation is NIBD (nicht invasiver blutdruck)
+//      'displayShortString': 'NIBD',
+//      'abbreviation': 'NIBD',
+//      'unit': 'mmHg',
+//      'color': AppTheme.nibdColor,
+//      'upperBound': {
+//        // upper&lower bounds vor [SYS,DIA]
+//        'adult': [130, 90],
+//        'child': [100, 75],
+//        'infant': [85, 60], // dia for infant no info found
+//      },
+//      'lowerBound': {
+//        'adult': [120, 80],
+//        'child': [85, 60],
+//        'infant': [70, 50],
+//      },
+//    },
+//  };
+//  String get displayString => attributes[this]!['displayString'] as String;
+//  String get displayShortString =>
+//      attributes[this]!['displayShortString'] as String;
+//  String get abbreviation => attributes[this]!['abbreviation'] as String;
+//  String get unit => attributes[this]!['unit'] as String;
+//  Color get color => attributes[this]!['color'] as Color;
+//  Map get upperBound => attributes[this]!['upperBound'] as Map<String, dynamic>;
+//  Map get lowerBound => attributes[this]!['lowerBound'] as Map<String, dynamic>;
+//}
