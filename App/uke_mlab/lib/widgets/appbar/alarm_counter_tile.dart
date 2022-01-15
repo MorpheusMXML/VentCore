@@ -10,7 +10,7 @@ class AlarmCounterTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemState systemState = Get.find<SystemState>();
-    const double fSize = 25;
+    const double fSize = 24;
 
     return Obx(
       () {
@@ -20,25 +20,28 @@ class AlarmCounterTile extends StatelessWidget {
           case 0:
             return Container();
           case 1:
-            alarmText = alarmText + " general Alarm";
+            alarmText = alarmText + " sys. Alarm";
             break;
           default:
-            alarmText = alarmText + " general Alarms";
+            alarmText = alarmText + " sys. Alarms";
         }
         return Container(
           height: 50,
           margin: const EdgeInsets.only(left: 5),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(7),
-            color: systemState.generalAlarms.alarmList[0].toColor(),
-          ),
-          child: Center(
-            child: Text(
-              alarmText,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                color: Colors.black,
-                fontSize: fSize,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                primary: systemState.generalAlarms.alarmList[0].toColor(),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(7))),
+            onPressed: () {},
+            child: Center(
+              child: Text(
+                alarmText,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: fSize,
+                ),
               ),
             ),
           ),
