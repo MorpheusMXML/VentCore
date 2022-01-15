@@ -236,8 +236,8 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
     },
     sensorEnumAbsolute.sysAbsolute: {
       'displayString': 'Systolic Blood Pressure',
-      'displayShortString': 'Systolic',
-      'abbreviation': 'sys',
+      'displayShortString': 'NIBD',
+      'abbreviation': 'SYS',
       'unit': '',
       'color': AppTheme.nibdColor,
       'floatRepresentation': false,
@@ -254,8 +254,8 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
     },
     sensorEnumAbsolute.diaAbsolute: {
       'displayString': 'Diastolic Blood Pressure',
-      'displayShortString': 'Diastolic',
-      'abbreviation': 'dia',
+      'displayShortString': 'NIBD',
+      'abbreviation': 'DIA',
       'unit': '',
       'color': AppTheme.nibdColor,
       'floatRepresentation': false,
@@ -273,13 +273,11 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
   };
 
   String get displayString => attributes[this]!['displayString'] as String;
-  String get displayShortString =>
-      attributes[this]!['displayShortString'] as String;
+  String get displayShortString => attributes[this]!['displayShortString'] as String;
   String get abbreviation => attributes[this]!['abbreviation'] as String;
   String get unit => attributes[this]!['unit'] as String;
   Color get color => attributes[this]!['color'] as Color;
-  bool get floatRepresentation =>
-      attributes[this]!['floatRepresentation'] as bool;
+  bool get floatRepresentation => attributes[this]!['floatRepresentation'] as bool;
   Map get upperBound => attributes[this]!['upperBound'] as Map<String, dynamic>;
   Map get lowerBound => attributes[this]!['lowerBound'] as Map<String, dynamic>;
 }
