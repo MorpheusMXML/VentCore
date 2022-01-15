@@ -49,9 +49,8 @@ class ValueBoxTile extends StatelessWidget {
     // TODO: Also check for alarms here (=>build red container if alarm) + confirmation button above toggle_mode_button
     if (sensorGraph == null) {
       // could also be done via, but the relevant case disctinction here is whether there is a sensorGraph associated or not
-      DataModelAbsolute dataModel = Get.find<DataModelAbsolute>(
-          tag: sensorAbsolute
-              ?.name); // sensorAbsolute is not null since IF sensorGraph == null, sensorAbsolute is required
+      DataModelAbsolute dataModel =
+          Get.find<DataModelAbsolute>(tag: sensorAbsolute?.name); // sensorAbsolute is not null since IF sensorGraph == null, sensorAbsolute is required
 
       return type == 'regular'
           ? ValueBoxState(
@@ -96,8 +95,7 @@ class ValueBoxTile extends StatelessWidget {
         optAbreviationTitle: optAbreviationTitle,
       );
     } else {
-      throw Exception(
-          "ValueBoxTile was given both a sensorAbsolute and sensorGraph");
+      throw Exception("ValueBoxTile was given both a sensorAbsolute and sensorGraph");
     }
   }
 }

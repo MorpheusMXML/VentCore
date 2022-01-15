@@ -24,8 +24,7 @@ class DataModelGraph extends GetxController {
 
   DataModelGraph({required this.sensorKey}) {
     if (sensorKey == sensorEnumGraph.cpr) {
-      singleData =
-          ChartData.asCPR(time: DateTime.now(), counter: 0, value: 0.0).obs;
+      singleData = ChartData.asCPR(time: DateTime.now(), counter: 0, value: 0.0).obs;
     } else {
       singleData = ChartData(time: DateTime.now(), value: 0.0, counter: 0).obs;
     }
@@ -35,52 +34,44 @@ class DataModelGraph extends GetxController {
     //Check wether Data loaded is from CPR Sensor. To Change Constructor Call for ChartData to ChartData.asCPR
     if (sensorKey == sensorEnumGraph.cpr) {
       for (int i = 0; i < valueList.length; i++) {
-        singleData.value = ChartData.asCPR(
-            time: DateTime.now(),
-            value: valueList[i].toDouble(),
-            counter: singleData.value.counter + 1);
+        singleData.value = ChartData.asCPR(time: DateTime.now(), value: valueList[i].toDouble(), counter: singleData.value.counter + 1);
         graphData.add(singleData.value);
       }
 
-      if (graphData.length > graphDataMaxLength) {
+      if (graphData.length + 1 > graphDataMaxLength) {
         for (var i = 0; i < valueList.length; i++) {
           graphData.removeAt(0);
         }
-      } else {
-        for (int i = 0; i < valueList.length; i++) {
-          singleData.value = ChartData(
-              time: DateTime.now(),
-              value: valueList[i].toDouble(),
-              counter: singleData.value.counter + 1);
-          graphData.add(singleData.value);
-        }
-
-        if (graphData.length + 1 > graphDataMaxLength) {
-          for (var i = 0; i < valueList.length; i++) {
-            graphData.removeAt(0);
-          }
-        }
+      }
+    } else {
+      for (int i = 0; i < valueList.length; i++) {
+        singleData.value = ChartData(time: DateTime.now(), value: valueList[i].toDouble(), counter: singleData.value.counter + 1);
+        graphData.add(singleData.value);
       }
 
-      // update only added/removed indexes instead of the whole chart (efficient)
-      //chartController?.updateDataSource(
-      //    updatedDataIndexes: [for (int i = 0; i < graphData.length; i++) i]);
-
-      // TODO make "little" analysis here and call inform alarmManager to start evaluation
+      if (graphData.length + 1 > graphDataMaxLength) {
+        for (var i = 0; i < valueList.length; i++) {
+          graphData.removeAt(0);
+        }
+      }
     }
+
+    // update only added/removed indexes instead of the whole chart (efficient)
+    // chartController?.updateDataSource(updatedDataIndexes: [for (int i = 0; i < graphData.length; i++) i]);
+
+    // TODO make "little" analysis here and call inform alarmManager to start evaluation
   }
 
   // informs alarmController about change via call
   void informAlarmController() {
-    // TODO implement
+    // TODO: implement
   }
 
   void populateGraphList() {
     //singleData.value = ChartData(DateTime.now(), 0.0, 0);
     //graphData.add(singleData.value);
     for (int i = 0; i < graphDataMaxLength; i++) {
-      singleData.value =
-          ChartData(counter: i, time: DateTime.now(), value: 0.0);
+      singleData.value = ChartData(counter: i, time: DateTime.now(), value: 0.0);
       graphData.add(singleData.value);
     }
   }
@@ -92,7 +83,7 @@ class DataModelGraph extends GetxController {
     populateGraphList();
   }
 
-  void setGraphMaxLength(newLength) {
+  void setGraphMaxLength(int newLength) {
     graphDataMaxLength = newLength;
     graphData.clear();
     populateGraphList();

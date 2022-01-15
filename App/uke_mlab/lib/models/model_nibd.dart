@@ -18,17 +18,12 @@ class DataModelNIBD extends GetxController {
   final RxList<List<int>> historicValues = <List<int>>[].obs;
 
   DataModelNIBD({required this.sensorKey}) {
-    singleData =
-        ChartData.asNIBD(counter: 0, time: DateTime.now(), value: <int>[0, 0])
-            .obs;
+    singleData = ChartData.asNIBD(counter: 0, time: DateTime.now(), value: <int>[0, 0]).obs;
   }
 
   void updateValues(List<dynamic> valueList) {
     for (int i = 0; i < valueList.length; i++) {
-      singleData.value = ChartData.asNIBD(
-          time: DateTime.now(),
-          value: valueList[i],
-          counter: singleData.value.counter + 1);
+      singleData.value = ChartData.asNIBD(time: DateTime.now(), value: valueList[i], counter: singleData.value.counter + 1);
       graphData.add(singleData.value);
     }
 
@@ -44,9 +39,13 @@ class DataModelNIBD extends GetxController {
   }
 
   void resetDataModel() {
-    singleData.value =
-        ChartData.asNIBD(time: DateTime.now(), value: <int>[0, 0], counter: 0);
+    singleData.value = ChartData.asNIBD(time: DateTime.now(), value: <int>[0, 0], counter: 0);
     //clear historical data
+    graphData.clear();
+  }
+
+  void setGraphMaxLength(int newLength) {
+    graphDataMaxLength = newLength;
     graphData.clear();
   }
 }

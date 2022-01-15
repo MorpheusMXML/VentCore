@@ -66,46 +66,37 @@ class ModelManager {
     }
 
     for (var sensor in sensorEnumAbsolute.values) {
-      DataModelAbsolute dataModel =
-          Get.find<DataModelAbsolute>(tag: sensor.name);
+      DataModelAbsolute dataModel = Get.find<DataModelAbsolute>(tag: sensor.name);
       dataModel.resetDataModel();
 
       switch (patientType) {
         case patientTypeEnum.adult:
           dataModel.initialUpperBound = sensor.upperBound['adult'].toDouble();
-          dataModel
-              .setUpperAlarmBounadary(sensor.upperBound['adult'].toDouble());
+          dataModel.setUpperAlarmBounadary(sensor.upperBound['adult'].toDouble());
           dataModel.initialLowerBound = sensor.lowerBound['adult'].toDouble();
-          dataModel
-              .setLowerAlarmBounadary(sensor.lowerBound['adult'].toDouble());
+          dataModel.setLowerAlarmBounadary(sensor.lowerBound['adult'].toDouble());
           break;
         case patientTypeEnum.child:
           dataModel.initialUpperBound = sensor.upperBound['child'].toDouble();
-          dataModel
-              .setUpperAlarmBounadary(sensor.upperBound['child'].toDouble());
+          dataModel.setUpperAlarmBounadary(sensor.upperBound['child'].toDouble());
           dataModel.initialLowerBound = sensor.lowerBound['child'].toDouble();
-          dataModel
-              .setLowerAlarmBounadary(sensor.lowerBound['child'].toDouble());
+          dataModel.setLowerAlarmBounadary(sensor.lowerBound['child'].toDouble());
           break;
         case patientTypeEnum.infant:
           dataModel.initialUpperBound = sensor.upperBound['infant'].toDouble();
-          dataModel
-              .setUpperAlarmBounadary(sensor.upperBound['infant'].toDouble());
+          dataModel.setUpperAlarmBounadary(sensor.upperBound['infant'].toDouble());
           dataModel.initialLowerBound = sensor.lowerBound['infant'].toDouble();
-          dataModel
-              .setLowerAlarmBounadary(sensor.lowerBound['infant'].toDouble());
+          dataModel.setLowerAlarmBounadary(sensor.lowerBound['infant'].toDouble());
           break;
         default:
-          throw Exception(
-              'loadingPatientPresets called with wrong parameter (most likely patientTypeEnum.none)');
+          throw Exception('loadingPatientPresets called with wrong parameter (most likely patientTypeEnum.none)');
       }
     }
   }
 
   void loadDataModelEnvironmentValues() {
     for (var sensor in sensorEnumAbsolute.values) {
-      DataModelAbsolute dataModel =
-          Get.find<DataModelAbsolute>(tag: sensor.name);
+      DataModelAbsolute dataModel = Get.find<DataModelAbsolute>(tag: sensor.name);
       dataModel.color = sensor.color;
       dataModel.displayString = sensor.displayString;
       dataModel.displayShortString = sensor.displayShortString;
@@ -131,13 +122,17 @@ class ModelManager {
 
   void resetAllModels() {
     for (var sensor in sensorEnumAbsolute.values) {
-      DataModelAbsolute dataModel =
-          Get.find<DataModelAbsolute>(tag: sensor.name);
+      DataModelAbsolute dataModel = Get.find<DataModelAbsolute>(tag: sensor.name);
       dataModel.resetDataModel();
     }
     for (var sensor in sensorEnumGraph.values) {
-      DataModelGraph dataModel = Get.find<DataModelGraph>(tag: sensor.name);
-      dataModel.resetDataModel();
+      if (sensor == sensorEnumGraph.nibd) {
+        DataModelNIBD dataModelNIBD = Get.find<DataModelNIBD>(tag: sensor.name);
+        dataModelNIBD.resetDataModel();
+      } else {
+        DataModelGraph dataModel = Get.find<DataModelGraph>(tag: sensor.name);
+        dataModel.resetDataModel();
+      }
     }
   }
 }
