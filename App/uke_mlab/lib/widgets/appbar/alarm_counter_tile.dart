@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:uke_mlab/models/general_alarms.dart';
 import 'package:uke_mlab/models/system_state.dart';
 
 class AlarmCounterTile extends StatelessWidget {
   /// Builds depending on the amount of [GeneralAlarms] an statusbar element displaying the amount, rendered in respective forms.
   /// Could be combined with the [AlarmExpansionTile] due to similar code functionality, but extracted to make placing in [StatusBar] easier
-  const AlarmCounterTile({Key? key}) : super(key: key);
+  AlarmCounterTile({Key? key}) : super(key: key);
+
+  final SystemState systemState = Get.find<SystemState>();
 
   @override
   Widget build(BuildContext context) {
-    SystemState systemState = Get.find<SystemState>();
     const double fSize = 24;
 
     return Obx(
@@ -33,7 +35,9 @@ class AlarmCounterTile extends StatelessWidget {
                 primary: systemState.generalAlarms.alarmList[0].toColor(),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(7))),
-            onPressed: () {},
+            onPressed: () => systemState.generalAlarms.listExpanded
+                ? hideOverlay(context)
+                : showOverlay(context),
             child: Center(
               child: Text(
                 alarmText,
@@ -48,5 +52,22 @@ class AlarmCounterTile extends StatelessWidget {
         );
       },
     );
+  }
+
+  void showOverlay(BuildContext context) {
+    GeneralAlarms generalAlarms = systemState.generalAlarms;
+    generalAlarms.entry = OverlayEntry(
+        builder: (context) =>
+            Positioned(left: 100, top: 100, child: Text("ABC")));
+    final overlay = Overlay.of(context)!;
+    overlay.insert(generalAlarms.entry as OverlayEntry);
+    generalAlarms.listExpanded = true;
+  }
+
+  void hideOverlay(BuildContext context) {
+    GeneralAlarms generalAlarms = systemState.generalAlarms;
+    generalAlarms.entry?.remove();
+    generalAlarms.entry = null;
+    generalAlarms.listExpanded = false;
   }
 }

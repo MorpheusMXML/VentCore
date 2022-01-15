@@ -34,7 +34,7 @@ class StatusBar extends StatelessWidget {
                         data: systemState.generalAlarms.alarmList[0])),
               ),
               //Info about Alarm amount (AlarmCounterTile)
-              const Flexible(
+              Flexible(
                 flex: 2,
                 fit: FlexFit.loose,
                 child: AlarmCounterTile(),

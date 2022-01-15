@@ -6,6 +6,8 @@ import 'package:uke_mlab/utilities/enums/non_graph_alarm.dart';
 /// offers a sorted list of general alarms for being displayed in [StatusBar]
 class GeneralAlarms extends GetxController {
   final RxList<AlarmListEntry> alarmList = <AlarmListEntry>[].obs;
+  OverlayEntry? entry;
+  bool listExpanded = false;
 
   GeneralAlarms();
 
