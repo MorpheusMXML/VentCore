@@ -8,25 +8,27 @@ class ChartData with cpr, NIBD {
 
   ChartData({required this.time, required this.counter, required this.value});
 
-  ChartData.asCPR({required this.time, required this.counter, required this.value}) {
+  ChartData.asCPR(
+      {required this.time, required this.counter, required this.value}) {
     evaluateColor(value: value);
   }
 
-  ChartData.asNIBD({required this.time, required this.counter, required this.value}) {
+  ChartData.asNIBD(
+      {required this.time, required this.counter, required this.value}) {
     evaluarePressures(sysDiaPressures: value);
   }
 }
 
-///This mixin represents CPR Data provided for the Scenatios.
+///This mixin represents [ChartData.asCPR] provided for the scenarios.
 ///
-///Specifies the [Color] to signal the Pressure depth of performed CPR Compressions with green for the interval between 5 and 6. Otherwise red is Specified.
-///This color Property is used to Color the Bars in the [CprGraph].
+///Specifies the [Color] to signal the pressure depth of performed CPR compressions with green for the interval between 5 and 6. Otherwise red is specified.
+///This color property is used to color the bars in the [CprGraph].
 ///
-/// ### General Information about the CPR Depth indicated in red and green.
-/// Please Consider the recommendations for a optimal CPR to understand why the Colors are set the way they are. (https://www.cprblspros.com/cpr-cheat-sheet-2022)
+/// ### General information about the CPR depth indicated in red and green.
+/// Please consider the recommendations for a optimal CPR to understand why the colors are set the way they are. (https://www.cprblspros.com/cpr-cheat-sheet-2022)
 ///
 mixin cpr {
-  Color color = Colors.white;
+  late Color color;
 
   void evaluateColor({required value}) {
     ///evaluates the [Color] that has to be set for the Bars in the [CprGraph]. This Method is called when a [ChartData] is instanciated with the Constructor [ChartData.asCPR]
@@ -58,15 +60,17 @@ class CPRData {
 } */
 
 mixin NIBD {
-  int? systolicPressure;
-  int? diastolicPressure;
-  int? meanArterialPressure;
+  late int systolicPressure;
+  late int diastolicPressure;
+  late int meanArterialPressure;
 
   evaluarePressures({required List sysDiaPressures}) {
     systolicPressure = sysDiaPressures[0];
     diastolicPressure = sysDiaPressures[1];
 
     //Formular for Calculating MAD out of systolic and diastolic pressure
-    meanArterialPressure = (diastolicPressure! + (1 / 3) * (systolicPressure! - diastolicPressure!)).toInt();
+    meanArterialPressure =
+        (diastolicPressure + (1 / 3) * (systolicPressure - diastolicPressure))
+            .toInt();
   }
 }
