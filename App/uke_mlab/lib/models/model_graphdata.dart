@@ -28,7 +28,7 @@ class ChartData with cpr, NIBD {
 /// Please consider the recommendations for a optimal CPR to understand why the colors are set the way they are. (https://www.cprblspros.com/cpr-cheat-sheet-2022)
 ///
 mixin cpr {
-  late Color color;
+  Color color = Colors.white;
 
   void evaluateColor({required value}) {
     ///evaluates the [Color] that has to be set for the Bars in the [CprGraph]. This Method is called when a [ChartData] is instanciated with the Constructor [ChartData.asCPR]
