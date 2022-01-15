@@ -69,8 +69,11 @@ flutter:
   assets:
     - assets/icons/
     - assets/jsons/
+<<<<<<< HEAD
     - assets/sounds/
 
+=======
+>>>>>>> Issue-112
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
