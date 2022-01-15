@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/general_alarms.dart';
-import 'package:uke_mlab/utilities/enums/alarm_priority.dart';
+import 'package:uke_mlab/utilities/enums/alarm_status.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/utilities/enums/screen_status.dart';
 import 'package:uke_mlab/utilities/enums/patient_type.dart';
@@ -43,7 +43,8 @@ class SystemState {
       alarmState[sensor] = RxMap({
         "priority": 0,
         "message": "none",
-        "alarmPriorityEnum": alarmPriority.none
+        "enum": alarmStatus.none,
+        'color': AppTheme.alarmNoneColor,
       });
     }
   }
