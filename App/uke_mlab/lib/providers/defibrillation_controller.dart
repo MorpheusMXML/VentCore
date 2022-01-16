@@ -15,19 +15,20 @@ class DefibrillationController extends GetxController {
   RxString startTimerString = ''.obs;
   RxString lastTimerString = 'none'.obs;
 
-  RxString selectedImpedanceButton = 'Low'.obs;
+  RxString selectedImpedanceButton = 'OK'.obs;
   RxString selectedDefiButton = 'Auto'.obs;
   RxString selectedSynchronicityButton = 'Sync'.obs;
 
-  RxBool metronomeOn = false.obs;
+  RxBool metronomeOn = true.obs;
   RxString loaded = 'Loaded'.obs;
 
-  RxInt shockPower = 200.obs;
+  RxInt shockPower = 0.obs;
   RxString systemDiagnosis = 'Placeholder Diagnosis'.obs;
 
   RxInt numberOfShocks = 0.obs;
 
   void startTimerWatch() {
+    timerTimer?.cancel();
     timerWatch.start();
     timerTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
       startTimerCount++;
@@ -62,12 +63,18 @@ class DefibrillationController extends GetxController {
   void toggleLoaded(String value) async {
     if (loaded.value == 'Shock') {
       numberOfShocks++;
+      shockPower.value = 0;
+      loaded.value = value;
     } else {
       loaded.value = 'Loading';
-      await Future.delayed(const Duration(seconds: 2));
+      Timer.periodic(const Duration(milliseconds: 1), (timer) {
+        shockPower.value++;
+        if (shockPower >= 200) {
+          timer.cancel();
+          loaded.value = value;
+        }
+      });
     }
-
-    loaded.value = value;
   }
 
   void toggleMetronome(bool changed) {
@@ -79,6 +86,11 @@ class DefibrillationController extends GetxController {
   }
 
   void setSelectedDefiButton(String name) {
+    if (name == 'Auto') {
+      toggleMetronome(true);
+      setSelectedImpedanceButton('OK');
+      setSelectedSynchronicityButton('Sync');
+    }
     selectedDefiButton.value = name;
   }
 

@@ -17,11 +17,11 @@ class ScreenController {
   ModelManager modelManager = Get.find<ModelManager>();
 
   void setUpperBoundary(DataModelAbsolute dataModel, double value) {
-    dataModel.setUpperAlarmBounadary(value);
+    dataModel.setUpperAlarmBoundary(value);
   }
 
   void setLowerBoundary(DataModelAbsolute dataModel, double value) {
-    dataModel.setLowerAlarmBounadary(value);
+    dataModel.setLowerAlarmBoundary(value);
   }
 
   //Changes playing scenario based on input paramenter, stops currently playing scenario on call

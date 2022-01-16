@@ -69,6 +69,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // this is just to test displaying generalAlarms, remove this after testing
+    Timer.periodic(const Duration(seconds: 2), (timer) {
+      if (Random().nextInt(10) > 1) {
+        systemState.generalAlarms.addAlarm(
+            nonGraphAlarmEnum
+                .values[Random().nextInt(nonGraphAlarmEnum.values.length)],
+            Random().nextInt(100));
+      } else {
+        if (systemState.generalAlarms.alarmList.isNotEmpty) {
+          systemState.generalAlarms.alarmList.removeAt(0);
+        }
+      }
+    });
+
     return GetMaterialApp(
       title: 'MLab UKE',
       theme: AppTheme.darkTheme,
