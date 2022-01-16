@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/model_absolute.dart';
 import 'package:uke_mlab/models/model_graph.dart';
+import 'package:uke_mlab/models/screen_element_models/absolute_alarm_field_model.dart';
 import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/utilities/enums/alarm_status.dart';
 
@@ -55,7 +56,6 @@ class ValueBoxTile extends StatelessWidget {
       DataModelAbsolute dataModel = Get.find<DataModelAbsolute>(
           tag: sensorAbsolute
               ?.name); // sensorAbsolute is not null since IF sensorGraph == null, sensorAbsolute is required
-
       return type == 'regular'
           ? ValueBoxState(
               dataModel: dataModel,
