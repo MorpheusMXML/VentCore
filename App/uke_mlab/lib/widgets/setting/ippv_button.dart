@@ -7,6 +7,7 @@ class IPPVButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Theme.of(context).cardColor,
+      margin: const EdgeInsets.all(8),
       width: double.infinity,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(

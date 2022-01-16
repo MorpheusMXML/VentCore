@@ -15,29 +15,31 @@ class ShockPower extends StatelessWidget {
         color: Theme.of(context).cardColor,
         margin: const EdgeInsets.only(left: 8, right: 8),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Expanded(
-              flex: 3,
+              flex: 2,
               child: Text(
                 "Shock Power",
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 24,
                 ),
               ),
             ),
             Expanded(
-              flex: 2,
+              flex: 1,
               child: Obx(
                 () => Text(
                   '${defibrillationController.shockPower}',
                   style: const TextStyle(
-                    fontSize: 26,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 32,
                     color: Colors.red,
                   ),
                 ),
               ),
             ),
-            const Expanded(
+            const Flexible(
               flex: 1,
               child: Text(
                 "J",

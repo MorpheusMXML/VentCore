@@ -15,7 +15,6 @@ class SettingTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Theme.of(context).focusColor,
       padding: const EdgeInsets.all(8),
       child: Container(
         color: Theme.of(context).cardColor,
