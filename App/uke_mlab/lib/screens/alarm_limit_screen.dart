@@ -16,8 +16,8 @@ class AlarmLimitScreen extends StatelessWidget {
           height: 150,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: sensorEnum.values
-                .map((sensor) => ValueBoxTile(sensor: sensor))
+            children: sensorEnumAbsolute.values
+                .map((sensor) => ValueBoxTile(sensorAbsolute: sensor))
                 .toList(),
           ),
         ),

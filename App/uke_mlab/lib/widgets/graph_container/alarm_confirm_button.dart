@@ -5,7 +5,7 @@ import 'package:uke_mlab/utilities/enums/boundary_state.dart';
 import 'package:uke_mlab/models/system_state.dart';
 
 class AlarmConfirmButton extends StatelessWidget {
-  final sensorEnum sensor;
+  final sensorEnumAbsolute sensor;
   const AlarmConfirmButton({
     Key? key,
     required this.sensor,

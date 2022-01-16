@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uke_mlab/models/model.dart';
+import 'package:uke_mlab/models/model_absolute.dart';
 import 'package:uke_mlab/utilities/enums/non_graph_alarm.dart';
 
 /// offers a sorted list of general alarms for being displayed in [StatusBar]
@@ -47,7 +47,7 @@ class GeneralAlarms {
 
 /// Represents an entry for [GeneralAlarms.alarmList]
 class AlarmListEntry {
-  /// represents alarms not directly associated with numeric values in [DataModel]
+  /// represents alarms not directly associated with numeric values in [DataModelAbsolute]
   final nonGraphAlarmEnum alarm;
 
   /// time the alarm occured
