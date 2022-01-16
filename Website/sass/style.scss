@@ -40,6 +40,8 @@ body {
 
 $primary-color: #1C1B1F;
 $secondary-color: #AEA9B4;
+$tertiar-color: #938F99;
+$heartfreq-color: #49ff00;
 $white: #fff;
 $text-color: #686b75;
 
@@ -121,7 +123,7 @@ h4 {
 .btn-secondary:hover,
 .btn-secondary:focus,
 .btn-secondary:active {
-    background: $primary-color;
+    background: $tertiar-color;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
     transform: translateY(-3px);
     transition: all .2s ease-in-out;
@@ -168,10 +170,11 @@ h4 {
         transition: all .2s ease-in-out;
     }
     .navbar-nav .nav-link:hover {
-        color: $primary-color;
+        color: $heartfreq-color;
+        font-weight: 900;
     }
     .navbar-nav .nav-link.active {
-        color: $primary-color;
+        color: $tertiar-color;
         font-weight: 700;
     }
     .navbar-nav .active > .nav-link {
@@ -227,7 +230,7 @@ h4 {
     .navbar-toggler:hover {
         border: none;
         outline: 0;
-    }
+    } 
 }
 
 /*=======================================================
@@ -276,9 +279,14 @@ h4 {
 			ABOUT:
 ========================================================*/
 
-#about {
-    padding: 120px 0;
+#about-logos {
+    padding-top: 150px;
     text-align: center;
+}
+
+#about {
+    padding-top: 150px;
+    text-align: justify;
 }
 
 /*=======================================================
@@ -395,59 +403,6 @@ h4 {
 }
 
 /*=======================================================
-			TESTIMONIALS:
-========================================================*/
-
-#testimonials {
-    padding: 0 0 120px 0;
-    text-align: center;
-    .carousel-container {
-        margin: 0 auto;
-        .testi-icon {
-            background: url(../imgs/icons-bg.png);
-            background-position: center;
-            background-size: cover;
-            background-repeat: no-repeat;
-            display: inline-block;
-            width: 90px;
-            height: 90px;
-            svg {
-                position: relative;
-                top: 20px;
-            }
-        }
-        .quote {
-            font-size: 18px;
-            font-weight: bold;
-            margin: 40px 0;
-        }
-        img {
-            width: 60px;
-        }
-        .item {
-            padding: 0 10px;
-        }
-        .owl-theme .owl-controls .owl-page span {
-            display: block;
-            width: 12px;
-            height: 12px;
-            margin: 5px 7px;
-            filter: Alpha(Opacity=50);
-            opacity: 0.5;
-            -webkit-border-radius: 20px;
-            -moz-border-radius: 20px;
-            border-radius: 20px;
-            border: 2px solid $secondary-color;
-            background: transparent;
-        }
-        .owl-theme .owl-controls .owl-page.active span,
-        .owl-theme .owl-controls.clickable .owl-page:hover span {
-            background: $secondary-color;
-        }
-    }
-}
-
-/*=======================================================
 			VIDEO POP UP:
 ========================================================*/
 
@@ -501,7 +456,7 @@ h4 {
                 height: 24rem;
                 background: rgba(255, 255, 255, 0.4);
                 opacity: 0;
-                -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+                //-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
                 border-radius: 320px;
                 background-clip: padding-box;
                 -webkit-animation: waves 3s ease-in-out infinite;
@@ -618,7 +573,7 @@ h4 {
                 transition: all .2s ease-in-out;
                 border-radius: 100%;
                 line-height: 2.5;
-                margin: 0 8px 8px 0;
+                margin: 0 0 50px 0;
                 width: 40px;
                 height: 40px;
                 a {
@@ -641,7 +596,7 @@ h4 {
 
 #brands {
     padding: 120px 0;
-    text-align: center;
+    text-align: center;;
     .title-container {
         margin: 0 auto;
     }
@@ -665,6 +620,7 @@ h4 {
     .owl-theme .owl-controls.clickable .owl-page:hover span {
         background: $secondary-color;
     }
+
 }
 
 /*=======================================================
@@ -679,6 +635,12 @@ h4 {
     color: $white;
     .title-container {
         margin: 0 auto;
+    }
+
+    select{
+        width: 100%;
+        height: 50;
+        font-size: 20px;
     }
     form {
         margin: 40px 0;
@@ -722,6 +684,7 @@ h4 {
         .container .row {
             h2 {
                 font-size: 28px;
+                margin-bottom: 50px;
             }
         }
     }
