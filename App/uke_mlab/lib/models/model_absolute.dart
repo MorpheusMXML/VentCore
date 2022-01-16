@@ -53,7 +53,7 @@ class DataModelAbsolute extends GetxController {
 
     ///Inform [AlarmController] about a value change.
     alarmController.evaluateAlarm(absoluteValue.value, upperAlarmBound.value,
-        lowerAlarmBound.value, sensorKey);
+        lowerAlarmBound.value, historicValues, sensorKey);
   }
 
   void setUpperAlarmBoundary(double newBoundary) {
@@ -61,7 +61,7 @@ class DataModelAbsolute extends GetxController {
       upperAlarmBound.value = newBoundary;
     }
     alarmController.evaluateAlarm(absoluteValue.value, upperAlarmBound.value,
-        lowerAlarmBound.value, sensorKey);
+        lowerAlarmBound.value, historicValues, sensorKey);
   }
 
   void setLowerAlarmBoundary(double newBoundary) {
@@ -69,7 +69,7 @@ class DataModelAbsolute extends GetxController {
       lowerAlarmBound.value = newBoundary;
     }
     alarmController.evaluateAlarm(absoluteValue.value, upperAlarmBound.value,
-        lowerAlarmBound.value, sensorKey);
+        lowerAlarmBound.value, historicValues, sensorKey);
   }
 
   void resetDataModel() {

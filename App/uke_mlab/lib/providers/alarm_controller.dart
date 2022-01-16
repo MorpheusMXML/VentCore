@@ -10,7 +10,7 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 ///
 class AlarmController {
   ///Manages and throws Alarms with an implemented Alarm Logic.
-  final Map<sensorEnumAbsolute, dynamic> alarmMap =
+  final Map<sensorEnumAbsolute, dynamic> confirmMap =
       <sensorEnumAbsolute, dynamic>{};
   late ModelManager _modelManager;
   final SystemState _systemState = Get.find<SystemState>();
@@ -22,11 +22,15 @@ class AlarmController {
   ///Checks if a new added value in this [DataModel] should throw an alarm.
   ///
   ///This function is build to be called in the [DataModel].
-  void evaluateAlarm(value, upper, lower, sensorEnumAbsolute sensorKey) {
+  void evaluateAlarm(value, upper, lower, RxList historicValues,
+      sensorEnumAbsolute sensorKey) {
     dynamic boundaryDeviation = sensorKey.boundaryDeviation;
     //possible deviation arounde the upper and lower boundaries
     dynamic valueDeviation = (upper - lower) / 2;
-    dynamic valueDifference = value - value;
+    dynamic valueDifference = value;
+    if (historicValues.isNotEmpty) {
+      valueDifference = (historicValues[0] - value).abs();
+    }
 
     //Boundary Violation
 
@@ -67,8 +71,8 @@ class AlarmController {
     }
   }
 
-  void triggerAlarm(
-      sensorKey, alarmMessage alarmMessageEnum, alarmStatus alarmPrioEnum) {
+  void triggerAlarm(sensorEnumAbsolute sensorKey, alarmMessage alarmMessageEnum,
+      alarmStatus alarmPrioEnum) {
     int newPriority = alarmPrioEnum.priority;
     String newMessage = alarmMessageEnum.message;
 
@@ -78,10 +82,19 @@ class AlarmController {
     if (_systemState.alarmState[sensorKey]!["enum"] == alarmStatus.confirmed &&
         newPriority <= _systemState.alarmState[sensorKey]!["priority"] &&
         _systemState.alarmState[sensorKey]!["message"] == newMessage) {
-      //TODO: Confirmed State
-      evaluateBoundaryAdjustment();
+      //This time difference between the call of confirm to now
+      Duration diff = DateTime.now().difference(confirmMap[sensorKey]);
+      if (diff.inSeconds >= sensorKey.confirmDuration) {
+        //reset this confirm to the previous alarm
+        for (alarmStatus status in alarmStatus.values) {
+          if (_systemState.alarmState[sensorKey]!["priority"] ==
+              status.priority) {
+            _systemState.alarmState[sensorKey]!["enum"] = status;
+          }
+        }
+      }
     }
-    // This alarm is not a previous thrown alarm
+    // This alarm is not a previous thrown alarm and not confirmed
     else if (_systemState.alarmState[sensorKey]!["priority"] != newPriority ||
         _systemState.alarmState[sensorKey]!["message"] != newMessage) {
       ///Update [SystemState]
@@ -89,12 +102,14 @@ class AlarmController {
       _systemState.alarmState[sensorKey]!["message"] = newMessage;
       _systemState.alarmState[sensorKey]!["enum"] = alarmPrioEnum;
       _systemState.alarmState[sensorKey]!["color"] = alarmPrioEnum.color;
-      //Remember the thrown Alarm
-      alarmMap[sensorKey] = DateTime.now();
-      print(_systemState.alarmState[sensorKey]);
-      print(alarmMap.length);
     }
   }
 
+  //TODO: change upper and lower boundary if patient value is around that value everytime
   void evaluateBoundaryAdjustment() {}
+
+  void triggerConfirm(sensorEnumAbsolute sensorKey) {
+    _systemState.alarmState[sensorKey]!["enum"] = alarmStatus.confirmed;
+    confirmMap[sensorKey] = DateTime.now();
+  }
 }

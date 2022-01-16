@@ -32,7 +32,7 @@ extension AlarmStatusAttributes on alarmStatus {
     },
   };
 
-  String get prio => attributes[this]!['name'] as String;
+  String get name => attributes[this]!['name'] as String;
   int get priority => attributes[this]!['priority'] as int;
   Color get color => attributes[this]!['color'] as Color;
 }
