@@ -4,8 +4,10 @@ import 'package:uke_mlab/models/model_absolute.dart';
 import 'package:uke_mlab/utilities/enums/non_graph_alarm.dart';
 
 /// offers a sorted list of general alarms for being displayed in [StatusBar]
-class GeneralAlarms {
+class GeneralAlarms extends GetxController {
   final RxList<AlarmListEntry> alarmList = <AlarmListEntry>[].obs;
+  OverlayEntry? entry;
+  RxBool listExpanded = false.obs;
 
   GeneralAlarms();
 
@@ -36,6 +38,11 @@ class GeneralAlarms {
     int index = alarmList.indexWhere((element) => element.alarm == alarm);
     if (index != -1) {
       alarmList.removeAt(index);
+      if (alarmList.length <= 1) {
+        entry?.remove();
+        entry = null;
+        listExpanded.value = false;
+      }
     }
   }
 

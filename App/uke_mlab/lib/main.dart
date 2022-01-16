@@ -45,6 +45,26 @@ class MyApp extends StatelessWidget {
     // svgs are loaded and screens are given bindings?
     final AlarmController alarmController =
         Get.put(AlarmController(modelManager));
+    Timer.periodic(const Duration(seconds: 2), (timer) {
+      /*if (systemState.generalAlarms.alarmList.length < 2) {
+        systemState.generalAlarms.addAlarm(nonGraphAlarmEnum.ekgArtifact, 60);
+        systemState.generalAlarms.addAlarm(nonGraphAlarmEnum.ekgArtifact, 70);
+        systemState.generalAlarms.addAlarm(nonGraphAlarmEnum.leckageHigh, 60);
+      } else if (systemState.generalAlarms.alarmList.isNotEmpty) {
+        systemState.generalAlarms.removeAlarm(nonGraphAlarmEnum.ekgArtifact);
+      }*/
+
+      if (Random().nextInt(10) > 1) {
+        systemState.generalAlarms.addAlarm(
+            nonGraphAlarmEnum
+                .values[Random().nextInt(nonGraphAlarmEnum.values.length)],
+            Random().nextInt(100));
+      } else {
+        if (systemState.generalAlarms.alarmList.isNotEmpty) {
+          systemState.generalAlarms.alarmList.removeAt(0);
+        }
+      }
+    });
   }
 
   @override
