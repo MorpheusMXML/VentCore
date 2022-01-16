@@ -29,7 +29,6 @@ class GeneralAlarms extends GetxController {
     }
 
     alarmList.sort((a, b) => b.priority.compareTo(a.priority));
-    update();
   }
 
   /// remove [alarm] from list
@@ -39,6 +38,11 @@ class GeneralAlarms extends GetxController {
     int index = alarmList.indexWhere((element) => element.alarm == alarm);
     if (index != -1) {
       alarmList.removeAt(index);
+      if (alarmList.length <= 1) {
+        entry?.remove();
+        entry = null;
+        listExpanded.value = false;
+      }
     }
   }
 

@@ -36,7 +36,8 @@ class AlarmList extends StatelessWidget {
                 height: StatusBarConstants.verticalMargin,
                 color: Theme.of(context).shadowColor,
               ),
-              Expanded(
+              Flexible(
+                fit: FlexFit.loose,
                 child: ListView.builder(
                     shrinkWrap: true,
                     padding: const EdgeInsets.only(

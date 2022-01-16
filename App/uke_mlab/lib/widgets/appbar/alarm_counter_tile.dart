@@ -32,17 +32,19 @@ class AlarmCounterTile extends StatelessWidget {
         return SizedBox(
           height: 50,
           child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-                primary: systemState.generalAlarms.alarmList[0].toColor(),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(40))),
-            onPressed: () => systemState.generalAlarms.alarmList.length == 1
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(
+                  systemState.generalAlarms.alarmList[0].toColor()),
+              shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(40))),
+            ),
+            onPressed: systemState.generalAlarms.alarmList.length <= 1
                 ? null
-                : {
-                    systemState.generalAlarms.listExpanded.value
-                        ? {hideOverlay(context)}
-                        : {showOverlay(context)}
-                  },
+                : () => {
+                      systemState.generalAlarms.listExpanded.value
+                          ? {hideOverlay(context)}
+                          : {showOverlay(context)}
+                    },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -78,6 +80,7 @@ class AlarmCounterTile extends StatelessWidget {
   void showOverlay(BuildContext context) {
     GeneralAlarms generalAlarms = systemState.generalAlarms;
     double statusBarHeight = MediaQuery.of(context).padding.top;
+
     generalAlarms.entry = OverlayEntry(
       builder: (context) => Positioned(
         left: StatusBarConstants.menuButtonWidth,
