@@ -11,12 +11,10 @@ class ValueBoxState extends StatelessWidget {
   final double settingsWidth;
   final double settingsHeight;
   final String? optAbreviationTitle;
-  final String type;
 
   const ValueBoxState({
     Key? key,
     required this.dataModel,
-    this.type = 'regular',
     this.settingsHeight = 100,
     this.settingsWidth = 60,
     this.optAbreviationTitle,
@@ -25,7 +23,6 @@ class ValueBoxState extends StatelessWidget {
   const ValueBoxState.withHeadline({
     Key? key,
     required this.dataModel,
-    this.type = 'withHeadline',
     this.settingsHeight = 100,
     this.settingsWidth = 35,
     this.optAbreviationTitle,

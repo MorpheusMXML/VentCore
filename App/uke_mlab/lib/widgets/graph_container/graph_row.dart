@@ -45,12 +45,15 @@ class GraphRow extends StatelessWidget {
     return ConstrainedBox(
       constraints: const BoxConstraints(maxHeight: 150),
       child: Row(
-        children: [
-          Expanded(child: Graph(sensor: sensor)),
-          const SizedBox(width: 8),
-          evaluateValueBoxTile()
-        ],
-      ),
+          children: (sensor == sensorEnumGraph.nibd)
+              ? [
+                  Expanded(child: HistoryGraph(sensor: sensor)),
+                ]
+              : [
+                  Expanded(child: Graph(sensor: sensor)),
+                  const SizedBox(width: 8),
+                  evaluateValueBoxTile()
+                ]),
     );
   }
 

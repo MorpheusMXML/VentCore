@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
+import 'package:uke_mlab/utilities/enums/sensor.dart';
+import 'package:uke_mlab/widgets/graph/cpr_graph.dart';
 import 'package:uke_mlab/widgets/graph/graph_adder.dart';
 import 'package:uke_mlab/widgets/graph/graph_adder_popup.dart';
 import 'graph_container.dart';
@@ -24,15 +26,17 @@ class GraphView extends StatelessWidget {
                 shrinkWrap: true,
                 itemCount: systemState.graphList.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return GraphContainer(sensor: systemState.graphList[index]);
-                }, 
+                  // return GraphContainer(sensor: systemState.graphList[index]);
+                  //TODO: Change back to comment above. Just for Testing Purposes of CPR Graph
+                  return (systemState.graphList[index] == sensorEnumGraph.cpr)
+                      ? CprGraph(sensor: systemState.graphList[index])
+                      : GraphContainer(sensor: systemState.graphList[index]);
+                },
               ),
             ),
           ),
           Obx(
-            () => systemState.addGraph.value
-                ? GraphAdderPopup()
-                : const GraphAdder(),
+            () => systemState.addGraph.value ? GraphAdderPopup() : const GraphAdder(),
           ),
         ],
       ),

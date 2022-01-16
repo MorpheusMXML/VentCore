@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:uke_mlab/widgets/toggle/toggle_mode_button.dart';
 import 'package:uke_mlab/widgets/value_box/value_box_tile.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
+import 'package:uke_mlab/widgets/value_box/value_box_tile_nibd.dart';
 
 class MonitoringMode extends StatelessWidget {
   const MonitoringMode({
@@ -15,15 +16,13 @@ class MonitoringMode extends StatelessWidget {
         Flexible(
           flex: 1,
           child: Row(
-            children: [
-              // ValueBoxTile.withHeadline(sensor: sensorEnumNibd.nibd), // TODO requires multiple constructors in  ValueBoxTile to display special elements
-              Expanded(
-                // This is a placeholder for nibd tile
-                flex: 1,
-                child: Container(),
+            children: const [
+              ValueBoxTileNIBD(
+                sensorAbsoluteDIA: sensorEnumAbsolute.diaAbsolute,
+                sensorAbsoluteSYS: sensorEnumAbsolute.sysAbsolute,
               ),
-              const ValueBoxTile.withHeadline(
-                  sensorAbsolute: sensorEnumAbsolute.pulse),
+              // TODO: requires multiple constructors in  ValueBoxTile to display special elements
+              ValueBoxTile.withHeadline(sensorAbsolute: sensorEnumAbsolute.pulse),
             ],
           ),
         ),
@@ -31,8 +30,7 @@ class MonitoringMode extends StatelessWidget {
           flex: 1,
           child: Row(
             children: [
-              const ValueBoxTile.withHeadline(
-                  sensorAbsolute: sensorEnumAbsolute.tempAbsolute),
+              const ValueBoxTile.withHeadline(sensorAbsolute: sensorEnumAbsolute.tempAbsolute),
               Expanded(
                 // This is a placeholder to ensure uniformity
                 flex: 1,

@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/model_absolute.dart';
 import 'package:uke_mlab/models/model_graph.dart';
+import 'package:uke_mlab/models/model_nibd.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/utilities/enums/patient_type.dart';
 import 'package:uke_mlab/models/model_absolute.dart';
@@ -27,11 +28,19 @@ class ModelManager {
           tag: sensor.name);
     }
     for (var sensor in sensorEnumGraph.values) {
-      Get.put(
-          DataModelGraph(
-            sensorKey: sensor,
-          ),
-          tag: sensor.name);
+      if (sensor == sensorEnumGraph.nibd) {
+        Get.put(
+            DataModelNIBD(
+              sensorKey: sensor,
+            ),
+            tag: sensor.name);
+      } else {
+        Get.put(
+            DataModelGraph(
+              sensorKey: sensor,
+            ),
+            tag: sensor.name);
+      }
     }
   }
 
@@ -61,46 +70,37 @@ class ModelManager {
     }
 
     for (var sensor in sensorEnumAbsolute.values) {
-      DataModelAbsolute dataModel =
-          Get.find<DataModelAbsolute>(tag: sensor.name);
+      DataModelAbsolute dataModel = Get.find<DataModelAbsolute>(tag: sensor.name);
       dataModel.resetDataModel();
 
       switch (patientType) {
         case patientTypeEnum.adult:
           dataModel.initialUpperBound = sensor.upperBound['adult'].toDouble();
-          dataModel
-              .setUpperAlarmBoundary(sensor.upperBound['adult'].toDouble());
+          dataModel.setUpperAlarmBounadary(sensor.upperBound['adult'].toDouble());
           dataModel.initialLowerBound = sensor.lowerBound['adult'].toDouble();
-          dataModel
-              .setLowerAlarmBoundary(sensor.lowerBound['adult'].toDouble());
+          dataModel.setLowerAlarmBounadary(sensor.lowerBound['adult'].toDouble());
           break;
         case patientTypeEnum.child:
           dataModel.initialUpperBound = sensor.upperBound['child'].toDouble();
-          dataModel
-              .setUpperAlarmBoundary(sensor.upperBound['child'].toDouble());
+          dataModel.setUpperAlarmBounadary(sensor.upperBound['child'].toDouble());
           dataModel.initialLowerBound = sensor.lowerBound['child'].toDouble();
-          dataModel
-              .setLowerAlarmBoundary(sensor.lowerBound['child'].toDouble());
+          dataModel.setLowerAlarmBounadary(sensor.lowerBound['child'].toDouble());
           break;
         case patientTypeEnum.infant:
           dataModel.initialUpperBound = sensor.upperBound['infant'].toDouble();
-          dataModel
-              .setUpperAlarmBoundary(sensor.upperBound['infant'].toDouble());
+          dataModel.setUpperAlarmBounadary(sensor.upperBound['infant'].toDouble());
           dataModel.initialLowerBound = sensor.lowerBound['infant'].toDouble();
-          dataModel
-              .setLowerAlarmBoundary(sensor.lowerBound['infant'].toDouble());
+          dataModel.setLowerAlarmBounadary(sensor.lowerBound['infant'].toDouble());
           break;
         default:
-          throw Exception(
-              'loadingPatientPresets called with wrong parameter (most likely patientTypeEnum.none)');
+          throw Exception('loadingPatientPresets called with wrong parameter (most likely patientTypeEnum.none)');
       }
     }
   }
 
   void loadDataModelEnvironmentValues() {
     for (var sensor in sensorEnumAbsolute.values) {
-      DataModelAbsolute dataModel =
-          Get.find<DataModelAbsolute>(tag: sensor.name);
+      DataModelAbsolute dataModel = Get.find<DataModelAbsolute>(tag: sensor.name);
       dataModel.color = sensor.color;
       dataModel.displayString = sensor.displayString;
       dataModel.displayShortString = sensor.displayShortString;
@@ -108,8 +108,14 @@ class ModelManager {
       dataModel.unit = sensor.unit;
       dataModel.floatRepresentation = sensor.floatRepresentation;
     }
+    // bad implementation for deciding which datamodel to find, sorry
+    dynamic dataModel;
     for (var sensor in sensorEnumGraph.values) {
-      DataModelGraph dataModel = Get.find<DataModelGraph>(tag: sensor.name);
+      if (sensor == sensorEnumGraph.nibd) {
+        dataModel = Get.find<DataModelNIBD>(tag: sensor.name);
+      } else {
+        dataModel = Get.find<DataModelGraph>(tag: sensor.name);
+      }
       dataModel.color = sensor.color;
       dataModel.xAxisTitle = sensor.xAxisUnit;
       dataModel.yAxisTitle = sensor.yAxisUnit;
@@ -120,13 +126,17 @@ class ModelManager {
 
   void resetAllModels() {
     for (var sensor in sensorEnumAbsolute.values) {
-      DataModelAbsolute dataModel =
-          Get.find<DataModelAbsolute>(tag: sensor.name);
+      DataModelAbsolute dataModel = Get.find<DataModelAbsolute>(tag: sensor.name);
       dataModel.resetDataModel();
     }
     for (var sensor in sensorEnumGraph.values) {
-      DataModelGraph dataModel = Get.find<DataModelGraph>(tag: sensor.name);
-      dataModel.resetDataModel();
+      if (sensor == sensorEnumGraph.nibd) {
+        DataModelNIBD dataModelNIBD = Get.find<DataModelNIBD>(tag: sensor.name);
+        dataModelNIBD.resetDataModel();
+      } else {
+        DataModelGraph dataModel = Get.find<DataModelGraph>(tag: sensor.name);
+        dataModel.resetDataModel();
+      }
     }
   }
 }
