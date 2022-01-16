@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/screen_element_models/absolute_alarm_field_model.dart';
 import 'package:uke_mlab/models/system_state.dart';
+import 'package:uke_mlab/utilities/constants/absolute_alarm_field_constants.dart';
 import 'package:uke_mlab/widgets/value_box/alarm_confirmation/alarm_confirmation_button_single_list.dart';
 
 class AlarmConfirmationButtonSingle extends StatelessWidget {
@@ -22,7 +23,7 @@ class AlarmConfirmationButtonSingle extends StatelessWidget {
       onPressed: () => systemState.absAlarmFieldModel.listExpanded.value
           ? hideOverlay(context)
           : showOverlay(context),
-      // add check whether alarms are present
+      // TODO add check whether alarms are present in current map
       child: const Text("Single Alarm Conf"),
     );
   }
@@ -32,9 +33,9 @@ class AlarmConfirmationButtonSingle extends StatelessWidget {
     AbsAlarmFieldModel fieldModel = Get.find<SystemState>().absAlarmFieldModel;
 
     fieldModel.entry = OverlayEntry(
-      builder: (context) => const Positioned(
-        left: 500,
-        top: 500,
+      builder: (context) => Positioned(
+        left: AbsoluteAlarmFieldConst.left,
+        top: AbsoluteAlarmFieldConst.overlayPositionTop + statusBarHeight,
         child: AlarmButtonAbsoluteList(),
       ),
     );

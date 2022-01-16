@@ -20,8 +20,8 @@ class AlarmConfirmationButtonAll extends StatelessWidget {
       onPressed:
           null, // on pressed acknowledge all alarms in systemState.alarmList (oder so)
       child: const Center(
-        child: Flexible(
-          child: Text("Acknowledge all Alarms"),
+        child: Text(
+          "Acknowledge all Alarms",
         ),
       ),
     );

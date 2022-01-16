@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:uke_mlab/widgets/appbar/statusbar.dart';
 
 class StatusBarConstants {
   static const int flexBarAlarmCounterTile = 4;
@@ -22,5 +21,5 @@ class StatusBarConstants {
           flexBarAlarmArea /
           (flexBarAlarmCounterTile + flexBarAlarmFieldTile) *
           flexBarAlarmFieldTile) -
-      horizontalMargin;
+      2 * horizontalMargin;
 }

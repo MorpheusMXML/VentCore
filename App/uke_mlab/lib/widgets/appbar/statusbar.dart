@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
-import 'package:uke_mlab/utilities/statusbar_constants.dart';
+import 'package:uke_mlab/utilities/constants/statusbar_constants.dart';
 import 'package:uke_mlab/widgets/appbar/alarm_field_tile.dart';
 import 'package:uke_mlab/utilities/enums/patient_type.dart';
 import 'alarm_counter_tile.dart';

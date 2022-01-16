@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uke_mlab/utilities/constants/absolute_alarm_field_constants.dart';
 import 'package:uke_mlab/widgets/graph_container/alarm_confirm_button.dart';
 import 'package:uke_mlab/widgets/value_box/alarm_confirmation/alarm_confirmation_button_all.dart';
 import 'package:uke_mlab/widgets/value_box/alarm_confirmation/alarm_confirmation_button_single.dart';
@@ -9,7 +10,8 @@ class AlarmConfirmationRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 10),
+      margin: const EdgeInsets.only(
+          top: 10, right: AbsoluteAlarmFieldConst.horizontalMargin),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: const [
