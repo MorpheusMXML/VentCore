@@ -429,52 +429,50 @@ h4 {
                 }
             }
             a:hover {
-                background: $primary-color;
                 box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
                 transform: translateY(-3px);
-                i {
-                    color: $white;
+            }
+            &:hover{
+                .waves-block {
+                    position: absolute;
+                    width: 384px;
+                    width: 24rem;
+                    height: 384px;
+                    height: 24rem;
+                    left: 50%;
+                    top: 50%;
+                    -webkit-transform: translate(-50%, -50%);
+                    transform: translate(-50%, -50%);
+                    z-index: 1;
+                    .waves {
+                        position: absolute;
+                        width: 384px;
+                        width: 24rem;
+                        height: 384px;
+                        height: 24rem;
+                        background: rgba(255, 255, 255, 0.4);
+                        opacity: 0;
+                        //-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+                        border-radius: 320px;
+                        background-clip: padding-box;
+                        -webkit-animation: waves 2s ease-in-out infinite;
+                        animation: waves 2s ease-in-out infinite;
+                    }
+                    .wave-1 {
+                        -webkit-animation-delay: 0s;
+                        animation-delay: 0s;
+                    }
+                    .wave-2 {
+                        -webkit-animation-delay: 1s;
+                        animation-delay: 1s;
+                    }
+                    .wave-3 {
+                        -webkit-animation-delay: 2s;
+                        animation-delay: 2s;
+                    }
                 }
             }
-        }
-        .waves-block {
-            position: absolute;
-            width: 384px;
-            width: 24rem;
-            height: 384px;
-            height: 24rem;
-            left: 50%;
-            top: 50%;
-            -webkit-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
-            z-index: 1;
-            .waves {
-                position: absolute;
-                width: 384px;
-                width: 24rem;
-                height: 384px;
-                height: 24rem;
-                background: rgba(255, 255, 255, 0.4);
-                opacity: 0;
-                //-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-                border-radius: 320px;
-                background-clip: padding-box;
-                -webkit-animation: waves 3s ease-in-out infinite;
-                animation: waves 3s ease-in-out infinite;
-            }
-            .wave-1 {
-                -webkit-animation-delay: 0s;
-                animation-delay: 0s;
-            }
-            .wave-2 {
-                -webkit-animation-delay: 1s;
-                animation-delay: 1s;
-            }
-            .wave-3 {
-                -webkit-animation-delay: 2s;
-                animation-delay: 2s;
-            }
-        }
+        }     
         @keyframes waves {
             0% {
                 -webkit-transform: scale(0.2, 0.2);
@@ -487,8 +485,8 @@ h4 {
                 -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
             }
             100% {
-                -webkit-transform: scale(0.9, 0.9);
-                transform: scale(0.9, 0.9);
+                -webkit-transform: scale(0.7, 0.7);
+                transform: scale(0.7, 0.7);
                 opacity: 0;
                 -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
             }
