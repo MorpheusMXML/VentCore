@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 
-enum alarmStatus { high, middle, warning, confirmed, none }
+enum alarmStatus {
+  high,
+  middle,
+  warning,
+  confirmed,
+  none,
+}
 
 extension AlarmStatusAttributes on alarmStatus {
   static const Map<alarmStatus, Map<String, dynamic>> attributes = {

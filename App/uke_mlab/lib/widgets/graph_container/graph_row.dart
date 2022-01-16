@@ -17,31 +17,6 @@ class GraphRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: solve special case via constructor (different enumType)
-    /*if (sensor == sensorEnum.nibd) {
-      return ConstrainedBox(
-        constraints: const BoxConstraints(maxHeight: 150),
-        child: Row(
-          children: [
-            Expanded(
-              child: HistoryGraph(graphData: {
-                'data': [
-                  NIBDdata(DateTime.utc(2021, 12, 9, 11, 00), 120, 80),
-                  NIBDdata(DateTime.utc(2021, 12, 9, 11, 05), 140, 95),
-                  NIBDdata(DateTime.utc(2021, 12, 9, 11, 10), 180, 100),
-                  NIBDdata(DateTime.utc(2021, 12, 9, 11, 15), 185, 75),
-                  NIBDdata(DateTime.utc(2021, 12, 9, 11, 20), 200, 110),
-                ].obs,
-                'color': Colors.red,
-              }),
-            ),
-            const SizedBox(width: 8),
-            ValueBoxTile(sensor: sensor),
-          ],
-        ),
-      );
-    } else {
-    */
     return ConstrainedBox(
       constraints: const BoxConstraints(maxHeight: 150),
       child: Row(
@@ -57,7 +32,6 @@ class GraphRow extends StatelessWidget {
     );
   }
 
-//}
   Widget evaluateValueBoxTile() {
     if (SensorMapping.sensorMap[sensor] == null) {
       return ValueBoxTile.withoutAbsolute(sensorGraph: sensor);

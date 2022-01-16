@@ -26,24 +26,6 @@ class GraphAlarmBorder extends StatelessWidget {
       alarmStatus? alarm = systemState.alarmState[sensor]!["enum"];
       switch (alarm) {
         case alarmStatus.high:
-          return Column(
-            children: [
-              Expanded(
-                child: Container(
-                  color: systemState.alarmState[sensor]!["color"],
-                  padding: const EdgeInsets.only(bottom: 5),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      AlarmConfirmButton(sensor: sensor),
-                      GraphAlarmMessage(sensor: sensor),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          );
         case alarmStatus.middle:
           return Column(
             children: [
