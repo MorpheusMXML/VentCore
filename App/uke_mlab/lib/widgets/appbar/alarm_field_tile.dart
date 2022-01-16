@@ -17,6 +17,7 @@ class AlarmFieldTile extends StatelessWidget {
       color: Colors.black,
       decoration: TextDecoration.none,
       fontSize: 25,
+      fontWeight: FontWeight.w300,
     );
 
     return Container(

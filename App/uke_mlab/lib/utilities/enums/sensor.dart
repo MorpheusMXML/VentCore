@@ -241,7 +241,7 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
         'infant': 33,
       },
     },
-        sensorEnumAbsolute.diaAbsolute: {
+    sensorEnumAbsolute.diaAbsolute: {
       'displayString': 'Diastolic Blood Pressure',
       'displayShortString': 'NIBD',
       'abbreviation': 'DIA',
@@ -259,7 +259,7 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
         'infant': 50,
       },
     },
-      sensorEnumAbsolute.sysAbsolute: {
+    sensorEnumAbsolute.sysAbsolute: {
       'displayString': 'Systolic Blood Pressure',
       'displayShortString': 'NIBD',
       'abbreviation': 'SYS',
@@ -290,4 +290,7 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
   int get confirmDuration => attributes[this]!['confirmDuration'] ?? 10;
   dynamic get boundaryDeviation =>
       attributes[this]!['boundaryDeviation'] as dynamic;
+  Map get upperBound => attributes[this]!['upperBound'] as Map<String, dynamic>;
+  Map get lowerBound => attributes[this]!['lowerBound'] as Map<String, dynamic>;
+  bool get floatRepresentation => attributes[this]!['floatRepresentation'];
 }
