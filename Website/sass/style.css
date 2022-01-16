@@ -178,7 +178,7 @@ h4 {
 
 .navbar .navbar-nav .nav-link.active {
   color: #938F99;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .navbar .navbar-nav .active > .nav-link {
@@ -234,7 +234,6 @@ h4 {
 
 .navbar-light .navbar-nav .nav-link.active {
   color: #1C1B1F;
-  font-weight: 900;
 }
 
 .navbar-light .navbar-toggler {
@@ -349,14 +348,13 @@ h4 {
 
 #features .feature {
   margin: 30px 0;
-  padding: 0 50px;
+  padding: 0 20px;
   -webkit-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out;
 }
 
 #features .feature .feature-icon {
-  background: url(../imgs/Icons.png);
-  opacity: 0.7;
+  background: url(../imgs/icons-bg.png);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -472,18 +470,13 @@ h4 {
 }
 
 #video-popup .video-box .play-button a:hover {
-  background: #1C1B1F;
   -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
           box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   -webkit-transform: translateY(-3px);
           transform: translateY(-3px);
 }
 
-#video-popup .video-box .play-button a:hover i {
-  color: #fff;
-}
-
-#video-popup .video-box .waves-block {
+#video-popup .video-box .play-button:hover .waves-block {
   position: absolute;
   width: 384px;
   width: 24rem;
@@ -496,7 +489,7 @@ h4 {
   z-index: 1;
 }
 
-#video-popup .video-box .waves-block .waves {
+#video-popup .video-box .play-button:hover .waves-block .waves {
   position: absolute;
   width: 384px;
   width: 24rem;
@@ -506,21 +499,21 @@ h4 {
   opacity: 0;
   border-radius: 320px;
   background-clip: padding-box;
-  -webkit-animation: waves 3s ease-in-out infinite;
-  animation: waves 3s ease-in-out infinite;
+  -webkit-animation: waves 2s ease-in-out infinite;
+  animation: waves 2s ease-in-out infinite;
 }
 
-#video-popup .video-box .waves-block .wave-1 {
+#video-popup .video-box .play-button:hover .waves-block .wave-1 {
   -webkit-animation-delay: 0s;
   animation-delay: 0s;
 }
 
-#video-popup .video-box .waves-block .wave-2 {
+#video-popup .video-box .play-button:hover .waves-block .wave-2 {
   -webkit-animation-delay: 1s;
   animation-delay: 1s;
 }
 
-#video-popup .video-box .waves-block .wave-3 {
+#video-popup .video-box .play-button:hover .waves-block .wave-3 {
   -webkit-animation-delay: 2s;
   animation-delay: 2s;
 }
@@ -537,8 +530,8 @@ h4 {
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
   }
   100% {
-    -webkit-transform: scale(0.9, 0.9);
-    transform: scale(0.9, 0.9);
+    -webkit-transform: scale(0.7, 0.7);
+    transform: scale(0.7, 0.7);
     opacity: 0;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   }
@@ -556,8 +549,8 @@ h4 {
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
   }
   100% {
-    -webkit-transform: scale(0.9, 0.9);
-    transform: scale(0.9, 0.9);
+    -webkit-transform: scale(0.7, 0.7);
+    transform: scale(0.7, 0.7);
     opacity: 0;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   }
