@@ -46,9 +46,13 @@ class ModelManager {
 
   /// registers [AlarmController] in [ModelManager]
   ///
-  /// only to be called during system creation
+  /// Only call this during system creation.
   void registerAlarmController(AlarmController newController) {
     _alarmController = newController;
+    for (var sensor in sensorEnumAbsolute.values) {
+      Get.find<DataModelAbsolute>(tag: sensor.name).alarmController =
+          newController;
+    }
   }
 
   /// returns registered [AlarmController]

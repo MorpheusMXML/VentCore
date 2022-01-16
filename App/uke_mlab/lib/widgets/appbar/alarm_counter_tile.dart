@@ -11,10 +11,11 @@ class AlarmCounterTile extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemState systemState = Get.find<SystemState>();
     const double fSize = 25;
-    String alarmText = systemState.generalAlarms.alarmList.length.toString();
 
     return Obx(
       () {
+        String alarmText =
+            systemState.generalAlarms.alarmList.length.toString();
         switch (systemState.generalAlarms.alarmList.length) {
           case 0:
             return Container();

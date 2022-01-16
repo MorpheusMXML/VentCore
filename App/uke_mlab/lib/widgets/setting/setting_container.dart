@@ -11,16 +11,20 @@ class SettingContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const IPPVButton(),
-        ...data
-            .map((entry) => SettingTile(
-                  name: entry['name'].toString(),
-                  rate: entry['rate'].toString(),
-                ))
-            .toList()
-      ],
+    return Container(
+      color: Theme.of(context).focusColor,
+      margin: const EdgeInsets.only(right: 8),
+      child: Column(
+        children: [
+          const IPPVButton(),
+          ...data
+              .map((entry) => SettingTile(
+                    name: entry['name'].toString(),
+                    rate: entry['rate'].toString(),
+                  ))
+              .toList()
+        ],
+      ),
     );
   }
 }

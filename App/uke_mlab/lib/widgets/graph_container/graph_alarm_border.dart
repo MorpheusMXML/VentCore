@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:uke_mlab/models/system_state.dart';
-import 'package:uke_mlab/utilities/enums/boundary_state.dart';
+import 'package:uke_mlab/utilities/enums/alarm_status.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 import 'package:uke_mlab/widgets/graph_container/alarm_confirm_button.dart';
@@ -23,14 +23,14 @@ class GraphAlarmBorder extends StatelessWidget {
     final SystemState systemState = Get.find<SystemState>();
     return Obx(() {
       ///evaluate alarmTypes and see which Boundary is violated
-      boundaryStateEnum? alarmType = systemState.violationStates[sensor];
-      switch (alarmType) {
-        case boundaryStateEnum.lowerBoundaryViolated:
+      alarmStatus? alarm = systemState.alarmState[sensor]!["enum"];
+      switch (alarm) {
+        case alarmStatus.high:
           return Column(
             children: [
               Expanded(
                 child: Container(
-                  color: Colors.red,
+                  color: systemState.alarmState[sensor]!["color"],
                   padding: const EdgeInsets.only(bottom: 5),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -44,12 +44,12 @@ class GraphAlarmBorder extends StatelessWidget {
               ),
             ],
           );
-        case boundaryStateEnum.upperBoundaryViolated:
+        case alarmStatus.middle:
           return Column(
             children: [
               Expanded(
                 child: Container(
-                  color: Colors.red,
+                  color: systemState.alarmState[sensor]!["color"],
                   padding: const EdgeInsets.only(bottom: 5),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -63,12 +63,12 @@ class GraphAlarmBorder extends StatelessWidget {
               ),
             ],
           );
-        case boundaryStateEnum.suppressed:
+        case alarmStatus.confirmed:
           return Column(
             children: [
               Expanded(
                 child: Container(
-                  color: Colors.red,
+                  color: systemState.alarmState[sensor]!["color"],
                   margin: const EdgeInsets.fromLTRB(0, 0, 0, 30),
                 ),
               ),

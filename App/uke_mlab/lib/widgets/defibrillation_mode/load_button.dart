@@ -11,6 +11,20 @@ class LoadButton extends StatelessWidget {
     DefibrillationController defibrillationController =
         Get.find<DefibrillationController>();
 
+    ButtonStyle loadButtonStyle = ElevatedButton.styleFrom(
+      primary: Theme.of(context).shadowColor,
+      onPrimary: Colors.green,
+      side: const BorderSide(
+        color: Colors.green,
+      ),
+    );
+
+    ButtonStyle shockButtonStyle = ElevatedButton.styleFrom(
+      primary: Colors.red,
+      onPrimary: Colors.black,
+      side: const BorderSide(color: Colors.white),
+    );
+
     return Container(
       margin: const EdgeInsets.all(8),
       child: Obx(
@@ -18,79 +32,49 @@ class LoadButton extends StatelessWidget {
           switch (defibrillationController.loaded.value) {
             case 'Loaded':
               return ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Theme.of(context).shadowColor,
-                  onPrimary: Colors.green,
-                  side: const BorderSide(
-                    color: Colors.green,
-                  ),
-                ),
+                style: loadButtonStyle,
                 onPressed: () => defibrillationController.toggleLoaded('Shock'),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Flexible(
-                      flex: 3,
-                      child: Container(
-                        child: SvgPicture.asset('assets/icons/Battery.svg'),
-                        padding: const EdgeInsets.all(8),
-                      ),
+                    Container(
+                      child: SvgPicture.asset('assets/icons/Battery.svg'),
+                      padding: const EdgeInsets.all(8),
                     ),
-                    const Flexible(
-                      flex: 1,
-                      child: Text('Load'),
-                    ),
+                    const Text('Load'),
                   ],
                 ),
               );
             case 'Loading':
               return ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Theme.of(context).shadowColor,
-                  onPrimary: Colors.green,
-                  side: const BorderSide(
-                    color: Colors.green,
-                  ),
-                ),
+                style: loadButtonStyle,
                 onPressed: null,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Flexible(
-                      flex: 3,
-                      child: Container(
-                        child: SvgPicture.asset('assets/icons/Battery.svg'),
-                        padding: const EdgeInsets.all(8),
-                      ),
+                    Container(
+                      child: SvgPicture.asset('assets/icons/Battery.svg'),
+                      padding: const EdgeInsets.all(8),
                     ),
-                    const Flexible(
-                      flex: 1,
-                      child: Text('Loading...'),
-                    ),
+                    const Text('Loading...'),
                   ],
                 ),
               );
             case 'Shock':
               return ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    primary: Colors.red,
-                    onPrimary: Colors.black,
-                    side: const BorderSide(color: Colors.white)),
+                style: shockButtonStyle,
                 onPressed: () {
                   defibrillationController.startLastWatch();
                   defibrillationController.toggleLoaded('Loaded');
                 },
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Flexible(
-                      flex: 3,
-                      child: Container(
-                        child: SvgPicture.asset('assets/icons/Shock.svg'),
-                        margin: const EdgeInsets.all(8),
-                      ),
+                    Container(
+                      child: SvgPicture.asset('assets/icons/Shock.svg'),
+                      margin: const EdgeInsets.all(8),
                     ),
-                    const Flexible(
-                      flex: 1,
-                      child: Text('Shock'),
-                    ),
+                    const Text('Shock'),
                   ],
                 ),
               );

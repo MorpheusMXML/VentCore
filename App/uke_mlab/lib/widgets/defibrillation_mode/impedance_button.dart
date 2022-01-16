@@ -40,7 +40,7 @@ class ImpedanceButton extends StatelessWidget {
                   );
             return ElevatedButton(
               style: buttonStyle,
-              child: Text(name, style: const TextStyle(fontSize: 12)),
+              child: Text(name),
               onPressed:
                   defibrillationController.selectedImpedanceButton.value != name
                       ? () => defibrillationController

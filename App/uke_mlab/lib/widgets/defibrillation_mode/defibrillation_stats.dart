@@ -43,23 +43,29 @@ class DefibrillationStats extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                    child: Obx(() => Text(
-                          defibrillationController.lastTimerString.value,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(fontSize: 24),
-                        ))),
+                    child: Obx(() =>
+                        Text(defibrillationController.lastTimerString.value,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            )))),
                 Expanded(
-                    child: Obx(() => Text(
-                          '${defibrillationController.numberOfShocks}',
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(fontSize: 24),
-                        ))),
+                    child: Obx(
+                        () => Text('${defibrillationController.numberOfShocks}',
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            )))),
                 Expanded(
-                    child: Obx(() => Text(
-                          defibrillationController.startTimerString.value,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(fontSize: 24),
-                        ))),
+                    child: Obx(() =>
+                        Text(defibrillationController.startTimerString.value,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            )))),
               ],
             ),
           ],

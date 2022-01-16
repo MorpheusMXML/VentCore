@@ -24,10 +24,6 @@ enum sensorEnumAbsolute {
   diaAbsolute,
 }
 
-enum sensorEnumNibd {
-  none,
-}
-
 class SensorMapping {
   static const Map<sensorEnumGraph, sensorEnumAbsolute?> sensorMap = {
     sensorEnumGraph.paw: null,
@@ -118,6 +114,8 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
       'unit': 'bpm',
       'color': AppTheme.heartFreqColor,
       'floatRepresentation': false,
+      'confirmDuration': 20,
+      'boundaryDeviation': 0.1,
       'upperBound': {
         'adult': 85,
         'child': 125,
@@ -136,7 +134,12 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
       'unit': '°C',
       'color': AppTheme.tempColor,
       'floatRepresentation': true,
-      'upperBound': {'adult': 37.4, 'child': 37.4, 'infant': 37.4},
+      'boundaryDeviation': 0.1,
+      'upperBound': {
+        'adult': 37.4,
+        'child': 37.4,
+        'infant': 37.4,
+      },
       'lowerBound': {
         'adult': 36.5,
         'child': 36.5,
@@ -150,6 +153,7 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
       'unit': '%',
       'color': AppTheme.plethColor,
       'floatRepresentation': false,
+      'boundaryDeviation': 0.1,
       'upperBound': {
         'adult': 100,
         'child': 100,
@@ -168,6 +172,7 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
       'unit': 'mmHg',
       'color': AppTheme.co2Color,
       'floatRepresentation': false,
+      'boundaryDeviation': 0.1,
       'upperBound': {
         'adult': 45,
         'child': 45,
@@ -186,6 +191,7 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
       'unit': 'bpm',
       'color': AppTheme.pulseColor,
       'floatRepresentation': false,
+      'boundaryDeviation': 0.1,
       'upperBound': {
         'adult': 85,
         'child': 125,
@@ -223,6 +229,7 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
       'unit': 'br/min',
       'color': AppTheme.breathFrequencyColor,
       'floatRepresentation': false,
+      'boundaryDeviation': 0.1,
       'upperBound': {
         'adult': 20,
         'child': 28,
@@ -234,25 +241,7 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
         'infant': 33,
       },
     },
-    sensorEnumAbsolute.sysAbsolute: {
-      'displayString': 'Systolic Blood Pressure',
-      'displayShortString': 'NIBD',
-      'abbreviation': 'SYS',
-      'unit': 'mmHg',
-      'color': AppTheme.nibdColor,
-      'floatRepresentation': false,
-      'upperBound': {
-        'adult': 130,
-        'child': 100,
-        'infant': 85,
-      },
-      'lowerBound': {
-        'adult': 120,
-        'child': 85,
-        'infant': 70,
-      },
-    },
-    sensorEnumAbsolute.diaAbsolute: {
+        sensorEnumAbsolute.diaAbsolute: {
       'displayString': 'Diastolic Blood Pressure',
       'displayShortString': 'NIBD',
       'abbreviation': 'DIA',
@@ -270,46 +259,35 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
         'infant': 50,
       },
     },
+      sensorEnumAbsolute.sysAbsolute: {
+      'displayString': 'Systolic Blood Pressure',
+      'displayShortString': 'NIBD',
+      'abbreviation': 'SYS',
+      'unit': 'mmHg',
+      'color': AppTheme.nibdColor,
+      'floatRepresentation': false,
+      'upperBound': {
+        'adult': 130,
+        'child': 100,
+        'infant': 85,
+      },
+      'lowerBound': {
+        'adult': 120,
+        'child': 85,
+        'infant': 70,
+      },
+    },
   };
 
   String get displayString => attributes[this]!['displayString'] as String;
-  String get displayShortString => attributes[this]!['displayShortString'] as String;
+  String get displayShortString =>
+      attributes[this]!['displayShortString'] as String;
   String get abbreviation => attributes[this]!['abbreviation'] as String;
   String get unit => attributes[this]!['unit'] as String;
   Color get color => attributes[this]!['color'] as Color;
-  bool get floatRepresentation => attributes[this]!['floatRepresentation'] as bool;
-  Map get upperBound => attributes[this]!['upperBound'] as Map<String, dynamic>;
-  Map get lowerBound => attributes[this]!['lowerBound'] as Map<String, dynamic>;
-}
 
-//extension SensorNibdAttributes on sensorEnumNibd {
-//  static const Map<sensorEnumNibd, Map<String, dynamic>> attributes = {
-//    sensorEnumNibd.nibdAbsolute: {
-//      'displayString':
-//          'Non Invasive Blood Pressure', // german abbreviation is NIBD (nicht invasiver blutdruck)
-//      'displayShortString': 'NIBD',
-//      'abbreviation': 'NIBD',
-//      'unit': 'mmHg',
-//      'color': AppTheme.nibdColor,
-//      'upperBound': {
-//        // upper&lower bounds vor [SYS,DIA]
-//        'adult': [130, 90],
-//        'child': [100, 75],
-//        'infant': [85, 60], // dia for infant no info found
-//      },
-//      'lowerBound': {
-//        'adult': [120, 80],
-//        'child': [85, 60],
-//        'infant': [70, 50],
-//      },
-//    },
-//  };
-//  String get displayString => attributes[this]!['displayString'] as String;
-//  String get displayShortString =>
-//      attributes[this]!['displayShortString'] as String;
-//  String get abbreviation => attributes[this]!['abbreviation'] as String;
-//  String get unit => attributes[this]!['unit'] as String;
-//  Color get color => attributes[this]!['color'] as Color;
-//  Map get upperBound => attributes[this]!['upperBound'] as Map<String, dynamic>;
-//  Map get lowerBound => attributes[this]!['lowerBound'] as Map<String, dynamic>;
-//}
+  ///10 Seconds are a default confirm Duration
+  int get confirmDuration => attributes[this]!['confirmDuration'] ?? 10;
+  dynamic get boundaryDeviation =>
+      attributes[this]!['boundaryDeviation'] as dynamic;
+}

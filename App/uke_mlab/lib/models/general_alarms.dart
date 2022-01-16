@@ -63,9 +63,11 @@ class AlarmListEntry {
 
   /// translates the [priority] to a associated color
   Color toColor() {
-    if (priority > 50) {
-      return Colors.red;
+    if (priority > 0 && priority <= 33) {
+      return Colors.green;
+    } else if (priority > 33 && priority <= 66) {
+      return Colors.yellow;
     }
-    return Colors.yellow;
+    return Colors.red;
   }
 }
