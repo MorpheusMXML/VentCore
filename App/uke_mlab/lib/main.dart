@@ -45,6 +45,8 @@ class MyApp extends StatelessWidget {
     // svgs are loaded and screens are given bindings?
     final AlarmController alarmController =
         Get.put(AlarmController(modelManager));
+
+    // For general alarm testing purposes, TODO: Remove
     Timer.periodic(const Duration(seconds: 2), (timer) {
       /*if (systemState.generalAlarms.alarmList.length < 2) {
         systemState.generalAlarms.addAlarm(nonGraphAlarmEnum.ekgArtifact, 60);

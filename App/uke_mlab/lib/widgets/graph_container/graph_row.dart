@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
@@ -17,54 +16,25 @@ class GraphRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: solve special case via constructor (different enumType)
-    /*if (sensor == sensorEnum.nibd) {
-      return ConstrainedBox(
-        constraints: const BoxConstraints(maxHeight: 150),
-        child: Row(
-          children: [
-            Expanded(
-              child: HistoryGraph(graphData: {
-                'data': [
-                  NIBDdata(DateTime.utc(2021, 12, 9, 11, 00), 120, 80),
-                  NIBDdata(DateTime.utc(2021, 12, 9, 11, 05), 140, 95),
-                  NIBDdata(DateTime.utc(2021, 12, 9, 11, 10), 180, 100),
-                  NIBDdata(DateTime.utc(2021, 12, 9, 11, 15), 185, 75),
-                  NIBDdata(DateTime.utc(2021, 12, 9, 11, 20), 200, 110),
-                ].obs,
-                'color': Colors.red,
-              }),
-            ),
-            const SizedBox(width: 8),
-            ValueBoxTile(sensor: sensor),
-          ],
-        ),
-      );
-    } else {
-    */
     return ConstrainedBox(
       constraints: const BoxConstraints(maxHeight: 150),
-      child: Row(
-          children: (sensor == sensorEnumGraph.nibd)
-              ? [
-                  Expanded(child: HistoryGraph(sensor: sensor)),
-                ]
-              : [
-                  Expanded(child: Graph(sensor: sensor)),
-                  const SizedBox(width: 8),
-                  evaluateValueBoxTile()
-                ]),
+      child: Row(children: [
+        Expanded(
+          child: Graph(sensor: sensor),
+        ),
+        if (sensor != sensorEnumGraph.nibd) ...[
+          const SizedBox(width: 8),
+          evaluateValueBoxTile()
+        ]
+      ]),
     );
   }
 
-//}
   Widget evaluateValueBoxTile() {
     if (SensorMapping.sensorMap[sensor] == null) {
       return ValueBoxTile.withoutAbsolute(sensorGraph: sensor);
     } else {
-      return ValueBoxTile(
-          sensorAbsolute:
-              SensorMapping.sensorMap[sensor] as sensorEnumAbsolute);
+      return ValueBoxTile(sensorAbsolute: SensorMapping.sensorMap[sensor]);
     }
   }
 }

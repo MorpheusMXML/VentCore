@@ -23,37 +23,49 @@ class DataModelGraph extends GetxController {
   int graphDataMaxLength = 0;
 
   DataModelGraph({required this.sensorKey}) {
-    if (sensorKey == sensorEnumGraph.cpr) {
-      singleData = ChartData.asCPR(time: DateTime.now(), counter: 0, value: 0.0).obs;
-    } else {
-      singleData = ChartData(time: DateTime.now(), value: 0.0, counter: 0).obs;
+    switch (sensorKey) {
+      case sensorEnumGraph.cpr:
+        singleData =
+            ChartData.asCPR(time: DateTime.now(), counter: 0, value: 0.0).obs;
+        break;
+      default:
+        singleData =
+            ChartData(time: DateTime.now(), value: 0.0, counter: 0).obs;
     }
   }
 
   void updateValues(List<dynamic> valueList) {
-    //Check wether Data loaded is from CPR Sensor. To Change Constructor Call for ChartData to ChartData.asCPR
-    if (sensorKey == sensorEnumGraph.cpr) {
-      for (int i = 0; i < valueList.length; i++) {
-        singleData.value = ChartData.asCPR(time: DateTime.now(), value: valueList[i].toDouble(), counter: singleData.value.counter + 1);
-        graphData.add(singleData.value);
-      }
-
-      if (graphData.length + 1 > graphDataMaxLength) {
-        for (var i = 0; i < valueList.length; i++) {
-          graphData.removeAt(0);
+    // Check wether Data loaded is from CPR Sensor. To Change Constructor Call for ChartData to ChartData.asCPR
+    switch (sensorKey) {
+      case sensorEnumGraph.cpr:
+        for (int i = 0; i < valueList.length; i++) {
+          singleData.value = ChartData.asCPR(
+              time: DateTime.now(),
+              value: valueList[i].toDouble(),
+              counter: singleData.value.counter + 1);
+          graphData.add(singleData.value);
         }
-      }
-    } else {
-      for (int i = 0; i < valueList.length; i++) {
-        singleData.value = ChartData(time: DateTime.now(), value: valueList[i].toDouble(), counter: singleData.value.counter + 1);
-        graphData.add(singleData.value);
-      }
 
-      if (graphData.length + 1 > graphDataMaxLength) {
-        for (var i = 0; i < valueList.length; i++) {
-          graphData.removeAt(0);
+        if (graphData.length + 1 > graphDataMaxLength) {
+          for (var i = 0; i < valueList.length; i++) {
+            graphData.removeAt(0);
+          }
         }
-      }
+        break;
+      default:
+        for (int i = 0; i < valueList.length; i++) {
+          singleData.value = ChartData(
+              time: DateTime.now(),
+              value: valueList[i].toDouble(),
+              counter: singleData.value.counter + 1);
+          graphData.add(singleData.value);
+        }
+
+        if (graphData.length + 1 > graphDataMaxLength) {
+          for (var i = 0; i < valueList.length; i++) {
+            graphData.removeAt(0);
+          }
+        }
     }
 
     // update only added/removed indexes instead of the whole chart (efficient)
@@ -71,7 +83,8 @@ class DataModelGraph extends GetxController {
     //singleData.value = ChartData(DateTime.now(), 0.0, 0);
     //graphData.add(singleData.value);
     for (int i = 0; i < graphDataMaxLength; i++) {
-      singleData.value = ChartData(counter: i, time: DateTime.now(), value: 0.0);
+      singleData.value =
+          ChartData(counter: i, time: DateTime.now(), value: 0.0);
       graphData.add(singleData.value);
     }
   }
