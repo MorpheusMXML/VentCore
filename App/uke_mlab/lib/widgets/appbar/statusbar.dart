@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
-import 'package:uke_mlab/widgets/appbar/alarm_expansion_entry.dart';
+import 'package:uke_mlab/utilities/statusbar_constants.dart';
+import 'package:uke_mlab/widgets/appbar/alarm_field_tile.dart';
 import 'package:uke_mlab/utilities/enums/patient_type.dart';
 import 'alarm_counter_tile.dart';
 
@@ -20,23 +21,24 @@ class StatusBar extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Flexible(
-          flex: 5,
+          flex: StatusBarConstants.flexBarAlarmArea,
           fit: FlexFit.loose,
           child: Row(
             children: [
               //DropDown Menu (AlarmExpansionTile)
               Flexible(
-                flex: 7,
-                fit: FlexFit.tight,
+                flex: StatusBarConstants.flexBarAlarmFieldTile,
                 child: Obx(() => systemState.generalAlarms.alarmList.isEmpty
                     ? Container()
-                    : AlarmExpansionEntry(
+                    : AlarmFieldTile(
                         data: systemState.generalAlarms.alarmList[0])),
+              ),
+              const SizedBox(
+                width: StatusBarConstants.horizontalMargin * 2,
               ),
               //Info about Alarm amount (AlarmCounterTile)
               Flexible(
-                flex: 2,
-                fit: FlexFit.loose,
+                flex: StatusBarConstants.flexBarAlarmCounterTile,
                 child: AlarmCounterTile(),
               ),
             ],
@@ -44,9 +46,8 @@ class StatusBar extends StatelessWidget {
         ),
         // PatientType display
         Flexible(
-          flex: 1,
+          flex: StatusBarConstants.flexBarPatientTypeArea,
           child: Text(
-            // TODO: reset this value after scenario ends?
             systemState.patientType.displayString,
             style: TextStyle(
               color: Theme.of(context).dividerColor,
@@ -56,7 +57,7 @@ class StatusBar extends StatelessWidget {
         ),
         // O2 bottly display
         Flexible(
-          flex: 1,
+          flex: StatusBarConstants.flexBarO2BottleArea,
           child: Center(
               child: SvgPicture.asset('assets/icons/OxygenBottle.svg',
                   height: 20)),

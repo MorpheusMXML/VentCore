@@ -3,10 +3,10 @@ import 'package:uke_mlab/models/general_alarms.dart';
 import 'package:intl/intl.dart';
 import 'package:uke_mlab/utilities/enums/non_graph_alarm.dart';
 
-class AlarmExpansionEntry extends StatelessWidget {
+class AlarmFieldTile extends StatelessWidget {
   /// describes an entry for the possible dropDownButton menu in [AlarmExpansionTile]
   final AlarmListEntry data;
-  const AlarmExpansionEntry({
+  const AlarmFieldTile({
     Key? key,
     required this.data,
   }) : super(key: key);
@@ -15,6 +15,7 @@ class AlarmExpansionEntry extends StatelessWidget {
   Widget build(BuildContext context) {
     const TextStyle textStyle = TextStyle(
       color: Colors.black,
+      decoration: TextDecoration.none,
       fontSize: 25,
     );
 
@@ -45,10 +46,6 @@ class AlarmExpansionEntry extends StatelessWidget {
                 style: textStyle,
               ),
             ),
-          ),
-          Flexible(
-            flex: 2,
-            child: Container(),
           ),
         ],
       ),

@@ -7,7 +7,7 @@ import 'package:uke_mlab/utilities/enums/non_graph_alarm.dart';
 class GeneralAlarms extends GetxController {
   final RxList<AlarmListEntry> alarmList = <AlarmListEntry>[].obs;
   OverlayEntry? entry;
-  bool listExpanded = false;
+  RxBool listExpanded = false.obs;
 
   GeneralAlarms();
 
