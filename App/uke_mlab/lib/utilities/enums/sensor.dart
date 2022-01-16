@@ -238,7 +238,7 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
       'displayString': 'Systolic Blood Pressure',
       'displayShortString': 'NIBD',
       'abbreviation': 'SYS',
-      'unit': '',
+      'unit': 'mmHg',
       'color': AppTheme.nibdColor,
       'floatRepresentation': false,
       'upperBound': {
@@ -256,7 +256,7 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
       'displayString': 'Diastolic Blood Pressure',
       'displayShortString': 'NIBD',
       'abbreviation': 'DIA',
-      'unit': '',
+      'unit': 'mmHg',
       'color': AppTheme.nibdColor,
       'floatRepresentation': false,
       'upperBound': {

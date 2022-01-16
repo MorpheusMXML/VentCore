@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/model_absolute.dart';
 import 'package:uke_mlab/models/model_graph.dart';
+import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 class ValueBoxContainer extends StatelessWidget {
   final DataModelAbsolute? dataModelAbsolute;
@@ -25,10 +26,16 @@ class ValueBoxContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const double aspectRatio = 1.1; // TODO: should be 1 but then we have a pixel overflow -> 255 and others are too big in current configuration
-    const double fontSize = 17;
-    const double fontSizeCenter = 44;
+    double fontSize = 17;
+    double fontSizeCenter = 44;
     // could be done via template pattern for better code quality
     if (dataModelGraph == null) {
+
+      //When NIBD: avoid overflow.
+      if(dataModelAbsolute!.abbreviation == sensorEnumAbsolute.sysAbsolute.abbreviation || dataModelAbsolute!.abbreviation == sensorEnumAbsolute.diaAbsolute.abbreviation){
+        fontSizeCenter = 40;
+        fontSize = 14;
+      }
       return AspectRatio(
         aspectRatio: aspectRatio,
         child: ElevatedButton(
