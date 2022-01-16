@@ -37,9 +37,13 @@ class ModelManager {
 
   /// registers [AlarmController] in [ModelManager]
   ///
-  /// only to be called during system creation
+  /// Only call this during system creation.
   void registerAlarmController(AlarmController newController) {
     _alarmController = newController;
+    for (var sensor in sensorEnumAbsolute.values) {
+      Get.find<DataModelAbsolute>(tag: sensor.name).alarmController =
+          newController;
+    }
   }
 
   /// returns registered [AlarmController]
@@ -65,26 +69,26 @@ class ModelManager {
         case patientTypeEnum.adult:
           dataModel.initialUpperBound = sensor.upperBound['adult'].toDouble();
           dataModel
-              .setUpperAlarmBounadary(sensor.upperBound['adult'].toDouble());
+              .setUpperAlarmBoundary(sensor.upperBound['adult'].toDouble());
           dataModel.initialLowerBound = sensor.lowerBound['adult'].toDouble();
           dataModel
-              .setLowerAlarmBounadary(sensor.lowerBound['adult'].toDouble());
+              .setLowerAlarmBoundary(sensor.lowerBound['adult'].toDouble());
           break;
         case patientTypeEnum.child:
           dataModel.initialUpperBound = sensor.upperBound['child'].toDouble();
           dataModel
-              .setUpperAlarmBounadary(sensor.upperBound['child'].toDouble());
+              .setUpperAlarmBoundary(sensor.upperBound['child'].toDouble());
           dataModel.initialLowerBound = sensor.lowerBound['child'].toDouble();
           dataModel
-              .setLowerAlarmBounadary(sensor.lowerBound['child'].toDouble());
+              .setLowerAlarmBoundary(sensor.lowerBound['child'].toDouble());
           break;
         case patientTypeEnum.infant:
           dataModel.initialUpperBound = sensor.upperBound['infant'].toDouble();
           dataModel
-              .setUpperAlarmBounadary(sensor.upperBound['infant'].toDouble());
+              .setUpperAlarmBoundary(sensor.upperBound['infant'].toDouble());
           dataModel.initialLowerBound = sensor.lowerBound['infant'].toDouble();
           dataModel
-              .setLowerAlarmBounadary(sensor.lowerBound['infant'].toDouble());
+              .setLowerAlarmBoundary(sensor.lowerBound['infant'].toDouble());
           break;
         default:
           throw Exception(

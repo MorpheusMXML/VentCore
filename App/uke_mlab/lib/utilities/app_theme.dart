@@ -18,6 +18,11 @@ class AppTheme {
   static const Color tempColor = Color(0xFFFF6482);
   static const Color nibdColor = Color(0xFFDC362E);
   static const Color breathFrequencyColor = Color(0xFF009688);
+  static const Color alarmHighColor = Color(0xFFFF0000);
+  static const Color alarmMiddleColor = Color(0xFFFBFF00);
+  static const Color alarmWarningColor = Color(0xFF49FF00);
+  static const Color alarmNoneColor = Color(0xFF2A2831);
+
   final Color backgroundColor = const Color(0xFF1C1B1F);
   final Color appBar = const Color(0xFF1d192B);
 

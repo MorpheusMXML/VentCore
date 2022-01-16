@@ -107,6 +107,8 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
       'unit': 'bpm',
       'color': AppTheme.heartFreqColor,
       'floatRepresentation': false,
+      'confirmDuration': 20,
+      'boundaryDeviation': 0.1,
       'upperBound': {
         'adult': 85,
         'child': 125,
@@ -125,7 +127,12 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
       'unit': '°C',
       'color': AppTheme.tempColor,
       'floatRepresentation': true,
-      'upperBound': {'adult': 37.4, 'child': 37.4, 'infant': 37.4},
+      'boundaryDeviation': 0.1,
+      'upperBound': {
+        'adult': 37.4,
+        'child': 37.4,
+        'infant': 37.4,
+      },
       'lowerBound': {
         'adult': 36.5,
         'child': 36.5,
@@ -139,6 +146,7 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
       'unit': '%',
       'color': AppTheme.plethColor,
       'floatRepresentation': false,
+      'boundaryDeviation': 0.1,
       'upperBound': {
         'adult': 100,
         'child': 100,
@@ -157,6 +165,7 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
       'unit': 'mmHg',
       'color': AppTheme.co2Color,
       'floatRepresentation': false,
+      'boundaryDeviation': 0.1,
       'upperBound': {
         'adult': 45,
         'child': 45,
@@ -175,6 +184,7 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
       'unit': 'bpm',
       'color': AppTheme.pulseColor,
       'floatRepresentation': false,
+      'boundaryDeviation': 0.1,
       'upperBound': {
         'adult': 85,
         'child': 125,
@@ -212,6 +222,7 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
       'unit': 'br/min',
       'color': AppTheme.breathFrequencyColor,
       'floatRepresentation': false,
+      'boundaryDeviation': 0.1,
       'upperBound': {
         'adult': 20,
         'child': 28,
@@ -231,6 +242,11 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
   String get abbreviation => attributes[this]!['abbreviation'] as String;
   String get unit => attributes[this]!['unit'] as String;
   Color get color => attributes[this]!['color'] as Color;
+
+  ///10 Seconds are a default confirm Duration
+  int get confirmDuration => attributes[this]!['confirmDuration'] ?? 10;
+  dynamic get boundaryDeviation =>
+      attributes[this]!['boundaryDeviation'] as dynamic;
   Map get upperBound => attributes[this]!['upperBound'] as Map<String, dynamic>;
   Map get lowerBound => attributes[this]!['lowerBound'] as Map<String, dynamic>;
   bool get floatRepresentation => attributes[this]!['floatRepresentation'];

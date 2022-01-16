@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
-import 'package:uke_mlab/utilities/enums/boundary_state.dart';
 import 'package:uke_mlab/models/system_state.dart';
 
 class GraphAlarmMessage extends StatelessWidget {
@@ -15,15 +14,17 @@ class GraphAlarmMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final SystemState systemState = Get.find<SystemState>();
-    var alarmType = systemState.violationStates[sensor] as boundaryStateEnum;
 
-    return Text(
-      '${alarmType.message}: ${sensor.displayString}',
-      style: const TextStyle(
-        color: Colors.white,
-        fontSize: 20,
-        fontWeight: FontWeight.bold,
-      ),
-    );
+    return Obx(() {
+      String alarmMessage = systemState.alarmState[sensor]!["message"];
+      return Text(
+        '$alarmMessage: ${sensor.displayString}',
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+      );
+    });
   }
 }
