@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:uke_mlab/models/model_graph.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
-import 'package:uke_mlab/models/model_graphdata.dart';
+import 'package:uke_mlab/widgets/graph/cpr_graph.dart';
+import 'package:uke_mlab/widgets/graph/history_graph.dart';
+import 'package:uke_mlab/widgets/graph/regular_graph.dart';
 
 class Graph extends StatelessWidget {
   final sensorEnumGraph sensor;
@@ -15,28 +14,15 @@ class Graph extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DataModelGraph dataModel = Get.find<DataModelGraph>(tag: sensor.name);
-    return Obx(
-      () => SfCartesianChart(
-        backgroundColor: Theme.of(context).cardColor,
-        primaryYAxis: NumericAxis(
-          majorGridLines: MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
-        ),
-        primaryXAxis: NumericAxis(
-          majorGridLines: MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
-        ),
-        series: [
-          SplineSeries(
-              color: dataModel.color,
-              //ARNE Sagt: Löscht du das = Kopf Ab!!!!!!11!
-              dataSource: dataModel.graphData.value,
-              onRendererCreated: (ChartSeriesController controller) {
-                dataModel.chartController = controller;
-              },
-              xValueMapper: (ChartData data, _) => data.counter,
-              yValueMapper: (ChartData data, _) => data.value)
-        ],
-      ),
-    );
+    switch (sensor) {
+      case sensorEnumGraph.cpr:
+        return CprGraph(sensor: sensor);
+      case sensorEnumGraph.nibd:
+        return HistoryGraph(sensor: sensor);
+      // case sensorEnumGraph.co2:
+      //   return Co2Graph(sensor: sensor);
+      default:
+        return RegularGraph(sensor: sensor);
+    }
   }
 }
