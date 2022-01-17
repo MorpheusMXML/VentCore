@@ -20,50 +20,36 @@ class PatientScenario extends AbstractScenario {
       required Map<sensorEnumGraph, Map<String, dynamic>> dataMapGraph}) {
     for (var sensorAbsolute in dataMapAbsolute.keys) {
       // we update these two absolute tile when updating the graph
-      if (sensorAbsolute != sensorEnumAbsolute.sysAbsolute &&
-          sensorAbsolute != sensorEnumAbsolute.diaAbsolute) {
-        DataModelAbsolute dataModelAbsolute =
-            Get.find<DataModelAbsolute>(tag: sensorAbsolute.name);
-        double resolution =
-            dataMapAbsolute[sensorAbsolute]!['channel_information']
-                    ['resolution']['value']
-                .toDouble();
+      if (sensorAbsolute != sensorEnumAbsolute.sysAbsolute && sensorAbsolute != sensorEnumAbsolute.diaAbsolute) {
+        DataModelAbsolute dataModelAbsolute = Get.find<DataModelAbsolute>(tag: sensorAbsolute.name);
+        double resolution = dataMapAbsolute[sensorAbsolute]!['channel_information']['resolution']['value'].toDouble();
         List<dynamic> dataList = dataMapAbsolute[sensorAbsolute]!['data'];
 
-        Timer.periodic(calculateUpdateRateAbsolute(resolution: resolution),
-            (timer) {
-          if (dataList.length == dataModelAbsolute.counter.value) {
+        Timer.periodic(calculateUpdateRateAbsolute(resolution: resolution), (timer) {
+          if (dataModelAbsolute.counter.value == (dataList.length - 1)) {
             scenarioRunning = false;
           }
           if (!scenarioRunning) {
             timer.cancel();
           }
 
-          dataModelAbsolute.updateValue(
-              dataList[dataModelAbsolute.counter.value].toDouble());
+          dataModelAbsolute.updateValue(dataList[dataModelAbsolute.counter.value].toDouble());
         });
       }
     }
 
     for (var sensorGraph in dataMapGraph.keys) {
       int batchSize = 1;
-      double resolution = dataMapGraph[sensorGraph]!['channel_information']
-              ['resolution']['value']
-          .toDouble();
+      double resolution = dataMapGraph[sensorGraph]!['channel_information']['resolution']['value'].toDouble();
       List<dynamic> dataList = dataMapGraph[sensorGraph]!['data'];
 
       if (sensorGraph == sensorEnumGraph.nibd) {
-        DataModelNIBD dataModelNIBD =
-            Get.find<DataModelNIBD>(tag: sensorGraph.name);
-        DataModelAbsolute sysDataModel = Get.find<DataModelAbsolute>(
-            tag: sensorEnumAbsolute.sysAbsolute.name);
-        DataModelAbsolute diaDataModel = Get.find<DataModelAbsolute>(
-            tag: sensorEnumAbsolute.diaAbsolute.name);
+        DataModelNIBD dataModelNIBD = Get.find<DataModelNIBD>(tag: sensorGraph.name);
+        DataModelAbsolute sysDataModel = Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.sysAbsolute.name);
+        DataModelAbsolute diaDataModel = Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.diaAbsolute.name);
 
-        List<dynamic> sysDataList = List<dynamic>.generate(
-            dataList.length, (index) => dataList[index][0]);
-        List<dynamic> diaDataList = List<dynamic>.generate(
-            dataList.length, (index) => dataList[index][1]);
+        List<dynamic> sysDataList = List<dynamic>.generate(dataList.length, (index) => dataList[index][0]);
+        List<dynamic> diaDataList = List<dynamic>.generate(dataList.length, (index) => dataList[index][1]);
 
         updateNIBD(
           batchSize: batchSize,
@@ -76,8 +62,7 @@ class PatientScenario extends AbstractScenario {
           diaDataModel: diaDataModel,
         );
       } else {
-        DataModelGraph dataModelGraph =
-            Get.find<DataModelGraph>(tag: sensorGraph.name);
+        DataModelGraph dataModelGraph = Get.find<DataModelGraph>(tag: sensorGraph.name);
 
         updateGraph(
           batchSize: batchSize,
@@ -89,32 +74,6 @@ class PatientScenario extends AbstractScenario {
     }
   }
 
-  void updateGraph(
-      {required int batchSize,
-      required double resolution,
-      required List<dynamic> dataList,
-      required DataModelGraph dataModelGraph}) {
-    Timer.periodic(
-        calculateUpdateRate(batchSize: batchSize, resolution: resolution),
-        (timer) {
-      int startIndex = dataModelGraph.singleData.value.counter;
-      int endIndex = dataModelGraph.singleData.value.counter + batchSize;
-
-      if (dataList.length <= startIndex) {
-        scenarioRunning = false;
-      }
-      if (!scenarioRunning) {
-        timer.cancel();
-      }
-
-      if (endIndex >= dataList.length) {
-        endIndex = dataList.length;
-        scenarioRunning = false;
-      }
-      dataModelGraph.updateValues(dataList.sublist(startIndex, endIndex));
-    });
-  }
-
   void updateNIBD(
       {required int batchSize,
       required double resolution,
@@ -124,29 +83,52 @@ class PatientScenario extends AbstractScenario {
       required DataModelNIBD dataModelNIBD,
       required DataModelAbsolute sysDataModel,
       required DataModelAbsolute diaDataModel}) {
-    Timer.periodic(
-        calculateUpdateRate(batchSize: batchSize, resolution: resolution),
-        (timer) {
+    Timer.periodic(calculateUpdateRate(batchSize: batchSize, resolution: resolution), (timer) {
       int startIndex = dataModelNIBD.singleData.value.counter;
       int endIndex = dataModelNIBD.singleData.value.counter + batchSize;
 
       if (dataList.length <= startIndex) {
         scenarioRunning = false;
       }
+
       if (!scenarioRunning) {
         timer.cancel();
       }
 
-      sysDataModel
-          .updateValue(sysDataList[sysDataModel.counter.value].toDouble());
-      diaDataModel
-          .updateValue(diaDataList[diaDataModel.counter.value].toDouble());
+      sysDataModel.updateValue(sysDataList[sysDataModel.counter.value].toDouble());
+      diaDataModel.updateValue(diaDataList[diaDataModel.counter.value].toDouble());
+      dataModelNIBD.updateValues(dataList.sublist(startIndex, endIndex));
+      print("neue liste: ${dataList.sublist(startIndex, endIndex)}");
 
       if (endIndex >= dataList.length) {
         endIndex = dataList.length;
         scenarioRunning = false;
       }
-      dataModelNIBD.updateValues(dataList.sublist(startIndex, endIndex));
+    });
+  }
+
+  void updateGraph(
+      {required int batchSize,
+      required double resolution,
+      required List<dynamic> dataList,
+      required DataModelGraph dataModelGraph}) {
+    Timer.periodic(calculateUpdateRate(batchSize: batchSize, resolution: resolution), (timer) {
+      int startIndex = dataModelGraph.singleData.value.counter;
+      int endIndex = dataModelGraph.singleData.value.counter + batchSize;
+
+      if (dataList.length <= startIndex) {
+        scenarioRunning = false;
+      }
+
+      if (!scenarioRunning) {
+        timer.cancel();
+      }
+      dataModelGraph.updateValues(dataList.sublist(startIndex, endIndex));
+
+      if (endIndex >= dataList.length) {
+        endIndex = dataList.length;
+        scenarioRunning = false;
+      }
     });
   }
 }
