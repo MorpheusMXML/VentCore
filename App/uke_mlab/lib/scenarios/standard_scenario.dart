@@ -118,17 +118,12 @@ class StandardScenario extends AbstractScenario {
         timer.cancel();
       }
 
-      if (endIndex > dataList.length - 1 && startIndex < dataList.length - 1) {
-        List endOfList = dataList.sublist(startIndex, dataList.length);
-        // may discard last value
-        List startOfList =
-            dataList.sublist(0, (endIndex + 1) % (dataList.length - 1));
-
-        dataModelNIBD.updateValues(endOfList + startOfList);
-      } else if (startIndex > dataList.length - 1) {
+      if ((endIndex % dataList.length) == 0) {
+        dataModelNIBD.updateValues(
+            dataList.sublist(startIndex % dataList.length, dataList.length));
+      } else if (startIndex >= dataList.length) {
         dataModelNIBD.updateValues(dataList.sublist(
-            startIndex % (dataList.length - 1),
-            (endIndex + 1) % (dataList.length - 1)));
+            startIndex % dataList.length, endIndex % dataList.length));
       } else {
         dataModelNIBD.updateValues(dataList.sublist(startIndex, endIndex));
       }
