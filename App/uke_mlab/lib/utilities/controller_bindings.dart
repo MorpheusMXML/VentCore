@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:uke_mlab/models/general_alarms.dart';
 import 'package:uke_mlab/providers/defibrillation_controller.dart';
 
 import 'package:uke_mlab/providers/start_screen_controller.dart';
@@ -10,5 +11,6 @@ class ControllerBindings extends Bindings {
     Get.put(StartScreenController());
     Get.put(DefibrillationController());
     Get.put(ScreenController());
+    Get.put(GeneralAlarms());
   }
 }
