@@ -70,31 +70,6 @@ class ScreenController {
     }
   }
 
-  //TODO implement
-  void muteAlarm() {}
-
-  //TODO implement
-  void acknowledgeAlarm() {}
-
-  //TODO implement
-  void nextStep() {
-    if (Get.find<SystemState>().scenarioStarted) {
-      // go to the next stopping point in simmulation data (see patient stories)
-    }
-    // else case for throwing some kind of error message?
-  }
-
-  //TODO delete/implement
-  void endScenario(ModelManager manager) {
-    SystemState systemState = Get.find<SystemState>();
-    if (systemState.scenarioStarted) {
-      //stop scenario
-      //reset data models in manager ?
-      systemState.scenarioStarted = false;
-    }
-    // else case for throwing some kind of error message?
-  }
-
   Future? continueButton(String additionalInfo) {
     if (additionalInfo == 'Adult') {
       if (systemState.patientType != patientTypeEnum.adult) {
@@ -176,11 +151,6 @@ class ScreenController {
   Future? alarmSettingsButton() {
     //system state should stay the same here
     return Get.offNamed('/alarm_limit_screen');
-  }
-
-  //TODO use and implement
-  String alarmSettingsExitButton() {
-    return "";
   }
 
   Future? scenarioMenuExitButton() {

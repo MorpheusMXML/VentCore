@@ -36,7 +36,7 @@ class AlarmConfirmationButtonSingle extends StatelessWidget {
       builder: (context) => Positioned(
         left: AbsoluteAlarmFieldConst.left,
         top: AbsoluteAlarmFieldConst.overlayPositionTop + statusBarHeight,
-        child: AlarmButtonAbsoluteList(),
+        child: const AlarmButtonAbsoluteList(),
       ),
     );
     final overlay = Overlay.of(context)!;

@@ -4,6 +4,7 @@ import 'package:uke_mlab/models/model_absolute.dart';
 import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/utilities/constants/absolute_alarm_field_constants.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
+import 'package:uke_mlab/utilities/enums/alarm_status.dart';
 
 class AlarmButtonAbsoluteList extends StatelessWidget {
   const AlarmButtonAbsoluteList({Key? key}) : super(key: key);
@@ -13,6 +14,7 @@ class AlarmButtonAbsoluteList extends StatelessWidget {
     SystemState systemState = Get.find<SystemState>();
 
     return Obx(() {
+      // should be done via method in AbsAlarmFieldModel
       Set<sensorEnumAbsolute>? set;
       if (systemState.selectedToggleView[0]) {
         set = systemState.absAlarmFieldModel.monitorSet;
@@ -23,6 +25,11 @@ class AlarmButtonAbsoluteList extends StatelessWidget {
       } else {
         throw Exception(
             "No Toggle view active while activated absolute tile single alarm overlay is active");
+      }
+      if (set.isEmpty) {
+        systemState.absAlarmFieldModel.entry?.remove();
+        systemState.absAlarmFieldModel.entry = null;
+        systemState.absAlarmFieldModel.listExpanded.value = false;
       }
 
       return ConstrainedBox(
@@ -39,52 +46,67 @@ class AlarmButtonAbsoluteList extends StatelessWidget {
               bottom: AbsoluteAlarmFieldConst.verticalMargin * 2),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: set.map((sensor) {
-              return Flexible(
-                flex: 1,
-                child: Container(
-                  color: Theme.of(context).cardColor,
-                  padding: const EdgeInsets.only(
-                      top: AbsoluteAlarmFieldConst.verticalMargin / 2,
-                      bottom: AbsoluteAlarmFieldConst.verticalMargin / 2),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Flexible(
-                        fit: FlexFit.loose,
-                        child: Text(
-                          "${sensor.name}:\n${systemState.alarmState[sensor]!["message"]}",
-                          style: TextStyle(
-                            color: Get.find<DataModelAbsolute>(tag: sensor.name)
-                                .color,
-                            fontSize: 20,
-                            decoration: TextDecoration.none,
+            children: set.isEmpty
+                ? []
+                : set.map((sensor) {
+                    // add only sensors with current alarm
+                    if (systemState.alarmState[sensor]!["enum"] ==
+                        alarmStatus.none) {
+                      return Container();
+                    } else {
+                      return Flexible(
+                        flex: 1,
+                        child: Container(
+                          color: Theme.of(context).cardColor,
+                          padding: const EdgeInsets.only(
+                              top: AbsoluteAlarmFieldConst.verticalMargin / 2,
+                              bottom:
+                                  AbsoluteAlarmFieldConst.verticalMargin / 2),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Flexible(
+                                fit: FlexFit.loose,
+                                child: Text(
+                                  "${sensor.name}:\n${systemState.alarmState[sensor]!["message"]}",
+                                  style: TextStyle(
+                                    color: Get.find<DataModelAbsolute>(
+                                            tag: sensor.name)
+                                        .color,
+                                    fontSize: 20,
+                                    decoration: TextDecoration.none,
+                                  ),
+                                ),
+                              ),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  shape: const CircleBorder(),
+                                  minimumSize: Size(
+                                      60,
+                                      AbsoluteAlarmFieldConst.ippvHeight / 4 -
+                                          20),
+                                  maximumSize: Size(
+                                      60,
+                                      AbsoluteAlarmFieldConst.ippvHeight / 4 -
+                                          20),
+                                  primary: Get.find<DataModelAbsolute>(
+                                          tag: sensor.name)
+                                      .color,
+                                  onPrimary: Theme.of(context).dividerColor,
+                                ),
+                                onPressed: () =>
+                                    {}, //TODO add behavior for buttons (deactivate alarm and make button non active)
+                                child: const Icon(
+                                  Icons.check,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shape: const CircleBorder(),
-                          minimumSize: Size(
-                              60, AbsoluteAlarmFieldConst.ippvHeight / 4 - 20),
-                          maximumSize: Size(
-                              60, AbsoluteAlarmFieldConst.ippvHeight / 4 - 20),
-                          primary: Get.find<DataModelAbsolute>(tag: sensor.name)
-                              .color,
-                          onPrimary: Theme.of(context).dividerColor,
-                        ),
-                        onPressed: () =>
-                            {}, //TODO add behavior for buttons (deactivate alarm and make button non active)
-                        child: const Icon(
-                          Icons.check,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            }).toList(),
+                      );
+                    }
+                  }).toList(),
           ),
         ),
       );

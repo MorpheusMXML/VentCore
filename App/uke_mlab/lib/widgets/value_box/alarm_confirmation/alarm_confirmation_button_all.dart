@@ -18,7 +18,7 @@ class AlarmConfirmationButtonAll extends StatelessWidget {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(40))),
       ),
       onPressed:
-          null, // on pressed acknowledge all alarms in systemState.alarmList (oder so)
+          null, // on pressed acknowledge all alarms in systemState.alarmList (on screen)
       child: const Center(
         child: Text(
           "Acknowledge all Alarms",
