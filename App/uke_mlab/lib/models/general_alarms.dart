@@ -41,9 +41,7 @@ class GeneralAlarms extends GetxController {
     if (index != -1) {
       alarmList.removeAt(index);
       if (alarmList.length <= 1) {
-        entry?.remove();
-        entry = null;
-        listExpanded.value = false;
+        hideOverlay();
       }
     }
   }
@@ -63,12 +61,13 @@ class GeneralAlarms extends GetxController {
         child: const AlarmList(),
       ),
     );
+
     final overlay = Overlay.of(context)!;
-    overlay.insert(entry as OverlayEntry);
+    overlay.insert(entry!);
     listExpanded.value = true;
   }
 
-  void hideOverlay(BuildContext context) {
+  void hideOverlay() {
     entry?.remove();
     entry = null;
     listExpanded.value = false;

@@ -38,7 +38,7 @@ class AlarmCounterTile extends StatelessWidget {
             onPressed: generalAlarms.alarmList.length <= 1
                 ? null
                 : () => generalAlarms.listExpanded.value
-                    ? generalAlarms.hideOverlay(context)
+                    ? generalAlarms.hideOverlay()
                     : generalAlarms.showOverlay(context),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
