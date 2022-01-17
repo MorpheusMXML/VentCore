@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:uke_mlab/models/general_alarms.dart';
 import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/utilities/statusbar_constants.dart';
 import 'package:uke_mlab/widgets/appbar/alarm_field_tile.dart';
@@ -15,7 +16,8 @@ class StatusBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final systemState = Get.find<SystemState>();
+    final SystemState systemState = Get.find<SystemState>();
+    final GeneralAlarms generalAlarms = Get.find<GeneralAlarms>();
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -28,10 +30,9 @@ class StatusBar extends StatelessWidget {
               //DropDown Menu (AlarmExpansionTile)
               Flexible(
                 flex: StatusBarConstants.flexBarAlarmFieldTile,
-                child: Obx(() => systemState.generalAlarms.alarmList.isEmpty
+                child: Obx(() => generalAlarms.alarmList.isEmpty
                     ? Container()
-                    : AlarmFieldTile(
-                        data: systemState.generalAlarms.alarmList[0])),
+                    : AlarmFieldTile(data: generalAlarms.alarmList[0])),
               ),
               const SizedBox(
                 width: StatusBarConstants.horizontalMargin * 2,

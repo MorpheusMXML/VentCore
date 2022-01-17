@@ -13,7 +13,7 @@ class AlarmList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    GeneralAlarms generalAlarms = Get.find<SystemState>().generalAlarms;
+    GeneralAlarms generalAlarms = Get.find<GeneralAlarms>();
     double statusBarHeight = MediaQuery.of(context).padding.top;
 
     return Obx(
