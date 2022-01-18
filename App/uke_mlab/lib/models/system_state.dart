@@ -30,7 +30,8 @@ class SystemState {
     'PEEP': 60.obs
   };
 
-  final RxBool IPPVTapped = false.obs;
+  final RxBool ippvTapped = false.obs;
+  final RxString selectedIPPVMode = 'Mode1'.obs;
 
   RxList<bool> selectedToggleView = [true, false, false].obs;
 
