@@ -30,6 +30,8 @@ class SystemState {
     'PEEP': 60.obs
   };
 
+  final RxBool IPPVTapped = false.obs;
+
   RxList<bool> selectedToggleView = [true, false, false].obs;
 
   // TODO: Save differently? Use local storage to permanently save this setting?
