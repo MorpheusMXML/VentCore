@@ -12,7 +12,7 @@ class AbsoluteAlarmFieldConst {
   static const double flexSizeIPPV = 13;
   static const double flexAlarmButtonsHeight = 3;
 
-  static const int toggleButtonHeight = 40;
+  static const int buttonHeight = 40;
   static const int toggleButtonHeightFactor = 2;
 
   static const double horizontalMargin = 8;
@@ -23,7 +23,7 @@ class AbsoluteAlarmFieldConst {
               flexSizeIPPV +
               flexAlarmButtonsHeight) *
           flexSizeIPPV) -
-      (toggleButtonHeightFactor * toggleButtonHeight);
+      (toggleButtonHeightFactor * buttonHeight);
   static final double overlayPositionTop = ((heigthTotal) /
           (2 * flexAbsValueTilesHeight +
               flexSizeIPPV +

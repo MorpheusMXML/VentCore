@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/model_absolute.dart';
 import 'package:uke_mlab/models/system_state.dart';
+import 'package:uke_mlab/providers/alarm_controller.dart';
 import 'package:uke_mlab/utilities/constants/absolute_alarm_field_constants.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/utilities/enums/alarm_status.dart';
@@ -14,19 +15,21 @@ class AlarmButtonAbsoluteList extends StatelessWidget {
     SystemState systemState = Get.find<SystemState>();
 
     return Obx(() {
-      // should be done via method in AbsAlarmFieldModel
-      Set<sensorEnumAbsolute>? set;
-      if (systemState.selectedToggleView[0]) {
-        set = systemState.absAlarmFieldModel.monitorSet;
-      } else if (systemState.selectedToggleView[1]) {
-        set = systemState.absAlarmFieldModel.ventilationSet;
-      } else if (systemState.selectedToggleView[2]) {
-        set = systemState.absAlarmFieldModel.defiSet;
-      } else {
-        throw Exception(
-            "No Toggle view active while activated absolute tile single alarm overlay is active");
+      AlarmController alarmController = Get.find<AlarmController>();
+      Set<sensorEnumAbsolute> set =
+          Get.find<SystemState>().absAlarmFieldModel.getActiveSet();
+      bool nonConfirmedAlarms = false;
+
+      // checks whether there are non confirmed alarms in set.
+      // feels like it could be done in getActiveSet, but that runs in to race conditions with usage in AlarmConfirmationButtonSingle
+      for (var sensor in set) {
+        nonConfirmedAlarms = alarmController.confirmMap.containsKey(sensor);
+        if (!nonConfirmedAlarms) {
+          break;
+        }
       }
-      if (set.isEmpty) {
+
+      if (set.isEmpty || nonConfirmedAlarms) {
         systemState.absAlarmFieldModel.entry?.remove();
         systemState.absAlarmFieldModel.entry = null;
         systemState.absAlarmFieldModel.listExpanded.value = false;
@@ -49,9 +52,10 @@ class AlarmButtonAbsoluteList extends StatelessWidget {
             children: set.isEmpty
                 ? []
                 : set.map((sensor) {
-                    // add only sensors with current alarm
+                    // add only sensors with current, non-confirmed alarm to concurrency issues
                     if (systemState.alarmState[sensor]!["enum"] ==
-                        alarmStatus.none) {
+                            alarmStatus.none ||
+                        alarmController.confirmMap.containsKey(sensor)) {
                       return Container();
                     } else {
                       return Flexible(
@@ -94,8 +98,12 @@ class AlarmButtonAbsoluteList extends StatelessWidget {
                                       .color,
                                   onPrimary: Theme.of(context).dividerColor,
                                 ),
-                                onPressed: () =>
-                                    {}, //TODO add behavior for buttons (deactivate alarm and make button non active)
+                                onPressed: alarmController.confirmMap
+                                        .containsKey(sensor)
+                                    ? null
+                                    : () => {
+                                          alarmController.triggerConfirm(sensor)
+                                        },
                                 child: const Icon(
                                   Icons.check,
                                   color: Colors.black,

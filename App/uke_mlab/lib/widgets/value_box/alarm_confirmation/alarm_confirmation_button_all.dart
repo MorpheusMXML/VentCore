@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
+import 'package:uke_mlab/utilities/constants/absolute_alarm_field_constants.dart';
 
 class AlarmConfirmationButtonAll extends StatelessWidget {
   const AlarmConfirmationButtonAll({Key? key}) : super(key: key);
@@ -10,12 +11,14 @@ class AlarmConfirmationButtonAll extends StatelessWidget {
     SystemState systemState = Get.find<SystemState>();
 
     return ElevatedButton(
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(
-          Colors.black,
+      style: ElevatedButton.styleFrom(
+        fixedSize: Size(AbsoluteAlarmFieldConst.buttonHeight.toDouble(),
+            AbsoluteAlarmFieldConst.width * (3 / 8)),
+        primary: const Color(0xffeeeeee),
+        onPrimary: Colors.black,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(75),
         ),
-        shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(40))),
       ),
       onPressed:
           null, // on pressed acknowledge all alarms in systemState.alarmList (on screen)
