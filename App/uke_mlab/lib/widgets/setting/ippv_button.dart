@@ -8,16 +8,25 @@ class IPPVButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final SystemState systemState = Get.find<SystemState>();
+    final List<String> items = ['Mode1', 'Mode2', 'Mode3'];
 
     return Container(
       width: double.infinity,
       margin: const EdgeInsets.only(left: 8, right: 8),
-      child: DropdownButtonHideUnderline(
-        child: DropdownButton<dynamic>(
-          hint: const DropdownMenuItem(child: Text('IPPV')),
-          onChanged: (value) {},
-          // TODO: Add items here
-          items: const [],
+      child: Center(
+        child: DropdownButtonHideUnderline(
+          child: DropdownButton<dynamic>(
+              isExpanded: true,
+              hint: const Text('IPPV'),
+              value: null,
+              onChanged: (value) {},
+              items: items.map((value) {
+                return DropdownMenuItem(
+                  onTap: () {},
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList()),
         ),
       ),
     );
