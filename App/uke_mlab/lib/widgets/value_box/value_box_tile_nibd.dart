@@ -49,15 +49,16 @@ class ValueBoxTileNIBD extends StatelessWidget {
                 child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   //Systolic Absolute Box
                   Flexible(
-                    flex: 1,
+                    flex: 2,
                     child: ValueBoxState.withHeadline(
                       dataModel: dataModelSYS,
                       optAbreviationTitle: sensorAbsoluteSYS.abbreviation,
                     ),
                   ),
+                  Flexible(flex: 1, child: Container()),
                   //Diastolic Absolute Box
                   Flexible(
-                      flex: 1,
+                    flex: 2,
                     child: ValueBoxState.withHeadline(
                       dataModel: dataModelDIA,
                       optAbreviationTitle: sensorAbsoluteDIA.abbreviation,

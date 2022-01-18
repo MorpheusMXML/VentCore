@@ -22,20 +22,15 @@ class MonitoringMode extends StatelessWidget {
                 sensorAbsoluteSYS: sensorEnumAbsolute.sysAbsolute,
               ),
               // TODO: requires multiple constructors in  ValueBoxTile to display special elements
-              ValueBoxTile.withHeadline(sensorAbsolute: sensorEnumAbsolute.pulse),
             ],
           ),
         ),
         Flexible(
           flex: 1,
           child: Row(
-            children: [
-              const ValueBoxTile.withHeadline(sensorAbsolute: sensorEnumAbsolute.tempAbsolute),
-              Expanded(
-                // This is a placeholder to ensure uniformity
-                flex: 1,
-                child: Container(),
-              ),
+            children: const [
+              ValueBoxTile.withHeadline(sensorAbsolute: sensorEnumAbsolute.tempAbsolute),
+              ValueBoxTile.withHeadline(sensorAbsolute: sensorEnumAbsolute.pulse),
             ],
           ),
         ),
