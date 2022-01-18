@@ -1,10 +1,6 @@
-import 'dart:async';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:uke_mlab/models/general_alarms.dart';
 
 import 'package:uke_mlab/screens/alarm_limit_screen.dart';
 import 'package:uke_mlab/screens/demo_screen.dart';
@@ -15,7 +11,6 @@ import 'package:uke_mlab/models/model_manager.dart';
 import 'package:uke_mlab/providers/alarm_controller.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/utilities/controller_bindings.dart';
-import 'package:uke_mlab/utilities/enums/non_graph_alarm.dart';
 import 'package:uke_mlab/widgets/misc/app_scaffold.dart';
 import 'package:uke_mlab/widgets/misc/error_message.dart';
 
@@ -45,46 +40,10 @@ class MyApp extends StatelessWidget {
     // svgs are loaded and screens are given bindings?
     final AlarmController alarmController =
         Get.put(AlarmController(modelManager));
-
-    // For general alarm testing purposes, TODO: Remove
-    Timer.periodic(const Duration(seconds: 2), (timer) {
-      /*if (systemState.generalAlarms.alarmList.length < 2) {
-        systemState.generalAlarms.addAlarm(nonGraphAlarmEnum.ekgArtifact, 60);
-        systemState.generalAlarms.addAlarm(nonGraphAlarmEnum.ekgArtifact, 70);
-        systemState.generalAlarms.addAlarm(nonGraphAlarmEnum.leckageHigh, 60);
-      } else if (systemState.generalAlarms.alarmList.isNotEmpty) {
-        systemState.generalAlarms.removeAlarm(nonGraphAlarmEnum.ekgArtifact);
-      }*/
-
-      if (Random().nextInt(10) > 1) {
-        systemState.generalAlarms.addAlarm(
-            nonGraphAlarmEnum
-                .values[Random().nextInt(nonGraphAlarmEnum.values.length)],
-            Random().nextInt(100));
-      } else {
-        if (systemState.generalAlarms.alarmList.isNotEmpty) {
-          systemState.generalAlarms.alarmList.removeAt(0);
-        }
-      }
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    // this is just to test displaying generalAlarms, remove this after testing
-    Timer.periodic(const Duration(seconds: 2), (timer) {
-      if (Random().nextInt(10) > 1) {
-        systemState.generalAlarms.addAlarm(
-            nonGraphAlarmEnum
-                .values[Random().nextInt(nonGraphAlarmEnum.values.length)],
-            Random().nextInt(100));
-      } else {
-        if (systemState.generalAlarms.alarmList.isNotEmpty) {
-          systemState.generalAlarms.alarmList.removeAt(0);
-        }
-      }
-    });
-
     return GetMaterialApp(
       title: 'MLab UKE',
       theme: AppTheme.darkTheme,

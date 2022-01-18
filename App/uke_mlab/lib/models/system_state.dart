@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uke_mlab/models/general_alarms.dart';
 import 'package:uke_mlab/utilities/enums/alarm_status.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/utilities/enums/screen_status.dart';
@@ -21,8 +20,6 @@ class SystemState {
   RxList<sensorEnumGraph> graphList = <sensorEnumGraph>[].obs;
 
   RxBool addGraph = false.obs;
-
-  final GeneralAlarms generalAlarms = GeneralAlarms();
 
   Map<String, RxInt> ippvValues = {
     'Freq.': 20.obs,
