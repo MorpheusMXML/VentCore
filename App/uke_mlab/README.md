@@ -1,7 +1,6 @@
 <div id="top"></div>
 
 <!-- PROJECT SHIELDS -->
-TODO COMPLETE
 <div align="center">
 
 [![Commits][commit-shield]][commit-url]
@@ -29,7 +28,6 @@ TODO COMPLETE
     This is the Repository for the M-Lab Course project VentCore. 
     This Course was held during the WS 2021/2022 by the MAST Team of University of Hamburg
 
-TODO LINKS:
 <a href=""><strong>Explore the docs »</strong></a>
 <br />
 <br />
@@ -80,7 +78,7 @@ TODO LINKS:
 <div align="justify" style="font-family:Jura">
 
 # About The Project
-TODO SCREENSHOT
+
 ![VentCore][product-screenshot]
 
 This is the repository for the UKE M-Lab prototype of VentCore: A Mock-Up for a possible 3-in-1 Medical device which combines a patient Monitoring, Defibrillation and Ventilation.
@@ -120,6 +118,8 @@ Please make sure, that you've installed a stable Version of the Flutter SDK. Ple
   ```
 
 Depending on your operating system make sure to have the simulator(macOS) or Android Emulator(Windows) installed and working.
+
+<div id="device"></div>
 
 ## Device Recommendations
 
@@ -164,15 +164,14 @@ Android Version 11.0 x86
 
 This prototype works as showcase for demonstrating and evaluating of a future 3-in-1 interface with simulated data. 
 <br>
-
-|TODO SCREENSHOTS||
+|||
 |---|---|
 |Choose Presets|Set Alarm Limits directly|
-[StartScreen]|[AlarmLimit]|
+|![StartScreen]|[AlarmLimit]|
 |Switch between Modes|Customize the Screen|
-|[DefiScreen]|[Add] <br/>[NIBD]|
+|![DefiScreen]<br/>![threemodes]|[Add] <br/>[NIBD]|
 |Explore Patient Scenarios|Explore Alarm Behaviour|
-|[Scenario]|[RedAlarm]<br/>[YellowAlarm]|
+|![Scenario]|![RedAlarm]|
 
 ##### For more examples, please refer to the [Documentation](TODOLINK)
 
@@ -360,10 +359,11 @@ And also for providing simulation / real patient data and helping with DataGener
 [product-screenshot]: ./ReadMeFiles/ScreenshotMonitoring.png
 [StartScreen]:./ReadMeFiles/presets.png
 [AlarmLimit]: ./ReadMeFiles/alarmlimit.png
-[DefiScreen]:./ReadMeFiles/defibrillation.png
+[DefiScreen]:./ReadMeFiles/cpr.png
 [Add]:./ReadMeFiles/addin.png
 [NIBD]:./ReadMeFiles/nibd.png
-[Scenario]:./ReadMeFiles/scenario.png
-[RedAlarm]:./ReadMeFiles/redalarm.png
+[Scenario]:./ReadMeFiles/scenarios.png
+[RedAlarm]:./ReadMeFiles/red-alarms.png
 [YellowAlarm]:./ReadMeFiles/yellowalarm.png
 [Table Audio Priorities]:./ReadMeFiles/table-audio-priority.png
+[threemodes]:./ReadMeFiles/3in1.png
