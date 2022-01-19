@@ -289,6 +289,24 @@ h4 {
     text-align: justify;
 }
 
+.logo-about{
+    position: absolute;
+    top: 85%;
+    right: 0%;
+  }
+
+  .logo-size{
+      height: 150px;
+  }
+  
+.logo-features{
+    position: absolute;
+    top: 290%;
+    right: 0%;
+  }
+.logo-media{
+    height: 150px;
+}
 /*=======================================================
 			SERVICES:
 ========================================================*/
@@ -714,14 +732,62 @@ h4 {
             }
         }
     }
+    .logo-about{
+        animation: none;
+        position: relative;
+    }
+    .logo-features{
+        position: relative;
+        animation: none;
+    }
+    .fadeOutLeftLogo{
+        animation: none;
+        display: none;
+    }
+    .fadeOutRightLogo{
+        animation: none;
+        display: none;
+    }
+    .fadeOutLogo{
+        animation: none;
+        display: none;
+    }
+    .logo-size{
+        position: inherit;
+        height: 100px;
+    }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 600px) {
     #video-popup {
         .video-box {
             .waves-block {
                 display: none;
             }
         }
+    }
+    .logo-about{
+        animation: none;
+        position: relative;
+    }
+    .logo-features{
+        position: relative;
+        animation: none;
+    }
+    .fadeOutLeftLogo{
+        animation: none;
+        display: none;
+    }
+    .fadeOutRightLogo{
+        animation: none;
+        display: none;
+    }
+    .fadeOutLogo{
+        animation: none;
+        display: none;
+    }
+    .logo-size{
+        position: inherit;
+        height: 100px;
     }
 }
