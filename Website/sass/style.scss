@@ -240,21 +240,11 @@ h4 {
 .banner {
         position: relative;
         background: $primary-color;
-        height: 100%;
-      
-      &::after {
-        content: '';
-        position: absolute;
-        right: 0;
-        left: -0%;
-        top: 100%;
-        z-index: 10;
-        display: block;
-        height: 50px;
-        background-size: 50px 100%;
-        background-image: linear-gradient(135deg, $primary-color 25%, transparent 25%), linear-gradient(225deg, $primary-color 25%, transparent 25%);
-        background-position: 0 0;
-      }
+        width: 100%;
+        background-image: url(../imgs/header.png);
+        background-size:cover;
+        background-position: top center;
+
     text-align: center;
     .container {
         .caption {
