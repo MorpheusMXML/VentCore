@@ -298,8 +298,7 @@ h4 {
 }
 
 .logo-about {
-  position: absolute;
-  top: 85%;
+  position: relative;
   right: 0%;
 }
 
@@ -308,9 +307,7 @@ h4 {
 }
 
 .logo-features {
-  position: absolute;
-  top: 290%;
-  right: 0%;
+  position: relative;
 }
 
 .logo-media {
