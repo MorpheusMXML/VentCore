@@ -87,7 +87,7 @@ class HistoryGraph extends StatelessWidget {
                   color: Colors.redAccent)
             ],
             color: dataModel.color,
-            //ARNE Sagt: Löscht du das = Kopf Ab!!!!!!11!
+            // DONT DELETE .value, syncfusion would break in combination wiht Getx
             dataSource: dataModel.graphData.value,
             xValueMapper: (ChartData data, _) => data.time,
             yValueMapper: (ChartData data, _) => data.meanArterialPressure,

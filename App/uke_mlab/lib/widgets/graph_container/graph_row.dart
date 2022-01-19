@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
@@ -19,16 +18,15 @@ class GraphRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return ConstrainedBox(
       constraints: const BoxConstraints(maxHeight: 150),
-      child: Row(
-          children: (sensor == sensorEnumGraph.nibd)
-              ? [
-                  Expanded(child: HistoryGraph(sensor: sensor)),
-                ]
-              : [
-                  Expanded(child: Graph(sensor: sensor)),
-                  const SizedBox(width: 8),
-                  evaluateValueBoxTile()
-                ]),
+      child: Row(children: [
+        Expanded(
+          child: Graph(sensor: sensor),
+        ),
+        if (sensor != sensorEnumGraph.nibd) ...[
+          const SizedBox(width: 8),
+          evaluateValueBoxTile()
+        ]
+      ]),
     );
   }
 
@@ -36,9 +34,7 @@ class GraphRow extends StatelessWidget {
     if (SensorMapping.sensorMap[sensor] == null) {
       return ValueBoxTile.withoutAbsolute(sensorGraph: sensor);
     } else {
-      return ValueBoxTile(
-          sensorAbsolute:
-              SensorMapping.sensorMap[sensor] as sensorEnumAbsolute);
+      return ValueBoxTile(sensorAbsolute: SensorMapping.sensorMap[sensor]);
     }
   }
 }

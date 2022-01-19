@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/data_models/model_absolute.dart';
+import 'package:uke_mlab/utilities/constants/statusbar_constants.dart';
 import 'package:uke_mlab/utilities/enums/non_graph_alarm.dart';
+import 'package:uke_mlab/widgets/appbar/alarm_list.dart';
 
 /// offers a sorted list of general alarms for being displayed in [StatusBar]
 class GeneralAlarms extends GetxController {
@@ -39,9 +41,7 @@ class GeneralAlarms extends GetxController {
     if (index != -1) {
       alarmList.removeAt(index);
       if (alarmList.length <= 1) {
-        entry?.remove();
-        entry = null;
-        listExpanded.value = false;
+        hideOverlay();
       }
     }
   }
@@ -49,6 +49,28 @@ class GeneralAlarms extends GetxController {
   /// checks whether an [alarm] is contained in [alarmList]
   bool checkForAlarm(nonGraphAlarmEnum alarm) {
     return alarmList.indexWhere((element) => element.alarm == alarm) == -1;
+  }
+
+  void showOverlay(BuildContext context) {
+    double statusBarHeight = MediaQuery.of(context).padding.top;
+
+    entry = OverlayEntry(
+      builder: (context) => Positioned(
+        left: StatusBarConstants.menuButtonWidth,
+        top: statusBarHeight,
+        child: const AlarmList(),
+      ),
+    );
+
+    final overlay = Overlay.of(context)!;
+    overlay.insert(entry!);
+    listExpanded.value = true;
+  }
+
+  void hideOverlay() {
+    entry?.remove();
+    entry = null;
+    listExpanded.value = false;
   }
 }
 
