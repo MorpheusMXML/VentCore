@@ -28,7 +28,6 @@ class AbsAlarmFieldModel extends GetxController {
 
   void updateActiveList() {
     SystemState systemState = Get.find<SystemState>();
-    AlarmController alarmController = Get.find<AlarmController>();
 
     // loads absolute value tiles active in current screen into activeList
     if (systemState.selectedToggleView[0]) {

@@ -98,6 +98,7 @@ class AlarmController {
           if (_systemState.alarmState[sensorKey]!["priority"] ==
               status.priority) {
             _systemState.alarmState[sensorKey]!["enum"] = status;
+            _systemState.evaluateActiveGraphAbsolutes();
             _systemState.absAlarmFieldModel.updateActiveList();
           }
         }
@@ -120,6 +121,7 @@ class AlarmController {
 
   void triggerConfirm(sensorEnumAbsolute sensorKey) {
     _systemState.alarmState[sensorKey]!["enum"] = alarmStatus.confirmed;
+    _systemState.evaluateActiveGraphAbsolutes();
     _systemState.absAlarmFieldModel.updateActiveList();
     confirmMap[sensorKey] = DateTime.now();
   }

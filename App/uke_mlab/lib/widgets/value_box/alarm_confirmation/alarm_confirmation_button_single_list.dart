@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
-import 'package:uke_mlab/providers/alarm_controller.dart';
 import 'package:uke_mlab/utilities/constants/absolute_alarm_field_constants.dart';
-import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 import 'alarm_confirmation_single_list_entry.dart';
 

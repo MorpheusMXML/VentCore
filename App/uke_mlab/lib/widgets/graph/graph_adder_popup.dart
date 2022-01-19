@@ -37,8 +37,8 @@ class GraphAdderPopup extends StatelessWidget {
                 return ElevatedButton(
                     style: style,
                     onPressed: () => systemState.graphList.contains(sensor)
-                        ? systemState.graphList.remove(sensor)
-                        : systemState.graphList.add(sensor),
+                        ? systemState.graphListRemove(sensor)
+                        : systemState.graphListAdd(sensor),
                     child: Text(
                       sensor.graphTitle,
                       style: const TextStyle(fontSize: 18),

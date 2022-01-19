@@ -21,7 +21,7 @@ class AlarmConfirmationRowEntry extends StatelessWidget {
       margin:
           const EdgeInsets.only(bottom: AbsoluteAlarmFieldConst.verticalMargin),
       color: Theme.of(context).cardColor,
-      padding: EdgeInsets.only(
+      padding: const EdgeInsets.only(
           top: AbsoluteAlarmFieldConst.verticalMargin / 4,
           bottom: AbsoluteAlarmFieldConst.verticalMargin / 4),
       child: Row(
@@ -61,4 +61,4 @@ class AlarmConfirmationRowEntry extends StatelessWidget {
       ),
     );
   }
-} /*child: */
+}

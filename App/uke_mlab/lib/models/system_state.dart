@@ -21,6 +21,8 @@ class SystemState {
   // More or less copy pasted from old mockup class
   RxList<sensorEnumGraph> graphList = <sensorEnumGraph>[].obs;
 
+  RxList<sensorEnumAbsolute> activeGraphAbsolutes = <sensorEnumAbsolute>[].obs;
+
   RxBool addGraph = false.obs;
 
   final GeneralAlarms generalAlarms = GeneralAlarms();
@@ -65,5 +67,32 @@ class SystemState {
 
   void updateIPPVValue(String name, int value) {
     ippvValues[name]!.value = ippvValues[name]!.value + value;
+  }
+
+  void graphListAdd(sensorEnumGraph graphKey) {
+    evaluateActiveGraphAbsolutes();
+    graphList.add(graphKey);
+  }
+
+  void graphListRemove(sensorEnumGraph graphKey) {
+    evaluateActiveGraphAbsolutes();
+    graphList.remove(graphKey);
+  }
+
+  void graphListSet(List<sensorEnumGraph> newList) {
+    evaluateActiveGraphAbsolutes();
+    graphList.value = newList;
+  }
+
+  void evaluateActiveGraphAbsolutes() {
+    activeGraphAbsolutes.clear();
+    for (var graphSensorKey in graphList) {
+      sensorEnumAbsolute? sensorKey = SensorMapping.sensorMap[graphSensorKey];
+      if (sensorKey != null &&
+          (alarmState[sensorKey]!["enum"] != alarmStatus.none &&
+              alarmState[sensorKey]!["enum"] != alarmStatus.confirmed)) {
+        activeGraphAbsolutes.add(sensorKey);
+      }
+    }
   }
 }
