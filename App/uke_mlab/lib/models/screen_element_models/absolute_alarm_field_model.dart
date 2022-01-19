@@ -44,13 +44,9 @@ class AbsAlarmFieldModel extends GetxController {
 
     // if activeList isnt empty, remove sensors from list which are confirmed OR have no active alarm
     if (activeList.isNotEmpty) {
-      for (var sensorKey in activeList.value) {
-        if (systemState.alarmState[sensorKey]!["enum"] == alarmStatus.none ||
-            systemState.alarmState[sensorKey]!["enum"] ==
-                alarmStatus.confirmed) {
-          activeList.value.remove(sensorKey);
-        }
-      }
+      activeList.removeWhere((sensorKey) =>
+          systemState.alarmState[sensorKey]!["enum"] == alarmStatus.none ||
+          systemState.alarmState[sensorKey]!["enum"] == alarmStatus.confirmed);
     }
 
     // if there are not any Elements in list left and list is expanded => overlay

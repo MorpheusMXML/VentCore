@@ -23,10 +23,12 @@ class AlarmButtonAbsoluteList extends StatelessWidget {
         child: Container(
           color: Theme.of(context).focusColor,
           padding: const EdgeInsets.only(
-              left: AbsoluteAlarmFieldConst.horizontalMargin,
-              right: AbsoluteAlarmFieldConst.horizontalMargin,
-              top: AbsoluteAlarmFieldConst.verticalMargin * 2,
-              bottom: AbsoluteAlarmFieldConst.verticalMargin * 2),
+            left: AbsoluteAlarmFieldConst.horizontalMargin,
+            right: AbsoluteAlarmFieldConst.horizontalMargin,
+            top: AbsoluteAlarmFieldConst.verticalMargin * 1.5,
+          ),
+          margin: const EdgeInsets.only(
+              bottom: AbsoluteAlarmFieldConst.verticalMargin),
           child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -41,7 +43,9 @@ class AlarmButtonAbsoluteList extends StatelessWidget {
                       itemCount:
                           systemState.absAlarmFieldModel.activeList.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return AlarmConfirmationRowEntry();
+                        return AlarmConfirmationRowEntry(
+                            sensorKey: systemState
+                                .absAlarmFieldModel.activeList[index]);
                       }),
                 ),
               ]),
