@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uke_mlab/models/general_alarms.dart';
+import 'package:uke_mlab/models/screen_element_models/general_alarms.dart';
 import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/utilities/constants/statusbar_constants.dart';
 import 'package:uke_mlab/widgets/appbar/alarm_list.dart';

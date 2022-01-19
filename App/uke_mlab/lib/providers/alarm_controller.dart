@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:uke_mlab/models/model_manager.dart';
+import 'package:uke_mlab/models/data_models/model_manager.dart';
 import 'package:uke_mlab/models/system_state.dart';
 
 import 'package:uke_mlab/utilities/enums/alarm_status.dart';
@@ -98,6 +98,7 @@ class AlarmController {
           if (_systemState.alarmState[sensorKey]!["priority"] ==
               status.priority) {
             _systemState.alarmState[sensorKey]!["enum"] = status;
+            _systemState.absAlarmFieldModel.updateActiveList();
           }
         }
       }
@@ -119,6 +120,7 @@ class AlarmController {
 
   void triggerConfirm(sensorEnumAbsolute sensorKey) {
     _systemState.alarmState[sensorKey]!["enum"] = alarmStatus.confirmed;
+    _systemState.absAlarmFieldModel.updateActiveList();
     confirmMap[sensorKey] = DateTime.now();
   }
 }

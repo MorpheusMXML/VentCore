@@ -2,21 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/screen_element_models/absolute_alarm_field_model.dart';
 import 'package:uke_mlab/models/system_state.dart';
-import 'package:uke_mlab/providers/alarm_controller.dart';
 import 'package:uke_mlab/utilities/constants/absolute_alarm_field_constants.dart';
-import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/widgets/value_box/alarm_confirmation/alarm_confirmation_button_single_list.dart';
 
-class AlarmConfirmationButtonSingle extends StatelessWidget {
-  const AlarmConfirmationButtonSingle({Key? key}) : super(key: key);
+class AlarmConfirmationButtonSingleListExpansion extends StatelessWidget {
+  const AlarmConfirmationButtonSingleListExpansion({Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    AbsAlarmFieldModel alarmFieldModel =
-        Get.find<SystemState>().absAlarmFieldModel;
-    //Set<sensorEnumAbsolute> set = alarmFieldModel.getActiveSet();
+    SystemState systemState = Get.find<SystemState>();
 
-    //TODO put into Obx for update when solution to the problem below has been found
     return Obx(() {
       return ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -28,17 +24,16 @@ class AlarmConfirmationButtonSingle extends StatelessWidget {
             borderRadius: BorderRadius.circular(75),
           ),
         ),
-        onPressed:
-            false // TODO add check whether alarms are present in current map without using set directly which leads to concurrency issues
-                ? null
-                : () => alarmFieldModel.listExpanded.value
-                    ? hideOverlay(context)
-                    : showOverlay(context),
+        onPressed: systemState.absAlarmFieldModel.activeList.isEmpty
+            ? null
+            : () => systemState.absAlarmFieldModel.listExpanded.value
+                ? hideOverlay(context)
+                : showOverlay(context),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text("Single Alarm Conf"),
-            alarmFieldModel.listExpanded.value
+            const Text("Single Alarm Conf"),
+            systemState.absAlarmFieldModel.listExpanded.value
                 ? const Icon(
                     Icons.arrow_downward_rounded,
                     color: Colors.black,

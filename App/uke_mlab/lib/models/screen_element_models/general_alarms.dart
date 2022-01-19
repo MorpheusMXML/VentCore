@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uke_mlab/models/model_absolute.dart';
+import 'package:uke_mlab/models/data_models/model_absolute.dart';
 import 'package:uke_mlab/utilities/enums/non_graph_alarm.dart';
 
 /// offers a sorted list of general alarms for being displayed in [StatusBar]

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
-import 'package:uke_mlab/models/model_graphdata.dart';
-import 'package:uke_mlab/models/model_nibd.dart';
+import 'package:uke_mlab/models/data_models/model_graphdata.dart';
+import 'package:uke_mlab/models/data_models/model_nibd.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 ///Creates a [SfCartesianChart] to Display a History Graph. Example Use: NIBD History

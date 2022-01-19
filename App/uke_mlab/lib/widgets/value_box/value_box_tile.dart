@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uke_mlab/models/model_absolute.dart';
-import 'package:uke_mlab/models/model_graph.dart';
+import 'package:uke_mlab/models/data_models/model_absolute.dart';
+import 'package:uke_mlab/models/data_models/model_graph.dart';
 import 'package:uke_mlab/models/screen_element_models/absolute_alarm_field_model.dart';
 import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/utilities/enums/alarm_status.dart';

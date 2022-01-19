@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uke_mlab/models/model_absolute.dart';
+import 'package:uke_mlab/models/data_models/model_absolute.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/widgets/value_box/value_box_state.dart';
 
@@ -19,7 +19,8 @@ class ValueBoxTileNIBD extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DataModelAbsolute dataModelSYS = Get.find<DataModelAbsolute>(tag: sensorAbsoluteSYS.name);
+    DataModelAbsolute dataModelSYS =
+        Get.find<DataModelAbsolute>(tag: sensorAbsoluteSYS.name);
     DataModelAbsolute dataModelDIA = Get.find<DataModelAbsolute>(
         tag: sensorAbsoluteDIA
             .name); // sensorAbsolute is not null since IF sensorGraph == null, sensorAbsolute is required // sensorAbsolute is not null since IF sensorGraph == null, sensorAbsolute is required
@@ -46,7 +47,8 @@ class ValueBoxTileNIBD extends StatelessWidget {
             ),
             Flexible(
                 flex: 3,
-                child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                child:
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   //Systolic Absolute Box
                   Flexible(
                     flex: 1,
@@ -57,7 +59,7 @@ class ValueBoxTileNIBD extends StatelessWidget {
                   ),
                   //Diastolic Absolute Box
                   Flexible(
-                      flex: 1,
+                    flex: 1,
                     child: ValueBoxState.withHeadline(
                       dataModel: dataModelDIA,
                       optAbreviationTitle: sensorAbsoluteDIA.abbreviation,

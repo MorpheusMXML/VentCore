@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uke_mlab/utilities/constants/absolute_alarm_field_constants.dart';
-import 'package:uke_mlab/widgets/graph_container/alarm_confirm_button.dart';
-import 'package:uke_mlab/widgets/value_box/alarm_confirmation/alarm_confirmation_button_all.dart';
-import 'package:uke_mlab/widgets/value_box/alarm_confirmation/alarm_confirmation_button_single.dart';
+import 'package:uke_mlab/widgets/value_box/alarm_confirmation/alarm_confirmation_button_confirm_all.dart';
+import 'package:uke_mlab/widgets/value_box/alarm_confirmation/alarm_confirmation_button_single_list_expansion_button.dart';
 
 class AlarmConfirmationRow extends StatelessWidget {
   const AlarmConfirmationRow({Key? key}) : super(key: key);
@@ -22,7 +21,7 @@ class AlarmConfirmationRow extends StatelessWidget {
           Spacer(flex: 1),
           Expanded(
             flex: 5,
-            child: AlarmConfirmationButtonSingle(),
+            child: AlarmConfirmationButtonSingleListExpansion(),
           )
         ],
       ),
