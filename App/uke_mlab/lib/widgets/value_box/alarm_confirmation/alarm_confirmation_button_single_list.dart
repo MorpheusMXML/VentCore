@@ -54,29 +54,3 @@ class AlarmButtonAbsoluteList extends StatelessWidget {
     });
   }
 }
-
-
-/*
-set.isEmpty
-                ? []
-                : set.map((sensor) {
-                    // add only sensors with current, non-confirmed alarm to concurrency issues
-                    if (systemState.alarmState[sensor]!["enum"] ==
-                            alarmStatus.none ||
-                        alarmController.confirmMap.containsKey(sensor)) {
-                      return Container();
-                    } else {
-                      return Flexible(
-                        flex: 1,
-                        fit: FlexFit.loose,
-                        child: Container(
-                          color: Theme.of(context).cardColor,
-                          padding: const EdgeInsets.only(
-                              top: AbsoluteAlarmFieldConst.verticalMargin / 2,
-                              bottom:
-                                  AbsoluteAlarmFieldConst.verticalMargin / 2),
-                          child: 
-                        ),
-                      );
-                    }
-                  }).toList(), */
