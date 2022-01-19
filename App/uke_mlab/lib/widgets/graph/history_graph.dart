@@ -8,10 +8,11 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 ///Creates a [SfCartesianChart] to Display a History Graph. Example Use: NIBD History
 ///
-///Needs to be Instanciated with a [Map<String,Object?>] for the Graph data that should be Displayed.
-///The Data [Object] of this Map should be of Type [NIBDdata] for a NIBD History for Example.
+///Needs to be Instanciated with a [sensorEnumGraph] for the Graph data that should be Displayed.
+///The DataModel this finds with [GetX] depends on the specified SensorEnum.
+///If instanciated with NIBD Sensor: [DataModelNIBD] this houses [ChartData.asNIBD()] for a NIBD History for Example.
 ///
-///Uses [findMax] to Find the Maximum in the Data to Configure the Scaling of the Graph.
+///DEPRECATED: Uses [findMax] to Find the Maximum in the Data to Configure the Scaling of the Graph.
 ///
 ///Uses a [ScatterSeries] to Plot the MAD Value of the BloodPressure Measurement
 ///Uses [HiloSeries] to Plot the Systolic and Diastolic Pressure as Hi and Low of the Series.
@@ -29,15 +30,13 @@ class HistoryGraph extends StatelessWidget {
     List dataList;
     switch (type) {
       case 'max':
-        dataList = (List.generate(dataModel.graphData.length,
-            (index) => dataModel.graphData[index].systolicPressure));
+        dataList = (List.generate(dataModel.graphData.length, (index) => dataModel.graphData[index].systolicPressure));
         dataList.sort;
         double max = dataList.last.toDouble();
         print(max);
         return dataList.isEmpty ? 150.0 : max;
       case 'min':
-        dataList = (List.generate(dataModel.graphData.length,
-            (index) => dataModel.graphData[index].diastolicPressure));
+        dataList = (List.generate(dataModel.graphData.length, (index) => dataModel.graphData[index].diastolicPressure));
         dataList.sort;
         double min = dataList.last.toDouble();
         print(min);
@@ -69,11 +68,10 @@ class HistoryGraph extends StatelessWidget {
           dateFormat: DateFormat.Hm(),
           plotOffset: 10,
           desiredIntervals: 25,
-          majorGridLines:
-              MajorGridLines(width: 0, color: Theme.of(context).shadowColor),
+          majorGridLines: MajorGridLines(width: 0, color: Theme.of(context).shadowColor),
         ),
         series: [
-          // Renders scatter chart
+          // Renders scatter chart to display the MAD.
           ScatterSeries(
             markerSettings: const MarkerSettings(
                 height: 10,
@@ -81,28 +79,25 @@ class HistoryGraph extends StatelessWidget {
                 // Scatter will render in diamond shape
                 shape: DataMarkerType.diamond),
             trendlines: <Trendline>[
-              Trendline(
-                  dashArray: <double>[2, 3],
-                  type: TrendlineType.movingAverage,
-                  color: Colors.redAccent)
+              Trendline(dashArray: <double>[2, 3], type: TrendlineType.movingAverage, color: Colors.redAccent)
             ],
             color: dataModel.color,
             //ARNE Sagt: Löscht du das = Kopf Ab!!!!!!11!
+            // ignore: invalid_use_of_protected_member
             dataSource: dataModel.graphData.value,
             xValueMapper: (ChartData data, _) => data.time,
             yValueMapper: (ChartData data, _) => data.meanArterialPressure,
           ),
+          // Renders the Systolic and Diastolic Datapoints as a Hi-Lo Error Bar.
           HiloSeries(
             enableTooltip: true,
+            // ignore: invalid_use_of_protected_member
             dataSource: dataModel.graphData.value,
             color: Colors.red,
             xValueMapper: (ChartData data, _) => data.time,
             lowValueMapper: (ChartData data, _) => data.diastolicPressure,
             highValueMapper: (ChartData data, _) => data.systolicPressure,
-            markerSettings: const MarkerSettings(
-                shape: DataMarkerType.horizontalLine,
-                width: 10,
-                isVisible: true),
+            markerSettings: const MarkerSettings(shape: DataMarkerType.horizontalLine, width: 10, isVisible: true),
           ),
         ],
       ),
