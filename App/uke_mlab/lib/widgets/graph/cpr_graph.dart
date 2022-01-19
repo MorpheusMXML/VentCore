@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:uke_mlab/models/model_graph.dart';
+import 'package:uke_mlab/models/data_models/model_graph.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
-import 'package:uke_mlab/models/model_graphdata.dart';
+import 'package:uke_mlab/models/data_models/model_graphdata.dart';
 
 ///This Class returns a [Obx] which in turn consists of a [SfCartesianChart] with two [NumericAxis].
 ///The Graph rendered with this displays a history of how good the CPR has been performed in relation to the compression depth.
@@ -58,7 +58,8 @@ class CprGraph extends StatelessWidget {
           //Turning off String Labels at the Axis
           labelStyle: const TextStyle(fontSize: 0.0001),
           desiredIntervals: 25,
-          majorGridLines: MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
+          majorGridLines:
+              MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
         ),
         series: <ColumnSeries<ChartData, dynamic>>[
           ColumnSeries<ChartData, dynamic>(

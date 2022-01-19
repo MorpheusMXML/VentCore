@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:uke_mlab/models/data_models/model_graph.dart';
+import 'package:uke_mlab/utilities/enums/sensor.dart';
+import 'package:uke_mlab/models/data_models/model_graphdata.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/widgets/graph/cpr_graph.dart';
 import 'package:uke_mlab/widgets/graph/history_graph.dart';

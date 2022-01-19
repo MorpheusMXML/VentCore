@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:uke_mlab/widgets/info/info_container.dart';
 import 'package:uke_mlab/widgets/setting/setting_container.dart';
 import 'package:uke_mlab/widgets/toggle/toggle_mode_button.dart';
+import 'package:uke_mlab/widgets/value_box/alarm_confirmation/alarm_confirmation_button_row.dart';
 import 'package:uke_mlab/widgets/value_box/value_box_tile.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
@@ -27,10 +28,11 @@ class VentilationMode extends StatelessWidget {
       {'name': 'PEEP', 'rate': 'mBar'},
     ];
 
+    // TODO get elements to be added to vent Screen from systemState.absAlarmFieldModel respective Set
     return Column(
       children: [
         Flexible(
-          flex: 1,
+          flex: 8,
           child: Row(
             children: const [
               ValueBoxTile.withHeadline(
@@ -40,7 +42,7 @@ class VentilationMode extends StatelessWidget {
           ),
         ),
         Flexible(
-          flex: 1,
+          flex: 8,
           child: Row(
             children: [
               Expanded(
@@ -53,8 +55,12 @@ class VentilationMode extends StatelessWidget {
           ),
         ),
         Flexible(
-          flex: 2,
+          flex: 13,
           child: SettingContainer(data: settingData),
+        ),
+        const Flexible(
+          flex: 3,
+          child: AlarmConfirmationRow(),
         ),
         ToggleModeButton(),
       ],

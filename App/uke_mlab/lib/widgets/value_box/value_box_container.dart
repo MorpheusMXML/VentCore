@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uke_mlab/models/model_absolute.dart';
-import 'package:uke_mlab/models/model_graph.dart';
+import 'package:uke_mlab/models/data_models/model_absolute.dart';
+import 'package:uke_mlab/models/data_models/model_graph.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 class ValueBoxContainer extends StatelessWidget {
@@ -25,14 +25,17 @@ class ValueBoxContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const double aspectRatio = 1.1; // TODO: should be 1 but then we have a pixel overflow -> 255 and others are too big in current configuration
+    const double aspectRatio =
+        1.1; // TODO: should be 1 but then we have a pixel overflow -> 255 and others are too big in current configuration
     double fontSize = 17;
     double fontSizeCenter = 44;
     // could be done via template pattern for better code quality
     if (dataModelGraph == null) {
-
       //When NIBD: avoid overflow.
-      if(dataModelAbsolute!.abbreviation == sensorEnumAbsolute.sysAbsolute.abbreviation || dataModelAbsolute!.abbreviation == sensorEnumAbsolute.diaAbsolute.abbreviation){
+      if (dataModelAbsolute!.abbreviation ==
+              sensorEnumAbsolute.sysAbsolute.abbreviation ||
+          dataModelAbsolute!.abbreviation ==
+              sensorEnumAbsolute.diaAbsolute.abbreviation) {
         fontSizeCenter = 40;
         fontSize = 14;
       }
@@ -40,7 +43,9 @@ class ValueBoxContainer extends StatelessWidget {
         aspectRatio: aspectRatio,
         child: ElevatedButton(
           style: ButtonStyle(
-              shape: MaterialStateProperty.all(const RoundedRectangleBorder()), backgroundColor: MaterialStateProperty.all(Theme.of(context).cardColor)),
+              shape: MaterialStateProperty.all(const RoundedRectangleBorder()),
+              backgroundColor:
+                  MaterialStateProperty.all(Theme.of(context).cardColor)),
           onPressed: () => dataModelAbsolute!.tapped.toggle(),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -73,7 +78,9 @@ class ValueBoxContainer extends StatelessWidget {
                 () => Text(
                   dataModelAbsolute!.floatRepresentation
                       ? dataModelAbsolute!.absoluteValue.value.toString()
-                      : dataModelAbsolute!.absoluteValue.value.toInt().toString(),
+                      : dataModelAbsolute!.absoluteValue.value
+                          .toInt()
+                          .toString(),
                   style: TextStyle(
                     color: dataModelAbsolute!.color,
                     fontSize: fontSizeCenter,
@@ -121,34 +128,40 @@ class ValueBoxContainer extends StatelessWidget {
               // Top
               Padding(
                 padding: const EdgeInsets.only(left: 15.0, right: 15.0),
-                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                  Flexible(
-                    child: Text(
-                      dataModelGraph!.graphTitle,
-                      style: TextStyle(
-                        color: dataModelGraph!.color,
-                        fontSize: fontSize,
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          dataModelGraph!.graphTitle,
+                          style: TextStyle(
+                            color: dataModelGraph!.color,
+                            fontSize: fontSize,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                  const Spacer(),
-                  Text(
-                    "Graph\nValue",
-                    style: TextStyle(
-                      color: dataModelGraph!.color,
-                      fontSize: fontSize,
-                    ),
-                  ),
-                ]),
+                      const Spacer(),
+                      Text(
+                        "Graph\nValue",
+                        style: TextStyle(
+                          color: dataModelGraph!.color,
+                          fontSize: fontSize,
+                        ),
+                      ),
+                    ]),
               ),
 
               // Middle
 
               Obx(
                 () => Text(
-                  (dataModelGraph!.singleData.value.value > -1.0 && dataModelGraph!.singleData.value.value < 1.0)
-                      ? dataModelGraph!.singleData.value.value.toStringAsFixed(1)
-                      : dataModelGraph!.singleData.value.value.toInt().toString(),
+                  (dataModelGraph!.singleData.value.value > -1.0 &&
+                          dataModelGraph!.singleData.value.value < 1.0)
+                      ? dataModelGraph!.singleData.value.value
+                          .toStringAsFixed(1)
+                      : dataModelGraph!.singleData.value.value
+                          .toInt()
+                          .toString(),
                   style: TextStyle(
                     color: dataModelGraph!.color,
                     fontSize: fontSizeCenter,
@@ -159,23 +172,26 @@ class ValueBoxContainer extends StatelessWidget {
               // Bottom
               Padding(
                 padding: const EdgeInsets.only(left: 15.0, right: 15.0),
-                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                  Container(),
-                  Text(
-                    dataModelGraph!.yAxisTitle,
-                    style: TextStyle(
-                      color: dataModelGraph!.color,
-                      fontSize: fontSize,
-                    ),
-                  ),
-                ]),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(),
+                      Text(
+                        dataModelGraph!.yAxisTitle,
+                        style: TextStyle(
+                          color: dataModelGraph!.color,
+                          fontSize: fontSize,
+                        ),
+                      ),
+                    ]),
               ),
             ],
           ),
         ),
       );
     } else {
-      throw Exception("ValueBoxContainer was given both dataModelGraph and DataModelAbsolute");
+      throw Exception(
+          "ValueBoxContainer was given both dataModelGraph and DataModelAbsolute");
     }
   }
 }

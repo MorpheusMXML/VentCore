@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'dart:async';
 import 'dart:math';
-import 'package:uke_mlab/models/general_alarms.dart';
+import 'package:uke_mlab/models/screen_element_models/general_alarms.dart';
+import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/utilities/enums/non_graph_alarm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -20,7 +21,7 @@ class StartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // For general alarm testing purposes, TODO: Remove
-    final GeneralAlarms generalAlarms = Get.find<GeneralAlarms>();
+    final GeneralAlarms generalAlarms = Get.find<SystemState>().generalAlarms;
     Timer.periodic(const Duration(seconds: 2), (timer) {
       if (Random().nextInt(10) > 1) {
         generalAlarms.addAlarm(
@@ -29,7 +30,7 @@ class StartScreen extends StatelessWidget {
             Random().nextInt(100));
       } else {
         if (generalAlarms.alarmList.isNotEmpty) {
-          generalAlarms.alarmList.removeAt(0);
+          generalAlarms.removeAlarm(generalAlarms.alarmList[0].alarm);
         }
       }
     });

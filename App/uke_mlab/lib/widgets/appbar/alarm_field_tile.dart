@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:uke_mlab/models/general_alarms.dart';
+import 'package:uke_mlab/models/screen_element_models/general_alarms.dart';
 import 'package:intl/intl.dart';
 import 'package:uke_mlab/utilities/enums/non_graph_alarm.dart';
 

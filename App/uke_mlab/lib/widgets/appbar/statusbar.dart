@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:uke_mlab/models/general_alarms.dart';
+import 'package:uke_mlab/models/screen_element_models/general_alarms.dart';
 import 'package:uke_mlab/models/system_state.dart';
-import 'package:uke_mlab/utilities/statusbar_constants.dart';
+import 'package:uke_mlab/utilities/constants/statusbar_constants.dart';
 import 'package:uke_mlab/widgets/appbar/alarm_field_tile.dart';
 import 'package:uke_mlab/utilities/enums/patient_type.dart';
 import 'alarm_counter_tile.dart';
@@ -17,7 +17,7 @@ class StatusBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final SystemState systemState = Get.find<SystemState>();
-    final GeneralAlarms generalAlarms = Get.find<GeneralAlarms>();
+    final GeneralAlarms generalAlarms = systemState.generalAlarms;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,

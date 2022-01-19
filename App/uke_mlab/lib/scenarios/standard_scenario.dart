@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:get/get.dart';
 
-import 'package:uke_mlab/models/model_absolute.dart';
-import 'package:uke_mlab/models/model_graph.dart';
-import 'package:uke_mlab/models/model_nibd.dart';
+import 'package:uke_mlab/models/data_models/model_absolute.dart';
+import 'package:uke_mlab/models/data_models/model_graph.dart';
+import 'package:uke_mlab/models/data_models/model_nibd.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/utilities/enums/scenarios.dart';
 import 'package:uke_mlab/scenarios/abstract_scenario.dart';

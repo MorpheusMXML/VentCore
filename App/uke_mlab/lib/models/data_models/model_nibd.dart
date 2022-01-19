@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uke_mlab/models/model_graphdata.dart';
+import 'package:uke_mlab/models/data_models/model_graphdata.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 class DataModelNIBD extends GetxController {

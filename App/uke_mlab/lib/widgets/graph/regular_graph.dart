@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:uke_mlab/models/model_graph.dart';
-import 'package:uke_mlab/models/model_graphdata.dart';
+import 'package:uke_mlab/models/data_models/model_graph.dart';
+import 'package:uke_mlab/models/data_models/model_graphdata.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 class RegularGraph extends StatelessWidget {
@@ -30,6 +30,7 @@ class RegularGraph extends StatelessWidget {
         series: [
           SplineSeries(
               color: dataModel.color,
+              // DONT DELETE .value, syncfusion would break in combination wiht Getx
               dataSource: dataModel.graphData.value,
               onRendererCreated: (ChartSeriesController controller) {
                 dataModel.chartController = controller;

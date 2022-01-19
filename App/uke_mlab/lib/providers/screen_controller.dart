@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
-import 'package:uke_mlab/models/model_absolute.dart';
+import 'package:uke_mlab/models/data_models/model_absolute.dart';
 import 'package:uke_mlab/scenarios/patient_scenario.dart';
 import 'package:uke_mlab/utilities/enums/scenarios.dart';
 import 'package:uke_mlab/utilities/enums/patient_type.dart';
 import 'package:uke_mlab/utilities/enums/screen_status.dart';
-import 'package:uke_mlab/models/model_manager.dart';
+import 'package:uke_mlab/models/data_models/model_manager.dart';
 import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/scenarios/abstract_scenario.dart';
 import 'package:uke_mlab/scenarios/standard_scenario.dart';
@@ -70,31 +70,6 @@ class ScreenController {
     }
   }
 
-  //TODO implement
-  void muteAlarm() {}
-
-  //TODO implement
-  void acknowledgeAlarm() {}
-
-  //TODO implement
-  void nextStep() {
-    if (Get.find<SystemState>().scenarioStarted) {
-      // go to the next stopping point in simmulation data (see patient stories)
-    }
-    // else case for throwing some kind of error message?
-  }
-
-  //TODO delete/implement
-  void endScenario(ModelManager manager) {
-    SystemState systemState = Get.find<SystemState>();
-    if (systemState.scenarioStarted) {
-      //stop scenario
-      //reset data models in manager ?
-      systemState.scenarioStarted = false;
-    }
-    // else case for throwing some kind of error message?
-  }
-
   Future? continueButton(String additionalInfo) {
     if (additionalInfo == 'Adult') {
       if (systemState.patientType != patientTypeEnum.adult) {
@@ -117,6 +92,7 @@ class ScreenController {
     }
     systemState.screenStatus = screenStatusEnum.monitorScreen;
     changeScenario(scenariosEnum.standardScenario);
+    systemState.absAlarmFieldModel.updateActiveList();
     return Get.toNamed('/main_screen');
   }
 
@@ -128,6 +104,7 @@ class ScreenController {
     //systemState.patientType = patientTypeEnum.adult;
     systemState.screenStatus = screenStatusEnum.monitorScreen;
     changeScenario(scenariosEnum.standardScenario);
+    systemState.absAlarmFieldModel.updateActiveList();
     return Get.toNamed('/main_screen');
   }
 
@@ -140,15 +117,18 @@ class ScreenController {
     systemState.screenStatus = screenStatusEnum.defibrillationScreen;
     changeScenario(scenariosEnum.standardScenario);
     systemState.selectedToggleView.value = [false, false, true];
+    systemState.absAlarmFieldModel.updateActiveList();
     return Get.toNamed('/main_screen');
   }
 
   Future? patientSettingButton() {
     systemState.screenStatus = screenStatusEnum.patientSettingScreen;
+    systemState.absAlarmFieldModel.closeOverlay();
     return Get.offNamed('/start_screen');
   }
 
   Future? demoScreenButton() {
+    systemState.absAlarmFieldModel.closeOverlay();
     return Get.offNamed('/demo_screen');
   }
 
@@ -160,10 +140,13 @@ class ScreenController {
     }
     if (index == 0) {
       systemState.screenStatus = screenStatusEnum.monitorScreen;
+      systemState.absAlarmFieldModel.updateActiveList();
     } else if (index == 1) {
       systemState.screenStatus = screenStatusEnum.ventilationScreen;
+      systemState.absAlarmFieldModel.updateActiveList();
     } else if (index == 2) {
       systemState.screenStatus = screenStatusEnum.defibrillationScreen;
+      systemState.absAlarmFieldModel.updateActiveList();
     } else {
       throw Exception("No screen $index known in toggle view");
     }
@@ -175,12 +158,8 @@ class ScreenController {
 
   Future? alarmSettingsButton() {
     //system state should stay the same here
+    systemState.absAlarmFieldModel.closeOverlay();
     return Get.offNamed('/alarm_limit_screen');
-  }
-
-  //TODO use and implement
-  String alarmSettingsExitButton() {
-    return "";
   }
 
   Future? scenarioMenuExitButton() {
@@ -204,6 +183,7 @@ class ScreenController {
       systemState.patientType = patientTypeEnum.adult;
     }
     changeScenario(scenario);
+    systemState.absAlarmFieldModel.updateActiveList();
     return Get.toNamed('/main_screen');
   }
 }

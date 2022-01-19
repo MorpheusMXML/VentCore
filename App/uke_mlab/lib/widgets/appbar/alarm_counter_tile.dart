@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uke_mlab/models/general_alarms.dart';
+import 'package:uke_mlab/models/screen_element_models/general_alarms.dart';
+import 'package:uke_mlab/models/system_state.dart';
 
 class AlarmCounterTile extends StatelessWidget {
   /// Builds depending on the amount of [GeneralAlarms] an statusbar element displaying the amount, rendered in respective forms.
   /// Could be combined with the [AlarmExpansionTile] due to similar code functionality, but extracted to make placing in [StatusBar] easier
   AlarmCounterTile({Key? key}) : super(key: key);
 
-  final GeneralAlarms generalAlarms = Get.find<GeneralAlarms>();
+  final GeneralAlarms generalAlarms = Get.find<SystemState>().generalAlarms;
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +16,7 @@ class AlarmCounterTile extends StatelessWidget {
 
     return Obx(
       () {
-        String alarmText =
-            generalAlarms.alarmList.length.toString();
+        String alarmText = generalAlarms.alarmList.length.toString();
         switch (generalAlarms.alarmList.length) {
           case 0:
             return Container();
