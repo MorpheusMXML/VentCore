@@ -41,6 +41,8 @@ class ValueBoxTileNIBD extends StatelessWidget {
           children: [
             Flexible(
               flex: 1,
+
+              /// [Container] used to render the ShortString of the [DataModelAbsolute] Results in the [String] 'NIBD' if called with NIBD DataModel.
               child: Container(
                 margin: const EdgeInsets.only(top: 4, bottom: 4),
                 child: Text(
