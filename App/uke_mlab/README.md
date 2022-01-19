@@ -70,7 +70,7 @@
 <div align="justify" style="font-family:Jura">
 
 # About The Project
-TODO SCREENSHOT
+
 ![VentCore][product-screenshot]
 
 This is the repository for the UKE M-Lab prototype of VentCore: A Mock-Up for a possible 3-in-1 Medical device which combines a patient Monitoring, Defibrillation and Ventilation.
@@ -110,6 +110,8 @@ Please make sure, that you've installed a stable Version of the Flutter SDK. Ple
   ```
 
 Depending on your operating system make sure to have the simulator(macOS) or Android Emulator(Windows) installed and working.
+
+<div id="device"></div>
 
 ## Device Recommendations
 
@@ -425,10 +427,11 @@ And also for providing simulation / real patient data and helping with DataGener
 [product-screenshot]: ./ReadMeFiles/ScreenshotMonitoring.png
 [StartScreen]:./ReadMeFiles/presets.png
 [AlarmLimit]: ./ReadMeFiles/alarmlimit.png
-[DefiScreen]:./ReadMeFiles/defibrillation.png
+[DefiScreen]:./ReadMeFiles/cpr.png
 [Add]:./ReadMeFiles/addin.png
 [NIBD]:./ReadMeFiles/nibd.png
-[Scenario]:./ReadMeFiles/scenario.png
-[RedAlarm]:./ReadMeFiles/redalarm.png
+[Scenario]:./ReadMeFiles/scenarios.png
+[RedAlarm]:./ReadMeFiles/red-alarms.png
 [YellowAlarm]:./ReadMeFiles/yellowalarm.png
 [Table Audio Priorities]:./ReadMeFiles/table-audio-priority.png
+[threemodes]:./ReadMeFiles/3in1.png
