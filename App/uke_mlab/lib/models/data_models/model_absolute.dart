@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:uke_mlab/providers/alarm_controller.dart';
+import 'package:uke_mlab/providers/sound_controller.dart';
 
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
@@ -90,6 +91,20 @@ class DataModelAbsolute extends GetxController {
     // Inform alarmController about a value change.
     alarmController.evaluateAlarm(absoluteValue.value, upperAlarmBound.value,
         lowerAlarmBound.value, historicValues, sensorKey);
+
+    if (sensorKey == sensorEnumAbsolute.hfAbsolute) {
+      Get.find<SoundController>().saturationHfBeep(
+          absoluteValue.value.toInt(),
+          Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.spo2Absolute.name)
+              .absoluteValue
+              .toInt());
+    } else if (sensorKey == sensorEnumAbsolute.spo2Absolute) {
+      Get.find<SoundController>().saturationHfBeep(
+          Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.hfAbsolute.name)
+              .absoluteValue
+              .toInt(),
+          absoluteValue.value.toInt());
+    }
   }
 
   /// sets [upperAlarmBound] to [newBoundary] if [newBoundary] >= [lowerAlarmBound] is true

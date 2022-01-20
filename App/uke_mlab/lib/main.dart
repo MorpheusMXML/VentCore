@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:uke_mlab/providers/sound_controller.dart';
 
 import 'package:uke_mlab/screens/alarm_limit_screen.dart';
 import 'package:uke_mlab/screens/demo_screen.dart';
@@ -32,6 +33,7 @@ void main() {
 class MyApp extends StatelessWidget {
   final SystemState systemState = Get.put(SystemState());
   final ModelManager modelManager = Get.put(ModelManager());
+  final SoundController soundController = Get.put(SoundController());
 
   MyApp({Key? key}) : super(key: key) {
     // TODO: Create Binding Class for AlarmController and bind to the respective
