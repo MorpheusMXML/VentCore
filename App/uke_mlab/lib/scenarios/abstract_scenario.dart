@@ -3,12 +3,10 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 
-import 'package:uke_mlab/utilities/enums/scenarios.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 abstract class AbstractScenario {
   bool scenarioRunning = false;
-  late scenariosEnum scenarioType;
 
   /// Starts a given scenario via the [scenarioPath].
   ///

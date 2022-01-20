@@ -1,7 +1,15 @@
 import 'package:uke_mlab/utilities/enums/non_graph_alarm.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
-enum scenariosEnum { standardScenario, scenario1, scenario2, scenario3a, scenario3b, scenario3c, scenario4 }
+enum scenariosEnum {
+  standardScenario,
+  scenario1,
+  scenario2,
+  scenario3a,
+  scenario3b,
+  scenario3c,
+  scenario4
+}
 
 extension ScenarioEnumPath on scenariosEnum {
   static const Map<scenariosEnum, String> attributes = {
@@ -18,21 +26,37 @@ extension ScenarioEnumPath on scenariosEnum {
 }
 
 extension ScenarioEnumAttributes on scenariosEnum {
-  static const Map<scenariosEnum, Map<sensorEnumGraph, Map<int, nonGraphAlarmEnum>>> nonMeasurableAlarms = {
+  static const Map<scenariosEnum,
+          Map<sensorEnumGraph, Map<int, Map<String, dynamic>>>>
+      nonMeasurableAlarms = {
     scenariosEnum.standardScenario: {
       sensorEnumGraph.paw: {},
       sensorEnumGraph.flow: {},
       sensorEnumGraph.co2: {},
-      sensorEnumGraph.pleth: {},
+      sensorEnumGraph.pleth: {
+        700: {
+          'alarm': nonGraphAlarmEnum.o2empty,
+          'priority': 20,
+        },
+      },
       sensorEnumGraph.ecgCh1: {},
       sensorEnumGraph.ecgCh2: {},
       sensorEnumGraph.nibd: {},
     },
     scenariosEnum.scenario1: {
       sensorEnumGraph.pleth: {
-        100: nonGraphAlarmEnum.o2empty,
-        200: nonGraphAlarmEnum.o2low,
-        1000: nonGraphAlarmEnum.cprFeedback,
+        800: {
+          'alarm': nonGraphAlarmEnum.o2empty,
+          'priority': 20,
+        },
+        1000: {
+          'alarm': nonGraphAlarmEnum.o2low,
+          'priority': 60,
+        },
+        1200: {
+          'alarm': nonGraphAlarmEnum.cprFeedback,
+          'priority': 100,
+        },
       },
       sensorEnumGraph.ecgCh1: {},
       sensorEnumGraph.ecgCh2: {},
@@ -50,5 +74,6 @@ extension ScenarioEnumAttributes on scenariosEnum {
     scenariosEnum.scenario3c: {},
     scenariosEnum.scenario4: {},
   };
-  Map<sensorEnumGraph, Map<int, nonGraphAlarmEnum>> get scenarioMap => nonMeasurableAlarms[this]!;
+  Map<sensorEnumGraph, Map<int, Map<String, dynamic>>> get scenarioMap =>
+      nonMeasurableAlarms[this]!;
 }

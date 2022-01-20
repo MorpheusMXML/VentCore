@@ -42,31 +42,16 @@ class ScreenController {
         runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
         break;
       case scenariosEnum.scenario1:
-        runningScenario = PatientScenario(scenarioType: scenario);
-        runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
-        break;
       case scenariosEnum.scenario2:
-        runningScenario = PatientScenario(scenarioType: scenario);
-        runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
-        break;
       case scenariosEnum.scenario3a:
-        runningScenario = PatientScenario(scenarioType: scenario);
-        runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
-        break;
       case scenariosEnum.scenario3b:
-        runningScenario = PatientScenario(scenarioType: scenario);
-        runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
-        break;
       case scenariosEnum.scenario3c:
-        runningScenario = PatientScenario(scenarioType: scenario);
-        runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
-        break;
       case scenariosEnum.scenario4:
         runningScenario = PatientScenario(scenarioType: scenario);
         runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
         break;
       default:
-        throw Exception('No scenario for ' + scenario.name + ' known');
+        throw Exception('No scenario for ${scenario.name} known.');
     }
   }
 
