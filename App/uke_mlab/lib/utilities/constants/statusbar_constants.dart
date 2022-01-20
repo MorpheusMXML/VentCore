@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 
 class StatusBarConstants {
   static const int flexBarAlarmCounterTile = 4;
-  static const int flexBarAlarmFieldTile = 7;
+  static const int flexBarAlarmFieldTile = 8;
 
   static const int flexBarAlarmArea = 5;
   static const int flexBarO2BottleArea = 1;
@@ -21,5 +21,5 @@ class StatusBarConstants {
           flexBarAlarmArea /
           (flexBarAlarmCounterTile + flexBarAlarmFieldTile) *
           flexBarAlarmFieldTile) -
-      2 * horizontalMargin;
+      horizontalMargin;
 }
