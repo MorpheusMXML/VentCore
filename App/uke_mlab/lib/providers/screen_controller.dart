@@ -88,11 +88,13 @@ class ScreenController {
         systemState.patientType = patientTypeEnum.infant;
       }
     } else {
-      throw Exception('additionalInformation is not Adult, Child or Infant on screenChangeButton call from Continue Button');
+      throw Exception(
+          'additionalInformation is not Adult, Child or Infant on screenChangeButton call from Continue Button');
     }
     systemState.screenStatus = screenStatusEnum.monitorScreen;
     changeScenario(scenariosEnum.standardScenario);
     systemState.absAlarmFieldModel.updateActiveList();
+    Get.find<SoundController>().startSaturationHFSound();
     return Get.toNamed('/main_screen');
   }
 
@@ -119,17 +121,20 @@ class ScreenController {
     changeScenario(scenariosEnum.standardScenario);
     systemState.setSelectedToggleView([false, false, true]);
     systemState.absAlarmFieldModel.updateActiveList();
+    Get.find<SoundController>().startSaturationHFSound();
     return Get.toNamed('/main_screen');
   }
 
   Future? patientSettingButton() {
     systemState.screenStatus = screenStatusEnum.patientSettingScreen;
     systemState.absAlarmFieldModel.closeOverlay();
+    Get.find<SoundController>().stop();
     return Get.offNamed('/start_screen');
   }
 
   Future? demoScreenButton() {
     systemState.absAlarmFieldModel.closeOverlay();
+    Get.find<SoundController>().stop();
     return Get.offNamed('/demo_screen');
   }
 
@@ -162,10 +167,12 @@ class ScreenController {
   Future? alarmSettingsButton() {
     //system state should stay the same here
     systemState.absAlarmFieldModel.closeOverlay();
+    Get.find<SoundController>().stop();
     return Get.offNamed('/alarm_limit_screen');
   }
 
   Future? scenarioMenuExitButton() {
+    Get.find<SoundController>().startSaturationHFSound();
     switch (systemState.screenStatus) {
       case screenStatusEnum.patientSettingScreen:
         return Get.toNamed('/start_screen');
@@ -187,6 +194,7 @@ class ScreenController {
     }
     changeScenario(scenario);
     systemState.absAlarmFieldModel.updateActiveList();
+    Get.find<SoundController>().startSaturationHFSound();
     return Get.toNamed('/main_screen');
   }
 }

@@ -21,10 +21,10 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 ///
 class SoundController {
   ///Loads AudioAlarm Files into Cache and Provides functionality to Play, Stop them. Also provides ECG Sound per Minute and O2 Saturation.
-  static AudioCache alarmPlayer = AudioCache(prefix: 'assets/sounds/');
-  static AudioCache ecgPlayer = AudioCache(prefix: 'assets/sounds/');
-  late Timer? timer;
-  late Timer? getDataTimer;
+  final AudioCache alarmPlayer = AudioCache(prefix: 'assets/sounds/');
+  final AudioCache ecgPlayer = AudioCache(prefix: 'assets/sounds/');
+  Timer? timer;
+  Timer? getDataTimer;
 
   /// This [Map<SoundIdentifier, String>] specifies the AlarmType in the [Enum] Key and maps it to the [String] of the Sound Files Name in he Assets/sounds
   /// Folder. If you wish to change the Alarm Sound Files that shall pe blayed. Change them accordingly here and place the Sondfile under [./App/uke_mlab/assets/sounds]
@@ -44,8 +44,8 @@ class SoundController {
     SoundIdentifier.hF50: 'ECG_50wav.wav',
   };
 
-  late AudioPlayer alarmPlayerRet;
-  late AudioPlayer ecgPlayerRet;
+  AudioPlayer? alarmPlayerRet;
+  AudioPlayer? ecgPlayerRet;
 
   ///Constructor for this. Loads the specified Sound files from [alarmSoundFiles] & [ecgecgSoundFiles] into the Cache of the Application.
   SoundController() {
@@ -55,15 +55,28 @@ class SoundController {
 
   ///playes the SoundAlarm fot the AlarmType specified with [Enum soundIdentifier].
   play(Enum soundIdentifier) async {
-    alarmPlayerRet = await alarmPlayer.play(alarmSoundFiles[soundIdentifier].toString());
+    alarmPlayerRet =
+        await alarmPlayer.play(alarmSoundFiles[soundIdentifier].toString());
   }
 
   ///sops all [AudioPlayer]'s that are currently playing a Sound.
   stop() async {
-    alarmPlayerRet.stop();
-    ecgPlayerRet.stop();
-    timer!.cancel();
-    getDataTimer!.cancel();
+    if (alarmPlayerRet != null) {
+      alarmPlayerRet!.stop();
+      alarmPlayerRet = null;
+    }
+    if (ecgPlayerRet != null) {
+      ecgPlayerRet!.stop();
+      ecgPlayerRet = null;
+    }
+    if (timer != null) {
+      timer!.cancel();
+      timer = null;
+    }
+    if (getDataTimer != null) {
+      getDataTimer!.cancel();
+      getDataTimer = null;
+    }
   }
 
   /// Function starts the ECG Sound in the rhythm specified with [bpm] and playes the accordingly Pitched Sound File to the Oxygen Saturation specified with [spO2]
@@ -107,27 +120,28 @@ class SoundController {
         print('stopping Player');
         ecgPlayerRet.stop();
       } */
-      timer?.cancel();
+      if (timer != null) {
+        timer?.cancel();
+      }
 
       timer = Timer.periodic(duration, ((timer) async {
-        ecgPlayerRet = await ecgPlayer.play(ecgSound, volume: 1.0);
+        ecgPlayerRet = await ecgPlayer.play(ecgSound, volume: 0.7);
       }));
     } else {
-      ecgPlayerRet = await ecgPlayer.loop(ecgSound, volume: 1.0);
+      ecgPlayerRet = await ecgPlayer.loop(ecgSound, volume: 0.7);
     }
   }
 
   void startSaturationHFSound() {
-    bool first = false;
-    DataModelAbsolute hfModel = Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.hfAbsolute.name);
-    DataModelAbsolute spo2Model = Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.spo2Absolute.name);
-    if (getDataTimer!.isActive) {
-      return;
-    } else {
-      getDataTimer = Timer.periodic(const Duration(seconds: 3), (timer) {
-        saturationHfBeep(bpm: hfModel.absoluteValue.value.toInt(), spO2: spo2Model.absoluteValue.value.toInt());
-      });
-    }
+    DataModelAbsolute hfModel =
+        Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.hfAbsolute.name);
+    DataModelAbsolute spo2Model =
+        Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.spo2Absolute.name);
+    getDataTimer ??= Timer.periodic(const Duration(seconds: 5), (timer) {
+      saturationHfBeep(
+          bpm: hfModel.absoluteValue.value.toInt(),
+          spO2: spo2Model.absoluteValue.value.toInt());
+    });
   }
 }
 
