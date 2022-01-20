@@ -9,6 +9,5 @@ class ControllerBindings extends Bindings {
   void dependencies() {
     Get.put(StartScreenController());
     Get.put(DefibrillationController());
-    Get.put(ScreenController());
   }
 }
