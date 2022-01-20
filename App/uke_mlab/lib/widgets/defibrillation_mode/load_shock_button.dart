@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+
 import 'package:uke_mlab/providers/defibrillation_controller.dart';
 
 class LoadShockButton extends StatefulWidget {
@@ -16,12 +17,10 @@ class _LoadShockButtonState extends State<LoadShockButton> with SingleTickerProv
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(
-        milliseconds: 500,
+        seconds: 2,
       ),
-    )..addListener(() {
-        setState(() {});
-      });
-    _colorTween = ColorTween(begin: Colors.transparent, end: Colors.red).animate(_animationController);
+    );
+    _colorTween = ColorTween(begin: Colors.green, end: Colors.red).animate(_animationController);
 
     super.initState();
   }
@@ -34,59 +33,60 @@ class _LoadShockButtonState extends State<LoadShockButton> with SingleTickerProv
 
   DefibrillationController defibrillationController = Get.find<DefibrillationController>();
   late AnimationController _animationController;
-  late Animation _colorTween;
+  late Animation<Color?> _colorTween;
   @override
   Widget build(BuildContext context) {
-    ButtonStyle loadButtonStyle = ElevatedButton.styleFrom(
-      primary: Theme.of(context).shadowColor,
-      onPrimary: Colors.green,
-      side: const BorderSide(
-        color: Colors.green,
-      ),
-    );
-
-    ButtonStyle shockButtonStyle = ElevatedButton.styleFrom(
-      primary: Colors.red,
-      onPrimary: Colors.black,
-      side: const BorderSide(color: Colors.white),
-    );
     return Container(
-        margin: const EdgeInsets.all(8),
-        child: TweenAnimationBuilder<Color>(
-          tween: Tween(begin: Colors.transparent, end: Colors.red),
-          duration: const Duration(seconds: 3),
-          builder: (BuildContext context, Color color, Widget? child) {
-            return ElevatedButton(
-              style: loadButtonStyle,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    color: _colorTween.value,
-                    child: SvgPicture.asset('assets/icons/Battery.svg'),
-                    padding: const EdgeInsets.all(8),
-                  ),
-                  const Text('Load'),
-                ],
+      margin: const EdgeInsets.all(8),
+      child: AnimatedBuilder(
+        animation: _colorTween,
+        builder: (BuildContext _, Widget? __) {
+          return ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: _colorTween.value,
+              onPrimary: _colorTween.value,
+              side: const BorderSide(
+                color: Colors.green,
               ),
-              onPressed: () {
-                setState(() {});
-              },
-            );
-          },
-          child: const Icon(Icons.aspect_ratio),
-        ));
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  color: _colorTween.value,
+                  child: (_animationController.isCompleted && defibrillationController.isReadyToShock == true)
+                      ? SvgPicture.asset('assets/icons/Shock.svg')
+                      : SvgPicture.asset('assets/icons/Battery.svg'),
+                  padding: const EdgeInsets.all(8),
+                ),
+                const Text('Load'),
+              ],
+            ),
+            onPressed: () {
+              setState(
+                () {
+                  if (!defibrillationController.isReadyToShock) {
+                    _animationController.forward();
 
-/* 
+                    defibrillationController.isReadyToShock = true;
+                  }
+                },
+              );
+            },
+            onLongPress: () {
+              setState(() {
+                if (defibrillationController.isReadyToShock) {
+                  _animationController.reset();
                   defibrillationController.startLastWatch();
                   defibrillationController.numberOfShocks++;
-                  defibrillationController.animHeight = 0.obs;
-                  defibrillationController.defiState = DefibrillationState.readyToLoad;
-    */
+                  defibrillationController.isReadyToShock = false;
+                }
+              });
+            },
+          );
+        },
+        child: const Icon(Icons.aspect_ratio),
+      ),
+    );
   }
-}
-
-enum DefibrillationState {
-  readyToLoad,
-  readyToShock,
 }
