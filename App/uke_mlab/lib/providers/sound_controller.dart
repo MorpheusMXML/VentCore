@@ -1,6 +1,8 @@
 import 'dart:async';
-
+import 'package:get/get.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:uke_mlab/models/data_models/model_absolute.dart';
+import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 /// This Class provides the SoundPlaying and Triggering Functionallity.
 /// Alarms can be Triggered, stopped and the SpO2 / ECG Sound for the Heartfrequency can be started.
@@ -77,9 +79,12 @@ class SoundController {
   /// int milliesTillNext = ((1 / beepHz) * 1000).toInt();
   ///Duration duration = Duration(milliseconds: milliesTillNext);
   ///```
-  saturationHfBeep(int bpm, int spO2) async {
+  saturationHfBeep({required int bpm, required int spO2}) async {
     String ecgSound = ecgSoundFiles[SoundIdentifier.hFnormal].toString();
     ecgPlayerRet = await ecgPlayer.play(ecgSound, volume: 0);
+
+    ecgPlayerRet.stop();
+
     if (spO2 > 90) {
       ecgSound = ecgSoundFiles[SoundIdentifier.hFnormal].toString();
     } else if (spO2 > 80) {
@@ -109,6 +114,14 @@ class SoundController {
     } else {
       ecgPlayerRet = await ecgPlayer.loop(ecgSound, volume: 1.0);
     }
+  }
+
+  void startSaturationHFSound() {
+    DataModelAbsolute hfModel = Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.hfAbsolute.name);
+    DataModelAbsolute spo2Model = Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.spo2Absolute.name);
+    Timer.periodic(const Duration(seconds: 3), (timer) {
+      saturationHfBeep(bpm: hfModel.absoluteValue.value.toInt(), spO2: spo2Model.absoluteValue.value.toInt());
+    });
   }
 }
 

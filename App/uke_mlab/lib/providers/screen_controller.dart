@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/data_models/model_absolute.dart';
+import 'package:uke_mlab/providers/sound_controller.dart';
 import 'package:uke_mlab/scenarios/patient_scenario.dart';
 import 'package:uke_mlab/utilities/enums/scenarios.dart';
 import 'package:uke_mlab/utilities/enums/patient_type.dart';
@@ -87,8 +88,7 @@ class ScreenController {
         systemState.patientType = patientTypeEnum.infant;
       }
     } else {
-      throw Exception(
-          'additionalInformation is not Adult, Child or Infant on screenChangeButton call from Continue Button');
+      throw Exception('additionalInformation is not Adult, Child or Infant on screenChangeButton call from Continue Button');
     }
     systemState.screenStatus = screenStatusEnum.monitorScreen;
     changeScenario(scenariosEnum.standardScenario);
@@ -105,6 +105,7 @@ class ScreenController {
     systemState.screenStatus = screenStatusEnum.monitorScreen;
     changeScenario(scenariosEnum.standardScenario);
     systemState.absAlarmFieldModel.updateActiveList();
+    Get.find<SoundController>().startSaturationHFSound();
     return Get.toNamed('/main_screen');
   }
 
