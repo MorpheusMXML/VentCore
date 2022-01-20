@@ -5,19 +5,25 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/models/data_models/model_absolute.dart';
 import 'package:uke_mlab/models/data_models/model_graph.dart';
 import 'package:uke_mlab/models/data_models/model_nibd.dart';
+import 'package:uke_mlab/models/system_state.dart';
+import 'package:uke_mlab/utilities/enums/non_graph_alarm.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/utilities/enums/scenarios.dart';
 import 'package:uke_mlab/scenarios/abstract_scenario.dart';
 
 class PatientScenario extends AbstractScenario {
+  scenariosEnum scenarioType;
+
   PatientScenario({
-    scenarioType = scenariosEnum.scenario1,
+    required this.scenarioType,
   }) : super();
 
   @override
   void runScenario(
       {required Map<sensorEnumAbsolute, Map<String, dynamic>> dataMapAbsolute,
       required Map<sensorEnumGraph, Map<String, dynamic>> dataMapGraph}) {
+    Map<sensorEnumGraph, Map<int, nonGraphAlarmEnum>> scenarioMap = scenarioType.scenarioMap;
+
     for (var sensorAbsolute in dataMapAbsolute.keys) {
       // we update these two absolute tile when updating the graph
       if (sensorAbsolute != sensorEnumAbsolute.sysAbsolute && sensorAbsolute != sensorEnumAbsolute.diaAbsolute) {
@@ -36,6 +42,7 @@ class PatientScenario extends AbstractScenario {
     }
 
     for (var sensorGraph in dataMapGraph.keys) {
+      Map<int, nonGraphAlarmEnum> graphAlarmMap = scenarioMap[sensorGraph] ?? {};
       int batchSize = 1;
       double resolution = dataMapGraph[sensorGraph]!['channel_information']['resolution']['value'].toDouble();
       List<dynamic> dataList = dataMapGraph[sensorGraph]!['data'];
@@ -57,6 +64,7 @@ class PatientScenario extends AbstractScenario {
           dataModelNIBD: dataModelNIBD,
           sysDataModel: sysDataModel,
           diaDataModel: diaDataModel,
+          graphAlarmMap: graphAlarmMap,
         );
       } else {
         DataModelGraph dataModelGraph = Get.find<DataModelGraph>(tag: sensorGraph.name);
@@ -66,6 +74,7 @@ class PatientScenario extends AbstractScenario {
           resolution: resolution,
           dataList: dataList,
           dataModelGraph: dataModelGraph,
+          graphAlarmMap: graphAlarmMap,
         );
       }
     }
@@ -79,10 +88,16 @@ class PatientScenario extends AbstractScenario {
       required List dataList,
       required DataModelNIBD dataModelNIBD,
       required DataModelAbsolute sysDataModel,
-      required DataModelAbsolute diaDataModel}) {
+      required DataModelAbsolute diaDataModel,
+      required Map<int, nonGraphAlarmEnum> graphAlarmMap}) {
     Timer.periodic(calculateUpdateRate(batchSize: batchSize, resolution: resolution), (timer) {
       int startIndex = dataModelNIBD.singleData.value.counter;
       int endIndex = dataModelNIBD.singleData.value.counter + batchSize;
+
+      if (graphAlarmMap.containsKey(startIndex)) {
+        nonGraphAlarmEnum currentAlarm = graphAlarmMap[startIndex]!;
+        Get.find<SystemState>().generalAlarms.addAlarm(currentAlarm, 100);
+      }
 
       if ((endIndex % dataList.length) == 0) {
         timer.cancel();
@@ -98,10 +113,16 @@ class PatientScenario extends AbstractScenario {
       {required int batchSize,
       required double resolution,
       required List<dynamic> dataList,
-      required DataModelGraph dataModelGraph}) {
+      required DataModelGraph dataModelGraph,
+      required Map<int, nonGraphAlarmEnum> graphAlarmMap}) {
     Timer.periodic(calculateUpdateRate(batchSize: batchSize, resolution: resolution), (timer) {
       int startIndex = dataModelGraph.singleData.value.counter;
       int endIndex = dataModelGraph.singleData.value.counter + batchSize;
+
+      if (graphAlarmMap.containsKey(startIndex)) {
+        nonGraphAlarmEnum currentAlarm = graphAlarmMap[startIndex]!;
+        Get.find<SystemState>().generalAlarms.addAlarm(currentAlarm, 100);
+      }
 
       if ((endIndex % dataList.length) == 0) {
         timer.cancel();

@@ -21,19 +21,19 @@ class StartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // For general alarm testing purposes, TODO: Remove
-    final GeneralAlarms generalAlarms = Get.find<SystemState>().generalAlarms;
-    Timer.periodic(const Duration(seconds: 2), (timer) {
-      if (Random().nextInt(10) > 1) {
-        generalAlarms.addAlarm(
-            nonGraphAlarmEnum
-                .values[Random().nextInt(nonGraphAlarmEnum.values.length)],
-            Random().nextInt(100));
-      } else {
-        if (generalAlarms.alarmList.isNotEmpty) {
-          generalAlarms.removeAlarm(generalAlarms.alarmList[0].alarm);
-        }
-      }
-    });
+    //final GeneralAlarms generalAlarms = Get.find<SystemState>().generalAlarms;
+    //Timer.periodic(const Duration(seconds: 2), (timer) {
+    //  if (Random().nextInt(10) > 1) {
+    //    generalAlarms.addAlarm(
+    //        nonGraphAlarmEnum
+    //            .values[Random().nextInt(nonGraphAlarmEnum.values.length)],
+    //        Random().nextInt(100));
+    //  } else {
+    //    if (generalAlarms.alarmList.isNotEmpty) {
+    //      generalAlarms.removeAlarm(generalAlarms.alarmList[0].alarm);
+    //    }
+    //  }
+    //});
 
     Map<String, String> imageMap = {
       'Adult': 'assets/icons/adults2.svg',
