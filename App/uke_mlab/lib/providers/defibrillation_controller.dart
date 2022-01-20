@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:get/get.dart';
-import 'package:uke_mlab/widgets/defibrillation_mode/load_shock_button.dart';
 
 class DefibrillationController extends GetxController {
   Stopwatch timerWatch = Stopwatch();
@@ -23,7 +22,9 @@ class DefibrillationController extends GetxController {
   RxBool metronomeOn = true.obs;
   bool isReadyToShock = false;
 //TODO: Get Shock Power from preset Adult, CHild, Infant
+
   RxInt shockPower = 200.obs;
+
   RxString systemDiagnosis = 'Placeholder Diagnosis'.obs;
 
   RxInt numberOfShocks = 0.obs;
@@ -59,23 +60,6 @@ class DefibrillationController extends GetxController {
     String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
     String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
     return '$twoDigitMinutes:$twoDigitSeconds';
-  }
-
-  void toggleLoaded(String value) async {
-    if (loaded.value == 'Shock') {
-      numberOfShocks++;
-      shockPower.value = 0;
-      loaded.value = value;
-    } else {
-      loaded.value = 'Loading';
-      Timer.periodic(const Duration(milliseconds: 1), (timer) {
-        shockPower.value++;
-        if (shockPower >= 200) {
-          timer.cancel();
-          loaded.value = value;
-        }
-      });
-    }
   }
 
   void toggleMetronome(bool changed) {
