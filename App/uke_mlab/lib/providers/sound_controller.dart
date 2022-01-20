@@ -23,7 +23,8 @@ class SoundController {
   ///Loads AudioAlarm Files into Cache and Provides functionality to Play, Stop them. Also provides ECG Sound per Minute and O2 Saturation.
   static AudioCache alarmPlayer = AudioCache(prefix: 'assets/sounds/');
   static AudioCache ecgPlayer = AudioCache(prefix: 'assets/sounds/');
-  static Timer? timer;
+  late Timer? timer;
+  late Timer? getDataTimer;
 
   /// This [Map<SoundIdentifier, String>] specifies the AlarmType in the [Enum] Key and maps it to the [String] of the Sound Files Name in he Assets/sounds
   /// Folder. If you wish to change the Alarm Sound Files that shall pe blayed. Change them accordingly here and place the Sondfile under [./App/uke_mlab/assets/sounds]
@@ -61,6 +62,8 @@ class SoundController {
   stop() async {
     alarmPlayerRet.stop();
     ecgPlayerRet.stop();
+    timer!.cancel();
+    getDataTimer!.cancel();
   }
 
   /// Function starts the ECG Sound in the rhythm specified with [bpm] and playes the accordingly Pitched Sound File to the Oxygen Saturation specified with [spO2]
@@ -82,8 +85,6 @@ class SoundController {
   saturationHfBeep({required int bpm, required int spO2}) async {
     String ecgSound = ecgSoundFiles[SoundIdentifier.hFnormal].toString();
     ecgPlayerRet = await ecgPlayer.play(ecgSound, volume: 0);
-
-    ecgPlayerRet.stop();
 
     if (spO2 > 90) {
       ecgSound = ecgSoundFiles[SoundIdentifier.hFnormal].toString();
@@ -117,11 +118,16 @@ class SoundController {
   }
 
   void startSaturationHFSound() {
+    bool first = false;
     DataModelAbsolute hfModel = Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.hfAbsolute.name);
     DataModelAbsolute spo2Model = Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.spo2Absolute.name);
-    Timer.periodic(const Duration(seconds: 3), (timer) {
-      saturationHfBeep(bpm: hfModel.absoluteValue.value.toInt(), spO2: spo2Model.absoluteValue.value.toInt());
-    });
+    if (getDataTimer!.isActive) {
+      return;
+    } else {
+      getDataTimer = Timer.periodic(const Duration(seconds: 3), (timer) {
+        saturationHfBeep(bpm: hfModel.absoluteValue.value.toInt(), spO2: spo2Model.absoluteValue.value.toInt());
+      });
+    }
   }
 }
 
