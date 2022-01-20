@@ -2,8 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
-import 'package:uke_mlab/models/data_models/model_absolute.dart';
-import 'package:uke_mlab/models/data_models/model_nibd.dart';
+
 import 'package:uke_mlab/utilities/enums/scenarios.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
@@ -11,6 +10,10 @@ abstract class AbstractScenario {
   bool scenarioRunning = false;
   late scenariosEnum scenarioType;
 
+  /// Starts a given scenario via the [scenarioPath].
+  ///
+  /// [scenarioPath] points to the file that contains data.
+  /// Calls [loadData] to load the data via the [scenarioPath], after this method calls [runScenario].
   void startScenario({required String scenarioPath}) {
     scenarioRunning = true;
     loadData(scenarioPath: scenarioPath).then((dataList) => runScenario(
@@ -20,8 +23,10 @@ abstract class AbstractScenario {
             dataList[1] as Map<sensorEnumGraph, Map<String, dynamic>>));
   }
 
-  // runScenario(dataMapAbsolute: list[0], dataMapGraph: list[1]);
-  // to be overwritten, behaviour depending on concrete scenario
+  /// [runScenario] starts a [Timer] that updates each graph and absolute value seperately.
+  ///
+  /// [dataMapAbsolute] is a map created by [loadData] it holds all information to the used Absoute values in this scenario
+  /// [dataMapGraph] is a map created by [loadData] is holds all information to the used [Graph] in this scnario.
   void runScenario(
       {required Map<sensorEnumAbsolute, Map<String, dynamic>> dataMapAbsolute,
       required Map<sensorEnumGraph, Map<String, dynamic>> dataMapGraph});
@@ -30,10 +35,8 @@ abstract class AbstractScenario {
     scenarioRunning = false;
   }
 
-  // List of two maps one for graphs and one for absolute
-  // first entry should consist of the absolute enum map and the second contains the graph map
-  Future<List<Map<dynamic, Map<String, dynamic>>>> loadData(
-      {required String scenarioPath}) async {
+  /// Loads data specified by the [scenarioPath] and creates two maps that hold information to the graphs and absolute value tiles respectively, returns a list containing both maps.
+  Future<List<Map<dynamic, Map<String, dynamic>>>> loadData({required String scenarioPath}) async {
     Map<sensorEnumAbsolute, Map<String, dynamic>> absoluteMap = {};
     Map<sensorEnumGraph, Map<String, dynamic>> graphMap = {};
 
