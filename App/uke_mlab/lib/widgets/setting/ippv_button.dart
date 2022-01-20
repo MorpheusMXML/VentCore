@@ -26,9 +26,9 @@ class IPPVButton extends StatelessWidget {
             child: DropdownButtonHideUnderline(
               child: DropdownButton(
                 isExpanded: true,
-                value: systemState.selectedIPPVMode.value,
+                value: systemState.ippvModel.selectedIPPVMode.value,
                 onChanged: (newValue) {
-                  systemState.selectedIPPVMode.value = '$newValue';
+                  systemState.ippvModel.selectedIPPVMode.value = '$newValue';
                 },
                 items: <String>['Mode 1', 'Mode 2', 'Mode 3'].map((value) {
                   return DropdownMenuItem(

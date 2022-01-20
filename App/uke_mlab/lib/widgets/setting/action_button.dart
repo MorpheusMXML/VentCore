@@ -27,7 +27,7 @@ class ActionButton extends StatelessWidget {
 
     return Flexible(
       child: ElevatedButton(
-        onPressed: () => systemState.updateIPPVValue(name, value),
+        onPressed: () => systemState.ippvModel.updateIPPVValue(name, value),
         child: icon,
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(

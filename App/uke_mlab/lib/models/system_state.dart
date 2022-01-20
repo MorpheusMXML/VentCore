@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/screen_element_models/general_alarms.dart';
 import 'package:uke_mlab/models/screen_element_models/absolute_alarm_field_model.dart';
+import 'package:uke_mlab/models/screen_element_models/ippv_model.dart';
 import 'package:uke_mlab/utilities/enums/alarm_status.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/utilities/enums/screen_status.dart';
@@ -27,15 +28,7 @@ class SystemState extends GetxController {
 
   final GeneralAlarms generalAlarms = GeneralAlarms();
   final AbsAlarmFieldModel absAlarmFieldModel = AbsAlarmFieldModel();
-
-  Map<String, RxInt> ippvValues = {
-    'Freq.': 20.obs,
-    'Vt': 40.obs,
-    'PEEP': 60.obs
-  };
-
-  final RxBool ippvTapped = false.obs;
-  final RxString selectedIPPVMode = 'Mode 1'.obs;
+  final IppvModel ippvModel = IppvModel();
 
   RxList<bool> selectedToggleView = [true, false, false].obs;
 
@@ -66,10 +59,6 @@ class SystemState extends GetxController {
       isDarkMode.toggle();
       icon.value = const Icon(Icons.dark_mode_rounded);
     }
-  }
-
-  void updateIPPVValue(String name, int value) {
-    ippvValues[name]!.value = ippvValues[name]!.value + value;
   }
 
   void graphListAdd(sensorEnumGraph graphKey) {
