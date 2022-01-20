@@ -71,7 +71,7 @@
 
 # About The Project
 
-![VentCore][product-screenshot]
+![VentCore][monitoring]
 
 This is the repository for the UKE M-Lab prototype of VentCore: A Mock-Up for a possible 3-in-1 Medical device which combines a patient Monitoring, Defibrillation and Ventilation.
 The App in this repository demonstrates the User-Interface and Alarm-Management for such a device in a Tablet-Application. This Tablet-Application was designed for a 10" Inch Screen with the Flutter SDK to run on both, Android and iOS.
@@ -424,14 +424,15 @@ And also for providing simulation / real patient data and helping with DataGener
 [website-shield]:https://img.shields.io/badge/Website-VentCore-informational?style=for-the-badge
 [website-url]:./README.md
 
-[product-screenshot]: ./ReadMeFiles/ScreenshotMonitoring.png
-[StartScreen]:./ReadMeFiles/presets.png
-[AlarmLimit]: ./ReadMeFiles/alarmlimit.png
-[DefiScreen]:./ReadMeFiles/cpr.png
-[Add]:./ReadMeFiles/addin.png
-[NIBD]:./ReadMeFiles/nibd.png
-[Scenario]:./ReadMeFiles/scenarios.png
-[RedAlarm]:./ReadMeFiles/red-alarms.png
-[YellowAlarm]:./ReadMeFiles/yellowalarm.png
+[product-screenshot]: ./ReadMeFiles/Screenshots/ventilation2-black.png
+[monitoring]: ./ReadMeFiles/Screenshots/monitoring.png
+[ventilation]:./ReadMeFiles/Screenshots/ventilation.png
+[StartScreen]:./ReadMeFiles/Screenshots/presets.png
+[AlarmLimit]: ./ReadMeFiles/Screenshots/alarmlimit.png
+[DefiScreen]:./ReadMeFiles/Screenshots/cpr.png
+[Add]:./ReadMeFiles/Screenshots/monitoring-add-limit.png
+[Scenario]:./ReadMeFiles/Screenshots/scenarios.png
+[RedAlarm]:./ReadMeFiles/Screenshots/red-alarms.png
+[threemodes]:./ReadMeFiles/Screenshots/3in1.png
+
 [Table Audio Priorities]:./ReadMeFiles/table-audio-priority.png
-[threemodes]:./ReadMeFiles/3in1.png
