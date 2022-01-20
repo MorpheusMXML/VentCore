@@ -63,7 +63,8 @@ class LoadButton extends StatelessWidget {
             case 'Shock':
               return ElevatedButton(
                 style: shockButtonStyle,
-                onPressed: () {
+                onPressed: () => {},
+                onLongPress: () {
                   defibrillationController.startLastWatch();
                   defibrillationController.toggleLoaded('Loaded');
                 },
