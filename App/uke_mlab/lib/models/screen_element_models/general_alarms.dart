@@ -5,13 +5,12 @@ import 'package:uke_mlab/utilities/constants/statusbar_constants.dart';
 import 'package:uke_mlab/utilities/enums/non_graph_alarm.dart';
 import 'package:uke_mlab/widgets/appbar/alarm_list.dart';
 
-/// offers a sorted list of general alarms for being displayed in [StatusBar]
 class GeneralAlarms extends GetxController {
+  /// offers a sorted list of general alarms for being displayed in [StatusBar]
+
   final RxList<AlarmListEntry> alarmList = <AlarmListEntry>[].obs;
   OverlayEntry? entry;
   RxBool listExpanded = false.obs;
-
-  GeneralAlarms();
 
   /// adds an alarm to [alarmList]
   ///

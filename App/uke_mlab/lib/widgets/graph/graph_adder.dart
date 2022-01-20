@@ -12,7 +12,7 @@ class GraphAdder extends StatelessWidget {
     final SystemState systemState = Get.find<SystemState>();
 
     return ElevatedButton(
-      onPressed: () => systemState.addGraph.toggle(),
+      onPressed: () => systemState.graphList.addGraph.toggle(),
       style: ElevatedButton.styleFrom(
         primary: Colors.grey[800],
         fixedSize: const Size(80, 80),
