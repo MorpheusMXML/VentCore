@@ -16,6 +16,7 @@ class ScreenController {
   AbstractScenario? runningScenario;
   SystemState systemState = Get.find<SystemState>();
   ModelManager modelManager = Get.find<ModelManager>();
+  SoundController soundController = Get.find<SoundController>();
 
   void setUpperBoundary(DataModelAbsolute dataModel, double value) {
     dataModel.setUpperAlarmBoundary(value);
@@ -81,7 +82,7 @@ class ScreenController {
     systemState.screenStatus = screenStatusEnum.monitorScreen;
     changeScenario(scenariosEnum.standardScenario);
     systemState.absAlarmFieldModel.updateActiveList();
-    Get.find<SoundController>().startSaturationHFSound();
+    soundController.startSaturationHFSound();
     return Get.toNamed('/main_screen');
   }
 
@@ -94,7 +95,7 @@ class ScreenController {
     systemState.screenStatus = screenStatusEnum.monitorScreen;
     changeScenario(scenariosEnum.standardScenario);
     systemState.absAlarmFieldModel.updateActiveList();
-    Get.find<SoundController>().startSaturationHFSound();
+    soundController.startSaturationHFSound();
     return Get.toNamed('/main_screen');
   }
 
@@ -108,20 +109,20 @@ class ScreenController {
     changeScenario(scenariosEnum.standardScenario);
     systemState.setSelectedToggleView([false, false, true]);
     systemState.absAlarmFieldModel.updateActiveList();
-    Get.find<SoundController>().startSaturationHFSound();
+    soundController.startSaturationHFSound();
     return Get.toNamed('/main_screen');
   }
 
   Future? patientSettingButton() {
     systemState.screenStatus = screenStatusEnum.patientSettingScreen;
     systemState.absAlarmFieldModel.closeOverlay();
-    Get.find<SoundController>().stop();
+    soundController.stop();
     return Get.offNamed('/start_screen');
   }
 
   Future? demoScreenButton() {
     systemState.absAlarmFieldModel.closeOverlay();
-    Get.find<SoundController>().stop();
+    soundController.stop();
     return Get.offNamed('/demo_screen');
   }
 
@@ -162,15 +163,18 @@ class ScreenController {
   }
 
   Future? scenarioMenuExitButton() {
-    Get.find<SoundController>().startSaturationHFSound();
     switch (systemState.screenStatus) {
       case screenStatusEnum.patientSettingScreen:
+        soundController.stop();
         return Get.toNamed('/start_screen');
       case screenStatusEnum.monitorScreen:
+        soundController.startSaturationHFSound();
         return Get.toNamed('/main_screen');
       case screenStatusEnum.ventilationScreen:
+        soundController.startSaturationHFSound();
         return Get.toNamed('/main_screen');
       case screenStatusEnum.defibrillationScreen:
+        soundController.startSaturationHFSound();
         return Get.toNamed('/main_screen');
       default:
         throw Exception('unkown previous screen exiting Demo/Scenario Screen');
@@ -184,7 +188,7 @@ class ScreenController {
     }
     changeScenario(scenario);
     systemState.absAlarmFieldModel.updateActiveList();
-    Get.find<SoundController>().startSaturationHFSound();
+    soundController.startSaturationHFSound();
     return Get.toNamed('/main_screen');
   }
 }
