@@ -2,8 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
-import 'package:uke_mlab/models/model_absolute.dart';
-import 'package:uke_mlab/models/model_nibd.dart';
+
 import 'package:uke_mlab/utilities/enums/scenarios.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
@@ -20,7 +19,9 @@ abstract class AbstractScenario {
 
   // runScenario(dataMapAbsolute: list[0], dataMapGraph: list[1]);
   // to be overwritten, behaviour depending on concrete scenario
-  void runScenario({required Map<sensorEnumAbsolute, Map<String, dynamic>> dataMapAbsolute, required Map<sensorEnumGraph, Map<String, dynamic>> dataMapGraph});
+  void runScenario(
+      {required Map<sensorEnumAbsolute, Map<String, dynamic>> dataMapAbsolute,
+      required Map<sensorEnumGraph, Map<String, dynamic>> dataMapGraph});
 
   void stopScenario() {
     scenarioRunning = false;

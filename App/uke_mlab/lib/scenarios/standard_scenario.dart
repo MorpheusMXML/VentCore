@@ -97,14 +97,8 @@ class StandardScenario extends AbstractScenario {
       sysDataModel.updateValue(sysDataList[sysDataModel.counter.value].toDouble());
       diaDataModel.updateValue(diaDataList[diaDataModel.counter.value].toDouble());
 
-      if (!scenarioRunning) {
-        timer.cancel();
-      }
-
       if ((endIndex % dataList.length) == 0) {
         dataModelNIBD.updateValues(dataList.sublist(startIndex % dataList.length, dataList.length));
-        //} else if (startIndex >= dataList.length) {
-        //  dataModelNIBD.updateValues(dataList.sublist(startIndex % dataList.length, endIndex % dataList.length));
       } else {
         dataModelNIBD.updateValues(dataList.sublist((startIndex % dataList.length), (endIndex % dataList.length)));
       }
@@ -120,14 +114,8 @@ class StandardScenario extends AbstractScenario {
       int startIndex = dataModelGraph.singleData.value.counter;
       int endIndex = dataModelGraph.singleData.value.counter + batchSize;
 
-      if (!scenarioRunning) {
-        timer.cancel();
-      }
-
       if ((endIndex % dataList.length) == 0) {
         dataModelGraph.updateValues(dataList.sublist(startIndex % dataList.length, dataList.length));
-        //} else if (startIndex >= dataList.length) {
-        //  dataModelGraph.updateValues(dataList.sublist(startIndex % dataList.length, endIndex % dataList.length));
       } else {
         dataModelGraph.updateValues(dataList.sublist((startIndex % dataList.length), (endIndex % dataList.length)));
       }

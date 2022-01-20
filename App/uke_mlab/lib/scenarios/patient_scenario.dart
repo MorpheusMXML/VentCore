@@ -26,10 +26,7 @@ class PatientScenario extends AbstractScenario {
         List<dynamic> dataList = dataMapAbsolute[sensorAbsolute]!['data'];
 
         Timer.periodic(calculateUpdateRateAbsolute(resolution: resolution), (timer) {
-          if (dataModelAbsolute.counter.value == (dataList.length - 1)) {
-            scenarioRunning = false;
-          }
-          if (!scenarioRunning) {
+          if ((dataModelAbsolute.counter.value == (dataList.length - 1))) {
             timer.cancel();
           }
 
@@ -87,23 +84,13 @@ class PatientScenario extends AbstractScenario {
       int startIndex = dataModelNIBD.singleData.value.counter;
       int endIndex = dataModelNIBD.singleData.value.counter + batchSize;
 
-      if (dataList.length <= startIndex) {
-        scenarioRunning = false;
-      }
-
-      if (!scenarioRunning) {
+      if ((endIndex % dataList.length) == 0) {
         timer.cancel();
       }
 
       sysDataModel.updateValue(sysDataList[sysDataModel.counter.value].toDouble());
       diaDataModel.updateValue(diaDataList[diaDataModel.counter.value].toDouble());
       dataModelNIBD.updateValues(dataList.sublist(startIndex, endIndex));
-      print("neue liste: ${dataList.sublist(startIndex, endIndex)}");
-
-      if (endIndex >= dataList.length) {
-        endIndex = dataList.length;
-        scenarioRunning = false;
-      }
     });
   }
 
@@ -116,19 +103,10 @@ class PatientScenario extends AbstractScenario {
       int startIndex = dataModelGraph.singleData.value.counter;
       int endIndex = dataModelGraph.singleData.value.counter + batchSize;
 
-      if (dataList.length <= startIndex) {
-        scenarioRunning = false;
-      }
-
-      if (!scenarioRunning) {
+      if ((endIndex % dataList.length) == 0) {
         timer.cancel();
       }
       dataModelGraph.updateValues(dataList.sublist(startIndex, endIndex));
-
-      if (endIndex >= dataList.length) {
-        endIndex = dataList.length;
-        scenarioRunning = false;
-      }
     });
   }
 }
