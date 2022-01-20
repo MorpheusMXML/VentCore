@@ -30,7 +30,7 @@ class MainScreen extends StatelessWidget {
             // Ventilation
             if (systemState.selectedToggleView[1]) {
               // TODO set standard graphs for ventilation
-              systemState.graphListSet([
+              systemState.graphList.graphListSet([
                 sensorEnumGraph.flow,
                 sensorEnumGraph.paw,
               ]);
@@ -42,7 +42,7 @@ class MainScreen extends StatelessWidget {
             // Defibrillation
             else if (systemState.selectedToggleView[2]) {
               // TODO set standard graphs for defibrillation
-              systemState.graphListSet([
+              systemState.graphList.graphListSet([
                 sensorEnumGraph.cpr,
               ]);
               return Row(children: const [
@@ -52,7 +52,7 @@ class MainScreen extends StatelessWidget {
             }
             // Monitoring
             else {
-              systemState.graphListSet([
+              systemState.graphList.graphListSet([
                 sensorEnumGraph
                     .ecgCh2, // medical standard ecg channel is channel 2
                 sensorEnumGraph.co2,

@@ -22,15 +22,16 @@ class GraphView extends StatelessWidget {
             child: Obx(
               () => ListView.builder(
                 shrinkWrap: true,
-                itemCount: systemState.graphList.length,
+                itemCount: systemState.graphList.list.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return GraphContainer(sensor: systemState.graphList[index]);
+                  return GraphContainer(
+                      sensor: systemState.graphList.list[index]);
                 },
               ),
             ),
           ),
           Obx(
-            () => systemState.addGraph.value
+            () => systemState.graphList.addGraph.value
                 ? GraphAdderPopup()
                 : const GraphAdder(),
           ),

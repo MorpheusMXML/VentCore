@@ -12,8 +12,8 @@ class ToggleThemeButton extends StatelessWidget {
     SystemState systemState = Get.find<SystemState>();
 
     return IconButton(
-      onPressed: () => systemState.toggleTheme(),
-      icon: Obx(() => systemState.icon.value),
+      onPressed: () => systemState.themeModel.toggleTheme(),
+      icon: Obx(() => systemState.themeModel.toggleIcon.value),
     );
   }
 }

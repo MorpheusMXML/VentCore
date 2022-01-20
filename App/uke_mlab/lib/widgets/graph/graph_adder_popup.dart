@@ -17,13 +17,13 @@ class GraphAdderPopup extends StatelessWidget {
           fixedSize: const Size(800, 150),
           primary: Theme.of(context).cardColor.withOpacity(0.5),
         ),
-        onPressed: () => systemState.addGraph.toggle(),
+        onPressed: () => systemState.graphList.addGraph.toggle(),
         child: Obx(
           () => Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: sensorEnumGraph.values.map((sensor) {
                 ButtonStyle style;
-                systemState.graphList.contains(sensor)
+                systemState.graphList.list.contains(sensor)
                     ? style = ElevatedButton.styleFrom(
                         fixedSize: const Size(80, 60),
                         side: const BorderSide(width: 2, color: Colors.white),
@@ -36,9 +36,9 @@ class GraphAdderPopup extends StatelessWidget {
 
                 return ElevatedButton(
                     style: style,
-                    onPressed: () => systemState.graphList.contains(sensor)
-                        ? systemState.graphListRemove(sensor)
-                        : systemState.graphListAdd(sensor),
+                    onPressed: () => systemState.graphList.list.contains(sensor)
+                        ? systemState.graphList.graphListRemove(sensor)
+                        : systemState.graphList.graphListAdd(sensor),
                     child: Text(
                       sensor.graphTitle,
                       style: const TextStyle(fontSize: 18),

@@ -25,7 +25,7 @@ class AlarmConfirmationButtonAll extends StatelessWidget {
           ),
         ),
         onPressed: systemState.absAlarmFieldModel.activeList.isNotEmpty ||
-                systemState.activeGraphAbsolutes.isNotEmpty
+                systemState.graphList.activeGraphAbsolutes.isNotEmpty
             ? () => {confirmAllVisibleAlarms()}
             : null,
         child: const Center(
@@ -44,7 +44,7 @@ class AlarmConfirmationButtonAll extends StatelessWidget {
     for (var sensorKey in systemState.absAlarmFieldModel.activeList) {
       alarmController.triggerConfirm(sensorKey);
     }
-    for (var graphSensorKey in systemState.graphList) {
+    for (var graphSensorKey in systemState.graphList.list) {
       sensorEnumAbsolute? sensorKey = SensorMapping.sensorMap[graphSensorKey];
       if (sensorKey != null &&
           (systemState.alarmState[sensorKey]!["enum"] != alarmStatus.none ||
