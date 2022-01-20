@@ -50,6 +50,10 @@ class GeneralAlarms extends GetxController {
     return alarmList.indexWhere((element) => element.alarm == alarm) == -1;
   }
 
+  void resetAlarms() {
+    alarmList.clear();
+  }
+
   void showOverlay(BuildContext context) {
     double statusBarHeight = MediaQuery.of(context).padding.top;
 
