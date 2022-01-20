@@ -23,20 +23,22 @@ class IPPVButton extends StatelessWidget {
             decoration: BoxDecoration(
                 color: Colors.lightBlue[300],
                 borderRadius: const BorderRadius.all(Radius.circular(16))),
-            child: DropdownButton(
-              isExpanded: true,
-              value: systemState.selectedIPPVMode.value,
-              onChanged: (newValue) {
-                systemState.selectedIPPVMode.value = '$newValue';
-              },
-              items: <String>['Mode1', 'Mode2', 'Mode3'].map((value) {
-                return DropdownMenuItem(
-                  child: Container(
-                      margin: const EdgeInsets.only(left: 8),
-                      child: Text(value)),
-                  value: value,
-                );
-              }).toList(),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton(
+                isExpanded: true,
+                value: systemState.selectedIPPVMode.value,
+                onChanged: (newValue) {
+                  systemState.selectedIPPVMode.value = '$newValue';
+                },
+                items: <String>['Mode 1', 'Mode 2', 'Mode 3'].map((value) {
+                  return DropdownMenuItem(
+                    child: Container(
+                        margin: const EdgeInsets.only(left: 8),
+                        child: Text(value)),
+                    value: value,
+                  );
+                }).toList(),
+              ),
             ),
           ),
         ),

@@ -35,7 +35,7 @@ class SystemState extends GetxController {
   };
 
   final RxBool ippvTapped = false.obs;
-  final RxString selectedIPPVMode = 'Mode1'.obs;
+  final RxString selectedIPPVMode = 'Mode 1'.obs;
 
   RxList<bool> selectedToggleView = [true, false, false].obs;
 
