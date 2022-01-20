@@ -103,10 +103,10 @@ class StandardScenario extends AbstractScenario {
 
       if ((endIndex % dataList.length) == 0) {
         dataModelNIBD.updateValues(dataList.sublist(startIndex % dataList.length, dataList.length));
-      } else if (startIndex >= dataList.length) {
-        dataModelNIBD.updateValues(dataList.sublist(startIndex % dataList.length, endIndex % dataList.length));
+        //} else if (startIndex >= dataList.length) {
+        //  dataModelNIBD.updateValues(dataList.sublist(startIndex % dataList.length, endIndex % dataList.length));
       } else {
-        dataModelNIBD.updateValues(dataList.sublist(startIndex, endIndex));
+        dataModelNIBD.updateValues(dataList.sublist((startIndex % dataList.length), (endIndex % dataList.length)));
       }
     });
   }
@@ -126,10 +126,10 @@ class StandardScenario extends AbstractScenario {
 
       if ((endIndex % dataList.length) == 0) {
         dataModelGraph.updateValues(dataList.sublist(startIndex % dataList.length, dataList.length));
-      } else if (startIndex >= dataList.length) {
-        dataModelGraph.updateValues(dataList.sublist(startIndex % dataList.length, endIndex % dataList.length));
+        //} else if (startIndex >= dataList.length) {
+        //  dataModelGraph.updateValues(dataList.sublist(startIndex % dataList.length, endIndex % dataList.length));
       } else {
-        dataModelGraph.updateValues(dataList.sublist(startIndex, endIndex));
+        dataModelGraph.updateValues(dataList.sublist((startIndex % dataList.length), (endIndex % dataList.length)));
       }
     });
   }
