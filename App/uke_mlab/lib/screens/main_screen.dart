@@ -22,46 +22,48 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(left: 12, right: 12, top: 12),
+        margin: const EdgeInsets.only(left: 12, right: 12, top: 12),
 
-      // TODO: maybe change the default graphList elsewhere (Mode Screens?)
-      child: Obx(() {
-        // Ventilation
-        if (systemState.selectedToggleView[1]) {
-          // TODO set standard graphs for ventilation
-          systemState.graphListSet([
-            sensorEnumGraph.flow,
-            sensorEnumGraph.paw,
-          ]);
-          return Row(children: const [
-            Flexible(flex: 2, child: GraphView()),
-            Flexible(flex: 1, child: VentilationMode())
-          ]);
-        }
-        // Defibrillation
-        else if (systemState.selectedToggleView[2]) {
-          // TODO set standard graphs for defibrillation
-          systemState.graphListSet([
-            sensorEnumGraph.cpr,
-          ]);
-          return Row(children: const [
-            Flexible(flex: 2, child: GraphView()),
-            Flexible(flex: 1, child: DefibrillationMode())
-          ]);
-        }
-        // Monitoring
-        else {
-          systemState.graphListSet([
-            sensorEnumGraph.ecgCh2, // medical standard ecg channel is channel 2
-            sensorEnumGraph.co2,
-            sensorEnumGraph.pleth,
-          ]);
-          return Row(children: const [
-            Flexible(flex: 2, child: GraphView()),
-            Flexible(flex: 1, child: MonitoringMode())
-          ]);
-        }
-      }),
-    );
+        // TODO: maybe change the default graphList elsewhere (Mode Screens?)
+        child: GetBuilder<SystemState>(
+          builder: (_) {
+            // Ventilation
+            if (systemState.selectedToggleView[1]) {
+              // TODO set standard graphs for ventilation
+              systemState.graphListSet([
+                sensorEnumGraph.flow,
+                sensorEnumGraph.paw,
+              ]);
+              return Row(children: const [
+                Flexible(flex: 2, child: GraphView()),
+                Flexible(flex: 1, child: VentilationMode())
+              ]);
+            }
+            // Defibrillation
+            else if (systemState.selectedToggleView[2]) {
+              // TODO set standard graphs for defibrillation
+              systemState.graphListSet([
+                sensorEnumGraph.cpr,
+              ]);
+              return Row(children: const [
+                Flexible(flex: 2, child: GraphView()),
+                Flexible(flex: 1, child: DefibrillationMode())
+              ]);
+            }
+            // Monitoring
+            else {
+              systemState.graphListSet([
+                sensorEnumGraph
+                    .ecgCh2, // medical standard ecg channel is channel 2
+                sensorEnumGraph.co2,
+                sensorEnumGraph.pleth,
+              ]);
+              return Row(children: const [
+                Flexible(flex: 2, child: GraphView()),
+                Flexible(flex: 1, child: MonitoringMode())
+              ]);
+            }
+          },
+        ));
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
+import 'package:uke_mlab/utilities/constants/absolute_alarm_field_constants.dart';
 
 class IPPVButton extends StatelessWidget {
   const IPPVButton({Key? key}) : super(key: key);
@@ -11,7 +12,11 @@ class IPPVButton extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      margin: const EdgeInsets.only(left: 8, right: 8),
+      margin: const EdgeInsets.only(
+        left: AbsoluteAlarmFieldConst.horizontalMargin,
+        right: AbsoluteAlarmFieldConst.horizontalMargin,
+        top: AbsoluteAlarmFieldConst.verticalMargin,
+      ),
       child: Center(
         child: Obx(
           () => Container(

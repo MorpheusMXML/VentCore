@@ -8,7 +8,7 @@ import 'package:uke_mlab/utilities/enums/screen_status.dart';
 import 'package:uke_mlab/utilities/enums/patient_type.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 
-class SystemState {
+class SystemState extends GetxController {
   screenStatusEnum screenStatus = screenStatusEnum.patientSettingScreen;
 
   patientTypeEnum patientType = patientTypeEnum.none;
@@ -101,5 +101,10 @@ class SystemState {
         activeGraphAbsolutes.add(sensorKey);
       }
     }
+  }
+
+  void setSelectedToggleView(List<bool> newToggleView) {
+    selectedToggleView.value = newToggleView;
+    update();
   }
 }

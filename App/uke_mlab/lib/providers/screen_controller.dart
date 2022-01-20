@@ -116,7 +116,7 @@ class ScreenController {
     //systemState.patientType = patientTypeEnum.adult;
     systemState.screenStatus = screenStatusEnum.defibrillationScreen;
     changeScenario(scenariosEnum.standardScenario);
-    systemState.selectedToggleView.value = [false, false, true];
+    systemState.setSelectedToggleView([false, false, true]);
     systemState.absAlarmFieldModel.updateActiveList();
     return Get.toNamed('/main_screen');
   }
@@ -133,27 +133,29 @@ class ScreenController {
   }
 
   void setSelectedToggleView(int index) {
-    for (var i = 0; i <= systemState.selectedToggleView.length - 1; i++) {
-      index == i
-          ? systemState.selectedToggleView[i] = true
-          : systemState.selectedToggleView[i] = false;
-    }
-    if (index == 0) {
-      systemState.screenStatus = screenStatusEnum.monitorScreen;
-      systemState.absAlarmFieldModel.updateActiveList();
-    } else if (index == 1) {
-      systemState.screenStatus = screenStatusEnum.ventilationScreen;
-      systemState.absAlarmFieldModel.updateActiveList();
-    } else if (index == 2) {
-      systemState.screenStatus = screenStatusEnum.defibrillationScreen;
-      systemState.absAlarmFieldModel.updateActiveList();
-    } else {
-      throw Exception("No screen $index known in toggle view");
+    switch (index) {
+      case 0:
+        systemState.screenStatus = screenStatusEnum.monitorScreen;
+        systemState.setSelectedToggleView([true, false, false]);
+        systemState.absAlarmFieldModel.updateActiveList();
+        break;
+      case 1:
+        systemState.screenStatus = screenStatusEnum.ventilationScreen;
+        systemState.setSelectedToggleView([false, true, false]);
+        systemState.absAlarmFieldModel.updateActiveList();
+        break;
+      case 2:
+        systemState.screenStatus = screenStatusEnum.defibrillationScreen;
+        systemState.setSelectedToggleView([false, false, true]);
+        systemState.absAlarmFieldModel.updateActiveList();
+        break;
+      default:
+        throw Exception("No screen $index known in toggle view");
     }
   }
 
   void resetToggleView() {
-    systemState.selectedToggleView.value = [true, false, false];
+    systemState.setSelectedToggleView([true, false, false]);
   }
 
   Future? alarmSettingsButton() {
