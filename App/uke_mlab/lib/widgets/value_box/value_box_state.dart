@@ -31,7 +31,7 @@ class ValueBoxState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => dataModel.tapped.value
+      () => dataModel.expanded.value
           ? Container(
               color: Theme.of(context).shadowColor,
               child: Row(

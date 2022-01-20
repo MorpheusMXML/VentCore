@@ -57,12 +57,12 @@ class AlarmCounterTile extends StatelessWidget {
                         ? const Icon(
                             Icons.arrow_upward_rounded,
                             color: Colors.black,
-                            size: 40,
+                            size: 50 * 0.6,
                           )
                         : const Icon(
                             Icons.arrow_downward_rounded,
                             color: Colors.black,
-                            size: 40,
+                            size: 50 * 0.6,
                           ),
               ],
             ),

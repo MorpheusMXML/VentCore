@@ -8,8 +8,9 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/utilities/enums/patient_type.dart';
 import 'package:uke_mlab/providers/alarm_controller.dart';
 
-/// creates [DataModelAbsolute]s and [DataModelGraph]s and offers management operations for them
 class ModelManager {
+  /// creates [DataModelAbsolute]s and [DataModelGraph]s and offers management operations for them
+
   /// [AlarmController] of the system (this is due to race conditions during creation)
   late final AlarmController _alarmController;
 
@@ -106,6 +107,7 @@ class ModelManager {
     }
   }
 
+  /// load corresponding environment values into all [DataModelAbsolute]s and [DataModelGraph]s
   void loadDataModelEnvironmentValues() {
     for (var sensor in sensorEnumAbsolute.values) {
       DataModelAbsolute dataModel =
@@ -133,6 +135,9 @@ class ModelManager {
     }
   }
 
+  /// resets all known data models
+  ///
+  /// calls [DataModelAbsolute.resetDataModel] for all [sensorEnumAbsolute]s and [DataModelGraph.resetDataModel] for all [sensorEnumGraph]s
   void resetAllModels() {
     for (var sensor in sensorEnumAbsolute.values) {
       DataModelAbsolute dataModel =
