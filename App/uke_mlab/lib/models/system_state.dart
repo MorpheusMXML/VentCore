@@ -73,25 +73,21 @@ class SystemState extends GetxController {
   }
 
   void graphListAdd(sensorEnumGraph graphKey) {
-    print("Add");
     graphList.add(graphKey);
     evaluateActiveGraphAbsolutes();
   }
 
   void graphListRemove(sensorEnumGraph graphKey) {
-    print("Remove");
     graphList.remove(graphKey);
     evaluateActiveGraphAbsolutes();
   }
 
   void graphListSet(List<sensorEnumGraph> newList) {
-    print("Set");
     graphList.value = newList;
     evaluateActiveGraphAbsolutes();
   }
 
   void evaluateActiveGraphAbsolutes() {
-    print("$graphList");
     activeGraphAbsolutes.clear();
     for (var graphSensorKey in graphList) {
       sensorEnumAbsolute? sensorKey = SensorMapping.sensorMap[graphSensorKey];
