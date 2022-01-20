@@ -73,21 +73,25 @@ class SystemState {
   }
 
   void graphListAdd(sensorEnumGraph graphKey) {
-    evaluateActiveGraphAbsolutes();
+    print("Add");
     graphList.add(graphKey);
+    evaluateActiveGraphAbsolutes();
   }
 
   void graphListRemove(sensorEnumGraph graphKey) {
-    evaluateActiveGraphAbsolutes();
+    print("Remove");
     graphList.remove(graphKey);
+    evaluateActiveGraphAbsolutes();
   }
 
   void graphListSet(List<sensorEnumGraph> newList) {
-    evaluateActiveGraphAbsolutes();
+    print("Set");
     graphList.value = newList;
+    evaluateActiveGraphAbsolutes();
   }
 
   void evaluateActiveGraphAbsolutes() {
+    print("$graphList");
     activeGraphAbsolutes.clear();
     for (var graphSensorKey in graphList) {
       sensorEnumAbsolute? sensorKey = SensorMapping.sensorMap[graphSensorKey];
