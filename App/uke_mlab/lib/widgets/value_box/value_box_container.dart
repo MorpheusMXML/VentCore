@@ -46,7 +46,7 @@ class ValueBoxContainer extends StatelessWidget {
               shape: MaterialStateProperty.all(const RoundedRectangleBorder()),
               backgroundColor:
                   MaterialStateProperty.all(Theme.of(context).cardColor)),
-          onPressed: () => dataModelAbsolute!.tapped.toggle(),
+          onPressed: () => dataModelAbsolute!.expanded.toggle(),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
