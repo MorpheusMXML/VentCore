@@ -89,22 +89,7 @@ class DataModelAbsolute extends GetxController {
     }
 
     // Inform alarmController about a value change.
-    alarmController.evaluateAlarm(absoluteValue.value, upperAlarmBound.value,
-        lowerAlarmBound.value, historicValues, sensorKey);
-
-    if (sensorKey == sensorEnumAbsolute.hfAbsolute) {
-      Get.find<SoundController>().saturationHfBeep(
-          absoluteValue.value.toInt(),
-          Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.spo2Absolute.name)
-              .absoluteValue
-              .toInt());
-    } else if (sensorKey == sensorEnumAbsolute.spo2Absolute) {
-      Get.find<SoundController>().saturationHfBeep(
-          Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.hfAbsolute.name)
-              .absoluteValue
-              .toInt(),
-          absoluteValue.value.toInt());
-    }
+    alarmController.evaluateAlarm(absoluteValue.value, upperAlarmBound.value, lowerAlarmBound.value, historicValues, sensorKey);
   }
 
   /// sets [upperAlarmBound] to [newBoundary] if [newBoundary] >= [lowerAlarmBound] is true
@@ -113,8 +98,7 @@ class DataModelAbsolute extends GetxController {
     if (newBoundary >= lowerAlarmBound.value) {
       upperAlarmBound.value = newBoundary;
     }
-    alarmController.evaluateAlarm(absoluteValue.value, upperAlarmBound.value,
-        lowerAlarmBound.value, historicValues, sensorKey);
+    alarmController.evaluateAlarm(absoluteValue.value, upperAlarmBound.value, lowerAlarmBound.value, historicValues, sensorKey);
   }
 
   /// sets [lowerAlarmBound] to [newBoundary] if  [newBoundary] <= [upperAlarmBound] is true
@@ -123,8 +107,7 @@ class DataModelAbsolute extends GetxController {
     if (newBoundary <= upperAlarmBound.value) {
       lowerAlarmBound.value = newBoundary;
     }
-    alarmController.evaluateAlarm(absoluteValue.value, upperAlarmBound.value,
-        lowerAlarmBound.value, historicValues, sensorKey);
+    alarmController.evaluateAlarm(absoluteValue.value, upperAlarmBound.value, lowerAlarmBound.value, historicValues, sensorKey);
   }
 
   /// resets model to default values and clears [historicValues]
