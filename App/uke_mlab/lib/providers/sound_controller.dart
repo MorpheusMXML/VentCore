@@ -69,9 +69,14 @@ class SoundController {
 
   playDefiLoadSound() async {
     stop();
-    alarmPlayerRet = await alarmPlayer.play(_alarmSoundFiles[SoundIdentifier.defiLoading].toString());
-    alarmPlayerRet!.onPlayerCompletion.listen((event) async {
-      alarmPlayerRet = await alarmPlayer.loop(_alarmSoundFiles[SoundIdentifier.defiShockReady].toString());
+    alarmPlayer = await alarmPlayerCache.play(
+        _alarmSoundFiles[SoundIdentifier.defiLoading].toString(),
+        volume: 0.5);
+    alarmPlayer!.onPlayerCompletion.listen((event) async {
+      print("ABC");
+      alarmPlayer = await alarmPlayerCache.loop(
+          _alarmSoundFiles[SoundIdentifier.defiShockReady].toString(),
+          volume: 0.6);
     });
   }
 
@@ -171,18 +176,18 @@ class SoundController {
       );
     } else {
       timer = Timer.periodic(
-        Duration(seconds: getDataTimerDuration),
+        Duration(microseconds: 50),
         ((timer) async {
           if (Platform.isAndroid) {
             ecgPlayer = await ecgPlayerCache.play(
-              ecgSound,
+              _ecgSoundFiles[SoundIdentifier.hfzero].toString(),
               volume: volume,
               mode: PlayerMode.LOW_LATENCY,
             );
             // since stayAwake is not implemented on macOs, we like to check
           } else if (Platform.isIOS) {
             ecgPlayer = await ecgPlayerCache.play(
-              ecgSound,
+              _ecgSoundFiles[SoundIdentifier.hfzero].toString(),
               volume: volume,
               mode: PlayerMode.LOW_LATENCY,
             );
