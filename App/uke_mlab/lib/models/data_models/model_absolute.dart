@@ -88,8 +88,7 @@ class DataModelAbsolute extends GetxController {
     }
 
     // Inform alarmController about a value change.
-    alarmController.evaluateAlarm(absoluteValue.value, upperAlarmBound.value,
-        lowerAlarmBound.value, historicValues, sensorKey);
+    alarmController.evaluateAlarm(absoluteValue.value, upperAlarmBound.value, lowerAlarmBound.value, historicValues, sensorKey);
   }
 
   /// sets [upperAlarmBound] to [newBoundary] if [newBoundary] >= [lowerAlarmBound] is true
@@ -98,8 +97,7 @@ class DataModelAbsolute extends GetxController {
     if (newBoundary >= lowerAlarmBound.value) {
       upperAlarmBound.value = newBoundary;
     }
-    alarmController.evaluateAlarm(absoluteValue.value, upperAlarmBound.value,
-        lowerAlarmBound.value, historicValues, sensorKey);
+    alarmController.evaluateAlarm(absoluteValue.value, upperAlarmBound.value, lowerAlarmBound.value, historicValues, sensorKey);
   }
 
   /// sets [lowerAlarmBound] to [newBoundary] if  [newBoundary] <= [upperAlarmBound] is true
@@ -108,8 +106,7 @@ class DataModelAbsolute extends GetxController {
     if (newBoundary <= upperAlarmBound.value) {
       lowerAlarmBound.value = newBoundary;
     }
-    alarmController.evaluateAlarm(absoluteValue.value, upperAlarmBound.value,
-        lowerAlarmBound.value, historicValues, sensorKey);
+    alarmController.evaluateAlarm(absoluteValue.value, upperAlarmBound.value, lowerAlarmBound.value, historicValues, sensorKey);
   }
 
   /// resets model to default values and clears [historicValues]
@@ -119,6 +116,7 @@ class DataModelAbsolute extends GetxController {
     lowerAlarmBound.value = initialLowerBound;
     //reset singleData to 0 entry
     absoluteValue.value = 0;
+    counter.value = 0;
     //clear historical data
     historicValues.clear();
   }
