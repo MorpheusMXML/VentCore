@@ -18,7 +18,7 @@ class _LoadShockButtonState extends State<LoadShockButton> with SingleTickerProv
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(
-        seconds: 2,
+        seconds: 6,
       ),
     );
     _colorTween = ColorTween(begin: Colors.transparent, end: Colors.red).animate(_animationController);
