@@ -21,9 +21,10 @@ class DefibrillationController extends GetxController {
 
   RxBool metronomeOn = true.obs;
   bool isReadyToShock = false;
-//TODO: Get Shock Power from preset Adult, CHild, Infant
+  // TODO: Get Shock Power from preset Adult, CHild, Infant
 
   RxInt shockPower = 200.obs;
+  RxBool shockClicked = false.obs;
 
   RxString systemDiagnosis = 'Placeholder Diagnosis'.obs;
 
