@@ -28,13 +28,8 @@ class MainScreen extends StatelessWidget {
         child: GetBuilder<SystemState>(
           builder: (_) {
             // Ventilation
+            systemState.graphList.resetListToStandardGraphs();
             if (systemState.selectedToggleView[1]) {
-              // TODO set standard graphs for ventilation
-              systemState.graphList.graphListSet([
-                sensorEnumGraph.flow,
-                sensorEnumGraph.paw,
-                sensorEnumGraph.co2,
-              ]);
               return Row(children: const [
                 Flexible(flex: 2, child: GraphView()),
                 Flexible(flex: 1, child: VentilationMode())
@@ -42,12 +37,6 @@ class MainScreen extends StatelessWidget {
             }
             // Defibrillation
             else if (systemState.selectedToggleView[2]) {
-              // TODO set standard graphs for defibrillation
-              systemState.graphList.graphListSet([
-                sensorEnumGraph.ecgCh2,
-                sensorEnumGraph.co2,
-                sensorEnumGraph.cpr,
-              ]);
               return Row(children: const [
                 Flexible(flex: 2, child: GraphView()),
                 Flexible(flex: 1, child: DefibrillationMode())
@@ -55,12 +44,6 @@ class MainScreen extends StatelessWidget {
             }
             // Monitoring
             else {
-              systemState.graphList.graphListSet([
-                sensorEnumGraph
-                    .ecgCh2, // medical standard ecg channel is channel 2
-                sensorEnumGraph.co2,
-                sensorEnumGraph.pleth,
-              ]);
               return Row(children: const [
                 Flexible(flex: 2, child: GraphView()),
                 Flexible(flex: 1, child: MonitoringMode())

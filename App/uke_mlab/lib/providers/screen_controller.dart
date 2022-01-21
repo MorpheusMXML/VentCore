@@ -8,6 +8,7 @@ import 'package:uke_mlab/models/data_models/model_manager.dart';
 import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/scenarios/abstract_scenario.dart';
 import 'package:uke_mlab/scenarios/standard_scenario.dart';
+import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 // basic controller to interact with model
 // (at the moment) just boundary update
@@ -41,6 +42,8 @@ class ScreenController {
     switch (scenario) {
       case scenariosEnum.standardScenario:
         runningScenario = StandardScenario();
+        systemState.graphList.setStandardGraphs(ScenarioEnumDisplayedGraphs
+            .graphs[scenario] as Map<screenStatusEnum, List<sensorEnumGraph>>);
         runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
         break;
       case scenariosEnum.scenario1:
@@ -50,6 +53,8 @@ class ScreenController {
       case scenariosEnum.scenario3c:
       case scenariosEnum.scenario4:
         runningScenario = PatientScenario(scenarioType: scenario);
+        systemState.graphList.setStandardGraphs(ScenarioEnumDisplayedGraphs
+            .graphs[scenario] as Map<screenStatusEnum, List<sensorEnumGraph>>);
         runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
         break;
       default:

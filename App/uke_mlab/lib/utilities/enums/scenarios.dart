@@ -1,4 +1,5 @@
 import 'package:uke_mlab/utilities/enums/non_graph_alarm.dart';
+import 'package:uke_mlab/utilities/enums/screen_status.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 enum scenariosEnum {
@@ -23,6 +24,113 @@ extension ScenarioEnumPath on scenariosEnum {
   };
 
   String get scenarioPath => attributes[this]!;
+}
+
+extension ScenarioEnumDisplayedGraphs on scenariosEnum {
+  static const Map<scenariosEnum, Map<screenStatusEnum, List<sensorEnumGraph>>>
+      graphs = {
+    scenariosEnum.standardScenario: {
+      screenStatusEnum.monitorScreen: <sensorEnumGraph>[
+        sensorEnumGraph.ecgCh2, // medical standard ecg channel is channel 2
+        sensorEnumGraph.co2,
+        sensorEnumGraph.pleth,
+      ],
+      screenStatusEnum.ventilationScreen: <sensorEnumGraph>[
+        sensorEnumGraph.co2,
+        sensorEnumGraph.paw,
+        sensorEnumGraph.flow,
+      ],
+      screenStatusEnum.defibrillationScreen: <sensorEnumGraph>[
+        sensorEnumGraph.ecgCh2,
+        sensorEnumGraph.co2,
+      ],
+    },
+    scenariosEnum.scenario1: {
+      screenStatusEnum.monitorScreen: <sensorEnumGraph>[
+        sensorEnumGraph.ecgCh2, // medical standard ecg channel is channel 2
+        sensorEnumGraph.pleth,
+      ],
+      screenStatusEnum.ventilationScreen: <sensorEnumGraph>[],
+      screenStatusEnum.defibrillationScreen: <sensorEnumGraph>[
+        sensorEnumGraph.ecgCh2,
+      ],
+    },
+    scenariosEnum.scenario2: {
+      screenStatusEnum.monitorScreen: <sensorEnumGraph>[
+        sensorEnumGraph.ecgCh2, // medical standard ecg channel is channel 2
+        sensorEnumGraph.co2,
+        sensorEnumGraph.pleth,
+      ],
+      screenStatusEnum.ventilationScreen: <sensorEnumGraph>[
+        sensorEnumGraph.co2,
+      ],
+      screenStatusEnum.defibrillationScreen: <sensorEnumGraph>[
+        sensorEnumGraph.ecgCh2,
+        sensorEnumGraph.co2,
+      ],
+    },
+    scenariosEnum.scenario3a: {
+      screenStatusEnum.monitorScreen: <sensorEnumGraph>[
+        sensorEnumGraph.ecgCh2, // medical standard ecg channel is channel 2
+        sensorEnumGraph.co2,
+        sensorEnumGraph.pleth,
+      ],
+      screenStatusEnum.ventilationScreen: <sensorEnumGraph>[
+        sensorEnumGraph.co2,
+      ],
+      screenStatusEnum.defibrillationScreen: <sensorEnumGraph>[
+        sensorEnumGraph.ecgCh2,
+        sensorEnumGraph.co2,
+        sensorEnumGraph.cpr,
+      ],
+    },
+    scenariosEnum.scenario3b: {
+      screenStatusEnum.monitorScreen: <sensorEnumGraph>[
+        sensorEnumGraph.ecgCh2, // medical standard ecg channel is channel 2
+        sensorEnumGraph.co2,
+        sensorEnumGraph.pleth,
+      ],
+      screenStatusEnum.ventilationScreen: <sensorEnumGraph>[
+        sensorEnumGraph.co2,
+      ],
+      screenStatusEnum.defibrillationScreen: <sensorEnumGraph>[
+        sensorEnumGraph.ecgCh2,
+        sensorEnumGraph.co2,
+      ],
+    },
+    scenariosEnum.scenario3c: {
+      screenStatusEnum.monitorScreen: <sensorEnumGraph>[
+        sensorEnumGraph.ecgCh2, // medical standard ecg channel is channel 2
+        sensorEnumGraph.co2,
+        sensorEnumGraph.pleth,
+      ],
+      screenStatusEnum.ventilationScreen: <sensorEnumGraph>[
+        sensorEnumGraph.co2,
+      ],
+      screenStatusEnum.defibrillationScreen: <sensorEnumGraph>[
+        sensorEnumGraph.ecgCh2,
+        sensorEnumGraph.co2,
+        sensorEnumGraph.cpr,
+      ],
+    },
+    scenariosEnum.scenario4: {
+      screenStatusEnum.monitorScreen: <sensorEnumGraph>[
+        sensorEnumGraph.ecgCh2, // medical standard ecg channel is channel 2
+        sensorEnumGraph.co2,
+        sensorEnumGraph.pleth,
+      ],
+      screenStatusEnum.ventilationScreen: <sensorEnumGraph>[
+        sensorEnumGraph.co2,
+      ],
+      screenStatusEnum.defibrillationScreen: <sensorEnumGraph>[
+        sensorEnumGraph.ecgCh2,
+        sensorEnumGraph.co2,
+        sensorEnumGraph.cpr,
+      ],
+    }
+  };
+  Map<screenStatusEnum, List<sensorEnumGraph>> get scenarioGraphs =>
+      graphs[this]!;
 }
 
 extension ScenarioEnumAttributes on scenariosEnum {
