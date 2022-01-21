@@ -21,7 +21,7 @@ class _LoadShockButtonState extends State<LoadShockButton> with SingleTickerProv
         seconds: 2,
       ),
     );
-    _colorTween = ColorTween(begin: Colors.green, end: Colors.red).animate(_animationController);
+    _colorTween = ColorTween(begin: Colors.transparent, end: Colors.red).animate(_animationController);
 
     super.initState();
   }
