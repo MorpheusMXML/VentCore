@@ -13,7 +13,7 @@ class IppvModel {
   };
 
   /// contains the string representing to be displayed at [IPPVButton]
-  final RxString selectedIPPVMode = 'Mode 1'.obs;
+  final RxString selectedIPPVMode = 'IPPV'.obs;
 
   /// updates the current [ippvValues]
   void updateIPPVValue(String name, int value) {
