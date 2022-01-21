@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
+import 'package:uke_mlab/utilities/enums/screen_status.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/utilities/enums/alarm_status.dart';
 
@@ -15,6 +16,7 @@ class GraphList {
   /// a list containing keys (type [sensorEnumGraph]) of all currently drawn [GraphView]
   RxList<sensorEnumGraph> list = <sensorEnumGraph>[].obs;
 
+  /// list that determines the order of graphs displayed in monitor screen
   List<sensorEnumGraph> monitorList = [
     sensorEnumGraph.ecgCh2,
     sensorEnumGraph.ecgCh1, // ecgs together?
@@ -25,6 +27,8 @@ class GraphList {
     sensorEnumGraph.paw,
     sensorEnumGraph.flow,
   ];
+
+  /// list that determines the order of graphs displayed in ventilation screen
   List<sensorEnumGraph> ventiList = [
     sensorEnumGraph.pleth,
     sensorEnumGraph.co2,
@@ -35,6 +39,8 @@ class GraphList {
     sensorEnumGraph.nibd,
     sensorEnumGraph.cpr,
   ];
+
+  /// list that determines the order of graphs displayed in defibrillation screen
   List<sensorEnumGraph> defiList = [
     sensorEnumGraph.ecgCh2,
     sensorEnumGraph.ecgCh1,
@@ -45,6 +51,13 @@ class GraphList {
     sensorEnumGraph.paw,
     sensorEnumGraph.flow,
   ];
+
+  /// represents the standard active graphs for each [screenStatusEnum] that is not [screenStatusEnum.patientSettingScreen] (which obviously does not display graphs)
+  Map<screenStatusEnum, List<sensorEnumGraph>> standardGraphs = {
+    screenStatusEnum.monitorScreen: [],
+    screenStatusEnum.ventilationScreen: [],
+    screenStatusEnum.defibrillationScreen: [],
+  };
 
   /// a list containing keys (type [sensorEnumAbsolute]) of all currently drawn [GraphView]s corresponding [ValueBoxTile]s
   /// which are currently in an active [alarmStatus] (not confirmed and not none)
@@ -65,7 +78,7 @@ class GraphList {
 
   /// replaces the current [list] with [newList]
   void graphListSet(List<sensorEnumGraph> newList) {
-    list.value = newList;
+    list.value = List.from(newList);
     graphListSort();
     evaluateActiveGraphAbsolutes();
   }
@@ -103,6 +116,31 @@ class GraphList {
                   alarmStatus.confirmed)) {
         activeGraphAbsolutes.add(sensorKey);
       }
+    }
+  }
+
+  /// sets the [standardGraphs] for respective scenario
+  void setStandardGraphs(
+      Map<screenStatusEnum, List<sensorEnumGraph>> newGraphs) {
+    standardGraphs
+        .clear(); // does this also clear subelements? is this garbage collected?
+    standardGraphs = Map.from(newGraphs);
+  }
+
+  /// resets [list] to respective [standardGraphs]
+  void resetListToStandardGraphs() {
+    SystemState systemState = Get.find<SystemState>();
+    if (systemState.selectedToggleView[0]) {
+      graphListSet(standardGraphs[screenStatusEnum.monitorScreen]
+          as List<sensorEnumGraph>);
+    } else if (systemState.selectedToggleView[1]) {
+      graphListSet(standardGraphs[screenStatusEnum.ventilationScreen]
+          as List<sensorEnumGraph>);
+    } else if (systemState.selectedToggleView[2]) {
+      graphListSet(standardGraphs[screenStatusEnum.defibrillationScreen]
+          as List<sensorEnumGraph>);
+    } else {
+      throw Exception("Trying to reset graphList, no Toggle view was selected");
     }
   }
 }
