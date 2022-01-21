@@ -260,6 +260,7 @@ h4 {
             }
             img {
                 width: 800px;
+                margin-bottom: 5%;
             }
         }
     }
@@ -272,25 +273,28 @@ h4 {
 #about-logos {
     padding-top: 150px;
     text-align: center;
+    position: relative;
+    display: flex;
 }
 
 #about {
     padding-top: 150px;
     text-align: justify;
+
 }
 
 .logo-about{
-    position: relative;
-    right: 0%;
+    position: absolute;
+    width: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .logo-size{
       height: 150px;
   }
   
-.logo-features{
-    position: relative;
-  }
 .logo-media{
     height: 150px;
 }
@@ -511,9 +515,6 @@ h4 {
     }
     .item {
         margin: 40px 20px;
-        img {
-            box-shadow: 0 3px 15px rgba(76, 76, 77, 0.15);
-        }
     }
     .owl-theme .owl-controls .owl-page span {
         display: block;
@@ -719,30 +720,6 @@ h4 {
             }
         }
     }
-    .logo-about{
-        animation: none;
-        position: relative;
-    }
-    .logo-features{
-        position: relative;
-        animation: none;
-    }
-    .fadeOutLeftLogo{
-        animation: none;
-        display: none;
-    }
-    .fadeOutRightLogo{
-        animation: none;
-        display: none;
-    }
-    .fadeOutLogo{
-        animation: none;
-        display: none;
-    }
-    .logo-size{
-        position: inherit;
-        height: 100px;
-    }
 }
 
 @media (max-width: 600px) {
@@ -753,28 +730,6 @@ h4 {
             }
         }
     }
-    .logo-about{
-        animation: none;
-        position: relative;
-    }
-    .logo-features{
-        position: relative;
-        animation: none;
-    }
-    .fadeOutLeftLogo{
-        animation: none;
-        display: none;
-    }
-    .fadeOutRightLogo{
-        animation: none;
-        display: none;
-    }
-    .fadeOutLogo{
-        animation: none;
-        display: none;
-    }
-    .logo-size{
-        position: inherit;
-        height: 100px;
-    }
+
+
 }
