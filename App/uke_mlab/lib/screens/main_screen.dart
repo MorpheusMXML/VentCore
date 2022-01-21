@@ -33,6 +33,7 @@ class MainScreen extends StatelessWidget {
               systemState.graphList.graphListSet([
                 sensorEnumGraph.flow,
                 sensorEnumGraph.paw,
+                sensorEnumGraph.co2,
               ]);
               return Row(children: const [
                 Flexible(flex: 2, child: GraphView()),
@@ -43,6 +44,8 @@ class MainScreen extends StatelessWidget {
             else if (systemState.selectedToggleView[2]) {
               // TODO set standard graphs for defibrillation
               systemState.graphList.graphListSet([
+                sensorEnumGraph.ecgCh2,
+                sensorEnumGraph.co2,
                 sensorEnumGraph.cpr,
               ]);
               return Row(children: const [
