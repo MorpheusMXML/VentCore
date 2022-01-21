@@ -33,6 +33,8 @@ class ScreenController {
         runningScenario!.stopScenario();
         modelManager.resetAllModels();
         resetToggleView();
+        systemState.generalAlarms.resetAlarms();
+        runningScenario!.stopTimers();
       }
     }
 
@@ -42,31 +44,16 @@ class ScreenController {
         runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
         break;
       case scenariosEnum.scenario1:
-        runningScenario = PatientScenario();
-        runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
-        break;
       case scenariosEnum.scenario2:
-        runningScenario = PatientScenario();
-        runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
-        break;
       case scenariosEnum.scenario3a:
-        runningScenario = PatientScenario();
-        runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
-        break;
       case scenariosEnum.scenario3b:
-        runningScenario = PatientScenario();
-        runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
-        break;
       case scenariosEnum.scenario3c:
-        runningScenario = PatientScenario();
-        runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
-        break;
       case scenariosEnum.scenario4:
-        runningScenario = PatientScenario();
+        runningScenario = PatientScenario(scenarioType: scenario);
         runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
         break;
       default:
-        throw Exception('No scenario for ' + scenario.name + ' known');
+        throw Exception('No scenario for ${scenario.name} known.');
     }
   }
 
