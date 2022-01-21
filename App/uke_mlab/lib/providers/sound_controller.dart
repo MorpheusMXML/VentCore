@@ -64,6 +64,7 @@ class SoundController {
   }
 
   playDefiLoadSound() async {
+    ecgPlayerRet!.stop();
     alarmPlayerRet = await alarmPlayer.play(_alarmSoundFiles[SoundIdentifier.defiLoading].toString());
     alarmPlayerRet!.onPlayerCompletion.listen((event) async {
       alarmPlayerRet = await alarmPlayer.loop(_alarmSoundFiles[SoundIdentifier.defiShockReady].toString());
