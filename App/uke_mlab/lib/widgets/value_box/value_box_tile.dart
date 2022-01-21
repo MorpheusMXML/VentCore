@@ -63,56 +63,54 @@ class ValueBoxTile extends StatelessWidget {
             )
           :
           // called with headline case
-          Expanded(
-              child: Obx(
-                () => Container(
-                  color: evaluateBorderColor(context, systemState.alarmState),
-                  margin: const EdgeInsets.only(right: 8, bottom: 8),
-                  child: Column(
-                    children: [
-                      Flexible(
-                        flex: 1,
-                        child: ConstrainedBox(
-                          constraints: BoxConstraints(
-                            maxWidth: (Get.width - 12 - 12) /
-                                    (2 + 1) *
-                                    1 /
-                                    2 *
-                                    1 -
-                                8 -
-                                37 -
-                                37, // step in between solution with constansts, numbers from flexibles and paddings/margins
-                            // unsure why - 37 and not -35 (padding and margin f*up?)
-                          ),
-                          child: Container(
-                            margin: const EdgeInsets.only(
-                              top: 4,
-                              bottom: 4,
-                            ), //left: 35, right: 35),
-                            color: Theme.of(context).focusColor,
-                            child: Center(
-                              child: Text(
-                                dataModel.displayShortString,
-                                style: TextStyle(
-                                  decoration: TextDecoration.none,
-                                  color: dataModel.color,
-                                  fontSize: 20,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
+          Obx(
+              () => Container(
+                color: evaluateBorderColor(context, systemState.alarmState),
+                margin: const EdgeInsets.only(right: 8, bottom: 8),
+                child: Column(
+                  children: [
+                    Flexible(
+                      flex: 1,
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxWidth: (Get.width - 12 - 12) /
+                                  (2 + 1) *
+                                  1 /
+                                  2 *
+                                  1 -
+                              8 -
+                              37 -
+                              37, // step in between solution with constansts, numbers from flexibles and paddings/margins
+                          // unsure why - 37 and not -35 (padding and margin f*up?)
+                        ),
+                        child: Container(
+                          margin: const EdgeInsets.only(
+                            top: 4,
+                            bottom: 4,
+                          ), //left: 35, right: 35),
+                          color: Theme.of(context).focusColor,
+                          child: Center(
+                            child: Text(
+                              dataModel.displayShortString,
+                              style: TextStyle(
+                                decoration: TextDecoration.none,
+                                color: dataModel.color,
+                                fontSize: 20,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
                           ),
                         ),
                       ),
-                      Flexible(
-                        flex: 3,
-                        child: ValueBoxState.withHeadline(
-                          dataModel: dataModel,
-                          optAbreviationTitle: optAbreviationTitle,
-                        ),
+                    ),
+                    Flexible(
+                      flex: 3,
+                      child: ValueBoxState.withHeadline(
+                        dataModel: dataModel,
+                        optAbreviationTitle: optAbreviationTitle,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             );

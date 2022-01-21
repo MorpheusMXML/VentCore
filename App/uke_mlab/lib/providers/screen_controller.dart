@@ -148,6 +148,9 @@ class ScreenController {
   Future? alarmSettingsButton() {
     //system state should stay the same here
     systemState.absAlarmFieldModel.closeOverlay();
+    if (!modelManager.stylesTraitsLoaded) {
+      modelManager.loadDataModelEnvironmentValues();
+    }
     return Get.offNamed('/alarm_limit_screen');
   }
 
