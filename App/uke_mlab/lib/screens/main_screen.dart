@@ -33,7 +33,7 @@ class MainScreen extends StatelessWidget {
               systemState.graphList.graphListSet([
                 sensorEnumGraph.flow,
                 sensorEnumGraph.paw,
-                sensorEnumGraph.pleth,
+                sensorEnumGraph.co2,
               ]);
               return Row(children: const [
                 Flexible(flex: 2, child: GraphView()),
