@@ -32,4 +32,10 @@ class AbsoluteAlarmFieldConst {
           flexAbsValueTilesHeight) +
       1; // + MediaQuery.of(context).padding.top;?
   // WTF? That shouldnt work in my book since height of statusbar and togglebutton heigth are not looked at, but hey...
+
+  static final double alarmTileHeight = heigthTotal -
+      (toggleButtonHeightFactor * buttonHeight) -
+      ippvHeight -
+      3 * 8;
+  static final double alarmTileWidth = width / 2;
 }
