@@ -12,7 +12,7 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 /// - [alarmPlayerCache] loads a Instance of Type [AudioCache] and sets the sounds Folder prefix.
 /// + [ecgPlayerCache] loads a Instance of Type [AudioCache] and sets the sounds Folder prefix.
 /// + [timer] holds a Inscante of Type [Timer] to control the ECG Sunds Timing
-/// + [alarmSoundFiles] & [ecgSoundFiles] provide a Map where the Sounds for the corresponding Alarm or ECG Sound can be specified.
+/// + [_alarmSoundFiles] & [_ecgSoundFiles] provide a Map where the Sounds for the corresponding Alarm or ECG Sound can be specified.
 /// + [alarmPlayer] & [ecgPlayer] hold a late [AudioPlayer] Instance to controll the Audio after Triggering it.
 ///
 /// ### Methods
@@ -57,14 +57,14 @@ class SoundController {
 
   ///Constructor for this. Loads the specified Sound files from [alarmSoundFiles] & [ecgecgSoundFiles] into the Cache of the Application.
   SoundController() {
-    alarmPlayerCache.loadAll(alarmSoundFiles.values.toList());
-    ecgPlayerCache.loadAll(ecgSoundFiles.values.toList());
+    alarmPlayerCache.loadAll(_alarmSoundFiles.values.toList());
+    ecgPlayerCache.loadAll(_ecgSoundFiles.values.toList());
   }
 
   ///playes the SoundAlarm fot the AlarmType specified with [Enum soundIdentifier].
   play(Enum soundIdentifier) async {
     alarmPlayer = await alarmPlayerCache
-        .play(alarmSoundFiles[soundIdentifier].toString());
+        .play(_alarmSoundFiles[soundIdentifier].toString());
   }
 
   playDefiLoadSound() async {
@@ -80,7 +80,7 @@ class SoundController {
     });
   }
 
-  ///sops all [AudioPlayer]'s that are currently playing a Sound.
+  /// stops all [AudioPlayer]'s that are currently playing a Sound.
   stop() async {
     if (alarmPlayer != null) {
       alarmPlayer!.stop();
@@ -119,8 +119,8 @@ class SoundController {
   ///Duration duration = Duration(milliseconds: milliesTillNext);
   ///```
   saturationHfBeep({required int bpm, required int spO2}) async {
-    const double volume = 0.2;
-    String ecgSound = ecgSoundFiles[SoundIdentifier.hFnormal].toString();
+    const double volume = 0.3;
+    String ecgSound = _ecgSoundFiles[SoundIdentifier.hFnormal].toString();
     //ecgPlayerRet = await ecgPlayer.play(ecgSound, volume: 0);
 
     if (spO2 > 90) {

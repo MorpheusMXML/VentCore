@@ -12,7 +12,8 @@ class LoadShockButton extends StatefulWidget {
   _LoadShockButtonState createState() => _LoadShockButtonState();
 }
 
-class _LoadShockButtonState extends State<LoadShockButton> with SingleTickerProviderStateMixin {
+class _LoadShockButtonState extends State<LoadShockButton>
+    with SingleTickerProviderStateMixin {
   @override
   void initState() {
     _animationController = AnimationController(
@@ -21,7 +22,8 @@ class _LoadShockButtonState extends State<LoadShockButton> with SingleTickerProv
         seconds: 6,
       ),
     );
-    _colorTween = ColorTween(begin: Colors.transparent, end: Colors.red).animate(_animationController);
+    _colorTween = ColorTween(begin: Colors.transparent, end: Colors.red)
+        .animate(_animationController);
 
     super.initState();
   }
@@ -32,7 +34,8 @@ class _LoadShockButtonState extends State<LoadShockButton> with SingleTickerProv
     _animationController.dispose();
   }
 
-  DefibrillationController defibrillationController = Get.find<DefibrillationController>();
+  DefibrillationController defibrillationController =
+      Get.find<DefibrillationController>();
   SoundController soundController = Get.find<SoundController>();
   late AnimationController _animationController;
   late Animation<Color?> _colorTween;
@@ -56,7 +59,8 @@ class _LoadShockButtonState extends State<LoadShockButton> with SingleTickerProv
               children: [
                 Container(
                   color: _colorTween.value,
-                  child: (_animationController.isCompleted && defibrillationController.isReadyToShock == true)
+                  child: (_animationController.isCompleted &&
+                          defibrillationController.isReadyToShock == true)
                       ? SvgPicture.asset('assets/icons/Shock.svg')
                       : SvgPicture.asset('assets/icons/Battery.svg'),
                   padding: const EdgeInsets.all(8),
@@ -79,6 +83,7 @@ class _LoadShockButtonState extends State<LoadShockButton> with SingleTickerProv
               setState(() {
                 if (defibrillationController.isReadyToShock) {
                   soundController.stop();
+                  soundController.startSaturationHFSound();
                   _animationController.reset();
                   defibrillationController.startLastWatch();
                   defibrillationController.numberOfShocks++;
