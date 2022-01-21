@@ -27,10 +27,9 @@ class IPPVButton extends StatelessWidget {
               child: DropdownButton(
                 isExpanded: true,
                 value: systemState.ippvModel.selectedIPPVMode.value,
-                onChanged: (newValue) {
-                  systemState.ippvModel.selectedIPPVMode.value = '$newValue';
-                },
-                items: <String>['Mode 1', 'Mode 2', 'Mode 3'].map((value) {
+                onChanged: (newValue) =>
+                    systemState.ippvModel.selectedIPPVMode.value = '$newValue',
+                items: <String>['IPPV', 'S-IPPV', 'PCV', 'BiLevel + ASB', 'CPAP', 'CPAP + ASB', 'CPR'].map((value) {
                   return DropdownMenuItem(
                     child: Container(
                         margin: const EdgeInsets.only(left: 8),
