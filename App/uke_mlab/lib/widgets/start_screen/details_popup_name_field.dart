@@ -19,7 +19,7 @@ class PopupNameField extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.only(left: 10),
               child: Text('Name',
-                  style: TextStyle(fontSize: 17, color: Color(0xffeeeeee))),
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xffeeeeee))),
             ),
           ),
           Flexible(

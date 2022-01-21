@@ -32,7 +32,8 @@ class PopupSlider extends StatelessWidget {
               child: Text(
                 name,
                 style: const TextStyle(
-                  fontSize: 17,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
                   color: Color(0xffeeeeee),
                 ),
               ),
@@ -58,12 +59,15 @@ class PopupSlider extends StatelessWidget {
                 color: Theme.of(context).dividerColor,
                 borderRadius: const BorderRadius.all(Radius.circular(3))),
             alignment: Alignment.center,
-            height: 40 / MediaQuery.of(context).devicePixelRatio,
-            width: 90 / MediaQuery.of(context).devicePixelRatio,
+            height: 50 / MediaQuery.of(context).devicePixelRatio,
+            width: 150 / MediaQuery.of(context).devicePixelRatio,
             child: Obx(
               () => Text(
-                '${value.value.round().toString()} $unit',
-                style: const TextStyle(color: Colors.black),
+                '${value.value.round().toString()}$unit',
+                style: const TextStyle(
+                    fontSize: 21,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black),
               ),
             ),
           ),

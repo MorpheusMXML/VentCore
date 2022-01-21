@@ -33,7 +33,7 @@ class AEDButton extends StatelessWidget {
                 height: 250 / MediaQuery.of(context).devicePixelRatio,
                 color: const Color(0xff34c759),
               ),
-              const Text('AED')
+              const Text('AED', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))
             ],
           )),
     );

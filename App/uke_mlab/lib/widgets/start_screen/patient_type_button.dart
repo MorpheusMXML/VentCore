@@ -61,7 +61,7 @@ class PatientTypeButton extends StatelessWidget {
                   children: [
                     Text(
                       name,
-                      style: const TextStyle(fontSize: 25),
+                      style: const TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
