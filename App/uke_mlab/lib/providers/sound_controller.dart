@@ -13,7 +13,7 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 /// + [ecgPlayerCache] loads a Instance of Type [AudioCache] and sets the sounds Folder prefix.
 /// + [timer] holds a Inscante of Type [Timer] to control the ECG Sunds Timing
 /// + [_alarmSoundFiles] & [_ecgSoundFiles] provide a Map where the Sounds for the corresponding Alarm or ECG Sound can be specified.
-/// + [alarmPlayerRet] & [ecgPlayerRet] hold a late [AudioPlayer] Instance to controll the Audio after Triggering it.
+/// + [alarmPlayer] & [ecgPlayer] hold a late [AudioPlayer] Instance to controll the Audio after Triggering it.
 ///
 /// ### Methods
 /// + [play(Enum SoundIdentifier)] starts the alarm SoundIdentifier.
@@ -67,12 +67,20 @@ class SoundController {
         .play(_alarmSoundFiles[soundIdentifier].toString());
   }
 
-  loop(Enum soundIdentifier) async {
-    alarmPlayer = await alarmPlayerCache
-        .loop(_alarmSoundFiles[soundIdentifier].toString());
+  playDefiLoadSound() async {
+    stop();
+    alarmPlayer = await alarmPlayerCache.play(
+        _alarmSoundFiles[SoundIdentifier.defiLoading].toString(),
+        volume: 0.5,
+        mode: PlayerMode.LOW_LATENCY);
+    alarmPlayer!.onPlayerCompletion.listen((event) async {
+      print("ABC");
+      alarmPlayer = await alarmPlayerCache
+          .loop(_alarmSoundFiles[SoundIdentifier.defiShockReady].toString());
+    });
   }
 
-  ///sops all [AudioPlayer]'s that are currently playing a Sound.
+  /// stops all [AudioPlayer]'s that are currently playing a Sound.
   stop() async {
     if (alarmPlayer != null) {
       alarmPlayer!.stop();
@@ -111,7 +119,7 @@ class SoundController {
   ///Duration duration = Duration(milliseconds: milliesTillNext);
   ///```
   saturationHfBeep({required int bpm, required int spO2}) async {
-    const double volume = 0.2;
+    const double volume = 0.3;
     String ecgSound = _ecgSoundFiles[SoundIdentifier.hFnormal].toString();
     //ecgPlayerRet = await ecgPlayer.play(ecgSound, volume: 0);
 
