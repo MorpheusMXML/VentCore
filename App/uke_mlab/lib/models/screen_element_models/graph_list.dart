@@ -15,6 +15,37 @@ class GraphList {
   /// a list containing keys (type [sensorEnumGraph]) of all currently drawn [GraphView]
   RxList<sensorEnumGraph> list = <sensorEnumGraph>[].obs;
 
+  List<sensorEnumGraph> monitorList = [
+    sensorEnumGraph.ecgCh2,
+    sensorEnumGraph.ecgCh1, // ecgs together?
+    sensorEnumGraph.pleth,
+    sensorEnumGraph.co2,
+    sensorEnumGraph.nibd,
+    sensorEnumGraph.cpr,
+    sensorEnumGraph.paw,
+    sensorEnumGraph.flow,
+  ];
+  List<sensorEnumGraph> ventiList = [
+    sensorEnumGraph.pleth,
+    sensorEnumGraph.co2,
+    sensorEnumGraph.paw,
+    sensorEnumGraph.flow,
+    sensorEnumGraph.ecgCh2,
+    sensorEnumGraph.ecgCh1,
+    sensorEnumGraph.nibd,
+    sensorEnumGraph.cpr,
+  ];
+  List<sensorEnumGraph> defiList = [
+    sensorEnumGraph.ecgCh2,
+    sensorEnumGraph.ecgCh1,
+    sensorEnumGraph.co2,
+    sensorEnumGraph.cpr,
+    sensorEnumGraph.pleth,
+    sensorEnumGraph.nibd,
+    sensorEnumGraph.paw,
+    sensorEnumGraph.flow,
+  ];
+
   /// a list containing keys (type [sensorEnumAbsolute]) of all currently drawn [GraphView]s corresponding [ValueBoxTile]s
   /// which are currently in an active [alarmStatus] (not confirmed and not none)
   RxList<sensorEnumAbsolute> activeGraphAbsolutes = <sensorEnumAbsolute>[].obs;
@@ -22,19 +53,41 @@ class GraphList {
   /// adds [graphKey] to current [list]
   void graphListAdd(sensorEnumGraph graphKey) {
     list.add(graphKey);
+    graphListSort();
     evaluateActiveGraphAbsolutes();
   }
 
   /// removes [graphKey] from current [list]
   void graphListRemove(sensorEnumGraph graphKey) {
     list.remove(graphKey);
+    graphListSort();
     evaluateActiveGraphAbsolutes();
   }
 
   /// replaces the current [list] with [newList]
   void graphListSet(List<sensorEnumGraph> newList) {
     list.value = newList;
+    graphListSort();
     evaluateActiveGraphAbsolutes();
+  }
+
+  void graphListSort() {
+    SystemState systemState = Get.find<SystemState>();
+    if (systemState.selectedToggleView[0]) {
+      list.value.sort(
+          (a, b) => monitorList.indexOf(a).compareTo(monitorList.indexOf(b)));
+      //sort after monitorList
+    } else if (systemState.selectedToggleView[1]) {
+      list.value
+          .sort((a, b) => ventiList.indexOf(a).compareTo(ventiList.indexOf(b)));
+      //sort after ventList
+    } else if (systemState.selectedToggleView[2]) {
+      list.value
+          .sort((a, b) => defiList.indexOf(a).compareTo(defiList.indexOf(b)));
+      //sort after defiList
+    } else {
+      throw Exception("Trying to sort graphList, no Toggle view was selected");
+    }
   }
 
   /// evaluates the current [activeGraphAbsolutes]
