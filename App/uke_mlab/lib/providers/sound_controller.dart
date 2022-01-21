@@ -12,8 +12,8 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 /// - [alarmPlayerCache] loads a Instance of Type [AudioCache] and sets the sounds Folder prefix.
 /// + [ecgPlayerCache] loads a Instance of Type [AudioCache] and sets the sounds Folder prefix.
 /// + [timer] holds a Inscante of Type [Timer] to control the ECG Sunds Timing
-/// + [alarmSoundFiles] & [ecgSoundFiles] provide a Map where the Sounds for the corresponding Alarm or ECG Sound can be specified.
-/// + [alarmPlayer] & [ecgPlayer] hold a late [AudioPlayer] Instance to controll the Audio after Triggering it.
+/// + [_alarmSoundFiles] & [_ecgSoundFiles] provide a Map where the Sounds for the corresponding Alarm or ECG Sound can be specified.
+/// + [alarmPlayerRet] & [ecgPlayerRet] hold a late [AudioPlayer] Instance to controll the Audio after Triggering it.
 ///
 /// ### Methods
 /// + [play(Enum SoundIdentifier)] starts the alarm SoundIdentifier.
@@ -34,32 +34,42 @@ class SoundController {
 
   /// This [Map<SoundIdentifier, String>] specifies the AlarmType in the [Enum] Key and maps it to the [String] of the Sound Files Name in he Assets/sounds
   /// Folder. If you wish to change the Alarm Sound Files that shall pe blayed. Change them accordingly here and place the Sondfile under [./App/uke_mlab/assets/sounds]
-  static const Map<SoundIdentifier, String> alarmSoundFiles = {
+  static const Map<SoundIdentifier, String> _alarmSoundFiles = {
     SoundIdentifier.notifiation: 'SpaceyNotification.wav',
-    SoundIdentifier.mediumAlert: 'ALERTA.wav',
-    SoundIdentifier.highAlert: 'DINGDINGSINNG.wav',
+    SoundIdentifier.monitoringMediumAlert: 'ALERTA.wav',
+    SoundIdentifier.monitoringHighAlert: 'DINGDINGSINNG.wav',
+    SoundIdentifier.ventilationHighAlert: '3H_HighAlert.wav',
+    SoundIdentifier.ventilationMediumAlert: '3H_Notification.wav',
+    SoundIdentifier.defiLoading: 'defiLoading.wav',
+    SoundIdentifier.defiShockReady: 'defiReady.wav'
   };
 
   /// This [Map<SoundIdentifier, String>] specifies the EcgSaturation Type in the [Enum] Key and maps it to the [String] of the Sound Files Name in he Assets/sounds
   /// Folder. If you wish to change the ECG Sound Files that shall pe blayed. Change them accordingly here and place the Sondfile under [./App/uke_mlab/assets/sounds]
-  static const Map<SoundIdentifier, String> ecgSoundFiles = {
+  static const Map<SoundIdentifier, String> _ecgSoundFiles = {
     SoundIdentifier.hFnormal: 'ECG_100_Clean.wav',
     SoundIdentifier.hF80: 'ECG_80_Clean.wav',
     SoundIdentifier.hF75: 'ECG_75_Clean.wav',
     SoundIdentifier.hF65: 'ECG_65_Clean.wav',
     SoundIdentifier.hF50: 'ECG_50wav.wav',
+    SoundIdentifier.hfzero: 'hfzero.wav'
   };
 
   ///Constructor for this. Loads the specified Sound files from [alarmSoundFiles] & [ecgecgSoundFiles] into the Cache of the Application.
   SoundController() {
-    alarmPlayerCache.loadAll(alarmSoundFiles.values.toList());
-    ecgPlayerCache.loadAll(ecgSoundFiles.values.toList());
+    alarmPlayerCache.loadAll(_alarmSoundFiles.values.toList());
+    ecgPlayerCache.loadAll(_ecgSoundFiles.values.toList());
   }
 
   ///playes the SoundAlarm fot the AlarmType specified with [Enum soundIdentifier].
   play(Enum soundIdentifier) async {
     alarmPlayer = await alarmPlayerCache
-        .play(alarmSoundFiles[soundIdentifier].toString());
+        .play(_alarmSoundFiles[soundIdentifier].toString());
+  }
+
+  loop(Enum soundIdentifier) async {
+    alarmPlayer = await alarmPlayerCache
+        .loop(_alarmSoundFiles[soundIdentifier].toString());
   }
 
   ///sops all [AudioPlayer]'s that are currently playing a Sound.
@@ -102,19 +112,19 @@ class SoundController {
   ///```
   saturationHfBeep({required int bpm, required int spO2}) async {
     const double volume = 0.2;
-    String ecgSound = ecgSoundFiles[SoundIdentifier.hFnormal].toString();
+    String ecgSound = _ecgSoundFiles[SoundIdentifier.hFnormal].toString();
     //ecgPlayerRet = await ecgPlayer.play(ecgSound, volume: 0);
 
     if (spO2 > 90) {
-      ecgSound = ecgSoundFiles[SoundIdentifier.hFnormal].toString();
+      ecgSound = _ecgSoundFiles[SoundIdentifier.hFnormal].toString();
     } else if (spO2 > 80) {
-      ecgSound = ecgSoundFiles[SoundIdentifier.hF80].toString();
+      ecgSound = _ecgSoundFiles[SoundIdentifier.hF80].toString();
     } else if (spO2 > 70) {
-      ecgSound = ecgSoundFiles[SoundIdentifier.hF75].toString();
+      ecgSound = _ecgSoundFiles[SoundIdentifier.hF75].toString();
     } else if (spO2 > 60) {
-      ecgSound = ecgSoundFiles[SoundIdentifier.hF65].toString();
+      ecgSound = _ecgSoundFiles[SoundIdentifier.hF65].toString();
     } else {
-      ecgSound = ecgSoundFiles[SoundIdentifier.hF50].toString();
+      ecgSound = _ecgSoundFiles[SoundIdentifier.hF50].toString();
     }
 
     if (timer != null) {
@@ -222,11 +232,16 @@ class SoundController {
 ///+   hF50,
 enum SoundIdentifier {
   notifiation,
-  mediumAlert,
-  highAlert,
+  monitoringMediumAlert,
+  monitoringHighAlert,
+  ventilationMediumAlert,
+  ventilationHighAlert,
+  defiLoading,
+  defiShockReady,
   hFnormal,
   hF80,
   hF75,
   hF65,
   hF50,
+  hfzero,
 }
