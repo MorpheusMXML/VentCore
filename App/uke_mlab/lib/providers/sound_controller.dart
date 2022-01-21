@@ -1,6 +1,8 @@
 import 'dart:async';
-
+import 'package:get/get.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:uke_mlab/models/data_models/model_absolute.dart';
+import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 /// This Class provides the SoundPlaying and Triggering Functionallity.
 /// Alarms can be Triggered, stopped and the SpO2 / ECG Sound for the Heartfrequency can be started.
@@ -9,7 +11,7 @@ import 'package:audioplayers/audioplayers.dart';
 /// - [alarmPlayer] loads a Instance of Type [AudioCache] and sets the sounds Folder prefix.
 /// + [ecgPlayer] loads a Instance of Type [AudioCache] and sets the sounds Folder prefix.
 /// + [timer] holds a Inscante of Type [Timer] to control the ECG Sunds Timing
-/// + [alarmSoundFiles] & [ecgSoundFiles] provide a Map where the Sounds for the corresponding Alarm or ECG Sound can be specified.
+/// + [_alarmSoundFiles] & [_ecgSoundFiles] provide a Map where the Sounds for the corresponding Alarm or ECG Sound can be specified.
 /// + [alarmPlayerRet] & [ecgPlayerRet] hold a late [AudioPlayer] Instance to controll the Audio after Triggering it.
 ///
 /// ### Methods
@@ -19,46 +21,74 @@ import 'package:audioplayers/audioplayers.dart';
 ///
 class SoundController {
   ///Loads AudioAlarm Files into Cache and Provides functionality to Play, Stop them. Also provides ECG Sound per Minute and O2 Saturation.
-  static AudioCache alarmPlayer = AudioCache(prefix: 'assets/sounds/');
-  static AudioCache ecgPlayer = AudioCache(prefix: 'assets/sounds/');
-  static Timer? timer;
+  final AudioCache alarmPlayer = AudioCache(prefix: 'assets/sounds/');
+  final AudioCache ecgPlayer = AudioCache(prefix: 'assets/sounds/');
+  Timer? timer;
+  Timer? getDataTimer;
 
   /// This [Map<SoundIdentifier, String>] specifies the AlarmType in the [Enum] Key and maps it to the [String] of the Sound Files Name in he Assets/sounds
   /// Folder. If you wish to change the Alarm Sound Files that shall pe blayed. Change them accordingly here and place the Sondfile under [./App/uke_mlab/assets/sounds]
-  static const Map<SoundIdentifier, String> alarmSoundFiles = {
+  static const Map<SoundIdentifier, String> _alarmSoundFiles = {
     SoundIdentifier.notifiation: 'SpaceyNotification.wav',
-    SoundIdentifier.mediumAlert: 'ALERTA.wav',
-    SoundIdentifier.highAlert: 'DINGDINGSINNG.wav',
+    SoundIdentifier.monitoringMediumAlert: 'ALERTA.wav',
+    SoundIdentifier.monitoringHighAlert: 'DINGDINGSINNG.wav',
+    SoundIdentifier.ventilationHighAlert: '3H_HighAlert.wav',
+    SoundIdentifier.ventilationMediumAlert: '3H_Notification.wav',
+    SoundIdentifier.defiLoading: 'defiLoading.wav',
+    SoundIdentifier.defiShockReady: 'defiReady.wav'
   };
 
   /// This [Map<SoundIdentifier, String>] specifies the EcgSaturation Type in the [Enum] Key and maps it to the [String] of the Sound Files Name in he Assets/sounds
   /// Folder. If you wish to change the ECG Sound Files that shall pe blayed. Change them accordingly here and place the Sondfile under [./App/uke_mlab/assets/sounds]
-  static const Map<SoundIdentifier, String> ecgSoundFiles = {
+  static const Map<SoundIdentifier, String> _ecgSoundFiles = {
     SoundIdentifier.hFnormal: 'ECG_100_Clean.wav',
     SoundIdentifier.hF80: 'ECG_80_Clean.wav',
     SoundIdentifier.hF75: 'ECG_75_Clean.wav',
     SoundIdentifier.hF65: 'ECG_65_Clean.wav',
     SoundIdentifier.hF50: 'ECG_50wav.wav',
+    SoundIdentifier.hfzero: 'hfzero.wav'
   };
 
-  late AudioPlayer alarmPlayerRet;
-  late AudioPlayer ecgPlayerRet;
+  AudioPlayer? alarmPlayerRet;
+  AudioPlayer? ecgPlayerRet;
 
-  ///Constructor for this. Loads the specified Sound files from [alarmSoundFiles] & [ecgecgSoundFiles] into the Cache of the Application.
+  ///Constructor for this. Loads the specified Sound files from [_alarmSoundFiles] & [ecgecgSoundFiles] into the Cache of the Application.
   SoundController() {
-    alarmPlayer.loadAll(alarmSoundFiles.values.toList());
-    ecgPlayer.loadAll(ecgSoundFiles.values.toList());
+    alarmPlayer.loadAll(_alarmSoundFiles.values.toList());
+    ecgPlayer.loadAll(_ecgSoundFiles.values.toList());
   }
 
   ///playes the SoundAlarm fot the AlarmType specified with [Enum soundIdentifier].
   play(Enum soundIdentifier) async {
-    alarmPlayerRet = await alarmPlayer.play(alarmSoundFiles[soundIdentifier].toString());
+    alarmPlayerRet = await alarmPlayer.play(_alarmSoundFiles[soundIdentifier].toString());
+  }
+
+  playDefiLoadSound() async {
+    stop();
+    alarmPlayerRet = await alarmPlayer.play(_alarmSoundFiles[SoundIdentifier.defiLoading].toString());
+    alarmPlayerRet!.onPlayerCompletion.listen((event) async {
+      alarmPlayerRet = await alarmPlayer.loop(_alarmSoundFiles[SoundIdentifier.defiShockReady].toString());
+    });
   }
 
   ///sops all [AudioPlayer]'s that are currently playing a Sound.
   stop() async {
-    alarmPlayerRet.stop();
-    ecgPlayerRet.stop();
+    if (alarmPlayerRet != null) {
+      alarmPlayerRet!.stop();
+      alarmPlayerRet = null;
+    }
+    if (ecgPlayerRet != null) {
+      ecgPlayerRet!.stop();
+      ecgPlayerRet = null;
+    }
+    if (timer != null) {
+      timer!.cancel();
+      timer = null;
+    }
+    if (getDataTimer != null) {
+      getDataTimer!.cancel();
+      getDataTimer = null;
+    }
   }
 
   /// Function starts the ECG Sound in the rhythm specified with [bpm] and playes the accordingly Pitched Sound File to the Oxygen Saturation specified with [spO2]
@@ -77,19 +107,20 @@ class SoundController {
   /// int milliesTillNext = ((1 / beepHz) * 1000).toInt();
   ///Duration duration = Duration(milliseconds: milliesTillNext);
   ///```
-  saturationHfBeep(int bpm, int spO2) async {
-    String ecgSound = ecgSoundFiles[SoundIdentifier.hFnormal].toString();
+  saturationHfBeep({required int bpm, required int spO2}) async {
+    String ecgSound = _ecgSoundFiles[SoundIdentifier.hFnormal].toString();
     ecgPlayerRet = await ecgPlayer.play(ecgSound, volume: 0);
+
     if (spO2 > 90) {
-      ecgSound = ecgSoundFiles[SoundIdentifier.hFnormal].toString();
+      ecgSound = _ecgSoundFiles[SoundIdentifier.hFnormal].toString();
     } else if (spO2 > 80) {
-      ecgSound = ecgSoundFiles[SoundIdentifier.hF80].toString();
+      ecgSound = _ecgSoundFiles[SoundIdentifier.hF80].toString();
     } else if (spO2 > 70) {
-      ecgSound = ecgSoundFiles[SoundIdentifier.hF75].toString();
+      ecgSound = _ecgSoundFiles[SoundIdentifier.hF75].toString();
     } else if (spO2 > 60) {
-      ecgSound = ecgSoundFiles[SoundIdentifier.hF65].toString();
+      ecgSound = _ecgSoundFiles[SoundIdentifier.hF65].toString();
     } else {
-      ecgSound = ecgSoundFiles[SoundIdentifier.hF50].toString();
+      ecgSound = _ecgSoundFiles[SoundIdentifier.hF50].toString();
     }
 
     if (bpm != 0) {
@@ -101,14 +132,24 @@ class SoundController {
         print('stopping Player');
         ecgPlayerRet.stop();
       } */
-      timer?.cancel();
+      if (timer != null) {
+        timer?.cancel();
+      }
 
       timer = Timer.periodic(duration, ((timer) async {
-        ecgPlayerRet = await ecgPlayer.play(ecgSound, volume: 1.0);
+        ecgPlayerRet = await ecgPlayer.play(ecgSound, volume: 0.7);
       }));
     } else {
-      ecgPlayerRet = await ecgPlayer.loop(ecgSound, volume: 1.0);
+      ecgPlayerRet = await ecgPlayer.loop(_ecgSoundFiles[SoundIdentifier.hfzero].toString(), volume: 0.7);
     }
+  }
+
+  void startSaturationHFSound() {
+    DataModelAbsolute hfModel = Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.hfAbsolute.name);
+    DataModelAbsolute spo2Model = Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.spo2Absolute.name);
+    getDataTimer ??= Timer.periodic(const Duration(seconds: 5), (timer) {
+      saturationHfBeep(bpm: hfModel.absoluteValue.value.toInt(), spO2: spo2Model.absoluteValue.value.toInt());
+    });
   }
 }
 
@@ -126,11 +167,16 @@ class SoundController {
 ///+   hF50,
 enum SoundIdentifier {
   notifiation,
-  mediumAlert,
-  highAlert,
+  monitoringMediumAlert,
+  monitoringHighAlert,
+  ventilationMediumAlert,
+  ventilationHighAlert,
+  defiLoading,
+  defiShockReady,
   hFnormal,
   hF80,
   hF75,
   hF65,
   hF50,
+  hfzero,
 }

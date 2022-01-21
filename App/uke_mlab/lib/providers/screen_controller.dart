@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/data_models/model_absolute.dart';
+import 'package:uke_mlab/providers/sound_controller.dart';
 import 'package:uke_mlab/scenarios/patient_scenario.dart';
 import 'package:uke_mlab/utilities/enums/scenarios.dart';
 import 'package:uke_mlab/utilities/enums/patient_type.dart';
@@ -16,6 +17,7 @@ class ScreenController {
   AbstractScenario? runningScenario;
   SystemState systemState = Get.find<SystemState>();
   ModelManager modelManager = Get.find<ModelManager>();
+  SoundController soundController = Get.find<SoundController>();
 
   void setUpperBoundary(DataModelAbsolute dataModel, double value) {
     dataModel.setUpperAlarmBoundary(value);
@@ -85,6 +87,7 @@ class ScreenController {
     systemState.screenStatus = screenStatusEnum.monitorScreen;
     changeScenario(scenariosEnum.standardScenario);
     systemState.absAlarmFieldModel.updateActiveList();
+    soundController.startSaturationHFSound();
     return Get.toNamed('/main_screen');
   }
 
@@ -97,6 +100,7 @@ class ScreenController {
     systemState.screenStatus = screenStatusEnum.monitorScreen;
     changeScenario(scenariosEnum.standardScenario);
     systemState.absAlarmFieldModel.updateActiveList();
+    soundController.startSaturationHFSound();
     return Get.toNamed('/main_screen');
   }
 
@@ -110,17 +114,20 @@ class ScreenController {
     changeScenario(scenariosEnum.standardScenario);
     systemState.setSelectedToggleView([false, false, true]);
     systemState.absAlarmFieldModel.updateActiveList();
+    soundController.startSaturationHFSound();
     return Get.toNamed('/main_screen');
   }
 
   Future? patientSettingButton() {
     systemState.screenStatus = screenStatusEnum.patientSettingScreen;
     systemState.absAlarmFieldModel.closeOverlay();
+    soundController.stop();
     return Get.offNamed('/start_screen');
   }
 
   Future? demoScreenButton() {
     systemState.absAlarmFieldModel.closeOverlay();
+    soundController.stop();
     return Get.offNamed('/demo_screen');
   }
 
@@ -156,18 +163,23 @@ class ScreenController {
     if (!modelManager.stylesTraitsLoaded) {
       modelManager.loadDataModelEnvironmentValues();
     }
+    soundController.stop();
     return Get.offNamed('/alarm_limit_screen');
   }
 
   Future? scenarioMenuExitButton() {
     switch (systemState.screenStatus) {
       case screenStatusEnum.patientSettingScreen:
+        soundController.stop();
         return Get.toNamed('/start_screen');
       case screenStatusEnum.monitorScreen:
+        soundController.startSaturationHFSound();
         return Get.toNamed('/main_screen');
       case screenStatusEnum.ventilationScreen:
+        soundController.startSaturationHFSound();
         return Get.toNamed('/main_screen');
       case screenStatusEnum.defibrillationScreen:
+        soundController.startSaturationHFSound();
         return Get.toNamed('/main_screen');
       default:
         throw Exception('unkown previous screen exiting Demo/Scenario Screen');
@@ -181,6 +193,7 @@ class ScreenController {
     }
     changeScenario(scenario);
     systemState.absAlarmFieldModel.updateActiveList();
+    soundController.startSaturationHFSound();
     return Get.toNamed('/main_screen');
   }
 }

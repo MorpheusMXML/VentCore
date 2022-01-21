@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:uke_mlab/providers/alarm_controller.dart';
+import 'package:uke_mlab/providers/sound_controller.dart';
 
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 

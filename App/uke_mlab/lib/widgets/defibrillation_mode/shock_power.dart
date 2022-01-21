@@ -14,42 +14,87 @@ class ShockPower extends StatelessWidget {
       child: Container(
         color: Theme.of(context).cardColor,
         margin: const EdgeInsets.only(left: 8, right: 8),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Expanded(
-              flex: 2,
-              child: Text(
-                "Shock Power",
-                style: TextStyle(
-                  fontSize: 24,
-                ),
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Obx(
-                () => Text(
-                  '${defibrillationController.shockPower}',
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 32,
-                    color: Colors.red,
-                  ),
-                ),
-              ),
-            ),
-            const Flexible(
-              flex: 1,
-              child: Text(
-                "J",
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.red,
-                ),
-              ),
-            )
-          ],
+        child: Obx(
+          () => Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: defibrillationController.shockClicked.value
+                ? [
+                    Expanded(
+                      flex: 3,
+                      child: Obx(
+                        () => defibrillationController.shockClicked.value
+                            ? Slider(
+                                label: defibrillationController.shockPower.value
+                                    .toString(),
+                                min: 0,
+                                max: 250,
+                                divisions: 10,
+                                onChangeEnd: (value) => defibrillationController
+                                    .shockClicked
+                                    .toggle(),
+                                onChanged: (newValue) =>
+                                    defibrillationController.shockPower.value =
+                                        newValue.toInt(),
+                                value: defibrillationController.shockPower.value
+                                    .toDouble(),
+                              )
+                            : ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    primary: Colors.transparent),
+                                child: Text(
+                                  '${defibrillationController.shockPower}',
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 32,
+                                    color: Colors.red,
+                                  ),
+                                ),
+                                onPressed: () => defibrillationController
+                                    .shockClicked
+                                    .toggle(),
+                              ),
+                      ),
+                    ),
+                  ]
+                : [
+                    const Expanded(
+                      flex: 3,
+                      child: Text(
+                        "Shock Power",
+                        style: TextStyle(
+                          fontSize: 24,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.transparent),
+                        child: Text(
+                          '${defibrillationController.shockPower}',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 32,
+                            color: Colors.red,
+                          ),
+                        ),
+                        onPressed: () =>
+                            defibrillationController.shockClicked.toggle(),
+                      ),
+                    ),
+                    const Flexible(
+                      flex: 1,
+                      child: Text(
+                        "J",
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.red,
+                        ),
+                      ),
+                    )
+                  ],
+          ),
         ),
       ),
     );

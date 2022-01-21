@@ -20,9 +20,12 @@ class DefibrillationController extends GetxController {
   RxString selectedSynchronicityButton = 'Sync'.obs;
 
   RxBool metronomeOn = true.obs;
-  RxString loaded = 'Loaded'.obs;
+  bool isReadyToShock = false;
+  // TODO: Get Shock Power from preset Adult, CHild, Infant
 
-  RxInt shockPower = 0.obs;
+  RxInt shockPower = 200.obs;
+  RxBool shockClicked = false.obs;
+
   RxString systemDiagnosis = 'Placeholder Diagnosis'.obs;
 
   RxInt numberOfShocks = 0.obs;
@@ -58,23 +61,6 @@ class DefibrillationController extends GetxController {
     String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
     String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
     return '$twoDigitMinutes:$twoDigitSeconds';
-  }
-
-  void toggleLoaded(String value) async {
-    if (loaded.value == 'Shock') {
-      numberOfShocks++;
-      shockPower.value = 0;
-      loaded.value = value;
-    } else {
-      loaded.value = 'Loading';
-      Timer.periodic(const Duration(milliseconds: 1), (timer) {
-        shockPower.value++;
-        if (shockPower >= 200) {
-          timer.cancel();
-          loaded.value = value;
-        }
-      });
-    }
   }
 
   void toggleMetronome(bool changed) {
