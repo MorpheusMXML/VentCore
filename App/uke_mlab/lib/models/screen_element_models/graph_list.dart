@@ -74,16 +74,14 @@ class GraphList {
   void graphListSort() {
     SystemState systemState = Get.find<SystemState>();
     if (systemState.selectedToggleView[0]) {
-      list.value.sort(
+      list.sort(
           (a, b) => monitorList.indexOf(a).compareTo(monitorList.indexOf(b)));
       //sort after monitorList
     } else if (systemState.selectedToggleView[1]) {
-      list.value
-          .sort((a, b) => ventiList.indexOf(a).compareTo(ventiList.indexOf(b)));
+      list.sort((a, b) => ventiList.indexOf(a).compareTo(ventiList.indexOf(b)));
       //sort after ventList
     } else if (systemState.selectedToggleView[2]) {
-      list.value
-          .sort((a, b) => defiList.indexOf(a).compareTo(defiList.indexOf(b)));
+      list.sort((a, b) => defiList.indexOf(a).compareTo(defiList.indexOf(b)));
       //sort after defiList
     } else {
       throw Exception("Trying to sort graphList, no Toggle view was selected");
