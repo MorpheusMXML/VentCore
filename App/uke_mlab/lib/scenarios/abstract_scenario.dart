@@ -7,6 +7,7 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 abstract class AbstractScenario {
   bool scenarioRunning = false;
+  Set<Timer?> scenarioTimer = {};
 
   /// Starts a given scenario via the [scenarioPath].
   ///
@@ -15,10 +16,8 @@ abstract class AbstractScenario {
   void startScenario({required String scenarioPath}) {
     scenarioRunning = true;
     loadData(scenarioPath: scenarioPath).then((dataList) => runScenario(
-        dataMapAbsolute:
-            dataList[0] as Map<sensorEnumAbsolute, Map<String, dynamic>>,
-        dataMapGraph:
-            dataList[1] as Map<sensorEnumGraph, Map<String, dynamic>>));
+        dataMapAbsolute: dataList[0] as Map<sensorEnumAbsolute, Map<String, dynamic>>,
+        dataMapGraph: dataList[1] as Map<sensorEnumGraph, Map<String, dynamic>>));
   }
 
   /// [runScenario] starts a [Timer] that updates each graph and absolute value seperately.
@@ -73,8 +72,7 @@ abstract class AbstractScenario {
   /// ```dart
   /// int millisTillNextBatch = ((1 / resolution) * 1000) * batchSize;
   /// ```
-  Duration calculateUpdateRate(
-      {required int batchSize, required double resolution}) {
+  Duration calculateUpdateRate({required int batchSize, required double resolution}) {
     int millisTillNextDatapoint = ((1 / resolution) * 1000).toInt();
     int millisTillNextBatch = millisTillNextDatapoint * batchSize;
     return Duration(milliseconds: millisTillNextBatch);
@@ -82,5 +80,14 @@ abstract class AbstractScenario {
 
   Duration calculateUpdateRateAbsolute({required double resolution}) {
     return calculateUpdateRate(batchSize: 1, resolution: resolution);
+  }
+
+  void stopTimers() {
+    for (var timer in scenarioTimer) {
+      timer!.cancel();
+      //TODO: wird von garbage collection entfernt?
+      timer = null;
+    }
+    scenarioTimer.clear();
   }
 }

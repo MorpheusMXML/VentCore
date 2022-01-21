@@ -20,21 +20,16 @@ class StandardScenario extends AbstractScenario {
   void runScenario(
       {required Map<sensorEnumAbsolute, Map<String, dynamic>> dataMapAbsolute,
       required Map<sensorEnumGraph, Map<String, dynamic>> dataMapGraph}) {
-    Map<sensorEnumGraph, Map<int, Map<String, dynamic>>> scenarioMap =
-        scenariosEnum.standardScenario.scenarioMap;
+    Map<sensorEnumGraph, Map<int, Map<String, dynamic>>> scenarioMap = scenariosEnum.standardScenario.scenarioMap;
     for (var sensorAbsolute in dataMapAbsolute.keys) {
-      if (sensorAbsolute != sensorEnumAbsolute.sysAbsolute &&
-          sensorAbsolute != sensorEnumAbsolute.diaAbsolute) {
-        DataModelAbsolute dataModelAbsolute =
-            Get.find<DataModelAbsolute>(tag: sensorAbsolute.name);
-        double resolution =
-            dataMapAbsolute[sensorAbsolute]!['channel_information']
-                    ['resolution']['value']
-                .toDouble();
+      if (sensorAbsolute != sensorEnumAbsolute.sysAbsolute && sensorAbsolute != sensorEnumAbsolute.diaAbsolute) {
+        DataModelAbsolute dataModelAbsolute = Get.find<DataModelAbsolute>(tag: sensorAbsolute.name);
+        double resolution = dataMapAbsolute[sensorAbsolute]!['channel_information']['resolution']['value'].toDouble();
         List<dynamic> dataList = dataMapAbsolute[sensorAbsolute]!['data'];
 
-        Timer.periodic(calculateUpdateRateAbsolute(resolution: resolution),
-            (timer) {
+        Timer currentTimer;
+
+        currentTimer = Timer.periodic(calculateUpdateRateAbsolute(resolution: resolution), (timer) {
           // TODO: intermediate implementation -> fix later
           // if counter outside list -> set counter to 0
           if (dataList.length == dataModelAbsolute.counter.value) {
@@ -44,33 +39,25 @@ class StandardScenario extends AbstractScenario {
             timer.cancel();
           }
 
-          dataModelAbsolute.updateValue(
-              dataList[dataModelAbsolute.counter.value].toDouble());
+          dataModelAbsolute.updateValue(dataList[dataModelAbsolute.counter.value].toDouble());
         });
+        scenarioTimer.add(currentTimer);
       }
     }
 
     for (var sensorGraph in dataMapGraph.keys) {
-      Map<int, Map<String, dynamic>> graphAlarmMap =
-          scenarioMap[sensorGraph] ?? {};
+      Map<int, Map<String, dynamic>> graphAlarmMap = scenarioMap[sensorGraph] ?? {};
       int batchSize = 1;
-      double resolution = dataMapGraph[sensorGraph]!['channel_information']
-              ['resolution']['value']
-          .toDouble();
+      double resolution = dataMapGraph[sensorGraph]!['channel_information']['resolution']['value'].toDouble();
       List<dynamic> dataList = dataMapGraph[sensorGraph]!['data'];
 
       if (sensorGraph == sensorEnumGraph.nibd) {
-        DataModelNIBD dataModelNIBD =
-            Get.find<DataModelNIBD>(tag: sensorGraph.name);
-        DataModelAbsolute sysDataModel = Get.find<DataModelAbsolute>(
-            tag: sensorEnumAbsolute.sysAbsolute.name);
-        DataModelAbsolute diaDataModel = Get.find<DataModelAbsolute>(
-            tag: sensorEnumAbsolute.diaAbsolute.name);
+        DataModelNIBD dataModelNIBD = Get.find<DataModelNIBD>(tag: sensorGraph.name);
+        DataModelAbsolute sysDataModel = Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.sysAbsolute.name);
+        DataModelAbsolute diaDataModel = Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.diaAbsolute.name);
 
-        List<dynamic> sysDataList = List<dynamic>.generate(
-            dataList.length, (index) => dataList[index][0]);
-        List<dynamic> diaDataList = List<dynamic>.generate(
-            dataList.length, (index) => dataList[index][1]);
+        List<dynamic> sysDataList = List<dynamic>.generate(dataList.length, (index) => dataList[index][0]);
+        List<dynamic> diaDataList = List<dynamic>.generate(dataList.length, (index) => dataList[index][1]);
 
         updateNIBD(
           batchSize: batchSize,
@@ -84,8 +71,7 @@ class StandardScenario extends AbstractScenario {
           graphAlarmMap: graphAlarmMap,
         );
       } else {
-        DataModelGraph dataModelGraph =
-            Get.find<DataModelGraph>(tag: sensorGraph.name);
+        DataModelGraph dataModelGraph = Get.find<DataModelGraph>(tag: sensorGraph.name);
 
         updateGraph(
           batchSize: batchSize,
@@ -108,9 +94,9 @@ class StandardScenario extends AbstractScenario {
       required DataModelAbsolute sysDataModel,
       required DataModelAbsolute diaDataModel,
       required Map<int, Map<String, dynamic>> graphAlarmMap}) {
-    Timer.periodic(
-        calculateUpdateRate(batchSize: batchSize, resolution: resolution),
-        (timer) {
+    Timer currentTimer;
+
+    currentTimer = Timer.periodic(calculateUpdateRate(batchSize: batchSize, resolution: resolution), (timer) {
       int startIndex = dataModelNIBD.singleData.value.counter;
       int endIndex = dataModelNIBD.singleData.value.counter + batchSize;
 
@@ -120,27 +106,22 @@ class StandardScenario extends AbstractScenario {
         sysDataModel.counter.value = 0;
         diaDataModel.counter.value = 0;
       }
-      sysDataModel
-          .updateValue(sysDataList[sysDataModel.counter.value].toDouble());
-      diaDataModel
-          .updateValue(diaDataList[diaDataModel.counter.value].toDouble());
+      sysDataModel.updateValue(sysDataList[sysDataModel.counter.value].toDouble());
+      diaDataModel.updateValue(diaDataList[diaDataModel.counter.value].toDouble());
 
       if (graphAlarmMap.containsKey(startIndex)) {
         nonGraphAlarmEnum currentAlarm = graphAlarmMap[startIndex]!['alarm'];
         int currentPriority = graphAlarmMap[startIndex]!['priority'];
-        Get.find<SystemState>()
-            .generalAlarms
-            .addAlarm(currentAlarm, currentPriority);
+        Get.find<SystemState>().generalAlarms.addAlarm(currentAlarm, currentPriority);
       }
 
       if ((endIndex % dataList.length) == 0) {
-        dataModelNIBD.updateValues(
-            dataList.sublist(startIndex % dataList.length, dataList.length));
+        dataModelNIBD.updateValues(dataList.sublist(startIndex % dataList.length, dataList.length));
       } else {
-        dataModelNIBD.updateValues(dataList.sublist(
-            (startIndex % dataList.length), (endIndex % dataList.length)));
+        dataModelNIBD.updateValues(dataList.sublist((startIndex % dataList.length), (endIndex % dataList.length)));
       }
     });
+    scenarioTimer.add(currentTimer);
   }
 
   void updateGraph(
@@ -149,27 +130,24 @@ class StandardScenario extends AbstractScenario {
       required List<dynamic> dataList,
       required DataModelGraph dataModelGraph,
       required Map<int, Map<String, dynamic>> graphAlarmMap}) {
-    Timer.periodic(
-        calculateUpdateRate(batchSize: batchSize, resolution: resolution),
-        (timer) {
+    Timer currentTimer;
+
+    currentTimer = Timer.periodic(calculateUpdateRate(batchSize: batchSize, resolution: resolution), (timer) {
       int startIndex = dataModelGraph.singleData.value.counter;
       int endIndex = dataModelGraph.singleData.value.counter + batchSize;
 
       if (graphAlarmMap.containsKey(startIndex)) {
         nonGraphAlarmEnum currentAlarm = graphAlarmMap[startIndex]!['alarm'];
         int currentPriority = graphAlarmMap[startIndex]!['priority'];
-        Get.find<SystemState>()
-            .generalAlarms
-            .addAlarm(currentAlarm, currentPriority);
+        Get.find<SystemState>().generalAlarms.addAlarm(currentAlarm, currentPriority);
       }
 
       if ((endIndex % dataList.length) == 0) {
-        dataModelGraph.updateValues(
-            dataList.sublist(startIndex % dataList.length, dataList.length));
+        dataModelGraph.updateValues(dataList.sublist(startIndex % dataList.length, dataList.length));
       } else {
-        dataModelGraph.updateValues(dataList.sublist(
-            (startIndex % dataList.length), (endIndex % dataList.length)));
+        dataModelGraph.updateValues(dataList.sublist((startIndex % dataList.length), (endIndex % dataList.length)));
       }
     });
+    scenarioTimer.add(currentTimer);
   }
 }

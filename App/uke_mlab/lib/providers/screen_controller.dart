@@ -34,6 +34,7 @@ class ScreenController {
         modelManager.resetAllModels();
         resetToggleView();
         systemState.generalAlarms.resetAlarms();
+        runningScenario!.stopTimers();
       }
     }
 
