@@ -60,7 +60,6 @@ class GraphList {
   /// removes [graphKey] from current [list]
   void graphListRemove(sensorEnumGraph graphKey) {
     list.remove(graphKey);
-    graphListSort();
     evaluateActiveGraphAbsolutes();
   }
 
@@ -71,18 +70,22 @@ class GraphList {
     evaluateActiveGraphAbsolutes();
   }
 
+  /// sorts [list] into a order predefined by active screen
+  ///
+  /// order is either [monitorList], [ventiList] or [defiList] depending on
+  /// currently active [SystemState.selectedToggleView] entry
   void graphListSort() {
     SystemState systemState = Get.find<SystemState>();
     if (systemState.selectedToggleView[0]) {
+      //sort after monitorList
       list.sort(
           (a, b) => monitorList.indexOf(a).compareTo(monitorList.indexOf(b)));
-      //sort after monitorList
     } else if (systemState.selectedToggleView[1]) {
-      list.sort((a, b) => ventiList.indexOf(a).compareTo(ventiList.indexOf(b)));
       //sort after ventList
+      list.sort((a, b) => ventiList.indexOf(a).compareTo(ventiList.indexOf(b)));
     } else if (systemState.selectedToggleView[2]) {
-      list.sort((a, b) => defiList.indexOf(a).compareTo(defiList.indexOf(b)));
       //sort after defiList
+      list.sort((a, b) => defiList.indexOf(a).compareTo(defiList.indexOf(b)));
     } else {
       throw Exception("Trying to sort graphList, no Toggle view was selected");
     }
