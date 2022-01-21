@@ -63,8 +63,11 @@ class SoundController {
     alarmPlayerRet = await alarmPlayer.play(_alarmSoundFiles[soundIdentifier].toString());
   }
 
-  loop(Enum soundIdentifier) async {
-    alarmPlayerRet = await alarmPlayer.loop(_alarmSoundFiles[soundIdentifier].toString());
+  playDefiLoadSound() async {
+    alarmPlayerRet = await alarmPlayer.play(_alarmSoundFiles[SoundIdentifier.defiLoading].toString());
+    alarmPlayerRet!.onPlayerCompletion.listen((event) async {
+      alarmPlayerRet = await alarmPlayer.loop(_alarmSoundFiles[SoundIdentifier.defiShockReady].toString());
+    });
   }
 
   ///sops all [AudioPlayer]'s that are currently playing a Sound.

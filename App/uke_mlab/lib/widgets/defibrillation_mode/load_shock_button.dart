@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import 'package:uke_mlab/providers/defibrillation_controller.dart';
+import 'package:uke_mlab/providers/sound_controller.dart';
 
 class LoadShockButton extends StatefulWidget {
   const LoadShockButton({Key? key}) : super(key: key);
@@ -32,6 +33,7 @@ class _LoadShockButtonState extends State<LoadShockButton> with SingleTickerProv
   }
 
   DefibrillationController defibrillationController = Get.find<DefibrillationController>();
+  SoundController soundController = Get.find<SoundController>();
   late AnimationController _animationController;
   late Animation<Color?> _colorTween;
   @override
@@ -66,8 +68,8 @@ class _LoadShockButtonState extends State<LoadShockButton> with SingleTickerProv
               setState(
                 () {
                   if (!defibrillationController.isReadyToShock) {
+                    soundController.playDefiLoadSound();
                     _animationController.forward();
-
                     defibrillationController.isReadyToShock = true;
                   }
                 },
@@ -76,6 +78,7 @@ class _LoadShockButtonState extends State<LoadShockButton> with SingleTickerProv
             onLongPress: () {
               setState(() {
                 if (defibrillationController.isReadyToShock) {
+                  soundController.stop();
                   _animationController.reset();
                   defibrillationController.startLastWatch();
                   defibrillationController.numberOfShocks++;
