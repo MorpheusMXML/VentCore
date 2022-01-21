@@ -20,26 +20,20 @@ class MonitoringMode extends StatelessWidget {
           flex: 8,
           child: Row(
             children: const [
-              Expanded(
-                child: ValueBoxTile.withHeadline(
-                    sensorAbsolute: sensorEnumAbsolute.pulse),
-              ),
-              Expanded(
-                child: ValueBoxTile.withHeadline(
-                    sensorAbsolute: sensorEnumAbsolute.tempAbsolute),
-              ),
-            ],
-          ),
-        ),
-        Flexible(
-          flex: 8,
-          child: Row(
-            children: const [
               ValueBoxTileNIBD(
                 sensorAbsoluteDIA: sensorEnumAbsolute.diaAbsolute,
                 sensorAbsoluteSYS: sensorEnumAbsolute.sysAbsolute,
               ),
               // TODO: requires multiple constructors in  ValueBoxTile to display special elements
+            ],
+          ),
+        ),
+        Flexible(
+          flex: 1,
+          child: Row(
+            children: const [
+              ValueBoxTile.withHeadline(sensorAbsolute: sensorEnumAbsolute.tempAbsolute),
+              ValueBoxTile.withHeadline(sensorAbsolute: sensorEnumAbsolute.pulse),
             ],
           ),
         ),
