@@ -30,7 +30,7 @@ class ContinueButton extends StatelessWidget {
               ? () => screenController
                   .continueButton(startScreenController.selectedString.value)
               : null,
-          child: const Text('Continue', style: TextStyle(fontSize: 20)),
+          child: const Text('Continue', style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
         ),
       ),
     );
