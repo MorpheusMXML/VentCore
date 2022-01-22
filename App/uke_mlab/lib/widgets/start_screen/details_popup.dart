@@ -16,26 +16,16 @@ class DetailsPopup extends StatelessWidget {
     return Obx(
       () => startScreenController.isPopupVisible.value
           ? Container(
-              margin: const EdgeInsets.fromLTRB(0, 22, 65, 12),
+              margin: const EdgeInsets.only(right: 65, bottom: 12),
               color: Theme.of(context).focusColor,
               child: Column(
                 children: [
-                  const PopupNameField(),
-                  PopupSlider(
-                      name: 'Weight',
-                      unit: 'kg',
-                      value: startScreenController.weightValue),
-                  PopupSlider(
-                      name: 'Height',
-                      unit: 'cm',
-                      value: startScreenController.heightValue),
+                  PopupSlider(name: 'Weight', unit: 'kg', value: startScreenController.weightValue),
+                  PopupSlider(name: 'Height', unit: 'cm', value: startScreenController.heightValue),
                 ],
               ),
             )
-          : Container(
-              height: 400 / MediaQuery.of(context).devicePixelRatio,
-              margin: const EdgeInsets.fromLTRB(0, 0, 65, 12),
-            ),
+          : Container(),
     );
   }
 }

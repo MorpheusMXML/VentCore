@@ -20,7 +20,7 @@ class PopupSlider extends StatelessWidget {
 
     return Container(
       height: 100 / MediaQuery.of(context).devicePixelRatio,
-      margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+      margin: const EdgeInsets.fromLTRB(12, 12, 12, 12),
       color: const Color(0xff322f37),
       child: Row(
         children: [
@@ -55,19 +55,14 @@ class PopupSlider extends StatelessWidget {
           ),
           Container(
             margin: const EdgeInsets.fromLTRB(0, 5, 10, 5),
-            decoration: BoxDecoration(
-                color: Theme.of(context).dividerColor,
-                borderRadius: const BorderRadius.all(Radius.circular(3))),
+            decoration: BoxDecoration(color: Theme.of(context).dividerColor, borderRadius: const BorderRadius.all(Radius.circular(3))),
             alignment: Alignment.center,
             height: 50 / MediaQuery.of(context).devicePixelRatio,
             width: 150 / MediaQuery.of(context).devicePixelRatio,
             child: Obx(
               () => Text(
                 '${value.value.round().toString()}$unit',
-                style: const TextStyle(
-                    fontSize: 21,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
+                style: const TextStyle(fontSize: 21, fontWeight: FontWeight.bold, color: Colors.black),
               ),
             ),
           ),
