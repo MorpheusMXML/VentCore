@@ -12,8 +12,7 @@ class LoadShockButton extends StatefulWidget {
   _LoadShockButtonState createState() => _LoadShockButtonState();
 }
 
-class _LoadShockButtonState extends State<LoadShockButton>
-    with SingleTickerProviderStateMixin {
+class _LoadShockButtonState extends State<LoadShockButton> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     _animationController = AnimationController(
@@ -22,8 +21,7 @@ class _LoadShockButtonState extends State<LoadShockButton>
         seconds: 6,
       ),
     );
-    _colorTween = ColorTween(begin: Colors.transparent, end: Colors.red)
-        .animate(_animationController);
+    _colorTween = ColorTween(begin: Colors.transparent, end: Colors.red).animate(_animationController);
 
     super.initState();
   }
@@ -34,8 +32,7 @@ class _LoadShockButtonState extends State<LoadShockButton>
     _animationController.dispose();
   }
 
-  DefibrillationController defibrillationController =
-      Get.find<DefibrillationController>();
+  DefibrillationController defibrillationController = Get.find<DefibrillationController>();
   SoundController soundController = Get.find<SoundController>();
   late AnimationController _animationController;
   late Animation<Color?> _colorTween;
@@ -59,8 +56,7 @@ class _LoadShockButtonState extends State<LoadShockButton>
               children: [
                 Container(
                   color: _colorTween.value,
-                  child: (_animationController.isCompleted &&
-                          defibrillationController.isReadyToShock == true)
+                  child: (_animationController.isCompleted && defibrillationController.isReadyToShock == true)
                       ? SvgPicture.asset('assets/icons/Shock.svg')
                       : SvgPicture.asset('assets/icons/Battery.svg'),
                   padding: const EdgeInsets.all(8),
@@ -72,6 +68,8 @@ class _LoadShockButtonState extends State<LoadShockButton>
               setState(
                 () {
                   if (!defibrillationController.isReadyToShock) {
+                    //Disable ToggleButton for Safety Reasons because Mode Change shall be Blocked during Shock Loading and Ready to Shock State
+                    defibrillationController.toggleButtonAvailable.toggle();
                     soundController.playDefiLoadSound();
                     _animationController.forward();
                     defibrillationController.isReadyToShock = true;
@@ -88,6 +86,13 @@ class _LoadShockButtonState extends State<LoadShockButton>
                   defibrillationController.startLastWatch();
                   defibrillationController.numberOfShocks++;
                   defibrillationController.isReadyToShock = false;
+                  // Enable ToggleButton after Shock has been dicharged.
+                  defibrillationController.toggleButtonAvailable.toggle();
+                } else {
+                  defibrillationController.toggleButtonAvailable.toggle();
+                  soundController.playDefiLoadSound();
+                  _animationController.forward();
+                  defibrillationController.isReadyToShock = true;
                 }
               });
             },
