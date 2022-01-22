@@ -7,6 +7,7 @@ import 'package:uke_mlab/providers/sound_controller.dart';
 
 import 'package:uke_mlab/utilities/enums/alarm_status.dart';
 import 'package:uke_mlab/utilities/enums/alarm_message.dart';
+import 'package:uke_mlab/utilities/enums/screen_status.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 /// This Class provides the SoundPlaying and Triggering Functionallity.
@@ -178,7 +179,8 @@ class AlarmController {
       _systemState.graphList.evaluateActiveGraphAbsolutes();
       _systemState.absAlarmFieldModel.evaluateActiveList();
       // triggerSoundState Method for sounds
-      if (status.priority != 0 && // dont trigger on no alarm
+      if (_systemState.screenStatus != screenStatusEnum.defibrillationScreen &&
+          status.priority != 0 && // dont trigger on no alarm
           status.priority != 1 && // dont trigger on alarm confirmed
           (_systemState.absAlarmFieldModel.activeList.contains(sensor) ||
               _systemState.graphList.activeGraphAbsolutes.contains(sensor))) {
