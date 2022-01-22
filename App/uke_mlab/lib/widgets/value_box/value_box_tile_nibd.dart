@@ -31,55 +31,55 @@ class ValueBoxTileNIBD extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // sensorAbsolute is not null since IF sensorGraph == null, sensorAbsolute is required // sensorAbsolute is not null since IF sensorGraph == null, sensorAbsolute is required
-    DataModelAbsolute dataModelSYS = Get.find<DataModelAbsolute>(tag: sensorAbsoluteSYS.name);
-    DataModelAbsolute dataModelDIA = Get.find<DataModelAbsolute>(tag: sensorAbsoluteDIA.name);
-    return Expanded(
-      child: Container(
-        color: Theme.of(context).focusColor,
-        margin: const EdgeInsets.only(right: 8, bottom: 8),
-        child: Column(
-          children: [
-            Flexible(
-              flex: 1,
+    DataModelAbsolute dataModelSYS =
+        Get.find<DataModelAbsolute>(tag: sensorAbsoluteSYS.name);
+    DataModelAbsolute dataModelDIA =
+        Get.find<DataModelAbsolute>(tag: sensorAbsoluteDIA.name);
+    return Container(
+      color: Theme.of(context).focusColor,
+      margin: const EdgeInsets.only(right: 8, bottom: 8),
+      child: Column(
+        children: [
+          Flexible(
+            flex: 1,
 
-              /// [Container] used to render the ShortString of the [DataModelAbsolute] Results in the [String] 'NIBD' if called with NIBD DataModel.
-              child: Container(
-                margin: const EdgeInsets.only(top: 4, bottom: 4),
-                child: Text(
-                  dataModelSYS.displayShortString,
-                  style: TextStyle(
-                    decoration: TextDecoration.none,
-                    color: dataModelSYS.color,
-                    fontSize: 20,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+            /// [Container] used to render the ShortString of the [DataModelAbsolute] Results in the [String] 'NIBD' if called with NIBD DataModel.
+            child: Container(
+              margin: const EdgeInsets.only(top: 4, bottom: 4),
+              child: Text(
+                dataModelSYS.displayShortString,
+                style: TextStyle(
+                  decoration: TextDecoration.none,
+                  color: dataModelSYS.color,
+                  fontSize: 20,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             ),
-            Flexible(
-                flex: 3,
-                child:
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  //Systolic Absolute Box
-                  Flexible(
-                    flex: 2,
-                    child: ValueBoxState.withHeadline(
-                      dataModel: dataModelSYS,
-                      optAbreviationTitle: sensorAbsoluteSYS.abbreviation,
+          ),
+          Flexible(
+              flex: 3,
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    //Systolic Absolute Box
+                    Flexible(
+                      flex: 2,
+                      child: ValueBoxState.withHeadline(
+                        dataModel: dataModelSYS,
+                        optAbreviationTitle: sensorAbsoluteSYS.abbreviation,
+                      ),
                     ),
-                  ),
-                  Flexible(flex: 1, child: Container()),
-                  //Diastolic Absolute Box
-                  Flexible(
-                    flex: 2,
-                    child: ValueBoxState.withHeadline(
-                      dataModel: dataModelDIA,
-                      optAbreviationTitle: sensorAbsoluteDIA.abbreviation,
+                    //Diastolic Absolute Box
+                    Flexible(
+                      flex: 2,
+                      child: ValueBoxState.withHeadline(
+                        dataModel: dataModelDIA,
+                        optAbreviationTitle: sensorAbsoluteDIA.abbreviation,
+                      ),
                     ),
-                  ),
-                ]))
-          ],
-        ),
+                  ]))
+        ],
       ),
     );
   }
