@@ -26,7 +26,7 @@ class SoundController {
   final AudioCache alarmPlayerCache = AudioCache(prefix: 'assets/sounds/');
   final AudioCache ecgPlayerCache = AudioCache(prefix: 'assets/sounds/');
   final List<SoundListEntry> soundList = <SoundListEntry>[];
-  List<bool> _alarmTypes = [false, false];
+  final List<bool> _alarmTypes = [false, false];
   Timer? timer;
   Timer? getDataTimer;
   Timer? cancelTimerBeep;
@@ -111,26 +111,28 @@ class SoundController {
 
   triggerSoundState(dynamic sensor, int priority) {
     print(" \nSoundStateTriggered with $sensor");
+
+    // TODO compare list with current system state (eg: is temperature still confirmed?)
     soundList.removeWhere((item) => item.sensor == sensor);
-    if (priority != alarmStatus.confirmed.priority) {
-      soundList.add(SoundListEntry(sensor: sensor, priority: priority));
-    }
+    soundList.add(SoundListEntry(sensor: sensor, priority: priority));
+
     soundList.sort((a, b) => b.priority.compareTo(a.priority));
     soundList.removeWhere((item) => item.priority < soundList[0].priority);
     //for each Entry check Sensor Vent or Monitor
     for (var entry in soundList) {
       if (entry.sensor is sensorEnumAbsolute) {
         switch ((entry.sensor as sensorEnumAbsolute).alarmType) {
-          case 1:
+          case 1: // is monitor alarm
             _alarmTypes[0] = true;
             break;
-          case 2:
+          case 2: // is ventilator alarm
             _alarmTypes[1] = true;
             break;
           default:
             throw Exception("sensorEnumAbsolute has wrong defined alarmType");
         }
       }
+      // TODO: analyze general alarms too
     }
     print(
         "playAlarm called by ${soundList[0].sensor.toString()} with prio $priority\n ");
