@@ -86,7 +86,7 @@ class ScreenController {
     }
     systemState.screenStatus = screenStatusEnum.monitorScreen;
     changeScenario(scenariosEnum.standardScenario);
-    systemState.absAlarmFieldModel.updateActiveList();
+    systemState.absAlarmFieldModel.evaluateActiveList();
     soundController.startSaturationHFSound();
     return Get.toNamed('/main_screen');
   }
@@ -99,7 +99,7 @@ class ScreenController {
     //systemState.patientType = patientTypeEnum.adult;
     systemState.screenStatus = screenStatusEnum.monitorScreen;
     changeScenario(scenariosEnum.standardScenario);
-    systemState.absAlarmFieldModel.updateActiveList();
+    systemState.absAlarmFieldModel.evaluateActiveList();
     soundController.startSaturationHFSound();
     return Get.toNamed('/main_screen');
   }
@@ -113,7 +113,7 @@ class ScreenController {
     systemState.screenStatus = screenStatusEnum.defibrillationScreen;
     changeScenario(scenariosEnum.standardScenario);
     systemState.setSelectedToggleView([false, false, true]);
-    systemState.absAlarmFieldModel.updateActiveList();
+    systemState.absAlarmFieldModel.evaluateActiveList();
     soundController.startSaturationHFSound();
     return Get.toNamed('/main_screen');
   }
@@ -136,17 +136,17 @@ class ScreenController {
       case 0:
         systemState.screenStatus = screenStatusEnum.monitorScreen;
         systemState.setSelectedToggleView([true, false, false]);
-        systemState.absAlarmFieldModel.updateActiveList();
+        systemState.absAlarmFieldModel.evaluateActiveList();
         break;
       case 1:
         systemState.screenStatus = screenStatusEnum.ventilationScreen;
         systemState.setSelectedToggleView([false, true, false]);
-        systemState.absAlarmFieldModel.updateActiveList();
+        systemState.absAlarmFieldModel.evaluateActiveList();
         break;
       case 2:
         systemState.screenStatus = screenStatusEnum.defibrillationScreen;
         systemState.setSelectedToggleView([false, false, true]);
-        systemState.absAlarmFieldModel.updateActiveList();
+        systemState.absAlarmFieldModel.evaluateActiveList();
         break;
       default:
         throw Exception("No screen $index known in toggle view");
@@ -192,7 +192,7 @@ class ScreenController {
       systemState.patientType = patientTypeEnum.adult;
     }
     changeScenario(scenario);
-    systemState.absAlarmFieldModel.updateActiveList();
+    systemState.absAlarmFieldModel.evaluateActiveList();
     soundController.startSaturationHFSound();
     return Get.toNamed('/main_screen');
   }

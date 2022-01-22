@@ -76,7 +76,6 @@ class SoundController {
         _alarmSoundFiles[SoundIdentifier.defiLoading].toString(),
         volume: 0.5);
     alarmPlayer!.onPlayerCompletion.listen((event) async {
-      print("ABC");
       alarmPlayer = await alarmPlayerCache.loop(
           _alarmSoundFiles[SoundIdentifier.defiShockReady].toString(),
           volume: 0.6);
@@ -110,7 +109,8 @@ class SoundController {
     audioPlayer.stop();
   }
 
-  triggerSoundState(sensor, int priority) {
+  triggerSoundState(dynamic sensor, int priority) {
+    print(" \nSoundStateTriggered with $sensor");
     soundList.removeWhere((item) => item.sensor == sensor);
     if (priority != alarmStatus.confirmed.priority) {
       soundList.add(SoundListEntry(sensor: sensor, priority: priority));
@@ -132,6 +132,8 @@ class SoundController {
         }
       }
     }
+    print(
+        "playAlarm called by ${soundList[0].sensor.toString()} with prio $priority\n ");
     playAlarm(soundList[0].priority);
   }
 
@@ -279,6 +281,8 @@ class SoundController {
   }
 
   void startSaturationHFSound() {
+    // TODO: end comment
+    /*
     DataModelAbsolute hfModel =
         Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.hfAbsolute.name);
     DataModelAbsolute spo2Model =
@@ -288,7 +292,7 @@ class SoundController {
       saturationHfBeep(
           bpm: hfModel.absoluteValue.value.toInt(),
           spO2: spo2Model.absoluteValue.value.toInt());
-    });
+    });*/
   }
 }
 

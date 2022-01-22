@@ -66,7 +66,7 @@ extension SensorGraphAttributes on sensorEnumGraph {
       'yAxisUnit': '%',
       'xAxisUnit': '',
       'color': AppTheme.plethColor,
-      'graphLength': 100,
+      'graphLength': 250,
     },
     sensorEnumGraph.ecgCh1: {
       'graphTitle': 'ECG Channel 1',
@@ -295,6 +295,7 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
   Map get upperBound => attributes[this]!['upperBound'] as Map<String, dynamic>;
   Map get lowerBound => attributes[this]!['lowerBound'] as Map<String, dynamic>;
   bool get floatRepresentation => attributes[this]!['floatRepresentation'];
+
   /// 1= Monitor Alarm; 2=Ventilation Alarm. Monitor Alarm is default.
   int get alarmType => attributes[this]!['alarmType'] ?? 1;
 }
