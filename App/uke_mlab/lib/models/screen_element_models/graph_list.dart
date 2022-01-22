@@ -111,8 +111,8 @@ class GraphList {
     for (var graphSensorKey in list) {
       sensorEnumAbsolute? sensorKey = SensorMapping.sensorMap[graphSensorKey];
       if (sensorKey != null &&
-          (systemState.alarmState[sensorKey]!["enum"] != alarmStatus.none &&
-              systemState.alarmState[sensorKey]!["enum"] !=
+          (systemState.alarmState[sensorKey]!["status"] != alarmStatus.none &&
+              systemState.alarmState[sensorKey]!["status"] !=
                   alarmStatus.confirmed)) {
         activeGraphAbsolutes.add(sensorKey);
       }

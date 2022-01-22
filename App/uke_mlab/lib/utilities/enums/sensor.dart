@@ -295,4 +295,6 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
   Map get upperBound => attributes[this]!['upperBound'] as Map<String, dynamic>;
   Map get lowerBound => attributes[this]!['lowerBound'] as Map<String, dynamic>;
   bool get floatRepresentation => attributes[this]!['floatRepresentation'];
+  /// 1= Monitor Alarm; 2=Ventilation Alarm. Monitor Alarm is default.
+  int get alarmType => attributes[this]!['alarmType'] ?? 1;
 }

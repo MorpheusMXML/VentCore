@@ -1,9 +1,9 @@
 enum alarmMessage {
   suppressed,
   lowerBoundaryViolated,
-  inBoundaries,
   upperBoundaryViolated,
-  deviation
+  deviation,
+  none
 }
 
 extension AlarmMessageAttributes on alarmMessage {
@@ -12,16 +12,16 @@ extension AlarmMessageAttributes on alarmMessage {
       'message': 'Suppressed Alarm',
     },
     alarmMessage.lowerBoundaryViolated: {
-      'message': 'Lower Boundary Violated',
-    },
-    alarmMessage.inBoundaries: {
-      'message': 'In Boundaries',
+      'message': 'Low',
     },
     alarmMessage.upperBoundaryViolated: {
-      'message': 'Upper Boundary Violated',
+      'message': 'High',
     },
     alarmMessage.deviation: {
-      'message': 'value deviation detected',
+      'message': 'Deviation',
+    },
+    alarmMessage.none: {
+      'message': 'none',
     },
   };
 

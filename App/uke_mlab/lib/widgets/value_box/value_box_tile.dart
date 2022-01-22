@@ -126,8 +126,8 @@ class ValueBoxTile extends StatelessWidget {
   }
 
   Color evaluateBorderColor(BuildContext context,
-      RxMap<sensorEnumAbsolute, RxMap<String, dynamic>> alarmState) {
-    alarmStatus? alarm = alarmState[sensorAbsolute]!["enum"];
+      RxMap<sensorEnumAbsolute, Map<String, dynamic>> alarmState) {
+    alarmStatus? alarm = alarmState[sensorAbsolute]!["status"];
     switch (alarm) {
       case alarmStatus.high:
       case alarmStatus.middle:

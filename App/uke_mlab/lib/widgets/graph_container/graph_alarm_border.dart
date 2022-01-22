@@ -23,7 +23,7 @@ class GraphAlarmBorder extends StatelessWidget {
     final SystemState systemState = Get.find<SystemState>();
     return Obx(() {
       ///evaluate alarmTypes and see which Boundary is violated
-      alarmStatus? alarm = systemState.alarmState[sensor]!["enum"];
+      alarmStatus? alarm = systemState.getAlarmStateStatus(sensor);
       switch (alarm) {
         case alarmStatus.high:
         case alarmStatus.middle:
@@ -31,7 +31,7 @@ class GraphAlarmBorder extends StatelessWidget {
             children: [
               Expanded(
                 child: Container(
-                  color: systemState.alarmState[sensor]!["color"],
+                  color: systemState.getAlarmStateColor(sensor),
                   padding: const EdgeInsets.only(bottom: 5),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -50,7 +50,7 @@ class GraphAlarmBorder extends StatelessWidget {
             children: [
               Expanded(
                 child: Container(
-                  color: systemState.alarmState[sensor]!["color"],
+                  color: systemState.getAlarmStateColor(sensor),
                   margin: const EdgeInsets.fromLTRB(0, 0, 0, 30),
                 ),
               ),

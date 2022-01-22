@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/models/system_state.dart';
 
@@ -16,11 +17,11 @@ class GraphAlarmMessage extends StatelessWidget {
     final SystemState systemState = Get.find<SystemState>();
 
     return Obx(() {
-      String alarmMessage = systemState.alarmState[sensor]!["message"];
+      String alarmMessage = systemState.getAlarmStateMessage(sensor);
       return Text(
-        '$alarmMessage: ${sensor.displayString}',
+        '${sensor.displayString} $alarmMessage',
         style: const TextStyle(
-          color: Colors.white,
+          color: AppTheme.alarmMessageColor,
           fontSize: 20,
           fontWeight: FontWeight.bold,
         ),

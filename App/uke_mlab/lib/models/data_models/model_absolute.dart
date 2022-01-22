@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:uke_mlab/providers/alarm_controller.dart';
-import 'package:uke_mlab/providers/sound_controller.dart';
 
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
@@ -89,7 +88,12 @@ class DataModelAbsolute extends GetxController {
     }
 
     // Inform alarmController about a value change.
-    alarmController.evaluateAlarm(absoluteValue.value, upperAlarmBound.value, lowerAlarmBound.value, historicValues, sensorKey);
+    alarmController.evaluateAlarmState(
+        absoluteValue.value,
+        upperAlarmBound.value,
+        lowerAlarmBound.value,
+        historicValues,
+        sensorKey);
   }
 
   /// sets [upperAlarmBound] to [newBoundary] if [newBoundary] >= [lowerAlarmBound] is true
@@ -98,7 +102,12 @@ class DataModelAbsolute extends GetxController {
     if (newBoundary >= lowerAlarmBound.value) {
       upperAlarmBound.value = newBoundary;
     }
-    alarmController.evaluateAlarm(absoluteValue.value, upperAlarmBound.value, lowerAlarmBound.value, historicValues, sensorKey);
+    alarmController.evaluateAlarmState(
+        absoluteValue.value,
+        upperAlarmBound.value,
+        lowerAlarmBound.value,
+        historicValues,
+        sensorKey);
   }
 
   /// sets [lowerAlarmBound] to [newBoundary] if  [newBoundary] <= [upperAlarmBound] is true
@@ -107,7 +116,12 @@ class DataModelAbsolute extends GetxController {
     if (newBoundary <= upperAlarmBound.value) {
       lowerAlarmBound.value = newBoundary;
     }
-    alarmController.evaluateAlarm(absoluteValue.value, upperAlarmBound.value, lowerAlarmBound.value, historicValues, sensorKey);
+    alarmController.evaluateAlarmState(
+        absoluteValue.value,
+        upperAlarmBound.value,
+        lowerAlarmBound.value,
+        historicValues,
+        sensorKey);
   }
 
   /// resets model to default values and clears [historicValues]

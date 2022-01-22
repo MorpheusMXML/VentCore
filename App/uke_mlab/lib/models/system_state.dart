@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:uke_mlab/models/screen_element_models/general_alarms.dart';
@@ -5,6 +6,7 @@ import 'package:uke_mlab/models/screen_element_models/absolute_alarm_field_model
 import 'package:uke_mlab/models/screen_element_models/graph_list.dart';
 import 'package:uke_mlab/models/screen_element_models/ippv_model.dart';
 import 'package:uke_mlab/models/screen_element_models/theme_model.dart';
+import 'package:uke_mlab/utilities/enums/alarm_message.dart';
 
 import 'package:uke_mlab/utilities/enums/alarm_status.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
@@ -41,8 +43,8 @@ class SystemState extends GetxController {
   /// "message" for alarm message
   /// "enum" for current [alarmStatus]
   /// "color" for color
-  final RxMap<sensorEnumAbsolute, RxMap<String, dynamic>> alarmState =
-      <sensorEnumAbsolute, RxMap<String, dynamic>>{}.obs;
+  final RxMap<sensorEnumAbsolute, Map<String, dynamic>> alarmState =
+      <sensorEnumAbsolute, Map<String, dynamic>>{}.obs;
 
   /// A reference to the current [GeneralAlarms] in use
   final GeneralAlarms generalAlarms = GeneralAlarms();
@@ -58,17 +60,36 @@ class SystemState extends GetxController {
 
   /// A reference to the current [ThemeModel] in use
   final ThemeModel themeModel = ThemeModel();
-
   // SystemState initated with no violations at place and screenStatus as topLevelScreen
   SystemState() {
     for (var sensor in sensorEnumAbsolute.values) {
-      alarmState[sensor] = RxMap({
-        "priority": 0,
-        "message": "none",
-        "enum": alarmStatus.none,
+      alarmState[sensor] = {
+        'priority': alarmStatus.none.priority,
+        'message': alarmMessage.none.message,
+        'status': alarmStatus.none,
         'color': AppTheme.alarmNoneColor,
-      });
+      };
     }
+  }
+
+  /// Get [alarmState].[alarmStatus.priority] for given [sensor].
+  int getAlarmStatePriority(sensorEnumAbsolute sensor) {
+    return alarmState[sensor]!['priority'];
+  }
+
+  /// Get [alarmState].[alarmMessage] for given [sensor].
+  String getAlarmStateMessage(sensorEnumAbsolute sensor) {
+    return alarmState[sensor]!['message'];
+  }
+
+  /// Get [alarmState].[alarmStatus.status]  for given [sensor].
+  alarmStatus getAlarmStateStatus(sensorEnumAbsolute sensor) {
+    return alarmState[sensor]!['status'];
+  }
+
+  /// Get [alarmState].[alarmStatus.color] for given [sensor].
+  Color getAlarmStateColor(sensorEnumAbsolute sensor) {
+    return alarmState[sensor]!['color'];
   }
 
   /// overwrites [selectedToggleView]s value with [newToggleView] for usage on switch between
@@ -76,5 +97,16 @@ class SystemState extends GetxController {
   void setSelectedToggleView(List<bool> newToggleView) {
     selectedToggleView.value = newToggleView;
     update();
+  }
+
+  ///Set [alarmState] for given [sensor].
+  void setAlarmState(sensorEnumAbsolute sensor, int? priority, String? message,
+      alarmStatus? status, Color? color) {
+    alarmState[sensor] = {
+      'priority': priority ?? alarmState[sensor]!['priority'],
+      'message': message ?? getAlarmStateMessage(sensor),
+      'status': status ?? alarmState[sensor]!['status'],
+      'color': color ?? alarmState[sensor]!['color'],
+    };
   }
 }
