@@ -106,6 +106,7 @@ extension SensorGraphAttributes on sensorEnumGraph {
 }
 
 extension SensorAbsoluteAttributes on sensorEnumAbsolute {
+  // child and infant boundaries are mostly made up due to lack of data
   static const Map<sensorEnumAbsolute, Map<String, dynamic>> attributes = {
     sensorEnumAbsolute.hfAbsolute: {
       'displayString': 'Heart Frequency',
@@ -117,12 +118,12 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
       'confirmDuration': 20,
       'boundaryDeviation': 0.1,
       'upperBound': {
-        'adult': 85,
+        'adult': 100,
         'child': 125,
         'infant': 145,
       },
       'lowerBound': {
-        'adult': 55,
+        'adult': 50,
         'child': 85,
         'infant': 110,
       },
@@ -136,14 +137,14 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
       'floatRepresentation': true,
       'boundaryDeviation': 0.1,
       'upperBound': {
-        'adult': 37.4,
-        'child': 37.4,
-        'infant': 37.4,
+        'adult': 37.9,
+        'child': 37.9,
+        'infant': 37.9,
       },
       'lowerBound': {
-        'adult': 36.5,
-        'child': 36.5,
-        'infant': 36.5,
+        'adult': 36.0,
+        'child': 36.0,
+        'infant': 36.0,
       },
     },
     sensorEnumAbsolute.spo2Absolute: {
@@ -155,14 +156,15 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
       'floatRepresentation': false,
       'boundaryDeviation': 0.1,
       'upperBound': {
-        'adult': 100,
-        'child': 100,
-        'infant': 100,
+        'adult':
+            150, // spreadsheet says upper boundary not defined, 150 seems a good compromise
+        'child': 150,
+        'infant': 150,
       },
       'lowerBound': {
-        'adult': 90,
-        'child': 90,
-        'infant': 90,
+        'adult': 92,
+        'child': 92,
+        'infant': 92,
       },
     },
     sensorEnumAbsolute.co2Absolute: {
@@ -179,9 +181,9 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
         'infant': 45,
       },
       'lowerBound': {
-        'adult': 35,
-        'child': 35,
-        'infant': 35,
+        'adult': 30,
+        'child': 30,
+        'infant': 30,
       },
     },
     sensorEnumAbsolute.pulse: {
@@ -212,14 +214,14 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
       'color': AppTheme.mveColor,
       'floatRepresentation': true,
       'upperBound': {
-        'adult': 8.4,
+        'adult': 9.0,
         'child': 8.0,
         'infant': 7.0,
       },
       'lowerBound': {
-        'adult': 5.0,
-        'child': 5.0,
-        'infant': 5.0,
+        'adult': 3.5,
+        'child': 3.6,
+        'infant': 3.7,
       },
     },
     sensorEnumAbsolute.breathfrequency: {
@@ -249,14 +251,14 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
       'color': AppTheme.nibdColor,
       'floatRepresentation': false,
       'upperBound': {
-        'adult': 90,
-        'child': 75,
-        'infant': 60,
+        'adult': 100,
+        'child': 90,
+        'infant': 80,
       },
       'lowerBound': {
-        'adult': 80,
-        'child': 60,
-        'infant': 50,
+        'adult': 40,
+        'child': 35,
+        'infant': 30,
       },
     },
     sensorEnumAbsolute.sysAbsolute: {
@@ -280,14 +282,16 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
   };
 
   String get displayString => attributes[this]!['displayString'] as String;
-  String get displayShortString => attributes[this]!['displayShortString'] as String;
+  String get displayShortString =>
+      attributes[this]!['displayShortString'] as String;
   String get abbreviation => attributes[this]!['abbreviation'] as String;
   String get unit => attributes[this]!['unit'] as String;
   Color get color => attributes[this]!['color'] as Color;
 
   ///10 Seconds are a default confirm Duration
   int get confirmDuration => attributes[this]!['confirmDuration'] ?? 10;
-  dynamic get boundaryDeviation => attributes[this]!['boundaryDeviation'] as dynamic;
+  dynamic get boundaryDeviation =>
+      attributes[this]!['boundaryDeviation'] as dynamic;
   Map get upperBound => attributes[this]!['upperBound'] as Map<String, dynamic>;
   Map get lowerBound => attributes[this]!['lowerBound'] as Map<String, dynamic>;
   bool get floatRepresentation => attributes[this]!['floatRepresentation'];
