@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
+import 'package:uke_mlab/providers/defibrillation_controller.dart';
 import 'package:uke_mlab/providers/screen_controller.dart';
+import 'package:uke_mlab/widgets/defibrillation_mode/defibrillation_container.dart';
 
 class ToggleModeButton extends StatelessWidget {
   ToggleModeButton({Key? key}) : super(key: key);
@@ -25,15 +27,14 @@ class ToggleModeButton extends StatelessWidget {
       child: Obx(
         () => ToggleButtons(
           children: <Widget>[
-            getToggleButton(
-                0, iconLocationMap['Monitoring'].toString(), context),
-            getToggleButton(
-                1, iconLocationMap['Ventilation'].toString(), context),
-            getToggleButton(
-                2, iconLocationMap['Defibrillator'].toString(), context),
+            getToggleButton(0, iconLocationMap['Monitoring'].toString(), context),
+            getToggleButton(1, iconLocationMap['Ventilation'].toString(), context),
+            getToggleButton(2, iconLocationMap['Defibrillator'].toString(), context),
           ],
           onPressed: (int index) {
-            Get.find<ScreenController>().setSelectedToggleView(index);
+            if (Get.find<DefibrillationController>().toggleButtonAvailable.isTrue) {
+              Get.find<ScreenController>().setSelectedToggleView(index);
+            }
           },
           isSelected: systemState.selectedToggleView,
         ),
@@ -43,19 +44,14 @@ class ToggleModeButton extends StatelessWidget {
 
   getToggleButton(int index, String path, BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-          color: systemState.selectedToggleView[index]
-              ? active
-              : Theme.of(context).cardColor),
+      decoration: BoxDecoration(color: systemState.selectedToggleView[index] ? active : Theme.of(context).cardColor),
       width: 100,
       child: Padding(
         padding: const EdgeInsets.all(5),
         child: SvgPicture.asset(
           path,
           height: 40.0,
-          color: systemState.selectedToggleView[index]
-              ? Theme.of(context).dividerColor
-              : inactiveIcon,
+          color: systemState.selectedToggleView[index] ? Theme.of(context).dividerColor : inactiveIcon,
         ),
       ),
     );
