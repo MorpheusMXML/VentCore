@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/data_models/model_absolute.dart';
@@ -25,6 +27,7 @@ class AlarmController {
   final ModelManager _modelManager;
   final SoundController _soundController = Get.find<SoundController>();
   final SystemState _systemState = Get.find<SystemState>();
+  int middleCounter = 0;
   AlarmController(this._modelManager) {
     _modelManager.registerAlarmController(this);
     listen();
@@ -35,8 +38,11 @@ class AlarmController {
     _systemState.generalAlarms.alarmList.listen((alarmList) {
       //print("listenGeneralAlarmList");
       for (var i = 0; i < alarmList.length - 1; i++) {
-        _soundController.triggerSoundState(
-            alarmList[i].alarm, alarmList[i].priority);
+        if (_systemState.screenStatus !=
+            screenStatusEnum.defibrillationScreen) {
+          _soundController.triggerSoundState(
+              alarmList[i].alarm, alarmList[i].priority);
+        }
       }
     });
   }
@@ -283,7 +289,9 @@ class AlarmController {
       status,
       status.color,
     );
-    _soundController.triggerSoundState(sensor, status.priority);
+    if (_systemState.screenStatus != screenStatusEnum.defibrillationScreen) {
+      _soundController.triggerSoundState(sensor, status.priority);
+    }
     //}
     //}
   }
