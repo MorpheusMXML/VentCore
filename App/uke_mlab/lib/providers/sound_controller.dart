@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:get/get.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:uke_mlab/models/data_models/model_absolute.dart';
+import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/utilities/enums/alarm_status.dart';
+import 'package:uke_mlab/utilities/enums/non_graph_alarm.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 /// This Class provides the SoundPlaying and Triggering Functionallity.
@@ -31,6 +33,7 @@ class SoundController {
   Timer? getDataTimer;
   Timer? cancelTimerBeep;
   final int getDataTimerDuration = 5;
+  final SystemState systemState = Get.find<SystemState>();
 
   AudioPlayer? alarmPlayer;
   AudioPlayer? ecgPlayer;
@@ -113,15 +116,46 @@ class SoundController {
     print(" \nSoundStateTriggered with $sensor");
 
     // TODO compare list with current system state (eg: is temperature still confirmed?)
-    soundList.removeWhere((item) => item.sensor == sensor);
-    soundList.add(SoundListEntry(sensor: sensor, priority: priority));
+    // first try to do so
+    print("soundList: ${soundList.toString()}");
+    soundList.removeWhere((element) {
+      // checks whether element is in systemState.absAlarmFieldModel.activeList or systemState.graphList.activeGraphAbsolutes,
+      // if it is in neither => remove from soundList
+      if (element.type is sensorEnumAbsolute) {
+        return !systemState.absAlarmFieldModel.activeList
+                .contains(element.type as sensorEnumAbsolute) &&
+            !systemState.graphList.activeGraphAbsolutes
+                .contains(element.type as sensorEnumAbsolute);
+        // could be nicer
+        // checks whether element is in generalAlarms, if so returns false => not removed from soundList
+      } else if (element.type is nonGraphAlarmEnum) {
+        for (var item in systemState.generalAlarms.alarmList) {
+          if (item.alarm == element.type as nonGraphAlarmEnum) {
+            return false;
+          }
+        }
+        return true;
+      } else {
+        throw Exception(
+            "soundList does contain an element which has neither sensorEnumAbsolute nor nonGraphAlarmEnum as type");
+      }
+    });
+
+    soundList.removeWhere((item) => item.type == sensor);
+    soundList.add(SoundListEntry(type: sensor, priority: priority));
 
     soundList.sort((a, b) => b.priority.compareTo(a.priority));
     soundList.removeWhere((item) => item.priority < soundList[0].priority);
+
+    // dont play a sound when prio of new alarm is below prio of max alarm (we should be still looping over that)
+    if (soundList[0].priority > priority) {
+      return;
+    }
+
     //for each Entry check Sensor Vent or Monitor
     for (var entry in soundList) {
-      if (entry.sensor is sensorEnumAbsolute) {
-        switch ((entry.sensor as sensorEnumAbsolute).alarmType) {
+      if (entry.type is sensorEnumAbsolute) {
+        switch ((entry.type as sensorEnumAbsolute).alarmType) {
           case 1: // is monitor alarm
             _alarmTypes[0] = true;
             break;
@@ -135,7 +169,7 @@ class SoundController {
       // TODO: analyze general alarms too
     }
     print(
-        "playAlarm called by ${soundList[0].sensor.toString()} with prio $priority\n ");
+        "playAlarm called by ${soundList[0].type.toString()} with prio $priority\n ");
     playAlarm(soundList[0].priority);
   }
 
@@ -327,13 +361,13 @@ enum SoundIdentifier {
 }
 
 class SoundListEntry {
-  final dynamic sensor;
+  final dynamic type;
 
   /// priority of the alarm, should be between 0 and 100
   final int priority;
 
   SoundListEntry({
-    required this.sensor,
+    required this.type,
     required this.priority,
   });
 }
