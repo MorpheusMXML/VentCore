@@ -21,17 +21,20 @@ class GraphContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return ConstrainedBox(
       constraints: const BoxConstraints(maxHeight: 200),
-      child: Stack(
-        children: [
-          evaluateGraphAlarmBorder(),
-          Container(
-            margin: const EdgeInsets.only(top: 10.0),
-            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-            child: GraphRow(
-              sensor: sensor,
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 8),
+        child: Stack(
+          children: [
+            evaluateGraphAlarmBorder(),
+            Container(
+              margin: const EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+              child: GraphRow(
+                sensor: sensor,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
