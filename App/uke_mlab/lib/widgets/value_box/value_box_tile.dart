@@ -131,6 +131,7 @@ class ValueBoxTile extends StatelessWidget {
     switch (alarm) {
       case alarmStatus.high:
       case alarmStatus.middle:
+      case alarmStatus.warning:
         return alarmState[sensorAbsolute]!["color"];
       case alarmStatus.confirmed:
       default:

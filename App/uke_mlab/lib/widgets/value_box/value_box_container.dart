@@ -77,7 +77,12 @@ class ValueBoxContainer extends StatelessWidget {
               Obx(
                 () => Text(
                   dataModelAbsolute!.floatRepresentation
-                      ? dataModelAbsolute!.absoluteValue.value.toString()
+                      ? dataModelAbsolute!.sensorKey == sensorEnumAbsolute.mve
+                          ? dataModelAbsolute!.absoluteValue.value
+                              .toStringAsFixed(2)
+                          : //give mve 2 decimals
+                          dataModelAbsolute!.absoluteValue.value
+                              .toStringAsFixed(1)
                       : dataModelAbsolute!.absoluteValue.value
                           .toInt()
                           .toString(),

@@ -195,12 +195,12 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
       'floatRepresentation': false,
       'boundaryDeviation': 0.1,
       'upperBound': {
-        'adult': 85,
+        'adult': 100,
         'child': 125,
         'infant': 145,
       },
       'lowerBound': {
-        'adult': 55,
+        'adult': 50,
         'child': 85,
         'infant': 110,
       },
@@ -213,6 +213,7 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
       'unit': 'l/min',
       'color': AppTheme.mveColor,
       'floatRepresentation': true,
+      'boundaryDeviation': 0.075,
       'upperBound': {
         'adult': 9.0,
         'child': 8.0,

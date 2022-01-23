@@ -21,7 +21,9 @@ class SettingTile extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
+            ActionButton.decrement(name: name),
             SettingText(name: name, rate: rate),
+            ActionButton.increment(name: name),
           ],
         ),
       ),
