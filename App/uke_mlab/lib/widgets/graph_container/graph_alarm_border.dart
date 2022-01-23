@@ -51,7 +51,7 @@ class GraphAlarmBorder extends StatelessWidget {
               Expanded(
                 child: Container(
                   color: systemState.getAlarmStateColor(sensor),
-                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 30),
+                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 20),
                 ),
               ),
             ],

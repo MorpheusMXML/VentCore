@@ -54,10 +54,22 @@ class ValueBoxState extends StatelessWidget {
                 ],
               ),
             )
-          : ValueBoxContainer(
-              dataModelAbsolute: dataModel,
-              optAbreviationTitle: optAbreviationTitle,
-            ),
+          : settingsWidth == 60
+              ? ValueBoxContainer(
+                  dataModelAbsolute: dataModel,
+                  optAbreviationTitle: optAbreviationTitle,
+                )
+              : ConstrainedBox(
+                  constraints: BoxConstraints(
+                      maxWidth: (Get.width - 12 - 12) / (2 + 1) * 1 / 2 * 1 -
+                          8 -
+                          37 -
+                          37),
+                  child: ValueBoxContainer(
+                    dataModelAbsolute: dataModel,
+                    optAbreviationTitle: optAbreviationTitle,
+                  ),
+                ),
     );
   }
 }
