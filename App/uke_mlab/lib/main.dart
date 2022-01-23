@@ -41,7 +41,8 @@ class MyApp extends StatelessWidget {
     // pages, maybe create a new starting screen (loading screen) that navigates
     // to the current start page when all controllers are initialized, jsons,
     // svgs are loaded and screens are given bindings?
-    final AlarmController alarmController = Get.put(AlarmController(modelManager));
+    final AlarmController alarmController =
+        Get.put(AlarmController(modelManager));
   }
   @override
   Widget build(BuildContext context) {

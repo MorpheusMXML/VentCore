@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/data_models/model_absolute.dart';
+import 'package:uke_mlab/providers/alarm_controller.dart';
 import 'package:uke_mlab/providers/sound_controller.dart';
 import 'package:uke_mlab/scenarios/patient_scenario.dart';
 import 'package:uke_mlab/utilities/enums/scenarios.dart';
@@ -69,16 +70,19 @@ class ScreenController {
       if (systemState.patientType != patientTypeEnum.adult) {
         modelManager.loadPatientPresets(patientTypeEnum.adult);
         systemState.patientType = patientTypeEnum.adult;
+        systemState.resetSystemState();
       }
     } else if (additionalInfo == 'Child') {
       if (systemState.patientType != patientTypeEnum.child) {
         modelManager.loadPatientPresets(patientTypeEnum.child);
         systemState.patientType = patientTypeEnum.child;
+        systemState.resetSystemState();
       }
     } else if (additionalInfo == 'Infant') {
       if (systemState.patientType != patientTypeEnum.infant) {
         modelManager.loadPatientPresets(patientTypeEnum.infant);
         systemState.patientType = patientTypeEnum.infant;
+        systemState.resetSystemState();
       }
     } else {
       throw Exception(
@@ -161,7 +165,7 @@ class ScreenController {
     //system state should stay the same here
     systemState.absAlarmFieldModel.closeOverlay();
     Get.find<SoundController>().stop();
-    if (!modelManager.stylesTraitsLoaded) {
+    if (!modelManager.environmentValuesLoaded) {
       modelManager.loadDataModelEnvironmentValues();
     }
     return Get.offNamed('/alarm_limit_screen');
@@ -194,6 +198,7 @@ class ScreenController {
     changeScenario(scenario);
     systemState.absAlarmFieldModel.evaluateActiveList();
     soundController.startSaturationHFSound();
+    systemState.resetSystemState();
     return Get.toNamed('/main_screen');
   }
 }

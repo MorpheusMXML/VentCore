@@ -8,6 +8,9 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/utilities/enums/patient_type.dart';
 import 'package:uke_mlab/providers/alarm_controller.dart';
 
+import 'package:uke_mlab/models/system_state.dart';
+import 'package:uke_mlab/models/screen_element_models/ippv_model.dart';
+
 class ModelManager {
   /// creates [DataModelAbsolute]s and [DataModelGraph]s and offers management operations for them
 
@@ -15,7 +18,7 @@ class ModelManager {
   late final AlarmController _alarmController;
 
   /// signals whether style loading process is complete
-  bool stylesTraitsLoaded = false;
+  bool environmentValuesLoaded = false;
 
   /// initializes for each entry of [sensorEnumAbsolute] a [DataModelAbsolute] and for each entry of [sensorEnumGraph] a [DataModelGraph]
   ModelManager() {
@@ -66,39 +69,45 @@ class ModelManager {
   /// NOT TO BE CALLED WITH patientTypeEnum.none, since that has no predefined values
   /// [DataModelGraph] does not have boundary values due to the datas nature
   void loadPatientPresets(patientTypeEnum patientType) {
-    if (!stylesTraitsLoaded) {
+    // set default environment values
+    if (!environmentValuesLoaded) {
       loadDataModelEnvironmentValues();
     }
 
+    // reset data models (cant be in second for loop because of standard values of ippv)
+    for (var sensor in sensorEnumAbsolute.values) {
+      Get.find<DataModelAbsolute>(tag: sensor.name).resetDataModel();
+    }
+
+    // set default boundaries
     for (var sensor in sensorEnumAbsolute.values) {
       DataModelAbsolute dataModel =
           Get.find<DataModelAbsolute>(tag: sensor.name);
-      dataModel.resetDataModel();
 
       switch (patientType) {
         case patientTypeEnum.adult:
           dataModel.initialUpperBound = sensor.upperBound['adult'].toDouble();
-          dataModel
-              .setUpperAlarmBoundary(sensor.upperBound['adult'].toDouble());
+          dataModel.upperAlarmBound.value =
+              sensor.upperBound['adult'].toDouble();
           dataModel.initialLowerBound = sensor.lowerBound['adult'].toDouble();
-          dataModel
-              .setLowerAlarmBoundary(sensor.lowerBound['adult'].toDouble());
+          dataModel.lowerAlarmBound.value =
+              sensor.lowerBound['adult'].toDouble();
           break;
         case patientTypeEnum.child:
           dataModel.initialUpperBound = sensor.upperBound['child'].toDouble();
-          dataModel
-              .setUpperAlarmBoundary(sensor.upperBound['child'].toDouble());
+          dataModel.upperAlarmBound.value =
+              sensor.upperBound['child'].toDouble();
           dataModel.initialLowerBound = sensor.lowerBound['child'].toDouble();
-          dataModel
-              .setLowerAlarmBoundary(sensor.lowerBound['child'].toDouble());
+          dataModel.lowerAlarmBound.value =
+              sensor.lowerBound['child'].toDouble();
           break;
         case patientTypeEnum.infant:
           dataModel.initialUpperBound = sensor.upperBound['infant'].toDouble();
-          dataModel
-              .setUpperAlarmBoundary(sensor.upperBound['infant'].toDouble());
+          dataModel.upperAlarmBound.value =
+              sensor.upperBound['infant'].toDouble();
           dataModel.initialLowerBound = sensor.lowerBound['infant'].toDouble();
-          dataModel
-              .setLowerAlarmBoundary(sensor.lowerBound['infant'].toDouble());
+          dataModel.lowerAlarmBound.value =
+              sensor.lowerBound['infant'].toDouble();
           break;
         default:
           throw Exception(
@@ -119,9 +128,9 @@ class ModelManager {
       dataModel.unit = sensor.unit;
       dataModel.floatRepresentation = sensor.floatRepresentation;
     }
-    // bad implementation for deciding which datamodel to find, sorry
-    dynamic dataModel;
+
     for (var sensor in sensorEnumGraph.values) {
+      dynamic dataModel;
       if (sensor == sensorEnumGraph.nibd) {
         dataModel = Get.find<DataModelNIBD>(tag: sensor.name);
       } else {
@@ -133,6 +142,7 @@ class ModelManager {
       dataModel.graphTitle = sensor.graphTitle;
       dataModel.setGraphMaxLength(sensor.graphLength);
     }
+    environmentValuesLoaded = true;
   }
 
   /// resets all known data models

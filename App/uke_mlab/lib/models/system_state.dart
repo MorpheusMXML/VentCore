@@ -109,4 +109,8 @@ class SystemState extends GetxController {
       'color': color ?? alarmState[sensor]!['color'],
     };
   }
+
+  void resetSystemState() {
+    ippvModel.resetIPPV();
+  }
 }

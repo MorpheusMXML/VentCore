@@ -27,6 +27,7 @@ class AlarmController {
   final SystemState _systemState = Get.find<SystemState>();
   AlarmController(this._modelManager) {
     _modelManager.registerAlarmController(this);
+    // TODO find a better solution for mve and breathfrequency NOT throwing alarms at the start
     listen();
   }
 
@@ -142,6 +143,11 @@ class AlarmController {
     alarmMessage message,
     alarmStatus status,
   ) {
+    if (sensor == sensorEnumAbsolute.mve ||
+        sensor == sensorEnumAbsolute.breathfrequency) {
+      print(" \n$sensor: $status $message\n ");
+    }
+
     ///Prevent update because [alarmStatus.confirmed] is confirmed or [endConfirmStatus]
     if (_systemState.getAlarmStateStatus(sensor) == alarmStatus.confirmed) {
       if (isConfirmInConfirmDuration(sensor) &&
