@@ -60,8 +60,12 @@ class AlarmLimitScreen extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: monitorBoundarySet.map((sensorKey) {
-                          return ValueBoxTile.withHeadline(
-                              sensorAbsolute: sensorKey);
+                          return SizedBox(
+                            height: 160,
+                            width: (Get.width - 24) / 3 / 2 + 15,
+                            child: ValueBoxTile.withHeadline(
+                                sensorAbsolute: sensorKey),
+                          );
                         }).toList(),
                       ),
                     ),
@@ -89,8 +93,12 @@ class AlarmLimitScreen extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: ventilationBoundarySet.map((sensorKey) {
-                          return ValueBoxTile.withHeadline(
-                              sensorAbsolute: sensorKey);
+                          return SizedBox(
+                            height: 160,
+                            width: (Get.width - 24) / 3 / 2 + 15,
+                            child: ValueBoxTile.withHeadline(
+                                sensorAbsolute: sensorKey),
+                          );
                         }).toList(),
                       ),
                     ),
@@ -98,7 +106,7 @@ class AlarmLimitScreen extends StatelessWidget {
                 ],
               ),
 
-              // Ventilation Boundaries
+              // Graph Boundaries
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -118,8 +126,12 @@ class AlarmLimitScreen extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: graphBoundarySet.map((sensorKey) {
-                          return ValueBoxTile.withHeadline(
-                              sensorAbsolute: sensorKey);
+                          return SizedBox(
+                            height: 160,
+                            width: (Get.width - 24) / 3 / 2 + 15,
+                            child: ValueBoxTile.withHeadline(
+                                sensorAbsolute: sensorKey),
+                          );
                         }).toList(),
                       ),
                     ),
