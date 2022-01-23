@@ -317,8 +317,6 @@ class SoundController {
   }
 
   void startSaturationHFSound() {
-    // TODO: end comment
-    /*
     DataModelAbsolute hfModel =
         Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.hfAbsolute.name);
     DataModelAbsolute spo2Model =
@@ -328,7 +326,7 @@ class SoundController {
       saturationHfBeep(
           bpm: hfModel.absoluteValue.value.toInt(),
           spO2: spo2Model.absoluteValue.value.toInt());
-    });*/
+    });
   }
 }
 

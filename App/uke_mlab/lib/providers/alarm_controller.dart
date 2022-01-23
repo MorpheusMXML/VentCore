@@ -143,11 +143,6 @@ class AlarmController {
     alarmMessage message,
     alarmStatus status,
   ) {
-    if (sensor == sensorEnumAbsolute.mve ||
-        sensor == sensorEnumAbsolute.breathfrequency) {
-      print(" \n$sensor: $status $message\n ");
-    }
-
     ///Prevent update because [alarmStatus.confirmed] is confirmed or [endConfirmStatus]
     if (_systemState.getAlarmStateStatus(sensor) == alarmStatus.confirmed) {
       if (isConfirmInConfirmDuration(sensor) &&
@@ -185,8 +180,7 @@ class AlarmController {
       _systemState.graphList.evaluateActiveGraphAbsolutes();
       _systemState.absAlarmFieldModel.evaluateActiveList();
       // triggerSoundState Method for sounds
-      if (false && // TODO take shut-up false out
-          _systemState.screenStatus != screenStatusEnum.defibrillationScreen &&
+      if (_systemState.screenStatus != screenStatusEnum.defibrillationScreen &&
           status.priority != 0 && // dont trigger on no alarm
           status.priority != 1 && // dont trigger on alarm confirmed
           (_systemState.absAlarmFieldModel.activeList.contains(sensor) ||
