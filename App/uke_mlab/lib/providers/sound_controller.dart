@@ -63,20 +63,16 @@ class SoundController {
 
   ///playes the SoundAlarm fot the AlarmType specified with [Enum soundIdentifier].
   play(Enum soundIdentifier) async {
-    alarmPlayer = await alarmPlayerCache
-        .play(_alarmSoundFiles[soundIdentifier].toString());
+    alarmPlayer = await alarmPlayerCache.play(_alarmSoundFiles[soundIdentifier].toString());
   }
 
   playDefiLoadSound() async {
     stop();
-    alarmPlayer = await alarmPlayerCache.play(
-        _alarmSoundFiles[SoundIdentifier.defiLoading].toString(),
-        volume: 0.5);
+    alarmPlayer = await alarmPlayerCache.play(_alarmSoundFiles[SoundIdentifier.defiLoading].toString(), volume: 0.5);
     alarmPlayer!.onPlayerCompletion.listen((event) async {
       print("ABC");
-      alarmPlayer = await alarmPlayerCache.loop(
-          _alarmSoundFiles[SoundIdentifier.defiShockReady].toString(),
-          volume: 0.6);
+      alarmPlayer =
+          await alarmPlayerCache.loop(_alarmSoundFiles[SoundIdentifier.defiShockReady].toString(), volume: 0.6);
     });
   }
 
@@ -213,16 +209,16 @@ class SoundController {
   }
 
   void startSaturationHFSound() {
-    DataModelAbsolute hfModel =
-        Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.hfAbsolute.name);
-    DataModelAbsolute spo2Model =
-        Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.spo2Absolute.name);
-    getDataTimer ??=
-        Timer.periodic(Duration(seconds: getDataTimerDuration), (timer) {
-      saturationHfBeep(
-          bpm: hfModel.absoluteValue.value.toInt(),
-          spO2: spo2Model.absoluteValue.value.toInt());
-    });
+    //  DataModelAbsolute hfModel =
+    //      Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.hfAbsolute.name);
+    //  DataModelAbsolute spo2Model =
+    //      Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.spo2Absolute.name);
+    //  getDataTimer ??=
+    //      Timer.periodic(Duration(seconds: getDataTimerDuration), (timer) {
+    //    saturationHfBeep(
+    //        bpm: hfModel.absoluteValue.value.toInt(),
+    //        spO2: spo2Model.absoluteValue.value.toInt());
+    //  });
   }
 }
 

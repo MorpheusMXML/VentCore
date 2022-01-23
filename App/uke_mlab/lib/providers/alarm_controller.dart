@@ -15,8 +15,7 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 ///
 class AlarmController {
   ///Manages and throws Alarms with an implemented Alarm Logic.
-  final Map<sensorEnumAbsolute, dynamic> confirmMap =
-      <sensorEnumAbsolute, dynamic>{};
+  final Map<sensorEnumAbsolute, dynamic> confirmMap = <sensorEnumAbsolute, dynamic>{};
   late ModelManager _modelManager;
   final SystemState _systemState = Get.find<SystemState>();
   AlarmController(ModelManager modelManager) {
@@ -27,8 +26,7 @@ class AlarmController {
   ///Checks if a new added value in this [DataModel] should throw an alarm.
   ///
   ///This function is build to be called in the [DataModel].
-  void evaluateAlarm(value, upper, lower, RxList historicValues,
-      sensorEnumAbsolute sensorKey) {
+  void evaluateAlarm(value, upper, lower, RxList historicValues, sensorEnumAbsolute sensorKey) {
     dynamic boundaryDeviation = sensorKey.boundaryDeviation;
 
     ///Possible deviation arounde the upper and lower boundaries
@@ -42,30 +40,44 @@ class AlarmController {
 
     ///Value exceed upper alarm boundary
     if (value > upper) {
+      if (sensorKey == sensorEnumAbsolute.mve) {
+        print("Mve hat upper überschritten");
+      }
+
       ///Checks how serious the boundary is exceeded
-      if (boundaryDeviation != null &&
-          value < upper * (1 + boundaryDeviation)) {
-        triggerAlarm(
-            sensorKey, alarmMessage.upperBoundaryViolated, alarmStatus.middle);
+      if (boundaryDeviation != null && value < upper * (1 + boundaryDeviation)) {
+        triggerAlarm(sensorKey, alarmMessage.upperBoundaryViolated, alarmStatus.middle);
+        if (sensorKey == sensorEnumAbsolute.mve) {
+          print("Mve hat upper überschritten -> middle alarm");
+        }
         return;
       } else {
-        triggerAlarm(
-            sensorKey, alarmMessage.upperBoundaryViolated, alarmStatus.high);
+        triggerAlarm(sensorKey, alarmMessage.upperBoundaryViolated, alarmStatus.high);
+        if (sensorKey == sensorEnumAbsolute.mve) {
+          print("Mve hat upper überschritten -> high alarm");
+        }
         return;
       }
     }
 
     ///Value exceed lower alarm boundary
     else if (value < lower) {
+      if (sensorKey == sensorEnumAbsolute.mve) {
+        print("Mve hat lower unterschritten");
+      }
+
       ///Checks how serious the boundary is exceeded
-      if (boundaryDeviation != null &&
-          value > lower * (1 - boundaryDeviation)) {
-        triggerAlarm(
-            sensorKey, alarmMessage.lowerBoundaryViolated, alarmStatus.middle);
+      if (boundaryDeviation != null && value > lower * (1 - boundaryDeviation)) {
+        triggerAlarm(sensorKey, alarmMessage.lowerBoundaryViolated, alarmStatus.middle);
+        if (sensorKey == sensorEnumAbsolute.mve) {
+          print("Mve hat lower unterschritten -> middle alarm");
+        }
         return;
       } else {
-        triggerAlarm(
-            sensorKey, alarmMessage.lowerBoundaryViolated, alarmStatus.high);
+        triggerAlarm(sensorKey, alarmMessage.lowerBoundaryViolated, alarmStatus.high);
+        if (sensorKey == sensorEnumAbsolute.mve) {
+          print("Mve hat lower unterschritten -> high alarm");
+        }
         return;
       }
     }
@@ -75,12 +87,14 @@ class AlarmController {
     ///is previous value Difference in allowed Deviation
     if (valueDifference > valueDeviation) {
       triggerAlarm(sensorKey, alarmMessage.deviation, alarmStatus.warning);
+      if (sensorKey == sensorEnumAbsolute.mve) {
+        print("mve macht irgendwas -> warning");
+      }
       return;
     }
   }
 
-  void triggerAlarm(sensorEnumAbsolute sensorKey, alarmMessage alarmMessageEnum,
-      alarmStatus alarmPrioEnum) {
+  void triggerAlarm(sensorEnumAbsolute sensorKey, alarmMessage alarmMessageEnum, alarmStatus alarmPrioEnum) {
     int newPriority = alarmPrioEnum.priority;
     String newMessage = alarmMessageEnum.message;
 
@@ -95,8 +109,7 @@ class AlarmController {
       if (diff.inSeconds >= sensorKey.confirmDuration) {
         ///reset this confirm to the previous alarm
         for (alarmStatus status in alarmStatus.values) {
-          if (_systemState.alarmState[sensorKey]!["priority"] ==
-              status.priority) {
+          if (_systemState.alarmState[sensorKey]!["priority"] == status.priority) {
             _systemState.alarmState[sensorKey]!["enum"] = status;
             _systemState.graphList.evaluateActiveGraphAbsolutes();
             _systemState.absAlarmFieldModel.updateActiveList();

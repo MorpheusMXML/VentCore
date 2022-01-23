@@ -32,10 +32,8 @@ class ValueBoxContainer extends StatelessWidget {
     // could be done via template pattern for better code quality
     if (dataModelGraph == null) {
       //When NIBD: avoid overflow.
-      if (dataModelAbsolute!.abbreviation ==
-              sensorEnumAbsolute.sysAbsolute.abbreviation ||
-          dataModelAbsolute!.abbreviation ==
-              sensorEnumAbsolute.diaAbsolute.abbreviation) {
+      if (dataModelAbsolute!.abbreviation == sensorEnumAbsolute.sysAbsolute.abbreviation ||
+          dataModelAbsolute!.abbreviation == sensorEnumAbsolute.diaAbsolute.abbreviation) {
         fontSizeCenter = 40;
         fontSize = 14;
       }
@@ -44,8 +42,7 @@ class ValueBoxContainer extends StatelessWidget {
         child: ElevatedButton(
           style: ButtonStyle(
               shape: MaterialStateProperty.all(const RoundedRectangleBorder()),
-              backgroundColor:
-                  MaterialStateProperty.all(Theme.of(context).cardColor)),
+              backgroundColor: MaterialStateProperty.all(Theme.of(context).cardColor)),
           onPressed: () => dataModelAbsolute!.expanded.toggle(),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -77,10 +74,8 @@ class ValueBoxContainer extends StatelessWidget {
               Obx(
                 () => Text(
                   dataModelAbsolute!.floatRepresentation
-                      ? dataModelAbsolute!.absoluteValue.value.toString()
-                      : dataModelAbsolute!.absoluteValue.value
-                          .toInt()
-                          .toString(),
+                      ? dataModelAbsolute!.absoluteValue.value.toStringAsFixed(1)
+                      : dataModelAbsolute!.absoluteValue.value.toInt().toString(),
                   style: TextStyle(
                     color: dataModelAbsolute!.color,
                     fontSize: fontSizeCenter,
@@ -128,40 +123,34 @@ class ValueBoxContainer extends StatelessWidget {
               // Top
               Padding(
                 padding: const EdgeInsets.only(left: 15.0, right: 15.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Flexible(
-                        child: Text(
-                          dataModelGraph!.graphTitle,
-                          style: TextStyle(
-                            color: dataModelGraph!.color,
-                            fontSize: fontSize,
-                          ),
-                        ),
+                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                  Flexible(
+                    child: Text(
+                      dataModelGraph!.graphTitle,
+                      style: TextStyle(
+                        color: dataModelGraph!.color,
+                        fontSize: fontSize,
                       ),
-                      const Spacer(),
-                      Text(
-                        "Graph\nValue",
-                        style: TextStyle(
-                          color: dataModelGraph!.color,
-                          fontSize: fontSize,
-                        ),
-                      ),
-                    ]),
+                    ),
+                  ),
+                  const Spacer(),
+                  Text(
+                    "Graph\nValue",
+                    style: TextStyle(
+                      color: dataModelGraph!.color,
+                      fontSize: fontSize,
+                    ),
+                  ),
+                ]),
               ),
 
               // Middle
 
               Obx(
                 () => Text(
-                  (dataModelGraph!.singleData.value.value > -1.0 &&
-                          dataModelGraph!.singleData.value.value < 1.0)
-                      ? dataModelGraph!.singleData.value.value
-                          .toStringAsFixed(1)
-                      : dataModelGraph!.singleData.value.value
-                          .toInt()
-                          .toString(),
+                  (dataModelGraph!.singleData.value.value > -1.0 && dataModelGraph!.singleData.value.value < 1.0)
+                      ? dataModelGraph!.singleData.value.value.toStringAsFixed(1)
+                      : dataModelGraph!.singleData.value.value.toInt().toString(),
                   style: TextStyle(
                     color: dataModelGraph!.color,
                     fontSize: fontSizeCenter,
@@ -172,26 +161,23 @@ class ValueBoxContainer extends StatelessWidget {
               // Bottom
               Padding(
                 padding: const EdgeInsets.only(left: 15.0, right: 15.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(),
-                      Text(
-                        dataModelGraph!.yAxisTitle,
-                        style: TextStyle(
-                          color: dataModelGraph!.color,
-                          fontSize: fontSize,
-                        ),
-                      ),
-                    ]),
+                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                  Container(),
+                  Text(
+                    dataModelGraph!.yAxisTitle,
+                    style: TextStyle(
+                      color: dataModelGraph!.color,
+                      fontSize: fontSize,
+                    ),
+                  ),
+                ]),
               ),
             ],
           ),
         ),
       );
     } else {
-      throw Exception(
-          "ValueBoxContainer was given both dataModelGraph and DataModelAbsolute");
+      throw Exception("ValueBoxContainer was given both dataModelGraph and DataModelAbsolute");
     }
   }
 }

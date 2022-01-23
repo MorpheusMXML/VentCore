@@ -27,21 +27,11 @@ class StandardScenario extends AbstractScenario {
         double resolution = dataMapAbsolute[sensorAbsolute]!['channel_information']['resolution']['value'].toDouble();
         List<dynamic> dataList = dataMapAbsolute[sensorAbsolute]!['data'];
 
-        Timer currentTimer;
-
-        currentTimer = Timer.periodic(calculateUpdateRateAbsolute(resolution: resolution), (timer) {
-          // TODO: intermediate implementation -> fix later
-          // if counter outside list -> set counter to 0
-          if (dataList.length == dataModelAbsolute.counter.value) {
-            dataModelAbsolute.counter.value = 0;
-          }
-          if (!scenarioRunning) {
-            timer.cancel();
-          }
-
-          dataModelAbsolute.updateValue(dataList[dataModelAbsolute.counter.value].toDouble());
-        });
-        scenarioTimer.add(currentTimer);
+        if (sensorAbsolute == sensorEnumAbsolute.hfAbsolute) {
+          updateHFData(dataList: dataList, resolution: resolution, dataModelAbsolute: dataModelAbsolute);
+        } else {
+          updateAbsoluteData(dataList: dataList, resolution: resolution, dataModelAbsolute: dataModelAbsolute);
+        }
       }
     }
 
@@ -147,6 +137,45 @@ class StandardScenario extends AbstractScenario {
       } else {
         dataModelGraph.updateValues(dataList.sublist((startIndex % dataList.length), (endIndex % dataList.length)));
       }
+    });
+    scenarioTimer.add(currentTimer);
+  }
+
+  void updateHFData(
+      {required List<dynamic> dataList, required double resolution, required DataModelAbsolute dataModelAbsolute}) {
+    Timer currentTimer;
+
+    currentTimer = Timer.periodic(calculateUpdateRateAbsolute(resolution: resolution), (timer) {
+      // TODO: intermediate implementation -> fix later
+      // if counter outside list -> set counter to 0
+      if (dataList.length == dataModelAbsolute.counter.value) {
+        dataModelAbsolute.counter.value = 0;
+      }
+      if (!scenarioRunning) {
+        timer.cancel();
+      }
+      Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.pulse.name)
+          .updateValue((dataList[dataModelAbsolute.counter.value] * 0.98).toDouble());
+      dataModelAbsolute.updateValue(dataList[dataModelAbsolute.counter.value].toDouble());
+    });
+    scenarioTimer.add(currentTimer);
+  }
+
+  void updateAbsoluteData(
+      {required List<dynamic> dataList, required double resolution, required DataModelAbsolute dataModelAbsolute}) {
+    Timer currentTimer;
+
+    currentTimer = Timer.periodic(calculateUpdateRateAbsolute(resolution: resolution), (timer) {
+      // TODO: intermediate implementation -> fix later
+      // if counter outside list -> set counter to 0
+      if (dataList.length == dataModelAbsolute.counter.value) {
+        dataModelAbsolute.counter.value = 0;
+      }
+      if (!scenarioRunning) {
+        timer.cancel();
+      }
+
+      dataModelAbsolute.updateValue(dataList[dataModelAbsolute.counter.value].toDouble());
     });
     scenarioTimer.add(currentTimer);
   }

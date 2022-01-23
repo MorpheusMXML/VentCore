@@ -11,14 +11,14 @@ class ActionButton extends StatelessWidget {
     Key? key,
     required this.name,
     this.icon = const Icon(Icons.add),
-    this.value = 1,
+    this.value = 5,
   }) : super(key: key);
 
   const ActionButton.decrement({
     Key? key,
     required this.name,
     this.icon = const Icon(Icons.remove),
-    this.value = -1,
+    this.value = -5,
   }) : super(key: key);
 
   @override
