@@ -48,7 +48,7 @@ class AbsAlarmFieldModel extends GetxController {
 
   /// updates the current [activeList] so that it only contains the [sensorEnumAbsolute]s of not confirmed and active alarms
   /// if [activeList] is empty [AlarmButtonAbsoluteList] will be closed
-  void updateActiveList() {
+  void evaluateActiveList() {
     SystemState systemState = Get.find<SystemState>();
 
     // loads absolute value tiles active in current screen into activeList
@@ -66,8 +66,9 @@ class AbsAlarmFieldModel extends GetxController {
     // if activeList isnt empty, remove sensors from list which are confirmed OR have no active alarm
     if (activeList.isNotEmpty) {
       activeList.removeWhere((sensorKey) =>
-          systemState.alarmState[sensorKey]!["enum"] == alarmStatus.none ||
-          systemState.alarmState[sensorKey]!["enum"] == alarmStatus.confirmed);
+          systemState.alarmState[sensorKey]!["status"] == alarmStatus.none ||
+          systemState.alarmState[sensorKey]!["status"] ==
+              alarmStatus.confirmed);
     }
 
     // if there are not any Elements in list left and list is expanded => overlay

@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/data_models/model_absolute.dart';
+import 'package:uke_mlab/providers/alarm_controller.dart';
 import 'package:uke_mlab/providers/sound_controller.dart';
 import 'package:uke_mlab/scenarios/patient_scenario.dart';
 import 'package:uke_mlab/utilities/enums/scenarios.dart';
@@ -69,16 +70,19 @@ class ScreenController {
       if (systemState.patientType != patientTypeEnum.adult) {
         modelManager.loadPatientPresets(patientTypeEnum.adult);
         systemState.patientType = patientTypeEnum.adult;
+        systemState.resetSystemState();
       }
     } else if (additionalInfo == 'Child') {
       if (systemState.patientType != patientTypeEnum.child) {
         modelManager.loadPatientPresets(patientTypeEnum.child);
         systemState.patientType = patientTypeEnum.child;
+        systemState.resetSystemState();
       }
     } else if (additionalInfo == 'Infant') {
       if (systemState.patientType != patientTypeEnum.infant) {
         modelManager.loadPatientPresets(patientTypeEnum.infant);
         systemState.patientType = patientTypeEnum.infant;
+        systemState.resetSystemState();
       }
     } else {
       throw Exception(
@@ -86,7 +90,7 @@ class ScreenController {
     }
     systemState.screenStatus = screenStatusEnum.monitorScreen;
     changeScenario(scenariosEnum.standardScenario);
-    systemState.absAlarmFieldModel.updateActiveList();
+    systemState.absAlarmFieldModel.evaluateActiveList();
     soundController.startSaturationHFSound();
     return Get.toNamed('/main_screen');
   }
@@ -99,7 +103,7 @@ class ScreenController {
     //systemState.patientType = patientTypeEnum.adult;
     systemState.screenStatus = screenStatusEnum.monitorScreen;
     changeScenario(scenariosEnum.standardScenario);
-    systemState.absAlarmFieldModel.updateActiveList();
+    systemState.absAlarmFieldModel.evaluateActiveList();
     soundController.startSaturationHFSound();
     return Get.toNamed('/main_screen');
   }
@@ -113,7 +117,7 @@ class ScreenController {
     systemState.screenStatus = screenStatusEnum.defibrillationScreen;
     changeScenario(scenariosEnum.standardScenario);
     systemState.setSelectedToggleView([false, false, true]);
-    systemState.absAlarmFieldModel.updateActiveList();
+    systemState.absAlarmFieldModel.evaluateActiveList();
     soundController.startSaturationHFSound();
     return Get.toNamed('/main_screen');
   }
@@ -136,17 +140,17 @@ class ScreenController {
       case 0:
         systemState.screenStatus = screenStatusEnum.monitorScreen;
         systemState.setSelectedToggleView([true, false, false]);
-        systemState.absAlarmFieldModel.updateActiveList();
+        systemState.absAlarmFieldModel.evaluateActiveList();
         break;
       case 1:
         systemState.screenStatus = screenStatusEnum.ventilationScreen;
         systemState.setSelectedToggleView([false, true, false]);
-        systemState.absAlarmFieldModel.updateActiveList();
+        systemState.absAlarmFieldModel.evaluateActiveList();
         break;
       case 2:
         systemState.screenStatus = screenStatusEnum.defibrillationScreen;
         systemState.setSelectedToggleView([false, false, true]);
-        systemState.absAlarmFieldModel.updateActiveList();
+        systemState.absAlarmFieldModel.evaluateActiveList();
         break;
       default:
         throw Exception("No screen $index known in toggle view");
@@ -161,7 +165,7 @@ class ScreenController {
     //system state should stay the same here
     systemState.absAlarmFieldModel.closeOverlay();
     Get.find<SoundController>().stop();
-    if (!modelManager.stylesTraitsLoaded) {
+    if (!modelManager.environmentValuesLoaded) {
       modelManager.loadDataModelEnvironmentValues();
     }
     return Get.offNamed('/alarm_limit_screen');
@@ -192,8 +196,9 @@ class ScreenController {
       systemState.patientType = patientTypeEnum.adult;
     }
     changeScenario(scenario);
-    systemState.absAlarmFieldModel.updateActiveList();
+    systemState.absAlarmFieldModel.evaluateActiveList();
     soundController.startSaturationHFSound();
+    systemState.resetSystemState();
     return Get.toNamed('/main_screen');
   }
 }

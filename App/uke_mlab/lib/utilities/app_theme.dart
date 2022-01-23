@@ -22,6 +22,7 @@ class AppTheme {
   static const Color alarmMiddleColor = Color(0xFFFBFF00);
   static const Color alarmWarningColor = Color(0xFF49FF00);
   static const Color alarmNoneColor = Color(0xFF2A2831);
+  static const Color alarmMessageColor = Color(0xFF000000);
 
   final Color backgroundColor = const Color(0xFF1C1B1F);
   final Color appBar = const Color(0xFF1d192B);

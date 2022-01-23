@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uke_mlab/providers/sound_controller.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 
 enum alarmStatus {
@@ -41,4 +42,5 @@ extension AlarmStatusAttributes on alarmStatus {
   String get name => attributes[this]!['name'] as String;
   int get priority => attributes[this]!['priority'] as int;
   Color get color => attributes[this]!['color'] as Color;
+  SoundIdentifier? get sound => attributes[this]!['sound'];
 }
