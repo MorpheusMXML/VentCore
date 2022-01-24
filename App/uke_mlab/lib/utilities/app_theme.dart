@@ -20,7 +20,7 @@ class AppTheme {
   static const Color breathFrequencyColor = Color(0xFF009688);
   static const Color alarmHighColor = Color(0xFFFF0000);
   static const Color alarmMiddleColor = Color(0xFFFBFF00);
-  static const Color alarmWarningColor = Color(0xFF49FF00);
+  static const Color alarmWarningColor = Color(0xFF89AC76); //Color(0xFF49FF00);
   static const Color alarmNoneColor = Color(0xFF2A2831);
   static const Color alarmMessageColor = Color(0xFF000000);
 

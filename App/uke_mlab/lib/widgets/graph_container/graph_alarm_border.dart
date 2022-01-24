@@ -27,6 +27,7 @@ class GraphAlarmBorder extends StatelessWidget {
       switch (alarm) {
         case alarmStatus.high:
         case alarmStatus.middle:
+        case alarmStatus.warning:
           return Column(
             children: [
               Expanded(

@@ -263,7 +263,10 @@ class SoundController {
 
         ///Known Problem: We have to play the sound on first second and after this we use the Timer because the Timer plays on end of duration
         ///This causes and Problem with Toggle to VentilationScreen!
-        alarmPlayerCache.play(alarmSound);
+        //alarmPlayerCache.play(
+        //  alarmSound,
+        //  volume: alarmVolume,
+        //);
         alarmTimer = Timer.periodic(Duration(seconds: alarmSeconds),
             ((alarmTimer) async {
           if (Platform.isAndroid) {
