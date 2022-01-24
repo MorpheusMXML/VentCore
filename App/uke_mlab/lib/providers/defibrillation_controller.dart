@@ -2,6 +2,12 @@ import 'dart:async';
 
 import 'package:get/get.dart';
 
+/// This Class Implements the Controller for the Defibrillator.
+/// This Controller Manages the State of the Defibrillator, Tracks the Timings, No of Shocks and Shock Power.
+///
+/// It Further implements helper Methods that are calles to change the Settings of the Defibrillator like, Synchronicity, ShockPower and Impedance.
+/// Note that most of the Class Variables use [GetX] and the corresponding Data Classes [RxString], [RxBool], [RxInt] to make the changes of these Variables observable for the Widgets that display these Values,
+///
 class DefibrillationController extends GetxController {
   Stopwatch timerWatch = Stopwatch();
   Stopwatch lastWatch = Stopwatch();
@@ -32,6 +38,7 @@ class DefibrillationController extends GetxController {
 
   RxInt numberOfShocks = 0.obs;
 
+  /// This Method starts the Timer when the Defibrillator is Started for the first Time.
   void startTimerWatch() {
     timerTimer?.cancel();
     timerWatch.start();
@@ -41,6 +48,7 @@ class DefibrillationController extends GetxController {
     });
   }
 
+  /// This Method sets the Timer for the Time since the last Shock was applied.
   void startLastWatch() {
     if (lastWatch.isRunning) {
       lastTimer?.cancel();
@@ -56,6 +64,7 @@ class DefibrillationController extends GetxController {
     });
   }
 
+  /// This Method convertes the Timer to an String in the correct Formatting for Displaying.
   String timerToString(int seconds) {
     Duration duration = Duration(seconds: seconds);
 
@@ -65,14 +74,17 @@ class DefibrillationController extends GetxController {
     return '$twoDigitMinutes:$twoDigitSeconds';
   }
 
+  /// THis implements the Changing Behaviour of the Metronome Toggle Button
   void toggleMetronome(bool changed) {
     metronomeOn.value = changed;
   }
 
+  /// This Method sets the State of the Impedance that was selected by the User.
   void setSelectedImpedanceButton(String name) {
     selectedImpedanceButton.value = name;
   }
 
+  /// This Method sets the Default Settings when the Mode 'Auto' is selected to Impedence 'OK' and Synchrinicity to 'Sync'
   void setSelectedDefiButton(String name) {
     if (name == 'Auto') {
       toggleMetronome(true);
@@ -82,6 +94,7 @@ class DefibrillationController extends GetxController {
     selectedDefiButton.value = name;
   }
 
+  /// This Method sets the State of the selected Synchronicity of the Defibrillator.
   void setSelectedSynchronicityButton(String name) {
     selectedSynchronicityButton.value = name;
   }
