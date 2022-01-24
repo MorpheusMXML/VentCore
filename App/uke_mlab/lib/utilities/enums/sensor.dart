@@ -185,6 +185,7 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
         'child': 30,
         'infant': 30,
       },
+      'alarmType': 2,
     },
     sensorEnumAbsolute.pulse: {
       'displayString': 'Pulse',
@@ -223,6 +224,7 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
         'child': 3.6,
         'infant': 3.7,
       },
+      'alarmType': 2,
     },
     sensorEnumAbsolute.breathfrequency: {
       'displayString': 'Breath. Freq.',
@@ -242,6 +244,7 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
         'child': 13,
         'infant': 33,
       },
+      'alarmType': 2,
     },
     sensorEnumAbsolute.diaAbsolute: {
       'displayString': 'Diastolic Blood Pressure',
