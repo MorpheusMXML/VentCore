@@ -16,7 +16,7 @@ class AlarmFieldTile extends StatelessWidget {
     const TextStyle textStyle = TextStyle(
       color: Colors.black,
       decoration: TextDecoration.none,
-      fontSize: 25,
+      fontSize: 22,
       fontWeight: FontWeight.w300,
     );
 
@@ -47,6 +47,17 @@ class AlarmFieldTile extends StatelessWidget {
                 style: textStyle,
               ),
             ),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              shape: const CircleBorder(),
+              /* minimumSize: Size(20, 20),
+              maximumSize: Size(20, 20), */
+              primary: Colors.amber,
+              onPrimary: Theme.of(context).dividerColor,
+            ),
+            onPressed: () => {},
+            child: const Icon(Icons.check),
           ),
         ],
       ),

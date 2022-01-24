@@ -62,16 +62,17 @@ class StatusBar extends StatelessWidget {
           child: Center(child: SvgPicture.asset('assets/icons/OxygenBottle.svg', height: 20)),
         ),
         Flexible(
+            flex: StatusBarConstants.flexMuteECGButtonArea,
             child: Obx(
-          () => IconButton(
-              onPressed: () => {
-                    if (_soundController.ecgSoundActive.value) {_soundController.stop()} else {_soundController.startSaturationHFSound()}
-                  },
-              icon: Icon(
-                _soundController.ecgSoundActive.value ? Icons.volume_mute : Icons.volume_off,
-                size: 20,
-              )),
-        ))
+              () => IconButton(
+                  onPressed: () => {
+                        if (_soundController.ecgSoundActive.value) {_soundController.stop()} else {_soundController.startSaturationHFSound()}
+                      },
+                  icon: Icon(
+                    _soundController.ecgSoundActive.value ? Icons.volume_mute : Icons.volume_off,
+                    size: 20,
+                  )),
+            ))
       ],
     );
   }
