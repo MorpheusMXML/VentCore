@@ -4,8 +4,13 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/providers/defibrillation_controller.dart';
 import 'package:uke_mlab/providers/screen_controller.dart';
-import 'package:uke_mlab/widgets/defibrillation_mode/defibrillation_container.dart';
 
+/// This Class implements the [ToggleButtons] that provide the Mode Changing Functionality.
+///
+/// It houses the Buttons for Defibrillator, Ventilator and Monitoring with the corresponding Icons stored in the [iconLocationMap].
+/// Further gets the Instance of the [SystemState] to  track in which mode the App currently is.
+/// Also uses the [DefibrillationController] and [ScreenController] to restrict the availability of this Button during the Load/Shock Animation of the Defi.
+///
 class ToggleModeButton extends StatelessWidget {
   ToggleModeButton({Key? key}) : super(key: key);
 
