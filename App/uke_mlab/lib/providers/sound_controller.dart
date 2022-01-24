@@ -263,10 +263,14 @@ class SoundController {
 
         ///Known Problem: We have to play the sound on first second and after this we use the Timer because the Timer plays on end of duration
         ///This causes and Problem with Toggle to VentilationScreen!
+<<<<<<< HEAD
         //alarmPlayerCache.play(
         //  alarmSound,
         //  volume: alarmVolume,
         //);
+=======
+        alarmPlayerCache.play(alarmSound);
+>>>>>>> 749fae1adcc3972b6cf86454020f64abb699cac0
         alarmTimer = Timer.periodic(Duration(seconds: alarmSeconds),
             ((alarmTimer) async {
           if (Platform.isAndroid) {
@@ -403,6 +407,10 @@ class SoundController {
   }
 
   void startSaturationHFSound() {
+<<<<<<< HEAD
+=======
+    // TODO: end comment
+>>>>>>> 749fae1adcc3972b6cf86454020f64abb699cac0
     DataModelAbsolute hfModel =
         Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.hfAbsolute.name);
     DataModelAbsolute spo2Model =
