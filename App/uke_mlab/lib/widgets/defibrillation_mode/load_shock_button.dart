@@ -5,6 +5,28 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/providers/defibrillation_controller.dart';
 import 'package:uke_mlab/providers/sound_controller.dart';
 
+/// This Class implements the 2-in-1 Button for the Loading and Shock applying behaviour of the Defibrillator.
+/// #### Important Note: This Is a [StatefulWidget] this is necessary to adequately Animate the change for Loading the Defibrillator.
+///
+/// When this Class is Instanciated, the [initState()] Method for this Widget creates an Instance of [AnimationController] and [ColorTween].
+/// The ColorTween sets the Color Transition for the Animation from [Colors.transparent] to [Colors.red] and registeres it at the [_animationController].
+/// The [AnimationController] sets a [Duration] of 6 Seconds to fit the corresponding Sound Effect while Loading the Defi.
+///
+/// This Class also [Get]'s the [DefibrillationController] and [SoundController] Instances with [Get.find] in order to Trigger the Sound Effects
+/// of the Defibrillator and set the State of the Defibrillation Settings.
+///
+/// ### Behaviour of the Button:
+/// The Defibrillator is loaded with a short Click on the Button. After this, the Loading Sound is triggered
+/// at the [SoundController] with [soundController.playDefiLoadSound()].
+/// Also the State of the Defi is changed to 'ReadyToShock'. When the Color Animation is finished, the Alarm for the Armed Defi is played in Loop Mode.
+/// Also the SVG for the Icon is changed from the Battery to the Lightning Icon.
+///
+/// After the Defi is Loaded and ReadyToShock, one can apply the Shock with a Long Press on the Shock Button. This will Cancel the Spund Effect of the Armed Defi,
+///  reset the Color Animation back to Transparent and change the Icon back to the Battery.
+/// #### Note that the [defibrillationController.toggleButtonAvailable.toggle()] call with the Press and LongPress Callback disables
+/// the Functionallity of the [ToggleModeButton] for changing the Mode of the Device.
+/// This is due to a Bug that will cause the app to crash when Animating a Widget while changing the Screen Mode.
+/// Further for Safety Reasons one should not be able to change the Mode of the Device when the User is Loading the Defibrillator and / or ready to apply the Shock.
 class LoadShockButton extends StatefulWidget {
   const LoadShockButton({Key? key}) : super(key: key);
 
