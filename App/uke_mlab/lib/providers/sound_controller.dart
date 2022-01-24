@@ -29,6 +29,7 @@ class SoundController {
   final AudioCache ecgPlayerCache = AudioCache(prefix: 'assets/sounds/');
   final List<SoundListEntry> soundList = <SoundListEntry>[];
   final List<bool> _alarmTypes = [false, false];
+  RxBool ecgSoundActive = true.obs;
   Timer? timer;
   Timer? getDataTimer;
   Timer? cancelTimerBeep;
@@ -69,24 +70,20 @@ class SoundController {
 
   ///playes the SoundAlarm fot the AlarmType specified with [Enum soundIdentifier].
   play(Enum soundIdentifier) async {
-    alarmPlayer = await alarmPlayerCache
-        .play(_alarmSoundFiles[soundIdentifier].toString());
+    alarmPlayer = await alarmPlayerCache.play(_alarmSoundFiles[soundIdentifier].toString());
   }
 
   playDefiLoadSound() async {
     stop();
-    alarmPlayer = await alarmPlayerCache.play(
-        _alarmSoundFiles[SoundIdentifier.defiLoading].toString(),
-        volume: 0.5);
+    alarmPlayer = await alarmPlayerCache.play(_alarmSoundFiles[SoundIdentifier.defiLoading].toString(), volume: 0.5);
     alarmPlayer!.onPlayerCompletion.listen((event) async {
-      alarmPlayer = await alarmPlayerCache.loop(
-          _alarmSoundFiles[SoundIdentifier.defiShockReady].toString(),
-          volume: 0.6);
+      alarmPlayer = await alarmPlayerCache.loop(_alarmSoundFiles[SoundIdentifier.defiShockReady].toString(), volume: 0.6);
     });
   }
 
   /// stops all [AudioPlayer]'s that are currently playing a Sound.
   stop() async {
+    ecgSoundActive.value = false;
     if (alarmPlayer != null) {
       alarmPlayer!.stop();
       alarmPlayer!.dispose();
@@ -122,10 +119,8 @@ class SoundController {
       // checks whether element is in systemState.absAlarmFieldModel.activeList or systemState.graphList.activeGraphAbsolutes,
       // if it is in neither => remove from soundList
       if (element.type is sensorEnumAbsolute) {
-        return !systemState.absAlarmFieldModel.activeList
-                .contains(element.type as sensorEnumAbsolute) &&
-            !systemState.graphList.activeGraphAbsolutes
-                .contains(element.type as sensorEnumAbsolute);
+        return !systemState.absAlarmFieldModel.activeList.contains(element.type as sensorEnumAbsolute) &&
+            !systemState.graphList.activeGraphAbsolutes.contains(element.type as sensorEnumAbsolute);
         // could be nicer
         // checks whether element is in generalAlarms, if so returns false => not removed from soundList
       } else if (element.type is nonGraphAlarmEnum) {
@@ -136,8 +131,7 @@ class SoundController {
         }
         return true;
       } else {
-        throw Exception(
-            "soundList does contain an element which has neither sensorEnumAbsolute nor nonGraphAlarmEnum as type");
+        throw Exception("soundList does contain an element which has neither sensorEnumAbsolute nor nonGraphAlarmEnum as type");
       }
     });
 
@@ -168,8 +162,7 @@ class SoundController {
       }
       // TODO: analyze general alarms too
     }
-    print(
-        "playAlarm called by ${soundList[0].type.toString()} with prio $priority\n ");
+    print("playAlarm called by ${soundList[0].type.toString()} with prio $priority\n ");
     playAlarm(soundList[0].priority);
   }
 
@@ -317,15 +310,11 @@ class SoundController {
   }
 
   void startSaturationHFSound() {
-    DataModelAbsolute hfModel =
-        Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.hfAbsolute.name);
-    DataModelAbsolute spo2Model =
-        Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.spo2Absolute.name);
-    getDataTimer ??=
-        Timer.periodic(Duration(seconds: getDataTimerDuration), (timer) {
-      saturationHfBeep(
-          bpm: hfModel.absoluteValue.value.toInt(),
-          spO2: spo2Model.absoluteValue.value.toInt());
+    ecgSoundActive.value = true;
+    DataModelAbsolute hfModel = Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.hfAbsolute.name);
+    DataModelAbsolute spo2Model = Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.spo2Absolute.name);
+    getDataTimer ??= Timer.periodic(Duration(seconds: getDataTimerDuration), (timer) {
+      saturationHfBeep(bpm: hfModel.absoluteValue.value.toInt(), spO2: spo2Model.absoluteValue.value.toInt());
     });
   }
 }
