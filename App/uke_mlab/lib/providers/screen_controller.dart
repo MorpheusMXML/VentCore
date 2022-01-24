@@ -213,11 +213,13 @@ class ScreenController {
       boundaryAdjustmentMap.map[sensorKey]!.lowerCounter.value = 0;
       boundaryAdjustmentMap.map[sensorKey]!.dateTimeLower = DateTime.now();
       dataModel.setUpperAlarmBoundary(dataModel.lowerAlarmBound.value * 0.96);
+      boundaryAdjustmentMap.calculatePressable(sensorKey);
     }
     if (boundaryAdjustmentMap.map[sensorKey]!.upperCounter.value >= 3) {
       boundaryAdjustmentMap.map[sensorKey]!.upperCounter.value = 0;
       boundaryAdjustmentMap.map[sensorKey]!.dateTimeUpper = DateTime.now();
       dataModel.setUpperAlarmBoundary(dataModel.upperAlarmBound.value * 1.04);
+      boundaryAdjustmentMap.calculatePressable(sensorKey);
     }
   }
 }
