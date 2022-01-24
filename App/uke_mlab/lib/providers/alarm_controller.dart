@@ -20,15 +20,12 @@ class AlarmController {
   ///Manages and throws Alarms with an implemented Alarm Logic.
   final Map<sensorEnumAbsolute, dynamic> confirmMap =
       <sensorEnumAbsolute, dynamic>{};
-  final Map<sensorEnumAbsolute, Map<dynamic, dynamic>> boundaryAdjustmentMap =
-      <sensorEnumAbsolute, Map<dynamic, dynamic>>{};
   final ModelManager _modelManager;
   final SoundController _soundController = Get.find<SoundController>();
   final SystemState _systemState = Get.find<SystemState>();
-  
+
   AlarmController(this._modelManager) {
     _modelManager.registerAlarmController(this);
-    // TODO find a better solution for mve and breathfrequency NOT throwing alarms at the start
     listen();
   }
 
@@ -179,12 +176,6 @@ class AlarmController {
     ///Update AlarmState if change is detected
     if (_systemState.getAlarmStatePriority(sensor) != status.priority ||
         _systemState.getAlarmStateMessage(sensor) != message.message) {
-          ///Check if middle alarm is repeating and needs to change boundaries
-      // if (_systemState.getAlarmStatePriority(sensor) ==
-      //         alarmStatus.none.priority &&
-      //     status.priority == alarmStatus.middle.priority) {
-      //   evaluateBoundaryAdjustment(sensor, message);
-      // }
       _systemState.setAlarmState(
         sensor,
         status.priority,
@@ -192,6 +183,13 @@ class AlarmController {
         status,
         status.color,
       );
+      // Check if middle alarm is repeating and needs to change boundaries
+      if (_systemState.graphList.activeGraphAbsolutes.contains(sensor) &&
+          _systemState.getAlarmStatePriority(sensor) ==
+              alarmStatus.none.priority &&
+          status.priority == alarmStatus.middle.priority) {
+        evaluateBoundaryAdjustment(sensor, message);
+      }
     }
     triggerSoundController(sensor, status);
   }
@@ -204,45 +202,75 @@ class AlarmController {
         _soundController.alarmTimer?.cancel();
         _soundController.alarmTimer = null;
       }
-      _systemState.graphList.evaluateActiveGraphAbsolutes();
-      _systemState.absAlarmFieldModel.evaluateActiveList();
+      // _systemState.graphList.evaluateActiveGraphAbsolutes(); // done when alarm boundaries are set
+      // _systemState.absAlarmFieldModel.evaluateActiveList();
       _soundController.triggerSoundState(sensor, alarmStatus.none.priority);
     } else {
-      _systemState.graphList.evaluateActiveGraphAbsolutes();
-      _systemState.absAlarmFieldModel.evaluateActiveList();
+      // _systemState.graphList.evaluateActiveGraphAbsolutes();
+      // _systemState.absAlarmFieldModel.evaluateActiveList();
       _soundController.triggerSoundState(sensor, status.priority);
     }
   }
 
   //TODO: change upper and lower boundary if patient value is around that value everytime
-  void evaluateBoundaryAdjustment(sensorEnumAbsolute sensor, alarmMessage message) {
-    //     DataModelAbsolute dataModelAbsolute = Get.find<DataModelAbsolute>(tag: sensor.name);
-    //     dynamic upper =
-    //     Get.find<DataModelAbsolute>(tag: sensor.name).upperAlarmBound.value;
-    // dynamic lower =
-    //     Get.find<DataModelAbsolute>(tag: sensor.name).lowerAlarmBound.value;
-    // int counter = boundaryAdjustmentMap[sensor]![1]++;
-    // DateTime datetime = DateTime.now();
-    // boundaryAdjustmentMap[sensor] = {datetime, counter} as Map;
-    // if (message == alarmMessage.lowerBoundaryViolated && counter >= 3) {
-    //   dataModelAbsolute.setLowerAlarmBoundary(lower * 0.98);
+  void evaluateBoundaryAdjustment(
+      sensorEnumAbsolute sensor, alarmMessage message) {
+    DateTime dateTime = DateTime.now();
 
-    // } else if (message == alarmMessage.upperBoundaryViolated && counter >= 3) {
-    //   dataModelAbsolute.setUpperAlarmBoundary(upper*1.02);
-    // }
-    // if(counter >= 3){
-    //   counter = 0;
-    // }
+    if (message == alarmMessage.lowerBoundaryViolated) {
+      if (dateTime
+              .difference(
+                  _systemState.smartAdjustmentMap.map[sensor]!.dateTimeLower)
+              .inSeconds <=
+          30) {
+        _systemState.smartAdjustmentMap.map[sensor]!.lowerCounter.value++;
+        _systemState.smartAdjustmentMap.map[sensor]!.dateTimeLower = dateTime;
+        // functionalty now in Button
+        //if (_systemState
+        //        .boundaryAdjustmentMap.map[sensor]!.lowerCounter.value >=
+        //    3) {
+        //  dataModelAbsolute.setLowerAlarmBoundary(
+        //      lower * 0.98);
+        //}
+      } else {
+        _systemState.smartAdjustmentMap.map[sensor]!.lowerCounter.value = 0;
+        _systemState.smartAdjustmentMap.map[sensor]!.dateTimeLower = dateTime;
+        return;
+      }
+    } else if (message == alarmMessage.upperBoundaryViolated) {
+      if (dateTime
+              .difference(
+                  _systemState.smartAdjustmentMap.map[sensor]!.dateTimeUpper)
+              .inSeconds <=
+          30) {
+        _systemState.smartAdjustmentMap.map[sensor]!.upperCounter.value++;
+        _systemState.smartAdjustmentMap.map[sensor]!.dateTimeUpper = dateTime;
+        // functionalty now in Button
+        //if (_systemState
+        //        .boundaryAdjustmentMap.map[sensor]!.upperCounter.value >=
+        //    3) {
+        //  dataModelAbsolute.setUpperAlarmBoundary(
+        //      upper * 1.02);
+        //}
+      } else {
+        _systemState.smartAdjustmentMap.map[sensor]!.upperCounter.value = 0;
+        _systemState.smartAdjustmentMap.map[sensor]!.dateTimeUpper = dateTime;
+        return;
+      }
+    } else {
+      throw Exception(
+          "Message field was $message instead of alarmMessage.lowerBoundaryViolated or alarmMessage.upperBoundaryViolated");
+    }
   }
 
   void triggerConfirm(sensorEnumAbsolute sensor) {
     _systemState.setAlarmState(sensor, null, null, alarmStatus.confirmed, null);
-    _systemState.graphList.evaluateActiveGraphAbsolutes();
-    _systemState.absAlarmFieldModel.evaluateActiveList();
+    // _systemState.graphList.evaluateActiveGraphAbsolutes();
+    // _systemState.absAlarmFieldModel.evaluateActiveList();
     confirmMap[sensor] = DateTime.now();
 
     // TODO: reactivate
-    //evaluateAlarmState(sensor);
+    evaluateAlarmState(sensor);
   }
 
   bool isConfirmInConfirmDuration(

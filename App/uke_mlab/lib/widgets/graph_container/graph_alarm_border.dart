@@ -7,6 +7,7 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 import 'package:uke_mlab/widgets/graph_container/alarm_confirm_button.dart';
 import 'package:uke_mlab/widgets/graph_container/graph_alarm_message.dart';
+import 'package:uke_mlab/widgets/graph_container/smart_adjustment_button.dart';
 
 class GraphAlarmBorder extends StatelessWidget {
   /// Sets an border which is triggered through the [SystemState]
@@ -35,11 +36,16 @@ class GraphAlarmBorder extends StatelessWidget {
                   color: systemState.getAlarmStateColor(sensor),
                   padding: const EdgeInsets.only(bottom: 5),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      AlarmConfirmButton(sensor: sensor),
-                      GraphAlarmMessage(sensor: sensor),
+                      const Spacer(flex: 2),
+                      AlarmConfirmButton(sensorKey: sensor),
+                      const Spacer(flex: 2),
+                      GraphAlarmMessage(sensorKey: sensor),
+                      const Spacer(flex: 8),
+                      SmartAjdustButton(sensorKey: sensor),
+                      const Spacer(flex: 2),
                     ],
                   ),
                 ),
