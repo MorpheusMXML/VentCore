@@ -9,6 +9,19 @@ import 'package:uke_mlab/widgets/defibrillation_mode/sync_container.dart';
 import 'package:uke_mlab/widgets/defibrillation_mode/system_diagnosis.dart';
 import 'package:uke_mlab/widgets/toggle/toggle_mode_button.dart';
 
+/// This Class Renders the [Widget] that Structures the Defibrillation Screen.
+///
+/// It Calls the Custom Widgets:
+/// + [SystemDiagnosis]
+/// + [DefibrillationContainer]
+/// + [ShockPower]
+/// + [MetronomeContainer]
+/// + [ImpedanceContainer]
+/// + [SyncContainer]
+/// + [LoadShockButton]
+/// + [DefibrillationStats]
+///
+/// These Widgets Display the different Settings and Information needed for the Defibrillation.
 class DefibrillationMode extends StatelessWidget {
   const DefibrillationMode({
     Key? key,
