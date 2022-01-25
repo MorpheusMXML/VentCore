@@ -62,7 +62,7 @@ class AlarmLimitScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: monitorBoundarySet.map((sensorKey) {
                           return SizedBox(
-                            height: 160,
+                            height: 180,
                             width: (Get.width - 24) / 3 / 2 + 15,
                             child: ValueBoxTile.withHeadline(
                                 sensorAbsolute: sensorKey),
@@ -95,7 +95,7 @@ class AlarmLimitScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: ventilationBoundarySet.map((sensorKey) {
                           return SizedBox(
-                            height: 160,
+                            height: 180,
                             width: (Get.width - 24) / 3 / 2 + 15,
                             child: ValueBoxTile.withHeadline(
                                 sensorAbsolute: sensorKey),
@@ -128,7 +128,7 @@ class AlarmLimitScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: graphBoundarySet.map((sensorKey) {
                           return SizedBox(
-                            height: 160,
+                            height: 180,
                             width: (Get.width - 24) / 3 / 2 + 15,
                             child: ValueBoxTile.withHeadline(
                                 sensorAbsolute: sensorKey),
