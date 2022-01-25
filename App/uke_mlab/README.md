@@ -25,7 +25,7 @@
 <a href=""><strong>Explore the docs »</strong></a>
 <br />
 <br />
-<a href="">View Trailer</a>
+<a href="https://youtu.be/umgHKt3gESU">View Trailer</a>
 ·
 <a href="">Visit Website</a>
 ·
@@ -237,17 +237,6 @@ Alarms are displayed audibly in descending order of priority.
 Please refer to our [Code Documentation]().
 
 
-
-<!-- KNOWN ISSUES -->
-# Known Issues
-
-1. Issue 1
-2. Issue 3
-
-***
-
-
-
 ### Auditory alarm according to prioritisation
 Alarms are displayed audibly in descending order of priority.
 ![Table Audio Priorities](./ReadMeFiles/table-audio-priority.png)
@@ -312,15 +301,51 @@ With a combination of the random walk and the clean, easily loopable data we rec
 <!-- DOCUMENTATION -->
 # Documentation
 
-***
 <!-- TODO: Add Link-->
-Please refer to our [Code Documentation]().
+- Please refer to our [Code Documentation]()
+- Application [Styleguide](/App/documentation/uke-styleguide-tables.md)
+- Approaches and Logic for [Alarmmangement]()
+- [UseCases](./documentation/UseCase-English.pdf) for Testing
+ 
+- [Figma-Clickdummy](https://www.figma.com/proto/ase69ABWTPP8L2kVJdHuzq/MLab---UKE-Protoype-UI?node-id=892%3A3234&scaling=scale-down&page-id=892%3A792&starting-point-node-id=892%3A3234&show-proto-sidebar=1)
+
 
 <!-- KNOWN ISSUES -->
 # Known Issues
 
-1. Issue 1
-2. Issue 3
+**1. Sound Problems with MacOS and Simulator**
+
+  If you are using a Mac and you are simulating an iPad over XCode and the Simulator, please make sure, that you have enabled the sound in settings. Also playing sounds with the Mac speakers can lead to sound issues. Please consider using headphones.
+  ![MacOs](./ReadMeFiles/Screenshots/image.png)
+  ***
+
+**2. [Add-Button ValueTiles for the right side missing](https://git.informatik.uni-hamburg.de/mast/teaching/mlab/wt202122/uke/-/issues/121)**
+
+Adding an absolute sensor on the right side of the screen is currently missing.
+
+***
+
+**3. [Audioplayer output in Debug Console]()**
+
+This seems to be a known issue with the [audioplayer](https://github.com/bluefireteam/audioplayers/issues/707).
+If you want to disable the output, please filter your console. To exclude certain output, use ***!excludeText***
+***
+
+**4. [Delayed Alarm Sounds]()**
+
+Alarms sound don't start right away. This seems to be a problem of Audioplayer and Timer. Initial start should be directly.
+
+***
+
+**5. [Alarms disappear too quickly]()**
+
+Alarms should be visualized at least 10 seconds before it can update to a lower alarm. 
+
+***
+
+**6. [Server Issues with Pipeline](https://git.informatik.uni-hamburg.de/mast/teaching/mlab/wt202122/uke/-/issues/59)**
+
+The pipeline for the project couldn't be started due to server issues.
 
 ***
 
