@@ -20,19 +20,15 @@ class AlarmList extends StatelessWidget {
       () => ConstrainedBox(
         constraints: BoxConstraints(
           maxHeight: Get.height - statusBarHeight,
-          maxWidth: StatusBarConstants.alarmListWidth +
-              2 * StatusBarConstants.horizontalMargin,
+          maxWidth: StatusBarConstants.alarmListWidth + 2 * StatusBarConstants.horizontalMargin,
         ),
         child: Container(
           margin: const EdgeInsets.only(
-              bottom: StatusBarConstants.verticalMargin,
-              right: StatusBarConstants.horizontalMargin,
-              left: StatusBarConstants.horizontalMargin),
+              bottom: StatusBarConstants.verticalMargin, right: StatusBarConstants.horizontalMargin, left: StatusBarConstants.horizontalMargin),
           child: Column(
             children: [
               Container(
-                width: StatusBarConstants.alarmListWidth -
-                    2 * StatusBarConstants.horizontalMargin,
+                width: StatusBarConstants.alarmListWidth - 2 * StatusBarConstants.horizontalMargin,
                 height: StatusBarConstants.verticalMargin,
                 color: Theme.of(context).shadowColor,
               ),
@@ -54,8 +50,7 @@ class AlarmList extends StatelessWidget {
                             left: StatusBarConstants.horizontalMargin,
                           ),
                           color: Theme.of(context).shadowColor,
-                          child: AlarmFieldTile(
-                              data: generalAlarms.alarmList[index]));
+                          child: AlarmFieldTile(data: generalAlarms.alarmList[index]));
                     }),
               ),
             ],

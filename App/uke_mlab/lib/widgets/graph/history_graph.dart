@@ -25,27 +25,6 @@ class HistoryGraph extends StatelessWidget {
     required this.sensor,
   }) : super(key: key);
 
-  /// Efficient way to find min and Max of the Y-Axis Interval that should be Rendered in [HistoryGraph] given the data in [graphData].
-  double findMax(String type, DataModelNIBD dataModel) {
-    List dataList;
-    switch (type) {
-      case 'max':
-        dataList = (List.generate(dataModel.graphData.length, (index) => dataModel.graphData[index].systolicPressure));
-        dataList.sort;
-        double max = dataList.last.toDouble();
-        print(max);
-        return dataList.isEmpty ? 150.0 : max;
-      case 'min':
-        dataList = (List.generate(dataModel.graphData.length, (index) => dataModel.graphData[index].diastolicPressure));
-        dataList.sort;
-        double min = dataList.last.toDouble();
-        print(min);
-        return dataList.isEmpty ? 150.0 : min;
-      default:
-        return 0.0;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     DataModelNIBD dataModel = Get.find<DataModelNIBD>(tag: sensor.name);
@@ -56,8 +35,6 @@ class HistoryGraph extends StatelessWidget {
         primaryYAxis: NumericAxis(
           plotOffset: 5,
           desiredIntervals: 10,
-          //maximum: 150.0, //findMax('max', dataModel) + 5,
-          //minimum: 0.0, //findMax('min', dataModel) - 5,
           majorGridLines: MajorGridLines(
             width: 1,
             color: Theme.of(context).shadowColor,

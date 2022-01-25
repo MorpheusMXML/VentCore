@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:uke_mlab/models/system_state.dart';
 
 import 'package:uke_mlab/providers/alarm_controller.dart';
 
@@ -37,7 +36,7 @@ class DataModelAbsolute extends GetxController {
   bool floatRepresentation = false;
 
   /// contains information whether the alarm boundary settings of the corresponding [ValueBoxContainer] are expanded
-  final RxBool expanded = false.obs; // TODO put somewhere else please
+  final RxBool expanded = false.obs;
 
   /// representation of the upper alarm bound for the corresponding sensor
   final RxDouble upperAlarmBound = 0.0.obs;

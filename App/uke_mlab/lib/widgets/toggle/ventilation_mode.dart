@@ -13,8 +13,6 @@ class VentilationMode extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Move to a controller
-
     List<Map<String, Object>> infoData = [
       {'type': 'pPeak', 'value': 50.12, 'unit': 'mBar'},
       {'type': 'pPlat', 'value': 4.58, 'unit': 'mBar'},
@@ -28,7 +26,6 @@ class VentilationMode extends StatelessWidget {
       {'name': 'PEEP', 'rate': 'mBar'},
     ];
 
-    // TODO get elements to be added to vent Screen from systemState.absAlarmFieldModel respective Set
     return Column(
       children: [
         Flexible(
@@ -36,12 +33,9 @@ class VentilationMode extends StatelessWidget {
           child: Row(
             children: const [
               Expanded(
-                child: ValueBoxTile.withHeadline(
-                    sensorAbsolute: sensorEnumAbsolute.breathfrequency),
+                child: ValueBoxTile.withHeadline(sensorAbsolute: sensorEnumAbsolute.breathfrequency),
               ),
-              Expanded(
-                  child: ValueBoxTile.withHeadline(
-                      sensorAbsolute: sensorEnumAbsolute.mve)),
+              Expanded(child: ValueBoxTile.withHeadline(sensorAbsolute: sensorEnumAbsolute.mve)),
             ],
           ),
         ),
@@ -53,9 +47,8 @@ class VentilationMode extends StatelessWidget {
                 child: InfoContainer(data: infoData),
               ),
               const Expanded(
-                child: ValueBoxTile.withHeadline(
-                    sensorAbsolute: sensorEnumAbsolute.hfAbsolute),
-              ), // TODO hf here?
+                child: ValueBoxTile.withHeadline(sensorAbsolute: sensorEnumAbsolute.hfAbsolute),
+              ),
             ],
           ),
         ),

@@ -9,18 +9,17 @@ class AlarmConfirmationRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(
-          top: 10, right: AbsoluteAlarmFieldConst.horizontalMargin),
+      margin: const EdgeInsets.only(top: 10, right: AbsoluteAlarmFieldConst.horizontalMargin),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: const [
           Expanded(
-            flex: 5,
+            flex: 1,
             child: AlarmConfirmationButtonAll(),
           ),
-          Spacer(flex: 1),
+          // Spacer(flex: 1),
           Expanded(
-            flex: 5,
+            flex: 1,
             child: AlarmConfirmationButtonSingleListExpansion(),
           )
         ],
