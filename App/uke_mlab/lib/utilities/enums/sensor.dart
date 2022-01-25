@@ -33,7 +33,7 @@ class SensorMapping {
     sensorEnumGraph.ecgCh1:
         null, // could/should be null to avoid double representation, but due to customizability (ecgCh1 = only ecg channel) double representation is accepted
     sensorEnumGraph.ecgCh2: sensorEnumAbsolute.hfAbsolute,
-    sensorEnumGraph.cpr: sensorEnumAbsolute.hfAbsolute,
+    sensorEnumGraph.cpr: null,
     sensorEnumGraph.nibd: null,
   };
 }
@@ -285,14 +285,16 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
   };
 
   String get displayString => attributes[this]!['displayString'] as String;
-  String get displayShortString => attributes[this]!['displayShortString'] as String;
+  String get displayShortString =>
+      attributes[this]!['displayShortString'] as String;
   String get abbreviation => attributes[this]!['abbreviation'] as String;
   String get unit => attributes[this]!['unit'] as String;
   Color get color => attributes[this]!['color'] as Color;
 
   ///10 Seconds are a default confirm Duration
   int get confirmDuration => attributes[this]!['confirmDuration'] ?? 10;
-  dynamic get boundaryDeviation => attributes[this]!['boundaryDeviation'] as dynamic;
+  dynamic get boundaryDeviation =>
+      attributes[this]!['boundaryDeviation'] as dynamic;
   Map get upperBound => attributes[this]!['upperBound'] as Map<String, dynamic>;
   Map get lowerBound => attributes[this]!['lowerBound'] as Map<String, dynamic>;
   bool get floatRepresentation => attributes[this]!['floatRepresentation'];

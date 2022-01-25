@@ -65,6 +65,7 @@ class ValueBoxContainer extends StatelessWidget {
                   style: TextStyle(
                     color: dataModelAbsolute!.color,
                     fontSize: fontSize,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 Obx(
@@ -75,6 +76,7 @@ class ValueBoxContainer extends StatelessWidget {
                     style: TextStyle(
                       color: dataModelAbsolute!.color,
                       fontSize: fontSize,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 )
@@ -110,6 +112,7 @@ class ValueBoxContainer extends StatelessWidget {
                     style: TextStyle(
                       color: dataModelAbsolute!.color,
                       fontSize: fontSize,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
@@ -118,6 +121,7 @@ class ValueBoxContainer extends StatelessWidget {
                   style: TextStyle(
                     color: dataModelAbsolute!.color,
                     fontSize: fontSize,
+                    fontWeight: FontWeight.bold,
                   ),
                 )
               ]),
@@ -149,6 +153,7 @@ class ValueBoxContainer extends StatelessWidget {
                           style: TextStyle(
                             color: dataModelGraph!.color,
                             fontSize: fontSize,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
@@ -158,6 +163,7 @@ class ValueBoxContainer extends StatelessWidget {
                         style: TextStyle(
                           color: dataModelGraph!.color,
                           fontSize: fontSize,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ]),
@@ -193,6 +199,7 @@ class ValueBoxContainer extends StatelessWidget {
                         style: TextStyle(
                           color: dataModelGraph!.color,
                           fontSize: fontSize,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ]),

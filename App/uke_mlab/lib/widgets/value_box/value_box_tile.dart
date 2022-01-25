@@ -103,11 +103,11 @@ class ValueBoxTile extends StatelessWidget {
                                     child: Text(
                                       dataModel.displayShortString,
                                       style: TextStyle(
-                                        decoration: TextDecoration.none,
-                                        color: dataModel.color,
-                                        fontSize: 20,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
+                                          decoration: TextDecoration.none,
+                                          color: dataModel.color,
+                                          fontSize: 20,
+                                          overflow: TextOverflow.ellipsis,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                 ),
