@@ -69,14 +69,14 @@ extension SensorGraphAttributes on sensorEnumGraph {
       'graphLength': 250,
     },
     sensorEnumGraph.ecgCh1: {
-      'graphTitle': 'ECG Channel 1',
+      'graphTitle': 'ECG Ch. 1',
       'yAxisUnit': 'mV',
       'xAxisUnit': '',
       'color': AppTheme.heartFreqColor,
       'graphLength': 1500,
     },
     sensorEnumGraph.ecgCh2: {
-      'graphTitle': 'ECG Channel 2',
+      'graphTitle': 'ECG Ch. 2',
       'yAxisUnit': 'mV',
       'xAxisUnit': '',
       'color': AppTheme.heartFreqColor,
@@ -90,7 +90,7 @@ extension SensorGraphAttributes on sensorEnumGraph {
       'graphLength': 25,
     },
     sensorEnumGraph.nibd: {
-      'graphTitle': 'NIBD',
+      'graphTitle': 'NIBP',
       'yAxisUnit': '',
       'xAxisUnit': '',
       'color': AppTheme.nibdColor,
@@ -248,7 +248,7 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
     },
     sensorEnumAbsolute.diaAbsolute: {
       'displayString': 'Diastolic Blood Pressure',
-      'displayShortString': 'NIBD',
+      'displayShortString': 'NIBP',
       'abbreviation': 'DIA',
       'unit': 'mmHg',
       'color': AppTheme.nibdColor,
@@ -266,7 +266,7 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
     },
     sensorEnumAbsolute.sysAbsolute: {
       'displayString': 'Systolic Blood Pressure',
-      'displayShortString': 'NIBD',
+      'displayShortString': 'NIBP',
       'abbreviation': 'SYS',
       'unit': 'mmHg',
       'color': AppTheme.nibdColor,
