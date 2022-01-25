@@ -7,6 +7,7 @@ import 'package:uke_mlab/providers/alarm_controller.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 import 'package:uke_mlab/widgets/value_box/value_box_container.dart';
+import 'package:uke_mlab/widgets/value_box/value_box_settings.dart';
 
 class DataModelAbsolute extends GetxController {
   /// represents the data model to be used in [ValueBoxContainer] and subwidgets
@@ -16,6 +17,9 @@ class DataModelAbsolute extends GetxController {
 
   /// reference to the [AlarmController] of the system
   late final AlarmController alarmController;
+
+  /// An overlay of [ValueBoxSettings]
+  OverlayEntry? entry;
 
   /// default color for the [ValueBoxContainer]'s texts (to be overridden with actual color representing the corresponding sensor)
   Color color = Colors.white;
@@ -119,5 +123,59 @@ class DataModelAbsolute extends GetxController {
     counter.value = 0;
     //clear historical data
     historicValues.clear();
+  }
+
+  void showOverlay(ValueBoxContainer valueBoxContainer, GlobalKey globalKey,
+      BuildContext context) {
+    final RenderBox renderBox =
+        globalKey.currentContext!.findRenderObject() as RenderBox;
+    double boxHeight = renderBox.size.height;
+    double boxWidth = renderBox.size.width;
+
+    entry = OverlayEntry(
+        builder: (context) => Positioned(
+            top: renderBox.localToGlobal(Offset.zero).dy - 30,
+            left: renderBox.localToGlobal(Offset.zero).dx - 70,
+            child: Container(
+              height: boxHeight * 5 / 4,
+              width: 300,
+              color: const Color(0xFF49454F),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ValueBoxSettings.lower(
+                    dataModel: this,
+                    width: 40,
+                    height: 100,
+                  ),
+                  ConstrainedBox(
+                    child: valueBoxContainer,
+                    constraints: BoxConstraints(
+                      maxHeight: boxHeight,
+                      maxWidth: boxWidth,
+                    ),
+                  ),
+                  ValueBoxSettings.upper(
+                    dataModel: this,
+                    width: 40,
+                    height: 100,
+                  )
+                ],
+              ),
+            )));
+    final overlay = Overlay.of(context)!;
+    overlay.insert(entry as OverlayEntry);
+
+    // Hide all other overlays
+    for (var sensor in sensorEnumAbsolute.values) {
+      if (sensor != sensorKey) {
+        Get.find<DataModelAbsolute>(tag: sensor.name).hideOverlay();
+      }
+    }
+  }
+
+  void hideOverlay() {
+    entry?.remove();
+    entry = null;
   }
 }

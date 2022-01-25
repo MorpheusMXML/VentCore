@@ -26,23 +26,34 @@ class ValueBoxContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey globalKey = GlobalKey();
     const double aspectRatio = 1.1;
     double fontSize = 17;
     double fontSizeCenter = 44;
     // could be done via template pattern for better code quality
     if (dataModelGraph == null) {
       //When NIBD: avoid overflow.
-      if (dataModelAbsolute!.abbreviation == sensorEnumAbsolute.sysAbsolute.abbreviation ||
-          dataModelAbsolute!.abbreviation == sensorEnumAbsolute.diaAbsolute.abbreviation) {
+      if (dataModelAbsolute!.abbreviation ==
+              sensorEnumAbsolute.sysAbsolute.abbreviation ||
+          dataModelAbsolute!.abbreviation ==
+              sensorEnumAbsolute.diaAbsolute.abbreviation) {
         fontSizeCenter = 40;
         fontSize = 14;
       }
       return AspectRatio(
         aspectRatio: aspectRatio,
         child: ElevatedButton(
+          key: globalKey,
           style: ButtonStyle(
-              shape: MaterialStateProperty.all(const RoundedRectangleBorder()), backgroundColor: MaterialStateProperty.all(Theme.of(context).cardColor)),
-          onPressed: () => dataModelAbsolute!.expanded.toggle(),
+              shape: MaterialStateProperty.all(const RoundedRectangleBorder()),
+              backgroundColor:
+                  MaterialStateProperty.all(Theme.of(context).cardColor)),
+          onPressed: () {
+            dataModelAbsolute!.expanded.toggle();
+            dataModelAbsolute!.expanded.value
+                ? dataModelAbsolute!.showOverlay(this, globalKey, context)
+                : dataModelAbsolute!.hideOverlay();
+          },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -74,10 +85,14 @@ class ValueBoxContainer extends StatelessWidget {
                 () => Text(
                   dataModelAbsolute!.floatRepresentation
                       ? dataModelAbsolute!.sensorKey == sensorEnumAbsolute.mve
-                          ? dataModelAbsolute!.absoluteValue.value.toStringAsFixed(2)
+                          ? dataModelAbsolute!.absoluteValue.value
+                              .toStringAsFixed(2)
                           : //give mve 2 decimals
-                          dataModelAbsolute!.absoluteValue.value.toStringAsFixed(1)
-                      : dataModelAbsolute!.absoluteValue.value.toInt().toString(),
+                          dataModelAbsolute!.absoluteValue.value
+                              .toStringAsFixed(1)
+                      : dataModelAbsolute!.absoluteValue.value
+                          .toInt()
+                          .toString(),
                   style: TextStyle(
                     color: dataModelAbsolute!.color,
                     fontSize: fontSizeCenter,
@@ -125,34 +140,40 @@ class ValueBoxContainer extends StatelessWidget {
               // Top
               Padding(
                 padding: const EdgeInsets.only(left: 15.0, right: 15.0),
-                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                  Flexible(
-                    child: Text(
-                      dataModelGraph!.graphTitle,
-                      style: TextStyle(
-                        color: dataModelGraph!.color,
-                        fontSize: fontSize,
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          dataModelGraph!.graphTitle,
+                          style: TextStyle(
+                            color: dataModelGraph!.color,
+                            fontSize: fontSize,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                  const Spacer(),
-                  Text(
-                    "Graph\nValue",
-                    style: TextStyle(
-                      color: dataModelGraph!.color,
-                      fontSize: fontSize,
-                    ),
-                  ),
-                ]),
+                      const Spacer(),
+                      Text(
+                        "Graph\nValue",
+                        style: TextStyle(
+                          color: dataModelGraph!.color,
+                          fontSize: fontSize,
+                        ),
+                      ),
+                    ]),
               ),
 
               // Middle
 
               Obx(
                 () => Text(
-                  (dataModelGraph!.singleData.value.value > -1.0 && dataModelGraph!.singleData.value.value < 1.0)
-                      ? dataModelGraph!.singleData.value.value.toStringAsFixed(1)
-                      : dataModelGraph!.singleData.value.value.toInt().toString(),
+                  (dataModelGraph!.singleData.value.value > -1.0 &&
+                          dataModelGraph!.singleData.value.value < 1.0)
+                      ? dataModelGraph!.singleData.value.value
+                          .toStringAsFixed(1)
+                      : dataModelGraph!.singleData.value.value
+                          .toInt()
+                          .toString(),
                   style: TextStyle(
                     color: dataModelGraph!.color,
                     fontSize: fontSizeCenter,
@@ -163,23 +184,26 @@ class ValueBoxContainer extends StatelessWidget {
               // Bottom
               Padding(
                 padding: const EdgeInsets.only(left: 15.0, right: 15.0),
-                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                  Container(),
-                  Text(
-                    dataModelGraph!.yAxisTitle,
-                    style: TextStyle(
-                      color: dataModelGraph!.color,
-                      fontSize: fontSize,
-                    ),
-                  ),
-                ]),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(),
+                      Text(
+                        dataModelGraph!.yAxisTitle,
+                        style: TextStyle(
+                          color: dataModelGraph!.color,
+                          fontSize: fontSize,
+                        ),
+                      ),
+                    ]),
               ),
             ],
           ),
         ),
       );
     } else {
-      throw Exception("ValueBoxContainer was given both dataModelGraph and DataModelAbsolute");
+      throw Exception(
+          "ValueBoxContainer was given both dataModelGraph and DataModelAbsolute");
     }
   }
 }
