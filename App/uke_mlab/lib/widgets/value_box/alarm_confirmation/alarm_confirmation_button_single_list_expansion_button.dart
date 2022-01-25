@@ -7,7 +7,8 @@ import 'package:uke_mlab/widgets/value_box/alarm_confirmation/alarm_confirmation
 
 // TODO: COMMENTARY
 class AlarmConfirmationButtonSingleListExpansion extends StatelessWidget {
-  const AlarmConfirmationButtonSingleListExpansion({Key? key}) : super(key: key);
+  const AlarmConfirmationButtonSingleListExpansion({Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,8 @@ class AlarmConfirmationButtonSingleListExpansion extends StatelessWidget {
     return Obx(() {
       return ElevatedButton(
         style: ElevatedButton.styleFrom(
-          fixedSize: Size(AbsoluteAlarmFieldConst.buttonHeight.toDouble(), AbsoluteAlarmFieldConst.width * (3 / 8)),
+          fixedSize: Size(AbsoluteAlarmFieldConst.buttonHeight.toDouble(),
+              AbsoluteAlarmFieldConst.width * (3 / 8)),
           primary: const Color(0xffeeeeee),
           onPrimary: Colors.black,
           shape: RoundedRectangleBorder(
@@ -25,11 +27,16 @@ class AlarmConfirmationButtonSingleListExpansion extends StatelessWidget {
         ),
         onPressed: systemState.absAlarmFieldModel.activeList.isEmpty
             ? null
-            : () => systemState.absAlarmFieldModel.listExpanded.value ? hideOverlay(context) : showOverlay(context),
+            : () => systemState.absAlarmFieldModel.listExpanded.value
+                ? hideOverlay(context)
+                : showOverlay(context),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text("Single Alarm Conf"),
+            const Text(
+              "Single Alarm Conf",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
             systemState.absAlarmFieldModel.listExpanded.value
                 ? const Icon(
                     Icons.arrow_downward_rounded,
