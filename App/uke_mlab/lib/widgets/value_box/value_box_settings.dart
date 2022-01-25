@@ -71,6 +71,7 @@ class ValueBoxSettings extends StatelessWidget {
                           color: dataModel.color,
                           fontSize: 12,
                           decoration: TextDecoration.none,
+                          fontFamily: 'Jura',
                         ),
                       )
                   ]
@@ -82,6 +83,7 @@ class ValueBoxSettings extends StatelessWidget {
                           color: dataModel.color,
                           fontSize: 12,
                           decoration: TextDecoration.none,
+                          fontFamily: 'Jura',
                         ),
                       )
                   ]));
