@@ -40,7 +40,7 @@ class DataModelAbsolute extends GetxController {
   bool floatRepresentation = false;
 
   /// contains information whether the alarm boundary settings of the corresponding [ValueBoxContainer] are expanded
-  RxBool expanded = false.obs; //TODO: put somewhere else
+  bool expanded = false;
 
   /// representation of the upper alarm bound for the corresponding sensor
   final RxDouble upperAlarmBound = 0.0.obs;
@@ -123,5 +123,63 @@ class DataModelAbsolute extends GetxController {
     counter.value = 0;
     //clear historical data
     historicValues.clear();
+  }
+
+  void showOverlay(ValueBoxContainer valueBoxContainer, GlobalKey globalKey,
+      BuildContext context) {
+    final RenderBox renderBox =
+        globalKey.currentContext!.findRenderObject() as RenderBox;
+    double boxHeight = renderBox.size.height;
+    double boxWidth = renderBox.size.width;
+    double settingsWidth = boxWidth / 3;
+
+    entry = OverlayEntry(
+        builder: (context) => Positioned(
+            top: renderBox.localToGlobal(Offset.zero).dy - boxHeight * 1 / 5,
+            left: renderBox.localToGlobal(Offset.zero).dx - settingsWidth,
+            child: Container(
+              height: boxHeight * 5 / 4,
+              width: boxWidth + 2 * settingsWidth,
+              color: const Color(0xFF49454F),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ValueBoxSettings.lower(
+                    dataModel: this,
+                    width: settingsWidth,
+                    height: boxHeight,
+                  ),
+                  ConstrainedBox(
+                    child: valueBoxContainer,
+                    constraints: BoxConstraints(
+                      maxHeight: boxHeight,
+                      maxWidth: boxWidth,
+                    ),
+                  ),
+                  ValueBoxSettings.upper(
+                    dataModel: this,
+                    width: settingsWidth,
+                    height: boxHeight,
+                  )
+                ],
+              ),
+            )));
+    final overlay = Overlay.of(context)!;
+    overlay.insert(entry as OverlayEntry);
+
+    // Hide all other overlays
+    for (var sensor in sensorEnumAbsolute.values) {
+      if (sensor != sensorKey) {
+        Get.find<DataModelAbsolute>(tag: sensor.name).hideOverlay();
+        Get.find<DataModelAbsolute>(tag: sensor.name).expanded = false;
+      }
+    }
+  }
+
+  void hideOverlay() {
+    if (entry != null) {
+      entry!.remove();
+      entry = null;
+    }
   }
 }

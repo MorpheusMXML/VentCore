@@ -100,6 +100,9 @@ class SystemState extends GetxController {
   /// overwrites [selectedToggleView]s value with [newToggleView] for usage on switch between
   /// monitoring, ventilation and defibrillation representation in [MainScreen]
   void setSelectedToggleView(List<bool> newToggleView) {
+    for (var sensor in sensorEnumAbsolute.values) {
+      Get.find<DataModelAbsolute>(tag: sensor.name).hideOverlay();
+    }
     selectedToggleView.value = newToggleView;
     update();
   }
