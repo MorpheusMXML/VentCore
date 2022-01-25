@@ -1,3 +1,4 @@
+import 'package:uke_mlab/utilities/enums/alarm_status.dart';
 import 'package:uke_mlab/utilities/enums/non_graph_alarm.dart';
 import 'package:uke_mlab/utilities/enums/screen_status.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
@@ -128,16 +129,16 @@ extension ScenarioEnumDisplayedGraphs on scenariosEnum {
 
 /// This [extension] for [scenariosEnum] defines when a [nonGraphAlarmEnum] is supposed to be thrown.
 extension ScenarioEnumAttributes on scenariosEnum {
-  static const Map<scenariosEnum, Map<sensorEnumGraph, Map<int, Map<String, dynamic>>>> nonMeasurableAlarms = {
+  static Map<scenariosEnum, Map<sensorEnumGraph, Map<int, Map<String, dynamic>>>> nonMeasurableAlarms = {
     scenariosEnum.standardScenario: {
       sensorEnumGraph.pleth: {
         600: {
           'alarm': nonGraphAlarmEnum.o2empty,
-          'priority': 20,
+          'priority': alarmStatus.warning.priority,
         },
         700: {
           'alarm': nonGraphAlarmEnum.ekgNotConnected,
-          'priority': 20,
+          'priority': alarmStatus.warning.priority,
         },
       },
     },
@@ -145,7 +146,7 @@ extension ScenarioEnumAttributes on scenariosEnum {
       sensorEnumGraph.pleth: {
         300: {
           'alarm': nonGraphAlarmEnum.spo2bad,
-          'priority': 50 //alarmStatus.warning,
+          'priority': alarmStatus.warning.priority,
         },
       },
     },
@@ -153,31 +154,31 @@ extension ScenarioEnumAttributes on scenariosEnum {
       sensorEnumGraph.ecgCh1: {
         2500: {
           'alarm': nonGraphAlarmEnum.vt,
-          'priority': 50 //alarmStatus.middle,
+          'priority': alarmStatus.middle.priority,
         },
         3500: {
           'alarm': nonGraphAlarmEnum.leckageHigh,
-          'priority': 50 //alarmStatus.middle,
+          'priority': alarmStatus.middle.priority,
         },
         4000: {
           'alarm': nonGraphAlarmEnum.ventDisconnect,
-          'priority': 50 //alarmStatus.middle,
+          'priority': alarmStatus.middle.priority,
         },
         10000: {
           'alarm': nonGraphAlarmEnum.o2low,
-          'priority': 50 // alarmStatus.middle,
+          'priority': alarmStatus.middle.priority,
         },
         15000: {
           'alarm': nonGraphAlarmEnum.o2empty,
-          'priority': 50 // alarmStatus.high,
+          'priority': alarmStatus.high.priority,
         },
         18500: {
           'alarm': nonGraphAlarmEnum.ekgArtifact,
-          'priority': 50 //alarmStatus.warning,
+          'priority': alarmStatus.warning.priority,
         },
         100000: {
           'alarm': nonGraphAlarmEnum.lostConnection,
-          'priority': 50 //alarmStatus.high,
+          'priority': alarmStatus.high.priority,
         }
       },
     },
@@ -185,19 +186,19 @@ extension ScenarioEnumAttributes on scenariosEnum {
       sensorEnumGraph.ecgCh2: {
         2000: {
           'alarm': nonGraphAlarmEnum.ventDisconnect,
-          'priority': 50 // alarmStatus.high,
+          'priority': alarmStatus.high.priority,
         },
         4000: {
           'alarm': nonGraphAlarmEnum.ekgNotConnected,
-          'priority': 50 // alarmStatus.high,
+          'priority': alarmStatus.high.priority,
         },
         5500: {
           'alarm': nonGraphAlarmEnum.spo2disconnected,
-          'priority': 50 // alarmStatus.middle,
+          'priority': alarmStatus.middle.priority,
         },
         60000: {
           'alarm': nonGraphAlarmEnum.vf,
-          'priority': 50 // alarmStatus.high,
+          'priority': alarmStatus.high.priority,
         }
       }
     },
@@ -205,7 +206,7 @@ extension ScenarioEnumAttributes on scenariosEnum {
       sensorEnumGraph.pleth: {
         800: {
           'alarm': nonGraphAlarmEnum.spo2bad,
-          'priority': 50 // alarmStatus.warning,
+          'priority': alarmStatus.warning.priority,
         },
       }
     },
@@ -213,15 +214,15 @@ extension ScenarioEnumAttributes on scenariosEnum {
       sensorEnumGraph.ecgCh2: {
         2000: {
           'alarm': nonGraphAlarmEnum.ekgArtifact,
-          'priority': 50 // alarmStatus.warning,
+          'priority': alarmStatus.warning.priority,
         },
         15500: {
           'alarm': nonGraphAlarmEnum.spo2bad,
-          'priority': 50 // alarmStatus.warning,
+          'priority': alarmStatus.warning.priority,
         },
         9500: {
           'alarm': nonGraphAlarmEnum.vt,
-          'priority': 50 // alarmStatus.warning,
+          'priority': alarmStatus.warning.priority,
         },
       }
     },
@@ -229,11 +230,11 @@ extension ScenarioEnumAttributes on scenariosEnum {
       sensorEnumGraph.ecgCh2: {
         2000: {
           'alarm': nonGraphAlarmEnum.vt,
-          'priority': 50 // alarmStatus.high,
+          'priority': alarmStatus.high.priority,
         },
         4500: {
           'alarm': nonGraphAlarmEnum.spo2bad,
-          'priority': 50 // alarmStatus.middle,
+          'priority': alarmStatus.middle.priority,
         },
       }
     },
