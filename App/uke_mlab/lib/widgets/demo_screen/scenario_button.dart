@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/utilities/enums/scenarios.dart';
 import 'package:uke_mlab/providers/screen_controller.dart';
 
-///Widget for StartScreen Buttons
+/// Widget for StartScreen Buttons
 class ScenarioButton extends StatelessWidget {
   final String name;
   final scenariosEnum scenario;
@@ -21,10 +21,12 @@ class ScenarioButton extends StatelessWidget {
       margin: const EdgeInsets.fromLTRB(65, 0, 0, 12),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          fixedSize: Size(800 / MediaQuery.of(context).devicePixelRatio, 155 / MediaQuery.of(context).devicePixelRatio),
+          fixedSize: Size(800 / MediaQuery.of(context).devicePixelRatio,
+              155 / MediaQuery.of(context).devicePixelRatio),
           primary: const Color(0xffeeeeee),
           onPrimary: Colors.black,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),
         ),
         onPressed: () => screenController.scenarioButton(scenario),
         child: Text(

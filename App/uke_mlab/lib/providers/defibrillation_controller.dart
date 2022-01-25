@@ -32,7 +32,7 @@ class DefibrillationController extends GetxController {
   RxInt shockPower = 200.obs;
   RxBool shockClicked = false.obs;
 
-  RxString systemDiagnosis = 'Placeholder Diagnosis'.obs;
+  RxString systemDiagnosis = ''.obs;
 
   RxInt numberOfShocks = 0.obs;
 

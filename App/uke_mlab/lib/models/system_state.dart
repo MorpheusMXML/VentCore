@@ -43,7 +43,8 @@ class SystemState extends GetxController {
   /// "message" for alarm message
   /// "enum" for current [alarmStatus]
   /// "color" for color
-  final RxMap<sensorEnumAbsolute, Map<String, dynamic>> alarmState = <sensorEnumAbsolute, Map<String, dynamic>>{}.obs;
+  final RxMap<sensorEnumAbsolute, Map<String, dynamic>> alarmState =
+      <sensorEnumAbsolute, Map<String, dynamic>>{}.obs;
 
   /// A reference to the current [GeneralAlarms] in use
   final GeneralAlarms generalAlarms = GeneralAlarms();
@@ -103,7 +104,8 @@ class SystemState extends GetxController {
   }
 
   ///Set [alarmState] for given [sensor].
-  void setAlarmState(sensorEnumAbsolute sensor, int? priority, String? message, alarmStatus? status, Color? color) {
+  void setAlarmState(sensorEnumAbsolute sensor, int? priority, String? message,
+      alarmStatus? status, Color? color) {
     alarmState[sensor] = {
       'priority': priority ?? alarmState[sensor]!['priority'],
       'message': message ?? getAlarmStateMessage(sensor),
@@ -114,6 +116,7 @@ class SystemState extends GetxController {
     absAlarmFieldModel.evaluateActiveList();
   }
 
+  /// resets the [SystemState]s elements (currently only [ippvModel])
   void resetSystemState() {
     ippvModel.resetIPPV();
   }
