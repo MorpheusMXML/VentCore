@@ -65,6 +65,13 @@ class AlarmConfirmationRowEntry extends StatelessWidget {
                 color: theme.inverseContrastColor,
               ),
             ),
+            onPressed: () => alarmController.triggerConfirm(sensorKey),
+            child: const Icon(
+              Icons.check,
+              color: Colors.black,
+            ),
+          ),
+        ],
           ],
         ),
       ),

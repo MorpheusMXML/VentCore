@@ -31,19 +31,11 @@ class ImpedanceButton extends StatelessWidget {
       child: Container(
           margin: const EdgeInsets.all(2),
           child: Obx(() {
-            ButtonStyle buttonStyle;
-            defibrillationController.selectedImpedanceButton.value != name
-                ? buttonStyle = ElevatedButton.styleFrom(
-                    primary: theme.primarySwatch[40],
-                    onPrimary: theme.contrastColor,
-                  )
-                : buttonStyle = ButtonStyle(
-                    side: MaterialStateProperty.all(
-                        const BorderSide(color: Colors.green)),
-                    foregroundColor: MaterialStateProperty.all(Colors.green),
-                  );
             return ElevatedButton(
-              style: buttonStyle,
+              style:
+                  defibrillationController.selectedImpedanceButton.value != name
+                      ? theme.defiRegularButtonStyle
+                      : theme.defiSelectedButtonStyle,
               child: Text(name),
               onPressed:
                   defibrillationController.selectedImpedanceButton.value != name

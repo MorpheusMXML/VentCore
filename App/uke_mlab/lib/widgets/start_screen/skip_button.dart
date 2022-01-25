@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/screen_controller.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 
 /// This class contains the Skip Button and its functionality.
 ///
@@ -13,6 +14,7 @@ class SkipButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     final screenController = Get.find<ScreenController>();
 
     /// The Container contains the Buttons configuration and functionality.
@@ -23,7 +25,7 @@ class SkipButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           fixedSize: const Size(200, 60),
           primary: const Color(0xffeeeeee),
-          onPrimary: Colors.black,
+          onPrimary: theme.inverseContrastColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(75),
           ),

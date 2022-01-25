@@ -23,77 +23,46 @@ class ShockPower extends StatelessWidget {
             children: defibrillationController.shockClicked.value
                 ? [
                     Expanded(
-                      flex: 3,
-                      child: Obx(
-                        () => defibrillationController.shockClicked.value
-                            ? Slider(
-                                label: defibrillationController.shockPower.value
-                                    .toString(),
-                                min: 0,
-                                max: 250,
-                                divisions: 10,
-                                onChangeEnd: (value) => defibrillationController
-                                    .shockClicked
-                                    .toggle(),
-                                onChanged: (newValue) =>
-                                    defibrillationController.shockPower.value =
-                                        newValue.toInt(),
-                                value: defibrillationController.shockPower.value
-                                    .toDouble(),
-                              )
-                            : ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    primary: Colors.transparent),
-                                child: Text(
-                                  '${defibrillationController.shockPower}',
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 32,
-                                    color: Colors.red,
-                                  ),
-                                ),
-                                onPressed: () => defibrillationController
-                                    .shockClicked
-                                    .toggle(),
-                              ),
+                      child: Slider(
+                        label: defibrillationController.shockPower.value
+                            .toString(),
+                        min: 0,
+                        max: 250,
+                        divisions: 10,
+                        onChangeEnd: (value) =>
+                            defibrillationController.shockClicked.toggle(),
+                        onChanged: (newValue) => defibrillationController
+                            .shockPower.value = newValue.toInt(),
+                        value: defibrillationController.shockPower.value
+                            .toDouble(),
                       ),
-                    ),
+                    )
                   ]
                 : [
-                    const Expanded(
+                    Expanded(
                       flex: 3,
                       child: Text(
                         "Shock Power",
-                        style: TextStyle(
-                          fontSize: 24,
-                        ),
+                        style: theme.shockPowerTextStyle,
                       ),
                     ),
                     Expanded(
                       flex: 3,
                       child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            primary: Colors.transparent),
+                        style: theme.shockPowerButtonStyle,
                         child: Text(
                           '${defibrillationController.shockPower}',
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 32,
-                            color: Colors.red,
-                          ),
+                          style: theme.shockPowerButtonTextStyle,
                         ),
                         onPressed: () =>
                             defibrillationController.shockClicked.toggle(),
                       ),
                     ),
-                    const Flexible(
+                    Flexible(
                       flex: 1,
                       child: Text(
                         "J",
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.red,
-                        ),
+                        style: theme.jouleTextStyle,
                       ),
                     )
                   ],

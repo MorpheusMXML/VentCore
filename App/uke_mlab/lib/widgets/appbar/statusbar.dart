@@ -54,10 +54,7 @@ class StatusBar extends StatelessWidget {
           flex: StatusBarConstants.flexBarPatientTypeArea,
           child: Text(
             systemState.patientType.displayString,
-            style: TextStyle(
-              color: theme.contrastColor,
-              decoration: TextDecoration.none,
-            ),
+            style: theme.statusBarTextStyle,
           ),
         ),
         // O2 bottly display

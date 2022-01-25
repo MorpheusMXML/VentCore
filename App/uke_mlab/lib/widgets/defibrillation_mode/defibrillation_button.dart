@@ -26,19 +26,10 @@ class DefibrillationButton extends StatelessWidget {
       child: Container(
           margin: const EdgeInsets.all(8),
           child: Obx(() {
-            ButtonStyle buttonStyle;
-            defibrillationController.selectedDefiButton.value != name
-                ? buttonStyle = ElevatedButton.styleFrom(
-                    primary: theme.primarySwatch[40],
-                    onPrimary: theme.contrastColor,
-                  )
-                : buttonStyle = ButtonStyle(
-                    side: MaterialStateProperty.all(
-                        const BorderSide(color: Colors.green)),
-                    foregroundColor: MaterialStateProperty.all(Colors.green),
-                  );
             return ElevatedButton(
-              style: buttonStyle,
+              style: defibrillationController.selectedDefiButton.value != name
+                  ? theme.defiRegularButtonStyle
+                  : theme.defiSelectedButtonStyle,
               child: Text(name),
               onPressed: defibrillationController.selectedDefiButton.value !=
                       name

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/start_screen_controller.dart';
 import 'package:uke_mlab/providers/screen_controller.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 
 /// This class contains the Continue Button and its functionality.
 ///
@@ -13,6 +14,7 @@ class ContinueButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     final startScreenController = Get.find<StartScreenController>();
     final screenController = Get.find<ScreenController>();
 
@@ -26,7 +28,7 @@ class ContinueButton extends StatelessWidget {
             fixedSize: const Size(200, 60),
             onSurface: const Color(0xffeeeeee),
             primary: const Color(0xffeeeeee),
-            onPrimary: Colors.black,
+            onPrimary: theme.inverseContrastColor,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),
           ),

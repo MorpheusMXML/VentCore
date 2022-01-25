@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/utilities/enums/scenarios.dart';
 import 'package:uke_mlab/providers/screen_controller.dart';
 
@@ -15,6 +16,7 @@ class ScenarioButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     final ScreenController screenController = Get.find<ScreenController>();
 
     return Container(
@@ -24,7 +26,7 @@ class ScenarioButton extends StatelessWidget {
           fixedSize: Size(800 / MediaQuery.of(context).devicePixelRatio,
               155 / MediaQuery.of(context).devicePixelRatio),
           primary: const Color(0xffeeeeee),
-          onPrimary: Colors.black,
+          onPrimary: theme.inverseContrastColor,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),
         ),

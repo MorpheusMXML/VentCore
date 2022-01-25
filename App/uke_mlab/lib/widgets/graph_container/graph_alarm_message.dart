@@ -17,6 +17,7 @@ class GraphAlarmMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     final SystemState systemState = Get.find<SystemState>();
 
     return Obx(() {
@@ -25,8 +26,8 @@ class GraphAlarmMessage extends StatelessWidget {
         width: 400,
         child: Text(
           '${sensorKey.displayString} $alarmMessage',
-          style: const TextStyle(
-            color: AppTheme.alarmMessageColor,
+          style: TextStyle(
+            color: theme.inverseContrastColor,
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),

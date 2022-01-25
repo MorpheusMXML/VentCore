@@ -40,7 +40,7 @@ class GraphAdderPopup extends StatelessWidget {
                     : style = ElevatedButton.styleFrom(
                         fixedSize: const Size(80, 60),
                         primary: Colors.grey[50],
-                        onPrimary: Colors.black);
+                        onPrimary: theme.inverseContrastColor);
 
                 return ElevatedButton(
                     style: style,
