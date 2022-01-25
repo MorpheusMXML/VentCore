@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
 
+// TODO: COMMENTARY
 class GraphAdder extends StatelessWidget {
   const GraphAdder({
     Key? key,

@@ -6,6 +6,7 @@ import 'package:uke_mlab/utilities/constants/absolute_alarm_field_constants.dart
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/utilities/enums/alarm_status.dart';
 
+// TODO: COMMENTARY
 class AlarmConfirmationButtonAll extends StatelessWidget {
   const AlarmConfirmationButtonAll({Key? key}) : super(key: key);
 

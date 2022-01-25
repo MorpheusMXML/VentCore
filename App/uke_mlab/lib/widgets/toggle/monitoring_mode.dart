@@ -5,6 +5,7 @@ import 'package:uke_mlab/widgets/value_box/value_box_tile.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/widgets/value_box/value_box_tile_nibd.dart';
 
+// TODO: COMMENTARY
 class MonitoringMode extends StatelessWidget {
   const MonitoringMode({
     Key? key,

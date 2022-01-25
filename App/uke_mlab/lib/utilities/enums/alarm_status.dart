@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:uke_mlab/providers/sound_controller.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 
+//TODO: COMMENTARY
 enum alarmStatus {
   high,
   middle,
@@ -10,6 +11,7 @@ enum alarmStatus {
   none,
 }
 
+//TODO: COMMENTARY
 extension AlarmStatusAttributes on alarmStatus {
   static const Map<alarmStatus, Map<String, dynamic>> attributes = {
     alarmStatus.high: {

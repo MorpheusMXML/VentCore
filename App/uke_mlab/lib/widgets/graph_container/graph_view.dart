@@ -5,6 +5,7 @@ import 'package:uke_mlab/widgets/graph/graph_adder.dart';
 import 'package:uke_mlab/widgets/graph/graph_adder_popup.dart';
 import 'graph_container.dart';
 
+// TODO: COMMENTARY
 class GraphView extends StatelessWidget {
   const GraphView({
     Key? key,
@@ -24,16 +25,13 @@ class GraphView extends StatelessWidget {
                 shrinkWrap: true,
                 itemCount: systemState.graphList.list.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return GraphContainer(
-                      sensor: systemState.graphList.list[index]);
+                  return GraphContainer(sensor: systemState.graphList.list[index]);
                 },
               ),
             ),
           ),
           Obx(
-            () => systemState.graphList.addGraph.value
-                ? GraphAdderPopup()
-                : const GraphAdder(),
+            () => systemState.graphList.addGraph.value ? GraphAdderPopup() : const GraphAdder(),
           ),
         ],
       ),

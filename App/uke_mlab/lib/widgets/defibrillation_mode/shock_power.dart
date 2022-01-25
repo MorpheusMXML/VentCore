@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/defibrillation_controller.dart';
 
+// TODO: COMMENTARY
 class ShockPower extends StatelessWidget {
   const ShockPower({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    DefibrillationController defibrillationController =
-        Get.find<DefibrillationController>();
+    DefibrillationController defibrillationController = Get.find<DefibrillationController>();
 
     return Flexible(
       child: Container(
@@ -24,23 +24,16 @@ class ShockPower extends StatelessWidget {
                       child: Obx(
                         () => defibrillationController.shockClicked.value
                             ? Slider(
-                                label: defibrillationController.shockPower.value
-                                    .toString(),
+                                label: defibrillationController.shockPower.value.toString(),
                                 min: 0,
                                 max: 250,
                                 divisions: 10,
-                                onChangeEnd: (value) => defibrillationController
-                                    .shockClicked
-                                    .toggle(),
-                                onChanged: (newValue) =>
-                                    defibrillationController.shockPower.value =
-                                        newValue.toInt(),
-                                value: defibrillationController.shockPower.value
-                                    .toDouble(),
+                                onChangeEnd: (value) => defibrillationController.shockClicked.toggle(),
+                                onChanged: (newValue) => defibrillationController.shockPower.value = newValue.toInt(),
+                                value: defibrillationController.shockPower.value.toDouble(),
                               )
                             : ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    primary: Colors.transparent),
+                                style: ElevatedButton.styleFrom(primary: Colors.transparent),
                                 child: Text(
                                   '${defibrillationController.shockPower}',
                                   style: const TextStyle(
@@ -49,9 +42,7 @@ class ShockPower extends StatelessWidget {
                                     color: Colors.red,
                                   ),
                                 ),
-                                onPressed: () => defibrillationController
-                                    .shockClicked
-                                    .toggle(),
+                                onPressed: () => defibrillationController.shockClicked.toggle(),
                               ),
                       ),
                     ),
@@ -69,8 +60,7 @@ class ShockPower extends StatelessWidget {
                     Expanded(
                       flex: 3,
                       child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            primary: Colors.transparent),
+                        style: ElevatedButton.styleFrom(primary: Colors.transparent),
                         child: Text(
                           '${defibrillationController.shockPower}',
                           style: const TextStyle(
@@ -79,8 +69,7 @@ class ShockPower extends StatelessWidget {
                             color: Colors.red,
                           ),
                         ),
-                        onPressed: () =>
-                            defibrillationController.shockClicked.toggle(),
+                        onPressed: () => defibrillationController.shockClicked.toggle(),
                       ),
                     ),
                     const Flexible(

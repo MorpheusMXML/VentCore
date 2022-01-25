@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/models/screen_element_models/general_alarms.dart';
 import 'package:uke_mlab/models/system_state.dart';
 
+/// Builds depending on the amount of [GeneralAlarms] an statusbar element displaying the amount, rendered in respective forms.
+/// Could be combined with the [AlarmExpansionTile] due to similar code functionality, but extracted to make placing in [StatusBar] easier
 class AlarmCounterTile extends StatelessWidget {
-  /// Builds depending on the amount of [GeneralAlarms] an statusbar element displaying the amount, rendered in respective forms.
-  /// Could be combined with the [AlarmExpansionTile] due to similar code functionality, but extracted to make placing in [StatusBar] easier
   AlarmCounterTile({Key? key}) : super(key: key);
 
   final GeneralAlarms generalAlarms = Get.find<SystemState>().generalAlarms;
@@ -30,16 +30,12 @@ class AlarmCounterTile extends StatelessWidget {
           height: 50,
           child: ElevatedButton(
             style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(
-                  generalAlarms.alarmList[0].toColor()),
-              shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(40))),
+              backgroundColor: MaterialStateProperty.all(generalAlarms.alarmList[0].toColor()),
+              shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(40))),
             ),
             onPressed: generalAlarms.alarmList.length <= 1
                 ? null
-                : () => generalAlarms.listExpanded.value
-                    ? generalAlarms.hideOverlay()
-                    : generalAlarms.showOverlay(context),
+                : () => generalAlarms.listExpanded.value ? generalAlarms.hideOverlay() : generalAlarms.showOverlay(context),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

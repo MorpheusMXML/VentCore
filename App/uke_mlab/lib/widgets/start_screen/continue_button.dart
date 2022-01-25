@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/providers/start_screen_controller.dart';
 import 'package:uke_mlab/providers/screen_controller.dart';
 
+// TODO: COMMENTARY
 class ContinueButton extends StatelessWidget {
   const ContinueButton({
     Key? key,
@@ -23,13 +24,10 @@ class ContinueButton extends StatelessWidget {
             onSurface: const Color(0xffeeeeee),
             primary: const Color(0xffeeeeee),
             onPrimary: Colors.black,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),
           ),
-          onPressed: startScreenController.selectedString.value != ''
-              ? () => screenController
-                  .continueButton(startScreenController.selectedString.value)
-              : null,
+          onPressed:
+              startScreenController.selectedString.value != '' ? () => screenController.continueButton(startScreenController.selectedString.value) : null,
           child: const Text('Continue', style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
         ),
       ),

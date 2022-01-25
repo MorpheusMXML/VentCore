@@ -1,11 +1,7 @@
-enum alarmMessage {
-  suppressed,
-  lowerBoundaryViolated,
-  upperBoundaryViolated,
-  deviation,
-  none
-}
+//TODO: COMMENTARY
+enum alarmMessage { suppressed, lowerBoundaryViolated, upperBoundaryViolated, deviation, none }
 
+//TODO: COMMENTARY
 extension AlarmMessageAttributes on alarmMessage {
   static const Map<alarmMessage, Map<String, dynamic>> attributes = {
     alarmMessage.suppressed: {

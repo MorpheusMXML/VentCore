@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import 'package:uke_mlab/providers/screen_controller.dart';
 
+// TODO: COMMENTARY
 class AEDButton extends StatelessWidget {
   const AEDButton({
     Key? key,
@@ -18,12 +19,10 @@ class AEDButton extends StatelessWidget {
       margin: const EdgeInsets.fromLTRB(0, 0, 65, 12),
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            fixedSize: Size(300 / MediaQuery.of(context).devicePixelRatio,
-                300 / MediaQuery.of(context).devicePixelRatio),
+            fixedSize: Size(300 / MediaQuery.of(context).devicePixelRatio, 300 / MediaQuery.of(context).devicePixelRatio),
             primary: const Color(0xff363638),
             onPrimary: const Color(0xff34c759),
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           ),
           onPressed: () => screenController.aedButton(),
           child: Column(

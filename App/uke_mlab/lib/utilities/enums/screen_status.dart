@@ -1,6 +1,2 @@
-enum screenStatusEnum {
-  patientSettingScreen,
-  monitorScreen,
-  ventilationScreen,
-  defibrillationScreen
-}
+//TODO: COMMENTARY
+enum screenStatusEnum { patientSettingScreen, monitorScreen, ventilationScreen, defibrillationScreen }

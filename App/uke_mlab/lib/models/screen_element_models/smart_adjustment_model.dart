@@ -1,14 +1,14 @@
 import 'package:get/get.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
+// TODO: COMMENTARY
+
 class SmartAdjustmentMap {
-  final Map<sensorEnumAbsolute, SmartAdjustmentMapEntry> map =
-      <sensorEnumAbsolute, SmartAdjustmentMapEntry>{};
+  final Map<sensorEnumAbsolute, SmartAdjustmentMapEntry> map = <sensorEnumAbsolute, SmartAdjustmentMapEntry>{};
 
   SmartAdjustmentMap() {
     for (var sensorKey in sensorEnumAbsolute.values) {
-      map[sensorKey] =
-          SmartAdjustmentMapEntry(DateTime.now(), DateTime.now(), 0.obs, 0.obs);
+      map[sensorKey] = SmartAdjustmentMapEntry(DateTime.now(), DateTime.now(), 0.obs, 0.obs);
     }
   }
 
@@ -37,8 +37,7 @@ class SmartAdjustmentMap {
   }
 
   void calculatePressable(sensorEnumAbsolute sensorKey) {
-    if (map[sensorKey]!.lowerCounter.value >= 3 ||
-        map[sensorKey]!.upperCounter.value >= 3) {
+    if (map[sensorKey]!.lowerCounter.value >= 3 || map[sensorKey]!.upperCounter.value >= 3) {
       map[sensorKey]!.isPressable.value = true;
     } else {
       map[sensorKey]!.isPressable.value = false;

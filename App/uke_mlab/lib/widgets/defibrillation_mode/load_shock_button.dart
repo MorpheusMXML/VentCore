@@ -34,6 +34,9 @@ class LoadShockButton extends StatefulWidget {
   _LoadShockButtonState createState() => _LoadShockButtonState();
 }
 
+/// This implements the State for the [LoadShockButton]. Initializes a [AnimationController] and registeres a [ColorTween] with it. These initializations are called with [initState()].
+/// Holds a Reference to the [DefibrillationController], [SoundController] and Renders a [ElevatedButton] from the Information in the DefiController.
+/// Implements the Long Press and Short Press behaviour.
 class _LoadShockButtonState extends State<LoadShockButton> with SingleTickerProviderStateMixin {
   @override
   void initState() {

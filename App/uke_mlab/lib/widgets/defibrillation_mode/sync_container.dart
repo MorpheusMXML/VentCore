@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uke_mlab/widgets/defibrillation_mode/synchronicity_button.dart';
 
+// TODO: COMMENTARY
 class SyncContainer extends StatelessWidget {
   const SyncContainer({Key? key}) : super(key: key);
 

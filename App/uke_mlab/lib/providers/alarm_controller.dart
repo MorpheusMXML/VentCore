@@ -13,13 +13,12 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 /// Alarms can be Triggered, stopped and the SpO2 / ECG Sound for the Heartfrequency can be started.
 ///
 /// ### Class Variables
-///
+/// TODO: COMMENTARY
 /// ### Methods
 ///
 class AlarmController {
   ///Manages and throws Alarms with an implemented Alarm Logic.
-  final Map<sensorEnumAbsolute, dynamic> confirmMap =
-      <sensorEnumAbsolute, dynamic>{};
+  final Map<sensorEnumAbsolute, dynamic> confirmMap = <sensorEnumAbsolute, dynamic>{};
   final ModelManager _modelManager;
   final SoundController _soundController = Get.find<SoundController>();
   final SystemState _systemState = Get.find<SystemState>();
@@ -33,10 +32,8 @@ class AlarmController {
   void listen() {
     _systemState.generalAlarms.alarmList.listen((alarmList) {
       for (var i = 0; i < alarmList.length - 1; i++) {
-        if (_systemState.screenStatus !=
-            screenStatusEnum.defibrillationScreen) {
-          _soundController.triggerSoundState(
-              alarmList[i].alarm, alarmList[i].priority);
+        if (_systemState.screenStatus != screenStatusEnum.defibrillationScreen) {
+          _soundController.triggerSoundState(alarmList[i].alarm, alarmList[i].priority);
         }
       }
     });
@@ -52,14 +49,10 @@ class AlarmController {
   ///
   ///[value] doesn´t [triggerAlarmState] in this categories, it will set back to [alarmStatus.none]
   void evaluateAlarmState(sensorEnumAbsolute sensor) {
-    dynamic value =
-        Get.find<DataModelAbsolute>(tag: sensor.name).absoluteValue.value;
-    dynamic upper =
-        Get.find<DataModelAbsolute>(tag: sensor.name).upperAlarmBound.value;
-    dynamic lower =
-        Get.find<DataModelAbsolute>(tag: sensor.name).lowerAlarmBound.value;
-    RxList historicValues =
-        Get.find<DataModelAbsolute>(tag: sensor.name).historicValues;
+    dynamic value = Get.find<DataModelAbsolute>(tag: sensor.name).absoluteValue.value;
+    dynamic upper = Get.find<DataModelAbsolute>(tag: sensor.name).upperAlarmBound.value;
+    dynamic lower = Get.find<DataModelAbsolute>(tag: sensor.name).lowerAlarmBound.value;
+    RxList historicValues = Get.find<DataModelAbsolute>(tag: sensor.name).historicValues;
 
     ///Possible deviation arounde the upper and lower boundaries.
     dynamic allowedValueDeviation = (upper - lower) / 2;
@@ -77,8 +70,7 @@ class AlarmController {
     ///Evaluate upper alarm boundary. Here we trigger [alarmMessage.upperBoundaryViolated].
     if (value > upper) {
       ///Checks how serious the upper boundary is exceeded.
-      if (sensor.boundaryDeviation != null &&
-          value < upper * (1 + sensor.boundaryDeviation)) {
+      if (sensor.boundaryDeviation != null && value < upper * (1 + sensor.boundaryDeviation)) {
         triggerAlarmState(
           sensor,
           alarmMessage.upperBoundaryViolated,
@@ -98,8 +90,7 @@ class AlarmController {
     ///Evaluate lower alarm boundary.
     else if (value < lower) {
       ///Checks how serious the lower boundary is exceeded. Here we trigger [alarmMessage.lowerBoundaryViolated].
-      if (sensor.boundaryDeviation != null &&
-          value > lower * (1 - sensor.boundaryDeviation)) {
+      if (sensor.boundaryDeviation != null && value > lower * (1 - sensor.boundaryDeviation)) {
         triggerAlarmState(
           sensor,
           alarmMessage.lowerBoundaryViolated,
@@ -165,20 +156,16 @@ class AlarmController {
     }
 
     ///Prevent update because same [alarmStatus] and [alarmMessage] are same
-    if (_systemState.getAlarmStatePriority(sensor) == status.priority &&
-        _systemState.getAlarmStateMessage(sensor) == message.message) {
+    if (_systemState.getAlarmStatePriority(sensor) == status.priority && _systemState.getAlarmStateMessage(sensor) == message.message) {
       ///Trigger soundstate for not changed Alerts.
       triggerSoundController(sensor, status);
       return;
     }
 
     ///Update AlarmState if change is detected
-    if (_systemState.getAlarmStatePriority(sensor) != status.priority ||
-        _systemState.getAlarmStateMessage(sensor) != message.message) {
+    if (_systemState.getAlarmStatePriority(sensor) != status.priority || _systemState.getAlarmStateMessage(sensor) != message.message) {
       // Check if middle alarm is repeating and needs to change boundaries
-      if (_systemState.getAlarmStatePriority(sensor) ==
-              alarmStatus.none.priority &&
-          status.priority == alarmStatus.middle.priority) {
+      if (_systemState.getAlarmStatePriority(sensor) == alarmStatus.none.priority && status.priority == alarmStatus.middle.priority) {
         evaluateBoundaryAdjustment(sensor, message);
       }
       _systemState.setAlarmState(
@@ -211,8 +198,7 @@ class AlarmController {
   }
 
   //TODO: change upper and lower boundary if patient value is around that value everytime
-  void evaluateBoundaryAdjustment(
-      sensorEnumAbsolute sensor, alarmMessage message) {
+  void evaluateBoundaryAdjustment(sensorEnumAbsolute sensor, alarmMessage message) {
     DateTime dateTime = DateTime.now();
 
     if (message == alarmMessage.lowerBoundaryViolated) {
@@ -222,8 +208,7 @@ class AlarmController {
       _systemState.smartAdjustmentMap.updateUpperCounter(sensor);
       return;
     } else {
-      throw Exception(
-          "Message field was $message instead of alarmMessage.lowerBoundaryViolated or alarmMessage.upperBoundaryViolated");
+      throw Exception("Message field was $message instead of alarmMessage.lowerBoundaryViolated or alarmMessage.upperBoundaryViolated");
     }
   }
 

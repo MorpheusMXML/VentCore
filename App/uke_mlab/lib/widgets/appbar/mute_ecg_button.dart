@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/sound_controller.dart';
 
+/// Renders a [IconButton] to display a little Helper Button in the Statusbar.
+/// This Button Mutes and restarts the ECG Sound from the [SoundController] with [_soundController.startSaturationHFSound()]
+/// Holds a reference to the [SoundController] in [_soundController] got with [GetX]
 class MuteEcgButton extends StatelessWidget {
   final SoundController _soundController = Get.find<SoundController>();
 
@@ -12,10 +15,7 @@ class MuteEcgButton extends StatelessWidget {
     return Obx(
       () => IconButton(
         onPressed: () => {
-          if (_soundController.ecgSoundActive.value)
-            {_soundController.stop()}
-          else
-            {_soundController.startSaturationHFSound()}
+          if (_soundController.ecgSoundActive.value) {_soundController.stop()} else {_soundController.startSaturationHFSound()}
         },
         icon: Icon(
           _soundController.ecgSoundActive.value ? Icons.volume_mute : Icons.volume_off,

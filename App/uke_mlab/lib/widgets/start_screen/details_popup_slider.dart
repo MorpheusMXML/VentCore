@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/start_screen_controller.dart';
 
+// TODO: COMMENTARY
 class PopupSlider extends StatelessWidget {
   final String name;
   final String unit;

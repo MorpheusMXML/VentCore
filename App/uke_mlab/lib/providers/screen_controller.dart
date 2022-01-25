@@ -12,8 +12,10 @@ import 'package:uke_mlab/scenarios/abstract_scenario.dart';
 import 'package:uke_mlab/scenarios/standard_scenario.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
-// basic controller to interact with model
-// (at the moment) just boundary update
+/// This Screen Contoller handles the Settings of the alarmboundaries with [setUpperBoundary] and [setLowerBoundary] within the [DataModelAbsolute]
+/// Further handles the Changing of the Scenarios, starts the DataStreams and triggeres the necessary Runs for General Alarms, Data reading into the Graphs etc.
+/// Also handles the Continue, Skip and other Button Behaviours of the [StartScreen]?!
+/// TODO: COMMENTARY
 class ScreenController {
   AbstractScenario? runningScenario;
   SystemState systemState = Get.find<SystemState>();
@@ -28,7 +30,7 @@ class ScreenController {
     dataModel.setLowerAlarmBoundary(value);
   }
 
-  //Changes playing scenario based on input paramenter, stops currently playing scenario on call
+  ///Changes playing scenario based on input paramenter, stops currently playing scenario on call
   void changeScenario(scenariosEnum scenario) {
     systemState.scenarioStarted = true;
 
@@ -45,8 +47,7 @@ class ScreenController {
     switch (scenario) {
       case scenariosEnum.standardScenario:
         runningScenario = StandardScenario();
-        systemState.graphList.setStandardGraphs(
-            ScenarioEnumDisplayedGraphs.graphs[scenario] as Map<screenStatusEnum, List<sensorEnumGraph>>);
+        systemState.graphList.setStandardGraphs(ScenarioEnumDisplayedGraphs.graphs[scenario] as Map<screenStatusEnum, List<sensorEnumGraph>>);
         runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
         break;
       case scenariosEnum.scenario1:
@@ -56,8 +57,7 @@ class ScreenController {
       case scenariosEnum.scenario3c:
       case scenariosEnum.scenario4:
         runningScenario = PatientScenario(scenarioType: scenario);
-        systemState.graphList.setStandardGraphs(
-            ScenarioEnumDisplayedGraphs.graphs[scenario] as Map<screenStatusEnum, List<sensorEnumGraph>>);
+        systemState.graphList.setStandardGraphs(ScenarioEnumDisplayedGraphs.graphs[scenario] as Map<screenStatusEnum, List<sensorEnumGraph>>);
         runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
         break;
       default:
@@ -85,8 +85,7 @@ class ScreenController {
         systemState.resetSystemState();
       }
     } else {
-      throw Exception(
-          'additionalInformation is not Adult, Child or Infant on screenChangeButton call from Continue Button');
+      throw Exception('additionalInformation is not Adult, Child or Infant on screenChangeButton call from Continue Button');
     }
     systemState.screenStatus = screenStatusEnum.monitorScreen;
     changeScenario(scenariosEnum.standardScenario);
@@ -205,8 +204,7 @@ class ScreenController {
   /// Behavior for smartAdjustementButton
   void smartAdjustmentButton(sensorEnumAbsolute sensorKey) {
     SmartAdjustmentMap boundaryAdjustmentMap = systemState.smartAdjustmentMap;
-    DataModelAbsolute dataModel =
-        Get.find<DataModelAbsolute>(tag: sensorKey.name);
+    DataModelAbsolute dataModel = Get.find<DataModelAbsolute>(tag: sensorKey.name);
 
     if (boundaryAdjustmentMap.map[sensorKey]!.lowerCounter.value >= 3) {
       boundaryAdjustmentMap.map[sensorKey]!.lowerCounter.value = 0;

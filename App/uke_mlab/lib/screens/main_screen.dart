@@ -9,6 +9,7 @@ import 'package:uke_mlab/widgets/toggle/defibrillation_mode.dart';
 import 'package:uke_mlab/widgets/toggle/monitoring_mode.dart';
 import 'package:uke_mlab/widgets/toggle/ventilation_mode.dart';
 
+//TODO: COMMENTARY
 class MainScreen extends StatelessWidget {
   final SystemState systemState = Get.find<SystemState>();
   final StartScreenController startScreenController = Get.find<StartScreenController>();
@@ -26,20 +27,15 @@ class MainScreen extends StatelessWidget {
             // Ventilation
             systemState.graphList.resetListToStandardGraphs();
             if (systemState.selectedToggleView[1]) {
-              return Row(
-                  children: const [Flexible(flex: 2, child: GraphView()), Flexible(flex: 1, child: VentilationMode())]);
+              return Row(children: const [Flexible(flex: 2, child: GraphView()), Flexible(flex: 1, child: VentilationMode())]);
             }
             // Defibrillation
             else if (systemState.selectedToggleView[2]) {
-              return Row(children: const [
-                Flexible(flex: 2, child: GraphView()),
-                Flexible(flex: 1, child: DefibrillationMode())
-              ]);
+              return Row(children: const [Flexible(flex: 2, child: GraphView()), Flexible(flex: 1, child: DefibrillationMode())]);
             }
             // Monitoring
             else {
-              return Row(
-                  children: const [Flexible(flex: 2, child: GraphView()), Flexible(flex: 1, child: MonitoringMode())]);
+              return Row(children: const [Flexible(flex: 2, child: GraphView()), Flexible(flex: 1, child: MonitoringMode())]);
             }
           },
         ));

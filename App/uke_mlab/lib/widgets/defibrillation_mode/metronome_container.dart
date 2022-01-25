@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uke_mlab/widgets/defibrillation_mode/metronome_switch.dart';
 
+// TODO: COMMENTARY
 class MetronomeContainer extends StatelessWidget {
   const MetronomeContainer({Key? key}) : super(key: key);
 

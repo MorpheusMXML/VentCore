@@ -5,10 +5,10 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/widgets/graph_container/graph_alarm_border.dart';
 import 'package:uke_mlab/widgets/graph_container/graph_row.dart';
 
+/// Provides a frame for everything relating to graphs.
+///
+/// Includes standard sizes i.e. [ConstrainedBox] as a Container
 class GraphContainer extends StatelessWidget {
-  /// Provides a frame for everything relating to graphs.
-  ///
-  /// Includes standard sizes i.e. [ConstrainedBox] as a Container
   /// Uses a Stack to divide [GraphAlarmBorder] and the [GraphRow]
   final sensorEnumGraph sensor;
 

@@ -5,6 +5,7 @@ import 'package:uke_mlab/models/data_models/model_graph.dart';
 import 'package:uke_mlab/models/data_models/model_graphdata.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
+// TODO: COMMENTARY
 class RegularGraph extends StatelessWidget {
   final sensorEnumGraph sensor;
   const RegularGraph({
@@ -20,17 +21,16 @@ class RegularGraph extends StatelessWidget {
       () => SfCartesianChart(
         backgroundColor: Theme.of(context).cardColor,
         primaryYAxis: NumericAxis(
-          majorGridLines:
-              MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
+          majorGridLines: MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
         ),
         primaryXAxis: NumericAxis(
-          majorGridLines:
-              MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
+          majorGridLines: MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
         ),
         series: [
           SplineSeries(
               color: dataModel.color,
               // DONT DELETE .value, syncfusion would break in combination wiht Getx
+              // ignore: invalid_use_of_protected_member
               dataSource: dataModel.graphData.value,
               onRendererCreated: (ChartSeriesController controller) {
                 dataModel.chartController = controller;

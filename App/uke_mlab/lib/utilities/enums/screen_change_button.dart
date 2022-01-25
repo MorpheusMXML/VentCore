@@ -1,3 +1,4 @@
+//TODO: COMMENTARY
 enum screenChangeButtonEnum {
   aedButton,
   continueButton,

@@ -8,6 +8,7 @@ import 'package:uke_mlab/widgets/start_screen/continue_button.dart';
 import 'package:uke_mlab/widgets/start_screen/details_popup.dart';
 import 'package:uke_mlab/widgets/start_screen/skip_button.dart';
 
+//TODO: COMMENTARY
 class StartScreen extends StatelessWidget {
   const StartScreen({
     Key? key,

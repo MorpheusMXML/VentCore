@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/screen_controller.dart';
 
+// TODO: COMMENTARY
 class ExitButton extends StatelessWidget {
   const ExitButton({
     Key? key,

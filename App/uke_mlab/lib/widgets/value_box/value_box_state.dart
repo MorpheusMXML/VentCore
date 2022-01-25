@@ -6,6 +6,7 @@ import 'package:uke_mlab/models/data_models/model_absolute.dart';
 import 'package:uke_mlab/widgets/value_box/value_box_container.dart';
 import 'package:uke_mlab/widgets/value_box/value_box_settings.dart';
 
+// TODO: COMMENTARY
 class ValueBoxState extends StatelessWidget {
   final DataModelAbsolute dataModel;
   final double settingsWidth;

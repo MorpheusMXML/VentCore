@@ -11,23 +11,21 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/utilities/enums/scenarios.dart';
 import 'package:uke_mlab/scenarios/abstract_scenario.dart';
 
+//TODO: COMMENTARY
 class StandardScenario extends AbstractScenario {
   StandardScenario({
     scenarioType = scenariosEnum.standardScenario,
   }) : super();
 
   @override
-  void runScenario(
-      {required Map<sensorEnumAbsolute, Map<String, dynamic>> dataMapAbsolute,
-      required Map<sensorEnumGraph, Map<String, dynamic>> dataMapGraph}) {
+  void runScenario({required Map<sensorEnumAbsolute, Map<String, dynamic>> dataMapAbsolute, required Map<sensorEnumGraph, Map<String, dynamic>> dataMapGraph}) {
     Map<sensorEnumGraph, Map<int, Map<String, dynamic>>> scenarioMap = scenariosEnum.standardScenario.scenarioMap;
 
     // init mve & breathFreq values
     Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.breathfrequency.name)
         .updateValue(Get.find<SystemState>().ippvModel.defaultIppvValues['Freq.']!.toDouble());
-    Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.mve.name).updateValue(
-        Get.find<SystemState>().ippvModel.defaultIppvValues['Freq.']! *
-            (Get.find<SystemState>().ippvModel.defaultIppvValues['Vt']! / 1000));
+    Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.mve.name)
+        .updateValue(Get.find<SystemState>().ippvModel.defaultIppvValues['Freq.']! * (Get.find<SystemState>().ippvModel.defaultIppvValues['Vt']! / 1000));
 
     for (var sensorAbsolute in dataMapAbsolute.keys) {
       if (sensorAbsolute != sensorEnumAbsolute.sysAbsolute && sensorAbsolute != sensorEnumAbsolute.diaAbsolute) {
@@ -147,8 +145,7 @@ class StandardScenario extends AbstractScenario {
     scenarioTimer.add(currentTimer);
   }
 
-  void updateHFData(
-      {required List<dynamic> dataList, required double resolution, required DataModelAbsolute dataModelAbsolute}) {
+  void updateHFData({required List<dynamic> dataList, required double resolution, required DataModelAbsolute dataModelAbsolute}) {
     Timer currentTimer;
 
     currentTimer = Timer.periodic(calculateUpdateRateAbsolute(resolution: resolution), (timer) {
@@ -158,15 +155,13 @@ class StandardScenario extends AbstractScenario {
       if (!scenarioRunning) {
         timer.cancel();
       }
-      Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.pulse.name)
-          .updateValue((dataList[dataModelAbsolute.counter.value] * 0.98).toDouble());
+      Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.pulse.name).updateValue((dataList[dataModelAbsolute.counter.value] * 0.98).toDouble());
       dataModelAbsolute.updateValue(dataList[dataModelAbsolute.counter.value].toDouble());
     });
     scenarioTimer.add(currentTimer);
   }
 
-  void updateAbsoluteData(
-      {required List<dynamic> dataList, required double resolution, required DataModelAbsolute dataModelAbsolute}) {
+  void updateAbsoluteData({required List<dynamic> dataList, required double resolution, required DataModelAbsolute dataModelAbsolute}) {
     Timer currentTimer;
 
     currentTimer = Timer.periodic(calculateUpdateRateAbsolute(resolution: resolution), (timer) {

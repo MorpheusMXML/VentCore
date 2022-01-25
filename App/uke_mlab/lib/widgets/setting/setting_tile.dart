@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:uke_mlab/widgets/setting/action_button.dart';
 import 'package:uke_mlab/widgets/setting/setting_text.dart';
 
+// TODO: COMMENTARY
 class SettingTile extends StatelessWidget {
   final String name;
   final String rate;

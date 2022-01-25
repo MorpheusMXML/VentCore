@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// TODO: COMMENTARY
 class PopupNameField extends StatelessWidget {
   const PopupNameField({
     Key? key,
@@ -18,8 +19,7 @@ class PopupNameField extends StatelessWidget {
             fit: FlexFit.tight,
             child: Padding(
               padding: EdgeInsets.only(left: 10),
-              child: Text('Name',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xffeeeeee))),
+              child: Text('Name', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xffeeeeee))),
             ),
           ),
           Flexible(
@@ -34,9 +34,7 @@ class PopupNameField extends StatelessWidget {
                       filled: true,
                       fillColor: Theme.of(context).dividerColor,
                       floatingLabelBehavior: FloatingLabelBehavior.never,
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Theme.of(context).dividerColor)),
+                      focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).dividerColor)),
                       constraints: const BoxConstraints(
                         maxHeight: 25,
                       ),

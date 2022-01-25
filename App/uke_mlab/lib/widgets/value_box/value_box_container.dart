@@ -4,6 +4,7 @@ import 'package:uke_mlab/models/data_models/model_absolute.dart';
 import 'package:uke_mlab/models/data_models/model_graph.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
+// TODO: COMMENTARY
 class ValueBoxContainer extends StatelessWidget {
   final DataModelAbsolute? dataModelAbsolute;
   final DataModelGraph? dataModelGraph;
@@ -40,8 +41,7 @@ class ValueBoxContainer extends StatelessWidget {
         aspectRatio: aspectRatio,
         child: ElevatedButton(
           style: ButtonStyle(
-              shape: MaterialStateProperty.all(const RoundedRectangleBorder()),
-              backgroundColor: MaterialStateProperty.all(Theme.of(context).cardColor)),
+              shape: MaterialStateProperty.all(const RoundedRectangleBorder()), backgroundColor: MaterialStateProperty.all(Theme.of(context).cardColor)),
           onPressed: () => dataModelAbsolute!.expanded.toggle(),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

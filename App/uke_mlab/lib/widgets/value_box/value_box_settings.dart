@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/models/data_models/model_absolute.dart';
 import 'package:uke_mlab/providers/screen_controller.dart';
 
+// TODO: COMMENTARY
 class ValueBoxSettings extends StatelessWidget {
   final DataModelAbsolute dataModel;
   final String type;
@@ -32,14 +33,10 @@ class ValueBoxSettings extends StatelessWidget {
     int startItem;
 
     if (type == 'upper') {
-      startItem = dataModel.floatRepresentation
-          ? (dataModel.upperAlarmBound.value * 10).toInt()
-          : dataModel.upperAlarmBound.value.toInt();
+      startItem = dataModel.floatRepresentation ? (dataModel.upperAlarmBound.value * 10).toInt() : dataModel.upperAlarmBound.value.toInt();
       setFunction = screenController.setUpperBoundary;
     } else {
-      startItem = dataModel.floatRepresentation
-          ? (dataModel.lowerAlarmBound.value * 10).toInt()
-          : dataModel.lowerAlarmBound.value.toInt();
+      startItem = dataModel.floatRepresentation ? (dataModel.lowerAlarmBound.value * 10).toInt() : dataModel.lowerAlarmBound.value.toInt();
       setFunction = screenController.setLowerBoundary;
     }
 

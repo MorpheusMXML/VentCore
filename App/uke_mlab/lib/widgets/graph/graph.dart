@@ -4,6 +4,7 @@ import 'package:uke_mlab/widgets/graph/cpr_graph.dart';
 import 'package:uke_mlab/widgets/graph/history_graph.dart';
 import 'package:uke_mlab/widgets/graph/regular_graph.dart';
 
+// TODO: COMMENTARY
 class Graph extends StatelessWidget {
   final sensorEnumGraph sensor;
 

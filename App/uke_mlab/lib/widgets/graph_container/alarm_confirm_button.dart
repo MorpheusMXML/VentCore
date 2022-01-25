@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/providers/alarm_controller.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
+// TODO: COMMENTARY
 class AlarmConfirmButton extends StatelessWidget {
   final sensorEnumAbsolute sensorKey;
   const AlarmConfirmButton({

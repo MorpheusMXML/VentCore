@@ -4,10 +4,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/start_screen_controller.dart';
 
-//Widget for StartScreen Buttons
-//@param name Buttontext
-//@param optional image SVG asset path
-
+/// Widget for StartScreen Buttons
+/// [name] Buttontext
+/// optional [image] SVG asset path
 class PatientTypeButton extends StatelessWidget {
   final String name;
   final SvgPicture image;
@@ -27,20 +26,18 @@ class PatientTypeButton extends StatelessWidget {
       child: Obx(
         () => ElevatedButton(
           style: ElevatedButton.styleFrom(
-            minimumSize: Size(800 / MediaQuery.of(context).devicePixelRatio,
-                200 / MediaQuery.of(context).devicePixelRatio),
-            primary: startScreenController.selectedString.value == name
-                ? const Color(0xFF808B96)
-                : const Color(0xFFEEEEEE),
+            minimumSize: Size(800 / MediaQuery.of(context).devicePixelRatio, 200 / MediaQuery.of(context).devicePixelRatio),
+            primary: startScreenController.selectedString.value == name ? const Color(0xFF808B96) : const Color(0xFFEEEEEE),
             onPrimary: Colors.black,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),
           ),
-          //get weight and height for chosen preset
+
+          ///get weight and height for chosen preset
           onPressed: () {
             startScreenController.settingsButton(name);
           },
-          //button content
+
+          ///button content
           child: Row(
             children: [
               Flexible(

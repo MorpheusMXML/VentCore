@@ -4,6 +4,7 @@ import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/models/system_state.dart';
 
+// TODO: COMMENTARY
 class GraphAlarmMessage extends StatelessWidget {
   final sensorEnumAbsolute sensorKey;
 

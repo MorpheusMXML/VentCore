@@ -6,8 +6,8 @@ import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/utilities/enums/non_graph_alarm.dart';
 
+/// describes an entry for the possible dropDownButton menu in [AlarmExpansionTile]
 class AlarmFieldTile extends StatelessWidget {
-  /// describes an entry for the possible dropDownButton menu in [AlarmExpansionTile]
   final AlarmListEntry data;
   const AlarmFieldTile({
     Key? key,

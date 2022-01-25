@@ -6,6 +6,7 @@ import 'package:uke_mlab/widgets/value_box/alarm_confirmation/alarm_confirmation
 import 'package:uke_mlab/widgets/value_box/value_box_tile.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
+// TODO: COMMENTARY
 class VentilationMode extends StatelessWidget {
   const VentilationMode({
     Key? key,

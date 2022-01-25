@@ -1,3 +1,4 @@
+//TODO: COMMENTARY
 enum nonGraphAlarmEnum {
   spo2bad,
   spo2weak,
@@ -17,6 +18,7 @@ enum nonGraphAlarmEnum {
   cprFeedback,
 }
 
+//TODO: COMMENTARY
 extension NonGraphAlarmAttributes on nonGraphAlarmEnum {
   static const Map<nonGraphAlarmEnum, Map<String, dynamic>> attributes = {
     nonGraphAlarmEnum.spo2bad: {

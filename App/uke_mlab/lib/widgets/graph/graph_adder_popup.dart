@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/models/system_state.dart';
 
+// TODO: COMMENTARY
 class GraphAdderPopup extends StatelessWidget {
   final SystemState systemState = Get.find<SystemState>();
 
@@ -25,14 +26,8 @@ class GraphAdderPopup extends StatelessWidget {
                 ButtonStyle style;
                 systemState.graphList.list.contains(sensor)
                     ? style = ElevatedButton.styleFrom(
-                        fixedSize: const Size(80, 60),
-                        side: const BorderSide(width: 2, color: Colors.white),
-                        primary: sensor.color,
-                        onPrimary: Colors.white)
-                    : style = ElevatedButton.styleFrom(
-                        fixedSize: const Size(80, 60),
-                        primary: Colors.grey[50],
-                        onPrimary: Colors.black);
+                        fixedSize: const Size(80, 60), side: const BorderSide(width: 2, color: Colors.white), primary: sensor.color, onPrimary: Colors.white)
+                    : style = ElevatedButton.styleFrom(fixedSize: const Size(80, 60), primary: Colors.grey[50], onPrimary: Colors.black);
 
                 return ElevatedButton(
                     style: style,

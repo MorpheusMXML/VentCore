@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/defibrillation_controller.dart';
 
+// TODO: COMMENTARY
 class DefibrillationButton extends StatelessWidget {
   final String name;
   const DefibrillationButton.auto({
@@ -16,8 +17,7 @@ class DefibrillationButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final DefibrillationController defibrillationController =
-        Get.find<DefibrillationController>();
+    final DefibrillationController defibrillationController = Get.find<DefibrillationController>();
 
     return Expanded(
       child: Container(
@@ -25,20 +25,15 @@ class DefibrillationButton extends StatelessWidget {
           child: Obx(() {
             ButtonStyle buttonStyle;
             defibrillationController.selectedDefiButton.value != name
-                ? buttonStyle = ElevatedButton.styleFrom(
-                    primary: Theme.of(context).cardColor,
-                    onPrimary: Theme.of(context).dividerColor)
+                ? buttonStyle = ElevatedButton.styleFrom(primary: Theme.of(context).cardColor, onPrimary: Theme.of(context).dividerColor)
                 : buttonStyle = ButtonStyle(
-                    side: MaterialStateProperty.all(
-                        const BorderSide(color: Colors.green)),
+                    side: MaterialStateProperty.all(const BorderSide(color: Colors.green)),
                     foregroundColor: MaterialStateProperty.all(Colors.green),
                   );
             return ElevatedButton(
               style: buttonStyle,
               child: Text(name),
-              onPressed: defibrillationController.selectedDefiButton.value != name
-                  ? () => defibrillationController.setSelectedDefiButton(name)
-                  : null,
+              onPressed: defibrillationController.selectedDefiButton.value != name ? () => defibrillationController.setSelectedDefiButton(name) : null,
             );
           })),
     );

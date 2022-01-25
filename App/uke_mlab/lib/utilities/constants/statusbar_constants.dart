@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 
+//TODO: COMMENTARY
 class StatusBarConstants {
   static const int flexBarAlarmCounterTile = 4;
   static const int flexBarAlarmFieldTile = 8;

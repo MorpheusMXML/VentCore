@@ -48,12 +48,13 @@ class HistoryGraph extends StatelessWidget {
           majorGridLines: MajorGridLines(width: 0, color: Theme.of(context).shadowColor),
         ),
         series: [
-          // Renders scatter chart to display the MAD.
+          /// Renders scatter chart to display the MAD.
           ScatterSeries(
             markerSettings: const MarkerSettings(
                 height: 10,
                 width: 10,
-                // Scatter will render in diamond shape
+
+                /// Scatter will render in diamond shape
                 shape: DataMarkerType.diamond),
             trendlines: <Trendline>[
               Trendline(dashArray: <double>[2, 3], type: TrendlineType.movingAverage, color: Colors.redAccent)
@@ -65,7 +66,8 @@ class HistoryGraph extends StatelessWidget {
             xValueMapper: (ChartData data, _) => data.time,
             yValueMapper: (ChartData data, _) => data.meanArterialPressure,
           ),
-          // Renders the Systolic and Diastolic Datapoints as a Hi-Lo Error Bar.
+
+          /// Renders the Systolic and Diastolic Datapoints as a Hi-Lo Error Bar.
           HiloSeries(
             enableTooltip: true,
             // ignore: invalid_use_of_protected_member

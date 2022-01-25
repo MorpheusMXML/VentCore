@@ -1,3 +1,4 @@
+//TODO: COMMENTARY
 enum patientTypeEnum {
   adult,
   child,
@@ -5,6 +6,7 @@ enum patientTypeEnum {
   none,
 }
 
+//TODO: COMMENTARY
 extension BoundaryAttributes on patientTypeEnum {
   static const Map<patientTypeEnum, Map<String, dynamic>> attributes = {
     patientTypeEnum.adult: {

@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/defibrillation_controller.dart';
 
+// TODO: COMMENTARY
 class DefibrillationStats extends StatelessWidget {
   const DefibrillationStats({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    DefibrillationController defibrillationController =
-        Get.find<DefibrillationController>();
+    DefibrillationController defibrillationController = Get.find<DefibrillationController>();
 
     defibrillationController.startTimerWatch();
 
@@ -43,29 +43,26 @@ class DefibrillationStats extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                    child: Obx(() =>
-                        Text(defibrillationController.lastTimerString.value,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            )))),
+                    child: Obx(() => Text(defibrillationController.lastTimerString.value,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        )))),
                 Expanded(
-                    child: Obx(
-                        () => Text('${defibrillationController.numberOfShocks}',
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            )))),
+                    child: Obx(() => Text('${defibrillationController.numberOfShocks}',
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        )))),
                 Expanded(
-                    child: Obx(() =>
-                        Text(defibrillationController.startTimerString.value,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            )))),
+                    child: Obx(() => Text(defibrillationController.startTimerString.value,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        )))),
               ],
             ),
           ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//TODO: COMMENTARY
 class AppTheme {
   // https://stackoverflow.com/questions/49172746
   // https://github.com/flutter/flutter/issues/31522

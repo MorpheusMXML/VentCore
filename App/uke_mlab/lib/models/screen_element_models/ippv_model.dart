@@ -6,9 +6,8 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/widgets/setting/setting_container.dart';
 import 'package:uke_mlab/widgets/setting/ippv_button.dart';
 
+/// offers representation for [SettingContainer] and widgets below
 class IppvModel {
-  /// offers representation for [SettingContainer] and widgets below
-
   /// default data values for [SettingContainer] and widgets below
   Map<String, int> defaultIppvValues = {'Freq.': 15, 'Vt': 300, 'PEEP': 60};
 
@@ -19,11 +18,7 @@ class IppvModel {
   final RxString selectedIPPVMode = 'IPPV'.obs;
 
   IppvModel() {
-    ippvValues = {
-      'Freq.': defaultIppvValues['Freq.']!.obs,
-      'Vt': defaultIppvValues['Vt']!.obs,
-      'PEEP': defaultIppvValues['PEEP']!.obs
-    };
+    ippvValues = {'Freq.': defaultIppvValues['Freq.']!.obs, 'Vt': defaultIppvValues['Vt']!.obs, 'PEEP': defaultIppvValues['PEEP']!.obs};
   }
 
   /// updates the current [ippvValues]
@@ -45,14 +40,12 @@ class IppvModel {
           newValue += 5 * value;
           break;
         default:
-          throw Exception(
-              "Patient type not valid (most likely patientTypeEnum.none) during updateIPPVValue");
+          throw Exception("Patient type not valid (most likely patientTypeEnum.none) during updateIPPVValue");
       }
     } else if (name == "PEEP") {
       newValue += 5 * value;
     } else {
-      throw Exception(
-          "name was $name during updateIPPVValue which is no valid IPPv name");
+      throw Exception("name was $name during updateIPPVValue which is no valid IPPv name");
     }
 
     ippvValues[name]!.value = newValue;
@@ -64,15 +57,12 @@ class IppvModel {
   }
 
   void updateVentValues() {
-    Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.breathfrequency.name)
-        .updateValue(ippvValues['Freq.']!.value.toDouble());
+    Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.breathfrequency.name).updateValue(ippvValues['Freq.']!.value.toDouble());
     updateMVe();
   }
 
   void updateMVe() {
-    Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.mve.name).updateValue(
-        ((ippvValues['Freq.']!.value * (ippvValues['Vt']!.value / 1000)))
-            .toDouble());
+    Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.mve.name).updateValue(((ippvValues['Freq.']!.value * (ippvValues['Vt']!.value / 1000))).toDouble());
   }
 
   resetIPPV() {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
 
+// TODO: COMMENTARY
 class SettingText extends StatelessWidget {
   final String name;
   final String rate;
@@ -18,8 +19,7 @@ class SettingText extends StatelessWidget {
     return Flexible(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment:
-            CrossAxisAlignment.baseline, //gets text in same line
+        crossAxisAlignment: CrossAxisAlignment.baseline, //gets text in same line
         textBaseline: TextBaseline.ideographic, //gets text in same line
         children: [
           Text(
@@ -38,9 +38,7 @@ class SettingText extends StatelessWidget {
               ),
             ),
           ),
-          Text(rate,
-              style: TextStyle(
-                  fontSize: 12, color: Theme.of(context).dividerColor)),
+          Text(rate, style: TextStyle(fontSize: 12, color: Theme.of(context).dividerColor)),
         ],
       ),
     );

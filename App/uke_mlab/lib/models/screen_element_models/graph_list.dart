@@ -7,9 +7,8 @@ import 'package:uke_mlab/utilities/enums/alarm_status.dart';
 import 'package:uke_mlab/widgets/graph_container/graph_view.dart';
 import 'package:uke_mlab/widgets/value_box/value_box_tile.dart';
 
+/// contains a list [list] over all currently [GraphView] represented by the corresponding [sensorEnumGraph]
 class GraphList {
-  /// contains a list [list] over all currently [GraphView] represented by the corresponding [sensorEnumGraph]
-
   /// contains information whether a [GraphView] has been added to current screen
   RxBool addGraph = false.obs;
 
@@ -91,8 +90,7 @@ class GraphList {
     SystemState systemState = Get.find<SystemState>();
     if (systemState.selectedToggleView[0]) {
       //sort after monitorList
-      list.sort(
-          (a, b) => monitorList.indexOf(a).compareTo(monitorList.indexOf(b)));
+      list.sort((a, b) => monitorList.indexOf(a).compareTo(monitorList.indexOf(b)));
     } else if (systemState.selectedToggleView[1]) {
       //sort after ventList
       list.sort((a, b) => ventiList.indexOf(a).compareTo(ventiList.indexOf(b)));
@@ -111,19 +109,15 @@ class GraphList {
     for (var graphSensorKey in list) {
       sensorEnumAbsolute? sensorKey = SensorMapping.sensorMap[graphSensorKey];
       if (sensorKey != null &&
-          (systemState.alarmState[sensorKey]!["status"] != alarmStatus.none &&
-              systemState.alarmState[sensorKey]!["status"] !=
-                  alarmStatus.confirmed)) {
+          (systemState.alarmState[sensorKey]!["status"] != alarmStatus.none && systemState.alarmState[sensorKey]!["status"] != alarmStatus.confirmed)) {
         activeGraphAbsolutes.add(sensorKey);
       }
     }
   }
 
   /// sets the [standardGraphs] for respective scenario
-  void setStandardGraphs(
-      Map<screenStatusEnum, List<sensorEnumGraph>> newGraphs) {
-    standardGraphs
-        .clear(); // does this also clear subelements? is this garbage collected?
+  void setStandardGraphs(Map<screenStatusEnum, List<sensorEnumGraph>> newGraphs) {
+    standardGraphs.clear(); // does this also clear subelements? is this garbage collected?
     standardGraphs = Map.from(newGraphs);
   }
 
@@ -131,14 +125,11 @@ class GraphList {
   void resetListToStandardGraphs() {
     SystemState systemState = Get.find<SystemState>();
     if (systemState.selectedToggleView[0]) {
-      graphListSet(standardGraphs[screenStatusEnum.monitorScreen]
-          as List<sensorEnumGraph>);
+      graphListSet(standardGraphs[screenStatusEnum.monitorScreen] as List<sensorEnumGraph>);
     } else if (systemState.selectedToggleView[1]) {
-      graphListSet(standardGraphs[screenStatusEnum.ventilationScreen]
-          as List<sensorEnumGraph>);
+      graphListSet(standardGraphs[screenStatusEnum.ventilationScreen] as List<sensorEnumGraph>);
     } else if (systemState.selectedToggleView[2]) {
-      graphListSet(standardGraphs[screenStatusEnum.defibrillationScreen]
-          as List<sensorEnumGraph>);
+      graphListSet(standardGraphs[screenStatusEnum.defibrillationScreen] as List<sensorEnumGraph>);
     } else {
       throw Exception("Trying to reset graphList, no Toggle view was selected");
     }
