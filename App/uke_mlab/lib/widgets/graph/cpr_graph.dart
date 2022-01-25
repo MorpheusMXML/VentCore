@@ -58,11 +58,11 @@ class CprGraph extends StatelessWidget {
           //Turning off String Labels at the Axis
           labelStyle: const TextStyle(fontSize: 0.0001),
           desiredIntervals: 25,
-          majorGridLines:
-              MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
+          majorGridLines: MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
         ),
         series: <ColumnSeries<ChartData, dynamic>>[
           ColumnSeries<ChartData, dynamic>(
+              // ignore: invalid_use_of_protected_member
               dataSource: dataModel.graphData.value,
               onRendererCreated: (ChartSeriesController controller) {
                 dataModel.chartController = controller;
