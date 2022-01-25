@@ -5,6 +5,8 @@
 
 [![Commits][commit-shield]][commit-url]
 [![Issues][issues-shield]][issues-url]
+[![Team][team-shield]][team-url]
+[![Website][website-shield]][website-url]
 
 </div>
 
@@ -265,7 +267,7 @@ To tackle this issue we decided to generate our heartfrequency with an algorithm
 
 ![Json Structure](./ReadMeFiles/Screenshots/datastreams.PNG)
 
-|Every scenario and our standard scenario have a dedicated json file. On the top level one can find a list containing all the (sensor)channels needed, and general information for the scenario such as the duration. A channel can contain data for either a graph or one of the absolute values that are associated to the graphs and channel information. The data just holds a list of all the datapoints. Channel information provides useful descriptions and important parameters such as the enum identifier and the resolution. The resolution is stated in Hz.
+Every scenario and our standard scenario have a dedicated json file. On the top level one can find a list containing all the (sensor)channels needed, and general information for the scenario such as the duration. A channel can contain data for either a graph or one of the absolute values that are associated to the graphs and channel information. The data just holds a list of all the datapoints. Channel information provides useful descriptions and important parameters such as the enum identifier and the resolution. The resolution is stated in Hz.
 
 ### Building scenario data
 
@@ -366,11 +368,18 @@ And also for providing simulation / real patient data and helping with DataGener
 </div>
 
 <!-- MARKDOWN LINKS & IMAGES -->
-[issues-shield]: https://img.shields.io/badge/issues-162-brightgreen
+[issues-shield]: https://img.shields.io/badge/issues-162-brightgreen?style=for-the-badge
 [issues-url]: https://git.informatik.uni-hamburg.de/mast/teaching/mlab/wt202122/uke/-/issues
 
-[commit-shield]:https://img.shields.io/badge/commits-1010-orange
-[commit-url]:https://git.informatik.uni-hamburg.de/mast/teaching/mlab/wt202122/uke/-/commits/main
+[commit-shield]:https://img.shields.io/badge/commits-1010-orange?style=for-the-badge
+[commit-url]:https://git.informatik.uni-hamburg.de/mast/teaching/mlab/wt202122/uke/-/commits/main/
+
+[team-shield]:https://img.shields.io/badge/Contact-team-blue?style=for-the-badge
+[team-url]:#contact
+
+[website-shield]:https://img.shields.io/badge/Website-VentCore-blueviolet?style=for-the-badge
+[website-url]:[website-url]
+
 
 [product-screenshot]: ./ReadMeFiles/Screenshots/ventilation2-black.png
 [monitoring]: ./ReadMeFiles/Screenshots/monitoring.png
