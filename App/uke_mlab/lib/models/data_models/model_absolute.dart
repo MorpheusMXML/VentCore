@@ -127,6 +127,7 @@ class DataModelAbsolute extends GetxController {
 
   void showOverlay(ValueBoxContainer valueBoxContainer, GlobalKey globalKey,
       BuildContext context) {
+    print('show overlay called, expanded = $expanded}');
     final RenderBox renderBox =
         globalKey.currentContext!.findRenderObject() as RenderBox;
     double boxHeight = renderBox.size.height;
@@ -171,12 +172,15 @@ class DataModelAbsolute extends GetxController {
     for (var sensor in sensorEnumAbsolute.values) {
       if (sensor != sensorKey) {
         Get.find<DataModelAbsolute>(tag: sensor.name).hideOverlay();
+        Get.find<DataModelAbsolute>(tag: sensor.name).expanded = false;
       }
     }
   }
 
   void hideOverlay() {
-    entry?.remove();
-    entry = null;
+    if (entry != null) {
+      entry!.remove();
+      entry = null;
+    }
   }
 }
