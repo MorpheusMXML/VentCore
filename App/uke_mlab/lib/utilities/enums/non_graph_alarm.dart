@@ -10,8 +10,8 @@ enum nonGraphAlarmEnum {
   o2empty,
   nibpUnavail, //nibp not measurable
   lostConnection,
-  ekgArtifact,
-  ekgNotConnected,
+  ecgArtifact,
+  ecgNotConnected,
   vf, // ventricular fibrillation
   vt, // ventricular tachicardy
   sraCheckPuls, // "SR à Puls check"
@@ -51,11 +51,11 @@ extension NonGraphAlarmAttributes on nonGraphAlarmEnum {
     nonGraphAlarmEnum.lostConnection: {
       'message': 'Connection lost',
     },
-    nonGraphAlarmEnum.ekgArtifact: {
-      'message': 'EKG artifact',
+    nonGraphAlarmEnum.ecgArtifact: {
+      'message': 'ECG artifact',
     },
-    nonGraphAlarmEnum.ekgNotConnected: {
-      'message': 'EKG artifact',
+    nonGraphAlarmEnum.ecgNotConnected: {
+      'message': 'ECG artifact',
     },
     nonGraphAlarmEnum.vf: {
       'message': 'Ventricular fibrillation',

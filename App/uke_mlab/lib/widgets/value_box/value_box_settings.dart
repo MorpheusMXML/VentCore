@@ -33,10 +33,14 @@ class ValueBoxSettings extends StatelessWidget {
     int startItem;
 
     if (type == 'upper') {
-      startItem = dataModel.floatRepresentation ? (dataModel.upperAlarmBound.value * 10).toInt() : dataModel.upperAlarmBound.value.toInt();
+      startItem = dataModel.floatRepresentation
+          ? (dataModel.upperAlarmBound.value * 10).toInt()
+          : dataModel.upperAlarmBound.value.toInt();
       setFunction = screenController.setUpperBoundary;
     } else {
-      startItem = dataModel.floatRepresentation ? (dataModel.lowerAlarmBound.value * 10).toInt() : dataModel.lowerAlarmBound.value.toInt();
+      startItem = dataModel.floatRepresentation
+          ? (dataModel.lowerAlarmBound.value * 10).toInt()
+          : dataModel.lowerAlarmBound.value.toInt();
       setFunction = screenController.setLowerBoundary;
     }
 
@@ -54,16 +58,34 @@ class ValueBoxSettings extends StatelessWidget {
             magnification: 1.5,
             onSelectedItemChanged: (value) => setFunction(
                   dataModel,
-                  dataModel.floatRepresentation ? value.toDouble() / 10 : value.toDouble(),
+                  dataModel.floatRepresentation
+                      ? value.toDouble() / 10
+                      : value.toDouble(),
                 ),
             children: dataModel.floatRepresentation
                 ? [
                     for (double i = 0.0; i < 200.1; i = i + 0.1)
                       Text(
                         i.toStringAsFixed(1),
-                        style: const TextStyle(fontSize: 12),
+                        style: TextStyle(
+                          color: dataModel.color,
+                          fontSize: 12,
+                          decoration: TextDecoration.none,
+                          fontFamily: 'Jura',
+                        ),
                       )
                   ]
-                : List.generate(400, (index) => Text('$index'))));
+                : [
+                    for (int i = 0; i < 400; i++)
+                      Text(
+                        '$i',
+                        style: TextStyle(
+                          color: dataModel.color,
+                          fontSize: 12,
+                          decoration: TextDecoration.none,
+                          fontFamily: 'Jura',
+                        ),
+                      )
+                  ]));
   }
 }
