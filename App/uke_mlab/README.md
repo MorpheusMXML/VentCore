@@ -20,7 +20,7 @@
 
   <p>
     This is the Repository for the M-Lab Course project VentCore. 
-    This Course was held during the WS 2021/2022 by the MAST Team of University of Hamburg
+    This Course was held during the WS 2021/2022 by the MAST Team of University of Hamburg.
 
 <a href=""><strong>Explore the docs »</strong></a>
 <br />
@@ -55,8 +55,8 @@
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#design">Design</a></li>
-    <li><a href="#alarm">Alarm Handling</a></li>
-    <li><a href="#dataprocessing">Data Processing</a></li>
+    <li><a href="#alarm-handling">Alarm Handling</a></li>
+    <li><a href="#data-processing">Data Processing</a></li>
     <li><a href="#documentation">Documentation</a></li>
     <li><a href="#known-issues">Known Issues</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -216,134 +216,11 @@ Alarms are displayed audibly in descending order of priority.
 //TODO: Add Description of Alarm Handling Rules
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
-
-<!-- DATA PROCESSING -->
-# Data Processing
-
-***
-
-
-
-<!-- DOCUMENTATION -->
-# Documentation
-
-***
-<!-- TODO: Add Link-->
-Please refer to our [Code Documentation]().
-
-
-
-<!-- KNOWN ISSUES -->
-# Known Issues
-
-1. Issue 1
-2. Issue 3
-
-***
-
-<!-- DATA PROCESSING -->
-# Data Processing
-
-***
-
-
-
-<!-- DOCUMENTATION -->
-# Documentation
-
-***
-<!-- TODO: Add Link-->
-Please refer to our [Code Documentation]().
-
-
-
-<!-- KNOWN ISSUES -->
-# Known Issues
-
-1. Issue 1
-2. Issue 3
-
-***
-
-<!-- DATA PROCESSING -->
-# Data Processing
-Files to consider:
-- [Notebook 1](./SimulationData/data_processing.ipynb)
-- [Notebook 2](./SimulationData/weinmanndata.ipynb)
-- [Raw Data](./SimulationData/rawdata.ipynb)
-
-Mr. Neuhaus from Weinmann provided us with with data twice, once actual recorded ventilation and ECG data and the second time generated simulation data.
-
-As the patient scenarios are very complex finding data that fits our needs is near impossible. Even just finding a healthy ECG wave is a very hard task. Thats why we are building our datasets ourselfs.
-
-The first time we received an "edf" file containing recorded ventilation and ECG data.
-since this was a raw recording and not filtered or treated in any way we had to process the data which we did in [Notebook 1](./SimulationData/data_processing.ipynb).
-
-We used a python library called [mne](https://mne.tools/stable/index.html) to read the "edf" file and extract relevant information.  
-
-Since we immediately wanted to visualize the provided data within our application, we did not bother constructing a complex json file. Thus we built a simple list holding dictionaries for each graph (ECG, paw, pleth, etc.).
-
-Since the data is raw and unfiltered a lot of noise was present, to filter out the noise Mr. Neuhaus recomended us to use a algorithm called [simple moving average](https://en.wikipedia.org/wiki/Moving_average).
-Our implementation of the simple moving average can be found in this [Notebook 1](./SimulationData/data_processing.ipynb) under the section "Simple Moving Average".
-This provided us with a clean ECG wave we could use to display the ECG channel in our application.
-After finishing up the data for our graphs we realized that this is only half the data our application needs to be realistic enough for our customer.
-
-Thankfully Mr.Neuhaus provided us with clean simulated data. Using this data we redesinged our json datastructure.
-
-### General Data Structure
-
-We were now able to display an ECG wave as a graph. However for a realistic representation of the associated heartfrequency we would have to analyze the number of pqrst complexes in one minute. Which would have taken to much time to implement correctly, we decided against analyzing our graphs. We still lacked a datasource to realisticly display a heartfrequency. 
-
-Our most basic approach was generating semi random numbers and just display those. The problem that arrises with random generated numbers is that a random datapoint is not depended on its predecessor. In the realm of medical data this leads to serious inconsistencies. Since the heartfrequency might be 120 at time x and 75 the next timestep this does not mimic a realistic trend for a heartfrequency (even in the most dramatic cases hf would not drop by that much). 
-
-To tackle this issue we decided to generate our heartfrequency with an algorithm called random walk. A [random walk](https://en.wikipedia.org/wiki/Random_walk) generates a list of values each based on the last value to allow for a more realistic trend . Our implementation of a random walk can be found under the section "Random Walk" in the notebook. The relationship between ECG and heartfrequency is not unique and almost every graph brings its associated value (i.e. pleth -> spo2, co2 -> co2Absolute). With our strategy we were able to generate all the datastreams necessary.
-
-### Json Structure
-![Json Structure](./ReadMeFiles/Screenshots/datastreams.PNG)
-
-|Every scenario and our standard scenario have a dedicated json file. On the top level one can find a list containing all the (sensor)channels needed, and general information for the scenario such as the duration. A channel can contain data for either a graph or one of the absolute values that are associated to the graphs and channel information. The data just holds a list of all the datapoints. Channel information provides useful descriptions and important parameters such as the enum identifier and the resolution. The resolution is stated in Hz.
-
-### Building scenario data
-
-With a combination of the random walk and the clean, easily loopable data we recieved, we had the tools to construct any scenario we wanted. Now that we had all the basic components needed we tried to replicate the given patient scenarios as close as possible.
-
-<!-- DOCUMENTATION -->
-# Documentation
-
-***
-<!-- TODO: Add Link-->
-Please refer to our [Code Documentation]().
-
-<!-- KNOWN ISSUES -->
-# Known Issues
-
-1. Issue 1
-2. Issue 3
-
-***
-
-
-
 ### Auditory alarm according to prioritisation
 Alarms are displayed audibly in descending order of priority.
 ![Table Audio Priorities](./ReadMeFiles/table-audio-priority.png)
 
-
-
-### Auditory Behaviour of Alarms
-
-
-
-## General Rules
-
-//TODO: Add Description of Alarm Handling Rules
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 ***
-
-
 
 <!-- DATA PROCESSING -->
 # Data Processing
@@ -386,6 +263,8 @@ To tackle this issue we decided to generate our heartfrequency with an algorithm
 ### Building scenario data
 
 With a combination of the random walk and the clean, easily loopable data we recieved, we had the tools to construct any scenario we wanted. Now that we had all the basic components needed we tried to replicate the given patient scenarios as close as possible.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- DOCUMENTATION -->
 # Documentation
@@ -394,9 +273,11 @@ With a combination of the random walk and the clean, easily loopable data we rec
 - Please refer to our [Code Documentation]()
 - Application [Styleguide](/App/documentation/uke-styleguide-tables.md)
 - Approaches and Logic for [Alarmmangement]()
-- [UseCases](./documentation/UseCase-English.pdf) for Testing
+- [UseCases](./App/documentation/UseCase-English.pdf) for Testing
  
 - [Figma-Clickdummy](https://www.figma.com/proto/ase69ABWTPP8L2kVJdHuzq/MLab---UKE-Protoype-UI?node-id=892%3A3234&scaling=scale-down&page-id=892%3A792&starting-point-node-id=892%3A3234&show-proto-sidebar=1)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 
 <!-- KNOWN ISSUES -->
@@ -435,6 +316,8 @@ Alarms should be visualized at least 10 seconds before it can update to a lower 
 **6. [Server Issues with Pipeline](https://git.informatik.uni-hamburg.de/mast/teaching/mlab/wt202122/uke/-/issues/59)**
 
 The pipeline for the project couldn't be started due to server issues.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 ***
 
