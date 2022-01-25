@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
+import 'package:uke_mlab/widgets/graph/co2_graph.dart';
 import 'package:uke_mlab/widgets/graph/cpr_graph.dart';
 import 'package:uke_mlab/widgets/graph/history_graph.dart';
 import 'package:uke_mlab/widgets/graph/regular_graph.dart';
@@ -20,8 +21,8 @@ class Graph extends StatelessWidget {
         return CprGraph(sensor: sensor);
       case sensorEnumGraph.nibd:
         return HistoryGraph(sensor: sensor);
-      // case sensorEnumGraph.co2:
-      //   return Co2Graph(sensor: sensor);
+      case sensorEnumGraph.co2:
+         return CO2Graph(sensor: sensor);
       default:
         return RegularGraph(sensor: sensor);
     }
