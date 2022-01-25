@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:uke_mlab/models/system_state.dart';
 
 import 'package:uke_mlab/providers/alarm_controller.dart';
 

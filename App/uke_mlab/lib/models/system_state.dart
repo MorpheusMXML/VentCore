@@ -113,8 +113,6 @@ class SystemState extends GetxController {
       'status': status ?? alarmState[sensor]!['status'],
       'color': color ?? alarmState[sensor]!['color'],
     };
-
-    // TODO: check if taking the evaluation here hurts program flow
     graphList.evaluateActiveGraphAbsolutes();
     absAlarmFieldModel.evaluateActiveList();
   }

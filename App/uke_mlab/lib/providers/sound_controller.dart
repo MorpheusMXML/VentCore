@@ -127,8 +127,6 @@ class SoundController {
   }
 
   triggerSoundState(dynamic sensor, int priority) {
-    //print(" \nSoundStateTriggered with $sensor");
-
     // TODO compare list with current system state (eg: is temperature still confirmed?)
     // first try to do so
     soundList.removeWhere((element) {
@@ -180,8 +178,6 @@ class SoundController {
       }
       // TODO: analyze general alarms too
     }
-    print(
-        "playAlarm called by ${soundList[0].type.toString()} with prio $priority\n ");
     playAlarm(soundList[0].priority);
   }
 

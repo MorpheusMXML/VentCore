@@ -40,8 +40,9 @@ class SmartAdjustmentMap {
     if (map[sensorKey]!.lowerCounter.value >= 3 ||
         map[sensorKey]!.upperCounter.value >= 3) {
       map[sensorKey]!.isPressable.value = true;
+    } else {
+      map[sensorKey]!.isPressable.value = false;
     }
-    map[sensorKey]!.isPressable.value = false;
   }
 }
 

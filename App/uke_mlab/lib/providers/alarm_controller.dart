@@ -146,7 +146,7 @@ class AlarmController {
   ) {
     ///Prevent update because [alarmStatus.confirmed] is confirmed or [endConfirmStatus]
     if (_systemState.getAlarmStateStatus(sensor) == alarmStatus.confirmed) {
-      if (isConfirmInConfirmDuration(sensor) &&
+      if (isSensorInConfirmDuration(sensor) &&
           _systemState.getAlarmStateMessage(sensor) == message.message &&
           _systemState.getAlarmStatePriority(sensor) >= status.priority) {
         _systemState.setAlarmState(
@@ -176,6 +176,12 @@ class AlarmController {
     ///Update AlarmState if change is detected
     if (_systemState.getAlarmStatePriority(sensor) != status.priority ||
         _systemState.getAlarmStateMessage(sensor) != message.message) {
+      // Check if middle alarm is repeating and needs to change boundaries
+      if (_systemState.getAlarmStatePriority(sensor) ==
+              alarmStatus.none.priority &&
+          status.priority == alarmStatus.middle.priority) {
+        evaluateBoundaryAdjustment(sensor, message);
+      }
       _systemState.setAlarmState(
         sensor,
         status.priority,
@@ -183,13 +189,6 @@ class AlarmController {
         status,
         status.color,
       );
-      // Check if middle alarm is repeating and needs to change boundaries
-      if (_systemState.graphList.activeGraphAbsolutes.contains(sensor) &&
-          _systemState.getAlarmStatePriority(sensor) ==
-              alarmStatus.none.priority &&
-          status.priority == alarmStatus.middle.priority) {
-        evaluateBoundaryAdjustment(sensor, message);
-      }
     }
     triggerSoundController(sensor, status);
   }
@@ -218,45 +217,11 @@ class AlarmController {
     DateTime dateTime = DateTime.now();
 
     if (message == alarmMessage.lowerBoundaryViolated) {
-      if (dateTime
-              .difference(
-                  _systemState.smartAdjustmentMap.map[sensor]!.dateTimeLower)
-              .inSeconds <=
-          30) {
-        _systemState.smartAdjustmentMap.map[sensor]!.lowerCounter.value++;
-        _systemState.smartAdjustmentMap.map[sensor]!.dateTimeLower = dateTime;
-        // functionalty now in Button
-        //if (_systemState
-        //        .boundaryAdjustmentMap.map[sensor]!.lowerCounter.value >=
-        //    3) {
-        //  dataModelAbsolute.setLowerAlarmBoundary(
-        //      lower * 0.98);
-        //}
-      } else {
-        _systemState.smartAdjustmentMap.map[sensor]!.lowerCounter.value = 0;
-        _systemState.smartAdjustmentMap.map[sensor]!.dateTimeLower = dateTime;
-        return;
-      }
+      _systemState.smartAdjustmentMap.updateLowerCounter(sensor);
+      return;
     } else if (message == alarmMessage.upperBoundaryViolated) {
-      if (dateTime
-              .difference(
-                  _systemState.smartAdjustmentMap.map[sensor]!.dateTimeUpper)
-              .inSeconds <=
-          30) {
-        _systemState.smartAdjustmentMap.map[sensor]!.upperCounter.value++;
-        _systemState.smartAdjustmentMap.map[sensor]!.dateTimeUpper = dateTime;
-        // functionalty now in Button
-        //if (_systemState
-        //        .boundaryAdjustmentMap.map[sensor]!.upperCounter.value >=
-        //    3) {
-        //  dataModelAbsolute.setUpperAlarmBoundary(
-        //      upper * 1.02);
-        //}
-      } else {
-        _systemState.smartAdjustmentMap.map[sensor]!.upperCounter.value = 0;
-        _systemState.smartAdjustmentMap.map[sensor]!.dateTimeUpper = dateTime;
-        return;
-      }
+      _systemState.smartAdjustmentMap.updateUpperCounter(sensor);
+      return;
     } else {
       throw Exception(
           "Message field was $message instead of alarmMessage.lowerBoundaryViolated or alarmMessage.upperBoundaryViolated");
@@ -273,7 +238,7 @@ class AlarmController {
     evaluateAlarmState(sensor);
   }
 
-  bool isConfirmInConfirmDuration(
+  bool isSensorInConfirmDuration(
     sensorEnumAbsolute sensor,
   ) {
     if (confirmMap[sensor] != null) {
@@ -289,8 +254,6 @@ class AlarmController {
   }
 
   void endConfirmStatus(sensor, alarmStatus status) {
-    //for (alarmStatus status in alarmStatus.values) {
-    //if (_systemState.getAlarmStatePriority(sensor) == status.priority) {
     _systemState.setAlarmState(
       sensor,
       status.priority,
@@ -298,7 +261,5 @@ class AlarmController {
       status,
       status.color,
     );
-    //}
-    //}
   }
 }

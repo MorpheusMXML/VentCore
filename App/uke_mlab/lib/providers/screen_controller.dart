@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/data_models/model_absolute.dart';
 import 'package:uke_mlab/models/screen_element_models/smart_adjustment_model.dart';
-import 'package:uke_mlab/providers/alarm_controller.dart';
 import 'package:uke_mlab/providers/sound_controller.dart';
 import 'package:uke_mlab/scenarios/patient_scenario.dart';
 import 'package:uke_mlab/utilities/enums/scenarios.dart';
@@ -212,13 +211,13 @@ class ScreenController {
     if (boundaryAdjustmentMap.map[sensorKey]!.lowerCounter.value >= 3) {
       boundaryAdjustmentMap.map[sensorKey]!.lowerCounter.value = 0;
       boundaryAdjustmentMap.map[sensorKey]!.dateTimeLower = DateTime.now();
-      dataModel.setUpperAlarmBoundary(dataModel.lowerAlarmBound.value * 0.96);
+      dataModel.setLowerAlarmBoundary(dataModel.lowerAlarmBound.value * 0.97);
       boundaryAdjustmentMap.calculatePressable(sensorKey);
     }
     if (boundaryAdjustmentMap.map[sensorKey]!.upperCounter.value >= 3) {
       boundaryAdjustmentMap.map[sensorKey]!.upperCounter.value = 0;
       boundaryAdjustmentMap.map[sensorKey]!.dateTimeUpper = DateTime.now();
-      dataModel.setUpperAlarmBoundary(dataModel.upperAlarmBound.value * 1.04);
+      dataModel.setUpperAlarmBoundary(dataModel.upperAlarmBound.value * 1.03);
       boundaryAdjustmentMap.calculatePressable(sensorKey);
     }
   }

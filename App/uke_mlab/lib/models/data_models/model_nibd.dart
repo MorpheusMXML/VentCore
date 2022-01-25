@@ -37,10 +37,6 @@ class DataModelNIBD extends GetxController {
         graphData.removeAt(0);
       }
     }
-    // update only added/removed indexes instead of the whole chart (efficient)
-    // chartController?.updateDataSource(updatedDataIndexes: [for (int i = 0; i < graphData.length; i++) i]);
-
-    // TODO make "little" analysis here and call inform alarmManager to start evaluation
   }
 
   void resetDataModel() {

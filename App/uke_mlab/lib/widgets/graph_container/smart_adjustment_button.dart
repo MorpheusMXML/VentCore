@@ -42,7 +42,6 @@ class SmartAjdustButton extends StatelessWidget {
                               3
                           ? const Icon(
                               Icons.arrow_downward_rounded,
-                              size: 20,
                             )
                           : const SizedBox(
                               width: 20,
@@ -57,7 +56,6 @@ class SmartAjdustButton extends StatelessWidget {
                               3
                           ? const Icon(
                               Icons.arrow_upward_rounded,
-                              size: 20,
                             )
                           : const SizedBox(
                               width: 20,
