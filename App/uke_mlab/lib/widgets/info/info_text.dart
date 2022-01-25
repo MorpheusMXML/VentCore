@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// A widget that formats ventilation information.
 class InfoText extends StatelessWidget {
   final String type;
   final String value;
@@ -27,19 +28,16 @@ class InfoText extends StatelessWidget {
           Expanded(
             child: Text(
               type,
-              style: TextStyle(
-                  fontSize: 16, color: Theme.of(context).dividerColor),
+              style: TextStyle(fontSize: 16, color: Theme.of(context).dividerColor),
             ),
           ),
           Text(
             value,
-            style:
-                TextStyle(fontSize: 16, color: Theme.of(context).dividerColor),
+            style: TextStyle(fontSize: 16, color: Theme.of(context).dividerColor),
           ),
           Text(
             unit,
-            style:
-                TextStyle(fontSize: 10, color: Theme.of(context).dividerColor),
+            style: TextStyle(fontSize: 10, color: Theme.of(context).dividerColor),
           ),
         ],
       ),

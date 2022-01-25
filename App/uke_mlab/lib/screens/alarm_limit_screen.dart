@@ -23,15 +23,11 @@ class AlarmLimitScreen extends StatelessWidget {
       }
     }
 
-    monitorBoundarySet
-        .addAll(Get.find<SystemState>().absAlarmFieldModel.monitorSet);
-    monitorBoundarySet
-        .removeWhere((sensorKey) => graphBoundarySet.contains(sensorKey));
+    monitorBoundarySet.addAll(Get.find<SystemState>().absAlarmFieldModel.monitorSet);
+    monitorBoundarySet.removeWhere((sensorKey) => graphBoundarySet.contains(sensorKey));
 
-    ventilationBoundarySet
-        .addAll(Get.find<SystemState>().absAlarmFieldModel.ventilationSet);
-    ventilationBoundarySet
-        .removeWhere((sensorKey) => graphBoundarySet.contains(sensorKey));
+    ventilationBoundarySet.addAll(Get.find<SystemState>().absAlarmFieldModel.ventilationSet);
+    ventilationBoundarySet.removeWhere((sensorKey) => graphBoundarySet.contains(sensorKey));
 
     return Row(
       children: [
@@ -63,8 +59,7 @@ class AlarmLimitScreen extends StatelessWidget {
                           return SizedBox(
                             height: 160,
                             width: (Get.width - 24) / 3 / 2 + 15,
-                            child: ValueBoxTile.withHeadline(
-                                sensorAbsolute: sensorKey),
+                            child: ValueBoxTile.withHeadline(sensorAbsolute: sensorKey),
                           );
                         }).toList(),
                       ),
@@ -96,8 +91,7 @@ class AlarmLimitScreen extends StatelessWidget {
                           return SizedBox(
                             height: 160,
                             width: (Get.width - 24) / 3 / 2 + 15,
-                            child: ValueBoxTile.withHeadline(
-                                sensorAbsolute: sensorKey),
+                            child: ValueBoxTile.withHeadline(sensorAbsolute: sensorKey),
                           );
                         }).toList(),
                       ),
@@ -129,8 +123,7 @@ class AlarmLimitScreen extends StatelessWidget {
                           return SizedBox(
                             height: 160,
                             width: (Get.width - 24) / 3 / 2 + 15,
-                            child: ValueBoxTile.withHeadline(
-                                sensorAbsolute: sensorKey),
+                            child: ValueBoxTile.withHeadline(sensorAbsolute: sensorKey),
                           );
                         }).toList(),
                       ),
@@ -150,8 +143,7 @@ class AlarmLimitScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: const [
               Spacer(),
-              // TODO: maybe new file?
-              ExitButton()
+              ExitButton(),
             ],
           ),
         ),
@@ -159,153 +151,3 @@ class AlarmLimitScreen extends StatelessWidget {
     );
   }
 }
-
-
-// not well working graph boundaries with flexible GridView
-/*
- Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        // Tile Boundaries
-        Flexible(
-          flex: 3,
-          child: Column(
-            children: [
-              const Text(
-                "Tile Boundaries",
-                style: TextStyle(fontSize: 32),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  // Monitor Boundaries
-                  Column(
-                    children: [
-                      const Text(
-                        "Monitor Boundaries",
-                        style: TextStyle(fontSize: 24),
-                      ),
-                      ConstrainedBox(
-                        constraints: BoxConstraints(
-                          maxHeight: Get.height / 3.5,
-                          maxWidth: Get.width * (2 / 3) - 10,
-                        ),
-                        child: Row(
-                          children: monitorBoundarySet.map((sensorKey) {
-                            return ValueBoxTile.withHeadline(
-                                sensorAbsolute: sensorKey);
-                          }).toList(),
-                        ),
-                      ),
-                    ],
-                  ),
-                  // Ventilation Boundaries
-
-                  Column(
-                    children: [
-                      const Text(
-                        "Ventilation Boundaries",
-                        style: TextStyle(fontSize: 24),
-                      ),
-                      ConstrainedBox(
-                        constraints: BoxConstraints(
-                          maxHeight: Get.height / 3.5,
-                          maxWidth: Get.width * (1 / 3) - 10,
-                        ),
-                        child: Row(
-                          children: ventilationBoundarySet.map((sensorKey) {
-                            return ValueBoxTile.withHeadline(
-                                sensorAbsolute: sensorKey);
-                          }).toList(),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              )
-            ],
-          ),
-        ),
-
-        // Graph boundaries
-        Flexible(
-          flex: 3,
-          child: Column(
-            children: [
-              const Text(
-                "Graph Boundaries",
-                style: TextStyle(fontSize: 32),
-              ),
-              ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxHeight: Get.height / 3.5,
-                  maxWidth: Get.width / 2 - 10,
-                ),
-                child: GridView.count(
-                  crossAxisSpacing: 10,
-                  shrinkWrap: true,
-                  crossAxisCount: graphBoundarySet.length <= 5
-                      ? graphBoundarySet.length
-                      : (graphBoundarySet.length / 2).ceil(),
-                  children: graphBoundarySet.map((sensorkey) {
-                    return ValueBoxTile.withHeadline(sensorAbsolute: sensorkey);
-                  }).toList(),
-                ),
-              )
-            ],
-          ),
-        ),
-*/
-
-// Mudi old version:
-/*
-   return Row(
-      children: [
-        Flexible(child: Container()),
-        Flexible(
-          flex: 3,
-          child: Column(
-            children: [
-              const Text('Monitoring', style: TextStyle(fontSize: 32)),
-              GridView.count(
-                  shrinkWrap: true,
-                  crossAxisCount: 2,
-                  children: [
-                    sensorEnumAbsolute.hfAbsolute,
-                    sensorEnumAbsolute.spo2Absolute,
-                    sensorEnumAbsolute.tempAbsolute,
-                    sensorEnumAbsolute.sysAbsolute,
-                    sensorEnumAbsolute.co2Absolute,
-                    sensorEnumAbsolute.diaAbsolute,
-                    sensorEnumAbsolute.pulse,
-                  ]
-                      .map((sensor) =>
-                          ValueBoxTile.withHeadline(sensorAbsolute: sensor))
-                      .toList()),
-            ],
-          ),
-        ),
-        Flexible(child: Container()),
-        Flexible(
-          flex: 3,
-          child: Column(
-            children: [
-              const Text('Ventilation', style: TextStyle(fontSize: 32)),
-              GridView.count(
-                  shrinkWrap: true,
-                  crossAxisCount: 2,
-                  children: [
-                    sensorEnumAbsolute.hfAbsolute,
-                    sensorEnumAbsolute.mve,
-                    sensorEnumAbsolute.breathfrequency,
-                  ]
-                      .map((sensor) =>
-                          ValueBoxTile.withHeadline(sensorAbsolute: sensor))
-                      .toList()),
-            ],
-          ),
-        ),
-        Flexible(flex: 4, child: Container())
-      ],
-    );
-*/

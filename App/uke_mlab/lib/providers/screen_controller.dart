@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/data_models/model_absolute.dart';
-import 'package:uke_mlab/providers/alarm_controller.dart';
 import 'package:uke_mlab/providers/sound_controller.dart';
 import 'package:uke_mlab/scenarios/patient_scenario.dart';
 import 'package:uke_mlab/utilities/enums/scenarios.dart';
@@ -45,8 +44,8 @@ class ScreenController {
     switch (scenario) {
       case scenariosEnum.standardScenario:
         runningScenario = StandardScenario();
-        systemState.graphList.setStandardGraphs(ScenarioEnumDisplayedGraphs
-            .graphs[scenario] as Map<screenStatusEnum, List<sensorEnumGraph>>);
+        systemState.graphList.setStandardGraphs(
+            ScenarioEnumDisplayedGraphs.graphs[scenario] as Map<screenStatusEnum, List<sensorEnumGraph>>);
         runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
         break;
       case scenariosEnum.scenario1:
@@ -56,8 +55,8 @@ class ScreenController {
       case scenariosEnum.scenario3c:
       case scenariosEnum.scenario4:
         runningScenario = PatientScenario(scenarioType: scenario);
-        systemState.graphList.setStandardGraphs(ScenarioEnumDisplayedGraphs
-            .graphs[scenario] as Map<screenStatusEnum, List<sensorEnumGraph>>);
+        systemState.graphList.setStandardGraphs(
+            ScenarioEnumDisplayedGraphs.graphs[scenario] as Map<screenStatusEnum, List<sensorEnumGraph>>);
         runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
         break;
       default:

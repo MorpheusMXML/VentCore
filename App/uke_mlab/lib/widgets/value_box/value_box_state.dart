@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/data_models/model_absolute.dart';
 
-import 'package:uke_mlab/providers/screen_controller.dart';
 import 'package:uke_mlab/widgets/value_box/value_box_container.dart';
 import 'package:uke_mlab/widgets/value_box/value_box_settings.dart';
 
@@ -60,11 +59,7 @@ class ValueBoxState extends StatelessWidget {
                   optAbreviationTitle: optAbreviationTitle,
                 )
               : ConstrainedBox(
-                  constraints: BoxConstraints(
-                      maxWidth: (Get.width - 12 - 12) / (2 + 1) * 1 / 2 * 1 -
-                          8 -
-                          37 -
-                          37),
+                  constraints: BoxConstraints(maxWidth: (Get.width - 12 - 12) / (2 + 1) * 1 / 2 * 1 - 8 - 37 - 37),
                   child: ValueBoxContainer(
                     dataModelAbsolute: dataModel,
                     optAbreviationTitle: optAbreviationTitle,

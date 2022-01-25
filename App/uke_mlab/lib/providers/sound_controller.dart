@@ -77,7 +77,8 @@ class SoundController {
     stop();
     alarmPlayer = await alarmPlayerCache.play(_alarmSoundFiles[SoundIdentifier.defiLoading].toString(), volume: 0.5);
     alarmPlayer!.onPlayerCompletion.listen((event) async {
-      alarmPlayer = await alarmPlayerCache.loop(_alarmSoundFiles[SoundIdentifier.defiShockReady].toString(), volume: 0.6);
+      alarmPlayer =
+          await alarmPlayerCache.loop(_alarmSoundFiles[SoundIdentifier.defiShockReady].toString(), volume: 0.6);
     });
   }
 
@@ -110,11 +111,8 @@ class SoundController {
   }
 
   triggerSoundState(dynamic sensor, int priority) {
-    print(" \nSoundStateTriggered with $sensor");
-
     // TODO compare list with current system state (eg: is temperature still confirmed?)
     // first try to do so
-    print("soundList: ${soundList.toString()}");
     soundList.removeWhere((element) {
       // checks whether element is in systemState.absAlarmFieldModel.activeList or systemState.graphList.activeGraphAbsolutes,
       // if it is in neither => remove from soundList
@@ -131,7 +129,8 @@ class SoundController {
         }
         return true;
       } else {
-        throw Exception("soundList does contain an element which has neither sensorEnumAbsolute nor nonGraphAlarmEnum as type");
+        throw Exception(
+            "soundList does contain an element which has neither sensorEnumAbsolute nor nonGraphAlarmEnum as type");
       }
     });
 
@@ -162,7 +161,6 @@ class SoundController {
       }
       // TODO: analyze general alarms too
     }
-    print("playAlarm called by ${soundList[0].type.toString()} with prio $priority\n ");
     playAlarm(soundList[0].priority);
   }
 
@@ -273,7 +271,7 @@ class SoundController {
       );
     } else {
       timer = Timer.periodic(
-        Duration(microseconds: 50),
+        const Duration(microseconds: 50),
         ((timer) async {
           if (Platform.isAndroid) {
             ecgPlayer = await ecgPlayerCache.play(

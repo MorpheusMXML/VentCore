@@ -43,8 +43,6 @@ class ValueBoxSettings extends StatelessWidget {
       setFunction = screenController.setLowerBoundary;
     }
 
-    // TODO build sensibleCheck for boundaries (if potentially lower > upper => stop scrollability in one direction)
-    // would also help with the issue that in case the other ListWheelScrollView is not updated accordingly
     return ConstrainedBox(
         constraints: BoxConstraints(maxHeight: height, maxWidth: width),
         child: ListWheelScrollView(
@@ -59,9 +57,7 @@ class ValueBoxSettings extends StatelessWidget {
             magnification: 1.5,
             onSelectedItemChanged: (value) => setFunction(
                   dataModel,
-                  dataModel.floatRepresentation
-                      ? value.toDouble() / 10
-                      : value.toDouble(),
+                  dataModel.floatRepresentation ? value.toDouble() / 10 : value.toDouble(),
                 ),
             children: dataModel.floatRepresentation
                 ? [
