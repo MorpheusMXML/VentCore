@@ -17,19 +17,22 @@ class AlarmConfirmationButtonAll extends StatelessWidget {
     return Obx(
       () => ElevatedButton(
         style: ElevatedButton.styleFrom(
-          fixedSize: Size(AbsoluteAlarmFieldConst.buttonHeight.toDouble(), AbsoluteAlarmFieldConst.width * (3 / 8)),
+          fixedSize: Size(AbsoluteAlarmFieldConst.buttonHeight.toDouble(),
+              AbsoluteAlarmFieldConst.width * (3 / 8)),
           primary: const Color(0xffeeeeee),
           onPrimary: Colors.black,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(75),
           ),
         ),
-        onPressed: systemState.absAlarmFieldModel.activeList.isNotEmpty || systemState.graphList.activeGraphAbsolutes.isNotEmpty
+        onPressed: systemState.absAlarmFieldModel.activeList.isNotEmpty ||
+                systemState.graphList.activeGraphAbsolutes.isNotEmpty
             ? () => {confirmAllVisibleAlarms()}
             : null,
         child: const Center(
           child: Text(
             "Confirm all Alarms",
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
       ),
@@ -46,7 +49,9 @@ class AlarmConfirmationButtonAll extends StatelessWidget {
     for (var graphSensorKey in systemState.graphList.list) {
       sensorEnumAbsolute? sensorKey = SensorMapping.sensorMap[graphSensorKey];
       if (sensorKey != null &&
-          (systemState.alarmState[sensorKey]!["enum"] != alarmStatus.none || systemState.alarmState[sensorKey]!["enum"] != alarmStatus.confirmed)) {
+          (systemState.alarmState[sensorKey]!["enum"] != alarmStatus.none ||
+              systemState.alarmState[sensorKey]!["enum"] !=
+                  alarmStatus.confirmed)) {
         alarmController.triggerConfirm(sensorKey);
       }
     }

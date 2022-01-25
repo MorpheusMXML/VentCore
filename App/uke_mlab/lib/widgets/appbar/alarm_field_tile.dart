@@ -20,47 +20,50 @@ class AlarmFieldTile extends StatelessWidget {
       color: Colors.black,
       decoration: TextDecoration.none,
       fontSize: 18,
-      fontWeight: FontWeight.w300,
+      fontWeight: FontWeight.bold,
     );
 
-    return Container(
-      height: 50,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(7),
-        color: data.toColor(),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Flexible(
-            flex: 3,
-            child: Container(
-              padding: const EdgeInsets.only(left: 10),
-              child: Text(
-                DateFormat.Hms().format(data.time),
-                style: textStyle,
+    return Material(
+      child: Container(
+        height: 50,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(7),
+          color: data.toColor(),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Flexible(
+              flex: 3,
+              child: Container(
+                padding: const EdgeInsets.only(left: 10),
+                child: Text(
+                  DateFormat.Hms().format(data.time),
+                  style: textStyle,
+                ),
               ),
             ),
-          ),
-          Flexible(
-            flex: 9,
-            child: Center(
-              child: Text(
-                data.alarm.message,
-                style: textStyle,
+            Flexible(
+              flex: 9,
+              child: Center(
+                child: Text(
+                  data.alarm.message,
+                  style: textStyle,
+                ),
               ),
             ),
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              shape: const CircleBorder(),
-              primary: AppTheme.alarmNoneColor,
-              onPrimary: Theme.of(context).dividerColor,
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                shape: const CircleBorder(),
+                primary: AppTheme.alarmNoneColor,
+                onPrimary: Theme.of(context).dividerColor,
+              ),
+              onPressed: () =>
+                  Get.find<SystemState>().generalAlarms.removeAlarm(data.alarm),
+              child: const Icon(Icons.check),
             ),
-            onPressed: () => Get.find<SystemState>().generalAlarms.removeAlarm(data.alarm),
-            child: const Icon(Icons.check),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
