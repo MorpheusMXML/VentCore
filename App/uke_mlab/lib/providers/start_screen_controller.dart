@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-TODO: COMMENTARY
+//TODO: COMMENTARY
 class StartScreenController extends GetxController {
   RxString selectedString = ''.obs;
   RxDouble weightValue = 75.0.obs;

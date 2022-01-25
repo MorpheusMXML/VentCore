@@ -5,7 +5,7 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 //TODO: COMMENTARY
 enum scenariosEnum { standardScenario, scenario1, scenario2, scenario3a, scenario3b, scenario3c, scenario4 }
 
-//TODO: COMMENTARY
+/// This [extension] on [scenariosEnum] maps a path to the data file to its respective [scenariosEnum].
 extension ScenarioEnumPath on scenariosEnum {
   static const Map<scenariosEnum, String> attributes = {
     scenariosEnum.standardScenario: 'assets/jsons/standard_scenario.json',
@@ -126,7 +126,7 @@ extension ScenarioEnumDisplayedGraphs on scenariosEnum {
   Map<screenStatusEnum, List<sensorEnumGraph>> get scenarioGraphs => graphs[this]!;
 }
 
-//TODO: COMMENTARY
+/// This [extension] for [scenariosEnum] defines when a [nonGraphAlarmEnum] is supposed to be thrown.
 extension ScenarioEnumAttributes on scenariosEnum {
   static const Map<scenariosEnum, Map<sensorEnumGraph, Map<int, Map<String, dynamic>>>> nonMeasurableAlarms = {
     scenariosEnum.standardScenario: {
