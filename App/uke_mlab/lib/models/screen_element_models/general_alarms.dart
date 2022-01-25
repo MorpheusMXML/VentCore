@@ -5,6 +5,8 @@ import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/utilities/constants/statusbar_constants.dart';
 import 'package:uke_mlab/utilities/enums/non_graph_alarm.dart';
 import 'package:uke_mlab/widgets/appbar/alarm_list.dart';
+import 'package:uke_mlab/widgets/appbar/statusbar.dart';
+import 'package:uke_mlab/widgets/value_box/alarm_confirmation/alarm_confirmation_button_single_list.dart';
 
 /// This Class Implements the General Alarms that are displayed within the [StatusBar].
 /// Note that these Alarms are independent of the Patient Data and Shown Graphs and Absolute Values. These Alarms are General Notifications like O2 Bottle Empty etc.
@@ -53,10 +55,12 @@ class GeneralAlarms extends GetxController {
     return alarmList.indexWhere((element) => element.alarm == alarm) == -1;
   }
 
+  /// resets current [alarmList]
   void resetAlarms() {
     alarmList.clear();
   }
 
+  /// shows overlay for [AlarmList] and creates [entry]
   void showOverlay(BuildContext context) {
     double statusBarHeight = MediaQuery.of(context).padding.top;
 
@@ -73,6 +77,7 @@ class GeneralAlarms extends GetxController {
     listExpanded.value = true;
   }
 
+  /// hides (deletes) overlay of current [AlarmList] via closing [entry]
   void hideOverlay() {
     entry?.remove();
     entry = null;

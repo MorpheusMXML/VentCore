@@ -18,7 +18,11 @@ class IppvModel {
   final RxString selectedIPPVMode = 'IPPV'.obs;
 
   IppvModel() {
-    ippvValues = {'Freq.': defaultIppvValues['Freq.']!.obs, 'Vt': defaultIppvValues['Vt']!.obs, 'PEEP': defaultIppvValues['PEEP']!.obs};
+    ippvValues = {
+      'Freq.': defaultIppvValues['Freq.']!.obs,
+      'Vt': defaultIppvValues['Vt']!.obs,
+      'PEEP': defaultIppvValues['PEEP']!.obs
+    };
   }
 
   /// updates the current [ippvValues]
@@ -40,12 +44,14 @@ class IppvModel {
           newValue += 5 * value;
           break;
         default:
-          throw Exception("Patient type not valid (most likely patientTypeEnum.none) during updateIPPVValue");
+          throw Exception(
+              "Patient type not valid (most likely patientTypeEnum.none) during updateIPPVValue");
       }
     } else if (name == "PEEP") {
       newValue += 5 * value;
     } else {
-      throw Exception("name was $name during updateIPPVValue which is no valid IPPv name");
+      throw Exception(
+          "name was $name during updateIPPVValue which is no valid IPPv name");
     }
 
     ippvValues[name]!.value = newValue;
@@ -56,15 +62,21 @@ class IppvModel {
     }
   }
 
+  /// updates current [DataModelAbsolute] for breath frequency and mve on change of ventilation value in [ippvValues]
   void updateVentValues() {
-    Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.breathfrequency.name).updateValue(ippvValues['Freq.']!.value.toDouble());
+    Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.breathfrequency.name)
+        .updateValue(ippvValues['Freq.']!.value.toDouble());
     updateMVe();
   }
 
+  /// updates current [DataModelAbsolute] mve on change of Vt (tidal volume) value in [ippvValues]
   void updateMVe() {
-    Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.mve.name).updateValue(((ippvValues['Freq.']!.value * (ippvValues['Vt']!.value / 1000))).toDouble());
+    Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.mve.name).updateValue(
+        ((ippvValues['Freq.']!.value * (ippvValues['Vt']!.value / 1000)))
+            .toDouble());
   }
 
+  /// resets [ippvValues] to default values
   resetIPPV() {
     ippvValues['Freq.']!.value = defaultIppvValues['Freq.']!;
     ippvValues['Vt']!.value = defaultIppvValues['Vt']!;
