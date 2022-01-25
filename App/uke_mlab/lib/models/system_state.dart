@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:uke_mlab/models/data_models/model_absolute.dart';
 
 import 'package:uke_mlab/models/screen_element_models/general_alarms.dart';
 import 'package:uke_mlab/models/screen_element_models/absolute_alarm_field_model.dart';
@@ -99,6 +100,9 @@ class SystemState extends GetxController {
   /// overwrites [selectedToggleView]s value with [newToggleView] for usage on switch between
   /// monitoring, ventilation and defibrillation representation in [MainScreen]
   void setSelectedToggleView(List<bool> newToggleView) {
+    for (var sensor in sensorEnumAbsolute.values) {
+      Get.find<DataModelAbsolute>(tag: sensor.name).hideOverlay();
+    }
     selectedToggleView.value = newToggleView;
     update();
   }
