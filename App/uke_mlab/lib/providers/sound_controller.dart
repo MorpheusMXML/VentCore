@@ -309,7 +309,7 @@ class SoundController {
   ///Duration duration = Duration(milliseconds: milliesTillNext);
   ///```
   saturationHfBeep({required int bpm, required int spO2}) async {
-    const double volume = 0.3;
+    const double volume = 0.1;
     String ecgSound = _ecgSoundFiles[SoundIdentifier.hFnormal].toString();
     //ecgPlayerRet = await ecgPlayer.play(ecgSound, volume: 0);
 
@@ -365,30 +365,25 @@ class SoundController {
         }),
       );
     } else {
-      timer = Timer.periodic(
-        const Duration(microseconds: 50),
-        ((timer) async {
-          if (Platform.isAndroid) {
-            ecgPlayer = await ecgPlayerCache.play(
-              _ecgSoundFiles[SoundIdentifier.hfzero].toString(),
-              volume: volume,
-              mode: PlayerMode.LOW_LATENCY,
-            );
-            // since stayAwake is not implemented on macOs, we like to check
-          } else if (Platform.isIOS) {
-            ecgPlayer = await ecgPlayerCache.play(
-              _ecgSoundFiles[SoundIdentifier.hfzero].toString(),
-              volume: volume,
-              mode: PlayerMode.LOW_LATENCY,
-            );
-          }
+      if (Platform.isAndroid) {
+        ecgPlayer = await ecgPlayerCache.play(
+          _ecgSoundFiles[SoundIdentifier.hfzero].toString(),
+          volume: volume,
+          mode: PlayerMode.LOW_LATENCY,
+        );
+        // since stayAwake is not implemented on macOs, we like to check
+      } else if (Platform.isIOS) {
+        ecgPlayer = await ecgPlayerCache.play(
+          _ecgSoundFiles[SoundIdentifier.hfzero].toString(),
+          volume: volume,
+          mode: PlayerMode.LOW_LATENCY,
+        );
+      }
 
-          // fix for double timer after hot reload, cancels running timer 1 second after a reload of method should have occoured
-          if (cancelTimerBeep != null) {
-            cancelBeepTimer(Duration(seconds: getDataTimerDuration + 1));
-          }
-        }),
-      );
+      // fix for double timer after hot reload, cancels running timer 1 second after a reload of method should have occoured
+      if (cancelTimerBeep != null) {
+        cancelBeepTimer(Duration(seconds: getDataTimerDuration + 1));
+      }
     }
   }
 

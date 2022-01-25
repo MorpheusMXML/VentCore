@@ -32,8 +32,9 @@ class StatusBar extends StatelessWidget {
               //DropDown Menu (AlarmExpansionTile)
               Flexible(
                 flex: StatusBarConstants.flexBarAlarmFieldTile,
-                child: Obx(() =>
-                    generalAlarms.alarmList.isEmpty ? Container() : AlarmFieldTile(data: generalAlarms.alarmList[0])),
+                child: Obx(() => generalAlarms.alarmList.isEmpty
+                    ? Container()
+                    : AlarmFieldTile(data: generalAlarms.alarmList[0])),
               ),
               const SizedBox(
                 width: StatusBarConstants.horizontalMargin * 2,
@@ -60,7 +61,11 @@ class StatusBar extends StatelessWidget {
         // O2 bottly display
         Flexible(
           flex: StatusBarConstants.flexBarO2BottleArea,
-          child: Center(child: SvgPicture.asset('assets/icons/OxygenBottle.svg', height: 20)),
+          child: Center(
+              child: SvgPicture.asset(
+            'assets/icons/OxygenBottle.svg',
+            height: 30,
+          )),
         ),
         Flexible(
           flex: StatusBarConstants.flexMuteECGButtonArea,
