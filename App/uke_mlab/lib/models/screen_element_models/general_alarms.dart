@@ -6,7 +6,6 @@ import 'package:uke_mlab/utilities/constants/statusbar_constants.dart';
 import 'package:uke_mlab/utilities/enums/non_graph_alarm.dart';
 import 'package:uke_mlab/widgets/appbar/alarm_list.dart';
 import 'package:uke_mlab/widgets/appbar/statusbar.dart';
-import 'package:uke_mlab/widgets/value_box/alarm_confirmation/alarm_confirmation_button_single_list.dart';
 
 /// This Class Implements the General Alarms that are displayed within the [StatusBar].
 /// Note that these Alarms are independent of the Patient Data and Shown Graphs and Absolute Values. These Alarms are General Notifications like O2 Bottle Empty etc.
