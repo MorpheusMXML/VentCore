@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/start_screen_controller.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 
 /// Widget for StartScreen Buttons
 /// [name] Buttontext
@@ -19,6 +20,7 @@ class PatientTypeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     final startScreenController = Get.find<StartScreenController>();
 
     return Container(
@@ -26,10 +28,14 @@ class PatientTypeButton extends StatelessWidget {
       child: Obx(
         () => ElevatedButton(
           style: ElevatedButton.styleFrom(
-            minimumSize: Size(800 / MediaQuery.of(context).devicePixelRatio, 200 / MediaQuery.of(context).devicePixelRatio),
-            primary: startScreenController.selectedString.value == name ? const Color(0xFF808B96) : const Color(0xFFEEEEEE),
-            onPrimary: Colors.black,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),
+            minimumSize: Size(800 / MediaQuery.of(context).devicePixelRatio,
+                200 / MediaQuery.of(context).devicePixelRatio),
+            primary: startScreenController.selectedString.value == name
+                ? const Color(0xFF808B96)
+                : const Color(0xFFEEEEEE),
+            onPrimary: theme.inverseContrastColor,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),
           ),
 
           ///get weight and height for chosen preset
@@ -58,7 +64,8 @@ class PatientTypeButton extends StatelessWidget {
                   children: [
                     Text(
                       name,
-                      style: const TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          fontSize: 35, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),

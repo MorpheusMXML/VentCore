@@ -22,53 +22,44 @@ class DefibrillationStats extends StatelessWidget {
         child: Column(
           children: [
             Row(
-              children: const [
+              children: [
                 Expanded(
                     child: Text(
                   'Last Shock',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 18),
+                  style: theme.defiStatsHeadlineTextStyle,
                 )),
                 Expanded(
                     child: Text(
                   '# Shocks',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 18),
+                  style: theme.defiStatsHeadlineTextStyle,
                 )),
                 Expanded(
                     child: Text(
                   'Timer',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 18),
+                  style: theme.defiStatsHeadlineTextStyle,
                 )),
               ],
             ),
             Row(
               children: [
                 Expanded(
-                    child: Obx(() =>
-                        Text(defibrillationController.lastTimerString.value,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            )))),
+                    child: Obx(() => Text(
+                        defibrillationController.lastTimerString.value,
+                        textAlign: TextAlign.center,
+                        style: theme.defiStatsValueTextStyle))),
                 Expanded(
-                    child: Obx(
-                        () => Text('${defibrillationController.numberOfShocks}',
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            )))),
+                    child: Obx(() => Text(
+                        '${defibrillationController.numberOfShocks}',
+                        textAlign: TextAlign.center,
+                        style: theme.defiStatsValueTextStyle))),
                 Expanded(
-                    child: Obx(() =>
-                        Text(defibrillationController.startTimerString.value,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            )))),
+                    child: Obx(() => Text(
+                        defibrillationController.startTimerString.value,
+                        textAlign: TextAlign.center,
+                        style: theme.defiStatsValueTextStyle))),
               ],
             ),
           ],

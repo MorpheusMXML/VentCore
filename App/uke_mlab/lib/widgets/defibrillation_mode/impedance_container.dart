@@ -17,7 +17,7 @@ class ImpedanceContainer extends StatelessWidget {
         children: [
           Text(
             "Impedance",
-            style: TextStyle(color: theme.contrastColor),
+            style: theme.impedanceTextStyle,
           ),
           Row(
             children: const [

@@ -67,10 +67,10 @@ class PopupSlider extends StatelessWidget {
             child: Obx(
               () => Text(
                 '${value.value.round().toString()}$unit',
-                style: const TextStyle(
+                style: TextStyle(
                     fontSize: 21,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black),
+                    color: theme.inverseContrastColor),
               ),
             ),
           ),

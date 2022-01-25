@@ -8,13 +8,16 @@ class MetronomeSwitch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final DefibrillationController defibrillationController = Get.find<DefibrillationController>();
+    final DefibrillationController defibrillationController =
+        Get.find<DefibrillationController>();
 
-    return Obx(() => Switch(
-          value: defibrillationController.metronomeOn.value,
-          onChanged: (changed) {
-            defibrillationController.toggleMetronome(changed);
-          },
-        ));
+    return Obx(
+      () => Switch(
+        value: defibrillationController.metronomeOn.value,
+        onChanged: (changed) {
+          defibrillationController.toggleMetronome(changed);
+        },
+      ),
+    );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/providers/alarm_controller.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/utilities/constants/absolute_alarm_field_constants.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/utilities/enums/alarm_status.dart';
@@ -12,19 +13,22 @@ class AlarmConfirmationButtonAll extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     SystemState systemState = Get.find<SystemState>();
 
     return Obx(
       () => ElevatedButton(
         style: ElevatedButton.styleFrom(
-          fixedSize: Size(AbsoluteAlarmFieldConst.buttonHeight.toDouble(), AbsoluteAlarmFieldConst.width * (3 / 8)),
+          fixedSize: Size(AbsoluteAlarmFieldConst.buttonHeight.toDouble(),
+              AbsoluteAlarmFieldConst.width * (3 / 8)),
           primary: const Color(0xffeeeeee),
-          onPrimary: Colors.black,
+          onPrimary: theme.inverseContrastColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(75),
           ),
         ),
-        onPressed: systemState.absAlarmFieldModel.activeList.isNotEmpty || systemState.graphList.activeGraphAbsolutes.isNotEmpty
+        onPressed: systemState.absAlarmFieldModel.activeList.isNotEmpty ||
+                systemState.graphList.activeGraphAbsolutes.isNotEmpty
             ? () => {confirmAllVisibleAlarms()}
             : null,
         child: const Center(
@@ -46,7 +50,9 @@ class AlarmConfirmationButtonAll extends StatelessWidget {
     for (var graphSensorKey in systemState.graphList.list) {
       sensorEnumAbsolute? sensorKey = SensorMapping.sensorMap[graphSensorKey];
       if (sensorKey != null &&
-          (systemState.alarmState[sensorKey]!["enum"] != alarmStatus.none || systemState.alarmState[sensorKey]!["enum"] != alarmStatus.confirmed)) {
+          (systemState.alarmState[sensorKey]!["enum"] != alarmStatus.none ||
+              systemState.alarmState[sensorKey]!["enum"] !=
+                  alarmStatus.confirmed)) {
         alarmController.triggerConfirm(sensorKey);
       }
     }

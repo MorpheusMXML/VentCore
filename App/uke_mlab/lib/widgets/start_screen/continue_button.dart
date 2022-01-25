@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/start_screen_controller.dart';
 import 'package:uke_mlab/providers/screen_controller.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 
 // TODO: COMMENTARY
 class ContinueButton extends StatelessWidget {
@@ -11,6 +12,7 @@ class ContinueButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     final startScreenController = Get.find<StartScreenController>();
     final screenController = Get.find<ScreenController>();
 
@@ -23,12 +25,16 @@ class ContinueButton extends StatelessWidget {
             fixedSize: const Size(200, 60),
             onSurface: const Color(0xffeeeeee),
             primary: const Color(0xffeeeeee),
-            onPrimary: Colors.black,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),
+            onPrimary: theme.inverseContrastColor,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),
           ),
-          onPressed:
-              startScreenController.selectedString.value != '' ? () => screenController.continueButton(startScreenController.selectedString.value) : null,
-          child: const Text('Continue', style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+          onPressed: startScreenController.selectedString.value != ''
+              ? () => screenController
+                  .continueButton(startScreenController.selectedString.value)
+              : null,
+          child: const Text('Continue',
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
         ),
       ),
     );

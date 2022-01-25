@@ -25,7 +25,7 @@ class AlarmConfirmButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(50),
           ),
           fixedSize: const Size(20, 20),
-          primary: theme.primarySwatch[10],
+          primary: theme.primarySwatch[20],
           onPrimary: theme.contrastColor,
         ),
         onPressed: () => {alarmController.triggerConfirm(sensorKey)},
