@@ -1,5 +1,5 @@
-# M-Lab UKE Project: VentCore
+# VentCore - M-Lab 21/22 Project
 
-This repository provides the [Application](./App), as well as our deliverables for the course [Deliverables](./Deliverables) for the M-Lab UKE project.
+## This is the Course Repository for the M-Lab Project 'VentCore'. It was developed during the Winter Term 21/22
 
-For a short overview of the Application, please read the [Application README.md](./App/uke_mlab/README.md)
+### To get a detailed Overview on how to use the App, which features are available and how this app was developed please follow the Instructions provided in the Main [Readme](./App/uke_mlab/README.md)
