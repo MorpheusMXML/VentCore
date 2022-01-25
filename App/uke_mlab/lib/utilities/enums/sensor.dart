@@ -156,10 +156,9 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
       'floatRepresentation': false,
       'boundaryDeviation': 0.1,
       'upperBound': {
-        'adult':
-            150, // spreadsheet says upper boundary not defined, 150 seems a good compromise
-        'child': 150,
-        'infant': 150,
+        'adult': 100,
+        'child': 100,
+        'infant': 100,
       },
       'lowerBound': {
         'adult': 92,
