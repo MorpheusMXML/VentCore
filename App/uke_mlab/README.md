@@ -5,12 +5,8 @@
 
 [![Commits][commit-shield]][commit-url]
 [![Issues][issues-shield]][issues-url]
-[![Team][team-shield]][team-url]
-[![Website][website-shield]][website-url]
 
 </div>
-
-
 
 <!-- PROJECT LOGO -->
 <br />
@@ -18,8 +14,6 @@
   <a href="https://git.informatik.uni-hamburg.de/mast/teaching/mlab/wt202122/uke">
     <img src="./ReadMeFiles/LogoVentCore.png" alt="Logo">
   </a>
-
-
 
 <!-- DESCRIPTION -->
 <h2>UKE M-Lab </h2>
@@ -72,8 +66,6 @@
 
 ***
 
-
-
 <!-- ABOUT THE PROJECT -->
 <div align="justify" style="font-family:Jura">
 
@@ -101,9 +93,6 @@ As mentioned, this is a Flutter Tablet application written in **dart**. For the 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ***
-
-
-
 
 <!-- GETTING STARTED -->
 # Getting Started
@@ -134,7 +123,9 @@ Since this App was designed with a requirement of a 10" Inch tablet screen with 
 iPad Pro (3rd generation)
 iOS Version 15.2
 ```
+
 + **Windows**
+
 ```sh
 Pixel C 
 Android Version 11.0 x86
@@ -143,8 +134,11 @@ Android Version 11.0 x86
 ## Installation
 
 1. Clone the repository.
+
     ```sh
+
    git clone https://git.informatik.uni-hamburg.de/mast/teaching/mlab/wt202122/uke
+
    ```
 
 2. Start the emulator you want to use. [Device Recommendations](#device)
@@ -158,8 +152,6 @@ Android Version 11.0 x86
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ***
-
-
 
 <!-- USAGE EXAMPLES -->
 # Usage
@@ -183,8 +175,6 @@ This prototype works as showcase for demonstrating and evaluating of a future 3-
 
 ***
 
-
-
 <!-- DESIGN -->
 # Design
 
@@ -199,37 +189,30 @@ Also have a look at our StyleGuide for the colors used in the prototype.
 
 ***
 
-
-
 <!-- ALARM HANDLING -->
 # Alarm Handling
 For a complete overview, please refer to our [AlarmLogic.md](TODO LINK)
-
-
 
 ### Priotising alarms in categories
 Parameter alarms are prioritised according to the severity of their deviations from the set alarm limits. The `SensorDeviation` is defined in percent for each parameter.
 
 #### Example:
-  ```
+
+  ```shell
+
   Parameter: Heartfrequency
   Upper Limit: 120
   SensorDeviation: 0.1
   Middle Alert: 120 < currentValue < 131
   High Alert: currentValue >131
+
   ```
-
-
 
 ### Auditory alarm according to prioritisation
 Alarms are displayed audibly in descending order of priority.
 ![Table Audio Priorities](./ReadMeFiles/table-audio-priority.png)
 
-
-
 ### Auditory Behaviour of Alarms
-
-
 
 ## General Rules
 
@@ -237,8 +220,6 @@ Alarms are displayed audibly in descending order of priority.
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ***
-
-
 
 <!-- DATA PROCESSING -->
 # Data Processing
@@ -289,8 +270,6 @@ With a combination of the random walk and the clean, easily loopable data we rec
 <!-- TODO: Add Link-->
 Please refer to our [Code Documentation]().
 
-
-
 <!-- KNOWN ISSUES -->
 # Known Issues
 
@@ -298,8 +277,6 @@ Please refer to our [Code Documentation]().
 2. Issue 3
 
 ***
-
-
 
 <!-- CONTACT -->
 # Contact
@@ -316,12 +293,9 @@ Tim Puhlfürß - [<tim.puhlfuerss@uni-hamburg.de>](mailto:tim.puhlfuerss@uni-ham
 - Arne Struck - [arne.struck@studium.uni-hamburg.de](mailto:arne.struck@studium.uni-hamburg.de)
 - Mudassar Zahid - [mudassar.zahid@studium.uni-hamburg.de](mailto:mudassar.zahid@studium.uni-hamburg.de) 
 
-
 Project Link: [UHH Informatics GitLab EE ](https://git.informatik.uni-hamburg.de/mast/teaching/mlab/wt202122/uke)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
 
 <!-- ACKNOWLEDGMENTS -->
 # Acknowledgments
@@ -336,20 +310,12 @@ And also for providing simulation / real patient data and helping with DataGener
 <p align="right">(<a href="#top">back to top</a>)</p>
 </div>
 
-
-
 <!-- MARKDOWN LINKS & IMAGES -->
-[issues-shield]: https://img.shields.io/badge/Issues-X%20Closed-orange?style=for-the-badge
+[issues-shield]: https://img.shields.io/badge/issues-162-brightgreen
 [issues-url]: https://git.informatik.uni-hamburg.de/mast/teaching/mlab/wt202122/uke/-/issues
 
-[commit-shield]:https://img.shields.io/badge/Commits-Number-success?style=for-the-badge
+[commit-shield]:https://img.shields.io/badge/commits-1010-orange
 [commit-url]:https://git.informatik.uni-hamburg.de/mast/teaching/mlab/wt202122/uke/-/commits/main
-
-[team-shield]:https://img.shields.io/badge/Contact-Team-blueviolet?style=for-the-badge
-[team-url]:#contact
-
-[website-shield]:https://img.shields.io/badge/Website-VentCore-informational?style=for-the-badge
-[website-url]:./README.md
 
 [product-screenshot]: ./ReadMeFiles/Screenshots/ventilation2-black.png
 [monitoring]: ./ReadMeFiles/Screenshots/monitoring.png
