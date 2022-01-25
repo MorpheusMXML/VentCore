@@ -4,26 +4,18 @@ import 'package:uke_mlab/utilities/enums/screen_status.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 //TODO: COMMENTARY
-enum scenariosEnum {
-  standardScenario,
-  scenario1,
-  scenario2,
-  scenario3a,
-  scenario3b,
-  scenario3c,
-  scenario4
-}
+enum scenariosEnum { standardScenario, scenario1, scenario2, scenario3a, scenario3b, scenario3c, scenario4 }
 
 /// This [extension] on [scenariosEnum] maps a path to the data file to its respective [scenariosEnum].
 extension ScenarioEnumPath on scenariosEnum {
   static const Map<scenariosEnum, String> attributes = {
     scenariosEnum.standardScenario: 'assets/jsons/standard_scenario.json',
-    scenariosEnum.scenario1: 'assets/jsons/scenario1_data.json',
-    scenariosEnum.scenario2: 'assets/jsons/scenario2_data.json',
-    scenariosEnum.scenario3a: 'assets/jsons/scenario3_a_data.json',
-    scenariosEnum.scenario3b: 'assets/jsons/scenario3_b_data.json',
-    scenariosEnum.scenario3c: 'assets/jsons/scenario3_c_data.json',
-    scenariosEnum.scenario4: 'assets/jsons/scenario4_data.json'
+    scenariosEnum.scenario1: 'assets/jsons/scenario1.json',
+    scenariosEnum.scenario2: 'assets/jsons/scenario2.json',
+    scenariosEnum.scenario3a: 'assets/jsons/scenario3_a.json',
+    scenariosEnum.scenario3b: 'assets/jsons/scenario3_b.json',
+    scenariosEnum.scenario3c: 'assets/jsons/scenario3_c.json',
+    scenariosEnum.scenario4: 'assets/jsons/scenario4.json'
   };
 
   String get scenarioPath => attributes[this]!;
@@ -31,8 +23,7 @@ extension ScenarioEnumPath on scenariosEnum {
 
 //TODO: COMMENTARY
 extension ScenarioEnumDisplayedGraphs on scenariosEnum {
-  static const Map<scenariosEnum, Map<screenStatusEnum, List<sensorEnumGraph>>>
-      graphs = {
+  static const Map<scenariosEnum, Map<screenStatusEnum, List<sensorEnumGraph>>> graphs = {
     scenariosEnum.standardScenario: {
       screenStatusEnum.monitorScreen: <sensorEnumGraph>[
         sensorEnumGraph.ecgCh2, // medical standard ecg channel is channel 2
@@ -133,15 +124,12 @@ extension ScenarioEnumDisplayedGraphs on scenariosEnum {
       ],
     }
   };
-  Map<screenStatusEnum, List<sensorEnumGraph>> get scenarioGraphs =>
-      graphs[this]!;
+  Map<screenStatusEnum, List<sensorEnumGraph>> get scenarioGraphs => graphs[this]!;
 }
 
 /// This [extension] for [scenariosEnum] defines when a [nonGraphAlarmEnum] is supposed to be thrown.
 extension ScenarioEnumAttributes on scenariosEnum {
-  static Map<scenariosEnum,
-          Map<sensorEnumGraph, Map<int, Map<String, dynamic>>>>
-      nonMeasurableAlarms = {
+  static Map<scenariosEnum, Map<sensorEnumGraph, Map<int, Map<String, dynamic>>>> nonMeasurableAlarms = {
     scenariosEnum.standardScenario: {
       sensorEnumGraph.pleth: {
         600: {
@@ -251,6 +239,5 @@ extension ScenarioEnumAttributes on scenariosEnum {
       }
     },
   };
-  Map<sensorEnumGraph, Map<int, Map<String, dynamic>>> get scenarioMap =>
-      nonMeasurableAlarms[this]!;
+  Map<sensorEnumGraph, Map<int, Map<String, dynamic>>> get scenarioMap => nonMeasurableAlarms[this]!;
 }
