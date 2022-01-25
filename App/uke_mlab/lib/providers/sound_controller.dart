@@ -38,6 +38,7 @@ class SoundController {
   Timer? cancelTimerBeep;
   final int getDataTimerDuration = 5;
   final SystemState systemState = Get.find<SystemState>();
+  final double alarmVolume = 0.3;
 
   AudioPlayer? alarmPlayer;
   AudioPlayer? ecgPlayer;
@@ -75,16 +76,21 @@ class SoundController {
 
   ///Plays the SoundAlarm fot the AlarmType specified with [Enum soundIdentifier].
   play(Enum soundIdentifier) async {
-    alarmPlayer = await alarmPlayerCache.play(_alarmSoundFiles[soundIdentifier].toString());
+    alarmPlayer = await alarmPlayerCache
+        .play(_alarmSoundFiles[soundIdentifier].toString());
   }
 
   /// Stops all currently active [AudioPlayer], then starts the Loading Sound for the Defi.
   /// When this Loading Sound is completed, the Warning for the Charged and armed Defibrillator is loopes.
   playDefiLoadSound() async {
     stop();
-    defiPlayer = await defiPlayerCache.play(_alarmSoundFiles[SoundIdentifier.defiLoading].toString(), volume: 0.5);
+    defiPlayer = await defiPlayerCache.play(
+        _alarmSoundFiles[SoundIdentifier.defiLoading].toString(),
+        volume: alarmVolume);
     defiPlayer!.onPlayerCompletion.listen((event) async {
-      defiPlayer = await defiPlayerCache.loop(_alarmSoundFiles[SoundIdentifier.defiShockReady].toString(), volume: 0.6);
+      defiPlayer = await defiPlayerCache.loop(
+          _alarmSoundFiles[SoundIdentifier.defiShockReady].toString(),
+          volume: alarmVolume + 0.1);
     });
   }
 
@@ -132,8 +138,10 @@ class SoundController {
       // checks whether element is in systemState.absAlarmFieldModel.activeList or systemState.graphList.activeGraphAbsolutes,
       // if it is in neither => remove from soundList
       if (element.type is sensorEnumAbsolute) {
-        return !systemState.absAlarmFieldModel.activeList.contains(element.type as sensorEnumAbsolute) &&
-            !systemState.graphList.activeGraphAbsolutes.contains(element.type as sensorEnumAbsolute);
+        return !systemState.absAlarmFieldModel.activeList
+                .contains(element.type as sensorEnumAbsolute) &&
+            !systemState.graphList.activeGraphAbsolutes
+                .contains(element.type as sensorEnumAbsolute);
         // could be nicer
         // checks whether element is in generalAlarms, if so returns false => not removed from soundList
       } else if (element.type is nonGraphAlarmEnum) {
@@ -144,7 +152,8 @@ class SoundController {
         }
         return true;
       } else {
-        throw Exception("soundList does contain an element which has neither sensorEnumAbsolute nor nonGraphAlarmEnum as type");
+        throw Exception(
+            "soundList does contain an element which has neither sensorEnumAbsolute nor nonGraphAlarmEnum as type");
       }
     });
 
@@ -179,34 +188,39 @@ class SoundController {
 
   ///Plays right [alarmsound] with right [priority].
   playAlarm(int priority) {
-    const double alarmVolume = 0.3;
     int alarmSeconds = 0;
     String alarmSound = "noalarm";
     if (_alarmTypes[0] && _alarmTypes[1]) {
       //Play Monitor+Vent Sounds.
       if (priority == alarmStatus.high.priority) {
-        alarmSound = _alarmSoundFiles[SoundIdentifier.monitoringHighAlert].toString();
+        alarmSound =
+            _alarmSoundFiles[SoundIdentifier.monitoringHighAlert].toString();
         alarmSeconds = 2;
       } else if (priority == alarmStatus.middle.priority) {
-        alarmSound = _alarmSoundFiles[SoundIdentifier.monitoringMediumAlert].toString();
+        alarmSound =
+            _alarmSoundFiles[SoundIdentifier.monitoringMediumAlert].toString();
         alarmSeconds = 5;
       }
     } else if (_alarmTypes[1]) {
       //Play Vent Alarm.
       if (priority == alarmStatus.high.priority) {
-        alarmSound = _alarmSoundFiles[SoundIdentifier.ventilationHighAlert].toString();
+        alarmSound =
+            _alarmSoundFiles[SoundIdentifier.ventilationHighAlert].toString();
         alarmSeconds = 2;
       } else if (priority == alarmStatus.middle.priority) {
-        alarmSound = _alarmSoundFiles[SoundIdentifier.ventilationMediumAlert].toString();
+        alarmSound =
+            _alarmSoundFiles[SoundIdentifier.ventilationMediumAlert].toString();
         alarmSeconds = 5;
       }
     } else {
       //Play Monitor Alarm.
       if (priority == alarmStatus.high.priority) {
-        alarmSound = _alarmSoundFiles[SoundIdentifier.monitoringHighAlert].toString();
+        alarmSound =
+            _alarmSoundFiles[SoundIdentifier.monitoringHighAlert].toString();
         alarmSeconds = 2;
       } else if (priority == alarmStatus.middle.priority) {
-        alarmSound = _alarmSoundFiles[SoundIdentifier.monitoringMediumAlert].toString();
+        alarmSound =
+            _alarmSoundFiles[SoundIdentifier.monitoringMediumAlert].toString();
         alarmSeconds = 5;
       }
     }
@@ -218,7 +232,8 @@ class SoundController {
       return;
     }
     //Stop the [alarmTimer], if [priority] is [alarmStatus.none] or no [alarmSound] is choosen.
-    else if (alarmSound == "noalarm" || priority <= alarmStatus.confirmed.priority) {
+    else if (alarmSound == "noalarm" ||
+        priority <= alarmStatus.confirmed.priority) {
       if (alarmPlayer != null) {
         alarmPlayer!.stop();
         alarmPlayer!.dispose();
@@ -252,7 +267,8 @@ class SoundController {
         //  alarmSound,
         //  volume: alarmVolume,
         //);
-        alarmTimer = Timer.periodic(Duration(seconds: alarmSeconds), ((alarmTimer) async {
+        alarmTimer = Timer.periodic(Duration(seconds: alarmSeconds),
+            ((alarmTimer) async {
           if (Platform.isAndroid) {
             alarmPlayer = await alarmPlayerCache.play(
               alarmSound,
@@ -390,10 +406,15 @@ class SoundController {
   /// This Happens only every 3 Seconds to take it easy on the performance.
   void startSaturationHFSound() {
     ecgSoundActive.value = true;
-    DataModelAbsolute hfModel = Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.hfAbsolute.name);
-    DataModelAbsolute spo2Model = Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.spo2Absolute.name);
-    getDataTimer ??= Timer.periodic(Duration(seconds: getDataTimerDuration), (timer) {
-      saturationHfBeep(bpm: hfModel.absoluteValue.value.toInt(), spO2: spo2Model.absoluteValue.value.toInt());
+    DataModelAbsolute hfModel =
+        Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.hfAbsolute.name);
+    DataModelAbsolute spo2Model =
+        Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.spo2Absolute.name);
+    getDataTimer ??=
+        Timer.periodic(Duration(seconds: getDataTimerDuration), (timer) {
+      saturationHfBeep(
+          bpm: hfModel.absoluteValue.value.toInt(),
+          spO2: spo2Model.absoluteValue.value.toInt());
     });
   }
 }
