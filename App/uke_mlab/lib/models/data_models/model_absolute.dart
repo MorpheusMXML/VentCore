@@ -40,7 +40,7 @@ class DataModelAbsolute extends GetxController {
   bool floatRepresentation = false;
 
   /// contains information whether the alarm boundary settings of the corresponding [ValueBoxContainer] are expanded
-  final RxBool expanded = false.obs;
+  bool expanded = false;
 
   /// representation of the upper alarm bound for the corresponding sensor
   final RxDouble upperAlarmBound = 0.0.obs;
@@ -131,22 +131,23 @@ class DataModelAbsolute extends GetxController {
         globalKey.currentContext!.findRenderObject() as RenderBox;
     double boxHeight = renderBox.size.height;
     double boxWidth = renderBox.size.width;
+    double settingsWidth = boxWidth / 3;
 
     entry = OverlayEntry(
         builder: (context) => Positioned(
-            top: renderBox.localToGlobal(Offset.zero).dy - 30,
-            left: renderBox.localToGlobal(Offset.zero).dx - 70,
+            top: renderBox.localToGlobal(Offset.zero).dy - boxHeight * 1 / 5,
+            left: renderBox.localToGlobal(Offset.zero).dx - settingsWidth,
             child: Container(
               height: boxHeight * 5 / 4,
-              width: 300,
+              width: boxWidth + 2 * settingsWidth,
               color: const Color(0xFF49454F),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ValueBoxSettings.lower(
                     dataModel: this,
-                    width: 40,
-                    height: 100,
+                    width: settingsWidth,
+                    height: boxHeight,
                   ),
                   ConstrainedBox(
                     child: valueBoxContainer,
@@ -157,8 +158,8 @@ class DataModelAbsolute extends GetxController {
                   ),
                   ValueBoxSettings.upper(
                     dataModel: this,
-                    width: 40,
-                    height: 100,
+                    width: settingsWidth,
+                    height: boxHeight,
                   )
                 ],
               ),

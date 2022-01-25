@@ -49,8 +49,8 @@ class ValueBoxContainer extends StatelessWidget {
               backgroundColor:
                   MaterialStateProperty.all(Theme.of(context).cardColor)),
           onPressed: () {
-            dataModelAbsolute!.expanded.toggle();
-            dataModelAbsolute!.expanded.value
+            dataModelAbsolute!.expanded = !dataModelAbsolute!.expanded;
+            dataModelAbsolute!.expanded
                 ? dataModelAbsolute!.showOverlay(this, globalKey, context)
                 : dataModelAbsolute!.hideOverlay();
           },

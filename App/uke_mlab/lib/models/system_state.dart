@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:uke_mlab/models/data_models/model_absolute.dart';
 
 import 'package:uke_mlab/models/screen_element_models/general_alarms.dart';
 import 'package:uke_mlab/models/screen_element_models/absolute_alarm_field_model.dart';
@@ -43,7 +44,8 @@ class SystemState extends GetxController {
   /// "message" for alarm message
   /// "enum" for current [alarmStatus]
   /// "color" for color
-  final RxMap<sensorEnumAbsolute, Map<String, dynamic>> alarmState = <sensorEnumAbsolute, Map<String, dynamic>>{}.obs;
+  final RxMap<sensorEnumAbsolute, Map<String, dynamic>> alarmState =
+      <sensorEnumAbsolute, Map<String, dynamic>>{}.obs;
 
   /// A reference to the current [GeneralAlarms] in use
   final GeneralAlarms generalAlarms = GeneralAlarms();
@@ -98,12 +100,16 @@ class SystemState extends GetxController {
   /// overwrites [selectedToggleView]s value with [newToggleView] for usage on switch between
   /// monitoring, ventilation and defibrillation representation in [MainScreen]
   void setSelectedToggleView(List<bool> newToggleView) {
+    for (var sensor in sensorEnumAbsolute.values) {
+      Get.find<DataModelAbsolute>(tag: sensor.name).hideOverlay();
+    }
     selectedToggleView.value = newToggleView;
     update();
   }
 
   ///Set [alarmState] for given [sensor].
-  void setAlarmState(sensorEnumAbsolute sensor, int? priority, String? message, alarmStatus? status, Color? color) {
+  void setAlarmState(sensorEnumAbsolute sensor, int? priority, String? message,
+      alarmStatus? status, Color? color) {
     alarmState[sensor] = {
       'priority': priority ?? alarmState[sensor]!['priority'],
       'message': message ?? getAlarmStateMessage(sensor),
