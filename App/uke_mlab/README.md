@@ -92,8 +92,6 @@ As mentioned, this is a Flutter Tablet application written in **dart**. For the 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 <!-- GETTING STARTED -->
 # Getting Started
 
@@ -124,7 +122,7 @@ iPad Pro (3rd generation)
 iOS Version 15.2
 ```
 
-+ **Windows**
+* **Windows**
 
 ```sh
 Pixel C 
@@ -156,7 +154,7 @@ Android Version 11.0 x86
 <!-- USAGE EXAMPLES -->
 # Usage
 
-This prototype works as showcase for demonstrating and evaluating of a future 3-in-1 interface with simulated data. 
+This prototype works as showcase for demonstrating and evaluating of a future 3-in-1 interface with simulated data.
 <br>
 |||
 |---|---|
@@ -179,6 +177,7 @@ This prototype works as showcase for demonstrating and evaluating of a future 3-
 # Design
 
 For the design created in Figma please follow this link:
+
 * [Design Clickdummy](https://www.figma.com/proto/ase69ABWTPP8L2kVJdHuzq/MLab---UKE-Protoype-UI?node-id=892%3A3234&scaling=scale-down&page-id=892%3A792&starting-point-node-id=892%3A3234&show-proto-sidebar=1)
 
 Also have a look at our StyleGuide for the colors used in the prototype.
@@ -191,9 +190,11 @@ Also have a look at our StyleGuide for the colors used in the prototype.
 
 <!-- ALARM HANDLING -->
 # Alarm Handling
+
 For a complete overview, please refer to our [AlarmLogic.md](TODO LINK)
 
 ### Priotising alarms in categories
+
 Parameter alarms are prioritised according to the severity of their deviations from the set alarm limits. The `SensorDeviation` is defined in percent for each parameter.
 
 #### Example:
@@ -209,6 +210,7 @@ Parameter alarms are prioritised according to the severity of their deviations f
   ```
 
 ### Auditory alarm according to prioritisation
+
 Alarms are displayed audibly in descending order of priority.
 ![Table Audio Priorities](./ReadMeFiles/table-audio-priority.png)
 
@@ -228,9 +230,10 @@ Alarms are displayed audibly in descending order of priority.
 <!-- DATA PROCESSING -->
 # Data Processing
 Files to consider:
-- [Notebook 1](./SimulationData/data_processing.ipynb)
-- [Notebook 2](./SimulationData/weinmanndata.ipynb)
-- [Raw Data](./SimulationData/rawdata.ipynb)
+
+* [Notebook 1](./SimulationData/data_processing.ipynb)
+* [Notebook 2](./SimulationData/weinmanndata.ipynb)
+* [Raw Data](./SimulationData/rawdata.ipynb)
 
 Mr. Neuhaus from Weinmann provided us with with data twice, once actual recorded ventilation and ECG data and the second time generated simulation data.
 
@@ -254,11 +257,12 @@ Thankfully Mr.Neuhaus provided us with clean simulated data. Using this data we 
 
 We were now able to display an ECG wave as a graph. However for a realistic representation of the associated heartfrequency we would have to analyze the number of pqrst complexes in one minute. Which would have taken to much time to implement correctly, we decided against analyzing our graphs. We still lacked a datasource to realisticly display a heartfrequency. 
 
-Our most basic approach was generating semi random numbers and just display those. The problem that arrises with random generated numbers is that a random datapoint is not depended on its predecessor. In the realm of medical data this leads to serious inconsistencies. Since the heartfrequency might be 120 at time x and 75 the next timestep this does not mimic a realistic trend for a heartfrequency (even in the most dramatic cases hf would not drop by that much). 
+Our most basic approach was generating semi random numbers and just display those. The problem that arrises with random generated numbers is that a random datapoint is not depended on its predecessor. In the realm of medical data this leads to serious inconsistencies. Since the heartfrequency might be 120 at time x and 75 the next timestep this does not mimic a realistic trend for a heartfrequency (even in the most dramatic cases hf would not drop by that much).
 
 To tackle this issue we decided to generate our heartfrequency with an algorithm called random walk. A [random walk](https://en.wikipedia.org/wiki/Random_walk) generates a list of values each based on the last value to allow for a more realistic trend . Our implementation of a random walk can be found under the section "Random Walk" in the notebook. The relationship between ECG and heartfrequency is not unique and almost every graph brings its associated value (i.e. pleth -> spo2, co2 -> co2Absolute). With our strategy we were able to generate all the datastreams necessary.
 
 ### Json Structure
+
 ![Json Structure](./ReadMeFiles/Screenshots/datastreams.PNG)
 
 |Every scenario and our standard scenario have a dedicated json file. On the top level one can find a list containing all the (sensor)channels needed, and general information for the scenario such as the duration. A channel can contain data for either a graph or one of the absolute values that are associated to the graphs and channel information. The data just holds a list of all the datapoints. Channel information provides useful descriptions and important parameters such as the enum identifier and the resolution. The resolution is stated in Hz.
@@ -298,19 +302,19 @@ Adding an absolute sensor on the right side of the screen is currently missing.
 
 ***
 
-**3. [Audioplayer output in Debug Console]()**
+**3. [Audioplayer output in Debug Console](TODO: Link Missing?)**
 
 This seems to be a known issue with the [audioplayer](https://github.com/bluefireteam/audioplayers/issues/707).
 If you want to disable the output, please filter your console. To exclude certain output, use ***!excludeText***
 ***
 
-**4. [Delayed Alarm Sounds]()**
+**4. [Delayed Alarm Sounds](TODO: Link Missing?)**
 
 Alarms sound don't start right away. This seems to be a problem of Audioplayer and Timer. Initial start should be directly.
 
 ***
 
-**5. [Alarms disappear too quickly]()**
+**5. [Alarms disappear too quickly](TODO: Link Missing?)**
 
 Alarms should be visualized at least 10 seconds before it can update to a lower alarm. 
 
@@ -328,29 +332,34 @@ The pipeline for the project couldn't be started due to server issues.
 # Contact
 
 ##### Project Supervisor
+
 Tim Puhlfürß - [<tim.puhlfuerss@uni-hamburg.de>](mailto:tim.puhlfuerss@uni-hamburg.de)
 
 ##### Development Team
-- Corvin Biebach - [corvin.biebach@studium.uni-hamburg.de](mailto:corvin.biebach@studium.uni-hamburg.de)
-- Maximilian Brosius - [mail@maxbrosius.de](mailto:mail@maxbrosius.de)
-- Fynn Menk - [fynn.menk@gmail.com](mailto:fynn.menk@gmail.com)
-- Anni Reinert - [anni.reinert@rb-reinert.de](mailto:anni@rb-reinert.de)
-- Noah Scheld - [nickels12er@gmail.com](mailto:nickels12er@gmail.com)
-- Arne Struck - [arne.struck@studium.uni-hamburg.de](mailto:arne.struck@studium.uni-hamburg.de)
-- Mudassar Zahid - [mudassar.zahid@studium.uni-hamburg.de](mailto:mudassar.zahid@studium.uni-hamburg.de) 
 
-Project Link: [UHH Informatics GitLab EE ](https://git.informatik.uni-hamburg.de/mast/teaching/mlab/wt202122/uke)
+* Corvin Biebach - [corvin.biebach@studium.uni-hamburg.de](mailto:corvin.biebach@studium.uni-hamburg.de)
+* Maximilian Brosius - [mail@maxbrosius.de](mailto:mail@maxbrosius.de)
+* Fynn Menk - [fynn.menk@gmail.com](mailto:fynn.menk@gmail.com)
+* Anni Reinert - [anni.reinert@rb-reinert.de](mailto:anni@rb-reinert.de)
+* Noah Scheld - [nickels12er@gmail.com](mailto:nickels12er@gmail.com)
+* Arne Struck - [arne.struck@studium.uni-hamburg.de](mailto:arne.struck@studium.uni-hamburg.de)
+* Mudassar Zahid - [mudassar.zahid@studium.uni-hamburg.de](mailto:mudassar.zahid@studium.uni-hamburg.de)
+
+Project Link: [UHH Informatics GitLab Repository](https://git.informatik.uni-hamburg.de/mast/teaching/mlab/wt202122/uke)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- ACKNOWLEDGMENTS -->
 # Acknowledgments
+
 Special Thanks for the friendly help for the Requirements Elicitation and medical questions to:
+
 * [Dr. Mahler](mailto:an.mahler@uke.de) - Emergency Doctor @ UKE Hamburg
 * [Dr. Reip](mailto:w.reip@uke.de) - Emergency Doctor @ UKE Hamburg
 * [Dr. Sasu](mailto:p.sasu@uke.de) - Emergency Doctor @ UKE Hamburg
 
 And also for providing simulation / real patient data and helping with DataGeneration for the Showcase.
+
 * [Christian Neuhaus](mailto:C.Neuhaus@weinmann-emt.de) - WEINMANN Emergency
 
 <p align="right">(<a href="#top">back to top</a>)</p>
