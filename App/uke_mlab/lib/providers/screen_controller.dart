@@ -3,6 +3,7 @@ import 'package:uke_mlab/models/data_models/model_absolute.dart';
 import 'package:uke_mlab/models/screen_element_models/smart_adjustment_model.dart';
 import 'package:uke_mlab/providers/sound_controller.dart';
 import 'package:uke_mlab/scenarios/patient_scenario.dart';
+import 'package:uke_mlab/screens/start_screen.dart';
 import 'package:uke_mlab/utilities/enums/scenarios.dart';
 import 'package:uke_mlab/utilities/enums/patient_type.dart';
 import 'package:uke_mlab/utilities/enums/screen_status.dart';
@@ -11,26 +12,33 @@ import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/scenarios/abstract_scenario.dart';
 import 'package:uke_mlab/scenarios/standard_scenario.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
+import 'package:uke_mlab/widgets/demo_screen/exit_button.dart';
+import 'package:uke_mlab/widgets/demo_screen/scenario_button.dart';
+import 'package:uke_mlab/widgets/menu/menu.dart';
+import 'package:uke_mlab/widgets/start_screen/continue_button.dart';
+import 'package:uke_mlab/widgets/start_screen/skip_button.dart';
+import 'package:uke_mlab/widgets/toggle/toggle_mode_button.dart';
 
-/// This Screen Contoller handles the Settings of the alarmboundaries with [setUpperBoundary] and [setLowerBoundary] within the [DataModelAbsolute]
+/// handles the settings of the alarmboundaries with [setUpperBoundary] and [setLowerBoundary] within the [DataModelAbsolute]
 /// Further handles the Changing of the Scenarios, starts the DataStreams and triggeres the necessary Runs for General Alarms, Data reading into the Graphs etc.
-/// Also handles the Continue, Skip and other Button Behaviours of the [StartScreen]?!
-/// TODO: COMMENTARY
+/// Also handles the Continue, Skip and other Button Behaviours of the [StartScreen]
 class ScreenController {
   AbstractScenario? runningScenario;
   SystemState systemState = Get.find<SystemState>();
   ModelManager modelManager = Get.find<ModelManager>();
   SoundController soundController = Get.find<SoundController>();
 
+  /// sets the upper alarm boundary of [dataModel] to [value]
   void setUpperBoundary(DataModelAbsolute dataModel, double value) {
     dataModel.setUpperAlarmBoundary(value);
   }
 
+  /// sets the lower alarm boundary of [dataModel] to [value]
   void setLowerBoundary(DataModelAbsolute dataModel, double value) {
     dataModel.setLowerAlarmBoundary(value);
   }
 
-  ///Changes playing scenario based on input paramenter, stops currently playing scenario on call
+  /// Changes playing scenario based on input paramenter, stops currently playing scenario on call
   void changeScenario(scenariosEnum scenario) {
     systemState.scenarioStarted = true;
 
@@ -47,7 +55,8 @@ class ScreenController {
     switch (scenario) {
       case scenariosEnum.standardScenario:
         runningScenario = StandardScenario();
-        systemState.graphList.setStandardGraphs(ScenarioEnumDisplayedGraphs.graphs[scenario] as Map<screenStatusEnum, List<sensorEnumGraph>>);
+        systemState.graphList.setStandardGraphs(ScenarioEnumDisplayedGraphs
+            .graphs[scenario] as Map<screenStatusEnum, List<sensorEnumGraph>>);
         runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
         break;
       case scenariosEnum.scenario1:
@@ -57,7 +66,8 @@ class ScreenController {
       case scenariosEnum.scenario3c:
       case scenariosEnum.scenario4:
         runningScenario = PatientScenario(scenarioType: scenario);
-        systemState.graphList.setStandardGraphs(ScenarioEnumDisplayedGraphs.graphs[scenario] as Map<screenStatusEnum, List<sensorEnumGraph>>);
+        systemState.graphList.setStandardGraphs(ScenarioEnumDisplayedGraphs
+            .graphs[scenario] as Map<screenStatusEnum, List<sensorEnumGraph>>);
         runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
         break;
       default:
@@ -65,6 +75,7 @@ class ScreenController {
     }
   }
 
+  /// behavior of the [ContinueButton]
   Future? continueButton(String additionalInfo) {
     if (additionalInfo == 'Adult') {
       if (systemState.patientType != patientTypeEnum.adult) {
@@ -85,7 +96,8 @@ class ScreenController {
         systemState.resetSystemState();
       }
     } else {
-      throw Exception('additionalInformation is not Adult, Child or Infant on screenChangeButton call from Continue Button');
+      throw Exception(
+          'additionalInformation is not Adult, Child or Infant on screenChangeButton call from Continue Button');
     }
     systemState.screenStatus = screenStatusEnum.monitorScreen;
     changeScenario(scenariosEnum.standardScenario);
@@ -94,6 +106,7 @@ class ScreenController {
     return Get.toNamed('/main_screen');
   }
 
+  /// behavior of [SkipButton]
   Future? skipButton() {
     if (systemState.patientType == patientTypeEnum.none) {
       modelManager.loadPatientPresets(patientTypeEnum.adult);
@@ -107,6 +120,7 @@ class ScreenController {
     return Get.toNamed('/main_screen');
   }
 
+  /// behavior of [aedButton]
   Future? aedButton() {
     if (systemState.patientType == patientTypeEnum.none) {
       modelManager.loadPatientPresets(patientTypeEnum.adult);
@@ -121,6 +135,7 @@ class ScreenController {
     return Get.toNamed('/main_screen');
   }
 
+  /// behavior of patient settings button in [AppMenu]
   Future? patientSettingButton() {
     systemState.screenStatus = screenStatusEnum.patientSettingScreen;
     systemState.absAlarmFieldModel.closeOverlay();
@@ -128,12 +143,14 @@ class ScreenController {
     return Get.offNamed('/start_screen');
   }
 
+  /// behavior of demo screen button in [AppMenu]
   Future? demoScreenButton() {
     systemState.absAlarmFieldModel.closeOverlay();
     soundController.stop();
     return Get.offNamed('/demo_screen');
   }
 
+  /// beavior when using [ToggleModeButton]
   void setSelectedToggleView(int index) {
     switch (index) {
       case 0:
@@ -156,10 +173,12 @@ class ScreenController {
     }
   }
 
+  /// resets [ToggleModeButton] to default
   void resetToggleView() {
     systemState.setSelectedToggleView([true, false, false]);
   }
 
+  /// behavior of alarm settings button in [AppMenu]
   Future? alarmSettingsButton() {
     //system state should stay the same here
     systemState.absAlarmFieldModel.closeOverlay();
@@ -170,7 +189,8 @@ class ScreenController {
     return Get.offNamed('/alarm_limit_screen');
   }
 
-  Future? scenarioMenuExitButton() {
+  /// exit button behavior for exit button in [ExitButton]
+  Future? menuExitButton() {
     switch (systemState.screenStatus) {
       case screenStatusEnum.patientSettingScreen:
         soundController.stop();
@@ -189,6 +209,7 @@ class ScreenController {
     }
   }
 
+  /// behavior of [ScenarioButton]
   Future? scenarioButton(scenariosEnum scenario) {
     if (systemState.patientType == patientTypeEnum.none) {
       modelManager.loadPatientPresets(patientTypeEnum.adult);
@@ -204,7 +225,8 @@ class ScreenController {
   /// Behavior for smartAdjustementButton
   void smartAdjustmentButton(sensorEnumAbsolute sensorKey) {
     SmartAdjustmentMap boundaryAdjustmentMap = systemState.smartAdjustmentMap;
-    DataModelAbsolute dataModel = Get.find<DataModelAbsolute>(tag: sensorKey.name);
+    DataModelAbsolute dataModel =
+        Get.find<DataModelAbsolute>(tag: sensorKey.name);
 
     if (boundaryAdjustmentMap.map[sensorKey]!.lowerCounter.value >= 3) {
       boundaryAdjustmentMap.map[sensorKey]!.lowerCounter.value = 0;
