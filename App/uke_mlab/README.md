@@ -20,7 +20,7 @@
 
   <p>
     This is the Repository for the M-Lab Course project VentCore. 
-    This Course was held during the WS 2021/2022 by the MAST Team of University of Hamburg
+    This Course was held during the WS 2021/2022 by the MAST Team of University of Hamburg.
 
 <a href=""><strong>Explore the docs »</strong></a>
 <br />
@@ -55,8 +55,8 @@
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#design">Design</a></li>
-    <li><a href="#alarm">Alarm Handling</a></li>
-    <li><a href="#dataprocessing">Data Processing</a></li>
+    <li><a href="#alarm-handling">Alarm Handling</a></li>
+    <li><a href="#data-processing">Data Processing</a></li>
     <li><a href="#documentation">Documentation</a></li>
     <li><a href="#known-issues">Known Issues</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -219,42 +219,11 @@ Alarms are displayed audibly in descending order of priority.
 //TODO: Add Description of Alarm Handling Rules
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
-
-<!-- DATA PROCESSING -->
-# Data Processing
-
-***
-
-
-
-<!-- DOCUMENTATION -->
-# Documentation
-
-***
-<!-- TODO: Add Link-->
-Please refer to our [Code Documentation]().
-
-
 ### Auditory alarm according to prioritisation
 Alarms are displayed audibly in descending order of priority.
 ![Table Audio Priorities](./ReadMeFiles/table-audio-priority.png)
 
-
-
-### Auditory Behaviour of Alarms
-
-
-
-## General Rules
-
-//TODO: Add Description of Alarm Handling Rules
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 ***
-
-
 
 <!-- DATA PROCESSING -->
 # Data Processing
@@ -298,6 +267,8 @@ To tackle this issue we decided to generate our heartfrequency with an algorithm
 
 With a combination of the random walk and the clean, easily loopable data we recieved, we had the tools to construct any scenario we wanted. Now that we had all the basic components needed we tried to replicate the given patient scenarios as close as possible.
 
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 <!-- DOCUMENTATION -->
 # Documentation
 
@@ -305,9 +276,11 @@ With a combination of the random walk and the clean, easily loopable data we rec
 - Please refer to our [Code Documentation]()
 - Application [Styleguide](/App/documentation/uke-styleguide-tables.md)
 - Approaches and Logic for [Alarmmangement]()
-- [UseCases](./documentation/UseCase-English.pdf) for Testing
+- [UseCases](./App/documentation/UseCase-English.pdf) for Testing
  
 - [Figma-Clickdummy](https://www.figma.com/proto/ase69ABWTPP8L2kVJdHuzq/MLab---UKE-Protoype-UI?node-id=892%3A3234&scaling=scale-down&page-id=892%3A792&starting-point-node-id=892%3A3234&show-proto-sidebar=1)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 
 <!-- KNOWN ISSUES -->
@@ -346,6 +319,8 @@ Alarms should be visualized at least 10 seconds before it can update to a lower 
 **6. [Server Issues with Pipeline](https://git.informatik.uni-hamburg.de/mast/teaching/mlab/wt202122/uke/-/issues/59)**
 
 The pipeline for the project couldn't be started due to server issues.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 ***
 
