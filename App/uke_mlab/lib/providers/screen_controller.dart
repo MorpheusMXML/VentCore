@@ -55,8 +55,7 @@ class ScreenController {
     switch (scenario) {
       case scenariosEnum.standardScenario:
         runningScenario = StandardScenario();
-        systemState.graphList.setStandardGraphs(ScenarioEnumDisplayedGraphs
-            .graphs[scenario] as Map<screenStatusEnum, List<sensorEnumGraph>>);
+        systemState.graphList.setStandardGraphs(ScenarioEnumDisplayedGraphs.graphs[scenario] as Map<screenStatusEnum, List<sensorEnumGraph>>);
         runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
         break;
       case scenariosEnum.scenario1:
@@ -66,8 +65,7 @@ class ScreenController {
       case scenariosEnum.scenario3c:
       case scenariosEnum.scenario4:
         runningScenario = PatientScenario(scenarioType: scenario);
-        systemState.graphList.setStandardGraphs(ScenarioEnumDisplayedGraphs
-            .graphs[scenario] as Map<screenStatusEnum, List<sensorEnumGraph>>);
+        systemState.graphList.setStandardGraphs(ScenarioEnumDisplayedGraphs.graphs[scenario] as Map<screenStatusEnum, List<sensorEnumGraph>>);
         runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
         break;
       default:
@@ -96,13 +94,12 @@ class ScreenController {
         systemState.resetSystemState();
       }
     } else {
-      throw Exception(
-          'additionalInformation is not Adult, Child or Infant on screenChangeButton call from Continue Button');
+      throw Exception('additionalInformation is not Adult, Child or Infant on screenChangeButton call from Continue Button');
     }
     systemState.screenStatus = screenStatusEnum.monitorScreen;
     changeScenario(scenariosEnum.standardScenario);
     systemState.absAlarmFieldModel.evaluateActiveList();
-    soundController.startSaturationHFSound();
+
     return Get.toNamed('/main_screen');
   }
 
@@ -116,7 +113,7 @@ class ScreenController {
     systemState.screenStatus = screenStatusEnum.monitorScreen;
     changeScenario(scenariosEnum.standardScenario);
     systemState.absAlarmFieldModel.evaluateActiveList();
-    soundController.startSaturationHFSound();
+
     return Get.toNamed('/main_screen');
   }
 
@@ -131,7 +128,7 @@ class ScreenController {
     changeScenario(scenariosEnum.standardScenario);
     systemState.setSelectedToggleView([false, false, true]);
     systemState.absAlarmFieldModel.evaluateActiveList();
-    soundController.startSaturationHFSound();
+
     return Get.toNamed('/main_screen');
   }
 
@@ -196,13 +193,10 @@ class ScreenController {
         soundController.stop();
         return Get.toNamed('/start_screen');
       case screenStatusEnum.monitorScreen:
-        soundController.startSaturationHFSound();
         return Get.toNamed('/main_screen');
       case screenStatusEnum.ventilationScreen:
-        soundController.startSaturationHFSound();
         return Get.toNamed('/main_screen');
       case screenStatusEnum.defibrillationScreen:
-        soundController.startSaturationHFSound();
         return Get.toNamed('/main_screen');
       default:
         throw Exception('unkown previous screen exiting Demo/Scenario Screen');
@@ -217,7 +211,7 @@ class ScreenController {
     }
     changeScenario(scenario);
     systemState.absAlarmFieldModel.evaluateActiveList();
-    soundController.startSaturationHFSound();
+
     systemState.resetSystemState();
     return Get.toNamed('/main_screen');
   }
@@ -225,8 +219,7 @@ class ScreenController {
   /// Behavior for smartAdjustementButton
   void smartAdjustmentButton(sensorEnumAbsolute sensorKey) {
     SmartAdjustmentMap boundaryAdjustmentMap = systemState.smartAdjustmentMap;
-    DataModelAbsolute dataModel =
-        Get.find<DataModelAbsolute>(tag: sensorKey.name);
+    DataModelAbsolute dataModel = Get.find<DataModelAbsolute>(tag: sensorKey.name);
 
     if (boundaryAdjustmentMap.map[sensorKey]!.lowerCounter.value >= 3) {
       boundaryAdjustmentMap.map[sensorKey]!.lowerCounter.value = 0;
