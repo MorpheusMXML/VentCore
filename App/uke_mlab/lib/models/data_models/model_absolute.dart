@@ -127,7 +127,6 @@ class DataModelAbsolute extends GetxController {
 
   void showOverlay(ValueBoxContainer valueBoxContainer, GlobalKey globalKey,
       BuildContext context) {
-    print('show overlay called, expanded = $expanded}');
     final RenderBox renderBox =
         globalKey.currentContext!.findRenderObject() as RenderBox;
     double boxHeight = renderBox.size.height;
