@@ -19,7 +19,7 @@ import 'package:uke_mlab/widgets/value_box/value_box_state.dart';
 class ValueBoxTile extends StatelessWidget {
   final sensorEnumAbsolute? sensorAbsolute;
   final sensorEnumGraph? sensorGraph;
-  final String? optAbreviationTitle; // TODO use this to override loaded title
+  final String? optAbreviationTitle;
   final String type;
   final bool superNIBD;
 
@@ -70,8 +70,7 @@ class ValueBoxTile extends StatelessWidget {
           // called with headline case
           Obx(
               () => ConstrainedBox(
-                constraints: BoxConstraints(
-                    maxWidth: (Get.width - 12 - 12) / (2 + 1) * 1 / 2 * 1 - 8),
+                constraints: BoxConstraints(maxWidth: (Get.width - 12 - 12) / (2 + 1) * 1 / 2 * 1 - 8),
                 child: Container(
                   color: evaluateBorderColor(context, systemState.alarmState),
                   margin: const EdgeInsets.only(right: 4, bottom: 8, left: 4),
@@ -84,11 +83,7 @@ class ValueBoxTile extends StatelessWidget {
                               flex: 1,
                               child: ConstrainedBox(
                                 constraints: BoxConstraints(
-                                  maxWidth: (Get.width - 12 - 12) /
-                                          (2 + 1) *
-                                          1 /
-                                          2 *
-                                          1 -
+                                  maxWidth: (Get.width - 12 - 12) / (2 + 1) * 1 / 2 * 1 -
                                       8 -
                                       37 -
                                       37, // step in between solution with constansts, numbers from flexibles and paddings/margins
@@ -132,13 +127,11 @@ class ValueBoxTile extends StatelessWidget {
         optAbreviationTitle: optAbreviationTitle,
       );
     } else {
-      throw Exception(
-          "ValueBoxTile was given both a sensorAbsolute and sensorGraph");
+      throw Exception("ValueBoxTile was given both a sensorAbsolute and sensorGraph");
     }
   }
 
-  Color evaluateBorderColor(BuildContext context,
-      RxMap<sensorEnumAbsolute, Map<String, dynamic>> alarmState) {
+  Color evaluateBorderColor(BuildContext context, RxMap<sensorEnumAbsolute, Map<String, dynamic>> alarmState) {
     alarmStatus? alarm = alarmState[sensorAbsolute]!["status"];
     switch (alarm) {
       case alarmStatus.high:

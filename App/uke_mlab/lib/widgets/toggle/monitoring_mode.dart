@@ -10,8 +10,6 @@ class MonitoringMode extends StatelessWidget {
     Key? key,
     absoluteValueBoxTiles,
   }) : super(key: key);
-
-  // TODO get elements to be added to vent Screen from systemState.absAlarmFieldModel respective Set
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -21,12 +19,10 @@ class MonitoringMode extends StatelessWidget {
           child: Row(
             children: const [
               Expanded(
-                child: ValueBoxTile.withHeadline(
-                    sensorAbsolute: sensorEnumAbsolute.pulse),
+                child: ValueBoxTile.withHeadline(sensorAbsolute: sensorEnumAbsolute.pulse),
               ),
               Expanded(
-                child: ValueBoxTile.withHeadline(
-                    sensorAbsolute: sensorEnumAbsolute.tempAbsolute),
+                child: ValueBoxTile.withHeadline(sensorAbsolute: sensorEnumAbsolute.tempAbsolute),
               ),
             ],
           ),

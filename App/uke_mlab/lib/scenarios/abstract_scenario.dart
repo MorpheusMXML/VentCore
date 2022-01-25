@@ -82,10 +82,10 @@ abstract class AbstractScenario {
     return calculateUpdateRate(batchSize: 1, resolution: resolution);
   }
 
+  /// Stops each [timer] in [scenarioTimer] and clears the list [scenarioTimer].
   void stopTimers() {
     for (var timer in scenarioTimer) {
       timer!.cancel();
-      //TODO: wird von garbage collection entfernt?
       timer = null;
     }
     scenarioTimer.clear();

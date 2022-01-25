@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uke_mlab/widgets/info/info_text.dart';
 
+/// A widget that shows multiple [InfoText]'s.
 class InfoContainer extends StatelessWidget {
   final List<Map<String, Object>> data;
 
@@ -16,7 +17,7 @@ class InfoContainer extends StatelessWidget {
       itemBuilder: (BuildContext context, int index) {
         return Container(
           color: Theme.of(context).focusColor,
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
           margin: const EdgeInsets.only(right: 8),
           child: InfoText(
             type: data[index]['type'].toString(),

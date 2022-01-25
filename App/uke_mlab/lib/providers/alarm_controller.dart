@@ -32,7 +32,6 @@ class AlarmController {
   /// soundTrigger for generalAlarms
   void listen() {
     _systemState.generalAlarms.alarmList.listen((alarmList) {
-      //print("listenGeneralAlarmList");
       for (var i = 0; i < alarmList.length - 1; i++) {
         if (_systemState.screenStatus !=
             screenStatusEnum.defibrillationScreen) {
@@ -53,14 +52,10 @@ class AlarmController {
   ///
   ///[value] doesn´t [triggerAlarmState] in this categories, it will set back to [alarmStatus.none]
   void evaluateAlarmState(sensorEnumAbsolute sensor) {
-    dynamic value =
-        Get.find<DataModelAbsolute>(tag: sensor.name).absoluteValue.value;
-    dynamic upper =
-        Get.find<DataModelAbsolute>(tag: sensor.name).upperAlarmBound.value;
-    dynamic lower =
-        Get.find<DataModelAbsolute>(tag: sensor.name).lowerAlarmBound.value;
-    RxList historicValues =
-        Get.find<DataModelAbsolute>(tag: sensor.name).historicValues;
+    dynamic value = Get.find<DataModelAbsolute>(tag: sensor.name).absoluteValue.value;
+    dynamic upper = Get.find<DataModelAbsolute>(tag: sensor.name).upperAlarmBound.value;
+    dynamic lower = Get.find<DataModelAbsolute>(tag: sensor.name).lowerAlarmBound.value;
+    RxList historicValues = Get.find<DataModelAbsolute>(tag: sensor.name).historicValues;
 
     ///Possible deviation arounde the upper and lower boundaries.
     dynamic allowedValueDeviation = (upper - lower) / 2;
@@ -78,8 +73,7 @@ class AlarmController {
     ///Evaluate upper alarm boundary. Here we trigger [alarmMessage.upperBoundaryViolated].
     if (value > upper) {
       ///Checks how serious the upper boundary is exceeded.
-      if (sensor.boundaryDeviation != null &&
-          value < upper * (1 + sensor.boundaryDeviation)) {
+      if (sensor.boundaryDeviation != null && value < upper * (1 + sensor.boundaryDeviation)) {
         triggerAlarmState(
           sensor,
           alarmMessage.upperBoundaryViolated,
@@ -99,8 +93,7 @@ class AlarmController {
     ///Evaluate lower alarm boundary.
     else if (value < lower) {
       ///Checks how serious the lower boundary is exceeded. Here we trigger [alarmMessage.lowerBoundaryViolated].
-      if (sensor.boundaryDeviation != null &&
-          value > lower * (1 - sensor.boundaryDeviation)) {
+      if (sensor.boundaryDeviation != null && value > lower * (1 - sensor.boundaryDeviation)) {
         triggerAlarmState(
           sensor,
           alarmMessage.lowerBoundaryViolated,

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:uke_mlab/models/screen_element_models/general_alarms.dart';
 import 'package:intl/intl.dart';
+import 'package:uke_mlab/models/system_state.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/utilities/enums/non_graph_alarm.dart';
 
 class AlarmFieldTile extends StatelessWidget {
@@ -16,7 +19,7 @@ class AlarmFieldTile extends StatelessWidget {
     const TextStyle textStyle = TextStyle(
       color: Colors.black,
       decoration: TextDecoration.none,
-      fontSize: 25,
+      fontSize: 18,
       fontWeight: FontWeight.w300,
     );
 
@@ -47,6 +50,15 @@ class AlarmFieldTile extends StatelessWidget {
                 style: textStyle,
               ),
             ),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              shape: const CircleBorder(),
+              primary: AppTheme.alarmNoneColor,
+              onPrimary: Theme.of(context).dividerColor,
+            ),
+            onPressed: () => Get.find<SystemState>().generalAlarms.removeAlarm(data.alarm),
+            child: const Icon(Icons.check),
           ),
         ],
       ),

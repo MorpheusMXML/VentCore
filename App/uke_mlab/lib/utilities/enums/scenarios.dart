@@ -1,4 +1,3 @@
-import 'package:uke_mlab/utilities/enums/alarm_status.dart';
 import 'package:uke_mlab/utilities/enums/non_graph_alarm.dart';
 import 'package:uke_mlab/utilities/enums/screen_status.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
@@ -20,8 +19,7 @@ extension ScenarioEnumPath on scenariosEnum {
 }
 
 extension ScenarioEnumDisplayedGraphs on scenariosEnum {
-  static const Map<scenariosEnum, Map<screenStatusEnum, List<sensorEnumGraph>>>
-      graphs = {
+  static const Map<scenariosEnum, Map<screenStatusEnum, List<sensorEnumGraph>>> graphs = {
     scenariosEnum.standardScenario: {
       screenStatusEnum.monitorScreen: <sensorEnumGraph>[
         sensorEnumGraph.ecgCh2, // medical standard ecg channel is channel 2
@@ -122,16 +120,19 @@ extension ScenarioEnumDisplayedGraphs on scenariosEnum {
       ],
     }
   };
-  Map<screenStatusEnum, List<sensorEnumGraph>> get scenarioGraphs =>
-      graphs[this]!;
+  Map<screenStatusEnum, List<sensorEnumGraph>> get scenarioGraphs => graphs[this]!;
 }
 
 extension ScenarioEnumAttributes on scenariosEnum {
   static const Map<scenariosEnum, Map<sensorEnumGraph, Map<int, Map<String, dynamic>>>> nonMeasurableAlarms = {
     scenariosEnum.standardScenario: {
       sensorEnumGraph.pleth: {
-        700: {
+        600: {
           'alarm': nonGraphAlarmEnum.o2empty,
+          'priority': 20,
+        },
+        700: {
+          'alarm': nonGraphAlarmEnum.ekgNotConnected,
           'priority': 20,
         },
       },

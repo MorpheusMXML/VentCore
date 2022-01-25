@@ -31,19 +31,16 @@ class StartScreen extends StatelessWidget {
               flex: 2,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children:
-                    // TODO: precache images so loading doesn't take so long
-                    // https://stackoverflow.com/questions/66872111/
-                    imageMap.entries
-                        .map((entry) => PatientTypeButton(
-                              name: entry.key,
-                              image: SvgPicture.asset(
-                                entry.value,
-                                height: 70,
-                                width: 70,
-                              ),
-                            ))
-                        .toList(),
+                children: imageMap.entries
+                    .map((entry) => PatientTypeButton(
+                          name: entry.key,
+                          image: SvgPicture.asset(
+                            entry.value,
+                            height: 70,
+                            width: 70,
+                          ),
+                        ))
+                    .toList(),
               ),
             ),
             Flexible(

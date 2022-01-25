@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/start_screen_controller.dart';
 import 'package:uke_mlab/widgets/start_screen/details_popup_slider.dart';
-import 'details_popup_name_field.dart';
 
 class DetailsPopup extends StatelessWidget {
   const DetailsPopup({

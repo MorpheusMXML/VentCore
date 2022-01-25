@@ -31,6 +31,7 @@ class SoundController {
   final List<SoundListEntry> soundList = <SoundListEntry>[];
   String? _previousAlarmSound;
   final List<bool> _alarmTypes = [false, false];
+  RxBool ecgSoundActive = true.obs;
   Timer? timer;
   Timer? alarmTimer;
   Timer? getDataTimer;
@@ -74,8 +75,7 @@ class SoundController {
 
   ///Plays the SoundAlarm fot the AlarmType specified with [Enum soundIdentifier].
   play(Enum soundIdentifier) async {
-    alarmPlayer = await alarmPlayerCache
-        .play(_alarmSoundFiles[soundIdentifier].toString());
+    alarmPlayer = await alarmPlayerCache.play(_alarmSoundFiles[soundIdentifier].toString());
   }
 
   playDefiLoadSound() async {
@@ -92,6 +92,7 @@ class SoundController {
 
   ///Stops all [AudioPlayer]'s that are currently playing a Sound.
   stop() async {
+    ecgSoundActive.value = false;
     if (alarmPlayer != null) {
       alarmPlayer!.stop();
       alarmPlayer!.dispose();
@@ -133,10 +134,8 @@ class SoundController {
       // checks whether element is in systemState.absAlarmFieldModel.activeList or systemState.graphList.activeGraphAbsolutes,
       // if it is in neither => remove from soundList
       if (element.type is sensorEnumAbsolute) {
-        return !systemState.absAlarmFieldModel.activeList
-                .contains(element.type as sensorEnumAbsolute) &&
-            !systemState.graphList.activeGraphAbsolutes
-                .contains(element.type as sensorEnumAbsolute);
+        return !systemState.absAlarmFieldModel.activeList.contains(element.type as sensorEnumAbsolute) &&
+            !systemState.graphList.activeGraphAbsolutes.contains(element.type as sensorEnumAbsolute);
         // could be nicer
         // checks whether element is in generalAlarms, if so returns false => not removed from soundList
       } else if (element.type is nonGraphAlarmEnum) {
@@ -362,7 +361,7 @@ class SoundController {
       );
     } else {
       timer = Timer.periodic(
-        Duration(microseconds: 50),
+        const Duration(microseconds: 50),
         ((timer) async {
           if (Platform.isAndroid) {
             ecgPlayer = await ecgPlayerCache.play(
@@ -399,15 +398,11 @@ class SoundController {
   }
 
   void startSaturationHFSound() {
-    DataModelAbsolute hfModel =
-        Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.hfAbsolute.name);
-    DataModelAbsolute spo2Model =
-        Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.spo2Absolute.name);
-    getDataTimer ??=
-        Timer.periodic(Duration(seconds: getDataTimerDuration), (timer) {
-      saturationHfBeep(
-          bpm: hfModel.absoluteValue.value.toInt(),
-          spO2: spo2Model.absoluteValue.value.toInt());
+    ecgSoundActive.value = true;
+    DataModelAbsolute hfModel = Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.hfAbsolute.name);
+    DataModelAbsolute spo2Model = Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.spo2Absolute.name);
+    getDataTimer ??= Timer.periodic(Duration(seconds: getDataTimerDuration), (timer) {
+      saturationHfBeep(bpm: hfModel.absoluteValue.value.toInt(), spO2: spo2Model.absoluteValue.value.toInt());
     });
   }
 }
