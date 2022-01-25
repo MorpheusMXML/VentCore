@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/defibrillation_controller.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 
 // TODO: COMMENTARY
 class ShockPower extends StatelessWidget {
@@ -8,11 +9,13 @@ class ShockPower extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DefibrillationController defibrillationController = Get.find<DefibrillationController>();
+    final ThemeData theme = Theme.of(context);
+    DefibrillationController defibrillationController =
+        Get.find<DefibrillationController>();
 
     return Flexible(
       child: Container(
-        color: Theme.of(context).cardColor,
+        color: theme.primarySwatch[40],
         margin: const EdgeInsets.only(left: 8, right: 8),
         child: Obx(
           () => Row(
@@ -24,16 +27,23 @@ class ShockPower extends StatelessWidget {
                       child: Obx(
                         () => defibrillationController.shockClicked.value
                             ? Slider(
-                                label: defibrillationController.shockPower.value.toString(),
+                                label: defibrillationController.shockPower.value
+                                    .toString(),
                                 min: 0,
                                 max: 250,
                                 divisions: 10,
-                                onChangeEnd: (value) => defibrillationController.shockClicked.toggle(),
-                                onChanged: (newValue) => defibrillationController.shockPower.value = newValue.toInt(),
-                                value: defibrillationController.shockPower.value.toDouble(),
+                                onChangeEnd: (value) => defibrillationController
+                                    .shockClicked
+                                    .toggle(),
+                                onChanged: (newValue) =>
+                                    defibrillationController.shockPower.value =
+                                        newValue.toInt(),
+                                value: defibrillationController.shockPower.value
+                                    .toDouble(),
                               )
                             : ElevatedButton(
-                                style: ElevatedButton.styleFrom(primary: Colors.transparent),
+                                style: ElevatedButton.styleFrom(
+                                    primary: Colors.transparent),
                                 child: Text(
                                   '${defibrillationController.shockPower}',
                                   style: const TextStyle(
@@ -42,7 +52,9 @@ class ShockPower extends StatelessWidget {
                                     color: Colors.red,
                                   ),
                                 ),
-                                onPressed: () => defibrillationController.shockClicked.toggle(),
+                                onPressed: () => defibrillationController
+                                    .shockClicked
+                                    .toggle(),
                               ),
                       ),
                     ),
@@ -60,7 +72,8 @@ class ShockPower extends StatelessWidget {
                     Expanded(
                       flex: 3,
                       child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(primary: Colors.transparent),
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.transparent),
                         child: Text(
                           '${defibrillationController.shockPower}',
                           style: const TextStyle(
@@ -69,7 +82,8 @@ class ShockPower extends StatelessWidget {
                             color: Colors.red,
                           ),
                         ),
-                        onPressed: () => defibrillationController.shockClicked.toggle(),
+                        onPressed: () =>
+                            defibrillationController.shockClicked.toggle(),
                       ),
                     ),
                     const Flexible(

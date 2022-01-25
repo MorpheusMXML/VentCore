@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/providers/screen_controller.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 // TODO: COMMENTARY
@@ -15,6 +16,7 @@ class SmartAjdustButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     ScreenController screenController = Get.find<ScreenController>();
     SystemState systemState = Get.find<SystemState>();
 
@@ -27,17 +29,20 @@ class SmartAjdustButton extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50),
                   ),
-                  primary: Theme.of(context).shadowColor,
-                  onPrimary: Theme.of(context).dividerColor,
+                  primary: theme.primarySwatch[10],
+                  onPrimary: theme.contrastColor,
                 ),
-                onPressed: () => screenController.smartAdjustmentButton(sensorKey),
+                onPressed: () =>
+                    screenController.smartAdjustmentButton(sensorKey),
                 child: SizedBox(
                   width: 100,
                   height: 20,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      systemState.smartAdjustmentMap.map[sensorKey]!.lowerCounter.value >= 3
+                      systemState.smartAdjustmentMap.map[sensorKey]!
+                                  .lowerCounter.value >=
+                              3
                           ? const Icon(
                               Icons.arrow_downward_rounded,
                             )
@@ -49,7 +54,9 @@ class SmartAjdustButton extends StatelessWidget {
                         "s. Adj.",
                       ),
                       const Spacer(),
-                      systemState.smartAdjustmentMap.map[sensorKey]!.upperCounter.value >= 3
+                      systemState.smartAdjustmentMap.map[sensorKey]!
+                                  .upperCounter.value >=
+                              3
                           ? const Icon(
                               Icons.arrow_upward_rounded,
                             )

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/defibrillation_controller.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 
 // TODO: COMMENTARY
 class DefibrillationStats extends StatelessWidget {
@@ -8,13 +9,15 @@ class DefibrillationStats extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DefibrillationController defibrillationController = Get.find<DefibrillationController>();
+    final ThemeData theme = Theme.of(context);
+    DefibrillationController defibrillationController =
+        Get.find<DefibrillationController>();
 
     defibrillationController.startTimerWatch();
 
     return Flexible(
       child: Container(
-        color: Theme.of(context).cardColor,
+        color: theme.primarySwatch[40],
         margin: const EdgeInsets.all(8),
         child: Column(
           children: [
@@ -43,26 +46,29 @@ class DefibrillationStats extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                    child: Obx(() => Text(defibrillationController.lastTimerString.value,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        )))),
+                    child: Obx(() =>
+                        Text(defibrillationController.lastTimerString.value,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            )))),
                 Expanded(
-                    child: Obx(() => Text('${defibrillationController.numberOfShocks}',
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        )))),
+                    child: Obx(
+                        () => Text('${defibrillationController.numberOfShocks}',
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            )))),
                 Expanded(
-                    child: Obx(() => Text(defibrillationController.startTimerString.value,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        )))),
+                    child: Obx(() =>
+                        Text(defibrillationController.startTimerString.value,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            )))),
               ],
             ),
           ],

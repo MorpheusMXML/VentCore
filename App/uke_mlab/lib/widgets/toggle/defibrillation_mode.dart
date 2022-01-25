@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/widgets/defibrillation_mode/defibrillation_container.dart';
 import 'package:uke_mlab/widgets/defibrillation_mode/defibrillation_stats.dart';
 import 'package:uke_mlab/widgets/defibrillation_mode/impedance_container.dart';
@@ -29,6 +30,8 @@ class DefibrillationMode extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
     return Column(
       children: [
         Flexible(
@@ -36,7 +39,7 @@ class DefibrillationMode extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width / 3.5,
             margin: const EdgeInsets.only(top: 12),
-            color: Theme.of(context).focusColor,
+            color: theme.primarySwatch[50],
             child: Column(
               children: [
                 const SystemDiagnosis(),

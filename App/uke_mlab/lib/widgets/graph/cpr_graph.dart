@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:uke_mlab/models/data_models/model_graph.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/models/data_models/model_graphdata.dart';
 
@@ -19,12 +20,13 @@ class CprGraph extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     DataModelGraph dataModel = Get.find<DataModelGraph>(tag: sensor.name);
 
     return Obx(
       () => SfCartesianChart(
         tooltipBehavior: TooltipBehavior(enable: true),
-        backgroundColor: Theme.of(context).cardColor,
+        backgroundColor: theme.primarySwatch[40],
         primaryYAxis: NumericAxis(
           //Turning off String Labels at the Axis
           labelStyle: const TextStyle(fontSize: 0.0001),
@@ -51,14 +53,17 @@ class CprGraph extends StatelessWidget {
           minimum: 2,
           majorGridLines: MajorGridLines(
             width: 1,
-            color: Theme.of(context).shadowColor,
+            color: theme.primarySwatch[20],
           ),
         ),
         primaryXAxis: NumericAxis(
           //Turning off String Labels at the Axis
           labelStyle: const TextStyle(fontSize: 0.0001),
           desiredIntervals: 25,
-          majorGridLines: MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
+          majorGridLines: MajorGridLines(
+            width: 1,
+            color: theme.primarySwatch[20],
+          ),
         ),
         series: <ColumnSeries<ChartData, dynamic>>[
           ColumnSeries<ChartData, dynamic>(

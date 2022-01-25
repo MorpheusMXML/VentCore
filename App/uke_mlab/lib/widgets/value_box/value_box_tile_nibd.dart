@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/data_models/model_absolute.dart';
 import 'package:uke_mlab/models/system_state.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/utilities/enums/alarm_status.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/widgets/value_box/value_box_tile.dart';
@@ -32,12 +33,14 @@ class ValueBoxTileNIBD extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     // sensorAbsolute is not null since IF sensorGraph == null, sensorAbsolute is required // sensorAbsolute is not null since IF sensorGraph == null, sensorAbsolute is required
-    DataModelAbsolute dataModelSYS = Get.find<DataModelAbsolute>(tag: sensorAbsoluteSYS.name);
+    DataModelAbsolute dataModelSYS =
+        Get.find<DataModelAbsolute>(tag: sensorAbsoluteSYS.name);
     SystemState systemState = Get.find<SystemState>();
     return Obx(
       () => Container(
-        color: Theme.of(context).focusColor,
+        color: theme.primarySwatch[50],
         child: Column(
           children: [
             Flexible(
@@ -51,7 +54,10 @@ class ValueBoxTileNIBD extends StatelessWidget {
                     flex: 1,
                     child: Container(
                       margin: const EdgeInsets.only(left: 4),
-                      color: evaluateBorderColor(context, sensorEnumAbsolute.sysAbsolute, systemState.alarmState),
+                      color: evaluateBorderColor(
+                          context,
+                          sensorEnumAbsolute.sysAbsolute,
+                          systemState.alarmState),
                     ),
                   ),
                   SizedBox(
@@ -75,7 +81,10 @@ class ValueBoxTileNIBD extends StatelessWidget {
                     flex: 1,
                     child: Container(
                       margin: const EdgeInsets.only(right: 4),
-                      color: evaluateBorderColor(context, sensorEnumAbsolute.diaAbsolute, systemState.alarmState),
+                      color: evaluateBorderColor(
+                          context,
+                          sensorEnumAbsolute.diaAbsolute,
+                          systemState.alarmState),
                     ),
                   ),
                 ],
@@ -83,24 +92,26 @@ class ValueBoxTileNIBD extends StatelessWidget {
             ),
             Flexible(
               flex: 3,
-              child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                //Systolic Absolute Box
-                Expanded(
-                  child: ValueBoxTile.withHeadline(
-                    sensorAbsolute: sensorEnumAbsolute.sysAbsolute,
-                    optAbreviationTitle: sensorAbsoluteSYS.abbreviation,
-                    superNIBD: true,
-                  ),
-                ),
-                //Diastolic Absolute Box
-                Expanded(
-                  child: ValueBoxTile.withHeadline(
-                    sensorAbsolute: sensorEnumAbsolute.diaAbsolute,
-                    optAbreviationTitle: sensorAbsoluteDIA.abbreviation,
-                    superNIBD: true,
-                  ),
-                ),
-              ]),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    //Systolic Absolute Box
+                    Expanded(
+                      child: ValueBoxTile.withHeadline(
+                        sensorAbsolute: sensorEnumAbsolute.sysAbsolute,
+                        optAbreviationTitle: sensorAbsoluteSYS.abbreviation,
+                        superNIBD: true,
+                      ),
+                    ),
+                    //Diastolic Absolute Box
+                    Expanded(
+                      child: ValueBoxTile.withHeadline(
+                        sensorAbsolute: sensorEnumAbsolute.diaAbsolute,
+                        optAbreviationTitle: sensorAbsoluteDIA.abbreviation,
+                        superNIBD: true,
+                      ),
+                    ),
+                  ]),
             )
           ],
         ),
@@ -108,8 +119,9 @@ class ValueBoxTileNIBD extends StatelessWidget {
     );
   }
 
-  Color evaluateBorderColor(
-      BuildContext context, sensorEnumAbsolute sensorKey, RxMap<sensorEnumAbsolute, Map<String, dynamic>> alarmState) {
+  Color? evaluateBorderColor(BuildContext context, sensorEnumAbsolute sensorKey,
+      RxMap<sensorEnumAbsolute, Map<String, dynamic>> alarmState) {
+    final ThemeData theme = Theme.of(context);
     alarmStatus? alarm = alarmState[sensorKey]!["status"];
     switch (alarm) {
       case alarmStatus.high:
@@ -118,7 +130,7 @@ class ValueBoxTileNIBD extends StatelessWidget {
         return alarmState[sensorKey]!["color"];
       case alarmStatus.confirmed:
       default:
-        return Theme.of(context).focusColor;
+        return theme.primarySwatch[50];
     }
   }
 }

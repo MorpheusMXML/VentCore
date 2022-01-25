@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/utilities/constants/absolute_alarm_field_constants.dart';
 import 'package:uke_mlab/widgets/setting/ippv_button.dart';
 import 'package:uke_mlab/widgets/setting/setting_tile.dart';
@@ -13,9 +14,13 @@ class SettingContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
     return Container(
-      color: Theme.of(context).focusColor,
-      margin: const EdgeInsets.only(right: AbsoluteAlarmFieldConst.verticalMargin, top: AbsoluteAlarmFieldConst.verticalMargin),
+      color: theme.primarySwatch[50],
+      margin: const EdgeInsets.only(
+          right: AbsoluteAlarmFieldConst.verticalMargin,
+          top: AbsoluteAlarmFieldConst.verticalMargin),
       child: Column(
         children: [
           const IPPVButton(),

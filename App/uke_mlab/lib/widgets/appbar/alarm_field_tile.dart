@@ -16,6 +16,8 @@ class AlarmFieldTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    
     const TextStyle textStyle = TextStyle(
       color: Colors.black,
       decoration: TextDecoration.none,
@@ -55,9 +57,10 @@ class AlarmFieldTile extends StatelessWidget {
             style: ElevatedButton.styleFrom(
               shape: const CircleBorder(),
               primary: AppTheme.alarmNoneColor,
-              onPrimary: Theme.of(context).dividerColor,
+              onPrimary: theme.contrastColor,
             ),
-            onPressed: () => Get.find<SystemState>().generalAlarms.removeAlarm(data.alarm),
+            onPressed: () =>
+                Get.find<SystemState>().generalAlarms.removeAlarm(data.alarm),
             child: const Icon(Icons.check),
           ),
         ],

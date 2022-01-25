@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/models/data_models/model_absolute.dart';
 import 'package:uke_mlab/models/data_models/model_graph.dart';
 import 'package:uke_mlab/models/system_state.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 
 import 'package:uke_mlab/utilities/enums/alarm_status.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
@@ -54,6 +55,7 @@ class ValueBoxTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     final SystemState systemState = Get.find<SystemState>();
     if (sensorGraph == null) {
       // could also be done via, but the relevant case disctinction here is whether there is a sensorGraph associated or not
@@ -98,7 +100,7 @@ class ValueBoxTile extends StatelessWidget {
                                     top: 4,
                                     bottom: 4,
                                   ), //left: 35, right: 35),
-                                  color: Theme.of(context).focusColor,
+                                  color: theme.primarySwatch[50],
                                   child: Center(
                                     child: Text(
                                       dataModel.displayShortString,
@@ -136,8 +138,10 @@ class ValueBoxTile extends StatelessWidget {
     }
   }
 
-  Color evaluateBorderColor(BuildContext context,
+  Color? evaluateBorderColor(BuildContext context,
       RxMap<sensorEnumAbsolute, Map<String, dynamic>> alarmState) {
+    final ThemeData theme = Theme.of(context);
+
     alarmStatus? alarm = alarmState[sensorAbsolute]!["status"];
     switch (alarm) {
       case alarmStatus.high:
@@ -146,7 +150,7 @@ class ValueBoxTile extends StatelessWidget {
         return alarmState[sensorAbsolute]!["color"];
       case alarmStatus.confirmed:
       default:
-        return Theme.of(context).focusColor;
+        return theme.primarySwatch[50];
     }
   }
 }

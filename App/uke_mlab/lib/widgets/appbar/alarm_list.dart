@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/screen_element_models/general_alarms.dart';
 import 'package:uke_mlab/models/system_state.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 
 import 'package:uke_mlab/utilities/constants/statusbar_constants.dart';
 import 'package:uke_mlab/widgets/appbar/alarm_field_tile.dart';
@@ -14,6 +15,7 @@ class AlarmList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     GeneralAlarms generalAlarms = Get.find<SystemState>().generalAlarms;
     double statusBarHeight = MediaQuery.of(context).padding.top;
 
@@ -21,17 +23,21 @@ class AlarmList extends StatelessWidget {
       () => ConstrainedBox(
         constraints: BoxConstraints(
           maxHeight: Get.height - statusBarHeight,
-          maxWidth: StatusBarConstants.alarmListWidth + 2 * StatusBarConstants.horizontalMargin,
+          maxWidth: StatusBarConstants.alarmListWidth +
+              2 * StatusBarConstants.horizontalMargin,
         ),
         child: Container(
           margin: const EdgeInsets.only(
-              bottom: StatusBarConstants.verticalMargin, right: StatusBarConstants.horizontalMargin, left: StatusBarConstants.horizontalMargin),
+              bottom: StatusBarConstants.verticalMargin,
+              right: StatusBarConstants.horizontalMargin,
+              left: StatusBarConstants.horizontalMargin),
           child: Column(
             children: [
               Container(
-                width: StatusBarConstants.alarmListWidth - 2 * StatusBarConstants.horizontalMargin,
+                width: StatusBarConstants.alarmListWidth -
+                    2 * StatusBarConstants.horizontalMargin,
                 height: StatusBarConstants.verticalMargin,
-                color: Theme.of(context).shadowColor,
+                color: theme.primarySwatch[10],
               ),
               Flexible(
                 fit: FlexFit.loose,
@@ -50,8 +56,9 @@ class AlarmList extends StatelessWidget {
                             right: StatusBarConstants.horizontalMargin,
                             left: StatusBarConstants.horizontalMargin,
                           ),
-                          color: Theme.of(context).shadowColor,
-                          child: AlarmFieldTile(data: generalAlarms.alarmList[index]));
+                          color: theme.primarySwatch[10],
+                          child: AlarmFieldTile(
+                              data: generalAlarms.alarmList[index]));
                     }),
               ),
             ],

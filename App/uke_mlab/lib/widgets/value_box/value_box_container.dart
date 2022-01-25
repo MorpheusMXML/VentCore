@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/data_models/model_absolute.dart';
 import 'package:uke_mlab/models/data_models/model_graph.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 // TODO: COMMENTARY
@@ -26,6 +27,7 @@ class ValueBoxContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     final GlobalKey globalKey = GlobalKey();
     const double aspectRatio = 1.1;
     double fontSize = 17;
@@ -47,7 +49,7 @@ class ValueBoxContainer extends StatelessWidget {
           style: ButtonStyle(
               shape: MaterialStateProperty.all(const RoundedRectangleBorder()),
               backgroundColor:
-                  MaterialStateProperty.all(Theme.of(context).cardColor)),
+                  MaterialStateProperty.all(theme.primarySwatch[40])),
           onPressed: () {
             dataModelAbsolute!.expanded = !dataModelAbsolute!.expanded;
             dataModelAbsolute!.expanded
@@ -131,7 +133,7 @@ class ValueBoxContainer extends StatelessWidget {
         child: Container(
           decoration: ShapeDecoration(
             shape: const RoundedRectangleBorder(),
-            color: Theme.of(context).cardColor,
+            color: theme.primarySwatch[40],
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
