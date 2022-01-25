@@ -4,7 +4,15 @@ import 'package:uke_mlab/utilities/enums/screen_status.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 //TODO: COMMENTARY
-enum scenariosEnum { standardScenario, scenario1, scenario2, scenario3a, scenario3b, scenario3c, scenario4 }
+enum scenariosEnum {
+  standardScenario,
+  scenario1,
+  scenario2,
+  scenario3a,
+  scenario3b,
+  scenario3c,
+  scenario4
+}
 
 /// This [extension] on [scenariosEnum] maps a path to the data file to its respective [scenariosEnum].
 extension ScenarioEnumPath on scenariosEnum {
@@ -23,7 +31,8 @@ extension ScenarioEnumPath on scenariosEnum {
 
 //TODO: COMMENTARY
 extension ScenarioEnumDisplayedGraphs on scenariosEnum {
-  static const Map<scenariosEnum, Map<screenStatusEnum, List<sensorEnumGraph>>> graphs = {
+  static const Map<scenariosEnum, Map<screenStatusEnum, List<sensorEnumGraph>>>
+      graphs = {
     scenariosEnum.standardScenario: {
       screenStatusEnum.monitorScreen: <sensorEnumGraph>[
         sensorEnumGraph.ecgCh2, // medical standard ecg channel is channel 2
@@ -124,12 +133,15 @@ extension ScenarioEnumDisplayedGraphs on scenariosEnum {
       ],
     }
   };
-  Map<screenStatusEnum, List<sensorEnumGraph>> get scenarioGraphs => graphs[this]!;
+  Map<screenStatusEnum, List<sensorEnumGraph>> get scenarioGraphs =>
+      graphs[this]!;
 }
 
 /// This [extension] for [scenariosEnum] defines when a [nonGraphAlarmEnum] is supposed to be thrown.
 extension ScenarioEnumAttributes on scenariosEnum {
-  static Map<scenariosEnum, Map<sensorEnumGraph, Map<int, Map<String, dynamic>>>> nonMeasurableAlarms = {
+  static Map<scenariosEnum,
+          Map<sensorEnumGraph, Map<int, Map<String, dynamic>>>>
+      nonMeasurableAlarms = {
     scenariosEnum.standardScenario: {
       sensorEnumGraph.pleth: {
         600: {
@@ -137,7 +149,7 @@ extension ScenarioEnumAttributes on scenariosEnum {
           'priority': alarmStatus.warning.priority,
         },
         700: {
-          'alarm': nonGraphAlarmEnum.ekgNotConnected,
+          'alarm': nonGraphAlarmEnum.ecgNotConnected,
           'priority': alarmStatus.warning.priority,
         },
       },
@@ -173,7 +185,7 @@ extension ScenarioEnumAttributes on scenariosEnum {
           'priority': alarmStatus.high.priority,
         },
         18500: {
-          'alarm': nonGraphAlarmEnum.ekgArtifact,
+          'alarm': nonGraphAlarmEnum.ecgArtifact,
           'priority': alarmStatus.warning.priority,
         },
         100000: {
@@ -189,7 +201,7 @@ extension ScenarioEnumAttributes on scenariosEnum {
           'priority': alarmStatus.high.priority,
         },
         4000: {
-          'alarm': nonGraphAlarmEnum.ekgNotConnected,
+          'alarm': nonGraphAlarmEnum.ecgNotConnected,
           'priority': alarmStatus.high.priority,
         },
         5500: {
@@ -213,7 +225,7 @@ extension ScenarioEnumAttributes on scenariosEnum {
     scenariosEnum.scenario3c: {
       sensorEnumGraph.ecgCh2: {
         2000: {
-          'alarm': nonGraphAlarmEnum.ekgArtifact,
+          'alarm': nonGraphAlarmEnum.ecgArtifact,
           'priority': alarmStatus.warning.priority,
         },
         15500: {
@@ -239,5 +251,6 @@ extension ScenarioEnumAttributes on scenariosEnum {
       }
     },
   };
-  Map<sensorEnumGraph, Map<int, Map<String, dynamic>>> get scenarioMap => nonMeasurableAlarms[this]!;
+  Map<sensorEnumGraph, Map<int, Map<String, dynamic>>> get scenarioMap =>
+      nonMeasurableAlarms[this]!;
 }
