@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/defibrillation_controller.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 
 // TODO: COMMENTARY
 class ImpedanceButton extends StatelessWidget {
@@ -22,7 +23,9 @@ class ImpedanceButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final DefibrillationController defibrillationController = Get.find<DefibrillationController>();
+    final ThemeData theme = Theme.of(context);
+    final DefibrillationController defibrillationController =
+        Get.find<DefibrillationController>();
 
     return Expanded(
       child: Container(
@@ -30,16 +33,23 @@ class ImpedanceButton extends StatelessWidget {
           child: Obx(() {
             ButtonStyle buttonStyle;
             defibrillationController.selectedImpedanceButton.value != name
-                ? buttonStyle = ElevatedButton.styleFrom(primary: Theme.of(context).cardColor, onPrimary: Theme.of(context).dividerColor)
+                ? buttonStyle = ElevatedButton.styleFrom(
+                    primary: theme.primarySwatch[40],
+                    onPrimary: theme.contrastColor,
+                  )
                 : buttonStyle = ButtonStyle(
-                    side: MaterialStateProperty.all(const BorderSide(color: Colors.green)),
+                    side: MaterialStateProperty.all(
+                        const BorderSide(color: Colors.green)),
                     foregroundColor: MaterialStateProperty.all(Colors.green),
                   );
             return ElevatedButton(
               style: buttonStyle,
               child: Text(name),
               onPressed:
-                  defibrillationController.selectedImpedanceButton.value != name ? () => defibrillationController.setSelectedImpedanceButton(name) : null,
+                  defibrillationController.selectedImpedanceButton.value != name
+                      ? () => defibrillationController
+                          .setSelectedImpedanceButton(name)
+                      : null,
             );
           })),
     );

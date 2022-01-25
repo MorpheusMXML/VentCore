@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 
 /// A widget that formats ventilation information.
 class InfoText extends StatelessWidget {
@@ -15,10 +16,12 @@ class InfoText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Theme.of(context).cardColor,
+        color: theme.primarySwatch[40],
         borderRadius: const BorderRadius.all(Radius.circular(8)),
       ),
       child: Row(
@@ -28,16 +31,16 @@ class InfoText extends StatelessWidget {
           Expanded(
             child: Text(
               type,
-              style: TextStyle(fontSize: 16, color: Theme.of(context).dividerColor),
+              style: TextStyle(fontSize: 16, color: theme.contrastColor),
             ),
           ),
           Text(
             value,
-            style: TextStyle(fontSize: 16, color: Theme.of(context).dividerColor),
+            style: TextStyle(fontSize: 16, color: theme.contrastColor),
           ),
           Text(
             unit,
-            style: TextStyle(fontSize: 10, color: Theme.of(context).dividerColor),
+            style: TextStyle(fontSize: 10, color: theme.contrastColor),
           ),
         ],
       ),

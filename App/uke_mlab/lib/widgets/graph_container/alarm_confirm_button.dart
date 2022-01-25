@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/alarm_controller.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 /// Renders the button which enables the user to confirm the alarm of the [sensorKey]s alarm.
@@ -18,6 +19,7 @@ class AlarmConfirmButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     final AlarmController alarmController = Get.find<AlarmController>();
 
     return SizedBox(
@@ -28,8 +30,8 @@ class AlarmConfirmButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(50),
           ),
           fixedSize: const Size(20, 20),
-          primary: Theme.of(context).shadowColor,
-          onPrimary: Theme.of(context).dividerColor,
+          primary: theme.primarySwatch[10],
+          onPrimary: theme.contrastColor,
         ),
         onPressed: () => {alarmController.triggerConfirm(sensorKey)},
         child: const Icon(Icons.check),

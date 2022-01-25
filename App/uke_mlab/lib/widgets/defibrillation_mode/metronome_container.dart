@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/widgets/defibrillation_mode/metronome_switch.dart';
 
 // TODO: COMMENTARY
@@ -7,9 +8,11 @@ class MetronomeContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
     return Container(
       margin: const EdgeInsets.all(8),
-      color: Theme.of(context).cardColor,
+      color: theme.primarySwatch[40],
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: const [

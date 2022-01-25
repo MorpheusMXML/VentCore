@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/start_screen_controller.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 
 /// This class contains the Popup Slider and its [Slider] functionality.
 /// 
@@ -22,6 +23,7 @@ class PopupSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     final startScreenController = Get.find<StartScreenController>();
     ///
     return Container(
@@ -65,14 +67,19 @@ class PopupSlider extends StatelessWidget {
           /// This Container contains the displayed value with the unit added.
           Container(
             margin: const EdgeInsets.fromLTRB(0, 5, 10, 5),
-            decoration: BoxDecoration(color: Theme.of(context).dividerColor, borderRadius: const BorderRadius.all(Radius.circular(3))),
+            decoration: BoxDecoration(
+                color: theme.contrastColor,
+                borderRadius: const BorderRadius.all(Radius.circular(3))),
             alignment: Alignment.center,
             height: 50 / MediaQuery.of(context).devicePixelRatio,
             width: 150 / MediaQuery.of(context).devicePixelRatio,
             child: Obx(
               () => Text(
                 '${value.value.round().toString()}$unit',
-                style: const TextStyle(fontSize: 21, fontWeight: FontWeight.bold, color: Colors.black),
+                style: const TextStyle(
+                    fontSize: 21,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black),
               ),
             ),
           ),

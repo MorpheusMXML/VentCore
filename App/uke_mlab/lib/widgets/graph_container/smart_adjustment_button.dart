@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/providers/screen_controller.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 /// This widget displays the button for the smart adjustment feature.
@@ -17,6 +18,7 @@ class SmartAdjustButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     ScreenController screenController = Get.find<ScreenController>();
     SystemState systemState = Get.find<SystemState>();
 
@@ -29,8 +31,8 @@ class SmartAdjustButton extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50),
                   ),
-                  primary: Theme.of(context).shadowColor,
-                  onPrimary: Theme.of(context).dividerColor,
+                  primary: theme.primarySwatch[10],
+                  onPrimary: theme.contrastColor,
                 ),
                 onPressed: () =>
                     screenController.smartAdjustmentButton(sensorKey),

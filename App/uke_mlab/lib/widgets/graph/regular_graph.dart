@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:uke_mlab/models/data_models/model_graph.dart';
 import 'package:uke_mlab/models/data_models/model_graphdata.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 /// Creates an [SfCartesianChart] with two [NumericAxis] and a [SplineSeries].
@@ -22,18 +23,23 @@ class RegularGraph extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     DataModelGraph dataModel = Get.find<DataModelGraph>(tag: sensor.name);
 
     return Obx(
       () => SfCartesianChart(
-        backgroundColor: Theme.of(context).cardColor,
+        backgroundColor: theme.primarySwatch[40],
         primaryYAxis: NumericAxis(
-          majorGridLines:
-              MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
+          majorGridLines: MajorGridLines(
+            width: 1,
+            color: theme.primarySwatch[20],
+          ),
         ),
         primaryXAxis: NumericAxis(
-          majorGridLines:
-              MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
+          majorGridLines: MajorGridLines(
+            width: 1,
+            color: theme.primarySwatch[20],
+          ),
         ),
         series: [
           SplineSeries(
