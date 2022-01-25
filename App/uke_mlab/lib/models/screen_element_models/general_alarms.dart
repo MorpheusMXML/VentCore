@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/data_models/model_absolute.dart';
+import 'package:uke_mlab/providers/defibrillation_controller.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/utilities/constants/statusbar_constants.dart';
 import 'package:uke_mlab/utilities/enums/non_graph_alarm.dart';
@@ -34,6 +35,10 @@ class GeneralAlarms extends GetxController {
     }
 
     alarmList.sort((a, b) => b.priority.compareTo(a.priority));
+    if (alarm == nonGraphAlarmEnum.vt || alarm == nonGraphAlarmEnum.vf) {
+      Get.find<DefibrillationController>().systemDiagnosis.value =
+          alarm.message;
+    }
   }
 
   /// remove [alarm] from list
@@ -47,15 +52,20 @@ class GeneralAlarms extends GetxController {
         hideOverlay();
       }
     }
+    if (!checkForAlarm(nonGraphAlarmEnum.vt) &&
+        !checkForAlarm(nonGraphAlarmEnum.vt)) {
+      Get.find<DefibrillationController>().systemDiagnosis.value = "";
+    }
   }
 
   /// checks whether an [alarm] is contained in [alarmList]
   bool checkForAlarm(nonGraphAlarmEnum alarm) {
-    return alarmList.indexWhere((element) => element.alarm == alarm) == -1;
+    return alarmList.indexWhere((element) => element.alarm == alarm) != -1;
   }
 
-  /// resets current [alarmList]
+  /// resets current [alarmList] and [DefibrillationController.systemDiagnosis] to an empty String
   void resetAlarms() {
+    Get.find<DefibrillationController>().systemDiagnosis.value = "";
     alarmList.clear();
   }
 
