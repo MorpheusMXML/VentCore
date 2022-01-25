@@ -4,11 +4,10 @@ import 'package:uke_mlab/models/data_models/model_absolute.dart';
 import 'package:uke_mlab/models/data_models/model_graph.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
-// TODO: COMMENTARY
 class ValueBoxContainer extends StatelessWidget {
   final DataModelAbsolute? dataModelAbsolute;
   final DataModelGraph? dataModelGraph;
-  final String? optAbreviationTitle;
+  final String? optAbreviationTitle; // TODO overwrite title if not null
 
   const ValueBoxContainer({
     Key? key,
@@ -26,8 +25,8 @@ class ValueBoxContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey globalKey = GlobalKey();
-    const double aspectRatio = 1.1;
+    const double aspectRatio =
+        1.1; // TODO: should be 1 but then we have a pixel overflow -> 255 and others are too big in current configuration
     double fontSize = 17;
     double fontSizeCenter = 44;
     // could be done via template pattern for better code quality
@@ -43,17 +42,11 @@ class ValueBoxContainer extends StatelessWidget {
       return AspectRatio(
         aspectRatio: aspectRatio,
         child: ElevatedButton(
-          key: globalKey,
           style: ButtonStyle(
               shape: MaterialStateProperty.all(const RoundedRectangleBorder()),
               backgroundColor:
                   MaterialStateProperty.all(Theme.of(context).cardColor)),
-          onPressed: () {
-            dataModelAbsolute!.expanded = !dataModelAbsolute!.expanded;
-            dataModelAbsolute!.expanded
-                ? dataModelAbsolute!.showOverlay(this, globalKey, context)
-                : dataModelAbsolute!.hideOverlay();
-          },
+          onPressed: () => dataModelAbsolute!.expanded.toggle(),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -65,7 +58,6 @@ class ValueBoxContainer extends StatelessWidget {
                   style: TextStyle(
                     color: dataModelAbsolute!.color,
                     fontSize: fontSize,
-                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 Obx(
@@ -76,7 +68,6 @@ class ValueBoxContainer extends StatelessWidget {
                     style: TextStyle(
                       color: dataModelAbsolute!.color,
                       fontSize: fontSize,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 )
@@ -112,7 +103,6 @@ class ValueBoxContainer extends StatelessWidget {
                     style: TextStyle(
                       color: dataModelAbsolute!.color,
                       fontSize: fontSize,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
@@ -121,7 +111,6 @@ class ValueBoxContainer extends StatelessWidget {
                   style: TextStyle(
                     color: dataModelAbsolute!.color,
                     fontSize: fontSize,
-                    fontWeight: FontWeight.bold,
                   ),
                 )
               ]),
@@ -153,7 +142,6 @@ class ValueBoxContainer extends StatelessWidget {
                           style: TextStyle(
                             color: dataModelGraph!.color,
                             fontSize: fontSize,
-                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
@@ -163,7 +151,6 @@ class ValueBoxContainer extends StatelessWidget {
                         style: TextStyle(
                           color: dataModelGraph!.color,
                           fontSize: fontSize,
-                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ]),
@@ -199,7 +186,6 @@ class ValueBoxContainer extends StatelessWidget {
                         style: TextStyle(
                           color: dataModelGraph!.color,
                           fontSize: fontSize,
-                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ]),

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:uke_mlab/models/data_models/model_absolute.dart';
 import 'package:uke_mlab/models/data_models/model_graph.dart';
+import 'package:uke_mlab/models/screen_element_models/absolute_alarm_field_model.dart';
 import 'package:uke_mlab/models/system_state.dart';
-
 import 'package:uke_mlab/utilities/enums/alarm_status.dart';
-import 'package:uke_mlab/utilities/enums/sensor.dart';
 
+import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/widgets/value_box/value_box_container.dart';
+import 'package:uke_mlab/widgets/value_box/value_box_state.dart';
 
 /// highest level widget that is always called when a ValueBox is needed
 ///
@@ -18,7 +18,7 @@ import 'package:uke_mlab/widgets/value_box/value_box_container.dart';
 class ValueBoxTile extends StatelessWidget {
   final sensorEnumAbsolute? sensorAbsolute;
   final sensorEnumGraph? sensorGraph;
-  final String? optAbreviationTitle;
+  final String? optAbreviationTitle; // TODO use this to override loaded title
   final String type;
   final bool superNIBD;
 
@@ -55,14 +55,15 @@ class ValueBoxTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final SystemState systemState = Get.find<SystemState>();
+    // TODO: Also check for alarms here (=>build red container if alarm) + confirmation button above toggle_mode_button
     if (sensorGraph == null) {
       // could also be done via, but the relevant case disctinction here is whether there is a sensorGraph associated or not
       DataModelAbsolute dataModel = Get.find<DataModelAbsolute>(
           tag: sensorAbsolute
               ?.name); // sensorAbsolute is not null since IF sensorGraph == null, sensorAbsolute is required
       return type == 'regular'
-          ? ValueBoxContainer(
-              dataModelAbsolute: dataModel,
+          ? ValueBoxState(
+              dataModel: dataModel,
               optAbreviationTitle: optAbreviationTitle,
             )
           :
@@ -103,11 +104,11 @@ class ValueBoxTile extends StatelessWidget {
                                     child: Text(
                                       dataModel.displayShortString,
                                       style: TextStyle(
-                                          decoration: TextDecoration.none,
-                                          color: dataModel.color,
-                                          fontSize: 20,
-                                          overflow: TextOverflow.ellipsis,
-                                          fontWeight: FontWeight.bold),
+                                        decoration: TextDecoration.none,
+                                        color: dataModel.color,
+                                        fontSize: 20,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -115,8 +116,8 @@ class ValueBoxTile extends StatelessWidget {
                             ),
                       Flexible(
                         flex: 3,
-                        child: ValueBoxContainer(
-                          dataModelAbsolute: dataModel,
+                        child: ValueBoxState.withHeadline(
+                          dataModel: dataModel,
                           optAbreviationTitle: optAbreviationTitle,
                         ),
                       ),
