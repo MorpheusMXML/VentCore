@@ -18,11 +18,12 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 ///
 class AlarmController {
   ///Manages and throws Alarms with an implemented Alarm Logic.
-  final Map<sensorEnumAbsolute, dynamic> confirmMap = <sensorEnumAbsolute, dynamic>{};
-  final Map soundMap = <int, dynamic>{};
+  final Map<sensorEnumAbsolute, dynamic> confirmMap =
+      <sensorEnumAbsolute, dynamic>{};
   final ModelManager _modelManager;
   final SoundController _soundController = Get.find<SoundController>();
   final SystemState _systemState = Get.find<SystemState>();
+
   AlarmController(this._modelManager) {
     _modelManager.registerAlarmController(this);
     listen();
@@ -32,7 +33,11 @@ class AlarmController {
   void listen() {
     _systemState.generalAlarms.alarmList.listen((alarmList) {
       for (var i = 0; i < alarmList.length - 1; i++) {
-        _soundController.triggerSoundState(alarmList[i].alarm, alarmList[i].priority);
+        if (_systemState.screenStatus !=
+            screenStatusEnum.defibrillationScreen) {
+          _soundController.triggerSoundState(
+              alarmList[i].alarm, alarmList[i].priority);
+        }
       }
     });
   }
@@ -134,7 +139,7 @@ class AlarmController {
   ) {
     ///Prevent update because [alarmStatus.confirmed] is confirmed or [endConfirmStatus]
     if (_systemState.getAlarmStateStatus(sensor) == alarmStatus.confirmed) {
-      if (isConfirmInConfirmDuration(sensor) &&
+      if (isSensorInConfirmDuration(sensor) &&
           _systemState.getAlarmStateMessage(sensor) == message.message &&
           _systemState.getAlarmStatePriority(sensor) >= status.priority) {
         _systemState.setAlarmState(
@@ -144,6 +149,9 @@ class AlarmController {
           null,
           status.color,
         );
+
+        /// Trigger Sound State for Confirmed Alerts
+        triggerSoundController(sensor, alarmStatus.confirmed);
         return;
       } else {
         endConfirmStatus(sensor, status);
@@ -153,12 +161,20 @@ class AlarmController {
     ///Prevent update because same [alarmStatus] and [alarmMessage] are same
     if (_systemState.getAlarmStatePriority(sensor) == status.priority &&
         _systemState.getAlarmStateMessage(sensor) == message.message) {
+      ///Trigger soundstate for not changed Alerts.
+      triggerSoundController(sensor, status);
       return;
     }
 
     ///Update AlarmState if change is detected
     if (_systemState.getAlarmStatePriority(sensor) != status.priority ||
         _systemState.getAlarmStateMessage(sensor) != message.message) {
+      // Check if middle alarm is repeating and needs to change boundaries
+      if (_systemState.getAlarmStatePriority(sensor) ==
+              alarmStatus.none.priority &&
+          status.priority == alarmStatus.middle.priority) {
+        evaluateBoundaryAdjustment(sensor, message);
+      }
       _systemState.setAlarmState(
         sensor,
         status.priority,
@@ -166,86 +182,56 @@ class AlarmController {
         status,
         status.color,
       );
-      _systemState.graphList.evaluateActiveGraphAbsolutes();
-      _systemState.absAlarmFieldModel.evaluateActiveList();
-      // triggerSoundState Method for sounds
-      if (_systemState.screenStatus != screenStatusEnum.defibrillationScreen &&
-          status.priority != 0 && // dont trigger on no alarm
-          status.priority != 1 && // dont trigger on alarm confirmed
-          (_systemState.absAlarmFieldModel.activeList.contains(sensor) ||
-              _systemState.graphList.activeGraphAbsolutes.contains(sensor))) {
-        _soundController.triggerSoundState(sensor, status.priority);
+    }
+    triggerSoundController(sensor, status);
+  }
+
+  void triggerSoundController(sensorEnumAbsolute sensor, alarmStatus status) {
+    ///Prevent sounds in defibrillationScreen:
+    ///Stop [alarmTimer] and trigger [sensor] with no Priority
+    if (_systemState.screenStatus == screenStatusEnum.defibrillationScreen) {
+      if (_soundController.alarmTimer != null) {
+        _soundController.alarmTimer?.cancel();
+        _soundController.alarmTimer = null;
       }
+      // _systemState.graphList.evaluateActiveGraphAbsolutes(); // done when alarm boundaries are set
+      // _systemState.absAlarmFieldModel.evaluateActiveList();
+      _soundController.triggerSoundState(sensor, alarmStatus.none.priority);
+    } else {
+      // _systemState.graphList.evaluateActiveGraphAbsolutes();
+      // _systemState.absAlarmFieldModel.evaluateActiveList();
+      _soundController.triggerSoundState(sensor, status.priority);
     }
   }
-  // void triggerAlarmState(sensorEnumAbsolute sensor,
-  //     alarmMessage alarmMessageEnum, alarmStatus alarmPrioEnum) {
-  //   int newPriority = alarmPrioEnum.priority;
-  //   String newMessage = alarmMessageEnum.message;
-
-  //   /// This alarm is confirmed
-  //   /// This alarm has a lower or same priority
-  //   /// This alarm has same Message
-  //   if (_systemState.alarmState[sensor]!['enum'] == alarmStatus.confirmed &&
-  //       newPriority <= _systemState.alarmState[sensor]!['priority'] &&
-  //       _systemState.alarmState[sensor]!['message'] == newMessage) {
-  //     ///This time difference between the call of confirm to now
-  //     Duration diff = DateTime.now().difference(confirmMap[sensor]);
-  //     if (diff.inSeconds >= sensor.confirmDuration) {
-  //       ///reset this confirm to the previous alarm
-  //       for (alarmStatus status in alarmStatus.values) {
-  //         if (_systemState.alarmState[sensor]!['priority'] ==
-  //             status.priority) {
-  //           _systemState.alarmState[sensor]!['enum'] = status;
-  //           _systemState.graphList.evaluateActiveGraphAbsolutes();
-  //           _systemState.absAlarmFieldModel.updateActiveList();
-  //         }
-  //       }
-  //     }
-  //   }
-
-  //   ///This alarm is not a previous thrown alarm and not confirmed
-  //   else if (_systemState.alarmState[sensor]!['priority'] != newPriority ||
-  //       _systemState.alarmState[sensor]!['message'] != newMessage) {
-  //     ///Update [SystemState]
-  //     _systemState.alarmState[sensor]!['priority'] = newPriority;
-  //     _systemState.alarmState[sensor]!['message'] = newMessage;
-  //     _systemState.alarmState[sensor]!['enum'] = alarmPrioEnum;
-  //     _systemState.alarmState[sensor]!['color'] = alarmPrioEnum.color;
-  //   }
-  // }
-
-  // deprecated at the moment
-  void triggerSoundState(alarmStatus alarmPrioEnum, sensorEnumAbsolute sensor) {
-    ///Avoid null exception.
-    ///
-    ///Alarm Priorität prüfen
-    ///Diese Map dann gegen Sensor Priorität prüfen
-    ///Alarm auspielen für den höchsten Alarm
-
-    SoundIdentifier? sound = alarmPrioEnum.sound;
-    if (sound != null) {}
-  }
-
-  // void evaluateSoundState(name, prio, montirOrVent) {
-  //   List soundList = List.from(_systemState.alarmState.values.toList());
-  //   soundList.addAll(_systemState.generalAlarms.alarmList);
-  //   print(soundList);
-  //   var sortedKey = _systemState.alarmState.keys.toList.sort();
-  //   // Map {}
-  // }
 
   //TODO: change upper and lower boundary if patient value is around that value everytime
-  void evaluateBoundaryAdjustment() {}
+  void evaluateBoundaryAdjustment(
+      sensorEnumAbsolute sensor, alarmMessage message) {
+    DateTime dateTime = DateTime.now();
+
+    if (message == alarmMessage.lowerBoundaryViolated) {
+      _systemState.smartAdjustmentMap.updateLowerCounter(sensor);
+      return;
+    } else if (message == alarmMessage.upperBoundaryViolated) {
+      _systemState.smartAdjustmentMap.updateUpperCounter(sensor);
+      return;
+    } else {
+      throw Exception(
+          "Message field was $message instead of alarmMessage.lowerBoundaryViolated or alarmMessage.upperBoundaryViolated");
+    }
+  }
 
   void triggerConfirm(sensorEnumAbsolute sensor) {
     _systemState.setAlarmState(sensor, null, null, alarmStatus.confirmed, null);
-    _systemState.graphList.evaluateActiveGraphAbsolutes();
-    _systemState.absAlarmFieldModel.evaluateActiveList();
+    // _systemState.graphList.evaluateActiveGraphAbsolutes();
+    // _systemState.absAlarmFieldModel.evaluateActiveList();
     confirmMap[sensor] = DateTime.now();
+
+    // TODO: reactivate
+    evaluateAlarmState(sensor);
   }
 
-  bool isConfirmInConfirmDuration(
+  bool isSensorInConfirmDuration(
     sensorEnumAbsolute sensor,
   ) {
     if (confirmMap[sensor] != null) {
@@ -261,8 +247,6 @@ class AlarmController {
   }
 
   void endConfirmStatus(sensor, alarmStatus status) {
-    //for (alarmStatus status in alarmStatus.values) {
-    //if (_systemState.getAlarmStatePriority(sensor) == status.priority) {
     _systemState.setAlarmState(
       sensor,
       status.priority,
@@ -270,8 +254,5 @@ class AlarmController {
       status,
       status.color,
     );
-    _soundController.triggerSoundState(sensor, status.priority);
-    //}
-    //}
   }
 }

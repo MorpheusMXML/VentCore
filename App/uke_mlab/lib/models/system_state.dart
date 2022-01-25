@@ -5,6 +5,7 @@ import 'package:uke_mlab/models/screen_element_models/general_alarms.dart';
 import 'package:uke_mlab/models/screen_element_models/absolute_alarm_field_model.dart';
 import 'package:uke_mlab/models/screen_element_models/graph_list.dart';
 import 'package:uke_mlab/models/screen_element_models/ippv_model.dart';
+import 'package:uke_mlab/models/screen_element_models/smart_adjustment_model.dart';
 import 'package:uke_mlab/models/screen_element_models/theme_model.dart';
 import 'package:uke_mlab/utilities/enums/alarm_message.dart';
 
@@ -60,6 +61,10 @@ class SystemState extends GetxController {
 
   /// A reference to the current [ThemeModel] in use
   final ThemeModel themeModel = ThemeModel();
+
+  /// A reference to the current [SmartAdjustmentMap] in use. Used for smartAdjustment
+  final SmartAdjustmentMap smartAdjustmentMap = SmartAdjustmentMap();
+
   // SystemState initated with no violations at place and screenStatus as topLevelScreen
   SystemState() {
     for (var sensor in sensorEnumAbsolute.values) {
@@ -108,6 +113,8 @@ class SystemState extends GetxController {
       'status': status ?? alarmState[sensor]!['status'],
       'color': color ?? alarmState[sensor]!['color'],
     };
+    graphList.evaluateActiveGraphAbsolutes();
+    absAlarmFieldModel.evaluateActiveList();
   }
 
   void resetSystemState() {

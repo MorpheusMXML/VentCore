@@ -5,11 +5,11 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/models/system_state.dart';
 
 class GraphAlarmMessage extends StatelessWidget {
-  final sensorEnumAbsolute sensor;
+  final sensorEnumAbsolute sensorKey;
 
   const GraphAlarmMessage({
     Key? key,
-    required this.sensor,
+    required this.sensorKey,
   }) : super(key: key);
 
   @override
@@ -17,13 +17,16 @@ class GraphAlarmMessage extends StatelessWidget {
     final SystemState systemState = Get.find<SystemState>();
 
     return Obx(() {
-      String alarmMessage = systemState.getAlarmStateMessage(sensor);
-      return Text(
-        '${sensor.displayString} $alarmMessage',
-        style: const TextStyle(
-          color: AppTheme.alarmMessageColor,
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
+      String alarmMessage = systemState.getAlarmStateMessage(sensorKey);
+      return SizedBox(
+        width: 400,
+        child: Text(
+          '${sensorKey.displayString} $alarmMessage',
+          style: const TextStyle(
+            color: AppTheme.alarmMessageColor,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       );
     });

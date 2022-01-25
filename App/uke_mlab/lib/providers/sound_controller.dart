@@ -26,11 +26,14 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 class SoundController {
   ///Loads AudioAlarm Files into Cache and Provides functionality to Play, Stop them. Also provides ECG Sound per Minute and O2 Saturation.
   final AudioCache alarmPlayerCache = AudioCache(prefix: 'assets/sounds/');
+  final AudioCache defiPlayerCache = AudioCache(prefix: 'assets/sounds/');
   final AudioCache ecgPlayerCache = AudioCache(prefix: 'assets/sounds/');
   final List<SoundListEntry> soundList = <SoundListEntry>[];
+  String? _previousAlarmSound;
   final List<bool> _alarmTypes = [false, false];
   RxBool ecgSoundActive = true.obs;
   Timer? timer;
+  Timer? alarmTimer;
   Timer? getDataTimer;
   Timer? cancelTimerBeep;
   final int getDataTimerDuration = 5;
@@ -38,6 +41,7 @@ class SoundController {
 
   AudioPlayer? alarmPlayer;
   AudioPlayer? ecgPlayer;
+  AudioPlayer? defiPlayer;
 
   /// This [Map<SoundIdentifier, String>] specifies the AlarmType in the [Enum] Key and maps it to the [String] of the Sound Files Name in he Assets/sounds
   /// Folder. If you wish to change the Alarm Sound Files that shall pe blayed. Change them accordingly here and place the Sondfile under [./App/uke_mlab/assets/sounds]
@@ -45,10 +49,10 @@ class SoundController {
     SoundIdentifier.notification: 'SpaceyNotification.wav',
     SoundIdentifier.monitoringMediumAlert: 'ALERTA.wav',
     SoundIdentifier.monitoringHighAlert: 'DINGDINGSINNG.wav',
-    SoundIdentifier.ventilationHighAlert: '3H_HighAlert.wav',
+    SoundIdentifier.ventilationHighAlert: '2A_High123.wav',
     SoundIdentifier.ventilationMediumAlert: '3H_Notification.wav',
     SoundIdentifier.defiLoading: 'defiLoading.wav',
-    SoundIdentifier.defiShockReady: 'defiReady.wav'
+    SoundIdentifier.defiShockReady: 'defiReady.wav',
   };
 
   /// This [Map<SoundIdentifier, String>] specifies the EcgSaturation Type in the [Enum] Key and maps it to the [String] of the Sound Files Name in he Assets/sounds
@@ -66,23 +70,27 @@ class SoundController {
   SoundController() {
     alarmPlayerCache.loadAll(_alarmSoundFiles.values.toList());
     ecgPlayerCache.loadAll(_ecgSoundFiles.values.toList());
+    defiPlayerCache.loadAll(_alarmSoundFiles.values.toList());
   }
 
-  ///playes the SoundAlarm fot the AlarmType specified with [Enum soundIdentifier].
+  ///Plays the SoundAlarm fot the AlarmType specified with [Enum soundIdentifier].
   play(Enum soundIdentifier) async {
     alarmPlayer = await alarmPlayerCache.play(_alarmSoundFiles[soundIdentifier].toString());
   }
 
   playDefiLoadSound() async {
     stop();
-    alarmPlayer = await alarmPlayerCache.play(_alarmSoundFiles[SoundIdentifier.defiLoading].toString(), volume: 0.5);
-    alarmPlayer!.onPlayerCompletion.listen((event) async {
-      alarmPlayer =
-          await alarmPlayerCache.loop(_alarmSoundFiles[SoundIdentifier.defiShockReady].toString(), volume: 0.6);
+    defiPlayer = await defiPlayerCache.play(
+        _alarmSoundFiles[SoundIdentifier.defiLoading].toString(),
+        volume: 0.5);
+    defiPlayer!.onPlayerCompletion.listen((event) async {
+      defiPlayer = await defiPlayerCache.loop(
+          _alarmSoundFiles[SoundIdentifier.defiShockReady].toString(),
+          volume: 0.6);
     });
   }
 
-  /// stops all [AudioPlayer]'s that are currently playing a Sound.
+  ///Stops all [AudioPlayer]'s that are currently playing a Sound.
   stop() async {
     ecgSoundActive.value = false;
     if (alarmPlayer != null) {
@@ -90,10 +98,19 @@ class SoundController {
       alarmPlayer!.dispose();
       alarmPlayer = null;
     }
+    if (defiPlayer != null) {
+      defiPlayer!.stop();
+      defiPlayer!.dispose();
+      defiPlayer = null;
+    }
     if (ecgPlayer != null) {
       ecgPlayer!.stop();
       ecgPlayer!.dispose();
       ecgPlayer = null;
+    }
+    if (alarmTimer != null) {
+      alarmTimer!.cancel();
+      alarmTimer = null;
     }
     if (timer != null) {
       timer!.cancel();
@@ -105,7 +122,7 @@ class SoundController {
     }
   }
 
-  ///stops a specific [AudioPlayer] that is currently playing a Sound.
+  ///Stops a specific [AudioPlayer] that is currently playing a Sound.
   stopAlarmPlayer(AudioPlayer audioPlayer) {
     audioPlayer.stop();
   }
@@ -139,13 +156,12 @@ class SoundController {
 
     soundList.sort((a, b) => b.priority.compareTo(a.priority));
     soundList.removeWhere((item) => item.priority < soundList[0].priority);
-
-    // dont play a sound when prio of new alarm is below prio of max alarm (we should be still looping over that)
+    //Don't play a sound when prio of new alarm is below prio of max alarm (we should be still looping over that)
     if (soundList[0].priority > priority) {
       return;
     }
 
-    //for each Entry check Sensor Vent or Monitor
+    ///For each Entry check Sensor alarmtype if Vent or Monitor.
     for (var entry in soundList) {
       if (entry.type is sensorEnumAbsolute) {
         switch ((entry.type as sensorEnumAbsolute).alarmType) {
@@ -164,37 +180,111 @@ class SoundController {
     playAlarm(soundList[0].priority);
   }
 
+  ///Plays right [alarmsound] with right [priority].
   playAlarm(int priority) {
+    const double alarmVolume = 0.3;
+    int alarmSeconds = 0;
+    String alarmSound = "noalarm";
     if (_alarmTypes[0] && _alarmTypes[1]) {
-      //play Monitor+Vent
+      //Play Monitor+Vent Sounds.
       if (priority == alarmStatus.high.priority) {
-        // alarmPlayer!.stop();
-        play(SoundIdentifier.monitoringHighAlert);
+        alarmSound =
+            _alarmSoundFiles[SoundIdentifier.monitoringHighAlert].toString();
+        alarmSeconds = 2;
       } else if (priority == alarmStatus.middle.priority) {
-        // alarmPlayer!.stop();
-        play(SoundIdentifier.monitoringMediumAlert);
+        alarmSound =
+            _alarmSoundFiles[SoundIdentifier.monitoringMediumAlert].toString();
+        alarmSeconds = 5;
       }
     } else if (_alarmTypes[1]) {
-      //play Vent Alarm
+      //Play Vent Alarm.
       if (priority == alarmStatus.high.priority) {
-        // alarmPlayer!.stop();
-        play(SoundIdentifier.ventilationHighAlert);
+        alarmSound =
+            _alarmSoundFiles[SoundIdentifier.ventilationHighAlert].toString();
+        alarmSeconds = 2;
       } else if (priority == alarmStatus.middle.priority) {
-        // alarmPlayer!.stop();
-        play(SoundIdentifier.ventilationMediumAlert);
+        alarmSound =
+            _alarmSoundFiles[SoundIdentifier.ventilationMediumAlert].toString();
+        alarmSeconds = 5;
       }
     } else {
-      //play Monitor Alarm
+      //Play Monitor Alarm.
       if (priority == alarmStatus.high.priority) {
-        // alarmPlayer!.stop();
-        play(SoundIdentifier.monitoringHighAlert);
+        alarmSound =
+            _alarmSoundFiles[SoundIdentifier.monitoringHighAlert].toString();
+        alarmSeconds = 2;
       } else if (priority == alarmStatus.middle.priority) {
-        // alarmPlayer!.stop();
-        play(SoundIdentifier.monitoringMediumAlert);
+        alarmSound =
+            _alarmSoundFiles[SoundIdentifier.monitoringMediumAlert].toString();
+        alarmSeconds = 5;
       }
     }
+
+    //Don't reset Timer, if same [alarmSound] should be triggered as [_previousAlamSound].
+    if (alarmSound == _previousAlarmSound) {
+      _alarmTypes[0] = false;
+      _alarmTypes[1] = false;
+      return;
+    }
+    //Stop the [alarmTimer], if [priority] is [alarmStatus.none] or no [alarmSound] is choosen.
+    else if (alarmSound == "noalarm" ||
+        priority <= alarmStatus.confirmed.priority) {
+      if (alarmPlayer != null) {
+        alarmPlayer!.stop();
+        alarmPlayer!.dispose();
+        alarmPlayer = null;
+      }
+      if (alarmTimer != null) {
+        alarmTimer?.cancel();
+        alarmTimer = null;
+      }
+      _alarmTypes[0] = false;
+      _alarmTypes[1] = false;
+      _previousAlarmSound = null;
+      return;
+    }
+    //Register new [alarmTimer] with [alarmSound], [alarmDuration] and [alarmVolume].
+    else {
+      if (alarmSeconds != 0) {
+        if (alarmPlayer != null) {
+          alarmPlayer!.stop();
+          alarmPlayer!.dispose();
+          alarmPlayer = null;
+        }
+        if (alarmTimer != null) {
+          alarmTimer?.cancel();
+          alarmTimer = null;
+        }
+
+        ///Known Problem: We have to play the sound on first second and after this we use the Timer because the Timer plays on end of duration
+        ///This causes and Problem with Toggle to VentilationScreen!
+        //alarmPlayerCache.play(
+        //  alarmSound,
+        //  volume: alarmVolume,
+        //);
+        alarmTimer = Timer.periodic(Duration(seconds: alarmSeconds),
+            ((alarmTimer) async {
+          if (Platform.isAndroid) {
+            alarmPlayer = await alarmPlayerCache.play(
+              alarmSound,
+              volume: alarmVolume,
+              mode: PlayerMode.LOW_LATENCY,
+            );
+            // since stayAwake is not implemented on macOs, we like to check
+          } else if (Platform.isIOS) {
+            alarmPlayer = await alarmPlayerCache.play(
+              alarmSound,
+              volume: alarmVolume,
+              mode: PlayerMode.LOW_LATENCY,
+            );
+          }
+        }));
+      }
+    }
+
     _alarmTypes[0] = false;
     _alarmTypes[1] = false;
+    _previousAlarmSound = alarmSound;
   }
 
   /// Function starts the ECG Sound in the rhythm specified with [bpm] and playes the accordingly Pitched Sound File to the Oxygen Saturation specified with [spO2]

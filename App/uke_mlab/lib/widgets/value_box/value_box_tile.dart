@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:uke_mlab/models/data_models/model_absolute.dart';
 import 'package:uke_mlab/models/data_models/model_graph.dart';
 import 'package:uke_mlab/models/system_state.dart';
-import 'package:uke_mlab/utilities/enums/alarm_status.dart';
 
+import 'package:uke_mlab/utilities/enums/alarm_status.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
+
 import 'package:uke_mlab/widgets/value_box/value_box_container.dart';
 import 'package:uke_mlab/widgets/value_box/value_box_state.dart';
 

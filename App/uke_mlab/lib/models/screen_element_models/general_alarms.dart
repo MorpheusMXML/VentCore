@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/data_models/model_absolute.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/utilities/constants/statusbar_constants.dart';
 import 'package:uke_mlab/utilities/enums/non_graph_alarm.dart';
 import 'package:uke_mlab/widgets/appbar/alarm_list.dart';
@@ -96,10 +97,10 @@ class AlarmListEntry {
   /// translates the [priority] to a associated color
   Color toColor() {
     if (priority > 0 && priority <= 33) {
-      return Colors.green;
+      return AppTheme.alarmWarningColor;
     } else if (priority > 33 && priority <= 66) {
-      return Colors.yellow;
+      return AppTheme.alarmMiddleColor;
     }
-    return Colors.red;
+    return AppTheme.alarmHighColor;
   }
 }

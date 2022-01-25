@@ -5,7 +5,6 @@ import 'package:uke_mlab/models/data_models/model_nibd.dart';
 
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/utilities/enums/patient_type.dart';
-import 'package:uke_mlab/providers/alarm_controller.dart';
 
 class ModelManager {
   /// creates [DataModelAbsolute]s and [DataModelGraph]s and offers management operations for them
