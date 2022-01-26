@@ -14,7 +14,7 @@
 <br />
 <div align="center" style="font-family: Jura">
   <a href="https://git.informatik.uni-hamburg.de/mast/teaching/mlab/wt202122/uke">
-    <img src="./ReadMeFiles/LogoVentCore.png" alt="Logo">
+    <img src="./App/uke_mlab/ReadMeFiles/LogoVentCore.png" alt="Logo">
   </a>
 
 <!-- DESCRIPTION -->
@@ -24,12 +24,12 @@
     This is the Repository for the M-Lab Course project VentCore. 
     This Course was held during the WS 2021/2022 by the MAST Team of University of Hamburg.
 
-<a href="./documentation"><strong>Explore the docs »</strong></a>
+<a href="https://morpheusmxml.github.io/VentCoreDoc/doc/api/"><strong>Explore the docs »</strong></a>
 <br />
 <br />
 <a href="https://youtu.be/umgHKt3gESU">View Trailer</a>
 ·
-<a href="">Visit Website</a>
+<a href="https://annimarie13.github.io/VentCore/">Visit Website</a>
 ·
 </p>
 </div>
@@ -169,7 +169,7 @@ This prototype works as showcase for demonstrating and evaluating of a future 3-
 |High Alarms|Overview of All Alarmlimits|
 |![redalarm]|![limits]|
 
-##### For more examples, please refer to the [Documentation](TODOLINK)
+##### For more examples, please refer to the [Documentation](https://morpheusmxml.github.io/VentCoreDoc/doc/api/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -184,7 +184,7 @@ For the design created in Figma please follow this link:
 
 Also have a look at our StyleGuide for the colors used in the prototype.
 
-* [Style Guide](../documentation/uke-styleguide-tables.md)
+* [Style Guide](./App/documentation/uke-styleguide-tables.md)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -193,17 +193,15 @@ Also have a look at our StyleGuide for the colors used in the prototype.
 <!-- ALARM HANDLING -->
 # Alarm Handling
 
-##### For a complete overview, please refer to our [AlarmLogic.md](TODO LINK)
+##### For a complete overview, please refer to our [AlarmLogic.md](./App/documentation/alarmlogic.md)
 
 ## Alarm Overview
-The system is able to play the highest alarm sounds for active alarms and to play only one alarm at time. It also changes the visualisation of the current alarm state with colors on the screen. Furthermore it can evaluate the alarm type wether it is coming from monitoring or ventilation sensors. If the highest alarms are coming from monitoring and ventilation the alarm sounds alternate. All alarm sounds are [selfmade](#contact) to convey a new feeling for the application and because the old sound files were not reachable for the M-Lab project. 
-The user is able to confirm single alarms or all alarms at once. In defibrillation mode all alarms are muted. Switching back to montioring or ventilation enables active alarms again. Upcoming alarms can be confirmed and stay confirmed for a defined time. When the alarm is raising in its priority, the confirm state ends to inform the user about the worse condition that occured. In addition to that, the user gets the offer from the system to "smart adjust boundaries" when a middle alert is occuring three times in a row without being interrupted by a higher alarm or an alarm with another alarm message. If the user accepts this offer, the system adjust the triggered boundary by predefined percentages. This aims to reduce the sensory overload and to support. 
+The system is able to play the highest alarm sounds for active alarms and to play only one alarm at time. It also changes the visualisation of the current alarm state with colors on the screen. Furthermore it can evaluate the alarm type wether it is coming from monitoring or ventilation sensors. All alarm sounds are selfmaed to convey a new feeling for the application and because the old sound files were not reachable for the M-Lab project.
+The user is able to confirm single alarms or all alarms at once. In defibrillation mode all alarms are muted. Switching back to montioring or ventilation enables active alarms again. Upcoming alarms can be confirmed and stay confirmed for a defined time. When the alarm is raising in its priority, the confirm state ends to inform the user about the worse condition that occured. In addition to that, the user gets the offer from the system to "smart adjust boundaries" when a middle alert is occuring three times in a row without being interrupted by a higher alarm or an alarm with another alarm message. If the user accepts this offer, the system adjust the triggered boundary by predefined percentages. This aims to reduce the sensory overload and to support.  
 
 ## Alarm Priority
 
-With every value update, the system listens if an alarm is necessary. …….
-
-With the updated values, the system checks for the priority of the value update and if it’s a middle or high alert or a warning. To check the priority, every sensor has a predefined `sensorDeviation`. The `sensorDeviation` describes the range of allowed values above or below a limit before an alarm is classified as high and is defined individually for each sensor.
+With the updated values, the system checks for the priority of the value update and if it’s a middle or high alert or a warning. To check the priority, every sensor has a predefined `SensorDeviation`. The `SensorDeviation` describes the range of allowed values above or below a limit before an alarm is classified as high.
 
 ```shell
 
@@ -225,47 +223,56 @@ high alert upper boundary: if (newValue <= 50 * 0.9)
 
 ```
 ### Examples `SensorDeviation`
-|Sensor|Lower Boundary|Upper Boundary|`sensorDeviation`|high alarm lower| high alarm upper|
-|-|:-:|:-:|:-:|:-:|:-:|
+| Sensor | Lower Boundary | Upper Boundary | `sensorDeviation` | high alarm lower | high alarm upper |
+| ----------- | :-----------: | :-----------: | :-----------: | :-----------: | :-----------: |
 |Heartfrequency|50|120|10%|45|132|
 |SpO2|90|-|10%|81|-|
 |Temperature|36.0|37.9|1%|35.6|38.2|
 |CO2|30|45|10%|27|49|
 
-## Alarm State
+If a value update is whether a high or a middle alert, the system still checks for warnings. Those can occur, when the `ValueDeviation`, the value difference from the current value and the new updated value, is higher than allowed. This can for example also happen when the updated value is in the boundaries of the sensor. The `ValueDeviation` is different for every sensor but calculated with the following formular:
 
-If an alarm is detected the system still needs to check, if it is necessary to throw the alarm and if the sensor is active at the screen. For this, the system holds an alarm state and an `activeAlarmList`.
+```shell
 
-An alarm state needs to be changed when a new alarm with the same or higher priority and another message occurs. An `alarmMessage` defines the type of the alarm, for example if the upper boundary or if the lower boundary is violated. If a new alarm with a higher priority occurs, the alarms state always needs to be changed to a higher priority.
+Sensor: Heartfrequency
 
-Another condition that needs be considered is the `confirmState` of an alarm. During a confirm, the sensor should not throw new alarms with the same message, that are the same or lower priority. But if the alarm changes to the worse, the user needs to be informed. Even if we are in the confirm time. More cases are described in the following decisions.
-![table](./ReadMeFiles/Screenshots/table1.png)
+Upper Boundary: 120
 
+Lower Boundary: 50
 
-##### For a complete overview, please refer to our [AlarmLogic.md](TODO LINK)
+valueDifference = [upperBoundary – lowerBoundary] / 2 = 35
+
+```
+
+The system also needs to check for Zero-Values. This can be an indicator of disconnection of the physical sensor or for high alert at the same time.
+
+##### For a complete overview, please refer to our [AlarmLogic.md](./App/documentation/alarmlogic.md)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 ***
 
 <!-- DATA PROCESSING -->
 # Data Processing
 Files to consider:
 
-* [Notebook 1](./SimulationData/data_processing.ipynb)
-* [Notebook 2](./SimulationData/weinmanndata.ipynb)
-* [Raw Data](./SimulationData/rawdata.ipynb)
+* [Notebook 1](./App/uke_mlab/SimulationData/data_processing.ipynb)
+* [Notebook 2](./App/uke_mlab/SimulationData/weinmanndata.ipynb)
+* [Raw Data](./App/uke_mlab/SimulationData/rawdata.ipynb)
 
 Mr. Neuhaus from Weinmann provided us with with data twice, once actual recorded ventilation and ECG data and the second time generated simulation data.
 
 As the patient scenarios are very complex finding data that fits our needs is near impossible. Even just finding a healthy ECG wave is a very hard task. Thats why we are building our datasets ourselfs.
 
 The first time we received an "edf" file containing recorded ventilation and ECG data.
-since this was a raw recording and not filtered or treated in any way we had to process the data which we did in [Notebook 1](./SimulationData/data_processing.ipynb).
+since this was a raw recording and not filtered or treated in any way we had to process the data which we did in [Notebook 1](./App/uke_mlab/SimulationData/data_processing.ipynb).
 
 We used a python library called [mne](https://mne.tools/stable/index.html) to read the "edf" file and extract relevant information.  
 
 Since we immediately wanted to visualize the provided data within our application, we did not bother constructing a complex json file. Thus we built a simple list holding dictionaries for each graph (ECG, paw, pleth, etc.).
 
 Since the data is raw and unfiltered a lot of noise was present, to filter out the noise Mr. Neuhaus recomended us to use a algorithm called [simple moving average](https://en.wikipedia.org/wiki/Moving_average).
-Our implementation of the simple moving average can be found in this [Notebook 1](./SimulationData/data_processing.ipynb) under the section "Simple Moving Average".
+Our implementation of the simple moving average can be found in this [Notebook 1](./App/uke_mlab/SimulationData/data_processing.ipynb) under the section "Simple Moving Average".
 This provided us with a clean ECG wave we could use to display the ECG channel in our application.
 After finishing up the data for our graphs we realized that this is only half the data our application needs to be realistic enough for our customer.
 
@@ -281,7 +288,7 @@ To tackle this issue we decided to generate our heartfrequency with an algorithm
 
 ### Json Structure
 
-![Json Structure](./ReadMeFiles/Screenshots/datastreams.PNG)
+![Json Structure](./App/uke_mlab/ReadMeFiles/Screenshots/datastreams.PNG)
 
 Every scenario and our standard scenario have a dedicated json file. On the top level one can find a list containing all the (sensor)channels needed, and general information for the scenario such as the duration. A channel can contain data for either a graph or one of the absolute values that are associated to the graphs and channel information. The data just holds a list of all the datapoints. Channel information provides useful descriptions and important parameters such as the enum identifier and the resolution. The resolution is stated in Hz.
 
@@ -295,10 +302,12 @@ With a combination of the random walk and the clean, easily loopable data we rec
 # Documentation
 
 <!-- TODO: Add Link-->
-- Please refer to our [Code Documentation](./documentation)
+- Please refer to our [Code Documentation](https://morpheusmxml.github.io/VentCoreDoc/doc/api/)
 - Application [Styleguide](/App/documentation/uke-styleguide-tables.md)
-- Approaches and Logic for [Alarmmangement](TODO LINK)
-- [UseCases](./App/documentation/UseCase-English.pdf) for Testing
+- Approaches and Logic for [Alarmmangement](/App/documentation/alarmlogic.md)
+- [UseCases](./App/documentation/UseCase_English.pdf) for Testing
+
+- [Retrospective](./App/documentation/Retrospective.pdf)
  
 - [Figma-Clickdummy](https://www.figma.com/proto/ase69ABWTPP8L2kVJdHuzq/MLab---UKE-Protoype-UI?node-id=892%3A3234&scaling=scale-down&page-id=892%3A792&starting-point-node-id=892%3A3234&show-proto-sidebar=1)
 
@@ -308,37 +317,43 @@ With a combination of the random walk and the clean, easily loopable data we rec
 <!-- KNOWN ISSUES -->
 # Known Issues
 
-**1. Sound Problems with MacOS and Simulator**
+**1. [Sound Problems with MacOS and Simulator](https://stackoverflow.com/questions/302399/sound-not-working-in-iphone-simulator)**
 
   If you are using a Mac and you are simulating an iPad over XCode and the Simulator, please make sure, that you have enabled the sound in settings. Also playing sounds with the Mac speakers can lead to sound issues. Please consider using headphones.
-  ![MacOs](./ReadMeFiles/Screenshots/image.png)
+  ![MacOs](./App/uke_mlab/ReadMeFiles/Screenshots/image.png)
   ***
 
-**2. [Add-Button ValueTiles for the right side missing](https://git.informatik.uni-hamburg.de/mast/teaching/mlab/wt202122/uke/-/issues/121)**
-
-Adding an absolute sensor on the right side of the screen is currently missing.
+**2. [Observation RAM](https://git.informatik.uni-hamburg.de/mast/teaching/mlab/wt202122/uke/-/issues/169)**
+ 
+ RAM filled with 4.3 GB after running application for extended time period (about 15 minutes). Tested on iPad Pro, 12.9inches, 2nd generation.
 
 ***
 
-**3. [Audioplayer output in Debug Console](TODO: Link Missing?)**
+**3. [Add-Button ValueTiles for the right side missing](https://git.informatik.uni-hamburg.de/mast/teaching/mlab/wt202122/uke/-/issues/121)**
 
-This seems to be a known issue with the [audioplayer](https://github.com/bluefireteam/audioplayers/issues/707).
-If you want to disable the output, please filter your console. To exclude certain output, use ***!excludeText***
+Adding an absolute sensor on the right side of the screen is currently missing. 
+
 ***
 
-**4. [Delayed Alarm Sounds](TODO: Link Missing?)**
+**4. [Delayed Alarm Sounds](https://git.informatik.uni-hamburg.de/mast/teaching/mlab/wt202122/uke/-/issues/167)**
 
 Alarms sound don't start right away. This seems to be a problem of Audioplayer and Timer. Initial start should be directly.
 
 ***
 
-**5. [Alarms disappear too quickly](TODO: Link Missing?)**
+**5. [Alternating Sound missing](https://git.informatik.uni-hamburg.de/mast/teaching/mlab/wt202122/uke/-/issues/168)**
+
+Alarmsound should be alternating, when at least two alarms from monitoring and ventilation occur at the same time with the same priority.
+
+***
+
+**6. [Alarms disappear too quickly](https://git.informatik.uni-hamburg.de/mast/teaching/mlab/wt202122/uke/-/issues/166)**
 
 Alarms should be visualized at least 10 seconds before it can update to a lower alarm. 
 
 ***
 
-**6. [Server Issues with Pipeline](https://git.informatik.uni-hamburg.de/mast/teaching/mlab/wt202122/uke/-/issues/59)**
+**7. [Server Issues with Pipeline](https://git.informatik.uni-hamburg.de/mast/teaching/mlab/wt202122/uke/-/issues/59)**
 
 The pipeline for the project couldn't be started due to server issues.
 
@@ -376,7 +391,7 @@ Special Thanks for the friendly help for the Requirements Elicitation and medica
 * [Dr. Reip](mailto:w.reip@uke.de) - Emergency Doctor @ UKE Hamburg
 * [Dr. Sasu](mailto:p.sasu@uke.de) - Emergency Doctor @ UKE Hamburg
 
-And also for providing simulation / real patient data and helping with DataGeneration for the Showcase.
+And also for providing simulation / real patient data and helping with DataGeneration for the showcase.
 
 * [Christian Neuhaus](mailto:C.Neuhaus@weinmann-emt.de) - WEINMANN Emergency
 
@@ -384,7 +399,7 @@ And also for providing simulation / real patient data and helping with DataGener
 </div>
 
 <!-- MARKDOWN LINKS & IMAGES -->
-[issues-shield]: https://img.shields.io/badge/issues-162-brightgreen?style=for-the-badge
+[issues-shield]: https://img.shields.io/badge/issues-167-brightgreen?style=for-the-badge
 [issues-url]: https://git.informatik.uni-hamburg.de/mast/teaching/mlab/wt202122/uke/-/issues
 
 [commit-shield]:https://img.shields.io/badge/commits-1010-orange?style=for-the-badge
@@ -394,19 +409,19 @@ And also for providing simulation / real patient data and helping with DataGener
 [team-url]:#contact
 
 [website-shield]:https://img.shields.io/badge/Website-VentCore-blueviolet?style=for-the-badge
-[website-url]:[website-url]
+[website-url]:https://annimarie13.github.io/VentCore/
 
 
-[product-screenshot]: ./ReadMeFiles/Screenshots/ventilation2-black.png
-[monitoring]: ./ReadMeFiles/Screenshots/monitoring.png
-[ventilation]:./ReadMeFiles/Screenshots/ventilation.png
-[StartScreen]:./ReadMeFiles/Screenshots/presets.png
-[AlarmLimit]: ./ReadMeFiles/Screenshots/alarmlimit.png
-[DefiScreen]:./ReadMeFiles/Screenshots/cpr.png
-[Add]:./ReadMeFiles/Screenshots/monitoring-add-limit.png
-[Scenario]:./ReadMeFiles/Screenshots/scenarios.png
-[RedAlarm]:./ReadMeFiles/Screenshots/red-alarms.png
-[threemodes]:./ReadMeFiles/Screenshots/3in1.png
-[limits]:./ReadMeFiles/Screenshots/limits.png
+[product-screenshot]: ./App/uke_mlab/ReadMeFiles/Screenshots/ventilation2-black.png
+[monitoring]: ./App/uke_mlab/ReadMeFiles/Screenshots/monitoring.png
+[ventilation]:./App/uke_mlab/ReadMeFiles/Screenshots/ventilation.png
+[StartScreen]:./App/uke_mlab/ReadMeFiles/Screenshots/presets.png
+[AlarmLimit]: ./App/uke_mlab/ReadMeFiles/Screenshots/alarmlimit.png
+[DefiScreen]:./App/uke_mlab/ReadMeFiles/Screenshots/cpr.png
+[Add]:./App/uke_mlab/ReadMeFiles/Screenshots/monitoring-add-limit.png
+[Scenario]:./App/uke_mlab/ReadMeFiles/Screenshots/scenarios.png
+[RedAlarm]:./App/uke_mlab/ReadMeFiles/Screenshots/red-alarms.png
+[threemodes]:./App/uke_mlab/ReadMeFiles/Screenshots/3in1.png
+[limits]:./App/uke_mlab/ReadMeFiles/Screenshots/limits.png
 
 [Table Audio Priorities]:./ReadMeFiles/table-audio-priority.png
