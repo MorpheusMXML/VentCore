@@ -24,7 +24,7 @@
     This is the Repository for the M-Lab Course project VentCore. 
     This Course was held during the WS 2021/2022 by the MAST Team of University of Hamburg.
 
-<a href=""><strong>Explore the docs »</strong></a>
+<a href="./documentation"><strong>Explore the docs »</strong></a>
 <br />
 <br />
 <a href="https://youtu.be/umgHKt3gESU">View Trailer</a>
@@ -193,40 +193,56 @@ Also have a look at our StyleGuide for the colors used in the prototype.
 <!-- ALARM HANDLING -->
 # Alarm Handling
 
-For a complete overview, please refer to our [AlarmLogic.md](TODO LINK)
+##### For a complete overview, please refer to our [AlarmLogic.md](TODO LINK)
 
-### Priotising alarms in categories
+## Alarm Overview
+The system is able to play the highest alarm sounds for active alarms and to play only one alarm at time. It also changes the visualisation of the current alarm state with colors on the screen. Furthermore it can evaluate the alarm type wether it is coming from monitoring or ventilation sensors. If the highest alarms are coming from monitoring and ventilation the alarm sounds alternate. All alarm sounds are [selfmade](#contact) to convey a new feeling for the application and because the old sound files were not reachable for the M-Lab project. 
+The user is able to confirm single alarms or all alarms at once. In defibrillation mode all alarms are muted. Switching back to montioring or ventilation enables active alarms again. Upcoming alarms can be confirmed and stay confirmed for a defined time. When the alarm is raising in its priority, the confirm state ends to inform the user about the worse condition that occured. In addition to that, the user gets the offer from the system to "smart adjust boundaries" when a middle alert is occuring three times in a row without being interrupted by a higher alarm or an alarm with another alarm message. If the user accepts this offer, the system adjust the triggered boundary by predefined percentages. This aims to reduce the sensory overload and to support. 
 
-Parameter alarms are prioritised according to the severity of their deviations from the set alarm limits. The `SensorDeviation` is defined in percent for each parameter.
+## Alarm Priority
 
-#### Example:
+With every value update, the system listens if an alarm is necessary. …….
 
-  ```shell
+With the updated values, the system checks for the priority of the value update and if it’s a middle or high alert or a warning. To check the priority, every sensor has a predefined `sensorDeviation`. The `sensorDeviation` describes the range of allowed values above or below a limit before an alarm is classified as high and is defined individually for each sensor.
 
-  Parameter: Heartfrequency
-  Upper Limit: 120
-  SensorDeviation: 0.1
-  Middle Alert: 120 < currentValue < 131
-  High Alert: currentValue >131
+```shell
 
-  ```
+Sensor: Heartfrequency
 
-### Auditory alarm according to prioritisation
+Upper Boundary: 120
 
-Alarms are displayed audibly in descending order of priority.
-![Table Audio Priorities](./ReadMeFiles/table-audio-priority.png)
+Lower Boundaray: 50
 
-### Auditory Behaviour of Alarms
+SensorDeviation: 0.1 (10%)
 
-## General Rules
+middle alert upper boundary: if (newValue < 120 * 1.1)
 
-//TODO: Add Description of Alarm Handling Rules
-<p align="right">(<a href="#top">back to top</a>)</p>
+high alert upper boundary: if (newValue >= 120 * 1.1)
 
-### Auditory alarm according to prioritisation
-Alarms are displayed audibly in descending order of priority.
-![Table Audio Priorities](./ReadMeFiles/table-audio-priority.png)
+middle alert lower boundary: if (newValue > 50 * 0.9)
 
+high alert upper boundary: if (newValue <= 50 * 0.9)
+
+```
+### Examples `SensorDeviation`
+|Sensor|Lower Boundary|Upper Boundary|`sensorDeviation`|high alarm lower| high alarm upper|
+|-|:-:|:-:|:-:|:-:|:-:|
+|Heartfrequency|50|120|10%|45|132|
+|SpO2|90|-|10%|81|-|
+|Temperature|36.0|37.9|1%|35.6|38.2|
+|CO2|30|45|10%|27|49|
+
+## Alarm State
+
+If an alarm is detected the system still needs to check, if it is necessary to throw the alarm and if the sensor is active at the screen. For this, the system holds an alarm state and an `activeAlarmList`.
+
+An alarm state needs to be changed when a new alarm with the same or higher priority and another message occurs. An `alarmMessage` defines the type of the alarm, for example if the upper boundary or if the lower boundary is violated. If a new alarm with a higher priority occurs, the alarms state always needs to be changed to a higher priority.
+
+Another condition that needs be considered is the `confirmState` of an alarm. During a confirm, the sensor should not throw new alarms with the same message, that are the same or lower priority. But if the alarm changes to the worse, the user needs to be informed. Even if we are in the confirm time. More cases are described in the following decisions.
+![table](./ReadMeFiles/Screenshots/table1.png)
+
+
+##### For a complete overview, please refer to our [AlarmLogic.md](TODO LINK)
 ***
 
 <!-- DATA PROCESSING -->
@@ -279,9 +295,9 @@ With a combination of the random walk and the clean, easily loopable data we rec
 # Documentation
 
 <!-- TODO: Add Link-->
-- Please refer to our [Code Documentation]()
+- Please refer to our [Code Documentation](./documentation)
 - Application [Styleguide](/App/documentation/uke-styleguide-tables.md)
-- Approaches and Logic for [Alarmmangement]()
+- Approaches and Logic for [Alarmmangement](TODO LINK)
 - [UseCases](./App/documentation/UseCase-English.pdf) for Testing
  
 - [Figma-Clickdummy](https://www.figma.com/proto/ase69ABWTPP8L2kVJdHuzq/MLab---UKE-Protoype-UI?node-id=892%3A3234&scaling=scale-down&page-id=892%3A792&starting-point-node-id=892%3A3234&show-proto-sidebar=1)
