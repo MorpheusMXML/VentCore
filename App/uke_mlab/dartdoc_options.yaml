@@ -1,0 +1,27 @@
+dartdoc:
+  categories:
+    "Models":
+      markdown: doc/First.md
+      name: Models
+    "Data Models":
+#      markdown:
+      name: Data Models
+    "Screen Element Models":
+#      markdown:
+      name: Screen Element Models
+    "Providers":
+#      markdown: doc/Second.md
+      name: Providers / Controller
+    "Scenarios":
+#      markdown:
+      name: Scenarios
+    "Screens":
+ #     markdown:
+      name: Screens
+    "Utilities":
+#      markdown:
+      name: Utilities
+  categoryOrder: ["Models", "Data Models", "Screen Element Models", "Providers", "Scenarios", "Screens", "Utilities"]
+  linkTo:
+    url: "https://my.dartdocumentationsite.org/dev/%v%"
+  
