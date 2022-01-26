@@ -128,10 +128,11 @@ class ValueBoxTileNIBD extends StatelessWidget {
   }
 
   /// Helper method to evaluate the backgroundcolor for alarms (default != [Theme.of(context).focusColor])
-  Color evaluateBorderColor(BuildContext context, sensorEnumAbsolute sensorKey,
+  Color? evaluateBorderColor(BuildContext context, sensorEnumAbsolute sensorKey,
       RxMap<sensorEnumAbsolute, Map<String, dynamic>> alarmState) {
     final ThemeData theme = Theme.of(context);
     alarmStatus? alarm = alarmState[sensorKey]!["status"];
+
     switch (alarm) {
       case alarmStatus.high:
       case alarmStatus.middle:
