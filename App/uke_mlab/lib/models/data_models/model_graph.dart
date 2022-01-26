@@ -11,7 +11,8 @@ import 'model_graphdata.dart';
 /// Alarm evaluation is done in alarm_controller
 /// graphDataMaxLength is initialized with 100, can be manipulated
 /// {@category Models}
-/// {@subCategory Data Models}
+/// {@category DataModels}
+/// {@subCategory DataModels}
 class DataModelGraph extends GetxController {
   /// sensor key hinting at the corresponding sensor addressing the current [DataModelGraph]
   final sensorEnumGraph sensorKey;
@@ -60,8 +61,7 @@ class DataModelGraph extends GetxController {
     switch (sensorKey) {
       case sensorEnumGraph.cpr:
         for (int i = 0; i < valueList.length; i++) {
-          singleData.value = ChartData.asCPR(
-              time: DateTime.now(), value: valueList[i].toDouble(), counter: singleData.value.counter + 1);
+          singleData.value = ChartData.asCPR(time: DateTime.now(), value: valueList[i].toDouble(), counter: singleData.value.counter + 1);
           graphData.add(singleData.value);
         }
 
@@ -80,8 +80,7 @@ class DataModelGraph extends GetxController {
         break;
       default:
         for (int i = 0; i < valueList.length; i++) {
-          singleData.value =
-              ChartData(time: DateTime.now(), value: valueList[i].toDouble(), counter: singleData.value.counter + 1);
+          singleData.value = ChartData(time: DateTime.now(), value: valueList[i].toDouble(), counter: singleData.value.counter + 1);
           graphData.add(singleData.value);
         }
 
