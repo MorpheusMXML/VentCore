@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
 
-/// Theme of the app containing static, non changing colors as well as light and dark theme
-///
-/// Non changing colors contain mostly alarm colors and sensor colors following the style guide.
+/// This class provides the app with a two themes: [darkTheme] and [lightTheme].
+/// By default, the app starts in the [lightTheme] and can be toggled to the [darkTheme] by clicking on the theme [ToggleThemeButton].
+/// The class contains constant values (such as [heartFreqColor]) that are not changed when toggling the theme.
+/// Text Styles, Button Styles and some Colors are changed depending on the active theme.
+/// The theme class is extended by extensions that specify those styles.
 class AppTheme {
   static const Color heartFreqColor = Color(0xFF34C759);
   static const Color flowColor = Color(0xFF0CECDD);
@@ -24,7 +26,7 @@ class AppTheme {
   final Color backgroundColor = const Color(0xFF1C1B1F);
   final Color appBar = const Color(0xFF1d192B);
 
-  /// Dark theme of the App, is default
+  /// Dark theme of the App (default)
   static ThemeData get darkTheme {
     return ThemeData(
       brightness: Brightness.dark,
@@ -61,7 +63,8 @@ class AppTheme {
   }
 }
 
-// COLORS
+/// This extension contains custom colors that are used throughout the app.
+/// The colors in [primarySwatch] are the most used colors.
 extension CustomColors on ThemeData {
   ColorSwatch<int> get primarySwatch => ColorSwatch(0xFFEEEEEE, {
         0: Get.isDarkMode ? const Color(0xFFFFFFFF) : const Color(0xFFFFFFFF),
@@ -79,21 +82,25 @@ extension CustomColors on ThemeData {
       Get.isDarkMode ? primarySwatch[100] : primarySwatch[0];
 }
 
-// TEXT STYLES
+/// This extension contains custom text styles that are used by certain widgets.
+/// The colors in [primarySwatch] are the most used colors.
 extension CustomTextStyles on ThemeData {
-  static const xxs = 12;
-  static const xs = 16;
-  static const s = 17;
-  static const m = 18;
-  static const l = 20;
-  static const xl = 24;
-  static const xxl = 32;
-  static const xxxl = 44;
+  /// Custom Text Styles for the app.
 
+  // General TextStyles
   TextStyle get boldTextStyle => const TextStyle(
         fontWeight: FontWeight.bold,
       );
 
+  TextStyle get navigationButtonTextStyle => const TextStyle(
+        fontSize: 24,
+      );
+
+  TextStyle get mediumTextStyle => const TextStyle(
+        fontSize: 24,
+      );
+
+  // TextStyles used by DetailsPopup.
   TextStyle get patientPopupTextStyle => TextStyle(
         fontSize: 21,
         fontWeight: FontWeight.bold,
@@ -106,29 +113,29 @@ extension CustomTextStyles on ThemeData {
         color: primarySwatch[10],
       );
 
-  TextStyle get navigationButtonTextStyle => const TextStyle(
-        fontSize: 24,
-      );
-
   TextStyle get patientTypeTextStyle => const TextStyle(
         fontSize: 35,
         fontWeight: FontWeight.bold,
       );
 
+// TextStyles used by GraphAdder.
   TextStyle get graphAdderPopupTextStyle => const TextStyle(
         fontSize: 18,
       );
 
+  // TextStyles used by ErrorMessage.
   TextStyle get errorMessageTextStyle => const TextStyle(
         color: Colors.blue,
         fontSize: 24,
       );
 
+  // TextStyles used by InfoText and InfoContainer.
   TextStyle get infoTextStyle => TextStyle(
         fontSize: 16,
         color: contrastColor,
       );
 
+  // TextStyles used by Menu and MenuEntry.
   TextStyle get menuDisabledTextStyle => TextStyle(
         color: disabledColor,
         fontSize: 20,
@@ -142,6 +149,7 @@ extension CustomTextStyles on ThemeData {
         fontSize: 28,
       );
 
+  // TextStyles used by SettingContainer, SettingTile and SettingText
   TextStyle get settingTextStyle => TextStyle(
         fontSize: 16,
         color: contrastColor,
@@ -160,15 +168,23 @@ extension CustomTextStyles on ThemeData {
         fontWeight: FontWeight.bold,
       );
 
+  // TextStyles used by AED Button
   TextStyle get aedButtonTextStyle => const TextStyle(
         fontSize: 20,
         fontWeight: FontWeight.bold,
       );
 
+  // TextStyles used by the graphs
   TextStyle get graphAlarmMessageTextStyle => TextStyle(
         color: inverseContrastColor,
         fontSize: 20,
         fontWeight: FontWeight.bold,
+      );
+
+  // TextStyles used by AlarmCounterTile, AlarmFieldTile and StatusBar
+  TextStyle get alarmTextStyle => TextStyle(
+        color: inverseContrastColor,
+        fontSize: 24,
       );
 
   TextStyle get alarmFieldTextStyle => TextStyle(
@@ -178,16 +194,12 @@ extension CustomTextStyles on ThemeData {
         fontWeight: FontWeight.bold,
       );
 
-  TextStyle get alarmTextStyle => TextStyle(
-        color: inverseContrastColor,
-        fontSize: 24,
-      );
-
   TextStyle get statusBarTextStyle => TextStyle(
         color: contrastColor,
         decoration: TextDecoration.none,
       );
 
+  // TextStyles used by DefibrillationStats, SystemDiagnosis, ImpedanceContainer, ShockPower
   TextStyle get defiStatsHeadlineTextStyle => const TextStyle(
         fontSize: 18,
       );
@@ -220,14 +232,12 @@ extension CustomTextStyles on ThemeData {
         fontSize: 20,
         color: Colors.red,
       );
-
-  TextStyle get mediumTextStyle => const TextStyle(
-        fontSize: 24,
-      );
 }
 
-// BUTTON STYLES
+/// This extension contains custom button styles that are used by certain widgets.
+/// The colors in [primarySwatch] are the most used colors.
 extension CustomButtonStyles on ThemeData {
+  // Buttonstyle used by ValueBoxContainer
   ButtonStyle get valueBoxContainerButtonStyle => ButtonStyle(
         shape: MaterialStateProperty.all(
           const RoundedRectangleBorder(),
@@ -237,23 +247,7 @@ extension CustomButtonStyles on ThemeData {
         ),
       );
 
-  ButtonStyle get alarmCounterButtonStyle => ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(
-          Get.find<SystemState>().generalAlarms.alarmList[0].toColor(),
-        ),
-        shape: MaterialStateProperty.all(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(40),
-          ),
-        ),
-      );
-
-  ButtonStyle get alarmFieldButtonStyle => ElevatedButton.styleFrom(
-        shape: const CircleBorder(),
-        primary: AppTheme.alarmNoneColor,
-        onPrimary: contrastColor,
-      );
-
+  // Buttonstyles used by DefibrillationButton, ImpedanceButton and SynchronicityButton
   ButtonStyle get defiRegularButtonStyle => ElevatedButton.styleFrom(
         primary: primarySwatch[40],
         onPrimary: contrastColor,
@@ -264,11 +258,13 @@ extension CustomButtonStyles on ThemeData {
         foregroundColor: MaterialStateProperty.all(Colors.green),
       );
 
+  // Buttonstyles used by ShockPower
   ButtonStyle get shockPowerButtonStyle => ElevatedButton.styleFrom(
-      primary: Colors.transparent,
-      textStyle: const TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: 100,
-        color: Colors.red,
-      ));
+        primary: Colors.transparent,
+        textStyle: const TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 100,
+          color: Colors.red,
+        ),
+      );
 }
