@@ -1,4 +1,8 @@
-//TODO: COMMENTARY
+import 'package:uke_mlab/models/data_models/model_absolute.dart';
+
+/// Enum containing keys for alarms not directly related to a [DataModelAbsolute] which are mocked using this enum.
+///
+/// These are mostly alarms comming directly from the medical device, except for [vt] and [vf]
 enum nonGraphAlarmEnum {
   spo2bad,
   spo2weak,
@@ -18,7 +22,9 @@ enum nonGraphAlarmEnum {
   cprFeedback,
 }
 
-//TODO: COMMENTARY
+/// Contains a Map [attributes] with [nonGraphAlarmEnum] as key to another key-value pair containing information regarding the Alarm.
+///
+/// Currently the only entry on the second level Map has 'message' as key.
 extension NonGraphAlarmAttributes on nonGraphAlarmEnum {
   static const Map<nonGraphAlarmEnum, Map<String, dynamic>> attributes = {
     nonGraphAlarmEnum.spo2bad: {
@@ -71,5 +77,6 @@ extension NonGraphAlarmAttributes on nonGraphAlarmEnum {
     },
   };
 
+  /// Returns 'message' value from the [attributes] map
   get message => attributes[this]!['message'] as String;
 }
