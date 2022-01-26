@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
 
-// TODO: COMMENTARY
+/// Custom widget for the text of one IPPv setting parameter.
 class SettingText extends StatelessWidget {
+  /// Name of the parameter
   final String name;
+
+  /// Unit of the parameter
   final String rate;
   const SettingText({
     Key? key,

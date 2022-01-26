@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/utilities/constants/absolute_alarm_field_constants.dart';
 
-// TODO: COMMENTARY
+/// Contains a button allowing the user to select IPPv mode
 class IPPVButton extends StatelessWidget {
   const IPPVButton({Key? key}) : super(key: key);
 
@@ -21,15 +21,28 @@ class IPPVButton extends StatelessWidget {
       child: Center(
         child: Obx(
           () => Container(
-            decoration: BoxDecoration(color: Colors.lightBlue[300], borderRadius: const BorderRadius.all(Radius.circular(16))),
+            decoration: BoxDecoration(
+                color: Colors.lightBlue[300],
+                borderRadius: const BorderRadius.all(Radius.circular(16))),
             child: DropdownButtonHideUnderline(
               child: DropdownButton(
                 isExpanded: true,
                 value: systemState.ippvModel.selectedIPPVMode.value,
-                onChanged: (newValue) => systemState.ippvModel.selectedIPPVMode.value = '$newValue',
-                items: <String>['IPPV', 'S-IPPV', 'PCV', 'BiLevel + ASB', 'CPAP', 'CPAP + ASB', 'CPR'].map((value) {
+                onChanged: (newValue) =>
+                    systemState.ippvModel.selectedIPPVMode.value = '$newValue',
+                items: <String>[
+                  'IPPV',
+                  'S-IPPV',
+                  'PCV',
+                  'BiLevel + ASB',
+                  'CPAP',
+                  'CPAP + ASB',
+                  'CPR'
+                ].map((value) {
                   return DropdownMenuItem(
-                    child: Container(margin: const EdgeInsets.only(left: 8), child: Text(value)),
+                    child: Container(
+                        margin: const EdgeInsets.only(left: 8),
+                        child: Text(value)),
                     value: value,
                   );
                 }).toList(),
