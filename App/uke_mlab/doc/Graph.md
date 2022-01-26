@@ -5,3 +5,5 @@ Such as, ecg graph, history graph and pleth.
 Note that the graphs excessively use the Syncfusion Flutter package.
 
 For further information about Syncfusion charts have a look [here](https://pub.dev/packages/syncfusion_flutter_charts)
+
+![GraphScreenshot](./TopicScreenshots/graph.PNG)
