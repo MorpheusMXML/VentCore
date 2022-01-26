@@ -72,6 +72,13 @@ class DataModelGraph extends GetxController {
             graphData.removeAt(0);
           }
         }
+
+        if (chartController is ChartSeriesController &&
+            chartController != null) {
+          chartController!.updateDataSource(
+              updatedDataIndexes:
+                  List.generate(graphDataMaxLength, (index) => index++));
+        }
         break;
       default:
         for (int i = 0; i < valueList.length; i++) {
