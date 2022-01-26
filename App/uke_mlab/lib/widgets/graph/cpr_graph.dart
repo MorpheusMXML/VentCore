@@ -10,7 +10,7 @@ import 'package:uke_mlab/models/data_models/model_graphdata.dart';
 /// The Graph rendered displays a history of how well the CPR has been performed in relation to the compression depth.
 ///
 /// The [sensor] parameter specifies the sensor this graph gets its data from. Typically, [sensorEnumGraph.cpr] should be provided.
-/// A correspondig [DataModelGraph] for the CPR Graph is created with [GetX].
+/// A corresponding [DataModelGraph] for the CPR Graph is created with [GetX].
 class CprGraph extends StatelessWidget {
   /// Creates a CPR bar graph to indicate optimum pressure applied during CPR.
   final sensorEnumGraph sensor;

@@ -3,14 +3,22 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/providers/defibrillation_controller.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 
-// TODO: COMMENTARY
+/// Creates an Synchronicity Button with the values "Sync" or "Async".
+/// [SynchronicityButton.sync] creates a synchronized Synchronicity Button.
+/// [SynchronicityButton.async] creates an asynchronized Synchronicity Button.
+///
+/// The [DefibrillationController] handles all actions relating to this button.
 class SynchronicityButton extends StatelessWidget {
+  /// Synchronicity button for the defibrillation settings.
   final String name;
+
+  /// Creates instance of [SynchronicityButton] with String 'Sync'.
   const SynchronicityButton.sync({
     Key? key,
     this.name = 'Sync',
   }) : super(key: key);
 
+  /// Creates instance of [SynchronicityButton] with String 'Async'.
   const SynchronicityButton.async({
     Key? key,
     this.name = 'Async',

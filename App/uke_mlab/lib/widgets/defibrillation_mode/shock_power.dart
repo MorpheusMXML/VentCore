@@ -3,9 +3,17 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/providers/defibrillation_controller.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 
-// TODO: COMMENTARY
+/// Displays the shock power for the defibrillation in Joule.
+/// If clicked on the shock power value, widget renders into a [Slider] for adjusting the shock power.
+///
+/// The [DefibrillationController] handles all actions relating to the button and switch.
 class ShockPower extends StatelessWidget {
-  const ShockPower({Key? key}) : super(key: key);
+  /// Displays all widgets related to the shock power.
+
+  /// Creates instance of [ShockPower].
+  const ShockPower({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -3,9 +3,16 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/providers/defibrillation_controller.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 
-// TODO: COMMENTARY
+/// Creates an a [Text] that displays the current system diagnosis.
+///
+/// The [DefibrillationController] handles all actions relating to this textfield.
 class SystemDiagnosis extends StatelessWidget {
-  const SystemDiagnosis({Key? key}) : super(key: key);
+  /// Displays current system diagnosis.
+
+  /// Creates instance of [SystemDiagnosis].
+  const SystemDiagnosis({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

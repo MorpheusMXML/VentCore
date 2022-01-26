@@ -10,7 +10,7 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 /// This is the most commonly used graph type.
 ///
 /// The [sensor] parameter specifies the sensor this graph gets its data from. Typically, [sensorEnumGraph.ecgCh1], [sensorEnumGraph.ecgCh2], [sensorEnumGraph.flow], [sensorEnumGraph.paw] or [sensorEnumGraph.pleth] should be provided.
-/// A correspondig [DataModelGraph] for the CPR Graph is created with [GetX].
+/// A corresponding [DataModelGraph] for the CPR Graph is created with [GetX].
 class RegularGraph extends StatelessWidget {
   /// Creates a regular graph.
   final sensorEnumGraph sensor;

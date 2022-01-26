@@ -28,7 +28,9 @@ import 'package:uke_mlab/providers/sound_controller.dart';
 /// This is due to a Bug that will cause the app to crash when Animating a Widget while changing the Screen Mode.
 /// Further for Safety Reasons one should not be able to change the Mode of the Device when the User is Loading the Defibrillator and / or ready to apply the Shock.
 class LoadShockButton extends StatefulWidget {
-  const LoadShockButton({Key? key}) : super(key: key);
+  const LoadShockButton({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _LoadShockButtonState createState() => _LoadShockButtonState();

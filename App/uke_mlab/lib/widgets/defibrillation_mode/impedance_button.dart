@@ -3,19 +3,30 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/providers/defibrillation_controller.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 
-// TODO: COMMENTARY
+/// Creates an Impedance Button with an intensity depending on which constructor is called.
+/// [ImpedanceButton.low] creates an Impedance Button with low intensity.
+/// [ImpedanceButton.medium] creates an Impedance Button with medium intensity.
+/// [ImpedanceButton.high] creates an Impedance Button with high intensity.
+///
+/// The [DefibrillationController] handles all actions relating to this button.
 class ImpedanceButton extends StatelessWidget {
+  /// Impedance button for the defibrillation settings.
+
   final String name;
+
+  /// Creates instance of [ImpedanceButton] with String 'Low'.
   const ImpedanceButton.low({
     Key? key,
     this.name = 'Low',
   }) : super(key: key);
 
+  /// Creates instance of [ImpedanceButton] with String 'OK'.
   const ImpedanceButton.medium({
     Key? key,
     this.name = 'OK',
   }) : super(key: key);
 
+  /// Creates instance of [ImpedanceButton] with String 'High'.
   const ImpedanceButton.high({
     Key? key,
     this.name = 'High',

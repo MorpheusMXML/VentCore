@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:uke_mlab/widgets/defibrillation_mode/defibrillation_button.dart';
 
-// TODO: COMMENTARY
+/// Creates a row of the two possible [DefibrillationButton]s,  [DefibrillationButton.auto] and [DefibrillationButton.manual].
+/// The row is displayed by [DefibrillationMode].
 class DefibrillationContainer extends StatelessWidget {
-  const DefibrillationContainer({Key? key}) : super(key: key);
+  /// The two defibrillation buttons, auto and manual.
+
+  /// Creates instance of [DefibrillationContainer].
+  const DefibrillationContainer({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

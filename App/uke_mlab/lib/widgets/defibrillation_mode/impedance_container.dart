@@ -2,9 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/widgets/defibrillation_mode/impedance_button.dart';
 
-// TODO: COMMENTARY
+/// Creates a column of the three possible [ImpedanceButton]s,  [ImpedanceButton.low], [ImpedanceButton.medium] and [ImpedanceButton.high].
+/// The headline "Impedance" is displayed on top of this column.
 class ImpedanceContainer extends StatelessWidget {
-  const ImpedanceContainer({Key? key}) : super(key: key);
+  /// Displays all impedance related widgets.
+
+  /// Creates instance of [ImpedanceContainer].
+  const ImpedanceContainer({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

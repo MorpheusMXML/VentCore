@@ -3,14 +3,22 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/providers/defibrillation_controller.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 
-// TODO: COMMENTARY
+/// Creates an Auto or Manual Button depending on which constructor is called for the defibrillation settings.
+/// [DefibrillationButton.auto] creates an Auto Button.
+/// [DefibrillationButton.manual] creates a Manual Button.
+///
+/// The [DefibrillationController] handles all actions relating to this button.
 class DefibrillationButton extends StatelessWidget {
+  /// Auto/Manual Button for the defibrillation settings.
   final String name;
+
+  /// Creates instance of [DefibrillationButton] with String 'Auto'.
   const DefibrillationButton.auto({
     Key? key,
     this.name = 'Auto',
   }) : super(key: key);
 
+  /// Creates instance of [DefibrillationButton] with String 'Manual'.
   const DefibrillationButton.manual({
     Key? key,
     this.name = 'Manual',
