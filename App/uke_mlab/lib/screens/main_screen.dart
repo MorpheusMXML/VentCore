@@ -9,7 +9,8 @@ import 'package:uke_mlab/widgets/toggle/defibrillation_mode.dart';
 import 'package:uke_mlab/widgets/toggle/monitoring_mode.dart';
 import 'package:uke_mlab/widgets/toggle/ventilation_mode.dart';
 
-/// main screen of the application, shows [GraphView] and [VentilationMode] for monitoring, ventilation and defibrillation
+/// Main screen of the application, shows [GraphView] and [VentilationMode] for monitoring, ventilation and defibrillation.
+///
 /// {@category Screens}
 class MainScreen extends StatelessWidget {
   final SystemState systemState = Get.find<SystemState>();

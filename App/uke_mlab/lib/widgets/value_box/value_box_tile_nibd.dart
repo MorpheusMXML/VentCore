@@ -17,8 +17,8 @@ import 'package:uke_mlab/widgets/value_box/value_box_tile.dart';
 /// ### Important Notice
 /// This Widget is implemented to take the space of 2 'usual' Absolute Tiles. So the NIBD Absolute Tile returned from this needs a Full row in the AbsoluteTile Section on the Screen.
 /// This Special size was chosen due to the difference of the NIBD Data to other Absolute Datapoints. NIBD always has at least 2 Datapoints with corresponing Alarm Borders.
-/// {@category Widgets}
-/// {@subCategory Value Box}
+///
+/// {@category ValueBox}
 class ValueBoxTileNIBD extends StatelessWidget {
   /// Renders the Absolute Value Tile for NIBD Measurements. Requires the [sensorEnumAbsolute] for Systolic and Diastolic Pressure.
 

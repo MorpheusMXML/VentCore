@@ -1,4 +1,6 @@
 /// Enum for alarm message associated with an alarm
+
+/// {@category Enums}
 enum alarmMessage {
   suppressed,
   lowerBoundaryViolated,
@@ -6,6 +8,7 @@ enum alarmMessage {
   deviation,
   none,
 }
+
 
 /// Attributes associated with [alarmMessage], at the moment just containing a String corresponding to the alarm
 extension AlarmMessageAttributes on alarmMessage {

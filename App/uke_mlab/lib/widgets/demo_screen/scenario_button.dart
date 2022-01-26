@@ -5,8 +5,8 @@ import 'package:uke_mlab/utilities/enums/scenarios.dart';
 import 'package:uke_mlab/providers/screen_controller.dart';
 
 /// Widget for StartScreen Buttons
-/// {@category Widgets}
-/// {@subCategory Demo Screen}
+///
+/// {@category DemoScreen}
 class ScenarioButton extends StatelessWidget {
   final String name;
   final scenariosEnum scenario;

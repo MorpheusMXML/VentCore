@@ -8,8 +8,8 @@ import 'package:uke_mlab/widgets/graph_container/graph_view.dart';
 import 'package:uke_mlab/widgets/value_box/value_box_tile.dart';
 
 /// Contains a list [list] over all currently [GraphView] represented by the corresponding [sensorEnumGraph].
-/// {@category Models}
-/// {@subCategory Screen Element Models}
+///
+/// {@category ScreenElementModels}
 class GraphList {
   /// Contains information whether a [GraphView] has been added to current screen.
   RxBool addGraph = false.obs;

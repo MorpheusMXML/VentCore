@@ -7,6 +7,8 @@ import 'package:uke_mlab/utilities/app_theme.dart';
 /// The timer is only started when entering the toggle screen this widget is on.
 ///
 /// The [DefibrillationController] handles all actions relating to the stats.
+
+/// {@category DefibrillationMode}
 class DefibrillationStats extends StatelessWidget {
   /// Widget for displaying defibrillation stats.
 

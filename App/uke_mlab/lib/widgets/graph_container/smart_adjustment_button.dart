@@ -7,8 +7,7 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 /// This widget displays the button for the smart adjustment feature.
 ///
-/// {@category Widgets}
-/// {@subCategory Graph Container}
+/// {@category GraphContainer}
 class SmartAdjustButton extends StatelessWidget {
   /// Key to identify the corresponding sensor.
   final sensorEnumAbsolute sensorKey;

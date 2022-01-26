@@ -4,8 +4,7 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 /// Holds representation of information for all [DataModelAbsolute]s for the smart Adjustment feature of the alarm boundaries.
 ///
-/// {@category Models}
-/// {@subCategory Screen Element Models}
+/// {@category ScreenElementModels}
 class SmartAdjustmentMap {
   /// Maps an [SmartAdjustmentMapEntry].
   final Map<sensorEnumAbsolute, SmartAdjustmentMapEntry> map = <sensorEnumAbsolute, SmartAdjustmentMapEntry>{};

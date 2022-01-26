@@ -4,9 +4,8 @@ import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 
 /// Custom widget for the text of one IPPv setting parameter.
-
-/// {@category Widgets}
-/// {@subCategory Settings}
+///
+/// {@category IppvSettings}
 class SettingText extends StatelessWidget {
   /// Name of the parameter
   final String name;

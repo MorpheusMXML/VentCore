@@ -7,8 +7,8 @@ import 'package:uke_mlab/widgets/setting/setting_container.dart';
 import 'package:uke_mlab/widgets/setting/ippv_button.dart';
 
 /// Offers representation for [SettingContainer] and widgets below.
-/// {@category Models}
-/// {@subCategory Screen Element Models}
+///
+/// {@category ScreenElementModels}
 class IppvModel {
   /// Default data values for [SettingContainer] and widgets below.
   Map<String, int> defaultIppvValues = {'Freq.': 15, 'Vt': 300, 'PEEP': 60};

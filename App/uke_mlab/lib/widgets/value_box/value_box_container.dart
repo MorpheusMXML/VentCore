@@ -9,8 +9,8 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 ///
 /// For a [DataModelGraph] without associated [DataModelAbsolute] the current value of the graph is represented if [ValueBoxContainer.withoutAbsolute] was used.
 /// Either [dataModelAbsolute] or [dataModelGraph] must be null
-/// {@category Widgets}
-/// {@subCategory Value Box}
+///
+/// {@category ValueBox}
 class ValueBoxContainer extends StatelessWidget {
   /// The [DataModelAbsolute] to represent.
   final DataModelAbsolute? dataModelAbsolute;

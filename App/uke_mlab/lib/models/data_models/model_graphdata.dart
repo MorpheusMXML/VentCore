@@ -5,8 +5,8 @@ import 'package:uke_mlab/widgets/graph/history_graph.dart';
 /// [ChartData] represents a datapoint with [time], [counter], and [value] to be rendered in a graph.
 ///
 /// This uses the mixin [ChartData.asCPR] and [ChartData.asNIBD] to initialize special datapoints for the [CprGraph] and [HistoryGraph].
-/// {@category Models}
-/// {@subCategory Data Models}
+///
+/// {@category DataModels}
 class ChartData with cpr, NIBD {
   final DateTime time;
   final int counter;

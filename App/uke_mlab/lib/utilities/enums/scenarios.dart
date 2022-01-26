@@ -4,8 +4,8 @@ import 'package:uke_mlab/utilities/enums/screen_status.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 /// Contains a key for each scenario available
-/// {@category Utilities}
-/// {@subCategory Enums}
+///
+/// {@category Enums}
 enum scenariosEnum {
   standardScenario,
   scenario1,

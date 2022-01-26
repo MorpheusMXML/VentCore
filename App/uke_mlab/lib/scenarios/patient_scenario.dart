@@ -12,6 +12,7 @@ import 'package:uke_mlab/utilities/enums/scenarios.dart';
 import 'package:uke_mlab/scenarios/abstract_scenario.dart';
 
 /// This implementation of [AbstractScenario] updates the data until there are no more datapoints at which point it stops.
+///
 /// {@category Scenarios}
 class PatientScenario extends AbstractScenario {
   scenariosEnum scenarioType;

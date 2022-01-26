@@ -1,74 +1,87 @@
 dartdoc:
      categories:
-          "Models":
-               markdown: doc/First.md
-               name: Models
           "DataModels":
                markdown: doc/DataModels.md
                name: DataModels
-#          "Screen Element Models":
-##              markdown:
-#               name: Screen Element Models
-#          "Providers":
-##               markdown: doc/Second.md
-#               name: Providers / Controller
-#          "Scenarios":
-##               markdown:
-#               name: Scenarios
-#          "Screens":
-# #             markdown:
-#                name: Screens
-#          "Utilities":
-##               markdown:
-#               name: Utilities
-#          "Constants":
-# #              markdown:
-#               name: Constants
-#          "Enums":
-# #             markdown:
-#               name: Enums
+          "ScreenElementModels":
+               markdown: doc/ScreenElementModels.md
+               name: ScreenElementModels
+          "SystemState":
+               markdown: doc/SystemState.md
+               name: SystemState
+          "Providers":
+               markdown: doc/Providers.md
+               name: Providers
+          "Scenarios":
+               markdown: doc/Scenarios.md
+               name: Scenarios
+          "Screens":
+               markdown: doc/Screens.md
+               name: Screens
+          "Constants":
+               markdown: doc/Constants.md
+               name: Constants
+          "Enums":
+               markdown: doc/Enums.md
+               name: Enums
+          "Utilities":
+               markdown: doc/Utilities.md
+               name: Utilities
+          "AppBar":
+               markdown: doc/AppBar.md
+               name: AppBar
+          "DefibrillationMode":
+               markdown: doc/DefibrillationMode.md
+               name: DefibrillationMode
+          "DemoScreen":
+               markdown: doc/DemoScreen.md
+               name: DemoScreen
+          "Graph":
+               markdown: doc/Graph.md
+               name: Graph
+          "GraphContainer":
+               markdown: doc/GraphContainer.md
+               name: GraphContainer
+          "Info":
+               markdown: doc/Info.md
+               name: Info
+          "Menu":
+               markdown: doc/Menu.md
+               name: Menu
+          "Miscellaneous":
+               markdown: doc/Miscellaneous.md
+               name: Miscellaneous
+          "IppvSettings":
+               markdown: doc/IppvSettings.md
+               name: IppvSettings
+          "StartScreen":
+               markdown: doc/StartScreen.md
+               name: StartScreen
+          "Toggle":
+               markdown: doc/Toggle.md
+               name: Toggle
+          "AlarmConfirmation":
+               markdown: doc/AlarmConfirmation.md
+               name: AlarmConfirmation
+          "Value Box":
+               markdown:
+               name: Value Box
 #          "Widgets":
 # #             markdown:
 #               name: Widgets
-#          "AppBar":
-# #             markdown:
-#               name: App Bar
-#          "Defibrillation Mode":
-# #             markdown:
-#               name: Defibrillation Mode
-#          "Demo Screen":
-# #             markdown:
-#               name: Demo Screen
-#          "Start Screen":
-# #             markdown:
-#               name: Start Screen
-#          "Graph":
-# #             markdown:
-#               name: Graph
-#          "Graph Container":
-# #             markdown:
-#               name: Graph Container
-#          "Info":
-# #             markdown:
-#               name: Info
-#          "Menu":
-# #             markdown:
-#               name: Menu
-#          "Miscellaneous":
-# #             markdown:
-#               name: Miscellaneous
-#          "Settings":
-# #             markdown:
-#               name: Settings
-#          "Toggle":
-# #             markdown:
-#               name: Toggle
-#          "Value Box":
-# #             markdown:
-#               name: Value Box
-#          "Alarm Confirmation":
-#               #markdown:
-#               name: Alarm Confirmation
+
+
+
+
+
+
+
+
+
+
+
+
+
      showUndocumentedCategories: true
      #categoryOrder: ["Models", "Data Models", "Screen Element Models", "Providers", "Scenarios", "Screens", "Utilities", "Constants", "Enums", "Widgets", "AppBar", "Defibrillation Mode", "Demo Screen", "Start Screen", "Graph", "Graph Container", "Info", "Menu", "Miscellaneous", "Settings", "Toggle", "Value Box"]
      categoryOrder: ["Models", "DataModels"]

@@ -7,6 +7,8 @@ import 'package:uke_mlab/utilities/app_theme.dart';
 /// If clicked on the shock power value, widget renders into a [Slider] for adjusting the shock power.
 ///
 /// The [DefibrillationController] handles all actions relating to the button and switch.
+
+/// {@category DefibrillationMode}
 class ShockPower extends StatelessWidget {
   /// Displays all widgets related to the shock power.
 

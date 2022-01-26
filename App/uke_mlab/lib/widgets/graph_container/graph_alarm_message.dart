@@ -6,8 +6,7 @@ import 'package:uke_mlab/models/system_state.dart';
 
 /// Display the alarm message for the alarm corresponding to [sensorKey].
 ///
-/// {@category Widgets}
-/// {@subCategory Graph Container}
+/// {@category GraphContainer}
 class GraphAlarmMessage extends StatelessWidget {
   /// Key to identify the corresponding sensor
   final sensorEnumAbsolute sensorKey;

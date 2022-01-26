@@ -8,6 +8,8 @@ import 'package:uke_mlab/utilities/app_theme.dart';
 /// [DefibrillationButton.manual] creates a Manual Button.
 ///
 /// The [DefibrillationController] handles all actions relating to this button.
+
+/// {@category DefibrilationMode}
 class DefibrillationButton extends StatelessWidget {
   /// Auto/Manual Button for the defibrillation settings.
   final String name;

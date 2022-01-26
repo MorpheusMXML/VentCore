@@ -8,6 +8,8 @@ import 'package:uke_mlab/utilities/app_theme.dart';
 /// [SynchronicityButton.async] creates an asynchronized Synchronicity Button.
 ///
 /// The [DefibrillationController] handles all actions relating to this button.
+
+/// {@category DefibrillationMode}
 class SynchronicityButton extends StatelessWidget {
   /// Synchronicity button for the defibrillation settings.
   final String name;

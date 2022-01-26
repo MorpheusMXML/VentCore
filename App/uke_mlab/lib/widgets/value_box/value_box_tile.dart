@@ -16,8 +16,8 @@ import 'package:uke_mlab/widgets/value_box/value_box_container.dart';
 /// [DataModelAbsolute] is found here and attributes provided for children
 /// Categorize ValueBox in "regular" and "withHeadline"
 /// "withHeadline" uses [Flexible] to position a readable Headline onto the actual [ValueBoxTile]
-/// {@category Widgets}
-/// {@subCategory Value Box}
+///
+/// {@category ValueBox}
 class ValueBoxTile extends StatelessWidget {
   final sensorEnumAbsolute? sensorAbsolute;
   final sensorEnumGraph? sensorGraph;

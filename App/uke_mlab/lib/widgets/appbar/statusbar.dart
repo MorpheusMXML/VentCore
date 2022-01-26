@@ -11,8 +11,8 @@ import 'package:uke_mlab/widgets/appbar/mute_ecg_button.dart';
 import 'alarm_counter_tile.dart';
 
 /// Renders the statusbar at the top of the screen. Houses the burger menu, [AlarmFieldTile], a [patientType], the o2 bottle, and the [MuteEcgButton].
-/// {@category Widgets}
-/// {@subCategory Appbar}
+///
+/// {@category AppBar}
 class StatusBar extends StatelessWidget {
   /// constructs the status bar for usage over the whole project
   const StatusBar({

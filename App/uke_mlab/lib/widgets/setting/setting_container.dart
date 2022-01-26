@@ -9,9 +9,8 @@ import 'package:uke_mlab/widgets/setting/setting_tile.dart';
 /// Uses:
 /// + [IPPVButton]
 /// + [SettingTile]
-
-/// {@category Widgets}
-/// {@subCategory Settings}
+///
+/// {@category IppvSettings}
 class SettingContainer extends StatelessWidget {
   /// Descriptions for the ippv settings
   final List<Map<String, Object>> data;
@@ -27,8 +26,7 @@ class SettingContainer extends StatelessWidget {
     return Container(
       color: theme.primarySwatch[50],
       margin: const EdgeInsets.only(
-          right: AbsoluteAlarmFieldConst.verticalMargin,
-          top: AbsoluteAlarmFieldConst.verticalMargin),
+          right: AbsoluteAlarmFieldConst.verticalMargin, top: AbsoluteAlarmFieldConst.verticalMargin),
       child: Column(
         children: [
           const IPPVButton(),

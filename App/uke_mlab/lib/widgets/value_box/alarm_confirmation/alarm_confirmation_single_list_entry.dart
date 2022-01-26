@@ -10,8 +10,8 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 /// Provides an entry for [AlarmConfirmationButtonSingleListExpansion]s list.
 ///
 /// It contains its sensors name, the message of the alarm and a button to confirm the alarm
-/// {@category Widgets}
-/// {@subCategory Value Box, Alarm Confirmation}
+///
+/// {@category AlarmConfirmation}
 class AlarmConfirmationRowEntry extends StatelessWidget {
   final sensorEnumAbsolute sensorKey;
 

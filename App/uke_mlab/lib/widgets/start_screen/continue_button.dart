@@ -7,8 +7,8 @@ import 'package:uke_mlab/utilities/app_theme.dart';
 /// This class contains the Continue Button and its functionality.
 ///
 /// It provides a way to continue to the main screen with the previously selected patient preset and values.
-/// {@category Widgets}
-/// {@subCategory Start Screen}
+///
+/// {@category StartScreen}
 class ContinueButton extends StatelessWidget {
   const ContinueButton({
     Key? key,

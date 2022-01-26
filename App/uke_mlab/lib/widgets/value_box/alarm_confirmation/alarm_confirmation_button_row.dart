@@ -4,8 +4,8 @@ import 'package:uke_mlab/widgets/value_box/alarm_confirmation/alarm_confirmation
 import 'package:uke_mlab/widgets/value_box/alarm_confirmation/alarm_confirmation_button_single_list_expansion_button.dart';
 
 /// The row containing [AlarmConfirmationButtonAll] and [AlarmConfirmationButtonSingleListExpansion].
-/// {@category Widgets}
-/// {@subCategory Value Box, Alarm Confirmation}
+///
+/// {@category AlarmConfirmation}
 class AlarmConfirmationRow extends StatelessWidget {
   const AlarmConfirmationRow({Key? key}) : super(key: key);
 

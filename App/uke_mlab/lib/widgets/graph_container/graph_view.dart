@@ -8,8 +8,7 @@ import 'graph_container.dart';
 /// Displays the graphs specified in [SystemState.graphList], and [GraphAdder] or [GraphAdderPopup].
 /// This widget normally takes up the entire left half of the screen.
 ///
-/// {@category Widgets}
-/// {@subCategory Graph Container}
+/// {@category GraphContainer}
 class GraphView extends StatelessWidget {
   /// Displays a list of graphs and a button to add/remove more graphs.
 

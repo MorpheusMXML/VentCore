@@ -5,8 +5,8 @@ import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/widgets/start_screen/details_popup_slider.dart';
 
 /// This class contains the Details Popup and its functionality.
-/// {@category Widgets}
-/// {@subCategory Start Screen}
+///
+/// {@category StartScreen}
 class DetailsPopup extends StatelessWidget {
   const DetailsPopup({
     Key? key,

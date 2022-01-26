@@ -12,6 +12,8 @@ import 'package:uke_mlab/widgets/value_box/value_box_tile_nibd.dart';
 /// + [ValueBoxTileNIBD]
 /// + [AlarmConfirmationRow]
 /// + [ToggleModeButtonContainer]
+///
+/// {@category Toggle}
 class MonitoringMode extends StatelessWidget {
   const MonitoringMode({
     Key? key,

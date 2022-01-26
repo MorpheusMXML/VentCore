@@ -6,8 +6,8 @@ import 'package:uke_mlab/widgets/appbar/alarm_list.dart';
 import 'package:uke_mlab/widgets/appbar/statusbar.dart';
 
 /// Contains constants relating the [StatusBar].
-/// {@category Utilities}
-/// {@subCategory Constants}
+///
+/// {@category Constants}
 class StatusBarConstants {
   /// Flex value for the [AlarmCounterTile].
   static const int flexBarAlarmCounterTile = 4;

@@ -7,6 +7,7 @@ import 'package:uke_mlab/widgets/demo_screen/exit_button.dart';
 import 'package:uke_mlab/widgets/value_box/value_box_tile.dart';
 
 /// Presents all data models and the ability to adjust their boundaries via [ValueBoxTile]s
+///
 /// {@category Screens}
 class AlarmLimitScreen extends StatelessWidget {
   const AlarmLimitScreen({

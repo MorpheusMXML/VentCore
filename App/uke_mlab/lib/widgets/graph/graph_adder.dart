@@ -6,9 +6,8 @@ import 'package:uke_mlab/utilities/app_theme.dart';
 /// This widget renders a stylized [ElevatedButton] to add graphs.
 /// The plus icon indicates the adding functionality.
 /// After clicking the button, the [GraphAdderPopup] is rendered.
-
-/// {@category Widgets}
-/// {@subCategory Graph}
+///
+/// {@category Graph}
 class GraphAdder extends StatelessWidget {
   /// Creates a button that should add graphs.
 

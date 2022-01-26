@@ -4,8 +4,8 @@ import 'package:uke_mlab/widgets/value_box/alarm_confirmation/alarm_confirmation
 import 'package:uke_mlab/widgets/value_box/value_box_tile.dart';
 
 /// Contains static constants for the right part of the screen, containing the non graph based alarm fields.
-/// {@category Utilities}
-/// {@subCategory Constants}
+///
+/// {@category Constants}
 class AbsoluteAlarmFieldConst {
   /// Total width of the screen part (excluding padding)
   static final double width = (Get.width - 24) / 3 -

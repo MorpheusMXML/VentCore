@@ -1,6 +1,6 @@
 /// An enum representing the currently selected Patient Type.
-/// {@category Utilities}
-/// {@subCategory Enums}
+///
+/// {@category Enums}
 enum patientTypeEnum {
   adult,
   child,

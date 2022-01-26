@@ -6,8 +6,8 @@ import 'package:uke_mlab/providers/screen_controller.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 
 /// This class contains the AED Button and provides its functionality.
-/// {@category Widgets}
-/// {@subCategory Start Screen}
+///
+/// {@category StartScreen}
 class AEDButton extends StatelessWidget {
   const AEDButton({
     Key? key,

@@ -7,8 +7,8 @@ import 'package:uke_mlab/utilities/app_theme.dart';
 /// Depending on the amount of [GeneralAlarms] builds an statusbar element displaying the amount, rendered in respective forms.
 ///
 /// Allows to trigger an overlay containing all alarms.
-/// {@category Widgets}
-/// {@subCategory Appbar}
+///
+/// {@category AppBar}
 class AlarmCounterTile extends StatelessWidget {
   AlarmCounterTile({Key? key}) : super(key: key);
 

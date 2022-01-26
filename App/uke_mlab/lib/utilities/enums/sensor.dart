@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 
 /// Contains a key for each graph currently available in the app
-/// {@category Utilities}
-/// {@subCategory Enums}
+///
+/// {@category Enums}
 enum sensorEnumGraph {
   paw,
   flow,

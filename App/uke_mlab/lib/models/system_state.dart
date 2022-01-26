@@ -22,7 +22,7 @@ import 'package:uke_mlab/scenarios/abstract_scenario.dart';
 import 'package:uke_mlab/screens/main_screen.dart';
 
 /// Superclass holding references to various models for screen elements as well as holding the top level information of current status of the system.
-/// {@category Models}
+/// {@category SystemState}
 class SystemState extends GetxController {
   /// Contains global information whether an [AbstractScenario] is active.
   bool scenarioStarted = false;

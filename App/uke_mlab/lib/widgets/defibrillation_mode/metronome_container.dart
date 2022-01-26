@@ -3,6 +3,8 @@ import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/widgets/defibrillation_mode/metronome_switch.dart';
 
 /// Creates a row consisting of the [Text] "Metronome" and the [MetronomeSwitch] which toggles the metronome state.
+
+/// {@category DefibrillationMode}
 class MetronomeContainer extends StatelessWidget {
   /// Displays all metronome related widgets.
 

@@ -14,6 +14,8 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 /// + [InfoContainer]
 /// + [AlarmConfirmationRow]
 /// + [ToggleModeButtonContainer]
+///
+/// {@category Toggle}
 class VentilationMode extends StatelessWidget {
   const VentilationMode({
     Key? key,

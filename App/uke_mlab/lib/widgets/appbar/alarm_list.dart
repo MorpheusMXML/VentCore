@@ -10,8 +10,8 @@ import 'package:uke_mlab/widgets/appbar/alarm_field_tile.dart';
 /// List of [GeneralAlarms] containing [AlarmFieldTile] corresponding to active [GeneralAlarms].
 ///
 /// Only displayable if there is more than 1 [GeneralAlarms]
-/// {@category Widgets}
-/// {@subCategory Appbar}
+///
+/// {@category AppBar}
 class AlarmList extends StatelessWidget {
   const AlarmList({
     Key? key,

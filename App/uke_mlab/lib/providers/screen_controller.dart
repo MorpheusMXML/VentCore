@@ -24,6 +24,7 @@ import 'package:uke_mlab/widgets/toggle/toggle_mode_button_container.dart';
 /// Handles the settings of the alarmboundaries with [setUpperBoundary] and [setLowerBoundary] within the [DataModelAbsolute]
 /// Further handles the Changing of the Scenarios, starts the DataStreams and triggeres the necessary Runs for General Alarms, Data reading into the Graphs etc.
 /// Also handles the Continue, Skip and other Button Behaviours of the [StartScreen]
+///
 /// {@category Providers}
 class ScreenController {
   AbstractScenario? runningScenario;

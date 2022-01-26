@@ -8,8 +8,8 @@ import 'package:uke_mlab/utilities/enums/non_graph_alarm.dart';
 import 'package:uke_mlab/widgets/appbar/alarm_counter_tile.dart';
 
 /// Describes an entry for the possible dropDownButton menu creatable by [AlarmCounterTile] under certain conditions.
-/// {@category Widgets}
-/// {@subCategory Appbar}
+///
+/// {@category AppBar}
 class AlarmFieldTile extends StatelessWidget {
   final AlarmListEntry data;
   const AlarmFieldTile({

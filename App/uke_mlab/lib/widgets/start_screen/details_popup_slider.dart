@@ -9,8 +9,8 @@ import 'package:uke_mlab/utilities/app_theme.dart';
 /// + [name] holds an instance of [String] which will be used as the displayed Name for this widget.
 /// + [unit] holds an instance of [String] which will be used as the displayed unit for this widget.
 /// + [value] holds an instance of [RxDouble] which will be used as the displayed value for this widget.
-/// {@category Widgets}
-/// {@subCategory Start Screen}
+///
+/// {@category StartScreen}
 class PopupSlider extends StatelessWidget {
   final String name;
   final String unit;

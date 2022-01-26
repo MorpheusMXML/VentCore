@@ -25,7 +25,7 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 /// + [playAlarmSound] plays the [alarmPlayer] in a periodic [Duration].
 /// + [stopAudioPlayer] stops a specific given [AudioPlayer] that is currently playing a Sound.
 /// + [stopAlarmTimer] stops the [alarmTimer] that is currently looping.
-
+///
 /// {@category Providers}
 class SoundController {
   ///Loads AudioAlarm Files into Cache and Provides functionality to Play, Stop them. Also provides ECG Sound per Minute and O2 Saturation.

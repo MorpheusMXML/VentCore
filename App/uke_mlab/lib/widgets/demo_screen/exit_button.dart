@@ -7,6 +7,8 @@ import 'package:uke_mlab/utilities/enums/screen_status.dart';
 /// Exit button for menus
 ///
 /// Uses [ScreenController.menuExitButton] to lead back to previous screen denoted by [screenStatusEnum]
+
+/// {@category DemoScreen}
 class ExitButton extends StatelessWidget {
   const ExitButton({
     Key? key,

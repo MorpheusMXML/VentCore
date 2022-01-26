@@ -9,8 +9,8 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/utilities/enums/patient_type.dart';
 
 /// Creates [DataModelAbsolute]s and [DataModelGraph]s and offers management operations for them.
-/// {@category Models}
-/// {@subCategory Data Models}
+///
+/// {@category DataModels}
 class ModelManager {
   /// [AlarmController] of the system (this is due to race conditions during creation)
   late final AlarmController _alarmController;

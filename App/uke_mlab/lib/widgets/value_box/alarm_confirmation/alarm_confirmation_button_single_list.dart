@@ -10,8 +10,8 @@ import 'alarm_confirmation_single_list_entry.dart';
 /// The list for the overlay created by [AlarmConfirmationButtonSingleListExpansion]
 ///
 /// Consitst of [AlarmConfirmationRowEntry]s
-/// {@category Widgets}
-/// {@subCategory Value Box, Alarm Confirmation}
+///
+/// {@category AlarmConfirmation}
 class AlarmButtonAbsoluteList extends StatelessWidget {
   const AlarmButtonAbsoluteList({Key? key}) : super(key: key);
 
