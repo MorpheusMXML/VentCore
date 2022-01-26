@@ -27,7 +27,7 @@ class AlarmConfirmationRowEntry extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.only(
             bottom: AbsoluteAlarmFieldConst.verticalMargin),
-        color: theme.primarySwatch[40],
+        color: theme.primarySwatch[70],
         padding: const EdgeInsets.only(
             top: AbsoluteAlarmFieldConst.verticalMargin / 4,
             bottom: AbsoluteAlarmFieldConst.verticalMargin / 4),

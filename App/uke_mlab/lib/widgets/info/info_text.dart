@@ -21,7 +21,7 @@ class InfoText extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: theme.primarySwatch[40],
+        color: theme.primarySwatch[70],
         borderRadius: const BorderRadius.all(Radius.circular(8)),
       ),
       child: Row(

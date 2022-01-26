@@ -6,8 +6,6 @@ import 'package:uke_mlab/models/data_models/model_graphdata.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
-
-
 /// Creates an [SfCartesianChart] with two [NumericAxis] and an [AreaSeries].
 ///
 /// The [sensor] parameter specifies the sensor this graph gets its data from. Typically, [sensorEnumGraph.co2] should be provided.
@@ -29,17 +27,17 @@ class CO2Graph extends StatelessWidget {
 
     return Obx(
       () => SfCartesianChart(
-        backgroundColor: theme.primarySwatch[40],
+        backgroundColor: theme.primarySwatch[70],
         primaryYAxis: NumericAxis(
           majorGridLines: MajorGridLines(
             width: 1,
-            color: theme.primarySwatch[20],
+            color: theme.primarySwatch[40],
           ),
         ),
         primaryXAxis: NumericAxis(
           majorGridLines: MajorGridLines(
             width: 1,
-            color: theme.primarySwatch[20],
+            color: theme.primarySwatch[40],
           ),
         ),
         series: [

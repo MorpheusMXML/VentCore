@@ -4,7 +4,7 @@ import 'package:uke_mlab/providers/start_screen_controller.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 
 /// This class contains the Popup Slider and its [Slider] functionality.
-/// 
+///
 /// ### Class Variables
 /// + [name] holds an instance of [String] which will be used as the displayed Name for this widget.
 /// + [unit] holds an instance of [String] which will be used as the displayed unit for this widget.
@@ -25,11 +25,13 @@ class PopupSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final startScreenController = Get.find<StartScreenController>();
+
     ///
     return Container(
       height: 100 / MediaQuery.of(context).devicePixelRatio,
       margin: const EdgeInsets.fromLTRB(12, 12, 12, 12),
-      color: theme.primarySwatch[30],
+      color: theme.primarySwatch[60],
+
       /// The Flexibles contain the layout of the objects in the Container
       child: Row(
         children: [
@@ -39,12 +41,10 @@ class PopupSlider extends StatelessWidget {
             fit: FlexFit.tight,
             child: Padding(
               padding: const EdgeInsets.only(left: 10),
-              child: Text(
-                name,
-                style: theme.patientPopupTextStyle2
-              ),
+              child: Text(name, style: theme.patientPopupTextStyle2),
             ),
           ),
+
           /// This Flexible contains the Slider functionality, size and gets the value.
           Flexible(
             flex: 8,
@@ -60,6 +60,7 @@ class PopupSlider extends StatelessWidget {
                   }),
             ),
           ),
+
           /// This Container contains the displayed value with the unit added.
           Container(
             margin: const EdgeInsets.fromLTRB(0, 5, 10, 5),
@@ -70,11 +71,10 @@ class PopupSlider extends StatelessWidget {
             height: 50 / MediaQuery.of(context).devicePixelRatio,
             width: 150 / MediaQuery.of(context).devicePixelRatio,
             child: Obx(
-              () => Text(
-                '${value.value.round().toString()}$unit',
-                style: theme.patientPopupTextStyle
+              () => Text('${value.value.round().toString()}$unit',
+                  style: theme.patientPopupTextStyle),
             ),
-            ),),
+          ),
         ],
       ),
     );

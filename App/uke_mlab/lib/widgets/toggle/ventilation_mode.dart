@@ -72,7 +72,7 @@ class VentilationMode extends StatelessWidget {
           flex: 3,
           child: AlarmConfirmationRow(),
         ),
-        ToggleModeButtonContainer(),
+        const ToggleModeButtonContainer(),
       ],
     );
   }

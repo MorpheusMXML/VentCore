@@ -14,13 +14,14 @@ class DetailsPopup extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final startScreenController = Get.find<StartScreenController>();
-    
+
     /// The Obx contains the functionality of the Widget.
     return Obx(
       () => startScreenController.isPopupVisible.value
           ? Container(
               margin: const EdgeInsets.only(right: 65, bottom: 12),
-              color: theme.primarySwatch[50],
+              color: theme.primarySwatch[80],
+
               ///The Column contains the Popup Sliders and provides their names and units.
               child: Column(
                 children: [

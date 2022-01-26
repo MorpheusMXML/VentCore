@@ -67,17 +67,35 @@ class AppTheme {
 /// The colors in [primarySwatch] are the most used colors.
 extension CustomColors on ThemeData {
   ColorSwatch<int> get primarySwatch => ColorSwatch(0xFFEEEEEE, {
-        0: Get.isDarkMode ? const Color(0xFFFFFFFF) : const Color(0xFFFFFFFF),
-        10: Get.isDarkMode ? const Color(0xFFEEEEEE) : const Color(0x6FFFFFFF),
-        12: Get.isDarkMode ? const Color(0xFF79747E) : const Color(0x6FFFFFFF),
-        15: Get.isDarkMode ? const Color(0xFF808B96) : const Color(0x6FFFFFFF),
-        20: Get.isDarkMode ? const Color(0xFF49454F) : const Color(0xDFFFFFFF),
-        25: Get.isDarkMode ? const Color(0xFF363638) : const Color(0xBFFFFFFF),
-        30: Get.isDarkMode ? const Color(0xFF322F37) : const Color(0xEFFFFFFF),
-        40: Get.isDarkMode ? const Color(0xFF2A2831) : const Color(0xCFFFFFFF),
-        50: Get.isDarkMode ? const Color(0xFF25232A) : const Color(0xBFFFFFFF),
-        60: Get.isDarkMode ? const Color(0xFF5D5FEF) : const Color(0xBFFFFFFF),
-        100: Get.isDarkMode ? const Color(0xFF000000) : const Color(0xAFFFFFFF),
+        0: Get.isDarkMode ? const Color(0xFFFFFFFF) : const Color(0xFF000000),
+        10: Get.isDarkMode
+            ? const Color(0xFFEEEEEE)
+            : Colors.amber[50] as Color,
+        20: Get.isDarkMode
+            ? const Color(0xFF808B96)
+            : Colors.amber[50] as Color,
+        30: Get.isDarkMode
+            ? const Color(0xFF79747E)
+            : Colors.amber[50] as Color,
+        40: Get.isDarkMode
+            ? const Color(0xFF49454F)
+            : Colors.amber[100] as Color,
+        50: Get.isDarkMode
+            ? const Color(0xFF363638)
+            : Colors.amber[100] as Color,
+        60: Get.isDarkMode
+            ? const Color(0xFF322F37)
+            : Colors.amber[200] as Color,
+        70: Get.isDarkMode
+            ? const Color(0xFF2A2831)
+            : Colors.amber[200] as Color,
+        80: Get.isDarkMode
+            ? const Color(0xFF25232A)
+            : Colors.amber[300] as Color,
+        90: Get.isDarkMode
+            ? const Color(0xFF5D5FEF)
+            : Colors.amber[300] as Color,
+        100: const Color(0xFF000000),
       });
 
   Color? get contrastColor =>
@@ -247,13 +265,13 @@ extension CustomButtonStyles on ThemeData {
           const RoundedRectangleBorder(),
         ),
         backgroundColor: MaterialStateProperty.all(
-          primarySwatch[40],
+          primarySwatch[70],
         ),
       );
 
   // ButtonStyles used by DefibrillationButton, ImpedanceButton and SynchronicityButton
   ButtonStyle get defiRegularButtonStyle => ElevatedButton.styleFrom(
-        primary: primarySwatch[40],
+        primary: primarySwatch[70],
         onPrimary: contrastColor,
       );
 
@@ -292,7 +310,7 @@ extension CustomButtonStyles on ThemeData {
   // ButtonStyles used by GraphAdder and GraphAdderPopup
   ButtonStyle get graphAdderPopupButtonStyle => ElevatedButton.styleFrom(
         fixedSize: const Size(800, 150),
-        primary: primarySwatch[40]!.withOpacity(0.5),
+        primary: primarySwatch[70]!.withOpacity(0.5),
       );
 
   ButtonStyle get graphAdderButtonStyle => ElevatedButton.styleFrom(
@@ -307,7 +325,7 @@ extension CustomButtonStyles on ThemeData {
           borderRadius: BorderRadius.circular(50),
         ),
         fixedSize: const Size(20, 20),
-        primary: primarySwatch[20],
+        primary: primarySwatch[40],
         onPrimary: contrastColor,
       );
 

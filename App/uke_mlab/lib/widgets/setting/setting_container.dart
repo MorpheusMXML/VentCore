@@ -22,7 +22,7 @@ class SettingContainer extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
 
     return Container(
-      color: theme.primarySwatch[50],
+      color: theme.primarySwatch[80],
       margin: const EdgeInsets.only(
           right: AbsoluteAlarmFieldConst.verticalMargin,
           top: AbsoluteAlarmFieldConst.verticalMargin),
