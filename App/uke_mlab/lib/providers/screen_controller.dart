@@ -55,7 +55,8 @@ class ScreenController {
     switch (scenario) {
       case scenariosEnum.standardScenario:
         runningScenario = StandardScenario();
-        systemState.graphList.setStandardGraphs(ScenarioEnumDisplayedGraphs.graphs[scenario] as Map<screenStatusEnum, List<sensorEnumGraph>>);
+        systemState.graphList.setStandardGraphs(ScenarioEnumDisplayedGraphs
+            .graphs[scenario] as Map<screenStatusEnum, List<sensorEnumGraph>>);
         runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
         break;
       case scenariosEnum.scenario1:
@@ -65,7 +66,8 @@ class ScreenController {
       case scenariosEnum.scenario3c:
       case scenariosEnum.scenario4:
         runningScenario = PatientScenario(scenarioType: scenario);
-        systemState.graphList.setStandardGraphs(ScenarioEnumDisplayedGraphs.graphs[scenario] as Map<screenStatusEnum, List<sensorEnumGraph>>);
+        systemState.graphList.setStandardGraphs(ScenarioEnumDisplayedGraphs
+            .graphs[scenario] as Map<screenStatusEnum, List<sensorEnumGraph>>);
         runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
         break;
       default:
@@ -94,10 +96,12 @@ class ScreenController {
         systemState.resetSystemState();
       }
     } else {
-      throw Exception('additionalInformation is not Adult, Child or Infant on screenChangeButton call from Continue Button');
+      throw Exception(
+          'additionalInformation is not Adult, Child or Infant on screenChangeButton call from Continue Button');
     }
     systemState.screenStatus = screenStatusEnum.monitorScreen;
     changeScenario(scenariosEnum.standardScenario);
+    systemState.graphList.evaluateActiveGraphAbsolutes();
     systemState.absAlarmFieldModel.evaluateActiveList();
 
     return Get.toNamed('/main_screen');
@@ -112,6 +116,7 @@ class ScreenController {
     //systemState.patientType = patientTypeEnum.adult;
     systemState.screenStatus = screenStatusEnum.monitorScreen;
     changeScenario(scenariosEnum.standardScenario);
+    systemState.graphList.evaluateActiveGraphAbsolutes();
     systemState.absAlarmFieldModel.evaluateActiveList();
 
     return Get.toNamed('/main_screen');
@@ -127,6 +132,7 @@ class ScreenController {
     systemState.screenStatus = screenStatusEnum.defibrillationScreen;
     changeScenario(scenariosEnum.standardScenario);
     systemState.setSelectedToggleView([false, false, true]);
+    systemState.graphList.evaluateActiveGraphAbsolutes();
     systemState.absAlarmFieldModel.evaluateActiveList();
 
     return Get.toNamed('/main_screen');
@@ -154,16 +160,19 @@ class ScreenController {
         systemState.screenStatus = screenStatusEnum.monitorScreen;
         systemState.setSelectedToggleView([true, false, false]);
         systemState.absAlarmFieldModel.evaluateActiveList();
+        systemState.graphList.evaluateActiveGraphAbsolutes();
         break;
       case 1:
         systemState.screenStatus = screenStatusEnum.ventilationScreen;
         systemState.setSelectedToggleView([false, true, false]);
         systemState.absAlarmFieldModel.evaluateActiveList();
+        systemState.graphList.evaluateActiveGraphAbsolutes();
         break;
       case 2:
         systemState.screenStatus = screenStatusEnum.defibrillationScreen;
         systemState.setSelectedToggleView([false, false, true]);
         systemState.absAlarmFieldModel.evaluateActiveList();
+        systemState.graphList.evaluateActiveGraphAbsolutes();
         break;
       default:
         throw Exception("No screen $index known in toggle view");
@@ -179,7 +188,7 @@ class ScreenController {
   Future? alarmSettingsButton() {
     //system state should stay the same here
     systemState.absAlarmFieldModel.closeOverlay();
-    Get.find<SoundController>().stop();
+    soundController.stop();
     if (!modelManager.environmentValuesLoaded) {
       modelManager.loadDataModelEnvironmentValues();
     }
@@ -210,6 +219,7 @@ class ScreenController {
       systemState.patientType = patientTypeEnum.adult;
     }
     changeScenario(scenario);
+    systemState.graphList.evaluateActiveGraphAbsolutes();
     systemState.absAlarmFieldModel.evaluateActiveList();
 
     systemState.resetSystemState();
@@ -219,7 +229,8 @@ class ScreenController {
   /// Behavior for smartAdjustementButton
   void smartAdjustmentButton(sensorEnumAbsolute sensorKey) {
     SmartAdjustmentMap boundaryAdjustmentMap = systemState.smartAdjustmentMap;
-    DataModelAbsolute dataModel = Get.find<DataModelAbsolute>(tag: sensorKey.name);
+    DataModelAbsolute dataModel =
+        Get.find<DataModelAbsolute>(tag: sensorKey.name);
 
     if (boundaryAdjustmentMap.map[sensorKey]!.lowerCounter.value >= 3) {
       boundaryAdjustmentMap.map[sensorKey]!.lowerCounter.value = 0;

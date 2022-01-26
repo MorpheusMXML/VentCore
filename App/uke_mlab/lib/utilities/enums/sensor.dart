@@ -115,7 +115,7 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
       'unit': 'bpm',
       'color': AppTheme.heartFreqColor,
       'floatRepresentation': false,
-      'confirmDuration': 20,
+      'confirmDuration': 90,
       'boundaryDeviation': 0.1,
       'upperBound': {
         'adult': 100,
@@ -253,6 +253,7 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
       'unit': 'mmHg',
       'color': AppTheme.nibdColor,
       'floatRepresentation': false,
+      'boundaryDeviation': 0.1,
       'upperBound': {
         'adult': 100,
         'child': 90,
@@ -271,6 +272,7 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
       'unit': 'mmHg',
       'color': AppTheme.nibdColor,
       'floatRepresentation': false,
+      'boundaryDeviation': 0.1,
       'upperBound': {
         'adult': 130,
         'child': 100,
@@ -291,8 +293,8 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
   String get unit => attributes[this]!['unit'] as String;
   Color get color => attributes[this]!['color'] as Color;
 
-  ///10 Seconds are a default confirm Duration
-  int get confirmDuration => attributes[this]!['confirmDuration'] ?? 10;
+  ///60 Seconds are a default confirm Duration
+  int get confirmDuration => attributes[this]!['confirmDuration'] ?? 60;
   dynamic get boundaryDeviation =>
       attributes[this]!['boundaryDeviation'] as dynamic;
   Map get upperBound => attributes[this]!['upperBound'] as Map<String, dynamic>;
