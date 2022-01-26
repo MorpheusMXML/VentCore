@@ -103,6 +103,7 @@ class ScreenController {
     }
     systemState.screenStatus = screenStatusEnum.monitorScreen;
     changeScenario(scenariosEnum.standardScenario);
+    systemState.graphList.evaluateActiveGraphAbsolutes();
     systemState.absAlarmFieldModel.evaluateActiveList();
 
     return Get.toNamed('/main_screen');
@@ -117,6 +118,7 @@ class ScreenController {
     //systemState.patientType = patientTypeEnum.adult;
     systemState.screenStatus = screenStatusEnum.monitorScreen;
     changeScenario(scenariosEnum.standardScenario);
+    systemState.graphList.evaluateActiveGraphAbsolutes();
     systemState.absAlarmFieldModel.evaluateActiveList();
 
     return Get.toNamed('/main_screen');
@@ -132,6 +134,7 @@ class ScreenController {
     systemState.screenStatus = screenStatusEnum.defibrillationScreen;
     changeScenario(scenariosEnum.standardScenario);
     systemState.setSelectedToggleView([false, false, true]);
+    systemState.graphList.evaluateActiveGraphAbsolutes();
     systemState.absAlarmFieldModel.evaluateActiveList();
 
     return Get.toNamed('/main_screen');
@@ -160,16 +163,19 @@ class ScreenController {
         systemState.screenStatus = screenStatusEnum.monitorScreen;
         systemState.setSelectedToggleView([true, false, false]);
         systemState.absAlarmFieldModel.evaluateActiveList();
+        systemState.graphList.evaluateActiveGraphAbsolutes();
         break;
       case 1:
         systemState.screenStatus = screenStatusEnum.ventilationScreen;
         systemState.setSelectedToggleView([false, true, false]);
         systemState.absAlarmFieldModel.evaluateActiveList();
+        systemState.graphList.evaluateActiveGraphAbsolutes();
         break;
       case 2:
         systemState.screenStatus = screenStatusEnum.defibrillationScreen;
         systemState.setSelectedToggleView([false, false, true]);
         systemState.absAlarmFieldModel.evaluateActiveList();
+        systemState.graphList.evaluateActiveGraphAbsolutes();
         break;
       default:
         throw Exception("No screen $index known in toggle view");
@@ -186,7 +192,7 @@ class ScreenController {
   Future? alarmSettingsButton() {
     //system state should stay the same here
     systemState.absAlarmFieldModel.closeOverlay();
-    Get.find<SoundController>().stop();
+    soundController.stop();
     if (!modelManager.environmentValuesLoaded) {
       modelManager.loadDataModelEnvironmentValues();
     }
@@ -217,6 +223,7 @@ class ScreenController {
       systemState.patientType = patientTypeEnum.adult;
     }
     changeScenario(scenario);
+    systemState.graphList.evaluateActiveGraphAbsolutes();
     systemState.absAlarmFieldModel.evaluateActiveList();
 
     systemState.resetSystemState();

@@ -3,41 +3,40 @@ import 'dart:io';
 import 'package:get/get.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:uke_mlab/models/data_models/model_absolute.dart';
-import 'package:uke_mlab/models/system_state.dart';
-import 'package:uke_mlab/utilities/enums/alarm_status.dart';
-import 'package:uke_mlab/utilities/enums/non_graph_alarm.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
-/// This Class provides the sound Playing and Triggering Functionallity.
-/// Alarms can be triggered, stopped and the SpO2 / ECG Sound for the Heartfrequency can be started.
+/// This class provides the sound production and sound triggering functionallity.
+/// Alarm sounds can be triggered, stopped and the SpO2 / ECG Sound for the heartfrequency can be started.
 ///
 /// ### Class Variables
-/// + [alarmPlayerCache] loads a Instance of Type [AudioCache] and sets the sounds Folder prefix.
-/// + [ecgPlayerCache] loads a Instance of Type [AudioCache] and sets the sounds Folder prefix.
-/// + [timer] holds a Inscante of Type [Timer] to control the ECG Sounds Timing
-/// + [_alarmSoundFiles] & [_ecgSoundFiles] provide a Map where the Sounds Files for the corresponding Alarm or ECG Sound can be specified.
-/// + [alarmPlayer], [defiPlayer] & [ecgPlayer] hold a [AudioPlayer] Instance to controll the Audio after Triggering it.
+/// + [alarmPlayerCache] loads an instance of type [AudioCache] and sets the sounds folder prefix.
+/// + [ecgPlayerCache] loads an instance of type [AudioCache] and sets the sounds folder prefix.
+/// + [timer] holds an instance of type [Timer] to control for example the ECG sound timing.
+/// + [alarmTimer], [getDataTimer], [cancelTimerBeep] also hold an i
+/// - [_alarmSoundFiles] & [_ecgSoundFiles] provide a [Map] where the sounds for the corresponding alarm or ECG sound can be specified.
+/// + [alarmPlayer], [ecgPlayer] and [defiPlayer] hold a late [AudioPlayer] instance to controll the audio after triggering it.
+/// + [alarmVolume] is a constant to reduce redundant code and change volume in one place.
 ///
 /// ### Methods
-/// + [play(Enum SoundIdentifier)] starts the alarm SoundIdentifier.
-/// + [stop()] stops all players.
-/// + [saturationHfBeep(int BPM, int spO2)] calculates according to specified BPM when and how often the ECG Sound should be played.
-///
+/// + [play] starts the alarm of given [SoundIdentifier].
+/// + [stop] stops all players.
+/// + [saturationHfBeep] calculates according to specified BPM when and how often the ECG Sound should be played.
+/// + [playDefiLoadSound] stops all currently active [AudioPlayer], then starts the Loading Sound for the Defi.
+/// + [playAlarmSound] plays the [alarmPlayer] in a periodic [Duration].
+/// + [stopAudioPlayer] stops a specific given [AudioPlayer] that is currently playing a Sound.
+/// + [stopAlarmTimer] stops the [alarmTimer] that is currently looping.
+
 class SoundController {
   ///Loads AudioAlarm Files into Cache and Provides functionality to Play, Stop them. Also provides ECG Sound per Minute and O2 Saturation.
   final AudioCache alarmPlayerCache = AudioCache(prefix: 'assets/sounds/');
   final AudioCache defiPlayerCache = AudioCache(prefix: 'assets/sounds/');
   final AudioCache ecgPlayerCache = AudioCache(prefix: 'assets/sounds/');
-  final List<SoundListEntry> soundList = <SoundListEntry>[];
-  String? _previousAlarmSound;
-  final List<bool> _alarmTypes = [false, false];
   RxBool ecgSoundActive = false.obs;
   Timer? timer;
   Timer? alarmTimer;
   Timer? getDataTimer;
   Timer? cancelTimerBeep;
   final int getDataTimerDuration = 5;
-  final SystemState systemState = Get.find<SystemState>();
   final double alarmVolume = 0.3;
 
   AudioPlayer? alarmPlayer;
@@ -67,26 +66,58 @@ class SoundController {
     SoundIdentifier.hfzero: 'hfzero.wav'
   };
 
-  ///Constructor for this. Loads the specified Sound files from [alarmSoundFiles] & [ecgecgSoundFiles] into the Cache of the Application.
+  /// Constructor for this. Loads the specified Sound files from [_alarmSoundFiles] & [ecgecgSoundFiles] into the Cache of the Application.
   SoundController() {
     alarmPlayerCache.loadAll(_alarmSoundFiles.values.toList());
     ecgPlayerCache.loadAll(_ecgSoundFiles.values.toList());
     defiPlayerCache.loadAll(_alarmSoundFiles.values.toList());
   }
 
-  ///Plays the SoundAlarm fot the AlarmType specified with [Enum soundIdentifier].
+  /// Plays the SoundAlarm for the AlarmType specified with [soundIdentifier].
   play(Enum soundIdentifier) async {
-    alarmPlayer = await alarmPlayerCache.play(_alarmSoundFiles[soundIdentifier].toString());
+    alarmPlayer = await alarmPlayerCache
+        .play(_alarmSoundFiles[soundIdentifier].toString());
   }
 
   /// Stops all currently active [AudioPlayer], then starts the Loading Sound for the Defi.
-  /// When this Loading Sound is completed, the Warning for the Charged and armed Defibrillator is loopes.
+  ///
+  /// When this Loading Sound is completed, the Warning for the Charged and armed Defibrillator is looping.
+  /// Plays the [defiPlayer] after this [SoundIdentifier.defiLoading] finished it will loop over [SoundIdentifier.defiShockReady].
   playDefiLoadSound() async {
     stop();
-    defiPlayer = await defiPlayerCache.play(_alarmSoundFiles[SoundIdentifier.defiLoading].toString(), volume: alarmVolume);
+    defiPlayer = await defiPlayerCache.play(
+        _alarmSoundFiles[SoundIdentifier.defiLoading].toString(),
+        volume: alarmVolume);
     defiPlayer!.onPlayerCompletion.listen((event) async {
-      defiPlayer = await defiPlayerCache.loop(_alarmSoundFiles[SoundIdentifier.defiShockReady].toString(), volume: alarmVolume + 0.1);
+      defiPlayer = await defiPlayerCache.loop(
+          _alarmSoundFiles[SoundIdentifier.defiShockReady].toString(),
+          volume: alarmVolume + 0.1);
     });
+  }
+
+  /// Plays the [alarmPlayer] in a periodic [Duration] defined by [timerDuration].
+  ///
+  /// If [timerDuration] = 0 it wont start an [alarmTimer]
+  playAlarmSound(SoundIdentifier? alarmSound, int timerDuration) async {
+    if (alarmSound != null) {
+      stopAudioPlayer(alarmPlayer);
+      if (timerDuration != 0) {
+        alarmTimer = Timer.periodic(Duration(seconds: timerDuration),
+            ((alarmTimer) async {
+          alarmPlayer = await alarmPlayerCache.play(
+            _alarmSoundFiles[alarmSound].toString(),
+            volume: alarmVolume,
+            mode: PlayerMode.LOW_LATENCY,
+          );
+        }));
+      } else {
+        alarmPlayer = await alarmPlayerCache.play(
+          _alarmSoundFiles[alarmSound].toString(),
+          volume: alarmVolume,
+          mode: PlayerMode.LOW_LATENCY,
+        );
+      }
+    }
   }
 
   ///Stops all [AudioPlayer]'s that are currently playing a Sound.
@@ -121,159 +152,19 @@ class SoundController {
     }
   }
 
-  ///Stops a specific [AudioPlayer] that is currently playing a Sound.
-  stopAlarmPlayer(AudioPlayer audioPlayer) {
-    audioPlayer.stop();
+  /// Stops a specific [AudioPlayer] that is currently playing a Sound.
+  stopAudioPlayer(AudioPlayer? audioPlayer) {
+    if (audioPlayer != null) {
+      audioPlayer.stop();
+    }
   }
 
-  triggerSoundState(dynamic sensor, int priority) {
-    // TODO compare list with current system state (eg: is temperature still confirmed?)
-    // first try to do so
-    soundList.removeWhere((element) {
-      // checks whether element is in systemState.absAlarmFieldModel.activeList or systemState.graphList.activeGraphAbsolutes,
-      // if it is in neither => remove from soundList
-      if (element.type is sensorEnumAbsolute) {
-        return !systemState.absAlarmFieldModel.activeList.contains(element.type as sensorEnumAbsolute) &&
-            !systemState.graphList.activeGraphAbsolutes.contains(element.type as sensorEnumAbsolute);
-        // could be nicer
-        // checks whether element is in generalAlarms, if so returns false => not removed from soundList
-      } else if (element.type is nonGraphAlarmEnum) {
-        for (var item in systemState.generalAlarms.alarmList) {
-          if (item.alarm == element.type as nonGraphAlarmEnum) {
-            return false;
-          }
-        }
-        return true;
-      } else {
-        throw Exception("soundList does contain an element which has neither sensorEnumAbsolute nor nonGraphAlarmEnum as type");
-      }
-    });
-
-    soundList.removeWhere((item) => item.type == sensor);
-    soundList.add(SoundListEntry(type: sensor, priority: priority));
-
-    soundList.sort((a, b) => b.priority.compareTo(a.priority));
-    soundList.removeWhere((item) => item.priority < soundList[0].priority);
-    //Don't play a sound when prio of new alarm is below prio of max alarm (we should be still looping over that)
-    if (soundList[0].priority > priority) {
-      return;
+  /// Stops the [alarmTimer] that is currently looping the [alarmPlayer].
+  stopAlarmTimer() async {
+    if (alarmTimer != null) {
+      alarmTimer!.cancel();
+      alarmTimer = null;
     }
-
-    ///For each Entry check Sensor alarmtype if Vent or Monitor.
-    for (var entry in soundList) {
-      if (entry.type is sensorEnumAbsolute) {
-        switch ((entry.type as sensorEnumAbsolute).alarmType) {
-          case 1: // is monitor alarm
-            _alarmTypes[0] = true;
-            break;
-          case 2: // is ventilator alarm
-            _alarmTypes[1] = true;
-            break;
-          default:
-            throw Exception("sensorEnumAbsolute has wrong defined alarmType");
-        }
-      }
-      // TODO: analyze general alarms too
-    }
-    playAlarm(soundList[0].priority);
-  }
-
-  ///Plays right [alarmsound] with right [priority].
-  playAlarm(int priority) {
-    int alarmSeconds = 0;
-    String alarmSound = "noalarm";
-    if (_alarmTypes[0] && _alarmTypes[1]) {
-      //Play Monitor+Vent Sounds.
-      if (priority == alarmStatus.high.priority) {
-        alarmSound = _alarmSoundFiles[SoundIdentifier.monitoringHighAlert].toString();
-        alarmSeconds = 2;
-      } else if (priority == alarmStatus.middle.priority) {
-        alarmSound = _alarmSoundFiles[SoundIdentifier.monitoringMediumAlert].toString();
-        alarmSeconds = 5;
-      }
-    } else if (_alarmTypes[1]) {
-      //Play Vent Alarm.
-      if (priority == alarmStatus.high.priority) {
-        alarmSound = _alarmSoundFiles[SoundIdentifier.ventilationHighAlert].toString();
-        alarmSeconds = 2;
-      } else if (priority == alarmStatus.middle.priority) {
-        alarmSound = _alarmSoundFiles[SoundIdentifier.ventilationMediumAlert].toString();
-        alarmSeconds = 5;
-      }
-    } else {
-      //Play Monitor Alarm.
-      if (priority == alarmStatus.high.priority) {
-        alarmSound = _alarmSoundFiles[SoundIdentifier.monitoringHighAlert].toString();
-        alarmSeconds = 2;
-      } else if (priority == alarmStatus.middle.priority) {
-        alarmSound = _alarmSoundFiles[SoundIdentifier.monitoringMediumAlert].toString();
-        alarmSeconds = 5;
-      }
-    }
-
-    //Don't reset Timer, if same [alarmSound] should be triggered as [_previousAlamSound].
-    if (alarmSound == _previousAlarmSound) {
-      _alarmTypes[0] = false;
-      _alarmTypes[1] = false;
-      return;
-    }
-    //Stop the [alarmTimer], if [priority] is [alarmStatus.none] or no [alarmSound] is choosen.
-    else if (alarmSound == "noalarm" || priority <= alarmStatus.confirmed.priority) {
-      if (alarmPlayer != null) {
-        alarmPlayer!.stop();
-        alarmPlayer!.dispose();
-        alarmPlayer = null;
-      }
-      if (alarmTimer != null) {
-        alarmTimer?.cancel();
-        alarmTimer = null;
-      }
-      _alarmTypes[0] = false;
-      _alarmTypes[1] = false;
-      _previousAlarmSound = null;
-      return;
-    }
-    //Register new [alarmTimer] with [alarmSound], [alarmDuration] and [alarmVolume].
-    else {
-      if (alarmSeconds != 0) {
-        if (alarmPlayer != null) {
-          alarmPlayer!.stop();
-          alarmPlayer!.dispose();
-          alarmPlayer = null;
-        }
-        if (alarmTimer != null) {
-          alarmTimer?.cancel();
-          alarmTimer = null;
-        }
-
-        ///Known Problem: We have to play the sound on first second and after this we use the Timer because the Timer plays on end of duration
-        ///This causes and Problem with Toggle to VentilationScreen!
-        //alarmPlayerCache.play(
-        //  alarmSound,
-        //  volume: alarmVolume,
-        //);
-        alarmTimer = Timer.periodic(Duration(seconds: alarmSeconds), ((alarmTimer) async {
-          if (Platform.isAndroid) {
-            alarmPlayer = await alarmPlayerCache.play(
-              alarmSound,
-              volume: alarmVolume,
-              mode: PlayerMode.LOW_LATENCY,
-            );
-            // since stayAwake is not implemented on macOs, we like to check
-          } else if (Platform.isIOS) {
-            alarmPlayer = await alarmPlayerCache.play(
-              alarmSound,
-              volume: alarmVolume,
-              mode: PlayerMode.LOW_LATENCY,
-            );
-          }
-        }));
-      }
-    }
-
-    _alarmTypes[0] = false;
-    _alarmTypes[1] = false;
-    _previousAlarmSound = alarmSound;
   }
 
   /// Function starts the ECG Sound in the rhythm specified with [bpm] and playes the accordingly Pitched Sound File to the Oxygen Saturation specified with [spO2]
@@ -295,7 +186,6 @@ class SoundController {
   saturationHfBeep({required int bpm, required int spO2}) async {
     const double volume = 0.1;
     String ecgSound = _ecgSoundFiles[SoundIdentifier.hFnormal].toString();
-    //ecgPlayerRet = await ecgPlayer.play(ecgSound, volume: 0);
 
     if (spO2 > 90) {
       ecgSound = _ecgSoundFiles[SoundIdentifier.hFnormal].toString();
@@ -319,11 +209,6 @@ class SoundController {
       int milliesTillNext = ((1 / beepHz) * 1000).toInt();
       Duration duration = Duration(milliseconds: milliesTillNext);
 
-      /*     if (ecgPlayerRet.state == PlayerState.PLAYING) {
-        print('stopping Player');
-        ecgPlayerRet.stop();
-      } */
-
       timer = Timer.periodic(
         duration,
         ((timer) async {
@@ -333,7 +218,8 @@ class SoundController {
               volume: volume,
               mode: PlayerMode.LOW_LATENCY,
             );
-            // since stayAwake is not implemented on macOs, we like to check
+
+            /// since stayAwake is not implemented on macOs, we like to check
           } else if (Platform.isIOS) {
             ecgPlayer = await ecgPlayerCache.play(
               ecgSound,
@@ -342,7 +228,7 @@ class SoundController {
             );
           }
 
-          // fix for double timer after hot reload, cancels running timer 1 second after a reload of method should have occoured
+          /// fix for double timer after hot reload, cancels running timer 1 second after a reload of method should have occoured
           if (cancelTimerBeep != null) {
             cancelBeepTimer(duration);
           }
@@ -355,7 +241,8 @@ class SoundController {
           volume: volume,
           mode: PlayerMode.LOW_LATENCY,
         );
-        // since stayAwake is not implemented on macOs, we like to check
+
+        /// since stayAwake is not implemented on macOs, we like to check
       } else if (Platform.isIOS) {
         ecgPlayer = await ecgPlayerCache.play(
           _ecgSoundFiles[SoundIdentifier.hfzero].toString(),
@@ -364,14 +251,14 @@ class SoundController {
         );
       }
 
-      // fix for double timer after hot reload, cancels running timer 1 second after a reload of method should have occoured
+      /// fix for double timer after hot reload, cancels running timer 1 second after a reload of method should have occoured
       if (cancelTimerBeep != null) {
         cancelBeepTimer(Duration(seconds: getDataTimerDuration + 1));
       }
     }
   }
 
-  // internal method, to fix double timers after hot reload
+  /// internal method, to fix double timers after hot reload
   void cancelBeepTimer(Duration duration) {
     cancelTimerBeep = Timer(duration, () {
       timer?.cancel();
@@ -381,23 +268,28 @@ class SoundController {
     });
   }
 
-  /// Creates the [Timer.periodic()], gets the [DataModelAbsolute] for HF and SPO2 and starts Triggers periodically the Saturation HF Beep Update Method.
-  /// This Happens only every 3 Seconds to take it easy on the performance.
+  /// Creates the [Timer.periodic()], gets the [DataModelAbsolute] for HF and SPO2 and starts triggers periodically the saturation HF Beep Update Method.
+  /// This happens only every 3 seconds to take it easy on the performance.
   void startSaturationHFSound() {
     ecgSoundActive.value = true;
-    DataModelAbsolute hfModel = Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.hfAbsolute.name);
-    DataModelAbsolute spo2Model = Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.spo2Absolute.name);
-    getDataTimer ??= Timer.periodic(Duration(seconds: getDataTimerDuration), (timer) {
-      saturationHfBeep(bpm: hfModel.absoluteValue.value.toInt(), spO2: spo2Model.absoluteValue.value.toInt());
+    DataModelAbsolute hfModel =
+        Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.hfAbsolute.name);
+    DataModelAbsolute spo2Model =
+        Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.spo2Absolute.name);
+    getDataTimer ??=
+        Timer.periodic(Duration(seconds: getDataTimerDuration), (timer) {
+      saturationHfBeep(
+          bpm: hfModel.absoluteValue.value.toInt(),
+          spO2: spo2Model.absoluteValue.value.toInt());
     });
   }
 }
 
-///This [enum] Specifies the Categories of Alarms and ECG Sound Types there are. Used to identify the SoundFile and triggering of it in the [SoundController] Class this is needed for.
-///this needs to be Changed to add more Categories of Alarms.
+///This [SoundIdentifier] specifies the categories of alarms and ECG sound types there are. Used to identify the soundfile and triggering of it in the [SoundController] class this is needed for.
+///this needs to be changed to add more categories of alarms.
 ///
 ///#### Current Categories:
-///+ notifiation,
+///+   notifiation,
 ///+   mediumAlert,
 ///+   highAlert,
 ///+   hFnormal,
@@ -419,17 +311,4 @@ enum SoundIdentifier {
   hF65,
   hF50,
   hfzero,
-}
-
-// TODO: COMMENTARY
-class SoundListEntry {
-  final dynamic type;
-
-  /// priority of the alarm, should be between 0 and 100
-  final int priority;
-
-  SoundListEntry({
-    required this.type,
-    required this.priority,
-  });
 }
