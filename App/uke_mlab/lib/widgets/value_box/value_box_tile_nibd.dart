@@ -42,8 +42,9 @@ class ValueBoxTileNIBD extends StatelessWidget {
     DataModelAbsolute dataModelSYS =
         Get.find<DataModelAbsolute>(tag: sensorAbsoluteSYS.name);
     SystemState systemState = Get.find<SystemState>();
+
     return Container(
-      color: Theme.of(context).primarySwatch[50],
+      color: theme.primarySwatch[50],
       margin: const EdgeInsets.only(left: 4, right: 4, top: 4, bottom: 4),
       child: Column(
         children: [
@@ -127,7 +128,7 @@ class ValueBoxTileNIBD extends StatelessWidget {
     );
   }
 
-  /// Helper method to evaluate the backgroundcolor for alarms (default != [Theme.of(context).focusColor])
+  /// Helper method to evaluate the backgroundcolor for alarms (default != [Theme.of(context).primarySwatch[50]])
   Color? evaluateBorderColor(BuildContext context, sensorEnumAbsolute sensorKey,
       RxMap<sensorEnumAbsolute, Map<String, dynamic>> alarmState) {
     final ThemeData theme = Theme.of(context);

@@ -14,6 +14,7 @@ class AppMenuEntry extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     final ScreenController screenController = Get.find<ScreenController>();
     String navigateTo = '/' + name.replaceAll(RegExp(r' '), '_').toLowerCase();
 
@@ -42,7 +43,7 @@ class AppMenuEntry extends StatelessWidget {
             title: Text(
               name,
               style: TextStyle(
-                color: Theme.of(context).disabledColor,
+                color: theme.disabledColor,
                 fontSize: 20,
               ),
             ),
