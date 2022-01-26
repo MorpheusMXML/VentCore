@@ -55,7 +55,8 @@ class ScreenController {
     switch (scenario) {
       case scenariosEnum.standardScenario:
         runningScenario = StandardScenario();
-        systemState.graphList.setStandardGraphs(ScenarioEnumDisplayedGraphs.graphs[scenario] as Map<screenStatusEnum, List<sensorEnumGraph>>);
+        systemState.graphList.setStandardGraphs(ScenarioEnumDisplayedGraphs
+            .graphs[scenario] as Map<screenStatusEnum, List<sensorEnumGraph>>);
         runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
         break;
       case scenariosEnum.scenario1:
@@ -65,7 +66,8 @@ class ScreenController {
       case scenariosEnum.scenario3c:
       case scenariosEnum.scenario4:
         runningScenario = PatientScenario(scenarioType: scenario);
-        systemState.graphList.setStandardGraphs(ScenarioEnumDisplayedGraphs.graphs[scenario] as Map<screenStatusEnum, List<sensorEnumGraph>>);
+        systemState.graphList.setStandardGraphs(ScenarioEnumDisplayedGraphs
+            .graphs[scenario] as Map<screenStatusEnum, List<sensorEnumGraph>>);
         runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
         break;
       default:
@@ -94,7 +96,8 @@ class ScreenController {
         systemState.resetSystemState();
       }
     } else {
-      throw Exception('additionalInformation is not Adult, Child or Infant on screenChangeButton call from Continue Button');
+      throw Exception(
+          'additionalInformation is not Adult, Child or Infant on screenChangeButton call from Continue Button');
     }
     systemState.screenStatus = screenStatusEnum.monitorScreen;
     changeScenario(scenariosEnum.standardScenario);
@@ -149,6 +152,7 @@ class ScreenController {
 
   /// beavior when using [ToggleModeButton]
   void setSelectedToggleView(int index) {
+    hideAlarmBoundaryOverlays();
     switch (index) {
       case 0:
         systemState.screenStatus = screenStatusEnum.monitorScreen;
@@ -172,6 +176,7 @@ class ScreenController {
 
   /// resets [ToggleModeButton] to default
   void resetToggleView() {
+    hideAlarmBoundaryOverlays();
     systemState.setSelectedToggleView([true, false, false]);
   }
 
@@ -219,7 +224,8 @@ class ScreenController {
   /// Behavior for smartAdjustementButton
   void smartAdjustmentButton(sensorEnumAbsolute sensorKey) {
     SmartAdjustmentMap boundaryAdjustmentMap = systemState.smartAdjustmentMap;
-    DataModelAbsolute dataModel = Get.find<DataModelAbsolute>(tag: sensorKey.name);
+    DataModelAbsolute dataModel =
+        Get.find<DataModelAbsolute>(tag: sensorKey.name);
 
     if (boundaryAdjustmentMap.map[sensorKey]!.lowerCounter.value >= 3) {
       boundaryAdjustmentMap.map[sensorKey]!.lowerCounter.value = 0;
@@ -232,6 +238,14 @@ class ScreenController {
       boundaryAdjustmentMap.map[sensorKey]!.dateTimeUpper = DateTime.now();
       dataModel.setUpperAlarmBoundary(dataModel.upperAlarmBound.value * 1.03);
       boundaryAdjustmentMap.calculatePressable(sensorKey);
+    }
+  }
+
+  /// helper method to hide all overlays for alarm boundaries if interacted with menus and changes of the screen
+  void hideAlarmBoundaryOverlays() {
+    for (var sensor in sensorEnumAbsolute.values) {
+      Get.find<DataModelAbsolute>(tag: sensor.name).hideOverlay();
+      Get.find<DataModelAbsolute>(tag: sensor.name).expanded = false;
     }
   }
 }

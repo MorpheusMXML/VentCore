@@ -60,21 +60,24 @@ class ValueBoxTile extends StatelessWidget {
       DataModelAbsolute dataModel = Get.find<DataModelAbsolute>(
           tag: sensorAbsolute
               ?.name); // sensorAbsolute is not null since IF sensorGraph == null, sensorAbsolute is required
-      return type == 'regular'
-          ? ValueBoxContainer(
-              dataModelAbsolute: dataModel,
-              optAbreviationTitle: optAbreviationTitle,
-            )
-          :
-          // called with headline case
-          Obx(
-              () => ConstrainedBox(
-                constraints: BoxConstraints(
-                    maxWidth: (Get.width - 12 - 12) / (2 + 1) * 1 / 2 * 1 - 8),
-                child: Container(
-                  color: evaluateBorderColor(context, systemState.alarmState),
-                  margin: const EdgeInsets.only(right: 4, bottom: 8, left: 4),
-                  child: Column(
+      return Container(
+        margin: (superNIBD || type == 'regular')
+            ? null
+            : const EdgeInsets.only(left: 4, right: 4, bottom: 8),
+        child: Stack(
+          alignment: AlignmentDirectional.topCenter,
+          children: [
+            Obx(() {
+              return Container(
+                color: evaluateBorderColor(context, systemState.alarmState),
+              );
+            }),
+            type == 'regular'
+                ? ValueBoxContainer(
+                    dataModelAbsolute: dataModel,
+                    optAbreviationTitle: optAbreviationTitle,
+                  )
+                : Column(
                     children: [
                       // headtile
                       superNIBD
@@ -122,9 +125,9 @@ class ValueBoxTile extends StatelessWidget {
                       ),
                     ],
                   ),
-                ),
-              ),
-            );
+          ],
+        ),
+      );
     } else if (sensorAbsolute == null) {
       return ValueBoxContainer.withoutAbsolute(
         dataModelGraph: Get.find<DataModelGraph>(tag: sensorGraph!.name),
@@ -145,6 +148,8 @@ class ValueBoxTile extends StatelessWidget {
       case alarmStatus.warning:
         return alarmState[sensorAbsolute]!["color"];
       case alarmStatus.confirmed:
+        return (alarmState[sensorAbsolute]!["color"] as Color)
+            .withOpacity(0.65);
       default:
         return Theme.of(context).focusColor;
     }

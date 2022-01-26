@@ -33,83 +33,96 @@ class ValueBoxTileNIBD extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // sensorAbsolute is not null since IF sensorGraph == null, sensorAbsolute is required // sensorAbsolute is not null since IF sensorGraph == null, sensorAbsolute is required
-    DataModelAbsolute dataModelSYS = Get.find<DataModelAbsolute>(tag: sensorAbsoluteSYS.name);
+    DataModelAbsolute dataModelSYS =
+        Get.find<DataModelAbsolute>(tag: sensorAbsoluteSYS.name);
     SystemState systemState = Get.find<SystemState>();
-    return Obx(
-      () => Container(
-        color: Theme.of(context).focusColor,
-        child: Column(
-          children: [
-            Flexible(
-              flex: 1,
+    return Container(
+      color: Theme.of(context).focusColor,
+      margin: const EdgeInsets.only(left: 4, right: 4, top: 4, bottom: 4),
+      child: Column(
+        children: [
+          Flexible(
+            flex: 1,
 
-              /// [Container] used to render the ShortString of the [DataModelAbsolute] Results in the [String] 'NIBD' if called with NIBD DataModel.
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
+            /// [Container] used to render the ShortString of the [DataModelAbsolute] Results in the [String] 'NIBD' if called with NIBD DataModel.
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Obx(
+                  () => Flexible(
                     flex: 1,
                     child: Container(
-                      margin: const EdgeInsets.only(left: 4),
-                      color: evaluateBorderColor(context, sensorEnumAbsolute.sysAbsolute, systemState.alarmState),
+                      color: evaluateBorderColor(
+                          context,
+                          sensorEnumAbsolute.sysAbsolute,
+                          systemState.alarmState),
                     ),
                   ),
-                  SizedBox(
-                    width: 2 * 37 + 8,
-                    child: Center(
-                      child: Container(
-                        margin: const EdgeInsets.only(top: 4, bottom: 4),
-                        child: Text(
-                          dataModelSYS.displayShortString,
-                          style: TextStyle(
-                            decoration: TextDecoration.none,
-                            color: dataModelSYS.color,
-                            fontSize: 20,
-                            overflow: TextOverflow.ellipsis,
-                          ),
+                ),
+                SizedBox(
+                  width: 2 * 37 + 8,
+                  child: Center(
+                    child: Container(
+                      margin: const EdgeInsets.only(top: 4, bottom: 4),
+                      child: Text(
+                        dataModelSYS.displayShortString,
+                        style: TextStyle(
+                          decoration: TextDecoration.none,
+                          color: dataModelSYS.color,
+                          fontSize: 20,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ),
                   ),
-                  Flexible(
-                    flex: 1,
-                    child: Container(
-                      margin: const EdgeInsets.only(right: 4),
-                      color: evaluateBorderColor(context, sensorEnumAbsolute.diaAbsolute, systemState.alarmState),
+                ),
+                Flexible(
+                  flex: 1,
+                  child: Obx(
+                    () => Container(
+                      color: evaluateBorderColor(
+                          context,
+                          sensorEnumAbsolute.diaAbsolute,
+                          systemState.alarmState),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            Flexible(
-              flex: 3,
-              child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                //Systolic Absolute Box
-                Expanded(
-                  child: ValueBoxTile.withHeadline(
-                    sensorAbsolute: sensorEnumAbsolute.sysAbsolute,
-                    optAbreviationTitle: sensorAbsoluteSYS.abbreviation,
-                    superNIBD: true,
+          ),
+          Flexible(
+            flex: 3,
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  //Systolic Absolute Box
+                  Expanded(
+                    child: ValueBoxTile.withHeadline(
+                      sensorAbsolute: sensorEnumAbsolute.sysAbsolute,
+                      optAbreviationTitle: sensorAbsoluteSYS.abbreviation,
+                      superNIBD: true,
+                    ),
                   ),
-                ),
-                //Diastolic Absolute Box
-                Expanded(
-                  child: ValueBoxTile.withHeadline(
-                    sensorAbsolute: sensorEnumAbsolute.diaAbsolute,
-                    optAbreviationTitle: sensorAbsoluteDIA.abbreviation,
-                    superNIBD: true,
+                  const SizedBox(
+                    width: 8,
                   ),
-                ),
-              ]),
-            )
-          ],
-        ),
+                  //Diastolic Absolute Box
+                  Expanded(
+                    child: ValueBoxTile.withHeadline(
+                      sensorAbsolute: sensorEnumAbsolute.diaAbsolute,
+                      optAbreviationTitle: sensorAbsoluteDIA.abbreviation,
+                      superNIBD: true,
+                    ),
+                  ),
+                ]),
+          )
+        ],
       ),
     );
   }
 
-  Color evaluateBorderColor(
-      BuildContext context, sensorEnumAbsolute sensorKey, RxMap<sensorEnumAbsolute, Map<String, dynamic>> alarmState) {
+  Color evaluateBorderColor(BuildContext context, sensorEnumAbsolute sensorKey,
+      RxMap<sensorEnumAbsolute, Map<String, dynamic>> alarmState) {
     alarmStatus? alarm = alarmState[sensorKey]!["status"];
     switch (alarm) {
       case alarmStatus.high:
@@ -117,6 +130,7 @@ class ValueBoxTileNIBD extends StatelessWidget {
       case alarmStatus.warning:
         return alarmState[sensorKey]!["color"];
       case alarmStatus.confirmed:
+        return (alarmState[sensorKey]!["color"] as Color).withOpacity(0.65);
       default:
         return Theme.of(context).focusColor;
     }

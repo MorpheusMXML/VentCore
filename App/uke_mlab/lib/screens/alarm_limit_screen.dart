@@ -54,21 +54,16 @@ class AlarmLimitScreen extends StatelessWidget {
                   ),
                   Container(
                     padding: const EdgeInsets.only(left: 16),
-                    child: ConstrainedBox(
-                      constraints: BoxConstraints(
-                        maxHeight: Get.height / 4,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: monitorBoundarySet.map((sensorKey) {
-                          return SizedBox(
-                            height: 180,
-                            width: (Get.width - 24) / 3 / 2 + 15,
-                            child: ValueBoxTile.withHeadline(
-                                sensorAbsolute: sensorKey),
-                          );
-                        }).toList(),
-                      ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: monitorBoundarySet.map((sensorKey) {
+                        return SizedBox(
+                          height: 180,
+                          width: (Get.width - 24) / 3 / 2 + 15,
+                          child: ValueBoxTile.withHeadline(
+                              sensorAbsolute: sensorKey),
+                        );
+                      }).toList(),
                     ),
                   ),
                 ],
@@ -87,21 +82,16 @@ class AlarmLimitScreen extends StatelessWidget {
                   ),
                   Container(
                     padding: const EdgeInsets.only(left: 16),
-                    child: ConstrainedBox(
-                      constraints: BoxConstraints(
-                        maxHeight: Get.height / 4,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: ventilationBoundarySet.map((sensorKey) {
-                          return SizedBox(
-                            height: 180,
-                            width: (Get.width - 24) / 3 / 2 + 15,
-                            child: ValueBoxTile.withHeadline(
-                                sensorAbsolute: sensorKey),
-                          );
-                        }).toList(),
-                      ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: ventilationBoundarySet.map((sensorKey) {
+                        return SizedBox(
+                          height: 180,
+                          width: (Get.width - 24) / 3 / 2 + 15,
+                          child: ValueBoxTile.withHeadline(
+                              sensorAbsolute: sensorKey),
+                        );
+                      }).toList(),
                     ),
                   ),
                 ],
@@ -120,21 +110,16 @@ class AlarmLimitScreen extends StatelessWidget {
                   ),
                   Container(
                     padding: const EdgeInsets.only(left: 16),
-                    child: ConstrainedBox(
-                      constraints: BoxConstraints(
-                        maxHeight: Get.height / 4,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: graphBoundarySet.map((sensorKey) {
-                          return SizedBox(
-                            height: 180,
-                            width: (Get.width - 24) / 3 / 2 + 15,
-                            child: ValueBoxTile.withHeadline(
-                                sensorAbsolute: sensorKey),
-                          );
-                        }).toList(),
-                      ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: graphBoundarySet.map((sensorKey) {
+                        return SizedBox(
+                          height: 180,
+                          width: (Get.width - 24) / 3 / 2 + 15,
+                          child: ValueBoxTile.withHeadline(
+                              sensorAbsolute: sensorKey),
+                        );
+                      }).toList(),
                     ),
                   ),
                 ],
