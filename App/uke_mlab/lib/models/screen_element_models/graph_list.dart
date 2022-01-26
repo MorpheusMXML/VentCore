@@ -7,9 +7,8 @@ import 'package:uke_mlab/utilities/enums/alarm_status.dart';
 import 'package:uke_mlab/widgets/graph_container/graph_view.dart';
 import 'package:uke_mlab/widgets/value_box/value_box_tile.dart';
 
+/// Contains a list [list] over all currently [GraphView] represented by the corresponding [sensorEnumGraph].
 class GraphList {
-  /// Contains a list [list] over all currently [GraphView] represented by the corresponding [sensorEnumGraph].
-
   /// Contains information whether a [GraphView] has been added to current screen.
   RxBool addGraph = false.obs;
 

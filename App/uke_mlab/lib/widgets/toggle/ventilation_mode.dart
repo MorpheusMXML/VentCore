@@ -6,16 +6,15 @@ import 'package:uke_mlab/widgets/value_box/alarm_confirmation/alarm_confirmation
 import 'package:uke_mlab/widgets/value_box/value_box_tile.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
+/// Renders the [Widget] that structures the right part of the ventilation screen.
+///
+/// It Calls the Custom Widgets:
+/// + [ValueBoxTile] for [sensorEnumAbsolute.breathfrequency], [sensorEnumAbsolute.mve] and [sensorEnumAbsolute.hfAbsolute]
+/// + [SettingContainer] for IPPv-setting
+/// + [InfoContainer]
+/// + [AlarmConfirmationRow]
+/// + [ToggleModeButton]
 class VentilationMode extends StatelessWidget {
-  /// Renders the [Widget] that structures the right part of the ventilation screen.
-  ///
-  /// It Calls the Custom Widgets:
-  /// + [ValueBoxTile] for [sensorEnumAbsolute.breathfrequency], [sensorEnumAbsolute.mve] and [sensorEnumAbsolute.hfAbsolute]
-  /// + [SettingContainer] for IPPv-setting
-  /// + [InfoContainer]
-  /// + [AlarmConfirmationRow]
-  /// + [ToggleModeButton]
-
   const VentilationMode({
     Key? key,
   }) : super(key: key);

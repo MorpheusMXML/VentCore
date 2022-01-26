@@ -8,11 +8,11 @@ import 'package:uke_mlab/utilities/enums/non_graph_alarm.dart';
 import 'package:uke_mlab/widgets/appbar/alarm_list.dart';
 import 'package:uke_mlab/widgets/appbar/statusbar.dart';
 
-/// This Class Implements the General Alarms that are displayed within the [StatusBar].
+/// Offers a sorted list of general alarms for being displayed in [StatusBar].
+///
+/// This class implements the general alarms that are displayed within the [StatusBar].
 /// Note that these Alarms are independent of the Patient Data and Shown Graphs and Absolute Values. These Alarms are General Notifications like O2 Bottle Empty etc.
 class GeneralAlarms extends GetxController {
-  /// Offers a sorted list of general alarms for being displayed in [StatusBar]
-
   final RxList<AlarmListEntry> alarmList = <AlarmListEntry>[].obs;
   OverlayEntry? entry;
   RxBool listExpanded = false.obs;

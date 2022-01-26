@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/providers/screen_controller.dart';
 
 /// This class contains the Skip Button and its functionality.
+///
 /// It provides a way to continue to the main screen without selecting patient preset and values.
 /// Instead it just continues to the main screen with default values.
 class SkipButton extends StatelessWidget {
@@ -13,6 +14,7 @@ class SkipButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenController = Get.find<ScreenController>();
+
     /// The Container contains the Buttons configuration and functionality.
     return Container(
       alignment: Alignment.centerRight,
@@ -26,7 +28,8 @@ class SkipButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(75),
           ),
         ),
-        child: const Text('Skip', style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+        child: const Text('Skip',
+            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
         onPressed: () => screenController.skipButton(),
       ),
     );

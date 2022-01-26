@@ -4,9 +4,8 @@ import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/providers/screen_controller.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
+/// The button for the smart adjustment feature.
 class SmartAjdustButton extends StatelessWidget {
-  /// The button for the smart adjustment feature.
-
   /// Key to identify the corresponding sensor.
   final sensorEnumAbsolute sensorKey;
 

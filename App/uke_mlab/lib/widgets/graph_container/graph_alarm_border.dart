@@ -9,10 +9,8 @@ import 'package:uke_mlab/widgets/graph_container/alarm_confirm_button.dart';
 import 'package:uke_mlab/widgets/graph_container/graph_alarm_message.dart';
 import 'package:uke_mlab/widgets/graph_container/smart_adjustment_button.dart';
 
+/// Sets an border which is triggered through the [SystemState]
 class GraphAlarmBorder extends StatelessWidget {
-  /// Sets an border which is triggered through the [SystemState]
-  ///
-  /// Uses a Switch case to divide different alarmTypes read through [boundaryStateEnum]
   final sensorEnumAbsolute sensor;
   const GraphAlarmBorder({
     Key? key,
