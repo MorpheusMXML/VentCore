@@ -2857,15 +2857,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     transform: translateX(0);
   }
 
-  30% {
+  100% {
     opacity: 0;
     -webkit-transform: translateX(100%);
-    -ms-transform: translateX(100%);
     transform: translateX(100%);
-  }
-  100% {
-    height: 0;
-    overflow: hidden;
   }
 }
 
@@ -2877,15 +2872,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     transform: translateX(0);
   }
 
-  30% {
+  100% {
     opacity: 0;
     -webkit-transform: translateX(100%);
     -ms-transform: translateX(100%);
     transform: translateX(100%);
-  }
-  100% {
-    height: 0;
-    overflow: hidden;
   }
 }
 
@@ -2902,15 +2893,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     transform: translateX(0);
   }
 
-  30% {
+  100% {
     opacity: 0;
     -webkit-transform: translateX(-100%);
-    -ms-transform: translateX(-100%);
     transform: translateX(-100%);
-  }
-  100% {
-    height: 0;
-    overflow: hidden;
   }
 }
 
@@ -2922,15 +2908,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     transform: translateX(0);
   }
 
-  30% {
+  100% {
     opacity: 0;
     -webkit-transform: translateX(-100%);
     -ms-transform: translateX(-100%);
     transform: translateX(-100%);
-  }
-  100% {
-    height: 0;
-    overflow: hidden;
   }
 }
 
@@ -2945,12 +2927,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     opacity: 1;
   }
 
-  30%{
-    opacity: 0;
-  }
   100% {
-    height: 0;
-    overflow: hidden;
+    opacity: 0;
   }
 }
 
@@ -2958,12 +2936,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
   0% {
     opacity: 1;
   }
-  30%{
-    opacity: 0;
-  }
+
   100% {
-    height: 0;
-    overflow: hidden;
+    opacity: 0;
   }
 }
 
@@ -2972,3 +2947,4 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
   animation-name: fadeOutLogo;
   animation-fill-mode: forwards;
 }
+
