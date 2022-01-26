@@ -43,10 +43,12 @@ class DataModelGraph extends GetxController {
   DataModelGraph({required this.sensorKey}) {
     switch (sensorKey) {
       case sensorEnumGraph.cpr:
-        singleData = ChartData.asCPR(time: DateTime.now(), counter: 0, value: 0.0).obs;
+        singleData =
+            ChartData.asCPR(time: DateTime.now(), counter: 0, value: 0.0).obs;
         break;
       default:
-        singleData = ChartData(time: DateTime.now(), counter: 0, value: 0.0).obs;
+        singleData =
+            ChartData(time: DateTime.now(), counter: 0, value: 0.0).obs;
     }
   }
 
@@ -59,7 +61,9 @@ class DataModelGraph extends GetxController {
       case sensorEnumGraph.cpr:
         for (int i = 0; i < valueList.length; i++) {
           singleData.value = ChartData.asCPR(
-              time: DateTime.now(), value: valueList[i].toDouble(), counter: singleData.value.counter + 1);
+              time: DateTime.now(),
+              value: valueList[i].toDouble(),
+              counter: singleData.value.counter + 1);
           graphData.add(singleData.value);
         }
 
@@ -68,11 +72,20 @@ class DataModelGraph extends GetxController {
             graphData.removeAt(0);
           }
         }
+
+        if (chartController is ChartSeriesController &&
+            chartController != null) {
+          chartController!.updateDataSource(
+              updatedDataIndexes:
+                  List.generate(graphDataMaxLength, (index) => index++));
+        }
         break;
       default:
         for (int i = 0; i < valueList.length; i++) {
-          singleData.value =
-              ChartData(time: DateTime.now(), value: valueList[i].toDouble(), counter: singleData.value.counter + 1);
+          singleData.value = ChartData(
+              time: DateTime.now(),
+              value: valueList[i].toDouble(),
+              counter: singleData.value.counter + 1);
           graphData.add(singleData.value);
         }
 
@@ -87,7 +100,8 @@ class DataModelGraph extends GetxController {
   /// generates an initial population of [graphData] of [graphDataMaxLength] length, representing a 0-line
   void populateGraphList() {
     for (int i = 0; i < graphDataMaxLength; i++) {
-      singleData.value = ChartData(counter: i, time: DateTime.now(), value: 0.0);
+      singleData.value =
+          ChartData(counter: i, time: DateTime.now(), value: 0.0);
       graphData.add(singleData.value);
     }
   }
