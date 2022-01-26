@@ -141,6 +141,7 @@ class ValueBoxTile extends StatelessWidget {
     }
   }
 
+  /// Helper method to evaluate the backgroundcolor for alarms (default != [Theme.of(context).primarySwatch[50]])
   Color? evaluateBorderColor(BuildContext context,
       RxMap<sensorEnumAbsolute, Map<String, dynamic>> alarmState) {
     final ThemeData theme = Theme.of(context);

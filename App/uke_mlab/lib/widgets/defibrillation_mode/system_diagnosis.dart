@@ -19,7 +19,7 @@ class SystemDiagnosis extends StatelessWidget {
       child: Obx(
         () => Text(
           defibrillationController.systemDiagnosis.value,
-          style: const TextStyle(fontSize: 20),
+          style: theme.defiDiagnosisTextStyle,
           softWrap: true,
           textAlign: TextAlign.center,
         ),

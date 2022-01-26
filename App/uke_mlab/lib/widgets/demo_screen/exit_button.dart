@@ -12,7 +12,7 @@ class ExitButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    
+
     return Container(
       alignment: Alignment.centerRight,
       margin: const EdgeInsets.fromLTRB(0, 0, 50, 50),
@@ -25,7 +25,10 @@ class ExitButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(75),
           ),
         ),
-        child: const Text('Exit', style: TextStyle(fontSize: 20)),
+        child: Text(
+          'Exit',
+          style: theme.navigationButtonTextStyle,
+        ),
         onPressed: () => Get.find<ScreenController>().menuExitButton(),
       ),
     );

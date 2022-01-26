@@ -60,10 +60,7 @@ class ValueBoxContainer extends StatelessWidget {
         aspectRatio: aspectRatio,
         child: ElevatedButton(
           key: globalKey,
-          style: ButtonStyle(
-              shape: MaterialStateProperty.all(const RoundedRectangleBorder()),
-              backgroundColor:
-                  MaterialStateProperty.all(theme.primarySwatch[40])),
+          style: theme.valueBoxContainerButtonStyle,
           onPressed: () {
             dataModelAbsolute!.expanded = !dataModelAbsolute!.expanded;
             dataModelAbsolute!.expanded

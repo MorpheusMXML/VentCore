@@ -31,16 +31,16 @@ class InfoText extends StatelessWidget {
           Expanded(
             child: Text(
               type,
-              style: TextStyle(fontSize: 16, color: theme.contrastColor),
+              style: theme.infoTextStyle,
             ),
           ),
           Text(
             value,
-            style: TextStyle(fontSize: 16, color: theme.contrastColor),
+            style: theme.infoTextStyle,
           ),
           Text(
             unit,
-            style: TextStyle(fontSize: 10, color: theme.contrastColor),
+            style: theme.infoTextStyle,
           ),
         ],
       ),

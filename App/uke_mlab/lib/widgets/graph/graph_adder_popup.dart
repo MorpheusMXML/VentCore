@@ -53,7 +53,7 @@ class GraphAdderPopup extends StatelessWidget {
                     },
                     child: Text(
                       sensor.graphTitle,
-                      style: const TextStyle(fontSize: 18),
+                      style: theme.graphAdderPopupTextStyle,
                       textAlign: TextAlign.center,
                     ));
               }).toList()),

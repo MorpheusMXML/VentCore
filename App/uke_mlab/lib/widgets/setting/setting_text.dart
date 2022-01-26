@@ -28,28 +28,16 @@ class SettingText extends StatelessWidget {
             CrossAxisAlignment.baseline, //gets text in same line
         textBaseline: TextBaseline.ideographic, //gets text in same line
         children: [
-          Text(
-            name,
-            style: TextStyle(
-              fontSize: 16,
-              color: theme.contrastColor,
-            ),
-          ),
+          Text(name, style: theme.settingTextStyle),
           Obx(
             () => Text(
               systemState.ippvModel.ippvValues[name].toString(),
-              style: TextStyle(
-                fontSize: 32,
-                color: theme.contrastColor,
-              ),
+              style: theme.settingTextStyle2,
             ),
           ),
           Text(
             rate,
-            style: TextStyle(
-              fontSize: 12,
-              color: theme.contrastColor,
-            ),
+            style: theme.settingTextStyle3,
           ),
         ],
       ),

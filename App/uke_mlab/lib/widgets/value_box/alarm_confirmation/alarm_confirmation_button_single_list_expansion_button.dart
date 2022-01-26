@@ -37,9 +37,9 @@ class AlarmConfirmationButtonSingleListExpansion extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
+            Text(
               "Single Alarm Conf",
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: theme.boldTextStyle,
             ),
             systemState.absAlarmFieldModel.listExpanded.value
                 ? Icon(

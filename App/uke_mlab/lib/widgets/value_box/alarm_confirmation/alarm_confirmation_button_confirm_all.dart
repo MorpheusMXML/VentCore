@@ -35,10 +35,10 @@ class AlarmConfirmationButtonAll extends StatelessWidget {
                 systemState.graphList.activeGraphAbsolutes.isNotEmpty
             ? () => {confirmAllVisibleAlarms()}
             : null,
-        child: const Center(
+        child: Center(
           child: Text(
             "Confirm all Alarms",
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: theme.boldTextStyle,
           ),
         ),
       ),

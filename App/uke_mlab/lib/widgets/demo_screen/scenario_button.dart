@@ -33,7 +33,7 @@ class ScenarioButton extends StatelessWidget {
         onPressed: () => screenController.scenarioButton(scenario),
         child: Text(
           name,
-          style: const TextStyle(fontSize: 25),
+          style:theme.navigationButtonTextStyle,
         ),
       ),
     );

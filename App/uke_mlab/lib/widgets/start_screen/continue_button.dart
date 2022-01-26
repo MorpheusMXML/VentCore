@@ -38,8 +38,10 @@ class ContinueButton extends StatelessWidget {
               : null,
 
           /// The Child of the container holds the Text on the Button
-          child: const Text('Continue',
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+          child: Text(
+            'Continue',
+            style: theme.navigationButtonTextStyle,
+          ),
         ),
       ),
     );

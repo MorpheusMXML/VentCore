@@ -18,14 +18,6 @@ class AlarmFieldTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    
-    // TODO
-    const TextStyle textStyle = TextStyle(
-      color: Colors.black,
-      decoration: TextDecoration.none,
-      fontSize: 18,
-      fontWeight: FontWeight.bold,
-    );
 
     return Material(
       child: Container(
@@ -43,7 +35,7 @@ class AlarmFieldTile extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 10),
                 child: Text(
                   DateFormat.Hms().format(data.time),
-                  style: textStyle,
+                  style: theme.alarmFieldTextStyle,
                 ),
               ),
             ),
@@ -52,7 +44,7 @@ class AlarmFieldTile extends StatelessWidget {
               child: Center(
                 child: Text(
                   data.alarm.message,
-                  style: textStyle,
+                  style: theme.alarmFieldTextStyle,
                 ),
               ),
             ),

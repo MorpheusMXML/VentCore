@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/screen_controller.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 
 /// Entry for the burger menu.
 ///
@@ -22,9 +23,7 @@ class AppMenuEntry extends StatelessWidget {
         ? ListTile(
             title: Text(
               name,
-              style: const TextStyle(
-                fontSize: 20,
-              ),
+              style: theme.menuTextStyle,
             ),
             onTap: () {
               switch (name) {
@@ -42,10 +41,7 @@ class AppMenuEntry extends StatelessWidget {
         : ListTile(
             title: Text(
               name,
-              style: TextStyle(
-                color: theme.disabledColor,
-                fontSize: 20,
-              ),
+              style: theme.menuDisabledTextStyle,
             ),
             onTap: null);
   }

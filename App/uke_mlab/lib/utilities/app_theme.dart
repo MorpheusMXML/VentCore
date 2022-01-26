@@ -87,11 +87,89 @@ extension CustomTextStyles on ThemeData {
   static const xxl = 32;
   static const xxxl = 44;
 
+  TextStyle get boldTextStyle => const TextStyle(
+        fontWeight: FontWeight.bold,
+      );
+
+  TextStyle get patientPopupTextStyle => TextStyle(
+        fontSize: 21,
+        fontWeight: FontWeight.bold,
+        color: inverseContrastColor,
+      );
+
+  TextStyle get patientPopupTextStyle2 => TextStyle(
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+        color: primarySwatch[10],
+      );
+
+  TextStyle get navigationButtonTextStyle => const TextStyle(
+        fontSize: 24,
+      );
+
+  TextStyle get patientTypeTextStyle => const TextStyle(
+        fontSize: 35,
+        fontWeight: FontWeight.bold,
+      );
+
+  TextStyle get graphAdderPopupTextStyle => const TextStyle(
+        fontSize: 18,
+      );
+
+  TextStyle get errorMessageTextStyle => const TextStyle(
+        color: Colors.blue,
+        fontSize: 24,
+      );
+
+  TextStyle get infoTextStyle => TextStyle(
+        fontSize: 16,
+        color: contrastColor,
+      );
+
+  TextStyle get menuDisabledTextStyle => TextStyle(
+        color: disabledColor,
+        fontSize: 20,
+      );
+
+  TextStyle get menuTextStyle => const TextStyle(
+        fontSize: 20,
+      );
+
+  TextStyle get menuHeadlineTextStyle => const TextStyle(
+        fontSize: 28,
+      );
+
+  TextStyle get settingTextStyle => TextStyle(
+        fontSize: 16,
+        color: contrastColor,
+      );
+
+  TextStyle get settingTextStyle2 => TextStyle(
+        fontSize: 32,
+        color: contrastColor,
+      );
+
+  TextStyle get settingTextStyle3 => TextStyle(
+        fontSize: 32,
+        color: contrastColor,
+      );
+
+  TextStyle get aedButtonTextStyle => const TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+      );
+
+  TextStyle get graphAlarmMessageTextStyle => TextStyle(
+        color: inverseContrastColor,
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+      );
+
   TextStyle get alarmFieldTextStyle => TextStyle(
         color: inverseContrastColor,
         decoration: TextDecoration.none,
         fontSize: 18,
-        fontWeight: FontWeight.w300,
+        fontWeight: FontWeight.bold,
       );
 
   TextStyle get alarmTextStyle => TextStyle(
@@ -113,6 +191,10 @@ extension CustomTextStyles on ThemeData {
         fontWeight: FontWeight.bold,
       );
 
+  TextStyle get defiDiagnosisTextStyle => const TextStyle(
+        fontSize: 20,
+      );
+
   TextStyle get impedanceTextStyle => TextStyle(
         color: contrastColor,
       );
@@ -132,14 +214,32 @@ extension CustomTextStyles on ThemeData {
         fontSize: 20,
         color: Colors.red,
       );
+
+  TextStyle get mediumTextStyle => const TextStyle(
+        fontSize: 24,
+      );
 }
 
+// BUTTON STYLES
 extension CustomButtonStyles on ThemeData {
+  ButtonStyle get valueBoxContainerButtonStyle => ButtonStyle(
+        shape: MaterialStateProperty.all(
+          const RoundedRectangleBorder(),
+        ),
+        backgroundColor: MaterialStateProperty.all(
+          primarySwatch[40],
+        ),
+      );
+
   ButtonStyle get alarmCounterButtonStyle => ButtonStyle(
         backgroundColor: MaterialStateProperty.all(
-            Get.find<SystemState>().generalAlarms.alarmList[0].toColor()),
+          Get.find<SystemState>().generalAlarms.alarmList[0].toColor(),
+        ),
         shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(40))),
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(40),
+          ),
+        ),
       );
 
   ButtonStyle get alarmFieldButtonStyle => ElevatedButton.styleFrom(

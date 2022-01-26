@@ -41,11 +41,7 @@ class PopupSlider extends StatelessWidget {
               padding: const EdgeInsets.only(left: 10),
               child: Text(
                 name,
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xffeeeeee),
-                ),
+                style: theme.patientPopupTextStyle2
               ),
             ),
           ),
@@ -76,13 +72,9 @@ class PopupSlider extends StatelessWidget {
             child: Obx(
               () => Text(
                 '${value.value.round().toString()}$unit',
-                style: TextStyle(
-                    fontSize: 21,
-                    fontWeight: FontWeight.bold,
-                    color: theme.inverseContrastColor),
-              ),
+                style: theme.patientPopupTextStyle
             ),
-          ),
+            ),),
         ],
       ),
     );

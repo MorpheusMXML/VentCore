@@ -26,11 +26,7 @@ class GraphAlarmMessage extends StatelessWidget {
         width: 400,
         child: Text(
           '${sensorKey.displayString} $alarmMessage',
-          style: TextStyle(
-            color: theme.inverseContrastColor,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
+          style: theme.graphAlarmMessageTextStyle,
         ),
       );
     });

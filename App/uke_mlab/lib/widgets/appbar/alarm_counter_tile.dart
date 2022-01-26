@@ -31,7 +31,6 @@ class AlarmCounterTile extends StatelessWidget {
         return SizedBox(
           height: 50,
           child: ElevatedButton(
-            // TODO
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(
                   generalAlarms.alarmList[0].toColor()),

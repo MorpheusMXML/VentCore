@@ -30,8 +30,8 @@ class SkipButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(75),
           ),
         ),
-        child: const Text('Skip',
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+        child: Text('Skip',
+            style: theme.navigationButtonTextStyle),
         onPressed: () => screenController.skipButton(),
       ),
     );
