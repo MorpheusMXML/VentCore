@@ -98,7 +98,7 @@ extension SensorGraphAttributes on sensorEnumGraph {
       'yAxisUnit': '',
       'xAxisUnit': '',
       'color': AppTheme.nibdColor,
-      'graphLength': 10, // intermediate value to be changed or something
+      'graphLength': 10, // TODO: intermediate value to be changed or something
     }
   };
 

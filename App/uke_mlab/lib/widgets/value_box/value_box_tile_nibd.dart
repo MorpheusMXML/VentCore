@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/data_models/model_absolute.dart';
 import 'package:uke_mlab/models/system_state.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/utilities/enums/alarm_status.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/widgets/value_box/value_box_tile.dart';
@@ -36,12 +37,14 @@ class ValueBoxTileNIBD extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     // sensorAbsolute is not null since IF sensorGraph == null, sensorAbsolute is required // sensorAbsolute is not null since IF sensorGraph == null, sensorAbsolute is required
     DataModelAbsolute dataModelSYS =
         Get.find<DataModelAbsolute>(tag: sensorAbsoluteSYS.name);
     SystemState systemState = Get.find<SystemState>();
+
     return Container(
-      color: Theme.of(context).focusColor,
+      color: theme.primarySwatch[50],
       margin: const EdgeInsets.only(left: 4, right: 4, top: 4, bottom: 4),
       child: Column(
         children: [
@@ -125,10 +128,12 @@ class ValueBoxTileNIBD extends StatelessWidget {
     );
   }
 
-  /// Helper method to evaluate the backgroundcolor for alarms (default != [Theme.of(context).focusColor])
-  Color evaluateBorderColor(BuildContext context, sensorEnumAbsolute sensorKey,
+  /// Helper method to evaluate the backgroundcolor for alarms (default != [Theme.of(context).primarySwatch[50]])
+  Color? evaluateBorderColor(BuildContext context, sensorEnumAbsolute sensorKey,
       RxMap<sensorEnumAbsolute, Map<String, dynamic>> alarmState) {
+    final ThemeData theme = Theme.of(context);
     alarmStatus? alarm = alarmState[sensorKey]!["status"];
+
     switch (alarm) {
       case alarmStatus.high:
       case alarmStatus.middle:
@@ -137,7 +142,7 @@ class ValueBoxTileNIBD extends StatelessWidget {
       case alarmStatus.confirmed:
         return (alarmState[sensorKey]!["color"] as Color).withOpacity(0.65);
       default:
-        return Theme.of(context).focusColor;
+        return theme.primarySwatch[50];
     }
   }
 }

@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:uke_mlab/models/system_state.dart';
 
 //TODO: COMMENTARY
 class AppTheme {
-  // https://stackoverflow.com/questions/49172746
-  // https://github.com/flutter/flutter/issues/31522
-  // mixin example but without own fields: https://github.com/jogeanmcf/tetris_game/blob/8a6202f3f7ceb7d7c2d3e73d2dcdb4edb7f136cc/lib/theme.dart
-
-  // Moved here from StyleController
   static const Color heartFreqColor = Color(0xFF34C759);
   static const Color flowColor = Color(0xFF0CECDD);
   static const Color mveColor = Color(0xFFFFEE58);
@@ -21,7 +18,6 @@ class AppTheme {
   static const Color alarmMiddleColor = Color(0xFFFBFF00);
   static const Color alarmWarningColor = Color(0xFF34C759);
   static const Color alarmNoneColor = Color(0xFF1C1C1E);
-  static const Color alarmMessageColor = Color(0xFF000000);
 
   final Color backgroundColor = const Color(0xFF1C1B1F);
   final Color appBar = const Color(0xFF1d192B);
@@ -32,10 +28,6 @@ class AppTheme {
       fontFamily: 'Jura',
       scaffoldBackgroundColor: const Color(0xFF1C1C1E),
       appBarTheme: const AppBarTheme(backgroundColor: Color(0xFF1D192B)),
-      cardColor: const Color(0xFF2A2831),
-      shadowColor: const Color(0xFF49454F),
-      focusColor: const Color(0xFF25232A),
-      dividerColor: const Color(0xFFFFFFFF),
       toggleButtonsTheme: ToggleButtonsThemeData(
         borderColor: Colors.grey[800],
         borderWidth: 0.5,
@@ -53,10 +45,6 @@ class AppTheme {
       fontFamily: 'Jura',
       scaffoldBackgroundColor: Colors.amber[50],
       appBarTheme: AppBarTheme(backgroundColor: Colors.amber[400]),
-      cardColor: Colors.amber[100],
-      shadowColor: Colors.amber[300],
-      focusColor: Colors.amber[200],
-      dividerColor: const Color(0xFF000000),
       toggleButtonsTheme: ToggleButtonsThemeData(
         borderColor: Colors.grey[800],
         borderWidth: 0.5,
@@ -67,4 +55,214 @@ class AppTheme {
       ),
     );
   }
+}
+
+// COLORS
+extension CustomColors on ThemeData {
+  ColorSwatch<int> get primarySwatch => ColorSwatch(0xFFEEEEEE, {
+        0: Get.isDarkMode ? const Color(0xFFFFFFFF) : const Color(0xFFFFFFFF),
+        10: Get.isDarkMode ? const Color(0xFFEEEEEE) : const Color(0x6FFFFFFF),
+        20: Get.isDarkMode ? const Color(0xFF49454F) : const Color(0xDFFFFFFF),
+        30: Get.isDarkMode ? const Color(0xFF322F37) : const Color(0xEFFFFFFF),
+        40: Get.isDarkMode ? const Color(0xFF2A2831) : const Color(0xCFFFFFFF),
+        50: Get.isDarkMode ? const Color(0xFF25232A) : const Color(0xBFFFFFFF),
+        100: Get.isDarkMode ? const Color(0xFF000000) : const Color(0xAFFFFFFF),
+      });
+
+  Color? get contrastColor =>
+      Get.isDarkMode ? primarySwatch[0] : primarySwatch[100];
+  Color? get inverseContrastColor =>
+      Get.isDarkMode ? primarySwatch[100] : primarySwatch[0];
+}
+
+// TEXT STYLES
+extension CustomTextStyles on ThemeData {
+  // TODO: Use these?
+  static const xxs = 12;
+  static const xs = 16;
+  static const s = 17;
+  static const m = 18;
+  static const l = 20;
+  static const xl = 24;
+  static const xxl = 32;
+  static const xxxl = 44;
+
+  TextStyle get boldTextStyle => const TextStyle(
+        fontWeight: FontWeight.bold,
+      );
+
+  TextStyle get patientPopupTextStyle => TextStyle(
+        fontSize: 21,
+        fontWeight: FontWeight.bold,
+        color: inverseContrastColor,
+      );
+
+  TextStyle get patientPopupTextStyle2 => TextStyle(
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+        color: primarySwatch[10],
+      );
+
+  TextStyle get navigationButtonTextStyle => const TextStyle(
+        fontSize: 24,
+      );
+
+  TextStyle get patientTypeTextStyle => const TextStyle(
+        fontSize: 35,
+        fontWeight: FontWeight.bold,
+      );
+
+  TextStyle get graphAdderPopupTextStyle => const TextStyle(
+        fontSize: 18,
+      );
+
+  TextStyle get errorMessageTextStyle => const TextStyle(
+        color: Colors.blue,
+        fontSize: 24,
+      );
+
+  TextStyle get infoTextStyle => TextStyle(
+        fontSize: 16,
+        color: contrastColor,
+      );
+
+  TextStyle get menuDisabledTextStyle => TextStyle(
+        color: disabledColor,
+        fontSize: 20,
+      );
+
+  TextStyle get menuTextStyle => const TextStyle(
+        fontSize: 20,
+      );
+
+  TextStyle get menuHeadlineTextStyle => const TextStyle(
+        fontSize: 28,
+      );
+
+  TextStyle get settingTextStyle => TextStyle(
+        fontSize: 16,
+        color: contrastColor,
+      );
+
+  TextStyle get settingTextStyle2 => TextStyle(
+        fontSize: 32,
+        color: contrastColor,
+      );
+
+  TextStyle get settingTextStyle3 => TextStyle(
+        fontSize: 32,
+        color: contrastColor,
+      );
+
+  TextStyle get aedButtonTextStyle => const TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+      );
+
+  TextStyle get graphAlarmMessageTextStyle => TextStyle(
+        color: inverseContrastColor,
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+      );
+
+  TextStyle get alarmFieldTextStyle => TextStyle(
+        color: inverseContrastColor,
+        decoration: TextDecoration.none,
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
+      );
+
+  TextStyle get alarmTextStyle => TextStyle(
+        color: inverseContrastColor,
+        fontSize: 24,
+      );
+
+  TextStyle get statusBarTextStyle => TextStyle(
+        color: contrastColor,
+        decoration: TextDecoration.none,
+      );
+
+  TextStyle get defiStatsHeadlineTextStyle => const TextStyle(
+        fontSize: 18,
+      );
+
+  TextStyle get defiStatsValueTextStyle => const TextStyle(
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+      );
+
+  TextStyle get defiDiagnosisTextStyle => const TextStyle(
+        fontSize: 20,
+      );
+
+  TextStyle get impedanceTextStyle => TextStyle(
+        color: contrastColor,
+      );
+
+  TextStyle get shockPowerTextStyle => const TextStyle(
+        fontSize: 24,
+      );
+
+  TextStyle get shockPowerButtonTextStyle => const TextStyle(
+        fontFamily: 'Jura',
+        fontWeight: FontWeight.bold,
+        fontSize: 32,
+        color: Colors.red,
+      );
+
+  TextStyle get jouleTextStyle => const TextStyle(
+        fontSize: 20,
+        color: Colors.red,
+      );
+
+  TextStyle get mediumTextStyle => const TextStyle(
+        fontSize: 24,
+      );
+}
+
+// BUTTON STYLES
+extension CustomButtonStyles on ThemeData {
+  ButtonStyle get valueBoxContainerButtonStyle => ButtonStyle(
+        shape: MaterialStateProperty.all(
+          const RoundedRectangleBorder(),
+        ),
+        backgroundColor: MaterialStateProperty.all(
+          primarySwatch[40],
+        ),
+      );
+
+  ButtonStyle get alarmCounterButtonStyle => ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(
+          Get.find<SystemState>().generalAlarms.alarmList[0].toColor(),
+        ),
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(40),
+          ),
+        ),
+      );
+
+  ButtonStyle get alarmFieldButtonStyle => ElevatedButton.styleFrom(
+        shape: const CircleBorder(),
+        primary: AppTheme.alarmNoneColor,
+        onPrimary: contrastColor,
+      );
+
+  ButtonStyle get defiRegularButtonStyle => ElevatedButton.styleFrom(
+        primary: primarySwatch[40],
+        onPrimary: contrastColor,
+      );
+
+  ButtonStyle get defiSelectedButtonStyle => ButtonStyle(
+        side: MaterialStateProperty.all(const BorderSide(color: Colors.green)),
+        foregroundColor: MaterialStateProperty.all(Colors.green),
+      );
+
+  ButtonStyle get shockPowerButtonStyle => ElevatedButton.styleFrom(
+      primary: Colors.transparent,
+      textStyle: const TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 100,
+        color: Colors.red,
+      ));
 }

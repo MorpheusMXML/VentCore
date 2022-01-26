@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/models/data_models/model_absolute.dart';
 import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/providers/alarm_controller.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/utilities/constants/absolute_alarm_field_constants.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
@@ -17,6 +18,7 @@ class AlarmConfirmationRowEntry extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     final SystemState systemState = Get.find<SystemState>();
     final AlarmController alarmController = Get.find<AlarmController>();
 
@@ -25,7 +27,7 @@ class AlarmConfirmationRowEntry extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.only(
             bottom: AbsoluteAlarmFieldConst.verticalMargin),
-        color: Theme.of(context).cardColor,
+        color: theme.primarySwatch[40],
         padding: const EdgeInsets.only(
             top: AbsoluteAlarmFieldConst.verticalMargin / 4,
             bottom: AbsoluteAlarmFieldConst.verticalMargin / 4),
@@ -55,12 +57,12 @@ class AlarmConfirmationRowEntry extends StatelessWidget {
                 maximumSize:
                     Size(60, AbsoluteAlarmFieldConst.ippvHeight / 4 - 20),
                 primary: Get.find<DataModelAbsolute>(tag: sensorKey.name).color,
-                onPrimary: Theme.of(context).dividerColor,
+                onPrimary: theme.contrastColor,
               ),
-              onPressed: () => {alarmController.triggerConfirm(sensorKey)},
-              child: const Icon(
+              onPressed: () => alarmController.triggerConfirm(sensorKey),
+              child: Icon(
                 Icons.check,
-                color: Colors.black,
+                color: theme.inverseContrastColor,
               ),
             ),
           ],

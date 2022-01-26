@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/screen_controller.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/models/system_state.dart';
 
@@ -18,10 +19,12 @@ class GraphAdderPopup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
     return ElevatedButton(
         style: ElevatedButton.styleFrom(
           fixedSize: const Size(800, 150),
-          primary: Theme.of(context).cardColor.withOpacity(0.5),
+          primary: theme.primarySwatch[40]!.withOpacity(0.5),
         ),
         onPressed: () => systemState.graphList.addGraph.toggle(),
         child: Obx(
@@ -38,7 +41,7 @@ class GraphAdderPopup extends StatelessWidget {
                     : style = ElevatedButton.styleFrom(
                         fixedSize: const Size(80, 60),
                         primary: Colors.grey[50],
-                        onPrimary: Colors.black);
+                        onPrimary: theme.inverseContrastColor);
 
                 return ElevatedButton(
                     style: style,
@@ -50,7 +53,7 @@ class GraphAdderPopup extends StatelessWidget {
                     },
                     child: Text(
                       sensor.graphTitle,
-                      style: const TextStyle(fontSize: 18),
+                      style: theme.graphAdderPopupTextStyle,
                       textAlign: TextAlign.center,
                     ));
               }).toList()),

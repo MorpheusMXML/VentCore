@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/screen_element_models/absolute_alarm_field_model.dart';
 import 'package:uke_mlab/models/system_state.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/utilities/constants/absolute_alarm_field_constants.dart';
 import 'package:uke_mlab/widgets/value_box/alarm_confirmation/alarm_confirmation_button_single_list.dart';
 
@@ -14,6 +15,7 @@ class AlarmConfirmationButtonSingleListExpansion extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     SystemState systemState = Get.find<SystemState>();
 
     return Obx(() {
@@ -22,7 +24,7 @@ class AlarmConfirmationButtonSingleListExpansion extends StatelessWidget {
           fixedSize: Size(AbsoluteAlarmFieldConst.buttonHeight.toDouble(),
               AbsoluteAlarmFieldConst.width * (3 / 8)),
           primary: const Color(0xffeeeeee),
-          onPrimary: Colors.black,
+          onPrimary: theme.inverseContrastColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(75),
           ),
@@ -35,19 +37,19 @@ class AlarmConfirmationButtonSingleListExpansion extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
+            Text(
               "Single Alarm Conf",
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: theme.boldTextStyle,
             ),
             systemState.absAlarmFieldModel.listExpanded.value
-                ? const Icon(
+                ? Icon(
                     Icons.arrow_downward_rounded,
-                    color: Colors.black,
+                    color: theme.inverseContrastColor,
                     size: AbsoluteAlarmFieldConst.buttonHeight * 0.6,
                   )
-                : const Icon(
+                : Icon(
                     Icons.arrow_upward_rounded,
-                    color: Colors.black,
+                    color: theme.inverseContrastColor,
                     size: AbsoluteAlarmFieldConst.buttonHeight * 0.6,
                   ),
           ],

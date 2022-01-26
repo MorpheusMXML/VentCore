@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/widgets/info/info_text.dart';
 
 /// A widget that shows multiple [InfoText]'s.
@@ -12,11 +13,13 @@ class InfoContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
     return ListView.builder(
       itemCount: data.length,
       itemBuilder: (BuildContext context, int index) {
         return Container(
-          color: Theme.of(context).focusColor,
+          color: theme.primarySwatch[50],
           padding: const EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
           margin: const EdgeInsets.only(right: 8),
           child: InfoText(

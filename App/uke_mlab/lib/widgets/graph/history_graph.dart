@@ -4,6 +4,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
 import 'package:uke_mlab/models/data_models/model_graphdata.dart';
 import 'package:uke_mlab/models/data_models/model_nibd.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 /// Creates an [SfCartesianChart] to display a History Graph. Example Use: NIBD History.
@@ -27,17 +28,18 @@ class HistoryGraph extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     DataModelNIBD dataModel = Get.find<DataModelNIBD>(tag: sensor.name);
     return Obx(
       () => SfCartesianChart(
         tooltipBehavior: TooltipBehavior(enable: true),
-        backgroundColor: Theme.of(context).cardColor,
+        backgroundColor: theme.primarySwatch[40],
         primaryYAxis: NumericAxis(
           plotOffset: 5,
           desiredIntervals: 10,
           majorGridLines: MajorGridLines(
             width: 1,
-            color: Theme.of(context).shadowColor,
+            color: theme.primarySwatch[20],
             dashArray: const <double>[2, 3],
           ),
         ),
@@ -45,8 +47,10 @@ class HistoryGraph extends StatelessWidget {
           dateFormat: DateFormat.Hm(),
           plotOffset: 10,
           desiredIntervals: 25,
-          majorGridLines:
-              MajorGridLines(width: 0, color: Theme.of(context).shadowColor),
+          majorGridLines: MajorGridLines(
+            width: 0,
+            color: theme.primarySwatch[20],
+          ),
         ),
         series: [
           // Renders scatter chart to display the MAD.

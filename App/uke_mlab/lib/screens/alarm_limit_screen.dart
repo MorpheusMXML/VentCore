@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/widgets/demo_screen/exit_button.dart';
 import 'package:uke_mlab/widgets/value_box/value_box_tile.dart';
@@ -13,6 +14,7 @@ class AlarmLimitScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     Set<sensorEnumAbsolute> graphBoundarySet = {};
     Set<sensorEnumAbsolute> monitorBoundarySet = {};
     Set<sensorEnumAbsolute> ventilationBoundarySet = {};
@@ -45,11 +47,9 @@ class AlarmLimitScreen extends StatelessWidget {
                 children: [
                   Container(
                     padding: const EdgeInsets.only(top: 8, bottom: 4, left: 16),
-                    child: const Text(
+                    child: Text(
                       "Monitor Boundaries",
-                      style: TextStyle(
-                        fontSize: 24,
-                      ),
+                      style: theme.mediumTextStyle,
                     ),
                   ),
                   Container(
@@ -75,9 +75,9 @@ class AlarmLimitScreen extends StatelessWidget {
                 children: [
                   Container(
                     padding: const EdgeInsets.only(top: 8, bottom: 4, left: 16),
-                    child: const Text(
+                    child: Text(
                       "Ventilation Boundaries",
-                      style: TextStyle(fontSize: 24),
+                      style: theme.mediumTextStyle,
                     ),
                   ),
                   Container(
@@ -103,9 +103,9 @@ class AlarmLimitScreen extends StatelessWidget {
                 children: [
                   Container(
                     padding: const EdgeInsets.only(top: 8, bottom: 4, left: 16),
-                    child: const Text(
+                    child: Text(
                       "Graph Boundaries",
-                      style: TextStyle(fontSize: 24),
+                      style: theme.mediumTextStyle,
                     ),
                   ),
                   Container(

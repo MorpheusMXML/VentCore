@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/widgets/defibrillation_mode/impedance_button.dart';
 
 // TODO: COMMENTARY
@@ -7,14 +8,16 @@ class ImpedanceContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
     return Container(
-      color: Theme.of(context).cardColor,
+      color: theme.primarySwatch[40],
       margin: const EdgeInsets.all(6),
       child: Column(
         children: [
           Text(
             "Impedance",
-            style: TextStyle(color: Theme.of(context).dividerColor),
+            style: theme.impedanceTextStyle,
           ),
           Row(
             children: const [

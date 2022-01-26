@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/screen_element_models/general_alarms.dart';
 import 'package:uke_mlab/models/system_state.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/utilities/constants/statusbar_constants.dart';
 import 'package:uke_mlab/widgets/appbar/alarm_field_tile.dart';
 import 'package:uke_mlab/utilities/enums/patient_type.dart';
@@ -18,6 +19,7 @@ class StatusBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     final SystemState systemState = Get.find<SystemState>();
     final GeneralAlarms generalAlarms = systemState.generalAlarms;
 
@@ -52,10 +54,7 @@ class StatusBar extends StatelessWidget {
           flex: StatusBarConstants.flexBarPatientTypeArea,
           child: Text(
             systemState.patientType.displayString,
-            style: TextStyle(
-              color: Theme.of(context).dividerColor,
-              decoration: TextDecoration.none,
-            ),
+            style: theme.statusBarTextStyle,
           ),
         ),
         // O2 bottly display

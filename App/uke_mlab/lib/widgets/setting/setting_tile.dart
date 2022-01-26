@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/widgets/setting/action_button.dart';
 import 'package:uke_mlab/widgets/setting/setting_text.dart';
 
@@ -21,10 +22,12 @@ class SettingTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
     return Container(
       padding: const EdgeInsets.all(8),
       child: Container(
-        color: Theme.of(context).cardColor,
+        color: theme.primarySwatch[40],
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [

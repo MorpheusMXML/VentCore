@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/screen_element_models/general_alarms.dart';
 import 'package:uke_mlab/models/system_state.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 
 /// Depending on the amount of [GeneralAlarms] builds an statusbar element displaying the amount, rendered in respective forms.
 ///
@@ -13,7 +14,7 @@ class AlarmCounterTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const double fSize = 24;
+    final ThemeData theme = Theme.of(context);
 
     return Obx(
       () {
@@ -47,22 +48,19 @@ class AlarmCounterTile extends StatelessWidget {
                 Text(
                   alarmText,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: fSize,
-                  ),
+                  style: theme.alarmTextStyle,
                 ),
                 generalAlarms.alarmList.length == 1
                     ? Container()
                     : generalAlarms.listExpanded.value
-                        ? const Icon(
-                            Icons.arrow_upward_rounded,
-                            color: Colors.black,
+                        ? Icon(
+                            Icons.arrow_drop_up,
+                            color: theme.inverseContrastColor,
                             size: 50 * 0.6,
                           )
-                        : const Icon(
-                            Icons.arrow_downward_rounded,
-                            color: Colors.black,
+                        : Icon(
+                            Icons.arrow_drop_down,
+                            color: theme.inverseContrastColor,
                             size: 50 * 0.6,
                           ),
               ],

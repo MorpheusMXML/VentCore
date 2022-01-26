@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/utilities/constants/absolute_alarm_field_constants.dart';
 import 'package:uke_mlab/widgets/value_box/alarm_confirmation/alarm_confirmation_button_single_list_expansion_button.dart';
 
@@ -14,6 +15,7 @@ class AlarmButtonAbsoluteList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     SystemState systemState = Get.find<SystemState>();
 
     return Obx(() {
@@ -23,7 +25,7 @@ class AlarmButtonAbsoluteList extends StatelessWidget {
           maxWidth: AbsoluteAlarmFieldConst.width,
         ),
         child: Container(
-          color: Theme.of(context).focusColor,
+          color: theme.primarySwatch[50],
           padding: const EdgeInsets.only(
             left: AbsoluteAlarmFieldConst.horizontalMargin,
             right: AbsoluteAlarmFieldConst.horizontalMargin,

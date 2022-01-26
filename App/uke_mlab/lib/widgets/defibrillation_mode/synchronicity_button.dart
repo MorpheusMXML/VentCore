@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/defibrillation_controller.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 
 // TODO: COMMENTARY
 class SynchronicityButton extends StatelessWidget {
@@ -17,27 +18,29 @@ class SynchronicityButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final DefibrillationController defibrillationController = Get.find<DefibrillationController>();
+    final ThemeData theme = Theme.of(context);
+    final DefibrillationController defibrillationController =
+        Get.find<DefibrillationController>();
 
     return Expanded(
       child: Container(
-          margin: const EdgeInsets.all(8),
-          child: Obx(() {
-            ButtonStyle buttonStyle;
-            defibrillationController.selectedSynchronicityButton.value != name
-                ? buttonStyle = ElevatedButton.styleFrom(primary: Theme.of(context).cardColor, onPrimary: Theme.of(context).dividerColor)
-                : buttonStyle = ButtonStyle(
-                    side: MaterialStateProperty.all(const BorderSide(color: Colors.green)),
-                    foregroundColor: MaterialStateProperty.all(Colors.green),
-                  );
-            return ElevatedButton(
-              style: buttonStyle,
-              child: Text(name),
-              onPressed: defibrillationController.selectedSynchronicityButton.value != name
-                  ? () => defibrillationController.setSelectedSynchronicityButton(name)
-                  : null,
-            );
-          })),
+        margin: const EdgeInsets.all(8),
+        child: Obx(
+          () => ElevatedButton(
+            style: defibrillationController.selectedSynchronicityButton.value !=
+                    name
+                ? theme.defiRegularButtonStyle
+                : theme.defiSelectedButtonStyle,
+            child: Text(name),
+            onPressed:
+                defibrillationController.selectedSynchronicityButton.value !=
+                        name
+                    ? () => defibrillationController
+                        .setSelectedSynchronicityButton(name)
+                    : null,
+          ),
+        ),
+      ),
     );
   }
 }

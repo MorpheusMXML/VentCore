@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/screen_controller.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 
 // TODO: COMMENTARY
 class ExitButton extends StatelessWidget {
@@ -10,6 +11,8 @@ class ExitButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
     return Container(
       alignment: Alignment.centerRight,
       margin: const EdgeInsets.fromLTRB(0, 0, 50, 50),
@@ -17,12 +20,15 @@ class ExitButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           fixedSize: const Size(200, 60),
           primary: const Color(0xFFEEEEEE),
-          onPrimary: Colors.black,
+          onPrimary: theme.inverseContrastColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(75),
           ),
         ),
-        child: const Text('Exit', style: TextStyle(fontSize: 20)),
+        child: Text(
+          'Exit',
+          style: theme.navigationButtonTextStyle,
+        ),
         onPressed: () => Get.find<ScreenController>().menuExitButton(),
       ),
     );

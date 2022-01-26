@@ -38,6 +38,7 @@ class MyApp extends StatelessWidget {
   final ScreenController screenController = Get.put(ScreenController());
 
   MyApp({Key? key}) : super(key: key) {
+    // TODO
     // pages, maybe create a new starting screen (loading screen) that navigates
     // to the current start page when all controllers are initialized, jsons,
     // svgs are loaded and screens are given bindings?

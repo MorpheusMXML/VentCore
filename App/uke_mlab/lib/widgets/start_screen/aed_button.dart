@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import 'package:uke_mlab/providers/screen_controller.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 
 /// This class contains the AED Button and provides its functionality.
 class AEDButton extends StatelessWidget {
@@ -12,19 +13,24 @@ class AEDButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     final ScreenController screenController = Get.find<ScreenController>();
+
     ///The Container contains the configuration of the Button and its behaviour.
     return Container(
       alignment: Alignment.centerRight,
       margin: const EdgeInsets.fromLTRB(0, 0, 65, 12),
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            fixedSize: Size(300 / MediaQuery.of(context).devicePixelRatio, 300 / MediaQuery.of(context).devicePixelRatio),
+            fixedSize: Size(300 / MediaQuery.of(context).devicePixelRatio,
+                300 / MediaQuery.of(context).devicePixelRatio),
             primary: const Color(0xff363638),
             onPrimary: const Color(0xff34c759),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           ),
           onPressed: () => screenController.aedButton(),
+
           ///The Column contains the layout of the AED Button.
           child: Column(
             children: [
@@ -33,7 +39,10 @@ class AEDButton extends StatelessWidget {
                 height: 250 / MediaQuery.of(context).devicePixelRatio,
                 color: const Color(0xff34c759),
               ),
-              const Text('AED', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))
+              Text(
+                'AED',
+                style: theme.aedButtonTextStyle,
+              )
             ],
           )),
     );
