@@ -1,0 +1,3 @@
+# Screen Element Models
+
+Classes that belong to the topic screen element models store data for UI elements and metadata for the current screen status. For example evaluates which graphs contain non confirmed alarms and are currently displayed on the screen.

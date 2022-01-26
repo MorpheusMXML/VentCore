@@ -1,5 +1,3 @@
-# Graph Topic
-
 The widgets in this topic are responsible for rendering the different graph types of the application.
 Such as, ecg graph, history graph and pleth.
 Note that the graphs excessively use the Syncfusion Flutter package.

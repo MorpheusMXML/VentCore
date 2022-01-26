@@ -1,5 +1,3 @@
-# Scenario Topic
-
 This topic resembles the classes needed to use the scenario data provided for the UKE project. We differentiate between the patient scenario (provided by the UKE project) and a standard scenario which houses the standard demonstration for the functionalities of the app. To change the Data feed into these scenarios please have a look at:
 
 ```bash

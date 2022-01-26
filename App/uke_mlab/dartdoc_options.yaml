@@ -66,8 +66,5 @@ dartdoc:
           "ValueBox":
                markdown: doc/ValueBox.md
                name: ValueBox
-     showUndocumentedCategories: true
-     categoryOrder: ["DataModels", "ScreenElementModels", "SystemState", "Providers", "Scenarios", "Screens", "Constants", "Enums", "Utilities", "AppBar", "DefibrillationMode", "DemoScreen", "Graph", "GraphContainer", "Info", "Menu", "Miscellaneous", "IppvSettings", "StartScreen", "Toggle", "AlarmConfirmation", "ValueBox"]
-     linkTo:
-          url: "https://my.dartdocumentationsite.org/dev/%v%"
+     categoryOrder: ["AlarmConfirmation", "AppBar", "Constants", "DataModels","DefibrillationMode","DemoScreen","Enums","Graph","GraphContainer","Info","IppvSettings","Menu","Miscellaneous","Providers","Scenarios","ScreenElementModels","Screens","StartScreen","SystemState","Toggle","Utilities","ValueBox"]
   
