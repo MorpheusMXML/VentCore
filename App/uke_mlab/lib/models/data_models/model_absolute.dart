@@ -11,7 +11,7 @@ import 'package:uke_mlab/widgets/value_box/value_box_settings.dart';
 
 /// Represents the data model to be used in [ValueBoxContainer] and subwidgets.
 /// {@category Models}
-/// {@subCategory Model Absolute}
+/// {@subCategory Screens}
 class DataModelAbsolute extends GetxController {
   /// sensor key hinting at the corresponding sensor addressing the current [DataModelAbsolute]
   late final sensorEnumAbsolute sensorKey;

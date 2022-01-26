@@ -21,6 +21,52 @@ dartdoc:
     "Utilities":
 #      markdown:
       name: Utilities
+    "Constants":
+ #     markdown:
+      name: Constants
+    "Enums":
+ #     markdown:
+      name: Enums
+    "Widgets":
+ #     markdown:
+      name: Widgets
+    "AppBar":
+ #     markdown:
+      name: App Bar
+    "Defibrillation Mode":
+ #     markdown:
+      name: Defibrillation Mode
+    "Demo Screen":
+ #     markdown:
+      name: Demo Screen
+      "Start Screen":
+ #     markdown:
+      name: Start Screen
+      "Graph":
+ #     markdown:
+      name: Graph
+      "Graph Container":
+ #     markdown:
+      name: Graph Container
+      "Info":
+ #     markdown:
+      name: Info
+      "Menu":
+ #     markdown:
+      name: Menu
+      "Miscellaneous":
+ #     markdown:
+      name: Miscellaneous
+      "Settings":
+ #     markdown:
+      name: Settings
+      "Toggle":
+ #     markdown:
+      name: Toggle
+      "Value Box":
+ #     markdown:
+      name: Value Box
+    
   categoryOrder: ["Models", "Data Models", "Screen Element Models", "Providers", "Scenarios", "Screens", "Utilities"]
   linkTo:
     url: "https://my.dartdocumentationsite.org/dev/%v%"
