@@ -5,9 +5,17 @@ import 'package:uke_mlab/models/data_models/model_graph.dart';
 import 'package:uke_mlab/models/data_models/model_graphdata.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
-// TODO: COMMENTARY
+
+
+/// Creates an [SfCartesianChart] with two [NumericAxis] and an [AreaSeries].
+///
+/// The [sensor] parameter specifies the sensor this graph gets its data from. Typically, [sensorEnumGraph.co2] should be provided.
+/// A correspondig [DataModelGraph] for the CPR Graph is created with [GetX].
 class CO2Graph extends StatelessWidget {
+  /// Creates a filled CO2 graph.
   final sensorEnumGraph sensor;
+
+  /// Creates instance of [CO2Graph].
   const CO2Graph({
     Key? key,
     required this.sensor,
@@ -21,15 +29,22 @@ class CO2Graph extends StatelessWidget {
       () => SfCartesianChart(
         backgroundColor: Theme.of(context).cardColor,
         primaryYAxis: NumericAxis(
-          majorGridLines: MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
+          majorGridLines: MajorGridLines(
+            width: 1,
+            color: Theme.of(context).shadowColor,
+          ),
         ),
         primaryXAxis: NumericAxis(
-          majorGridLines: MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
+          majorGridLines: MajorGridLines(
+            width: 1,
+            color: Theme.of(context).shadowColor,
+          ),
         ),
         series: [
+          // An AreaSeries renders a graph that is filled out with the specified color
           AreaSeries(
               color: dataModel.color,
-              // DONT DELETE .value, syncfusion would break in combination wiht Getx
+              // DO NOT DELETE .value, SyncFusion charts would break in combination with GetX.
               // ignore: invalid_use_of_protected_member
               dataSource: dataModel.graphData.value,
               onRendererCreated: (ChartSeriesController controller) {

@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
-import 'package:uke_mlab/widgets/graph/graph.dart';
 import 'package:uke_mlab/widgets/graph/graph_adder.dart';
 import 'package:uke_mlab/widgets/graph/graph_adder_popup.dart';
 import 'graph_container.dart';
 
-/// Displays a [Graph] and the sorrounding elements
+// TODO: Move this file to toggle directory? Since the right screen modes are also there.
+
+/// Displays the graphs specified in [SystemState.graphList], and [GraphAdder] or [GraphAdderPopup].
+/// This widget normally takes up the entire left half of the screen.
 class GraphView extends StatelessWidget {
+  /// Displays a list of graphs and a button to add/remove more graphs.
+
+  /// Creates instance of the [GraphView].
   const GraphView({
     Key? key,
   }) : super(key: key);
