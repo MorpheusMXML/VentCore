@@ -13,8 +13,6 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 /// {@subCategory Graph Container}
 class AlarmConfirmButton extends StatelessWidget {
 
-  /// Button confirm acknowledging an alarm.
-
   final sensorEnumAbsolute sensorKey;
 
   /// Creates instance of [AlarmConfirmButton].
