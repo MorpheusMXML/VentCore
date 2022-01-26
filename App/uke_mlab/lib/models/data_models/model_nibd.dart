@@ -4,8 +4,9 @@ import 'package:uke_mlab/models/data_models/model_graphdata.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/widgets/graph/history_graph.dart';
 
-/// Represents the DataModel for systolic and diastolic blood pressure measurements. And holds the information for the [HistoryGraph].
 class DataModelNIBD extends GetxController {
+  /// Represents the DataModel for systolic and diastolic blood pressure measurements. And holds the information for the [HistoryGraph].
+
   /// sensor key hinting at the corresponding sensor addressing the current [DataModelNIBD]
   final sensorEnumGraph sensorKey;
 

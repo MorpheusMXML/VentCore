@@ -21,23 +21,24 @@ import 'package:uke_mlab/scenarios/abstract_scenario.dart';
 
 import 'package:uke_mlab/screens/main_screen.dart';
 
-/// Superclass holding references to various models for screen elements
-/// as well as holding the top level information of current status of the system
 class SystemState extends GetxController {
-  /// contains global information whether an [AbstractScenario] is active
+  /// Superclass holding references to various models for screen elements as well as holding the top level information of current status of the system.
+
+  /// Contains global information whether an [AbstractScenario] is active.
   bool scenarioStarted = false;
 
-  /// contains information which screen is currently active using an element of [screenStatusEnum]
+  /// Contains information which screen is currently active using an element of [screenStatusEnum].
   screenStatusEnum screenStatus = screenStatusEnum.patientSettingScreen;
 
-  /// contains information which patient Type is currently active using an element of [patientTypeEnum]
+  /// Contains information which patient Type is currently active using an element of [patientTypeEnum].
   patientTypeEnum patientType = patientTypeEnum.none;
 
-  /// contains information which of the three monitoring, ventilation, defibrillation is currently active in [MainScreen]
-  /// as a list of true or false values corresponding to the order given above.
+  /// Contains information which of the three monitoring, ventilation, defibrillation is currently active in [MainScreen] as a list of true or false values corresponding to the order given above.
   RxList<bool> selectedToggleView = [true, false, false].obs;
 
-  /// contains global information which [sensorEnumAbsolute] currently is in which [alarmStatus],
+  /// Contains global information about the status of the [sensorEnumAbsolute].
+  ///
+  /// Includes is in which [alarmStatus],
   /// is of what priority, corresponds to which color and which alarm message will be printed on request
   /// this is done via the RxMap with the following keys:
   /// "priority" for priority
@@ -47,22 +48,22 @@ class SystemState extends GetxController {
   final RxMap<sensorEnumAbsolute, Map<String, dynamic>> alarmState =
       <sensorEnumAbsolute, Map<String, dynamic>>{}.obs;
 
-  /// A reference to the current [GeneralAlarms] in use
+  /// A reference to the current [GeneralAlarms] in use.
   final GeneralAlarms generalAlarms = GeneralAlarms();
 
-  /// A reference to the current [GraphList] in use
+  /// A reference to the current [GraphList] in use.
   final GraphList graphList = GraphList();
 
-  /// A reference to the current [AbsAlarmFieldModel] in use
+  /// A reference to the current [AbsAlarmFieldModel] in use.
   final AbsAlarmFieldModel absAlarmFieldModel = AbsAlarmFieldModel();
 
-  /// A reference to the current [IppvModel] in use
+  /// A reference to the current [IppvModel] in use.
   final IppvModel ippvModel = IppvModel();
 
-  /// A reference to the current [ThemeModel] in use
+  /// A reference to the current [ThemeModel] in use.
   final ThemeModel themeModel = ThemeModel();
 
-  /// A reference to the current [SmartAdjustmentMap] in use. Used for smartAdjustment
+  /// A reference to the current [SmartAdjustmentMap] in use. Used for smartAdjustment.
   final SmartAdjustmentMap smartAdjustmentMap = SmartAdjustmentMap();
 
   // SystemState initated with no violations at place and screenStatus as topLevelScreen
