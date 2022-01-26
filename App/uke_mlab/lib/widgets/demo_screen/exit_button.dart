@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/screen_controller.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
+import 'package:uke_mlab/utilities/enums/screen_status.dart';
 
-// TODO: COMMENTARY
+/// Exit button for menus
+///
+/// Uses [ScreenController.menuExitButton] to lead back to previous screen denoted by [screenStatusEnum]
 class ExitButton extends StatelessWidget {
   const ExitButton({
     Key? key,

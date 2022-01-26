@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
 
-//TODO: COMMENTARY
+/// Theme of the app containing static, non changing colors as well as light and dark theme
+///
+/// Non changing colors contain mostly alarm colors and sensor colors following the style guide.
 class AppTheme {
   static const Color heartFreqColor = Color(0xFF34C759);
   static const Color flowColor = Color(0xFF0CECDD);
@@ -22,6 +24,7 @@ class AppTheme {
   final Color backgroundColor = const Color(0xFF1C1B1F);
   final Color appBar = const Color(0xFF1d192B);
 
+  /// Dark theme of the App, is default
   static ThemeData get darkTheme {
     return ThemeData(
       brightness: Brightness.dark,
@@ -39,6 +42,7 @@ class AppTheme {
     );
   }
 
+  /// Light theme of the App (experimental at the moment)
   static ThemeData get lightTheme {
     return ThemeData(
       brightness: Brightness.light,
@@ -77,7 +81,6 @@ extension CustomColors on ThemeData {
 
 // TEXT STYLES
 extension CustomTextStyles on ThemeData {
-  // TODO: Use these?
   static const xxs = 12;
   static const xs = 16;
   static const s = 17;
