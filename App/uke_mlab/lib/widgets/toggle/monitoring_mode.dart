@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:uke_mlab/widgets/toggle/toggle_mode_button.dart';
+import 'package:uke_mlab/widgets/toggle/toggle_mode_button_container.dart';
 import 'package:uke_mlab/widgets/value_box/alarm_confirmation/alarm_confirmation_button_row.dart';
 import 'package:uke_mlab/widgets/value_box/value_box_tile.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
@@ -11,7 +11,7 @@ import 'package:uke_mlab/widgets/value_box/value_box_tile_nibd.dart';
 /// + [ValueBoxTile] for [sensorEnumAbsolute.pulse] and [sensorEnumAbsolute.tempAbsolute]
 /// + [ValueBoxTileNIBD]
 /// + [AlarmConfirmationRow]
-/// + [ToggleModeButton]
+/// + [ToggleModeButtonContainer]
 class MonitoringMode extends StatelessWidget {
   const MonitoringMode({
     Key? key,
@@ -54,7 +54,7 @@ class MonitoringMode extends StatelessWidget {
           flex: 3,
           child: AlarmConfirmationRow(),
         ),
-        ToggleModeButton(),
+        ToggleModeButtonContainer(),
       ],
     );
   }

@@ -24,8 +24,8 @@ class AEDButton extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             fixedSize: Size(300 / MediaQuery.of(context).devicePixelRatio,
                 300 / MediaQuery.of(context).devicePixelRatio),
-            primary: const Color(0xff363638),
-            onPrimary: const Color(0xff34c759),
+            primary: theme.primarySwatch[25],
+            onPrimary: AppTheme.alarmWarningColor,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           ),
@@ -37,7 +37,7 @@ class AEDButton extends StatelessWidget {
               SvgPicture.asset(
                 'assets/icons/AED2.svg', //smaller than AED.svg
                 height: 250 / MediaQuery.of(context).devicePixelRatio,
-                color: const Color(0xff34c759),
+                color: AppTheme.alarmWarningColor,
               ),
               Text(
                 'AED',

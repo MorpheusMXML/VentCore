@@ -17,7 +17,7 @@ import 'package:uke_mlab/widgets/demo_screen/scenario_button.dart';
 import 'package:uke_mlab/widgets/menu/menu.dart';
 import 'package:uke_mlab/widgets/start_screen/continue_button.dart';
 import 'package:uke_mlab/widgets/start_screen/skip_button.dart';
-import 'package:uke_mlab/widgets/toggle/toggle_mode_button.dart';
+import 'package:uke_mlab/widgets/toggle/toggle_mode_button_container.dart';
 
 /// Handles user input and various button behavior
 ///
@@ -155,7 +155,7 @@ class ScreenController {
     return Get.offNamed('/demo_screen');
   }
 
-  /// beavior when using [ToggleModeButton]
+  /// beavior when using [ToggleModeButtonContainer]
   void setSelectedToggleView(int index) {
     hideAlarmBoundaryOverlays();
     switch (index) {
@@ -182,7 +182,7 @@ class ScreenController {
     }
   }
 
-  /// resets [ToggleModeButton] to default
+  /// resets [ToggleModeButtonContainer] to default
   void resetToggleView() {
     hideAlarmBoundaryOverlays();
     systemState.setSelectedToggleView([true, false, false]);

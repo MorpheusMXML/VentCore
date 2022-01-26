@@ -69,10 +69,14 @@ extension CustomColors on ThemeData {
   ColorSwatch<int> get primarySwatch => ColorSwatch(0xFFEEEEEE, {
         0: Get.isDarkMode ? const Color(0xFFFFFFFF) : const Color(0xFFFFFFFF),
         10: Get.isDarkMode ? const Color(0xFFEEEEEE) : const Color(0x6FFFFFFF),
+        12: Get.isDarkMode ? const Color(0xFF79747E) : const Color(0x6FFFFFFF),
+        15: Get.isDarkMode ? const Color(0xFF808B96) : const Color(0x6FFFFFFF),
         20: Get.isDarkMode ? const Color(0xFF49454F) : const Color(0xDFFFFFFF),
+        25: Get.isDarkMode ? const Color(0xFF363638) : const Color(0xBFFFFFFF),
         30: Get.isDarkMode ? const Color(0xFF322F37) : const Color(0xEFFFFFFF),
         40: Get.isDarkMode ? const Color(0xFF2A2831) : const Color(0xCFFFFFFF),
         50: Get.isDarkMode ? const Color(0xFF25232A) : const Color(0xBFFFFFFF),
+        60: Get.isDarkMode ? const Color(0xFF5D5FEF) : const Color(0xBFFFFFFF),
         100: Get.isDarkMode ? const Color(0xFF000000) : const Color(0xAFFFFFFF),
       });
 
@@ -278,7 +282,7 @@ extension CustomButtonStyles on ThemeData {
   // ButtonStyle used by ContinueButton, SkipButton and ExitButton
   ButtonStyle get navigationButtonStyle => ElevatedButton.styleFrom(
         fixedSize: const Size(200, 60),
-        primary: const Color(0xFFEEEEEE),
+        primary: primarySwatch[10],
         onPrimary: inverseContrastColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(75),
@@ -310,7 +314,7 @@ extension CustomButtonStyles on ThemeData {
   ButtonStyle get alarmConfirmButtonStyle2 => ElevatedButton.styleFrom(
         fixedSize: Size(AbsoluteAlarmFieldConst.buttonHeight.toDouble(),
             AbsoluteAlarmFieldConst.width * (3 / 8)),
-        primary: const Color(0xffeeeeee),
+        primary: primarySwatch[10],
         onPrimary: inverseContrastColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(75),

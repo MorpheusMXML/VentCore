@@ -25,7 +25,7 @@ class ScenarioButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           fixedSize: Size(800 / MediaQuery.of(context).devicePixelRatio,
               155 / MediaQuery.of(context).devicePixelRatio),
-          primary: const Color(0xffeeeeee),
+          primary: theme.primarySwatch[10],
           onPrimary: theme.inverseContrastColor,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),

@@ -33,8 +33,8 @@ class PatientTypeButton extends StatelessWidget {
             minimumSize: Size(800 / MediaQuery.of(context).devicePixelRatio,
                 200 / MediaQuery.of(context).devicePixelRatio),
             primary: startScreenController.selectedString.value == name
-                ? const Color(0xFF808B96)
-                : const Color(0xFFEEEEEE),
+                ? theme.primarySwatch[15]
+                : theme.primarySwatch[10],
             onPrimary: theme.inverseContrastColor,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),

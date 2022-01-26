@@ -29,7 +29,7 @@ class PopupSlider extends StatelessWidget {
     return Container(
       height: 100 / MediaQuery.of(context).devicePixelRatio,
       margin: const EdgeInsets.fromLTRB(12, 12, 12, 12),
-      color: const Color(0xff322f37),
+      color: theme.primarySwatch[30],
       /// The Flexibles contain the layout of the objects in the Container
       child: Row(
         children: [
