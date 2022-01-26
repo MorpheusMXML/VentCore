@@ -3,7 +3,7 @@ import 'package:uke_mlab/utilities/enums/non_graph_alarm.dart';
 import 'package:uke_mlab/utilities/enums/screen_status.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
-/// Contains a key for each scenario available
+/// Contains a key for each scenario available.
 ///
 /// {@category Enums}
 enum scenariosEnum {

@@ -19,11 +19,11 @@ import 'package:uke_mlab/widgets/start_screen/continue_button.dart';
 import 'package:uke_mlab/widgets/start_screen/skip_button.dart';
 import 'package:uke_mlab/widgets/toggle/toggle_mode_button_container.dart';
 
-/// Handles user input and various button behavior
+/// Handles user input and various button behavior.
 ///
 /// Handles the settings of the alarmboundaries with [setUpperBoundary] and [setLowerBoundary] within the [DataModelAbsolute]
-/// Further handles the Changing of the Scenarios, starts the DataStreams and triggeres the necessary Runs for General Alarms, Data reading into the Graphs etc.
-/// Also handles the Continue, Skip and other Button Behaviours of the [StartScreen]
+/// Further handles the changing of the scenarios, starts the data streams and triggeres the necessary runs for general alarms, data reading into the graphs etc.
+/// Also handles the continue, skip and other button behaviours of the [StartScreen]
 ///
 /// {@category Providers}
 class ScreenController {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 
-/// Widget displaying an error message screen
+/// Widget displaying an error message screen.
 ///
 /// {@category Miscellaneous}
 class ErrorMessage extends StatelessWidget {

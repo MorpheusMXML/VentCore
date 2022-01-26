@@ -4,7 +4,7 @@ import 'package:uke_mlab/utilities/constants/absolute_alarm_field_constants.dart
 import 'package:uke_mlab/widgets/setting/ippv_button.dart';
 import 'package:uke_mlab/widgets/setting/setting_tile.dart';
 
-/// Top level widget for the ippv settings.
+/// Top level widget for the IPPV settings.
 ///
 /// Uses:
 /// + [IPPVButton]

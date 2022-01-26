@@ -4,7 +4,7 @@ import 'package:uke_mlab/utilities/enums/screen_status.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/utilities/enums/alarm_status.dart';
 
-import 'package:uke_mlab/widgets/graph_container/graph_view.dart';
+import 'package:uke_mlab/widgets/toggle/graph_view.dart';
 import 'package:uke_mlab/widgets/value_box/value_box_tile.dart';
 
 /// Contains a list [list] over all currently [GraphView] represented by the corresponding [sensorEnumGraph].

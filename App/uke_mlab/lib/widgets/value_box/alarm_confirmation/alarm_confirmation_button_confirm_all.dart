@@ -8,7 +8,7 @@ import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/utilities/enums/alarm_status.dart';
 
-/// Returns a button which confirms all active alrms on the current page if any are available
+/// Returns a button which confirms all active alrms on the current page if any are available.
 ///
 /// Active alarms are defined via [AbsAlarmFieldModel.activeList] and [GraphList.activeGraphAbsolutes]
 ///

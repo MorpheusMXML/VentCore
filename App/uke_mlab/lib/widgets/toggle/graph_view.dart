@@ -3,12 +3,13 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/widgets/graph/graph_adder.dart';
 import 'package:uke_mlab/widgets/graph/graph_adder_popup.dart';
-import 'graph_container.dart';
+import 'package:uke_mlab/widgets/graph_container/graph_container.dart';
+import '../graph_container/graph_container.dart';
 
 /// Displays the graphs specified in [SystemState.graphList], and [GraphAdder] or [GraphAdderPopup].
 /// This widget normally takes up the entire left half of the screen.
 ///
-/// {@category GraphContainer}
+/// {@category Toggle}
 class GraphView extends StatelessWidget {
   /// Displays a list of graphs and a button to add/remove more graphs.
 

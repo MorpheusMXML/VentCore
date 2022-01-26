@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 
-/// Custom widget for the text of one IPPv setting parameter.
+/// Custom widget for the text of one IPPV setting parameter.
 ///
 /// {@category IppvSettings}
 class SettingText extends StatelessWidget {

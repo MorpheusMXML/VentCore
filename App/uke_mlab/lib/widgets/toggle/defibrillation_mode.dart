@@ -68,7 +68,7 @@ class DefibrillationMode extends StatelessWidget {
           ),
         ),
         const Spacer(),
-        ToggleModeButtonContainer(),
+        const ToggleModeButtonContainer(),
       ],
     );
   }

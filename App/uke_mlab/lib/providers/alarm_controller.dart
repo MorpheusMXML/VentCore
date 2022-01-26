@@ -30,11 +30,11 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 /// - [_previousAlarmSound] saves the previous thrown alarm so this [evaluateAlarmSound] can refer to [_previousAlarmSound].
 /// - [_modelManager] loads an instance of [ModelManager]
 /// - [_systemState]  loads an instance this [SystemState] via [GetX]
+///
 /// {@category Providers}
 class AlarmController {
   /// This provides a [Map] to save [triggerConfirm] calls for given [sensorEnumAbsolute].
-  final Map<sensorEnumAbsolute, dynamic> _confirmMap =
-      <sensorEnumAbsolute, dynamic>{};
+  final Map<sensorEnumAbsolute, dynamic> _confirmMap = <sensorEnumAbsolute, dynamic>{};
 
   /// This provides a [List] and assits to identify the alarm with the highest [alarmStatus].
   final List<SoundListEntry> _soundList = <SoundListEntry>[];
@@ -86,14 +86,10 @@ class AlarmController {
   ///
   /// If this [sensor] doesn´t match in this categories, it will set back to [alarmStatus.none].
   void evaluateAlarmState(sensorEnumAbsolute sensor) {
-    dynamic value =
-        Get.find<DataModelAbsolute>(tag: sensor.name).absoluteValue.value;
-    dynamic upper =
-        Get.find<DataModelAbsolute>(tag: sensor.name).upperAlarmBound.value;
-    dynamic lower =
-        Get.find<DataModelAbsolute>(tag: sensor.name).lowerAlarmBound.value;
-    RxList historicValues =
-        Get.find<DataModelAbsolute>(tag: sensor.name).historicValues;
+    dynamic value = Get.find<DataModelAbsolute>(tag: sensor.name).absoluteValue.value;
+    dynamic upper = Get.find<DataModelAbsolute>(tag: sensor.name).upperAlarmBound.value;
+    dynamic lower = Get.find<DataModelAbsolute>(tag: sensor.name).lowerAlarmBound.value;
+    RxList historicValues = Get.find<DataModelAbsolute>(tag: sensor.name).historicValues;
 
     ///Possible deviation arounde the upper and lower boundaries.
     dynamic allowedValueDeviation = (upper - lower) / 2;
@@ -111,8 +107,7 @@ class AlarmController {
     ///Evaluate upper alarm boundary. Here we trigger [alarmMessage.upperBoundaryViolated].
     if (value > upper) {
       ///Checks how serious the upper boundary is exceeded.
-      if (sensor.boundaryDeviation != null &&
-          value < upper * (1 + sensor.boundaryDeviation)) {
+      if (sensor.boundaryDeviation != null && value < upper * (1 + sensor.boundaryDeviation)) {
         updateAlarmState(
           sensor,
           alarmMessage.upperBoundaryViolated,
@@ -132,8 +127,7 @@ class AlarmController {
     ///Evaluate lower alarm boundary.
     else if (value < lower) {
       ///Checks how serious the lower boundary is exceeded. Here we trigger [alarmMessage.lowerBoundaryViolated].
-      if (sensor.boundaryDeviation != null &&
-          value > lower * (1 - sensor.boundaryDeviation)) {
+      if (sensor.boundaryDeviation != null && value > lower * (1 - sensor.boundaryDeviation)) {
         updateAlarmState(
           sensor,
           alarmMessage.lowerBoundaryViolated,
@@ -217,8 +211,7 @@ class AlarmController {
     if (_systemState.getAlarmStatePriority(sensor) != status.priority ||
         _systemState.getAlarmStateMessage(sensor) != message.message) {
       /// Check if middle alarm is repeating and needs to change boundaries
-      if (_systemState.getAlarmStatePriority(sensor) ==
-              alarmStatus.none.priority &&
+      if (_systemState.getAlarmStatePriority(sensor) == alarmStatus.none.priority &&
           status.priority == alarmStatus.middle.priority) {
         evaluateBoundaryAdjustment(sensor, message);
       }
@@ -278,8 +271,7 @@ class AlarmController {
   ///
   /// This happens everytime when triggering [alarmStatus.middle] for given [sensor].
   /// The tolerance of this event is defined in the [SmartAdjustmentMap].
-  void evaluateBoundaryAdjustment(
-      sensorEnumAbsolute sensor, alarmMessage message) {
+  void evaluateBoundaryAdjustment(sensorEnumAbsolute sensor, alarmMessage message) {
     ///checks which Boundary was violated
     if (message == alarmMessage.lowerBoundaryViolated) {
       _systemState.smartAdjustmentMap.updateLowerCounter(sensor);
@@ -315,10 +307,8 @@ class AlarmController {
     _soundList.removeWhere((element) {
       /// checks whether element is in systemState.graphList.activeGraphAbsolutes or systemState.absAlarmFieldModel.activeList if so => remove from soundList.
       if (element.type is sensorEnumAbsolute) {
-        return !_systemState.graphList.activeGraphAbsolutes
-                .contains(element.type as sensorEnumAbsolute) &&
-            !_systemState.absAlarmFieldModel.activeList
-                .contains(element.type as sensorEnumAbsolute);
+        return !_systemState.graphList.activeGraphAbsolutes.contains(element.type as sensorEnumAbsolute) &&
+            !_systemState.absAlarmFieldModel.activeList.contains(element.type as sensorEnumAbsolute);
 
         /// checks whether element is in generalAlarms, if so returns false => not remove from soundList.
       } else if (element.type is nonGraphAlarmEnum) {
@@ -339,10 +329,8 @@ class AlarmController {
     /// is given sensor in any active list then add it to the soundList
     if ((sensor is sensorEnumAbsolute &&
             (_systemState.absAlarmFieldModel.activeList.contains(sensor) ||
-                _systemState.graphList.activeGraphAbsolutes
-                    .contains(sensor))) ||
-        (sensor is nonGraphAlarmEnum &&
-            _systemState.generalAlarms.checkForAlarm(sensor))) {
+                _systemState.graphList.activeGraphAbsolutes.contains(sensor))) ||
+        (sensor is nonGraphAlarmEnum && _systemState.generalAlarms.checkForAlarm(sensor))) {
       _soundList.add(SoundListEntry(type: sensor, priority: priority));
     }
 

@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 
-/// This class represents a single Toggle Mode Button.
+/// This class represents a single toggle mode button.
 /// The buttons are used by the [ToggleModeButtonContainer].
 /// The toggling logic is implemented by [ToggleModeButtonContainer] which utilizes [SystemState].
 ///
@@ -27,18 +27,14 @@ class ToggleModeButton extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-          color: systemState.selectedToggleView[index]
-              ? theme.primarySwatch[60]
-              : theme.primarySwatch[40]),
+          color: systemState.selectedToggleView[index] ? theme.primarySwatch[60] : theme.primarySwatch[40]),
       width: 100,
       child: Padding(
         padding: const EdgeInsets.all(5),
         child: SvgPicture.asset(
           path,
           height: 40.0,
-          color: systemState.selectedToggleView[index]
-              ? theme.contrastColor
-              : theme.primarySwatch[12],
+          color: systemState.selectedToggleView[index] ? theme.contrastColor : theme.primarySwatch[12],
         ),
       ),
     );

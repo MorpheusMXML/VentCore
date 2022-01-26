@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/utilities/constants/absolute_alarm_field_constants.dart';
+import 'package:uke_mlab/widgets/menu/toggle_theme_button.dart';
 
 /// This class provides the app with a two themes: [darkTheme] and [lightTheme].
 /// By default, the app starts in the [lightTheme] and can be toggled to the [darkTheme] by clicking on the theme [ToggleThemeButton].
 /// The class contains constant values (such as [heartFreqColor]) that are not changed when toggling the theme.
-/// Text Styles, Button Styles and some Colors are changed depending on the active theme.
+/// Text styles, button styles and some [Color]s are changed depending on the active theme.
 /// The theme class is extended by extensions that specify those styles.
 ///
 /// {@category Utilities}
@@ -82,10 +83,8 @@ extension CustomColors on ThemeData {
         100: Get.isDarkMode ? const Color(0xFF000000) : const Color(0xAFFFFFFF),
       });
 
-  Color? get contrastColor =>
-      Get.isDarkMode ? primarySwatch[0] : primarySwatch[100];
-  Color? get inverseContrastColor =>
-      Get.isDarkMode ? primarySwatch[100] : primarySwatch[0];
+  Color? get contrastColor => Get.isDarkMode ? primarySwatch[0] : primarySwatch[100];
+  Color? get inverseContrastColor => Get.isDarkMode ? primarySwatch[100] : primarySwatch[0];
 }
 
 /// This extension contains custom text styles that are used by certain widgets.
@@ -314,8 +313,7 @@ extension CustomButtonStyles on ThemeData {
       );
 
   ButtonStyle get alarmConfirmButtonStyle2 => ElevatedButton.styleFrom(
-        fixedSize: Size(AbsoluteAlarmFieldConst.buttonHeight.toDouble(),
-            AbsoluteAlarmFieldConst.width * (3 / 8)),
+        fixedSize: Size(AbsoluteAlarmFieldConst.buttonHeight.toDouble(), AbsoluteAlarmFieldConst.width * (3 / 8)),
         primary: primarySwatch[10],
         onPrimary: inverseContrastColor,
         shape: RoundedRectangleBorder(

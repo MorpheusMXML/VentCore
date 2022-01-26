@@ -11,7 +11,7 @@ import 'package:uke_mlab/widgets/appbar/statusbar.dart';
 /// Offers a sorted list of general alarms for being displayed in [StatusBar].
 ///
 /// This class implements the general alarms that are displayed within the [StatusBar].
-/// Note that these Alarms are independent of the Patient Data and Shown Graphs and Absolute Values. These Alarms are General Notifications like O2 Bottle Empty etc.
+/// Note that these alarms are independent of the patient data and shown graphs and absolute values. These alarms are general notifications like O2 bottle empty etc.
 ///
 /// {@category ScreenElementModels}
 class GeneralAlarms extends GetxController {

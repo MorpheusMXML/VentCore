@@ -31,7 +31,6 @@ void main() {
   ]).then((value) => runApp(MyApp()));
 }
 
-// TODO: Comments
 class MyApp extends StatelessWidget {
   final SystemState systemState = Get.put(SystemState());
   final ModelManager modelManager = Get.put(ModelManager());
@@ -40,8 +39,7 @@ class MyApp extends StatelessWidget {
 
   MyApp({Key? key}) : super(key: key) {
     // ignore: unused_local_variable
-    final AlarmController alarmController =
-        Get.put(AlarmController(modelManager));
+    final AlarmController alarmController = Get.put(AlarmController(modelManager));
   }
   @override
   Widget build(BuildContext context) {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
+import 'package:uke_mlab/widgets/graph/graph_adder_popup.dart';
 
 /// This widget renders a stylized [ElevatedButton] to add graphs.
 /// The plus icon indicates the adding functionality.

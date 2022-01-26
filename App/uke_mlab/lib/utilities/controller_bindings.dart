@@ -5,7 +5,7 @@ import 'package:uke_mlab/providers/defibrillation_controller.dart';
 import 'package:uke_mlab/providers/start_screen_controller.dart';
 import 'package:uke_mlab/providers/screen_controller.dart';
 
-/// Offers initial bindings of lower level controllers into [GetX]
+/// Offers initial bindings of lower level controllers into [GetX].
 ///
 /// Controllers bound are:
 /// + [StartScreenController]

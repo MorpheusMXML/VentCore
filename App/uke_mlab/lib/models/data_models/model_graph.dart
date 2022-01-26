@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:uke_mlab/providers/alarm_controller.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/widgets/graph_container/graph_container.dart';
 import 'model_graphdata.dart';
 
-/// represents the data model to be used in [GraphContainer] and subwidgets
+/// Represents the data model to be used in [GraphContainer] and sub widgets.
 ///
-/// graphData INCLUDES the singleData value at the end
-/// Alarm evaluation is done in alarm_controller
-/// graphDataMaxLength is initialized with 100, can be manipulated
+/// [graphData] includes the [singleData] value at the end
+/// Alarm evaluation is done in [AlarmController]
+/// [graphDataMaxLength] is initialized with 0, later manipulated via the sensors
 ///
 /// {@category DataModels}
 class DataModelGraph extends GetxController {
@@ -71,11 +72,8 @@ class DataModelGraph extends GetxController {
           }
         }
 
-        if (chartController is ChartSeriesController &&
-            chartController != null) {
-          chartController!.updateDataSource(
-              updatedDataIndexes:
-                  List.generate(graphDataMaxLength, (index) => index++));
+        if (chartController is ChartSeriesController && chartController != null) {
+          chartController!.updateDataSource(updatedDataIndexes: List.generate(graphDataMaxLength, (index) => index++));
         }
         break;
       default:

@@ -5,7 +5,7 @@ import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/widgets/menu/menu_entry.dart';
 import 'package:uke_mlab/widgets/menu/toggle_theme_button.dart';
 
-/// Contains the drawer for the menu Button
+/// Contains the drawer for the menu Button.
 ///
 /// {@category Menu}
 class AppMenu extends StatelessWidget {
@@ -30,10 +30,7 @@ class AppMenu extends StatelessWidget {
           DrawerHeader(
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('Menu', style: theme.menuHeadlineTextStyle),
-                  const ToggleThemeButton()
-                ]),
+                children: [Text('Menu', style: theme.menuHeadlineTextStyle), const ToggleThemeButton()]),
           ),
           ...routes.map((entry) => AppMenuEntry(name: entry)).toList(),
         ],

@@ -4,7 +4,7 @@ import 'package:uke_mlab/providers/start_screen_controller.dart';
 import 'package:uke_mlab/providers/screen_controller.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 
-/// This class contains the Continue Button and its functionality.
+/// This class contains the continue button and its functionality.
 ///
 /// It provides a way to continue to the main screen with the previously selected patient preset and values.
 ///

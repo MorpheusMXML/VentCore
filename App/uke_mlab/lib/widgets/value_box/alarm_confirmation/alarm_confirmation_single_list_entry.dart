@@ -6,6 +6,7 @@ import 'package:uke_mlab/providers/alarm_controller.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/utilities/constants/absolute_alarm_field_constants.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
+import 'package:uke_mlab/widgets/value_box/alarm_confirmation/alarm_confirmation_button_single_list_expansion_button.dart';
 
 /// Provides an entry for [AlarmConfirmationButtonSingleListExpansion]s list.
 ///
@@ -26,8 +27,7 @@ class AlarmConfirmationRowEntry extends StatelessWidget {
     return Material(
       color: Colors.transparent,
       child: Container(
-        margin: const EdgeInsets.only(
-            bottom: AbsoluteAlarmFieldConst.verticalMargin),
+        margin: const EdgeInsets.only(bottom: AbsoluteAlarmFieldConst.verticalMargin),
         color: theme.primarySwatch[40],
         padding: const EdgeInsets.only(
             top: AbsoluteAlarmFieldConst.verticalMargin / 4, bottom: AbsoluteAlarmFieldConst.verticalMargin / 4),

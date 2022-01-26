@@ -7,7 +7,7 @@ import 'package:uke_mlab/utilities/app_theme.dart';
 /// The timer is only started when entering the toggle screen this widget is on.
 ///
 /// The [DefibrillationController] handles all actions relating to the stats.
-
+///
 /// {@category DefibrillationMode}
 class DefibrillationStats extends StatelessWidget {
   /// Widget for displaying defibrillation stats.
@@ -20,8 +20,7 @@ class DefibrillationStats extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    DefibrillationController defibrillationController =
-        Get.find<DefibrillationController>();
+    DefibrillationController defibrillationController = Get.find<DefibrillationController>();
     defibrillationController.startTimerWatch();
 
     return Flexible(
@@ -55,20 +54,14 @@ class DefibrillationStats extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                    child: Obx(() => Text(
-                        defibrillationController.lastTimerString.value,
-                        textAlign: TextAlign.center,
-                        style: theme.defiStatsValueTextStyle))),
+                    child: Obx(() => Text(defibrillationController.lastTimerString.value,
+                        textAlign: TextAlign.center, style: theme.defiStatsValueTextStyle))),
                 Expanded(
-                    child: Obx(() => Text(
-                        '${defibrillationController.numberOfShocks}',
-                        textAlign: TextAlign.center,
-                        style: theme.defiStatsValueTextStyle))),
+                    child: Obx(() => Text('${defibrillationController.numberOfShocks}',
+                        textAlign: TextAlign.center, style: theme.defiStatsValueTextStyle))),
                 Expanded(
-                    child: Obx(() => Text(
-                        defibrillationController.startTimerString.value,
-                        textAlign: TextAlign.center,
-                        style: theme.defiStatsValueTextStyle))),
+                    child: Obx(() => Text(defibrillationController.startTimerString.value,
+                        textAlign: TextAlign.center, style: theme.defiStatsValueTextStyle))),
               ],
             ),
           ],

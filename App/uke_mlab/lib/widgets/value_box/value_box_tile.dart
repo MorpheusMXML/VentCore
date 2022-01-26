@@ -11,7 +11,7 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 import 'package:uke_mlab/widgets/value_box/value_box_container.dart';
 
-/// highest level widget that is always called when a ValueBox is needed
+/// Highest level widget that is always called when a [ValueBoxTile] is needed.
 ///
 /// [DataModelAbsolute] is found here and attributes provided for children
 /// Categorize ValueBox in "regular" and "withHeadline"
@@ -137,8 +137,7 @@ class ValueBoxTile extends StatelessWidget {
   }
 
   /// Helper method to evaluate the backgroundcolor for alarms (default != [Theme.of(context).primarySwatch[50]])
-  Color? evaluateBorderColor(BuildContext context,
-      RxMap<sensorEnumAbsolute, Map<String, dynamic>> alarmState) {
+  Color? evaluateBorderColor(BuildContext context, RxMap<sensorEnumAbsolute, Map<String, dynamic>> alarmState) {
     final ThemeData theme = Theme.of(context);
 
     alarmStatus? alarm = alarmState[sensorAbsolute]!["status"];

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 
-/// Contains a key for each graph currently available in the app
+/// Contains a key for each graph currently available in the app.
 ///
 /// {@category Enums}
 enum sensorEnumGraph {
@@ -15,9 +15,9 @@ enum sensorEnumGraph {
   nibd,
 }
 
-/// Contains a key for each absolute tile currently available in the app
-/// {@category Utilities}
-/// {@subCategory Enums}
+/// Contains a key for each absolute tile currently available in the app.
+///
+/// {@category Enums}
 enum sensorEnumAbsolute {
   hfAbsolute, // heartfrequency
   tempAbsolute, // temprerature in °C
@@ -102,7 +102,7 @@ extension SensorGraphAttributes on sensorEnumGraph {
       'yAxisUnit': '',
       'xAxisUnit': '',
       'color': AppTheme.nibdColor,
-      'graphLength': 10, // TODO: intermediate value
+      'graphLength': 10,
     }
   };
 

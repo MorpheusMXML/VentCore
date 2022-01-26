@@ -4,7 +4,7 @@ import 'package:uke_mlab/providers/start_screen_controller.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/widgets/start_screen/details_popup_slider.dart';
 
-/// This class contains the Details Popup and its functionality.
+/// This class contains the details popup and its functionality.
 ///
 /// {@category StartScreen}
 class DetailsPopup extends StatelessWidget {
@@ -23,17 +23,12 @@ class DetailsPopup extends StatelessWidget {
           ? Container(
               margin: const EdgeInsets.only(right: 65, bottom: 12),
               color: theme.primarySwatch[50],
+
               ///The Column contains the Popup Sliders and provides their names and units.
               child: Column(
                 children: [
-                  PopupSlider(
-                      name: 'Weight',
-                      unit: 'kg',
-                      value: startScreenController.weightValue),
-                  PopupSlider(
-                      name: 'Height',
-                      unit: 'cm',
-                      value: startScreenController.heightValue),
+                  PopupSlider(name: 'Weight', unit: 'kg', value: startScreenController.weightValue),
+                  PopupSlider(name: 'Height', unit: 'cm', value: startScreenController.heightValue),
                 ],
               ),
             )

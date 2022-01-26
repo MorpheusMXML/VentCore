@@ -3,9 +3,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/start_screen_controller.dart';
+import 'package:uke_mlab/screens/start_screen.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 
-/// This class contains the configurations for the StartScreen Buttons for the patient presets.
+/// This class contains the configurations for the [StartScreen] Buttons for the patient presets.
 ///
 /// ### Variables
 /// + [name] is an instance of a [String] which will be displayed on a button.
@@ -32,14 +33,12 @@ class PatientTypeButton extends StatelessWidget {
       child: Obx(
         () => ElevatedButton(
           style: ElevatedButton.styleFrom(
-            minimumSize: Size(800 / MediaQuery.of(context).devicePixelRatio,
-                200 / MediaQuery.of(context).devicePixelRatio),
-            primary: startScreenController.selectedString.value == name
-                ? theme.primarySwatch[15]
-                : theme.primarySwatch[10],
+            minimumSize:
+                Size(800 / MediaQuery.of(context).devicePixelRatio, 200 / MediaQuery.of(context).devicePixelRatio),
+            primary:
+                startScreenController.selectedString.value == name ? theme.primarySwatch[15] : theme.primarySwatch[10],
             onPrimary: theme.inverseContrastColor,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),
           ),
 
           ///get weight and height for chosen preset

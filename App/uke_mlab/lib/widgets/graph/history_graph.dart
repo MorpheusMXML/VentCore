@@ -7,7 +7,7 @@ import 'package:uke_mlab/models/data_models/model_nibd.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
-/// Creates an [SfCartesianChart] to display a History Graph. Example Use: NIBD History.
+/// Creates an [SfCartesianChart] to display a [HistoryGraph]. Example use: NIBD History.
 ///
 /// Needs to be instanciated with a [sensorEnumGraph] for the graph data that should be displayed.
 /// The DataModel it finds using [GetX] depends on the provided [sensor].

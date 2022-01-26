@@ -52,8 +52,7 @@ class AlarmFieldTile extends StatelessWidget {
             ),
             ElevatedButton(
               style: theme.alarmFieldButtonStyle,
-              onPressed: () =>
-                  Get.find<SystemState>().generalAlarms.removeAlarm(data.alarm),
+              onPressed: () => Get.find<SystemState>().generalAlarms.removeAlarm(data.alarm),
               child: const Icon(Icons.check),
             ),
           ],

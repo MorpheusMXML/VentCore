@@ -3,7 +3,7 @@ import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/widgets/setting/action_button.dart';
 import 'package:uke_mlab/widgets/setting/setting_text.dart';
 
-/// Custom widget containing all elements regarding 1 IPPv parameter
+/// Custom widget containing all elements regarding 1 IPPV parameter.
 ///
 /// Uses:
 /// [ActionButton]

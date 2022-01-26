@@ -6,7 +6,7 @@ import 'package:uke_mlab/models/data_models/model_absolute.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 /// This class provides the sound production and sound triggering functionallity.
-/// Alarm sounds can be triggered, stopped and the SpO2 / ECG Sound for the heartfrequency can be started.
+/// Alarm sounds can be triggered, stopped and the SpO2 / ecg sound for the heartfrequency can be started.
 ///
 /// ### Class Variables
 /// + [alarmPlayerCache] loads an instance of type [AudioCache] and sets the sounds folder prefix.
@@ -76,8 +76,7 @@ class SoundController {
 
   /// Plays the SoundAlarm for the AlarmType specified with [soundIdentifier].
   play(Enum soundIdentifier) async {
-    alarmPlayer = await alarmPlayerCache
-        .play(_alarmSoundFiles[soundIdentifier].toString());
+    alarmPlayer = await alarmPlayerCache.play(_alarmSoundFiles[soundIdentifier].toString());
   }
 
   /// Stops all currently active [AudioPlayer], then starts the Loading Sound for the Defi.
@@ -86,12 +85,10 @@ class SoundController {
   /// Plays the [defiPlayer] after this [SoundIdentifier.defiLoading] finished it will loop over [SoundIdentifier.defiShockReady].
   playDefiLoadSound() async {
     stop();
-    defiPlayer = await defiPlayerCache.play(
-        _alarmSoundFiles[SoundIdentifier.defiLoading].toString(),
-        volume: alarmVolume);
+    defiPlayer =
+        await defiPlayerCache.play(_alarmSoundFiles[SoundIdentifier.defiLoading].toString(), volume: alarmVolume);
     defiPlayer!.onPlayerCompletion.listen((event) async {
-      defiPlayer = await defiPlayerCache.loop(
-          _alarmSoundFiles[SoundIdentifier.defiShockReady].toString(),
+      defiPlayer = await defiPlayerCache.loop(_alarmSoundFiles[SoundIdentifier.defiShockReady].toString(),
           volume: alarmVolume + 0.1);
     });
   }
@@ -103,8 +100,7 @@ class SoundController {
     if (alarmSound != null) {
       stopAudioPlayer(alarmPlayer);
       if (timerDuration != 0) {
-        alarmTimer = Timer.periodic(Duration(seconds: timerDuration),
-            ((alarmTimer) async {
+        alarmTimer = Timer.periodic(Duration(seconds: timerDuration), ((alarmTimer) async {
           alarmPlayer = await alarmPlayerCache.play(
             _alarmSoundFiles[alarmSound].toString(),
             volume: alarmVolume,
@@ -273,15 +269,10 @@ class SoundController {
   /// This happens only every 3 seconds to take it easy on the performance.
   void startSaturationHFSound() {
     ecgSoundActive.value = true;
-    DataModelAbsolute hfModel =
-        Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.hfAbsolute.name);
-    DataModelAbsolute spo2Model =
-        Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.spo2Absolute.name);
-    getDataTimer ??=
-        Timer.periodic(Duration(seconds: getDataTimerDuration), (timer) {
-      saturationHfBeep(
-          bpm: hfModel.absoluteValue.value.toInt(),
-          spO2: spo2Model.absoluteValue.value.toInt());
+    DataModelAbsolute hfModel = Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.hfAbsolute.name);
+    DataModelAbsolute spo2Model = Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.spo2Absolute.name);
+    getDataTimer ??= Timer.periodic(Duration(seconds: getDataTimerDuration), (timer) {
+      saturationHfBeep(bpm: hfModel.absoluteValue.value.toInt(), spO2: spo2Model.absoluteValue.value.toInt());
     });
   }
 }

@@ -7,7 +7,7 @@ import 'package:uke_mlab/widgets/value_box/alarm_confirmation/alarm_confirmation
 
 import 'alarm_confirmation_single_list_entry.dart';
 
-/// The list for the overlay created by [AlarmConfirmationButtonSingleListExpansion]
+/// The list for the overlay created by [AlarmConfirmationButtonSingleListExpansion].
 ///
 /// Consitst of [AlarmConfirmationRowEntry]s
 ///
