@@ -61,8 +61,9 @@ class ValueBoxTile extends StatelessWidget {
           tag: sensorAbsolute
               ?.name); // sensorAbsolute is not null since IF sensorGraph == null, sensorAbsolute is required
       return Container(
-        margin:
-            superNIBD ? null : EdgeInsets.only(left: 4, right: 4, bottom: 8),
+        margin: (superNIBD || type == 'regular')
+            ? null
+            : const EdgeInsets.only(left: 4, right: 4, bottom: 8),
         child: Stack(
           alignment: AlignmentDirectional.topCenter,
           children: [
