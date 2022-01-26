@@ -3,14 +3,14 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/providers/alarm_controller.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
+/// Renders the button which enables the user to confirm the alarm of the [sensorKey]s alarm.
+///
+/// Uses [AlarmController.triggerConfirm}
 class AlarmConfirmButton extends StatelessWidget {
-  /// Button which enables the user to confirm the alarm of the [sensorKey]s alarm.
-  ///
-  /// Uses [AlarmController.triggerConfirm}
-
-  /// Key to identify the corresponding sensor
+  /// Button confirm acknowledging an alarm.
   final sensorEnumAbsolute sensorKey;
 
+  /// Creates instance of [AlarmConfirmButton].
   const AlarmConfirmButton({
     Key? key,
     required this.sensorKey,

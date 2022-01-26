@@ -9,9 +9,13 @@ import 'package:uke_mlab/widgets/graph_container/alarm_confirm_button.dart';
 import 'package:uke_mlab/widgets/graph_container/graph_alarm_message.dart';
 import 'package:uke_mlab/widgets/graph_container/smart_adjustment_button.dart';
 
-/// Sets an border which is triggered through the [SystemState]
+/// Creates a border behind a graph to indicate whether the graph is in an alarm state or not.
+/// For that, different colors are used. Triggering alarm borders happens through the [SystemState].
 class GraphAlarmBorder extends StatelessWidget {
+  /// Border of a graph, the color depends on the [alarmStatus].
   final sensorEnumAbsolute sensor;
+
+  /// Creates instance of [GraphAlarmBorder].
   const GraphAlarmBorder({
     Key? key,
     required this.sensor,
@@ -20,8 +24,9 @@ class GraphAlarmBorder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final SystemState systemState = Get.find<SystemState>();
+
     return Obx(() {
-      ///evaluate alarmTypes and see which Boundary is violated
+      // evaluate alarmTypes and see which boundary is violated
       alarmStatus? alarm = systemState.getAlarmStateStatus(sensor);
       switch (alarm) {
         case alarmStatus.high:
@@ -42,7 +47,7 @@ class GraphAlarmBorder extends StatelessWidget {
                       const Spacer(flex: 2),
                       GraphAlarmMessage(sensorKey: sensor),
                       const Spacer(flex: 8),
-                      SmartAjdustButton(sensorKey: sensor),
+                      SmartAdjustButton(sensorKey: sensor),
                       const Spacer(flex: 2),
                     ],
                   ),

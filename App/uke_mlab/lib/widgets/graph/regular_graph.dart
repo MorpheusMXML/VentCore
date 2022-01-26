@@ -5,9 +5,16 @@ import 'package:uke_mlab/models/data_models/model_graph.dart';
 import 'package:uke_mlab/models/data_models/model_graphdata.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
-// TODO: COMMENTARY
+/// Creates an [SfCartesianChart] with two [NumericAxis] and a [SplineSeries].
+/// This is the most commonly used graph type.
+///
+/// The [sensor] parameter specifies the sensor this graph gets its data from. Typically, [sensorEnumGraph.ecgCh1], [sensorEnumGraph.ecgCh2], [sensorEnumGraph.flow], [sensorEnumGraph.paw] or [sensorEnumGraph.pleth] should be provided.
+/// A correspondig [DataModelGraph] for the CPR Graph is created with [GetX].
 class RegularGraph extends StatelessWidget {
+  /// Creates a regular graph.
   final sensorEnumGraph sensor;
+
+  /// Creates instance [RegularGraph].
   const RegularGraph({
     Key? key,
     required this.sensor,
@@ -21,10 +28,12 @@ class RegularGraph extends StatelessWidget {
       () => SfCartesianChart(
         backgroundColor: Theme.of(context).cardColor,
         primaryYAxis: NumericAxis(
-          majorGridLines: MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
+          majorGridLines:
+              MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
         ),
         primaryXAxis: NumericAxis(
-          majorGridLines: MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
+          majorGridLines:
+              MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
         ),
         series: [
           SplineSeries(

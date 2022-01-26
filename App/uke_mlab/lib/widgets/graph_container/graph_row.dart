@@ -19,6 +19,7 @@ import 'package:uke_mlab/widgets/graph/history_graph.dart';
 class GraphRow extends StatelessWidget {
   /// Key to identify the corresponding sensor
   final sensorEnumGraph sensor;
+  
   const GraphRow({
     Key? key,
     required this.sensor,

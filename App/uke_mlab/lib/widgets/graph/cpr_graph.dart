@@ -5,17 +5,20 @@ import 'package:uke_mlab/models/data_models/model_graph.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/models/data_models/model_graphdata.dart';
 
-///This Class returns a [Obx] which in turn consists of a [SfCartesianChart] with two [NumericAxis].
-///The Graph rendered with this displays a history of how good the CPR has been performed in relation to the compression depth.
+/// Creates an [SfCartesianChart] with two [NumericAxis], two [PlotBand]s and a [ColumnSeries].
+/// The Graph rendered displays a history of how well the CPR has been performed in relation to the compression depth.
 ///
-///The [sensorEnum] parameter specifies the Sensor this Graph gets it data from.
-///Also a correspondig [DataModel] for the CPR Graph is created with [GetX].
+/// The [sensor] parameter specifies the sensor this graph gets its data from. Typically, [sensorEnumGraph.cpr] should be provided.
+/// A correspondig [DataModelGraph] for the CPR Graph is created with [GetX].
 class CprGraph extends StatelessWidget {
-  /// Creates a CPR Bar Graph to Indicate optimum pressure applied during CPR.
+  /// Creates a CPR bar graph to indicate optimum pressure applied during CPR.
   final sensorEnumGraph sensor;
 
-  ///Creates Instance of the CPR Bar Graph
-  const CprGraph({Key? key, required this.sensor}) : super(key: key);
+  /// Creates instance of the CPR bar graph
+  const CprGraph({
+    Key? key,
+    required this.sensor,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +29,10 @@ class CprGraph extends StatelessWidget {
         tooltipBehavior: TooltipBehavior(enable: true),
         backgroundColor: Theme.of(context).cardColor,
         primaryYAxis: NumericAxis(
-          //Turning off String Labels at the Axis
+          // This disables String labels at x-axis
           labelStyle: const TextStyle(fontSize: 0.0001),
 
-          ///PlotBands Create the green horizontal Line to Indicate the optimum depth Interval.
+          // PlotBands create the green horizontal line to indicate the optimum depth interval.
           plotBands: <PlotBand>[
             PlotBand(
               isVisible: true,
@@ -55,13 +58,17 @@ class CprGraph extends StatelessWidget {
           ),
         ),
         primaryXAxis: NumericAxis(
-          //Turning off String Labels at the Axis
+          // This disables String labels at x-axis
           labelStyle: const TextStyle(fontSize: 0.0001),
           desiredIntervals: 25,
-          majorGridLines: MajorGridLines(width: 1, color: Theme.of(context).shadowColor),
+          majorGridLines: MajorGridLines(
+            width: 1,
+            color: Theme.of(context).shadowColor,
+          ),
         ),
         series: <ColumnSeries<ChartData, dynamic>>[
           ColumnSeries<ChartData, dynamic>(
+              // DO NOT DELETE .value, SyncFusion charts would break in combination with GetX.
               // ignore: invalid_use_of_protected_member
               dataSource: dataModel.graphData.value,
               onRendererCreated: (ChartSeriesController controller) {

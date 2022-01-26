@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
 
-// TODO: COMMENTARY
+/// This widget renders a stylized [ElevatedButton] to add graphs. 
+/// The plus icon indicates the adding functionality.
+/// After clicking the button, the [GraphAdderPopup] is rendered.
 class GraphAdder extends StatelessWidget {
+  /// Creates a button that should add graphs.
+
+  /// Creates instance of [GraphAdder]
   const GraphAdder({
     Key? key,
   }) : super(key: key);
