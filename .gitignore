@@ -1,6 +1,6 @@
 ### Flutter ###
 # Flutter/Dart/Pub related
-**/doc/api/
+
 .dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
@@ -81,3 +81,4 @@ sketch
 
 ### VisualStudio Code ###
 .vscode/launch.json
+App/documentation/Screenshots Manuals/
