@@ -22,10 +22,7 @@ class GraphAdderPopup extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
 
     return ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          fixedSize: const Size(800, 150),
-          primary: theme.primarySwatch[40]!.withOpacity(0.5),
-        ),
+        style: theme.graphAdderPopupButtonStyle,
         onPressed: () => systemState.graphList.addGraph.toggle(),
         child: Obx(
           () => Row(

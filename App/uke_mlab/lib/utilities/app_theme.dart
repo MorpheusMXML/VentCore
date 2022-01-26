@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
+import 'package:uke_mlab/utilities/constants/absolute_alarm_field_constants.dart';
 
 /// This class provides the app with a two themes: [darkTheme] and [lightTheme].
 /// By default, the app starts in the [lightTheme] and can be toggled to the [darkTheme] by clicking on the theme [ToggleThemeButton].
@@ -266,5 +267,66 @@ extension CustomButtonStyles on ThemeData {
           fontSize: 100,
           color: Colors.red,
         ),
+      );
+
+  // TODO
+  ButtonStyle get alarmFieldButtonStyle => ElevatedButton.styleFrom(
+        shape: const CircleBorder(),
+        primary: AppTheme.alarmNoneColor,
+        onPrimary: contrastColor,
+      );
+
+  ButtonStyle get navigationButtonStyle => ElevatedButton.styleFrom(
+        fixedSize: const Size(200, 60),
+        primary: const Color(0xFFEEEEEE),
+        onPrimary: inverseContrastColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(75),
+        ),
+      );
+
+  ButtonStyle get graphAdderPopupButtonStyle => ElevatedButton.styleFrom(
+        fixedSize: const Size(800, 150),
+        primary: primarySwatch[40]!.withOpacity(0.5),
+      );
+
+  ButtonStyle get graphAdderButtonStyle => ElevatedButton.styleFrom(
+        primary: Colors.grey[800],
+        fixedSize: const Size(80, 80),
+        shape: const CircleBorder(),
+      );
+
+  ButtonStyle get alarmConfirmButtonStyle => ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(50),
+        ),
+        fixedSize: const Size(20, 20),
+        primary: primarySwatch[20],
+        onPrimary: contrastColor,
+      );
+
+  ButtonStyle get alarmConfirmButtonStyle2 => ElevatedButton.styleFrom(
+        fixedSize: Size(AbsoluteAlarmFieldConst.buttonHeight.toDouble(),
+            AbsoluteAlarmFieldConst.width * (3 / 8)),
+        primary: const Color(0xffeeeeee),
+        onPrimary: inverseContrastColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(75),
+        ),
+      );
+
+  ButtonStyle get smartAdjustmentButtonStyle => ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(50),
+        ),
+        primary: primarySwatch[10],
+        onPrimary: contrastColor,
+      );
+
+  ButtonStyle get actionButtonStyle => ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        primary: const Color(0xFF5AC8FA),
       );
 }

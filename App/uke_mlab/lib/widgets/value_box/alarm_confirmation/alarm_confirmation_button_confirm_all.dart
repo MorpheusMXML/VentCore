@@ -22,15 +22,7 @@ class AlarmConfirmationButtonAll extends StatelessWidget {
 
     return Obx(
       () => ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          fixedSize: Size(AbsoluteAlarmFieldConst.buttonHeight.toDouble(),
-              AbsoluteAlarmFieldConst.width * (3 / 8)),
-          primary: const Color(0xffeeeeee),
-          onPrimary: theme.inverseContrastColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(75),
-          ),
-        ),
+        style: theme.alarmConfirmButtonStyle2,
         onPressed: systemState.absAlarmFieldModel.activeList.isNotEmpty ||
                 systemState.graphList.activeGraphAbsolutes.isNotEmpty
             ? () => {confirmAllVisibleAlarms()}

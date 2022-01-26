@@ -25,15 +25,8 @@ class AlarmConfirmButton extends StatelessWidget {
     return SizedBox(
       height: 25,
       child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(50),
-          ),
-          fixedSize: const Size(20, 20),
-          primary: theme.primarySwatch[20],
-          onPrimary: theme.contrastColor,
-        ),
-        onPressed: () => {alarmController.triggerConfirm(sensorKey)},
+        style: theme.alarmConfirmButtonStyle,
+        onPressed: () => alarmController.triggerConfirm(sensorKey),
         child: const Icon(Icons.check),
       ),
     );

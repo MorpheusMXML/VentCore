@@ -20,14 +20,7 @@ class ExitButton extends StatelessWidget {
       alignment: Alignment.centerRight,
       margin: const EdgeInsets.fromLTRB(0, 0, 50, 50),
       child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          fixedSize: const Size(200, 60),
-          primary: const Color(0xFFEEEEEE),
-          onPrimary: theme.inverseContrastColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(75),
-          ),
-        ),
+        style: theme.navigationButtonStyle,
         child: Text(
           'Exit',
           style: theme.navigationButtonTextStyle,

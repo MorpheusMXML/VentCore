@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 
 /// Button to increment or decrement a respective IPPv-field
 class ActionButton extends StatelessWidget {
@@ -31,18 +32,14 @@ class ActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     final systemState = Get.find<SystemState>();
 
     return Flexible(
       child: ElevatedButton(
         onPressed: () => systemState.ippvModel.updateIPPVValue(name, value),
         child: icon,
-        style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-          primary: const Color(0xFF5AC8FA),
-        ),
+        style: theme.actionButtonStyle,
       ),
     );
   }

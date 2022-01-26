@@ -27,13 +27,7 @@ class SmartAdjustButton extends StatelessWidget {
       child: Obx(() {
         return systemState.smartAdjustmentMap.map[sensorKey]!.isPressable.value
             ? ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  primary: theme.primarySwatch[10],
-                  onPrimary: theme.contrastColor,
-                ),
+                style: theme.smartAdjustmentButtonStyle,
                 onPressed: () =>
                     screenController.smartAdjustmentButton(sensorKey),
                 child: SizedBox(

@@ -20,15 +20,7 @@ class AlarmConfirmationButtonSingleListExpansion extends StatelessWidget {
 
     return Obx(() {
       return ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          fixedSize: Size(AbsoluteAlarmFieldConst.buttonHeight.toDouble(),
-              AbsoluteAlarmFieldConst.width * (3 / 8)),
-          primary: const Color(0xffeeeeee),
-          onPrimary: theme.inverseContrastColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(75),
-          ),
-        ),
+        style: theme.alarmConfirmButtonStyle2,
         onPressed: systemState.absAlarmFieldModel.activeList.isEmpty
             ? null
             : () => systemState.absAlarmFieldModel.listExpanded.value

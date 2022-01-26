@@ -22,14 +22,7 @@ class SkipButton extends StatelessWidget {
       alignment: Alignment.centerRight,
       margin: const EdgeInsets.fromLTRB(0, 0, 10, 12),
       child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          fixedSize: const Size(200, 60),
-          primary: const Color(0xffeeeeee),
-          onPrimary: theme.inverseContrastColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(75),
-          ),
-        ),
+        style: theme.navigationButtonStyle,
         child: Text('Skip',
             style: theme.navigationButtonTextStyle),
         onPressed: () => screenController.skipButton(),

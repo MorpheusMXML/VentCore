@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 
-/// This widget renders a stylized [ElevatedButton] to add graphs. 
+/// This widget renders a stylized [ElevatedButton] to add graphs.
 /// The plus icon indicates the adding functionality.
 /// After clicking the button, the [GraphAdderPopup] is rendered.
 class GraphAdder extends StatelessWidget {
@@ -15,15 +16,12 @@ class GraphAdder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     final SystemState systemState = Get.find<SystemState>();
 
     return ElevatedButton(
       onPressed: () => systemState.graphList.addGraph.toggle(),
-      style: ElevatedButton.styleFrom(
-        primary: Colors.grey[800],
-        fixedSize: const Size(80, 80),
-        shape: const CircleBorder(),
-      ),
+      style: theme.graphAdderButtonStyle,
       child: const Icon(Icons.add, size: 40),
     );
   }
