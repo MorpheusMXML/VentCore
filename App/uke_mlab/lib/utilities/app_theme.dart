@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/utilities/constants/absolute_alarm_field_constants.dart';
 
 /// This class provides the app with a two themes: [darkTheme] and [lightTheme].
@@ -238,7 +237,7 @@ extension CustomTextStyles on ThemeData {
 /// This extension contains custom button styles that are used by certain widgets.
 /// The colors in [primarySwatch] are the most used colors.
 extension CustomButtonStyles on ThemeData {
-  // Buttonstyle used by ValueBoxContainer
+  // ButtonStyle used by ValueBoxContainer
   ButtonStyle get valueBoxContainerButtonStyle => ButtonStyle(
         shape: MaterialStateProperty.all(
           const RoundedRectangleBorder(),
@@ -248,7 +247,7 @@ extension CustomButtonStyles on ThemeData {
         ),
       );
 
-  // Buttonstyles used by DefibrillationButton, ImpedanceButton and SynchronicityButton
+  // ButtonStyles used by DefibrillationButton, ImpedanceButton and SynchronicityButton
   ButtonStyle get defiRegularButtonStyle => ElevatedButton.styleFrom(
         primary: primarySwatch[40],
         onPrimary: contrastColor,
@@ -259,7 +258,7 @@ extension CustomButtonStyles on ThemeData {
         foregroundColor: MaterialStateProperty.all(Colors.green),
       );
 
-  // Buttonstyles used by ShockPower
+  // ButtonStyle used by ShockPower
   ButtonStyle get shockPowerButtonStyle => ElevatedButton.styleFrom(
         primary: Colors.transparent,
         textStyle: const TextStyle(
@@ -269,13 +268,14 @@ extension CustomButtonStyles on ThemeData {
         ),
       );
 
-  // TODO
+  // ButtonStyle used by AlarmFieldTile
   ButtonStyle get alarmFieldButtonStyle => ElevatedButton.styleFrom(
         shape: const CircleBorder(),
         primary: AppTheme.alarmNoneColor,
         onPrimary: contrastColor,
       );
 
+  // ButtonStyle used by ContinueButton, SkipButton and ExitButton
   ButtonStyle get navigationButtonStyle => ElevatedButton.styleFrom(
         fixedSize: const Size(200, 60),
         primary: const Color(0xFFEEEEEE),
@@ -285,6 +285,7 @@ extension CustomButtonStyles on ThemeData {
         ),
       );
 
+  // ButtonStyles used by GraphAdder and GraphAdderPopup
   ButtonStyle get graphAdderPopupButtonStyle => ElevatedButton.styleFrom(
         fixedSize: const Size(800, 150),
         primary: primarySwatch[40]!.withOpacity(0.5),
@@ -296,6 +297,7 @@ extension CustomButtonStyles on ThemeData {
         shape: const CircleBorder(),
       );
 
+// ButtonStyles used by AlarmConfirmButton, AlarmConfirmationButtonAll and AlarmConfirmationButtonSingleListExpansion
   ButtonStyle get alarmConfirmButtonStyle => ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(50),
@@ -315,6 +317,7 @@ extension CustomButtonStyles on ThemeData {
         ),
       );
 
+  // ButtonStyle used by SmartAdjustmentButton
   ButtonStyle get smartAdjustmentButtonStyle => ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(50),
@@ -323,6 +326,7 @@ extension CustomButtonStyles on ThemeData {
         onPrimary: contrastColor,
       );
 
+  // ButtonStyle used by ActionButton
   ButtonStyle get actionButtonStyle => ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),

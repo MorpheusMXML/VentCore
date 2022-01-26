@@ -5,7 +5,6 @@ import 'package:uke_mlab/models/screen_element_models/graph_list.dart';
 import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/providers/alarm_controller.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
-import 'package:uke_mlab/utilities/constants/absolute_alarm_field_constants.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/utilities/enums/alarm_status.dart';
 

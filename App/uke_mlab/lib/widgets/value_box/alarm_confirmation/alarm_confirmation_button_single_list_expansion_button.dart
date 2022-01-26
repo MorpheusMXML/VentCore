@@ -10,8 +10,9 @@ import 'package:uke_mlab/widgets/value_box/alarm_confirmation/alarm_confirmation
 ///
 /// The List in the overlay consitst of [AlarmButtonAbsoluteList]s
 class AlarmConfirmationButtonSingleListExpansion extends StatelessWidget {
-  const AlarmConfirmationButtonSingleListExpansion({Key? key})
-      : super(key: key);
+  const AlarmConfirmationButtonSingleListExpansion({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
