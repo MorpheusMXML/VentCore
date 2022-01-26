@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:uke_mlab/providers/screen_controller.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/models/system_state.dart';
 
@@ -26,14 +27,23 @@ class GraphAdderPopup extends StatelessWidget {
                 ButtonStyle style;
                 systemState.graphList.list.contains(sensor)
                     ? style = ElevatedButton.styleFrom(
-                        fixedSize: const Size(80, 60), side: const BorderSide(width: 2, color: Colors.white), primary: sensor.color, onPrimary: Colors.white)
-                    : style = ElevatedButton.styleFrom(fixedSize: const Size(80, 60), primary: Colors.grey[50], onPrimary: Colors.black);
+                        fixedSize: const Size(80, 60),
+                        side: const BorderSide(width: 2, color: Colors.white),
+                        primary: sensor.color,
+                        onPrimary: Colors.white)
+                    : style = ElevatedButton.styleFrom(
+                        fixedSize: const Size(80, 60),
+                        primary: Colors.grey[50],
+                        onPrimary: Colors.black);
 
                 return ElevatedButton(
                     style: style,
-                    onPressed: () => systemState.graphList.list.contains(sensor)
-                        ? systemState.graphList.graphListRemove(sensor)
-                        : systemState.graphList.graphListAdd(sensor),
+                    onPressed: () {
+                      Get.find<ScreenController>().hideAlarmBoundaryOverlays();
+                      systemState.graphList.list.contains(sensor)
+                          ? systemState.graphList.graphListRemove(sensor)
+                          : systemState.graphList.graphListAdd(sensor);
+                    },
                     child: Text(
                       sensor.graphTitle,
                       style: const TextStyle(fontSize: 18),
