@@ -10,6 +10,8 @@ import 'package:uke_mlab/utilities/app_theme.dart';
 /// ### Variables
 /// + [name] is an instance of a [String] which will be displayed on a button.
 /// + [image] is an instance of a [String] which points to a .svg in the assets of the app.
+/// {@category Widgets}
+/// {@subCategory Start Screen}
 class PatientTypeButton extends StatelessWidget {
   final String name;
   final SvgPicture image;

@@ -4,6 +4,8 @@ import 'package:uke_mlab/screens/main_screen.dart';
 ///
 /// This does not correlate directly to screens since some screens are minor (as setting screens)
 /// While [patientSettingScreen], [monitorScreen] and [ventilationScreen] are realized via manipulating [MainScreen]
+/// {@category Utilities}
+/// {@subCategory Enums}
 enum screenStatusEnum {
   patientSettingScreen,
   monitorScreen,

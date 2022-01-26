@@ -3,6 +3,8 @@ import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/widgets/info/info_text.dart';
 
 /// A widget that shows multiple [InfoText]'s.
+/// {@category Widgets}
+/// {@subCategory Info}
 class InfoContainer extends StatelessWidget {
   final List<Map<String, Object>> data;
 

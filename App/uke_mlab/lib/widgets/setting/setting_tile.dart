@@ -8,6 +8,9 @@ import 'package:uke_mlab/widgets/setting/setting_text.dart';
 /// Uses:
 /// [ActionButton]
 /// [SettingText]
+
+/// {@category Widgets}
+/// {@subCategory Settings}
 class SettingTile extends StatelessWidget {
   /// Name of the parameter
   final String name;

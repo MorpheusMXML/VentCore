@@ -5,10 +5,11 @@ import 'package:uke_mlab/widgets/graph/graph_adder.dart';
 import 'package:uke_mlab/widgets/graph/graph_adder_popup.dart';
 import 'graph_container.dart';
 
-// TODO: Move this file to toggle directory? Since the right screen modes are also there.
-
 /// Displays the graphs specified in [SystemState.graphList], and [GraphAdder] or [GraphAdderPopup].
 /// This widget normally takes up the entire left half of the screen.
+///
+/// {@category Widgets}
+/// {@subCategory Graph Container}
 class GraphView extends StatelessWidget {
   /// Displays a list of graphs and a button to add/remove more graphs.
 
@@ -31,16 +32,13 @@ class GraphView extends StatelessWidget {
                 shrinkWrap: true,
                 itemCount: systemState.graphList.list.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return GraphContainer(
-                      sensor: systemState.graphList.list[index]);
+                  return GraphContainer(sensor: systemState.graphList.list[index]);
                 },
               ),
             ),
           ),
           Obx(
-            () => systemState.graphList.addGraph.value
-                ? GraphAdderPopup()
-                : const GraphAdder(),
+            () => systemState.graphList.addGraph.value ? GraphAdderPopup() : const GraphAdder(),
           ),
         ],
       ),

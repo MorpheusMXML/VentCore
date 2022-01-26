@@ -7,6 +7,8 @@ import 'package:uke_mlab/utilities/app_theme.dart';
 ///
 /// It provides a way to continue to the main screen without selecting patient preset and values.
 /// Instead it just continues to the main screen with default values.
+/// {@category Widgets}
+/// {@subCategory Start Screen}
 class SkipButton extends StatelessWidget {
   const SkipButton({
     Key? key,

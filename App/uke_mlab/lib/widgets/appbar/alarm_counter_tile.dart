@@ -7,6 +7,8 @@ import 'package:uke_mlab/utilities/app_theme.dart';
 /// Depending on the amount of [GeneralAlarms] builds an statusbar element displaying the amount, rendered in respective forms.
 ///
 /// Allows to trigger an overlay containing all alarms.
+/// {@category Widgets}
+/// {@subCategory Appbar}
 class AlarmCounterTile extends StatelessWidget {
   AlarmCounterTile({Key? key}) : super(key: key);
 
@@ -32,16 +34,13 @@ class AlarmCounterTile extends StatelessWidget {
           height: 50,
           child: ElevatedButton(
             style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(
-                  generalAlarms.alarmList[0].toColor()),
-              shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(40))),
+              backgroundColor: MaterialStateProperty.all(generalAlarms.alarmList[0].toColor()),
+              shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(40))),
             ),
             onPressed: generalAlarms.alarmList.length <= 1
                 ? null
-                : () => generalAlarms.listExpanded.value
-                    ? generalAlarms.hideOverlay()
-                    : generalAlarms.showOverlay(context),
+                : () =>
+                    generalAlarms.listExpanded.value ? generalAlarms.hideOverlay() : generalAlarms.showOverlay(context),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

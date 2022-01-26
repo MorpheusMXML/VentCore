@@ -17,6 +17,8 @@ import 'package:uke_mlab/widgets/value_box/value_box_tile.dart';
 /// ### Important Notice
 /// This Widget is implemented to take the space of 2 'usual' Absolute Tiles. So the NIBD Absolute Tile returned from this needs a Full row in the AbsoluteTile Section on the Screen.
 /// This Special size was chosen due to the difference of the NIBD Data to other Absolute Datapoints. NIBD always has at least 2 Datapoints with corresponing Alarm Borders.
+/// {@category Widgets}
+/// {@subCategory Value Box}
 class ValueBoxTileNIBD extends StatelessWidget {
   /// Renders the Absolute Value Tile for NIBD Measurements. Requires the [sensorEnumAbsolute] for Systolic and Diastolic Pressure.
 
@@ -39,8 +41,7 @@ class ValueBoxTileNIBD extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     // sensorAbsolute is not null since IF sensorGraph == null, sensorAbsolute is required // sensorAbsolute is not null since IF sensorGraph == null, sensorAbsolute is required
-    DataModelAbsolute dataModelSYS =
-        Get.find<DataModelAbsolute>(tag: sensorAbsoluteSYS.name);
+    DataModelAbsolute dataModelSYS = Get.find<DataModelAbsolute>(tag: sensorAbsoluteSYS.name);
     SystemState systemState = Get.find<SystemState>();
 
     return Container(
@@ -59,10 +60,7 @@ class ValueBoxTileNIBD extends StatelessWidget {
                   () => Flexible(
                     flex: 1,
                     child: Container(
-                      color: evaluateBorderColor(
-                          context,
-                          sensorEnumAbsolute.sysAbsolute,
-                          systemState.alarmState),
+                      color: evaluateBorderColor(context, sensorEnumAbsolute.sysAbsolute, systemState.alarmState),
                     ),
                   ),
                 ),
@@ -87,10 +85,7 @@ class ValueBoxTileNIBD extends StatelessWidget {
                   flex: 1,
                   child: Obx(
                     () => Container(
-                      color: evaluateBorderColor(
-                          context,
-                          sensorEnumAbsolute.diaAbsolute,
-                          systemState.alarmState),
+                      color: evaluateBorderColor(context, sensorEnumAbsolute.diaAbsolute, systemState.alarmState),
                     ),
                   ),
                 ),
@@ -99,29 +94,27 @@ class ValueBoxTileNIBD extends StatelessWidget {
           ),
           Flexible(
             flex: 3,
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  //Systolic Absolute Box
-                  Expanded(
-                    child: ValueBoxTile.withHeadline(
-                      sensorAbsolute: sensorEnumAbsolute.sysAbsolute,
-                      optAbreviationTitle: sensorAbsoluteSYS.abbreviation,
-                      superNIBD: true,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  //Diastolic Absolute Box
-                  Expanded(
-                    child: ValueBoxTile.withHeadline(
-                      sensorAbsolute: sensorEnumAbsolute.diaAbsolute,
-                      optAbreviationTitle: sensorAbsoluteDIA.abbreviation,
-                      superNIBD: true,
-                    ),
-                  ),
-                ]),
+            child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+              //Systolic Absolute Box
+              Expanded(
+                child: ValueBoxTile.withHeadline(
+                  sensorAbsolute: sensorEnumAbsolute.sysAbsolute,
+                  optAbreviationTitle: sensorAbsoluteSYS.abbreviation,
+                  superNIBD: true,
+                ),
+              ),
+              const SizedBox(
+                width: 8,
+              ),
+              //Diastolic Absolute Box
+              Expanded(
+                child: ValueBoxTile.withHeadline(
+                  sensorAbsolute: sensorEnumAbsolute.diaAbsolute,
+                  optAbreviationTitle: sensorAbsoluteDIA.abbreviation,
+                  superNIBD: true,
+                ),
+              ),
+            ]),
           )
         ],
       ),

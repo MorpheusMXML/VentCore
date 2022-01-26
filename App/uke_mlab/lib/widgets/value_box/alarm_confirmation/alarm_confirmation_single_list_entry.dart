@@ -10,11 +10,12 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 /// Provides an entry for [AlarmConfirmationButtonSingleListExpansion]s list.
 ///
 /// It contains its sensors name, the message of the alarm and a button to confirm the alarm
+/// {@category Widgets}
+/// {@subCategory Value Box, Alarm Confirmation}
 class AlarmConfirmationRowEntry extends StatelessWidget {
   final sensorEnumAbsolute sensorKey;
 
-  const AlarmConfirmationRowEntry({Key? key, required this.sensorKey})
-      : super(key: key);
+  const AlarmConfirmationRowEntry({Key? key, required this.sensorKey}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +30,7 @@ class AlarmConfirmationRowEntry extends StatelessWidget {
             bottom: AbsoluteAlarmFieldConst.verticalMargin),
         color: theme.primarySwatch[40],
         padding: const EdgeInsets.only(
-            top: AbsoluteAlarmFieldConst.verticalMargin / 4,
-            bottom: AbsoluteAlarmFieldConst.verticalMargin / 4),
+            top: AbsoluteAlarmFieldConst.verticalMargin / 4, bottom: AbsoluteAlarmFieldConst.verticalMargin / 4),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -52,10 +52,8 @@ class AlarmConfirmationRowEntry extends StatelessWidget {
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 shape: const CircleBorder(),
-                minimumSize:
-                    Size(60, AbsoluteAlarmFieldConst.ippvHeight / 4 - 20),
-                maximumSize:
-                    Size(60, AbsoluteAlarmFieldConst.ippvHeight / 4 - 20),
+                minimumSize: Size(60, AbsoluteAlarmFieldConst.ippvHeight / 4 - 20),
+                maximumSize: Size(60, AbsoluteAlarmFieldConst.ippvHeight / 4 - 20),
                 primary: Get.find<DataModelAbsolute>(tag: sensorKey.name).color,
                 onPrimary: theme.contrastColor,
               ),

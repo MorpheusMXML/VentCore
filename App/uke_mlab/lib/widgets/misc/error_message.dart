@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 
 /// Widget displaying an error message screen
+
+/// {@category Widgets}
+/// {@subCategory Miscellaneous}
 class ErrorMessage extends StatelessWidget {
   final FlutterErrorDetails details;
   const ErrorMessage({

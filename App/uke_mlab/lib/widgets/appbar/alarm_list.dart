@@ -10,6 +10,8 @@ import 'package:uke_mlab/widgets/appbar/alarm_field_tile.dart';
 /// List of [GeneralAlarms] containing [AlarmFieldTile] corresponding to active [GeneralAlarms].
 ///
 /// Only displayable if there is more than 1 [GeneralAlarms]
+/// {@category Widgets}
+/// {@subCategory Appbar}
 class AlarmList extends StatelessWidget {
   const AlarmList({
     Key? key,
@@ -25,8 +27,7 @@ class AlarmList extends StatelessWidget {
       () => ConstrainedBox(
         constraints: BoxConstraints(
           maxHeight: Get.height - statusBarHeight,
-          maxWidth: StatusBarConstants.alarmListWidth +
-              2 * StatusBarConstants.horizontalMargin,
+          maxWidth: StatusBarConstants.alarmListWidth + 2 * StatusBarConstants.horizontalMargin,
         ),
         child: Container(
           margin: const EdgeInsets.only(
@@ -36,8 +37,7 @@ class AlarmList extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                width: StatusBarConstants.alarmListWidth -
-                    2 * StatusBarConstants.horizontalMargin,
+                width: StatusBarConstants.alarmListWidth - 2 * StatusBarConstants.horizontalMargin,
                 height: StatusBarConstants.verticalMargin,
                 color: theme.primarySwatch[10],
               ),

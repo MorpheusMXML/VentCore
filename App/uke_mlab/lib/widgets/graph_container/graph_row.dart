@@ -16,6 +16,9 @@ import 'package:uke_mlab/widgets/graph/history_graph.dart';
 /// + [CO2Graph]
 /// + [RegularGraph]
 /// + [ValueBoxTile]
+///
+/// {@category Widgets}
+/// {@subCategory Graph Container}
 class GraphRow extends StatelessWidget {
   /// Key to identify the corresponding sensor
   final sensorEnumGraph sensor;

@@ -22,12 +22,15 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 /// 3. alarmsound with the help of [evaluateAlarmSound] and this is followed by triggering the [SoundController].
 ///
 /// ### Class Variables
+/// - [_systemState]  loads an instance this [SystemState] via [GetX]
+///
 /// - [_confirmMap] provides a [Map] to save [triggerConfirm] calls for given [sensorEnumAbsolute].
 /// - [_soundList] provides a [List] and assits to identify the alarm with the highest [alarmStatus].
 /// - [_alarmTypes] provides a [List] and assits to identify the specific [SoundIdentifier] in [evaluateAlarmSound].
 /// - [_previousAlarmSound] saves the previous thrown alarm so this [evaluateAlarmSound] can refer to [_previousAlarmSound].
 /// - [_modelManager] loads an instance of [ModelManager]
 /// - [_systemState]  loads an instance this [SystemState] via [GetX]
+/// {@category Providers}
 class AlarmController {
   /// This provides a [Map] to save [triggerConfirm] calls for given [sensorEnumAbsolute].
   final Map<sensorEnumAbsolute, dynamic> _confirmMap =

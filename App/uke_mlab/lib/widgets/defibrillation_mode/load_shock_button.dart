@@ -27,6 +27,8 @@ import 'package:uke_mlab/providers/sound_controller.dart';
 /// the Functionallity of the [ToggleModeButton] for changing the Mode of the Device.
 /// This is due to a Bug that will cause the app to crash when Animating a Widget while changing the Screen Mode.
 /// Further for Safety Reasons one should not be able to change the Mode of the Device when the User is Loading the Defibrillator and / or ready to apply the Shock.
+/// {@category Widgets}
+/// {@subCategory Defibrillation Mode}
 class LoadShockButton extends StatefulWidget {
   const LoadShockButton({
     Key? key,

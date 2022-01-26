@@ -12,6 +12,8 @@ import 'package:uke_mlab/providers/screen_controller.dart';
 /// + [DefibrillationController]
 /// + [ScreenController]
 /// + [GeneralAlarms]
+///
+/// {@category Utilities}
 class ControllerBindings extends Bindings {
   @override
   void dependencies() {

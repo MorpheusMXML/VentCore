@@ -3,6 +3,8 @@ import 'package:uke_mlab/models/data_models/model_absolute.dart';
 /// Enum containing keys for alarms not directly related to a [DataModelAbsolute] which are mocked using this enum.
 ///
 /// These are mostly alarms comming directly from the medical device, except for [vt] and [vf]
+/// {@category Utilities}
+/// {@subCategory Enums}
 enum nonGraphAlarmEnum {
   spo2bad,
   spo2weak,

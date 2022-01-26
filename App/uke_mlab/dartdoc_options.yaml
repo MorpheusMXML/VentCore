@@ -4,8 +4,8 @@ dartdoc:
                markdown: doc/First.md
                name: Models
           "Data Models":
-#         markdown:
-          name: Data Models
+#              markdown:
+               name: Data Models
           "Screen Element Models":
 #              markdown:
                name: Screen Element Models
@@ -66,8 +66,11 @@ dartdoc:
           "Value Box":
  #             markdown:
                name: Value Box
+          "Alarm Confirmation":
+               #markdown:
+               name: Alarm Confirmation
      showUndocumentedCategories: true
-     categoryOrder: ["Models", "Data Models", "Screen Element Models", "Providers", "Scenarios", "Screens", "Utilities"]
+     categoryOrder: ["Models", "Data Models", "Screen Element Models", "Providers", "Scenarios", "Screens", "Utilities", "Constants", "Enums", "Widgets", "AppBar", "Defibrillation Mode", "Demo Screen", "Start Screen", "Graph", "Graph Container", "Info", "Menu", "Miscellaneous", "Settings", "Toggle", "Value Box"]
      linkTo:
           url: "https://my.dartdocumentationsite.org/dev/%v%"
   

@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
+/// {@category Scenarios}
 abstract class AbstractScenario {
   bool scenarioRunning = false;
   Set<Timer?> scenarioTimer = {};

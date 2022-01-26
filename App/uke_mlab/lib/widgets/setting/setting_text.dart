@@ -4,6 +4,9 @@ import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 
 /// Custom widget for the text of one IPPv setting parameter.
+
+/// {@category Widgets}
+/// {@subCategory Settings}
 class SettingText extends StatelessWidget {
   /// Name of the parameter
   final String name;
@@ -24,8 +27,7 @@ class SettingText extends StatelessWidget {
     return Flexible(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment:
-            CrossAxisAlignment.baseline, //gets text in same line
+        crossAxisAlignment: CrossAxisAlignment.baseline, //gets text in same line
         textBaseline: TextBaseline.ideographic, //gets text in same line
         children: [
           Text(name, style: theme.settingTextStyle),

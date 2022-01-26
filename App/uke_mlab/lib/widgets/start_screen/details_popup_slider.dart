@@ -4,11 +4,13 @@ import 'package:uke_mlab/providers/start_screen_controller.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 
 /// This class contains the Popup Slider and its [Slider] functionality.
-/// 
+///
 /// ### Class Variables
 /// + [name] holds an instance of [String] which will be used as the displayed Name for this widget.
 /// + [unit] holds an instance of [String] which will be used as the displayed unit for this widget.
 /// + [value] holds an instance of [RxDouble] which will be used as the displayed value for this widget.
+/// {@category Widgets}
+/// {@subCategory Start Screen}
 class PopupSlider extends StatelessWidget {
   final String name;
   final String unit;
@@ -25,6 +27,7 @@ class PopupSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final startScreenController = Get.find<StartScreenController>();
+
     ///
     return Container(
       height: 100 / MediaQuery.of(context).devicePixelRatio,
@@ -45,6 +48,7 @@ class PopupSlider extends StatelessWidget {
               ),
             ),
           ),
+
           /// This Flexible contains the Slider functionality, size and gets the value.
           Flexible(
             flex: 8,
@@ -60,6 +64,7 @@ class PopupSlider extends StatelessWidget {
                   }),
             ),
           ),
+
           /// This Container contains the displayed value with the unit added.
           Container(
             margin: const EdgeInsets.fromLTRB(0, 5, 10, 5),

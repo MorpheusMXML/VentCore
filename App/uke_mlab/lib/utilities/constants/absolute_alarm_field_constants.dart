@@ -4,6 +4,8 @@ import 'package:uke_mlab/widgets/value_box/alarm_confirmation/alarm_confirmation
 import 'package:uke_mlab/widgets/value_box/value_box_tile.dart';
 
 /// Contains static constants for the right part of the screen, containing the non graph based alarm fields.
+/// {@category Utilities}
+/// {@subCategory Constants}
 class AbsoluteAlarmFieldConst {
   /// Total width of the screen part (excluding padding)
   static final double width = (Get.width - 24) / 3 -
@@ -36,27 +38,19 @@ class AbsoluteAlarmFieldConst {
   static const double verticalMargin = 8;
 
   /// Height of the IPPv component
-  static final double ippvHeight = ((heigthTotal) /
-          (2 * flexAbsValueTilesHeight +
-              flexSizeIPPV +
-              flexAlarmButtonsHeight) *
-          flexSizeIPPV) -
-      (toggleButtonHeightFactor * buttonHeight);
+  static final double ippvHeight =
+      ((heigthTotal) / (2 * flexAbsValueTilesHeight + flexSizeIPPV + flexAlarmButtonsHeight) * flexSizeIPPV) -
+          (toggleButtonHeightFactor * buttonHeight);
 
   /// Starting point for the overlay to confirm alarms
   static final double overlayPositionTop = ((heigthTotal) /
-          (2 * flexAbsValueTilesHeight +
-              flexSizeIPPV +
-              flexAlarmButtonsHeight) *
+          (2 * flexAbsValueTilesHeight + flexSizeIPPV + flexAlarmButtonsHeight) *
           2 *
           flexAbsValueTilesHeight) +
       1;
 
   /// Height of a single alarm tile
-  static final double alarmTileHeight = heigthTotal -
-      (toggleButtonHeightFactor * buttonHeight) -
-      ippvHeight -
-      3 * 8;
+  static final double alarmTileHeight = heigthTotal - (toggleButtonHeightFactor * buttonHeight) - ippvHeight - 3 * 8;
 
   /// Width of a single alarm tile
   static final double alarmTileWidth = width / 2;

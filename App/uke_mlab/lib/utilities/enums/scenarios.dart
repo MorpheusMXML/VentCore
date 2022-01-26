@@ -4,6 +4,8 @@ import 'package:uke_mlab/utilities/enums/screen_status.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 /// Contains a key for each scenario available
+/// {@category Utilities}
+/// {@subCategory Enums}
 enum scenariosEnum {
   standardScenario,
   scenario1,
@@ -34,8 +36,7 @@ extension ScenarioEnumPath on scenariosEnum {
 ///
 /// Used as default graphs displayed in each screen
 extension ScenarioEnumDisplayedGraphs on scenariosEnum {
-  static const Map<scenariosEnum, Map<screenStatusEnum, List<sensorEnumGraph>>>
-      graphs = {
+  static const Map<scenariosEnum, Map<screenStatusEnum, List<sensorEnumGraph>>> graphs = {
     scenariosEnum.standardScenario: {
       screenStatusEnum.monitorScreen: <sensorEnumGraph>[
         sensorEnumGraph.ecgCh2, // medical standard ecg channel is channel 2
@@ -138,15 +139,12 @@ extension ScenarioEnumDisplayedGraphs on scenariosEnum {
   };
 
   /// Returns the map which graphs should be active at default in given [scenariosEnum].
-  Map<screenStatusEnum, List<sensorEnumGraph>> get scenarioGraphs =>
-      graphs[this]!;
+  Map<screenStatusEnum, List<sensorEnumGraph>> get scenarioGraphs => graphs[this]!;
 }
 
 /// This [extension] for [scenariosEnum] defines when a [nonGraphAlarmEnum] is supposed to be thrown.
 extension ScenarioEnumAttributes on scenariosEnum {
-  static Map<scenariosEnum,
-          Map<sensorEnumGraph, Map<int, Map<String, dynamic>>>>
-      nonMeasurableAlarms = {
+  static Map<scenariosEnum, Map<sensorEnumGraph, Map<int, Map<String, dynamic>>>> nonMeasurableAlarms = {
     scenariosEnum.standardScenario: {
       sensorEnumGraph.pleth: {
         600: {
@@ -256,6 +254,5 @@ extension ScenarioEnumAttributes on scenariosEnum {
       }
     },
   };
-  Map<sensorEnumGraph, Map<int, Map<String, dynamic>>> get scenarioMap =>
-      nonMeasurableAlarms[this]!;
+  Map<sensorEnumGraph, Map<int, Map<String, dynamic>>> get scenarioMap => nonMeasurableAlarms[this]!;
 }

@@ -11,6 +11,7 @@ import 'package:uke_mlab/widgets/start_screen/skip_button.dart';
 /// The class start_screen contains the initial screen of the app.
 ///
 /// It contains the widgets [PatientTypeButton], [ContinueButton], [SkipButton], [AEDButton], [DetailsPopup].
+/// {@category Screens}
 class StartScreen extends StatelessWidget {
   const StartScreen({
     Key? key,

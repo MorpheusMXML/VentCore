@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 
 /// A widget that formats ventilation information.
+/// {@category Widgets}
+/// {@subCategory Info}
 class InfoText extends StatelessWidget {
   final String type;
   final String value;

@@ -6,6 +6,9 @@ import 'package:uke_mlab/utilities/app_theme.dart';
 /// Entry for the burger menu.
 ///
 /// Has the start screen button, demo screen button, alarm limit screen button
+
+/// {@category Widgets}
+/// {@subCategory Menu}
 class AppMenuEntry extends StatelessWidget {
   final String name;
   const AppMenuEntry({

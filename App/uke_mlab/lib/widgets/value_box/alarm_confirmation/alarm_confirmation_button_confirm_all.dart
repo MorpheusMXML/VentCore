@@ -11,6 +11,8 @@ import 'package:uke_mlab/utilities/enums/alarm_status.dart';
 /// Returns a button which confirms all active alrms on the current page if any are available
 ///
 /// Active alarms are defined via [AbsAlarmFieldModel.activeList] and [GraphList.activeGraphAbsolutes]
+/// {@category Widgets}
+/// {@subCategory Value Box, Alarm Confirmation}
 class AlarmConfirmationButtonAll extends StatelessWidget {
   const AlarmConfirmationButtonAll({Key? key}) : super(key: key);
 
@@ -51,8 +53,7 @@ class AlarmConfirmationButtonAll extends StatelessWidget {
       sensorEnumAbsolute? sensorKey = SensorMapping.sensorMap[graphSensorKey];
       if (sensorKey != null &&
           (systemState.alarmState[sensorKey]!["enum"] != alarmStatus.none ||
-              systemState.alarmState[sensorKey]!["enum"] !=
-                  alarmStatus.confirmed)) {
+              systemState.alarmState[sensorKey]!["enum"] != alarmStatus.confirmed)) {
         alarmController.triggerConfirm(sensorKey);
       }
     }

@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 ///
 /// It Further implements helper Methods that are calles to change the Settings of the Defibrillator like, Synchronicity, ShockPower and Impedance.
 /// Note that most of the Class Variables use [GetX] and the corresponding Data Classes [RxString], [RxBool], [RxInt] to make the changes of these Variables observable for the Widgets that display these Values,
-///
+/// {@category Providers}
 class DefibrillationController extends GetxController {
   Stopwatch timerWatch = Stopwatch();
   Stopwatch lastWatch = Stopwatch();

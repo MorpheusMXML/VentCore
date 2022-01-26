@@ -7,6 +7,8 @@ import 'package:uke_mlab/utilities/constants/absolute_alarm_field_constants.dart
 /// The class contains constant values (such as [heartFreqColor]) that are not changed when toggling the theme.
 /// Text Styles, Button Styles and some Colors are changed depending on the active theme.
 /// The theme class is extended by extensions that specify those styles.
+///
+/// {@category Utilities}
 class AppTheme {
   static const Color heartFreqColor = Color(0xFF34C759);
   static const Color flowColor = Color(0xFF0CECDD);

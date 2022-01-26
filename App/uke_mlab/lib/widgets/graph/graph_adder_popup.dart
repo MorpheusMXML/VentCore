@@ -8,6 +8,9 @@ import 'package:uke_mlab/models/system_state.dart';
 /// This widget renders one [ElevatedButton] for each [sensorEnumGraph] on top of an [ElevatedButton].
 /// Clicking the buttons for the [sensorEnumGraph] adds (or removes) it from the current list of graphs to be displayed.
 /// Clicking the button underneath removes the sensor buttons so that only the [GraphAdder] is displayed.
+
+/// {@category Widgets}
+/// {@subCategory Graph}
 class GraphAdderPopup extends StatelessWidget {
   /// Creates a popup to pick which graphs to display or remove.
   final SystemState systemState = Get.find<SystemState>();

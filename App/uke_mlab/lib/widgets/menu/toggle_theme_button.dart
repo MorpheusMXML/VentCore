@@ -3,6 +3,9 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
 
 /// Button allowing user to toggle the currently used theme (standard setting is dark)
+
+/// {@category Widgets}
+/// {@subCategory Menu}
 class ToggleThemeButton extends StatelessWidget {
   const ToggleThemeButton({
     Key? key,

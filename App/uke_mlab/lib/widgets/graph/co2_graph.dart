@@ -6,8 +6,6 @@ import 'package:uke_mlab/models/data_models/model_graphdata.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
-
-
 /// Creates an [SfCartesianChart] with two [NumericAxis] and an [AreaSeries].
 ///
 /// The [sensor] parameter specifies the sensor this graph gets its data from. Typically, [sensorEnumGraph.co2] should be provided.

@@ -4,6 +4,8 @@ import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/widgets/menu/toggle_theme_button.dart';
 
 /// Contains information about the current active [AppTheme].
+/// {@category Models}
+/// {@subCategory Screen Element Models}
 class ThemeModel {
   /// the icon representing the current [AppTheme] on the [ToggleThemeButton]
   Rx<Icon> toggleIcon = const Icon(Icons.dark_mode).obs;

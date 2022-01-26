@@ -9,6 +9,9 @@ import 'package:uke_mlab/widgets/setting/setting_tile.dart';
 /// Uses:
 /// + [IPPVButton]
 /// + [SettingTile]
+
+/// {@category Widgets}
+/// {@subCategory Settings}
 class SettingContainer extends StatelessWidget {
   /// Descriptions for the ippv settings
   final List<Map<String, Object>> data;

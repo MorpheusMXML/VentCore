@@ -8,6 +8,8 @@ import 'package:uke_mlab/widgets/graph_container/graph_row.dart';
 /// Provides a frame for everything relating to a graph.
 ///
 /// Includes standard sizes i.e. [ConstrainedBox] as a Container
+/// {@category Widgets}
+/// {@subCategory Graph Container}
 class GraphContainer extends StatelessWidget {
   /// Uses a Stack to divide [GraphAlarmBorder] and the [GraphRow]
   final sensorEnumGraph sensor;

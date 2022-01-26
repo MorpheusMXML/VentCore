@@ -12,6 +12,8 @@ import 'package:uke_mlab/widgets/appbar/statusbar.dart';
 ///
 /// This class implements the general alarms that are displayed within the [StatusBar].
 /// Note that these Alarms are independent of the Patient Data and Shown Graphs and Absolute Values. These Alarms are General Notifications like O2 Bottle Empty etc.
+/// {@category Models}
+/// {@subCategory Screen Element Models}
 class GeneralAlarms extends GetxController {
   final RxList<AlarmListEntry> alarmList = <AlarmListEntry>[].obs;
   OverlayEntry? entry;
@@ -36,8 +38,7 @@ class GeneralAlarms extends GetxController {
 
     alarmList.sort((a, b) => b.priority.compareTo(a.priority));
     if (alarm == nonGraphAlarmEnum.vt || alarm == nonGraphAlarmEnum.vf) {
-      Get.find<DefibrillationController>().systemDiagnosis.value =
-          alarm.message;
+      Get.find<DefibrillationController>().systemDiagnosis.value = alarm.message;
     }
   }
 
@@ -52,8 +53,7 @@ class GeneralAlarms extends GetxController {
         hideOverlay();
       }
     }
-    if (!checkForAlarm(nonGraphAlarmEnum.vt) &&
-        !checkForAlarm(nonGraphAlarmEnum.vt)) {
+    if (!checkForAlarm(nonGraphAlarmEnum.vt) && !checkForAlarm(nonGraphAlarmEnum.vt)) {
       Get.find<DefibrillationController>().systemDiagnosis.value = "";
     }
   }

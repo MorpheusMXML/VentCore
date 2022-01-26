@@ -24,6 +24,7 @@ import 'package:uke_mlab/widgets/toggle/toggle_mode_button_container.dart';
 /// Handles the settings of the alarmboundaries with [setUpperBoundary] and [setLowerBoundary] within the [DataModelAbsolute]
 /// Further handles the Changing of the Scenarios, starts the DataStreams and triggeres the necessary Runs for General Alarms, Data reading into the Graphs etc.
 /// Also handles the Continue, Skip and other Button Behaviours of the [StartScreen]
+/// {@category Providers}
 class ScreenController {
   AbstractScenario? runningScenario;
   SystemState systemState = Get.find<SystemState>();
@@ -57,8 +58,8 @@ class ScreenController {
     switch (scenario) {
       case scenariosEnum.standardScenario:
         runningScenario = StandardScenario();
-        systemState.graphList.setStandardGraphs(ScenarioEnumDisplayedGraphs
-            .graphs[scenario] as Map<screenStatusEnum, List<sensorEnumGraph>>);
+        systemState.graphList.setStandardGraphs(
+            ScenarioEnumDisplayedGraphs.graphs[scenario] as Map<screenStatusEnum, List<sensorEnumGraph>>);
         runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
         break;
       case scenariosEnum.scenario1:
@@ -68,8 +69,8 @@ class ScreenController {
       case scenariosEnum.scenario3c:
       case scenariosEnum.scenario4:
         runningScenario = PatientScenario(scenarioType: scenario);
-        systemState.graphList.setStandardGraphs(ScenarioEnumDisplayedGraphs
-            .graphs[scenario] as Map<screenStatusEnum, List<sensorEnumGraph>>);
+        systemState.graphList.setStandardGraphs(
+            ScenarioEnumDisplayedGraphs.graphs[scenario] as Map<screenStatusEnum, List<sensorEnumGraph>>);
         runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
         break;
       default:
@@ -233,8 +234,7 @@ class ScreenController {
   /// Behavior for smartAdjustementButton
   void smartAdjustmentButton(sensorEnumAbsolute sensorKey) {
     SmartAdjustmentMap boundaryAdjustmentMap = systemState.smartAdjustmentMap;
-    DataModelAbsolute dataModel =
-        Get.find<DataModelAbsolute>(tag: sensorKey.name);
+    DataModelAbsolute dataModel = Get.find<DataModelAbsolute>(tag: sensorKey.name);
 
     if (boundaryAdjustmentMap.map[sensorKey]!.lowerCounter.value >= 3) {
       boundaryAdjustmentMap.map[sensorKey]!.lowerCounter.value = 0;

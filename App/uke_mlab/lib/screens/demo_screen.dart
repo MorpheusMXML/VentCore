@@ -5,6 +5,7 @@ import 'package:uke_mlab/widgets/demo_screen/scenario_button.dart';
 import 'package:uke_mlab/widgets/demo_screen/exit_button.dart';
 
 /// lists all available scenarios and enables the user to start them on click
+/// {@category Screens}
 class DemoScreen extends StatelessWidget {
   const DemoScreen({
     Key? key,
@@ -25,18 +26,12 @@ class DemoScreen extends StatelessWidget {
                     name: 'Standard Scenario',
                     scenario: scenariosEnum.standardScenario,
                   ),
-                  ScenarioButton(
-                      name: 'Scenario 1', scenario: scenariosEnum.scenario1),
-                  ScenarioButton(
-                      name: 'Scenario 2', scenario: scenariosEnum.scenario2),
-                  ScenarioButton(
-                      name: 'Scenario 3a', scenario: scenariosEnum.scenario3a),
-                  ScenarioButton(
-                      name: 'Scenario 3b', scenario: scenariosEnum.scenario3b),
-                  ScenarioButton(
-                      name: 'Scenario 3c', scenario: scenariosEnum.scenario3c),
-                  ScenarioButton(
-                      name: 'Scenario 4', scenario: scenariosEnum.scenario4),
+                  ScenarioButton(name: 'Scenario 1', scenario: scenariosEnum.scenario1),
+                  ScenarioButton(name: 'Scenario 2', scenario: scenariosEnum.scenario2),
+                  ScenarioButton(name: 'Scenario 3a', scenario: scenariosEnum.scenario3a),
+                  ScenarioButton(name: 'Scenario 3b', scenario: scenariosEnum.scenario3b),
+                  ScenarioButton(name: 'Scenario 3c', scenario: scenariosEnum.scenario3c),
+                  ScenarioButton(name: 'Scenario 4', scenario: scenariosEnum.scenario4),
                 ],
               ),
             ],

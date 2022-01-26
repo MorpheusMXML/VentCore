@@ -16,6 +16,8 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 /// Uses a [ScatterSeries] to Plot the MAD Value of the BloodPressure Measurement
 /// Uses [HiloSeries] to Plot the Systolic and Diastolic Pressure as Hi and Low of the Series.
 ///
+/// {@category Widgets}
+/// {@subCategory Graph}
 class HistoryGraph extends StatelessWidget {
   /// Creates a history graph, typically used to display NIBD values.
   final sensorEnumGraph sensor;

@@ -4,6 +4,9 @@ import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/utilities/constants/absolute_alarm_field_constants.dart';
 
 /// Contains a button allowing the user to select IPPv mode
+
+/// {@category Widgets}
+/// {@subCategory Settings}
 class IPPVButton extends StatelessWidget {
   const IPPVButton({Key? key}) : super(key: key);
 

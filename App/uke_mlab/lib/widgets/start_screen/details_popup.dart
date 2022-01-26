@@ -5,6 +5,8 @@ import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/widgets/start_screen/details_popup_slider.dart';
 
 /// This class contains the Details Popup and its functionality.
+/// {@category Widgets}
+/// {@subCategory Start Screen}
 class DetailsPopup extends StatelessWidget {
   const DetailsPopup({
     Key? key,
@@ -14,7 +16,7 @@ class DetailsPopup extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final startScreenController = Get.find<StartScreenController>();
-    
+
     /// The Obx contains the functionality of the Widget.
     return Obx(
       () => startScreenController.isPopupVisible.value

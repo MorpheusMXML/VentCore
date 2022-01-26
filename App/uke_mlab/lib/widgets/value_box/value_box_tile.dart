@@ -16,6 +16,8 @@ import 'package:uke_mlab/widgets/value_box/value_box_container.dart';
 /// [DataModelAbsolute] is found here and attributes provided for children
 /// Categorize ValueBox in "regular" and "withHeadline"
 /// "withHeadline" uses [Flexible] to position a readable Headline onto the actual [ValueBoxTile]
+/// {@category Widgets}
+/// {@subCategory Value Box}
 class ValueBoxTile extends StatelessWidget {
   final sensorEnumAbsolute? sensorAbsolute;
   final sensorEnumGraph? sensorGraph;
@@ -63,9 +65,7 @@ class ValueBoxTile extends StatelessWidget {
           tag: sensorAbsolute
               ?.name); // sensorAbsolute is not null since IF sensorGraph == null, sensorAbsolute is required
       return Container(
-        margin: (superNIBD || type == 'regular')
-            ? null
-            : const EdgeInsets.only(left: 4, right: 4, bottom: 8),
+        margin: (superNIBD || type == 'regular') ? null : const EdgeInsets.only(left: 4, right: 4, bottom: 8),
         child: Stack(
           alignment: AlignmentDirectional.topCenter,
           children: [
@@ -88,11 +88,7 @@ class ValueBoxTile extends StatelessWidget {
                               flex: 1,
                               child: ConstrainedBox(
                                 constraints: BoxConstraints(
-                                  maxWidth: (Get.width - 12 - 12) /
-                                          (2 + 1) *
-                                          1 /
-                                          2 *
-                                          1 -
+                                  maxWidth: (Get.width - 12 - 12) / (2 + 1) * 1 / 2 * 1 -
                                       8 -
                                       37 -
                                       37, // step in between solution with constansts, numbers from flexibles and paddings/margins
@@ -136,8 +132,7 @@ class ValueBoxTile extends StatelessWidget {
         optAbreviationTitle: optAbreviationTitle,
       );
     } else {
-      throw Exception(
-          "ValueBoxTile was given both a sensorAbsolute and sensorGraph");
+      throw Exception("ValueBoxTile was given both a sensorAbsolute and sensorGraph");
     }
   }
 
@@ -153,8 +148,7 @@ class ValueBoxTile extends StatelessWidget {
       case alarmStatus.warning:
         return alarmState[sensorAbsolute]!["color"];
       case alarmStatus.confirmed:
-        return (alarmState[sensorAbsolute]!["color"] as Color)
-            .withOpacity(0.65);
+        return (alarmState[sensorAbsolute]!["color"] as Color).withOpacity(0.65);
       default:
         return theme.primarySwatch[50];
     }
