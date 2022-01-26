@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 import 'package:uke_mlab/providers/screen_controller.dart';
 
-// TODO: COMMENTARY
+/// This class contains the AED Button and provides its functionality.
 class AEDButton extends StatelessWidget {
   const AEDButton({
     Key? key,
@@ -13,7 +13,7 @@ class AEDButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ScreenController screenController = Get.find<ScreenController>();
-
+    ///The Container contains the configuration of the Button and its behaviour.
     return Container(
       alignment: Alignment.centerRight,
       margin: const EdgeInsets.fromLTRB(0, 0, 65, 12),
@@ -25,6 +25,7 @@ class AEDButton extends StatelessWidget {
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           ),
           onPressed: () => screenController.aedButton(),
+          ///The Column contains the layout of the AED Button.
           child: Column(
             children: [
               SvgPicture.asset(

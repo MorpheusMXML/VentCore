@@ -4,9 +4,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/start_screen_controller.dart';
 
-/// Widget for StartScreen Buttons
-/// [name] Buttontext
-/// optional [image] SVG asset path
+/// This class contains the configurations for the StartScreen Buttons for the patient presets.
+///
+/// ### Variables
+/// + [name] is an instance of a [String] which will be displayed on a button.
+/// + [image] is an instance of a [String] which points to a .svg in the assets of the app.
 class PatientTypeButton extends StatelessWidget {
   final String name;
   final SvgPicture image;
@@ -26,10 +28,14 @@ class PatientTypeButton extends StatelessWidget {
       child: Obx(
         () => ElevatedButton(
           style: ElevatedButton.styleFrom(
-            minimumSize: Size(800 / MediaQuery.of(context).devicePixelRatio, 200 / MediaQuery.of(context).devicePixelRatio),
-            primary: startScreenController.selectedString.value == name ? const Color(0xFF808B96) : const Color(0xFFEEEEEE),
+            minimumSize: Size(800 / MediaQuery.of(context).devicePixelRatio,
+                200 / MediaQuery.of(context).devicePixelRatio),
+            primary: startScreenController.selectedString.value == name
+                ? const Color(0xFF808B96)
+                : const Color(0xFFEEEEEE),
             onPrimary: Colors.black,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),
           ),
 
           ///get weight and height for chosen preset
@@ -37,9 +43,10 @@ class PatientTypeButton extends StatelessWidget {
             startScreenController.settingsButton(name);
           },
 
-          ///button content
+          ///The Row contains the elements of the Button in Flexibles to help with positioning.
           child: Row(
             children: [
+              ///The first Flexible contains the image.
               Flexible(
                 flex: 2,
                 //center svg within flexible
@@ -50,6 +57,8 @@ class PatientTypeButton extends StatelessWidget {
                   ],
                 ),
               ),
+
+              ///The second Flexible contains the name of the button.
               Flexible(
                 flex: 3,
                 //center text within flexible
@@ -58,12 +67,14 @@ class PatientTypeButton extends StatelessWidget {
                   children: [
                     Text(
                       name,
-                      style: const TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          fontSize: 35, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
               ),
-              //empty container in flexible to center text within in button (not best practice)
+
+              ///The last Flexible contains an empty container to help center the name.
               Flexible(flex: 2, child: Container())
             ],
           ),

@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/start_screen_controller.dart';
 
-// TODO: COMMENTARY
+/// This class contains the Popup Slider and its [Slider] functionality.
+/// 
+/// ### Class Variables
+/// + [name] holds an instance of [String] which will be used as the displayed Name for this widget.
+/// + [unit] holds an instance of [String] which will be used as the displayed unit for this widget.
+/// + [value] holds an instance of [RxDouble] which will be used as the displayed value for this widget.
 class PopupSlider extends StatelessWidget {
   final String name;
   final String unit;
@@ -18,13 +23,15 @@ class PopupSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final startScreenController = Get.find<StartScreenController>();
-
+    ///
     return Container(
       height: 100 / MediaQuery.of(context).devicePixelRatio,
       margin: const EdgeInsets.fromLTRB(12, 12, 12, 12),
       color: const Color(0xff322f37),
+      /// The Flexibles contain the layout of the objects in the Container
       child: Row(
         children: [
+          /// This Flexible contains the name of the Slider.
           Flexible(
             flex: 2,
             fit: FlexFit.tight,
@@ -40,6 +47,7 @@ class PopupSlider extends StatelessWidget {
               ),
             ),
           ),
+          /// This Flexible contains the Slider functionality, size and gets the value.
           Flexible(
             flex: 8,
             child: Obx(
@@ -54,6 +62,7 @@ class PopupSlider extends StatelessWidget {
                   }),
             ),
           ),
+          /// This Container contains the displayed value with the unit added.
           Container(
             margin: const EdgeInsets.fromLTRB(0, 5, 10, 5),
             decoration: BoxDecoration(color: Theme.of(context).dividerColor, borderRadius: const BorderRadius.all(Radius.circular(3))),

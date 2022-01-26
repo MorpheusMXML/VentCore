@@ -3,7 +3,8 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/providers/start_screen_controller.dart';
 import 'package:uke_mlab/providers/screen_controller.dart';
 
-// TODO: COMMENTARY
+/// This class contains the Continue Button and its functionality.
+/// It provides a way to continue to the main screen with the previously selected patient preset and values.
 class ContinueButton extends StatelessWidget {
   const ContinueButton({
     Key? key,
@@ -14,6 +15,7 @@ class ContinueButton extends StatelessWidget {
     final startScreenController = Get.find<StartScreenController>();
     final screenController = Get.find<ScreenController>();
 
+    /// The returned Obx contains the behaviour and configuration of the Button
     return Obx(
       () => Container(
         alignment: Alignment.centerRight,
@@ -28,6 +30,7 @@ class ContinueButton extends StatelessWidget {
           ),
           onPressed:
               startScreenController.selectedString.value != '' ? () => screenController.continueButton(startScreenController.selectedString.value) : null,
+          /// The Child of the container holds the Text on the Button 
           child: const Text('Continue', style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
         ),
       ),
