@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/providers/screen_controller.dart';
 
-// TODO: COMMENTARY
+/// Entry for the burger menu.
+///
+/// Has the start screen button, demo screen button, alarm limit screen button
 class AppMenuEntry extends StatelessWidget {
   final String name;
   const AppMenuEntry({
