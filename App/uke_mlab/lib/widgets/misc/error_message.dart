@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// TODO: COMMENTARY
+/// Widget displaying an error message screen
 class ErrorMessage extends StatelessWidget {
   final FlutterErrorDetails details;
   const ErrorMessage({

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
 
-// TODO: COMMENTARY
+/// Button allowing user to toggle the currently used theme (standard setting is dark)
 class ToggleThemeButton extends StatelessWidget {
   const ToggleThemeButton({
     Key? key,
