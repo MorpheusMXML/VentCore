@@ -63,28 +63,11 @@ dartdoc:
           "AlarmConfirmation":
                markdown: doc/AlarmConfirmation.md
                name: AlarmConfirmation
-          "Value Box":
-               markdown:
-               name: Value Box
-#          "Widgets":
-# #             markdown:
-#               name: Widgets
-
-
-
-
-
-
-
-
-
-
-
-
-
+          "ValueBox":
+               markdown: doc/ValueBox.md
+               name: ValueBox
      showUndocumentedCategories: true
-     #categoryOrder: ["Models", "Data Models", "Screen Element Models", "Providers", "Scenarios", "Screens", "Utilities", "Constants", "Enums", "Widgets", "AppBar", "Defibrillation Mode", "Demo Screen", "Start Screen", "Graph", "Graph Container", "Info", "Menu", "Miscellaneous", "Settings", "Toggle", "Value Box"]
-     categoryOrder: ["Models", "DataModels"]
+     categoryOrder: ["DataModels", "ScreenElementModels", "SystemState", "Providers", "Scenarios", "Screens", "Constants", "Enums", "Utilities", "AppBar", "DefibrillationMode", "DemoScreen", "Graph", "GraphContainer", "Info", "Menu", "Miscellaneous", "IppvSettings", "StartScreen", "Toggle", "AlarmConfirmation", "ValueBox"]
      linkTo:
           url: "https://my.dartdocumentationsite.org/dev/%v%"
   
