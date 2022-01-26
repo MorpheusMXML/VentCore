@@ -8,15 +8,15 @@ import 'package:uke_mlab/utilities/enums/alarm_status.dart';
 import 'package:uke_mlab/utilities/enums/non_graph_alarm.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
-/// This Class provides the SoundPlaying and Triggering Functionallity.
-/// Alarms can be Triggered, stopped and the SpO2 / ECG Sound for the Heartfrequency can be started.
+/// This Class provides the sound Playing and Triggering Functionallity.
+/// Alarms can be triggered, stopped and the SpO2 / ECG Sound for the Heartfrequency can be started.
 ///
 /// ### Class Variables
-/// - [alarmPlayerCache] loads a Instance of Type [AudioCache] and sets the sounds Folder prefix.
+/// + [alarmPlayerCache] loads a Instance of Type [AudioCache] and sets the sounds Folder prefix.
 /// + [ecgPlayerCache] loads a Instance of Type [AudioCache] and sets the sounds Folder prefix.
-/// + [timer] holds a Inscante of Type [Timer] to control the ECG Sunds Timing
-/// + [_alarmSoundFiles] & [_ecgSoundFiles] provide a Map where the Sounds for the corresponding Alarm or ECG Sound can be specified.
-/// + [alarmPlayer] & [ecgPlayer] hold a late [AudioPlayer] Instance to controll the Audio after Triggering it.
+/// + [timer] holds a Inscante of Type [Timer] to control the ECG Sounds Timing
+/// + [_alarmSoundFiles] & [_ecgSoundFiles] provide a Map where the Sounds Files for the corresponding Alarm or ECG Sound can be specified.
+/// + [alarmPlayer], [defiPlayer] & [ecgPlayer] hold a [AudioPlayer] Instance to controll the Audio after Triggering it.
 ///
 /// ### Methods
 /// + [play(Enum SoundIdentifier)] starts the alarm SoundIdentifier.
