@@ -1,5 +1,3 @@
-# Value Box Topic
-
 Holds all the lowlevel widget that make up our value box.
 
-![ValueBox](./TopicScreenshots/valuebox.PNG)
+![ValueBox](https://morpheusmxml.github.io/VentCoreDoc/doc/TopicScreenshots/valuebox.PNG)
