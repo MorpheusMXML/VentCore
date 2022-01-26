@@ -4,8 +4,10 @@ import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/models/system_state.dart';
 
-// TODO: COMMENTARY
 class GraphAlarmMessage extends StatelessWidget {
+  /// Widget displaying the alarm message for the alarm corresponding to [sensorKey].
+
+  /// Key to identify the corresponding sensor
   final sensorEnumAbsolute sensorKey;
 
   const GraphAlarmMessage({
