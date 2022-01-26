@@ -11,9 +11,8 @@ import 'package:uke_mlab/widgets/value_box/value_box_tile_nibd.dart';
 
 import 'package:uke_mlab/widgets/value_box/alarm_confirmation/alarm_confirmation_button_single_list.dart';
 
+/// Provides an overview which [ValueBoxTile] and [ValueBoxTileNIBD]s are currently represented on screen and which of them has a current active [alarmStatus].
 class AbsAlarmFieldModel extends GetxController {
-  /// Provides an overview which [ValueBoxTile] and [ValueBoxTileNIBD]s are currently represented on screen and which of them has a current active [alarmStatus].
-
   /// The [OverlayEntry] for [AlarmButtonAbsoluteList].
   OverlayEntry? entry;
 

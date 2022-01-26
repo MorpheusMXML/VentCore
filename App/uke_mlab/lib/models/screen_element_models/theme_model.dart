@@ -3,9 +3,8 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/widgets/menu/toggle_theme_button.dart';
 
+/// Contains information about the current active [AppTheme].
 class ThemeModel {
-  /// Contains information about the current active [AppTheme].
-
   /// Flag whether dark mode is currently active, starts at true.
   RxBool isDarkMode = true.obs;
 

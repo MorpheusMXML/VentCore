@@ -5,14 +5,14 @@ import 'package:uke_mlab/widgets/value_box/value_box_tile.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/widgets/value_box/value_box_tile_nibd.dart';
 
+/// Renders the [Widget] that structures the right part of the monitoring screen.
+///
+/// It Calls the Custom Widgets:
+/// + [ValueBoxTile] for [sensorEnumAbsolute.pulse] and [sensorEnumAbsolute.tempAbsolute]
+/// + [ValueBoxTileNIBD]
+/// + [AlarmConfirmationRow]
+/// + [ToggleModeButton]
 class MonitoringMode extends StatelessWidget {
-  /// This Class Renders the [Widget] that structures the right part of the monitoring screen.
-  ///
-  /// It Calls the Custom Widgets:
-  /// + [ValueBoxTile] for [sensorEnumAbsolute.pulse] and [sensorEnumAbsolute.tempAbsolute]
-  /// + [ValueBoxTileNIBD]
-  /// + [AlarmConfirmationRow]
-  /// + [ToggleModeButton]
   const MonitoringMode({
     Key? key,
     absoluteValueBoxTiles,

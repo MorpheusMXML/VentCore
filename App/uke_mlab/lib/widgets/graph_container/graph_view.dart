@@ -6,9 +6,8 @@ import 'package:uke_mlab/widgets/graph/graph_adder.dart';
 import 'package:uke_mlab/widgets/graph/graph_adder_popup.dart';
 import 'graph_container.dart';
 
+/// Displays a [Graph] and the sorrounding elements
 class GraphView extends StatelessWidget {
-  /// Displays a [Graph] and the sorrounding elements
-
   const GraphView({
     Key? key,
   }) : super(key: key);

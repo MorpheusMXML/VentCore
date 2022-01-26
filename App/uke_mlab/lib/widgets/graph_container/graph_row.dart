@@ -6,9 +6,8 @@ import 'package:uke_mlab/widgets/graph/graph.dart';
 import 'package:uke_mlab/widgets/value_box/value_box_tile.dart';
 import 'package:uke_mlab/widgets/graph/history_graph.dart';
 
+/// renders the actual [Graph] for instance [HistoryGraph] and the [ValueBoxTile]
 class GraphRow extends StatelessWidget {
-  /// renders the actual [Graph] for instance [HistoryGraph] and the [ValueBoxTile]
-
   /// Key to identify the corresponding sensor
   final sensorEnumGraph sensor;
   const GraphRow({

@@ -8,7 +8,7 @@ import 'package:uke_mlab/widgets/value_box/value_box_tile.dart';
 
 /// This Class renders the Absolute Value Tile for the NIBD Measurements.
 ///
-/// It requires the [SensorEnumAbsolute] of the Systolic and Diastolic measurement. Further specifies a [type] to decide Wether the Tile is rendered with a Headline or not.
+/// It requires the [sensorEnumAbsolute] of the Systolic and Diastolic measurement. Further specifies a [type] to decide Wether the Tile is rendered with a Headline or not.
 /// The [type] can be overwritten otherwise defaults to 'withHeadline'.
 ///
 /// The [Widget] that is returned by this Class uses [GetX] to find the corresponding [DataModelAbsolute] for the Systolic and Diastolic Measurements.
@@ -17,8 +17,12 @@ import 'package:uke_mlab/widgets/value_box/value_box_tile.dart';
 /// This Widget is implemented to take the space of 2 'usual' Absolute Tiles. So the NIBD Absolute Tile returned from this needs a Full row in the AbsoluteTile Section on the Screen.
 /// This Special size was chosen due to the difference of the NIBD Data to other Absolute Datapoints. NIBD always has at least 2 Datapoints with corresponing Alarm Borders.
 class ValueBoxTileNIBD extends StatelessWidget {
-  /// Renders the Absolute Value Tile for NIBD Measurements. Requires the [SensorEnumAbsoule] for Systolic and Diastolic Pressure.
+  /// Renders the Absolute Value Tile for NIBD Measurements. Requires the [sensorEnumAbsolute] for Systolic and Diastolic Pressure.
+
+  /// key for the sensorEnumAbsolute representing sys
   final sensorEnumAbsolute sensorAbsoluteSYS;
+
+  /// key for the sensorEnumAbsolute representing dia
   final sensorEnumAbsolute sensorAbsoluteDIA;
 
   final String type;
