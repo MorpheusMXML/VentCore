@@ -699,6 +699,11 @@ h4 {
   background: #AEA9B4;
 }
 
+#brands img.img-fluid {
+  max-width: 300px;
+  margin-bottom: 50px;
+}
+
 /*=======================================================
 			CONTACT:
 ========================================================*/
@@ -775,28 +780,9 @@ h4 {
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 600px) {
   #video-popup .video-box .waves-block {
     display: none;
-  }
-  .fadeOutLogo {
-    -webkit-animation: none;
-    animation: none;
-    display: none;
- }
-  .fadeOutLeftLogo {
-    -webkit-animation: none;
-    animation: none;
-    display: none;
-  }
-  .fadeOutRightLogo {
-    -webkit-animation: none;
-    animation: none;
-    display: none;
-  }
-  .fadeIn {
-    -webkit-animation: none;
-    animation: none;
   }
 }
 /*# sourceMappingURL=style.css.map */
