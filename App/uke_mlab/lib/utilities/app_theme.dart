@@ -142,16 +142,19 @@ extension CustomTextStyles on ThemeData {
   TextStyle get settingTextStyle => TextStyle(
         fontSize: 16,
         color: contrastColor,
+        fontWeight: FontWeight.bold,
       );
 
   TextStyle get settingTextStyle2 => TextStyle(
-        fontSize: 32,
+        fontSize: 24,
         color: contrastColor,
+        fontWeight: FontWeight.bold,
       );
 
   TextStyle get settingTextStyle3 => TextStyle(
-        fontSize: 32,
+        fontSize: 16,
         color: contrastColor,
+        fontWeight: FontWeight.bold,
       );
 
   TextStyle get aedButtonTextStyle => const TextStyle(
