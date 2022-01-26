@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the attributes constant from the SensorAttributes extension, for the Dart programming language.">
+  <title>attributes constant - SensorAttributes extension - sensor library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../../"
+      data-using-base-href="false">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">uke_mlab</a></li>
+    <li><a href="../../utilities_enums_sensor/utilities_enums_sensor-library.html">sensor</a></li>
+    <li><a href="../../utilities_enums_sensor/SensorAttributes.html">SensorAttributes</a></li>
+    <li class="self-crumb">attributes constant</li>
+  </ol>
+  <div class="self-name">attributes</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+
+  <div id="dartdoc-main-content" class="main-content">
+      <div>
+<h1><span class="kind-property">attributes</span> constant 
+    <a href="https://dart.dev/null-safety" class="feature feature-null-safety" title="Supports the null safety language feature.">Null safety</a>
+</h1></div>
+
+        <section class="multi-line-signature">
+          <a href="https://api.flutter.dev/flutter/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../utilities_enums_sensor/sensorEnum.html">sensorEnum</a></span>, <span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span>
+          const <span class="name ">attributes</span>
+          
+
+        </section>
+        
+
+        
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">static const Map&lt;sensorEnum, Map&lt;String, dynamic&gt;&gt; attributes = {
+  sensorEnum.heartFrequency: {
+    &#39;displayString&#39;: &#39;Heart Frequency&#39;,
+    &#39;displayShortString&#39;: &#39;Heart Freq.&#39;,
+    &#39;abbreviation&#39;: &#39;HF&#39;,
+    &#39;color&#39;: Color(0xFF4CAF50),
+    &#39;upperBound&#39;: {
+      &#39;adult&#39;: 120,
+      &#39;child&#39;: 125,
+      &#39;infant&#39;: 135,
+    },
+    &#39;lowerBound&#39;: {
+      &#39;adult&#39;: 70,
+      &#39;child&#39;: 80,
+      &#39;infant&#39;: 100,
+    },
+  },
+  sensorEnum.breathFrequency: {
+    &#39;displayString&#39;: &#39;Breath Frequency&#39;,
+    &#39;displayShortString&#39;: &#39;Breath Freq.&#39;,
+    &#39;abbreviation&#39;: &#39;AF&#39;,
+    &#39;color&#39;: Color(0xFF0CECDD),
+    &#39;updateRate&#39;: 10,
+    &#39;upperBound&#39;: {
+      &#39;adult&#39;: 200,
+      &#39;child&#39;: 170,
+      &#39;infant&#39;: 120,
+    },
+    &#39;lowerBound&#39;: {
+      &#39;adult&#39;: 40,
+      &#39;child&#39;: 50,
+      &#39;infant&#39;: 60,
+    },
+  },
+  sensorEnum.co2: {
+    &#39;displayString&#39;: &#39;CO2&#39;,
+    &#39;displayShortString&#39;: &#39;CO2&#39;,
+    &#39;abbreviation&#39;: &#39;CO2&#39;,
+    &#39;color&#39;: Color(0xFFAf52DE),
+    &#39;updateRate&#39;: 10,
+    &#39;upperBound&#39;: {
+      &#39;adult&#39;: 200,
+      &#39;child&#39;: 170,
+      &#39;infant&#39;: 120,
+    },
+    &#39;lowerBound&#39;: {
+      &#39;adult&#39;: 40,
+      &#39;child&#39;: 50,
+      &#39;infant&#39;: 60,
+    },
+  },
+  sensorEnum.mve: {
+    &#39;displayString&#39;: &#39;MVE&#39;,
+    &#39;displayShortString&#39;: &#39;MVE&#39;,
+    &#39;abbreviation&#39;: &#39;MVE&#39;,
+    &#39;color&#39;: Color(0xFF0CECDD),
+    &#39;updateRate&#39;: 5,
+    &#39;upperBound&#39;: {
+      &#39;adult&#39;: 230,
+      &#39;child&#39;: 170,
+      &#39;infant&#39;: 120,
+    },
+    &#39;lowerBound&#39;: {
+      &#39;adult&#39;: 80,
+      &#39;child&#39;: 70,
+      &#39;infant&#39;: 60,
+    },
+  },
+  sensorEnum.nibd: {
+    &#39;displayString&#39;: &#39;NIBD&#39;,
+    &#39;displayShortString&#39;: &#39;NIBD&#39;,
+    &#39;abbreviation&#39;: &#39;NIBD&#39;,
+    &#39;color&#39;: Color(0xFFDC362E),
+    &#39;updateRate&#39;: 5,
+    &#39;upperBound&#39;: {
+      &#39;adult&#39;: 220,
+      &#39;child&#39;: 170,
+      &#39;infant&#39;: 120,
+    },
+    &#39;lowerBound&#39;: {
+      &#39;adult&#39;: 70,
+      &#39;child&#39;: 60,
+      &#39;infant&#39;: 50,
+    },
+  },
+  sensorEnum.pulse: {
+    &#39;displayString&#39;: &#39;Pulse&#39;,
+    &#39;displayShortString&#39;: &#39;Pulse&#39;,
+    &#39;abbreviation&#39;: &#39;PP&#39;,
+    &#39;color&#39;: Color(0xFF9C27B0),
+    &#39;updateRate&#39;: 10,
+    &#39;upperBound&#39;: {
+      &#39;adult&#39;: 210,
+      &#39;child&#39;: 180,
+      &#39;infant&#39;: 130,
+    },
+    &#39;lowerBound&#39;: {
+      &#39;adult&#39;: 50,
+      &#39;child&#39;: 60,
+      &#39;infant&#39;: 70,
+    },
+  },
+  sensorEnum.spo2: {
+    &#39;displayString&#39;: &#39;Espiratorial O2&#39;,
+    &#39;displayShortString&#39;: &#39;Esp. O2&#39;,
+    &#39;abbreviation&#39;: &#39;SpO2&#39;,
+    &#39;color&#39;: Color(0xFF2196F3),
+    &#39;updateRate&#39;: 5,
+    &#39;upperBound&#39;: {
+      &#39;adult&#39;: 180,
+      &#39;child&#39;: 140,
+      &#39;infant&#39;: 120,
+    },
+    &#39;lowerBound&#39;: {
+      &#39;adult&#39;: 80,
+      &#39;child&#39;: 90,
+      &#39;infant&#39;: 100,
+    },
+  },
+  sensorEnum.ecg: {
+    &#39;displayString&#39;: &#39;ECG Channel 2&#39;,
+    &#39;displayShortString&#39;: &#39;ECG Ch.2&#39;,
+    &#39;abbreviation&#39;: &#39;ECG Ch.2&#39;,
+    &#39;color&#39;: Color(0xFF4CAF50),
+    &#39;updateRate&#39;: 10,
+    &#39;upperBound&#39;: {
+      &#39;adult&#39;: 180,
+      &#39;child&#39;: 140,
+      &#39;infant&#39;: 120,
+    },
+    &#39;lowerBound&#39;: {
+      &#39;adult&#39;: 80,
+      &#39;child&#39;: 90,
+      &#39;infant&#39;: 100,
+    },
+  },
+  sensorEnum.paw: {
+    &#39;displayString&#39;: &#39;ECG Channel 2&#39;,
+    &#39;displayShortString&#39;: &#39;ECG Ch.2&#39;,
+    &#39;abbreviation&#39;: &#39;ECG Ch.2&#39;,
+    &#39;updateRate&#39;: 10,
+    &#39;color&#39;: Color(0xFF4CAF50),
+    &#39;upperBound&#39;: {
+      &#39;adult&#39;: 180,
+      &#39;child&#39;: 140,
+      &#39;infant&#39;: 120,
+    },
+    &#39;lowerBound&#39;: {
+      &#39;adult&#39;: 80,
+      &#39;child&#39;: 90,
+      &#39;infant&#39;: 100,
+    },
+  },
+  sensorEnum.flow: {
+    &#39;displayString&#39;: &#39;ECG Channel 2&#39;,
+    &#39;displayShortString&#39;: &#39;ECG Ch.2&#39;,
+    &#39;abbreviation&#39;: &#39;ECG Ch.2&#39;,
+    &#39;updateRate&#39;: 10,
+    &#39;color&#39;: Color(0xFF4CAF50),
+    &#39;upperBound&#39;: {
+      &#39;adult&#39;: 180,
+      &#39;child&#39;: 140,
+      &#39;infant&#39;: 120,
+    },
+    &#39;lowerBound&#39;: {
+      &#39;adult&#39;: 80,
+      &#39;child&#39;: 90,
+      &#39;infant&#39;: 100,
+    },
+  },
+  sensorEnum.pleth: {
+    &#39;displayString&#39;: &#39;ECG Channel 2&#39;,
+    &#39;displayShortString&#39;: &#39;ECG Ch.2&#39;,
+    &#39;abbreviation&#39;: &#39;ECG Ch.2&#39;,
+    &#39;updateRate&#39;: 10,
+    &#39;color&#39;: Color(0xFF4CAF50),
+    &#39;upperBound&#39;: {
+      &#39;adult&#39;: 180,
+      &#39;child&#39;: 140,
+      &#39;infant&#39;: 120,
+    },
+    &#39;lowerBound&#39;: {
+      &#39;adult&#39;: 80,
+      &#39;child&#39;: 90,
+      &#39;infant&#39;: 100,
+    },
+  },
+  sensorEnum.hfAbsolute: {
+    &#39;displayString&#39;: &#39;ECG Channel 2&#39;,
+    &#39;displayShortString&#39;: &#39;ECG Ch.2&#39;,
+    &#39;abbreviation&#39;: &#39;ECG Ch.2&#39;,
+    &#39;updateRate&#39;: 10,
+    &#39;color&#39;: Color(0xFF4CAF50),
+    &#39;upperBound&#39;: {
+      &#39;adult&#39;: 180,
+      &#39;child&#39;: 140,
+      &#39;infant&#39;: 120,
+    },
+    &#39;lowerBound&#39;: {
+      &#39;adult&#39;: 80,
+      &#39;child&#39;: 90,
+      &#39;infant&#39;: 100,
+    },
+  },
+  sensorEnum.ecgCh1: {
+    &#39;displayString&#39;: &#39;ECG Channel 2&#39;,
+    &#39;displayShortString&#39;: &#39;ECG Ch.2&#39;,
+    &#39;abbreviation&#39;: &#39;ECG Ch.2&#39;,
+    &#39;updateRate&#39;: 10,
+    &#39;color&#39;: Color(0xFF4CAF50),
+    &#39;upperBound&#39;: {
+      &#39;adult&#39;: 180,
+      &#39;child&#39;: 140,
+      &#39;infant&#39;: 120,
+    },
+    &#39;lowerBound&#39;: {
+      &#39;adult&#39;: 80,
+      &#39;child&#39;: 90,
+      &#39;infant&#39;: 100,
+    },
+  },
+  sensorEnum.ecgCh2: {
+    &#39;displayString&#39;: &#39;ECG Channel 2&#39;,
+    &#39;displayShortString&#39;: &#39;ECG Ch.2&#39;,
+    &#39;abbreviation&#39;: &#39;ECG Ch.2&#39;,
+    &#39;updateRate&#39;: 10,
+    &#39;color&#39;: Color(0xFF4CAF50),
+    &#39;upperBound&#39;: {
+      &#39;adult&#39;: 180,
+      &#39;child&#39;: 140,
+      &#39;infant&#39;: 120,
+    },
+    &#39;lowerBound&#39;: {
+      &#39;adult&#39;: 80,
+      &#39;child&#39;: 90,
+      &#39;infant&#39;: 100,
+    },
+  },
+  sensorEnum.tempAbsolute: {
+    &#39;displayString&#39;: &#39;ECG Channel 2&#39;,
+    &#39;displayShortString&#39;: &#39;ECG Ch.2&#39;,
+    &#39;abbreviation&#39;: &#39;ECG Ch.2&#39;,
+    &#39;updateRate&#39;: 10,
+    &#39;color&#39;: Color(0xFF4CAF50),
+    &#39;upperBound&#39;: {
+      &#39;adult&#39;: 180,
+      &#39;child&#39;: 140,
+      &#39;infant&#39;: 120,
+    },
+    &#39;lowerBound&#39;: {
+      &#39;adult&#39;: 80,
+      &#39;child&#39;: 90,
+      &#39;infant&#39;: 100,
+    },
+  },
+  sensorEnum.nibdAbsolute: {
+    &#39;displayString&#39;: &#39;ECG Channel 2&#39;,
+    &#39;displayShortString&#39;: &#39;ECG Ch.2&#39;,
+    &#39;abbreviation&#39;: &#39;ECG Ch.2&#39;,
+    &#39;updateRate&#39;: 10,
+    &#39;color&#39;: Color(0xFF4CAF50),
+    &#39;upperBound&#39;: {
+      &#39;adult&#39;: 180,
+      &#39;child&#39;: 140,
+      &#39;infant&#39;: 120,
+    },
+    &#39;lowerBound&#39;: {
+      &#39;adult&#39;: 80,
+      &#39;child&#39;: 90,
+      &#39;infant&#39;: 100,
+    },
+  },
+  sensorEnum.spo2Absolute: {
+    &#39;displayString&#39;: &#39;ECG Channel 2&#39;,
+    &#39;displayShortString&#39;: &#39;ECG Ch.2&#39;,
+    &#39;abbreviation&#39;: &#39;ECG Ch.2&#39;,
+    &#39;updateRate&#39;: 10,
+    &#39;color&#39;: Color(0xFF4CAF50),
+    &#39;upperBound&#39;: {
+      &#39;adult&#39;: 180,
+      &#39;child&#39;: 140,
+      &#39;infant&#39;: 120,
+    },
+    &#39;lowerBound&#39;: {
+      &#39;adult&#39;: 80,
+      &#39;child&#39;: 90,
+      &#39;infant&#39;: 100,
+    },
+  },
+  sensorEnum.co2Absolute: {
+    &#39;displayString&#39;: &#39;ECG Channel 2&#39;,
+    &#39;displayShortString&#39;: &#39;ECG Ch.2&#39;,
+    &#39;abbreviation&#39;: &#39;ECG Ch.2&#39;,
+    &#39;updateRate&#39;: 10,
+    &#39;color&#39;: Color(0xFF4CAF50),
+    &#39;upperBound&#39;: {
+      &#39;adult&#39;: 180,
+      &#39;child&#39;: 140,
+      &#39;infant&#39;: 120,
+    },
+    &#39;lowerBound&#39;: {
+      &#39;adult&#39;: 80,
+      &#39;child&#39;: 90,
+      &#39;infant&#39;: 100,
+    },
+  },
+};
+
+</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+  <li><a href="../../index.html">uke_mlab</a></li>
+  <li><a href="../../utilities_enums_sensor/utilities_enums_sensor-library.html">sensor</a></li>
+  <li><a href="../../utilities_enums_sensor/SensorAttributes.html">SensorAttributes</a></li>
+  <li class="self-crumb">attributes constant</li>
+</ol>
+
+
+    <h5>SensorAttributes extension</h5>
+    <ol>
+
+
+
+
+    <li class="section-title"> <a href="../../utilities_enums_sensor/SensorAttributes.html#instance-properties">Properties</a>
+    </li>
+    <li><a href="../../utilities_enums_sensor/SensorAttributes/abbreviation.html">abbreviation</a></li>
+    <li><a href="../../utilities_enums_sensor/SensorAttributes/color.html">color</a></li>
+    <li><a href="../../utilities_enums_sensor/SensorAttributes/displayShortString.html">displayShortString</a></li>
+    <li><a href="../../utilities_enums_sensor/SensorAttributes/displayString.html">displayString</a></li>
+    <li><a href="../../utilities_enums_sensor/SensorAttributes/lowerBound.html">lowerBound</a></li>
+    <li><a href="../../utilities_enums_sensor/SensorAttributes/updateRate.html">updateRate</a></li>
+    <li><a href="../../utilities_enums_sensor/SensorAttributes/upperBound.html">upperBound</a></li>
+
+
+
+
+
+    <li class="section-title"><a href="../../utilities_enums_sensor/SensorAttributes.html#constants">Constants</a></li>
+    <li><a href="../../utilities_enums_sensor/SensorAttributes/attributes-constant.html">attributes</a></li>
+</ol>
+
+  </div><!--/.sidebar-offcanvas-->
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    uke_mlab
+      1.0.0+1
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/script.js?v1"></script>
+
+
+
+</body>
+
+</html>
+
