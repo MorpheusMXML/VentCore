@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/models/data_models/model_absolute.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
-/// Holds representation of information for all [DataModelAbsolute]s for the smart Adjustment feature of the alarm boundaries.
+/// holds representation of information for all [DataModelAbsolute]s for the smart adjustment feature of the alarm boundaries
 class SmartAdjustmentMap {
   /// Maps an [SmartAdjustmentMapEntry].
   final Map<sensorEnumAbsolute, SmartAdjustmentMapEntry> map =
@@ -12,7 +12,7 @@ class SmartAdjustmentMap {
 
   /// Initializes [map] with a map over all [sensorEnumAbsolute] with a [SmartAdjustmentMapEntry].
   ///
-  /// Times are set to now, counter values are 0 => Buttons not pressable
+  /// Times are set to now, counter values are 0 => buttons not pressable
   SmartAdjustmentMap() {
     for (var sensorKey in sensorEnumAbsolute.values) {
       map[sensorKey] =
