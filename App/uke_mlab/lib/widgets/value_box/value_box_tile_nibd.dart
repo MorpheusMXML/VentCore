@@ -33,7 +33,8 @@ class ValueBoxTileNIBD extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // sensorAbsolute is not null since IF sensorGraph == null, sensorAbsolute is required // sensorAbsolute is not null since IF sensorGraph == null, sensorAbsolute is required
-    DataModelAbsolute dataModelSYS = Get.find<DataModelAbsolute>(tag: sensorAbsoluteSYS.name);
+    DataModelAbsolute dataModelSYS =
+        Get.find<DataModelAbsolute>(tag: sensorAbsoluteSYS.name);
     SystemState systemState = Get.find<SystemState>();
     return Obx(
       () => Container(
@@ -51,7 +52,10 @@ class ValueBoxTileNIBD extends StatelessWidget {
                     flex: 1,
                     child: Container(
                       margin: const EdgeInsets.only(left: 4),
-                      color: evaluateBorderColor(context, sensorEnumAbsolute.sysAbsolute, systemState.alarmState),
+                      color: evaluateBorderColor(
+                          context,
+                          sensorEnumAbsolute.sysAbsolute,
+                          systemState.alarmState),
                     ),
                   ),
                   SizedBox(
@@ -75,7 +79,10 @@ class ValueBoxTileNIBD extends StatelessWidget {
                     flex: 1,
                     child: Container(
                       margin: const EdgeInsets.only(right: 4),
-                      color: evaluateBorderColor(context, sensorEnumAbsolute.diaAbsolute, systemState.alarmState),
+                      color: evaluateBorderColor(
+                          context,
+                          sensorEnumAbsolute.diaAbsolute,
+                          systemState.alarmState),
                     ),
                   ),
                 ],
@@ -83,24 +90,26 @@ class ValueBoxTileNIBD extends StatelessWidget {
             ),
             Flexible(
               flex: 3,
-              child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                //Systolic Absolute Box
-                Expanded(
-                  child: ValueBoxTile.withHeadline(
-                    sensorAbsolute: sensorEnumAbsolute.sysAbsolute,
-                    optAbreviationTitle: sensorAbsoluteSYS.abbreviation,
-                    superNIBD: true,
-                  ),
-                ),
-                //Diastolic Absolute Box
-                Expanded(
-                  child: ValueBoxTile.withHeadline(
-                    sensorAbsolute: sensorEnumAbsolute.diaAbsolute,
-                    optAbreviationTitle: sensorAbsoluteDIA.abbreviation,
-                    superNIBD: true,
-                  ),
-                ),
-              ]),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    //Systolic Absolute Box
+                    Expanded(
+                      child: ValueBoxTile.withHeadline(
+                        sensorAbsolute: sensorEnumAbsolute.sysAbsolute,
+                        optAbreviationTitle: sensorAbsoluteSYS.abbreviation,
+                        superNIBD: true,
+                      ),
+                    ),
+                    //Diastolic Absolute Box
+                    Expanded(
+                      child: ValueBoxTile.withHeadline(
+                        sensorAbsolute: sensorEnumAbsolute.diaAbsolute,
+                        optAbreviationTitle: sensorAbsoluteDIA.abbreviation,
+                        superNIBD: true,
+                      ),
+                    ),
+                  ]),
             )
           ],
         ),
@@ -108,8 +117,9 @@ class ValueBoxTileNIBD extends StatelessWidget {
     );
   }
 
-  Color evaluateBorderColor(
-      BuildContext context, sensorEnumAbsolute sensorKey, RxMap<sensorEnumAbsolute, Map<String, dynamic>> alarmState) {
+  /// Helper method to evaluate the backgroundcolor for alarms (default != [Theme.of(context).focusColor])
+  Color evaluateBorderColor(BuildContext context, sensorEnumAbsolute sensorKey,
+      RxMap<sensorEnumAbsolute, Map<String, dynamic>> alarmState) {
     alarmStatus? alarm = alarmState[sensorKey]!["status"];
     switch (alarm) {
       case alarmStatus.high:

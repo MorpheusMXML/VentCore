@@ -4,12 +4,23 @@ import 'package:uke_mlab/models/data_models/model_absolute.dart';
 import 'package:uke_mlab/models/data_models/model_graph.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
-// TODO: COMMENTARY
+/// Contains a widget representing the current value, boundaries, name and unit of a [DataModelAbsolute].
+///
+/// For a [DataModelGraph] without associated [DataModelAbsolute] the current value of the graph is represented if [ValueBoxContainer.withoutAbsolute] was used.
+/// Either [dataModelAbsolute] or [dataModelGraph] must be null
 class ValueBoxContainer extends StatelessWidget {
+  /// The [DataModelAbsolute] to represent.
   final DataModelAbsolute? dataModelAbsolute;
+
+  /// The [DataModelAbsolute] to represent.
   final DataModelGraph? dataModelGraph;
+
+  /// An optional title if the default one is not wished for
   final String? optAbreviationTitle;
 
+  /// Standard constructor, taking the [dataModelAbsolute] for representation.
+  ///
+  /// [dataModelGraph] should be null
   const ValueBoxContainer({
     Key? key,
     required this.dataModelAbsolute,
@@ -17,6 +28,9 @@ class ValueBoxContainer extends StatelessWidget {
     this.optAbreviationTitle,
   }) : super(key: key);
 
+  /// Constructor for graphs without [dataModelAbsolute], taking the [dataModelGraph] for representation.
+  ///
+  /// [dataModelAbsolute] should be null
   const ValueBoxContainer.withoutAbsolute({
     Key? key,
     this.dataModelAbsolute,
