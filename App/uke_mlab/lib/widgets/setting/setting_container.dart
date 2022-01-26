@@ -3,8 +3,13 @@ import 'package:uke_mlab/utilities/constants/absolute_alarm_field_constants.dart
 import 'package:uke_mlab/widgets/setting/ippv_button.dart';
 import 'package:uke_mlab/widgets/setting/setting_tile.dart';
 
-// TODO: COMMENTARY
+/// Top level widget for the ippv settings.
+///
+/// Uses:
+/// + [IPPVButton]
+/// + [SettingTile]
 class SettingContainer extends StatelessWidget {
+  /// Descriptions for the ippv settings
   final List<Map<String, Object>> data;
   const SettingContainer({
     Key? key,
@@ -15,7 +20,9 @@ class SettingContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Theme.of(context).focusColor,
-      margin: const EdgeInsets.only(right: AbsoluteAlarmFieldConst.verticalMargin, top: AbsoluteAlarmFieldConst.verticalMargin),
+      margin: const EdgeInsets.only(
+          right: AbsoluteAlarmFieldConst.verticalMargin,
+          top: AbsoluteAlarmFieldConst.verticalMargin),
       child: Column(
         children: [
           const IPPVButton(),

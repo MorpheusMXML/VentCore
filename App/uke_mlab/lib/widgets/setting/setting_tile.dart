@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:uke_mlab/widgets/setting/action_button.dart';
 import 'package:uke_mlab/widgets/setting/setting_text.dart';
 
-// TODO: COMMENTARY
+/// Custom widget containing all elements regarding 1 IPPv parameter
+///
+/// Uses:
+/// [ActionButton]
+/// [SettingText]
 class SettingTile extends StatelessWidget {
+  /// Name of the parameter
   final String name;
-  final String rate;
 
+  /// Unit of the parameter
+  final String rate;
   const SettingTile({
     Key? key,
     required this.name,

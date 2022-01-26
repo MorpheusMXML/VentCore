@@ -4,7 +4,7 @@ import 'package:uke_mlab/providers/screen_controller.dart';
 import 'package:uke_mlab/widgets/menu/menu_entry.dart';
 import 'package:uke_mlab/widgets/menu/toggle_theme_button.dart';
 
-// TODO: COMMENTARY
+/// Contains the drawer for the menu Button
 class AppMenu extends StatelessWidget {
   const AppMenu({
     Key? key,
