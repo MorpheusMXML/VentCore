@@ -1,7 +1,13 @@
-//TODO: COMMENTARY
-enum alarmMessage { suppressed, lowerBoundaryViolated, upperBoundaryViolated, deviation, none }
+/// Enum for alarm message associated with an alarm
+enum alarmMessage {
+  suppressed,
+  lowerBoundaryViolated,
+  upperBoundaryViolated,
+  deviation,
+  none,
+}
 
-//TODO: COMMENTARY
+/// Attributes associated with [alarmMessage], at the moment just containing a String corresponding to the alarm
 extension AlarmMessageAttributes on alarmMessage {
   static const Map<alarmMessage, Map<String, dynamic>> attributes = {
     alarmMessage.suppressed: {
@@ -21,5 +27,6 @@ extension AlarmMessageAttributes on alarmMessage {
     },
   };
 
+  /// Returns the name associated with the [alarmMessage]
   String get message => attributes[this]!['message'] as String;
 }
