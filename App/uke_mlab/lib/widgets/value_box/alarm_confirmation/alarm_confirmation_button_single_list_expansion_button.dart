@@ -5,7 +5,9 @@ import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/utilities/constants/absolute_alarm_field_constants.dart';
 import 'package:uke_mlab/widgets/value_box/alarm_confirmation/alarm_confirmation_button_single_list.dart';
 
-// TODO: COMMENTARY
+/// Contains a button which expands an overlay for all active, non confirmed alarms of absolute value tiles.
+///
+/// The List in the overlay consitst of [AlarmButtonAbsoluteList]s
 class AlarmConfirmationButtonSingleListExpansion extends StatelessWidget {
   const AlarmConfirmationButtonSingleListExpansion({Key? key})
       : super(key: key);
@@ -54,6 +56,7 @@ class AlarmConfirmationButtonSingleListExpansion extends StatelessWidget {
     });
   }
 
+  /// Creates and displays overlay containing [AlarmButtonAbsoluteList] in [AbsAlarmFieldModel]
   void showOverlay(BuildContext context) {
     double statusBarHeight = MediaQuery.of(context).padding.top;
     AbsAlarmFieldModel fieldModel = Get.find<SystemState>().absAlarmFieldModel;
@@ -70,6 +73,7 @@ class AlarmConfirmationButtonSingleListExpansion extends StatelessWidget {
     fieldModel.listExpanded.value = true;
   }
 
+  /// Hides and destroys current overlay containing [AlarmButtonAbsoluteList] in [AbsAlarmFieldModel]
   void hideOverlay(BuildContext context) {
     AbsAlarmFieldModel fieldModel = Get.find<SystemState>().absAlarmFieldModel;
     fieldModel.entry?.remove();

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:uke_mlab/widgets/graph/cpr_graph.dart';
+import 'package:uke_mlab/widgets/graph/history_graph.dart';
 
-/// [ChartData] represents a datapoint with [time], [counter], and [value] to be rendered in a graph.
-///
-/// This uses the mixin [ChartData.asCPR] and [ChartData.asNIBD] to initialize special datapoints for the [CprGraph] and [HistoryGraph].
 class ChartData with cpr, NIBD {
+  /// [ChartData] represents a datapoint with [time], [counter], and [value] to be rendered in a graph.
+  ///
+  /// This uses the mixin [ChartData.asCPR] and [ChartData.asNIBD] to initialize special datapoints for the [CprGraph] and [HistoryGraph].
+
   final DateTime time;
   final int counter;
 
@@ -11,11 +14,13 @@ class ChartData with cpr, NIBD {
 
   ChartData({required this.time, required this.counter, required this.value});
 
-  ChartData.asCPR({required this.time, required this.counter, required this.value}) {
+  ChartData.asCPR(
+      {required this.time, required this.counter, required this.value}) {
     evaluateColor(value: value);
   }
 
-  ChartData.asNIBD({required this.time, required this.counter, required this.value}) {
+  ChartData.asNIBD(
+      {required this.time, required this.counter, required this.value}) {
     evaluarePressures(sysDiaPressures: value);
   }
 }
@@ -58,6 +63,8 @@ mixin NIBD {
     systolicPressure = sysDiaPressures[0];
     diastolicPressure = sysDiaPressures[1];
 
-    meanArterialPressure = (diastolicPressure + (1 / 3) * (systolicPressure - diastolicPressure)).toInt();
+    meanArterialPressure =
+        (diastolicPressure + (1 / 3) * (systolicPressure - diastolicPressure))
+            .toInt();
   }
 }

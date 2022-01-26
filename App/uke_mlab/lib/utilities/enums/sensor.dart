@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 
+/// Contains a key for each graph currently available in the app
 enum sensorEnumGraph {
   paw,
   flow,
@@ -12,6 +13,7 @@ enum sensorEnumGraph {
   nibd,
 }
 
+/// Contains a key for each absolute tile currently available in the app
 enum sensorEnumAbsolute {
   hfAbsolute, // heartfrequency
   tempAbsolute, // temprerature in °C
@@ -24,6 +26,7 @@ enum sensorEnumAbsolute {
   diaAbsolute,
 }
 
+/// Associates a [sensorEnumGraph] with its corresponding [sensorEnumAbsolute]
 class SensorMapping {
   static const Map<sensorEnumGraph, sensorEnumAbsolute?> sensorMap = {
     sensorEnumGraph.paw: null,
@@ -38,6 +41,7 @@ class SensorMapping {
   };
 }
 
+/// Contains default values (eg. names, graphLenght, colors, units) for graphs accessable via [sensorEnumGraph] as key of [attributes].
 extension SensorGraphAttributes on sensorEnumGraph {
   static const Map<sensorEnumGraph, Map<String, dynamic>> attributes = {
     sensorEnumGraph.paw: {
@@ -98,13 +102,23 @@ extension SensorGraphAttributes on sensorEnumGraph {
     }
   };
 
+  /// Returns title of the graph.
   String get graphTitle => attributes[this]!['graphTitle'] as String;
+
+  /// Returns unit of the y-axis of the graph
   String get yAxisUnit => attributes[this]!['yAxisUnit'] as String;
+
+  /// Returns unit of the x-axis of the graph
   String get xAxisUnit => attributes[this]!['xAxisUnit'] as String;
+
+  /// Returns color for the graph
   Color get color => attributes[this]!['color'] as Color;
+
+  /// Returns default length for the graph to be displayed
   int get graphLength => attributes[this]!['graphLength'] as int;
 }
 
+/// Contains default values (eg. names, graphLenght, colors, unit) for value tiles accessable via [sensorEnumAbsolute] as key of [attributes].
 extension SensorAbsoluteAttributes on sensorEnumAbsolute {
   // child and infant boundaries are mostly made up due to lack of data
   static const Map<sensorEnumAbsolute, Map<String, dynamic>> attributes = {
@@ -284,21 +298,40 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
     },
   };
 
+  /// Returns written out name of the sensor represented by [sensorEnumAbsolute].
   String get displayString => attributes[this]!['displayString'] as String;
+
+  /// Returns a shortened version of the sensors represented by [sensorEnumAbsolute] name.
   String get displayShortString =>
       attributes[this]!['displayShortString'] as String;
+
+  /// Returns an abreviation for the sensors represented by [sensorEnumAbsolute] name.
   String get abbreviation => attributes[this]!['abbreviation'] as String;
+
+  /// Returns the unit the sensor represented by [sensorEnumAbsolute] delivers its data in as a String.
   String get unit => attributes[this]!['unit'] as String;
+
+  /// Returns the color the representation of the sensor represented by [sensorEnumAbsolute] shall be rendered.
   Color get color => attributes[this]!['color'] as Color;
 
-  ///10 Seconds are a default confirm Duration
+  /// Returns the default duration the confirm button of the sensor shall linger.
+  ///
+  /// 10 Seconds are a default confirm Duration.
   int get confirmDuration => attributes[this]!['confirmDuration'] ?? 10;
+
+  /// Returns the default boundary deviation for this sensor.
   dynamic get boundaryDeviation =>
       attributes[this]!['boundaryDeviation'] as dynamic;
+
+  /// Returns a Map for the default lower bound values of the sensor, containing information for 'adult', 'child' and 'infant'.
   Map get upperBound => attributes[this]!['upperBound'] as Map<String, dynamic>;
+
+  /// Returns a Map for the default upper bound values of the sensor, containing information for 'adult', 'child' and 'infant'.
   Map get lowerBound => attributes[this]!['lowerBound'] as Map<String, dynamic>;
   bool get floatRepresentation => attributes[this]!['floatRepresentation'];
 
-  /// 1= Monitor Alarm; 2=Ventilation Alarm. Monitor Alarm is default.
+  /// Returns whether this sensor will throw a Monitor or a Ventilation Alarm.
+  ///
+  /// 1 == Monitor Alarm; 2 == Ventilation Alarm. Monitor Alarm is default.
   int get alarmType => attributes[this]!['alarmType'] ?? 1;
 }

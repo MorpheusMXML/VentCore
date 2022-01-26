@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
+import 'package:uke_mlab/widgets/graph/graph.dart';
 import 'package:uke_mlab/widgets/graph/graph_adder.dart';
 import 'package:uke_mlab/widgets/graph/graph_adder_popup.dart';
 import 'graph_container.dart';
 
-// TODO: COMMENTARY
 class GraphView extends StatelessWidget {
+  /// Displays a [Graph] and the sorrounding elements
+
   const GraphView({
     Key? key,
   }) : super(key: key);
@@ -25,13 +27,16 @@ class GraphView extends StatelessWidget {
                 shrinkWrap: true,
                 itemCount: systemState.graphList.list.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return GraphContainer(sensor: systemState.graphList.list[index]);
+                  return GraphContainer(
+                      sensor: systemState.graphList.list[index]);
                 },
               ),
             ),
           ),
           Obx(
-            () => systemState.graphList.addGraph.value ? GraphAdderPopup() : const GraphAdder(),
+            () => systemState.graphList.addGraph.value
+                ? GraphAdderPopup()
+                : const GraphAdder(),
           ),
         ],
       ),

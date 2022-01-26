@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:uke_mlab/models/screen_element_models/absolute_alarm_field_model.dart';
+import 'package:uke_mlab/models/screen_element_models/graph_list.dart';
 import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/providers/alarm_controller.dart';
 import 'package:uke_mlab/utilities/constants/absolute_alarm_field_constants.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/utilities/enums/alarm_status.dart';
 
-// TODO: COMMENTARY
+/// Returns a button which confirms all active alrms on the current page if any are available
+///
+/// Active alarms are defined via [AbsAlarmFieldModel.activeList] and [GraphList.activeGraphAbsolutes]
 class AlarmConfirmationButtonAll extends StatelessWidget {
   const AlarmConfirmationButtonAll({Key? key}) : super(key: key);
 
@@ -39,6 +43,10 @@ class AlarmConfirmationButtonAll extends StatelessWidget {
     );
   }
 
+  /// Searches and confirms all active alarms.
+  ///
+  ///
+  /// Active alarms are defined via [AbsAlarmFieldModel.activeList] and [GraphList.activeGraphAbsolutes]
   void confirmAllVisibleAlarms() {
     SystemState systemState = Get.find<SystemState>();
     AlarmController alarmController = Get.find<AlarmController>();

@@ -3,13 +3,23 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/models/data_models/model_absolute.dart';
 import 'package:uke_mlab/providers/screen_controller.dart';
 
-// TODO: COMMENTARY
+/// Contains a widget with a scrollable row for changing an alarm boundary in a [DataModelAbsolute].
 class ValueBoxSettings extends StatelessWidget {
+  /// The [DataModelAbsolute] for which the boundaries will be adjusted
   final DataModelAbsolute dataModel;
+
+  /// Represents whether the lower or upper bound will be affected.
+  ///
+  /// Should be 'lower' or 'upper'
   final String type;
+
+  /// width of the [ValueBoxSettings]
   final double width;
+
+  /// height of the [ValueBoxSettings]
   final double height;
 
+  /// Constructor to use for a widget adjusting lower alarm boundaries of [dataModel]
   const ValueBoxSettings.lower({
     Key? key,
     required this.dataModel,
@@ -18,6 +28,7 @@ class ValueBoxSettings extends StatelessWidget {
     this.type = 'lower',
   }) : super(key: key);
 
+  /// Constructor to use for a widget adjusting upper alarm boundaries of [dataModel]
   const ValueBoxSettings.upper({
     Key? key,
     required this.dataModel,

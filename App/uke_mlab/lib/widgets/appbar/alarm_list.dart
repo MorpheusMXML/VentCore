@@ -6,7 +6,9 @@ import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/utilities/constants/statusbar_constants.dart';
 import 'package:uke_mlab/widgets/appbar/alarm_field_tile.dart';
 
-//TODO: COMMENTARY
+/// List of [GeneralAlarms] containing [AlarmFieldTile] corresponding to active [GeneralAlarms].
+///
+/// Only displayable if there is more than 1 [GeneralAlarms]
 class AlarmList extends StatelessWidget {
   const AlarmList({
     Key? key,
@@ -21,15 +23,19 @@ class AlarmList extends StatelessWidget {
       () => ConstrainedBox(
         constraints: BoxConstraints(
           maxHeight: Get.height - statusBarHeight,
-          maxWidth: StatusBarConstants.alarmListWidth + 2 * StatusBarConstants.horizontalMargin,
+          maxWidth: StatusBarConstants.alarmListWidth +
+              2 * StatusBarConstants.horizontalMargin,
         ),
         child: Container(
           margin: const EdgeInsets.only(
-              bottom: StatusBarConstants.verticalMargin, right: StatusBarConstants.horizontalMargin, left: StatusBarConstants.horizontalMargin),
+              bottom: StatusBarConstants.verticalMargin,
+              right: StatusBarConstants.horizontalMargin,
+              left: StatusBarConstants.horizontalMargin),
           child: Column(
             children: [
               Container(
-                width: StatusBarConstants.alarmListWidth - 2 * StatusBarConstants.horizontalMargin,
+                width: StatusBarConstants.alarmListWidth -
+                    2 * StatusBarConstants.horizontalMargin,
                 height: StatusBarConstants.verticalMargin,
                 color: Theme.of(context).shadowColor,
               ),
@@ -51,7 +57,8 @@ class AlarmList extends StatelessWidget {
                             left: StatusBarConstants.horizontalMargin,
                           ),
                           color: Theme.of(context).shadowColor,
-                          child: AlarmFieldTile(data: generalAlarms.alarmList[index]));
+                          child: AlarmFieldTile(
+                              data: generalAlarms.alarmList[index]));
                     }),
               ),
             ],

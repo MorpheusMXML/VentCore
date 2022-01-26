@@ -8,6 +8,8 @@ import 'package:uke_mlab/widgets/graph/history_graph.dart';
 
 class GraphRow extends StatelessWidget {
   /// renders the actual [Graph] for instance [HistoryGraph] and the [ValueBoxTile]
+
+  /// Key to identify the corresponding sensor
   final sensorEnumGraph sensor;
   const GraphRow({
     Key? key,
