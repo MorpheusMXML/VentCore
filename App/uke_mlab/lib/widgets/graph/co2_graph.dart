@@ -10,6 +10,8 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 ///
 /// The [sensor] parameter specifies the sensor this graph gets its data from. Typically, [sensorEnumGraph.co2] should be provided.
 /// A corresponding [DataModelGraph] for the CPR Graph is created with [GetX].
+///
+/// {@category Graph}
 class CO2Graph extends StatelessWidget {
   /// Creates a filled CO2 graph.
   final sensorEnumGraph sensor;

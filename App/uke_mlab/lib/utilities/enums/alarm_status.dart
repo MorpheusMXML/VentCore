@@ -5,6 +5,8 @@ import 'package:uke_mlab/utilities/enums/non_graph_alarm.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 /// Enum representing the alarm status of a [sensorEnumAbsolute] or [nonGraphAlarmEnum].
+///
+/// {@category Enums}
 enum alarmStatus {
   high,
   middle,

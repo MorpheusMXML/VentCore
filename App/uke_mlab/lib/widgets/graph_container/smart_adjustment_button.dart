@@ -6,8 +6,10 @@ import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
 /// This widget displays the button for the smart adjustment feature.
+///
+/// {@category GraphContainer}
 class SmartAdjustButton extends StatelessWidget {
-  /// Button for the smart adjustment feature.
+  /// Key to identify the corresponding sensor.
   final sensorEnumAbsolute sensorKey;
 
   /// Creates instance of [SmartAdjustButton].
@@ -36,9 +38,7 @@ class SmartAdjustButton extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      systemState.smartAdjustmentMap.map[sensorKey]!
-                                  .lowerCounter.value >=
-                              3
+                      systemState.smartAdjustmentMap.map[sensorKey]!.lowerCounter.value >= 3
                           ? const Icon(
                               Icons.arrow_downward_rounded,
                             )
@@ -50,9 +50,7 @@ class SmartAdjustButton extends StatelessWidget {
                         "s. Adj.",
                       ),
                       const Spacer(),
-                      systemState.smartAdjustmentMap.map[sensorKey]!
-                                  .upperCounter.value >=
-                              3
+                      systemState.smartAdjustmentMap.map[sensorKey]!.upperCounter.value >= 3
                           ? const Icon(
                               Icons.arrow_upward_rounded,
                             )

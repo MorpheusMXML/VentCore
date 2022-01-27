@@ -22,6 +22,8 @@ import 'package:uke_mlab/scenarios/abstract_scenario.dart';
 import 'package:uke_mlab/screens/main_screen.dart';
 
 /// Superclass holding references to various models for screen elements as well as holding the top level information of current status of the system.
+///
+/// {@category SystemState}
 class SystemState extends GetxController {
   /// Contains global information whether an [AbstractScenario] is active.
   bool scenarioStarted = false;
@@ -44,8 +46,7 @@ class SystemState extends GetxController {
   /// "message" for alarm message
   /// "enum" for current [alarmStatus]
   /// "color" for color
-  final RxMap<sensorEnumAbsolute, Map<String, dynamic>> alarmState =
-      <sensorEnumAbsolute, Map<String, dynamic>>{}.obs;
+  final RxMap<sensorEnumAbsolute, Map<String, dynamic>> alarmState = <sensorEnumAbsolute, Map<String, dynamic>>{}.obs;
 
   /// A reference to the current [GeneralAlarms] in use.
   final GeneralAlarms generalAlarms = GeneralAlarms();
@@ -108,8 +109,7 @@ class SystemState extends GetxController {
   }
 
   ///Set [alarmState] for given [sensor].
-  void setAlarmState(sensorEnumAbsolute sensor, int? priority, String? message,
-      alarmStatus? status, Color? color) {
+  void setAlarmState(sensorEnumAbsolute sensor, int? priority, String? message, alarmStatus? status, Color? color) {
     alarmState[sensor] = {
       'priority': priority ?? alarmState[sensor]!['priority'],
       'message': message ?? getAlarmStateMessage(sensor),

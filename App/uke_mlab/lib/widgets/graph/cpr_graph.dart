@@ -7,10 +7,12 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/models/data_models/model_graphdata.dart';
 
 /// Creates an [SfCartesianChart] with two [NumericAxis], two [PlotBand]s and a [ColumnSeries].
-/// The Graph rendered displays a history of how well the CPR has been performed in relation to the compression depth.
+/// The graph rendered displays a history of how well the CPR has been performed in relation to the compression depth.
 ///
 /// The [sensor] parameter specifies the sensor this graph gets its data from. Typically, [sensorEnumGraph.cpr] should be provided.
-/// A corresponding [DataModelGraph] for the CPR Graph is created with [GetX].
+/// A correspondig [DataModelGraph] for the CPR Graph is created with [GetX].
+///
+/// {@category Graph}
 class CprGraph extends StatelessWidget {
   /// Creates a CPR bar graph to indicate optimum pressure applied during CPR.
   final sensorEnumGraph sensor;

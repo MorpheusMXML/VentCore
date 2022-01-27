@@ -1,4 +1,6 @@
-/// An enum representing the currently selected Patient Type.
+/// An enum representing the currently selected patient type.
+///
+/// {@category Enums}
 enum patientTypeEnum {
   adult,
   child,
@@ -6,7 +8,7 @@ enum patientTypeEnum {
   none,
 }
 
-/// Extension for [patientTypeEnum] containing the map [attributes] which holds a String representing each [patientTypeEnum].
+/// Extension for [patientTypeEnum] containing the map [attributes] which holds a string representing each [patientTypeEnum].
 extension BoundaryAttributes on patientTypeEnum {
   static const Map<patientTypeEnum, Map<String, dynamic>> attributes = {
     patientTypeEnum.adult: {

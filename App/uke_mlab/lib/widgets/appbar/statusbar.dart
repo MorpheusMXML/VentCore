@@ -10,7 +10,10 @@ import 'package:uke_mlab/utilities/enums/patient_type.dart';
 import 'package:uke_mlab/widgets/appbar/mute_ecg_button.dart';
 import 'alarm_counter_tile.dart';
 
-/// Renders the statusbar at the top of the screen. Houses the burger menu, [AlarmFieldTile], a [patientType], the o2 bottle, and the [MuteEcgButton].
+/// Renders the statusbar at the top of the screen.
+/// Houses the burger menu, [AlarmFieldTile], a [patientTypeEnum], the o2 bottle, and the [MuteEcgButton].
+///
+/// {@category AppBar}
 class StatusBar extends StatelessWidget {
   /// constructs the status bar for usage over the whole project
   const StatusBar({
@@ -34,9 +37,8 @@ class StatusBar extends StatelessWidget {
               //DropDown Menu (AlarmExpansionTile)
               Flexible(
                 flex: StatusBarConstants.flexBarAlarmFieldTile,
-                child: Obx(() => generalAlarms.alarmList.isEmpty
-                    ? Container()
-                    : AlarmFieldTile(data: generalAlarms.alarmList[0])),
+                child: Obx(() =>
+                    generalAlarms.alarmList.isEmpty ? Container() : AlarmFieldTile(data: generalAlarms.alarmList[0])),
               ),
               const SizedBox(
                 width: StatusBarConstants.horizontalMargin * 2,

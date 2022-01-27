@@ -4,6 +4,8 @@ import 'package:uke_mlab/models/data_models/model_absolute.dart';
 import 'package:uke_mlab/providers/screen_controller.dart';
 
 /// Contains a widget with a scrollable row for changing an alarm boundary in a [DataModelAbsolute].
+///
+/// {@category ValueBox}
 class ValueBoxSettings extends StatelessWidget {
   /// The [DataModelAbsolute] for which the boundaries will be adjusted
   final DataModelAbsolute dataModel;
@@ -69,9 +71,7 @@ class ValueBoxSettings extends StatelessWidget {
             magnification: 1.5,
             onSelectedItemChanged: (value) => setFunction(
                   dataModel,
-                  dataModel.floatRepresentation
-                      ? value.toDouble() / 10
-                      : value.toDouble(),
+                  dataModel.floatRepresentation ? value.toDouble() / 10 : value.toDouble(),
                 ),
             children: dataModel.floatRepresentation
                 ? [

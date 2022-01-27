@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:uke_mlab/widgets/appbar/statusbar.dart';
 import 'package:uke_mlab/widgets/menu/menu.dart';
 
+/// {@category Miscellaneous}
 class AppScaffold extends StatelessWidget {
   final Widget screen;
 

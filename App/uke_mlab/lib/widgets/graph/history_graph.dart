@@ -7,7 +7,7 @@ import 'package:uke_mlab/models/data_models/model_nibd.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
-/// Creates an [SfCartesianChart] to display a History Graph. Example Use: NIBD History.
+/// Creates an [SfCartesianChart] to display a [HistoryGraph]. Example use: NIBD History.
 ///
 /// Needs to be instanciated with a [sensorEnumGraph] for the graph data that should be displayed.
 /// The DataModel it finds using [GetX] depends on the provided [sensor].
@@ -16,6 +16,7 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 /// Uses a [ScatterSeries] to Plot the MAD Value of the BloodPressure Measurement
 /// Uses [HiloSeries] to Plot the Systolic and Diastolic Pressure as Hi and Low of the Series.
 ///
+/// {@category Graph}
 class HistoryGraph extends StatelessWidget {
   /// Creates a history graph, typically used to display NIBD values.
   final sensorEnumGraph sensor;
@@ -61,10 +62,7 @@ class HistoryGraph extends StatelessWidget {
                 // Scatter renders in a diamond shape
                 shape: DataMarkerType.diamond),
             trendlines: <Trendline>[
-              Trendline(
-                  dashArray: <double>[2, 3],
-                  type: TrendlineType.movingAverage,
-                  color: Colors.redAccent)
+              Trendline(dashArray: <double>[2, 3], type: TrendlineType.movingAverage, color: Colors.redAccent)
             ],
             color: dataModel.color,
             // DO NOT DELETE .value, SyncFusion charts would break in combination with GetX.
@@ -84,10 +82,7 @@ class HistoryGraph extends StatelessWidget {
             xValueMapper: (ChartData data, _) => data.time,
             lowValueMapper: (ChartData data, _) => data.diastolicPressure,
             highValueMapper: (ChartData data, _) => data.systolicPressure,
-            markerSettings: const MarkerSettings(
-                shape: DataMarkerType.horizontalLine,
-                width: 10,
-                isVisible: true),
+            markerSettings: const MarkerSettings(shape: DataMarkerType.horizontalLine, width: 10, isVisible: true),
           ),
         ],
       ),

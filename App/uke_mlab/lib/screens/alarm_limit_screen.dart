@@ -6,7 +6,9 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 import 'package:uke_mlab/widgets/demo_screen/exit_button.dart';
 import 'package:uke_mlab/widgets/value_box/value_box_tile.dart';
 
-/// presents all data models and the ability to adjust their boundaries via [ValueBoxTile]s
+/// Presents all data models and the ability to adjust their boundaries via [ValueBoxTile]s.
+///
+/// {@category Screens}
 class AlarmLimitScreen extends StatelessWidget {
   const AlarmLimitScreen({
     Key? key,
@@ -26,15 +28,11 @@ class AlarmLimitScreen extends StatelessWidget {
       }
     }
 
-    monitorBoundarySet
-        .addAll(Get.find<SystemState>().absAlarmFieldModel.monitorSet);
-    monitorBoundarySet
-        .removeWhere((sensorKey) => graphBoundarySet.contains(sensorKey));
+    monitorBoundarySet.addAll(Get.find<SystemState>().absAlarmFieldModel.monitorSet);
+    monitorBoundarySet.removeWhere((sensorKey) => graphBoundarySet.contains(sensorKey));
 
-    ventilationBoundarySet
-        .addAll(Get.find<SystemState>().absAlarmFieldModel.ventilationSet);
-    ventilationBoundarySet
-        .removeWhere((sensorKey) => graphBoundarySet.contains(sensorKey));
+    ventilationBoundarySet.addAll(Get.find<SystemState>().absAlarmFieldModel.ventilationSet);
+    ventilationBoundarySet.removeWhere((sensorKey) => graphBoundarySet.contains(sensorKey));
 
     return Row(
       children: [
@@ -60,8 +58,7 @@ class AlarmLimitScreen extends StatelessWidget {
                         return SizedBox(
                           height: 180,
                           width: (Get.width - 24) / 3 / 2 + 15,
-                          child: ValueBoxTile.withHeadline(
-                              sensorAbsolute: sensorKey),
+                          child: ValueBoxTile.withHeadline(sensorAbsolute: sensorKey),
                         );
                       }).toList(),
                     ),
@@ -88,8 +85,7 @@ class AlarmLimitScreen extends StatelessWidget {
                         return SizedBox(
                           height: 180,
                           width: (Get.width - 24) / 3 / 2 + 15,
-                          child: ValueBoxTile.withHeadline(
-                              sensorAbsolute: sensorKey),
+                          child: ValueBoxTile.withHeadline(sensorAbsolute: sensorKey),
                         );
                       }).toList(),
                     ),
@@ -116,8 +112,7 @@ class AlarmLimitScreen extends StatelessWidget {
                         return SizedBox(
                           height: 180,
                           width: (Get.width - 24) / 3 / 2 + 15,
-                          child: ValueBoxTile.withHeadline(
-                              sensorAbsolute: sensorKey),
+                          child: ValueBoxTile.withHeadline(sensorAbsolute: sensorKey),
                         );
                       }).toList(),
                     ),

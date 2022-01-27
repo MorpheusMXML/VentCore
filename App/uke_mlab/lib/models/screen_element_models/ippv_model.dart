@@ -7,6 +7,8 @@ import 'package:uke_mlab/widgets/setting/setting_container.dart';
 import 'package:uke_mlab/widgets/setting/ippv_button.dart';
 
 /// Offers representation for [SettingContainer] and widgets below.
+///
+/// {@category ScreenElementModels}
 class IppvModel {
   /// Default data values for [SettingContainer] and widgets below.
   Map<String, int> defaultIppvValues = {'Freq.': 15, 'Vt': 300, 'PEEP': 60};
@@ -44,14 +46,12 @@ class IppvModel {
           newValue += 5 * value;
           break;
         default:
-          throw Exception(
-              "Patient type not valid (most likely patientTypeEnum.none) during updateIPPVValue");
+          throw Exception("Patient type not valid (most likely patientTypeEnum.none) during updateIPPVValue");
       }
     } else if (name == "PEEP") {
       newValue += 5 * value;
     } else {
-      throw Exception(
-          "name was $name during updateIPPVValue which is no valid IPPv name");
+      throw Exception("name was $name during updateIPPVValue which is no valid IPPv name");
     }
 
     ippvValues[name]!.value = newValue;
@@ -71,9 +71,8 @@ class IppvModel {
 
   /// Updates current [DataModelAbsolute] mve on change of Vt (tidal volume) value in [ippvValues].
   void updateMVe() {
-    Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.mve.name).updateValue(
-        ((ippvValues['Freq.']!.value * (ippvValues['Vt']!.value / 1000)))
-            .toDouble());
+    Get.find<DataModelAbsolute>(tag: sensorEnumAbsolute.mve.name)
+        .updateValue(((ippvValues['Freq.']!.value * (ippvValues['Vt']!.value / 1000))).toDouble());
   }
 
   /// Resets [ippvValues] to default values.

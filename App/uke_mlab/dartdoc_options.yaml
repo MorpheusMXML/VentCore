@@ -1,73 +1,70 @@
 dartdoc:
      categories:
-          "Models":
-               markdown: doc/First.md
-               name: Models
-          "Data Models":
-#         markdown:
-          name: Data Models
-          "Screen Element Models":
-#              markdown:
-               name: Screen Element Models
+          "DataModels":
+               markdown: doc/DataModels.md
+               name: DataModels
+          "ScreenElementModels":
+               markdown: doc/ScreenElementModels.md
+               name: ScreenElementModels
+          "SystemState":
+               markdown: doc/SystemState.md
+               name: SystemState
           "Providers":
-#               markdown: doc/Second.md
-               name: Providers / Controller
+               markdown: doc/Providers.md
+               name: Providers
           "Scenarios":
-#               markdown:
+               markdown: doc/Scenarios.md
                name: Scenarios
           "Screens":
- #             markdown:
-                name: Screens
-          "Utilities":
-#               markdown:
-               name: Utilities
+               markdown: doc/Screens.md
+               name: Screens
           "Constants":
- #              markdown:
+               markdown: doc/Constants.md
                name: Constants
           "Enums":
- #             markdown:
+               markdown: doc/Enums.md
                name: Enums
-          "Widgets":
- #             markdown:
-               name: Widgets
+          "Utilities":
+               markdown: doc/Utilities.md
+               name: Utilities
           "AppBar":
- #             markdown:
-               name: App Bar
-          "Defibrillation Mode":
- #             markdown:
-               name: Defibrillation Mode
-          "Demo Screen":
- #             markdown:
-               name: Demo Screen
-          "Start Screen":
- #             markdown:
-               name: Start Screen
+               markdown: doc/AppBar.md
+               name: AppBar
+          "DefibrillationMode":
+               markdown: doc/DefibrillationMode.md
+               name: DefibrillationMode
+          "DemoScreen":
+               markdown: doc/DemoScreen.md
+               name: DemoScreen
           "Graph":
- #             markdown:
+               markdown: doc/Graph.md
                name: Graph
-          "Graph Container":
- #             markdown:
-               name: Graph Container
+          "GraphContainer":
+               markdown: doc/GraphContainer.md
+               name: GraphContainer
           "Info":
- #             markdown:
+               markdown: doc/Info.md
                name: Info
           "Menu":
- #             markdown:
+               markdown: doc/Menu.md
                name: Menu
           "Miscellaneous":
- #             markdown:
+               markdown: doc/Miscellaneous.md
                name: Miscellaneous
-          "Settings":
- #             markdown:
-               name: Settings
+          "IppvSettings":
+               markdown: doc/IppvSettings.md
+               name: IppvSettings
+          "StartScreen":
+               markdown: doc/StartScreen.md
+               name: StartScreen
           "Toggle":
- #             markdown:
+               markdown: doc/Toggle.md
                name: Toggle
-          "Value Box":
- #             markdown:
-               name: Value Box
-     showUndocumentedCategories: true
-     categoryOrder: ["Models", "Data Models", "Screen Element Models", "Providers", "Scenarios", "Screens", "Utilities"]
-     linkTo:
-          url: "https://my.dartdocumentationsite.org/dev/%v%"
+          "AlarmConfirmation":
+               markdown: doc/AlarmConfirmation.md
+               name: AlarmConfirmation
+          "ValueBox":
+               markdown: doc/ValueBox.md
+               name: ValueBox
+     categoryOrder: ["AlarmConfirmation", "AppBar", "Constants", "DataModels","DefibrillationMode","DemoScreen","Enums","Graph","GraphContainer","Info","IppvSettings","Menu","Miscellaneous","Providers","Scenarios","ScreenElementModels","Screens","StartScreen","SystemState","Toggle","Utilities","ValueBox"]
   

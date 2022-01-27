@@ -5,6 +5,8 @@ import 'package:uke_mlab/providers/defibrillation_controller.dart';
 /// Creates an on/off switch for enabling/disabling the metronome.
 ///
 /// The [DefibrillationController] handles all actions relating to this switch.
+///
+/// {@category DefibrillationMode}
 class MetronomeSwitch extends StatelessWidget {
   /// The toggling switch for the metronome.
 
@@ -15,8 +17,7 @@ class MetronomeSwitch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final DefibrillationController defibrillationController =
-        Get.find<DefibrillationController>();
+    final DefibrillationController defibrillationController = Get.find<DefibrillationController>();
 
     return Obx(
       () => Switch(

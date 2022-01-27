@@ -14,6 +14,8 @@ import 'package:uke_mlab/utilities/enums/sensor.dart';
 /// + [InfoContainer]
 /// + [AlarmConfirmationRow]
 /// + [ToggleModeButtonContainer]
+///
+/// {@category Toggle}
 class VentilationMode extends StatelessWidget {
   const VentilationMode({
     Key? key,
@@ -41,12 +43,9 @@ class VentilationMode extends StatelessWidget {
           child: Row(
             children: const [
               Expanded(
-                child: ValueBoxTile.withHeadline(
-                    sensorAbsolute: sensorEnumAbsolute.breathfrequency),
+                child: ValueBoxTile.withHeadline(sensorAbsolute: sensorEnumAbsolute.breathfrequency),
               ),
-              Expanded(
-                  child: ValueBoxTile.withHeadline(
-                      sensorAbsolute: sensorEnumAbsolute.mve)),
+              Expanded(child: ValueBoxTile.withHeadline(sensorAbsolute: sensorEnumAbsolute.mve)),
             ],
           ),
         ),
@@ -58,8 +57,7 @@ class VentilationMode extends StatelessWidget {
                 child: InfoContainer(data: infoData),
               ),
               const Expanded(
-                child: ValueBoxTile.withHeadline(
-                    sensorAbsolute: sensorEnumAbsolute.hfAbsolute),
+                child: ValueBoxTile.withHeadline(sensorAbsolute: sensorEnumAbsolute.hfAbsolute),
               ),
             ],
           ),

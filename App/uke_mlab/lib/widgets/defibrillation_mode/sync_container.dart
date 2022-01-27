@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:uke_mlab/widgets/defibrillation_mode/synchronicity_button.dart';
 
 /// Creates a flexible row of the two possible [SynchronicityButton]s,  [SynchronicityButton.sync] and [SynchronicityButton.sync].
+///
+/// {@category DefibrillationMode}
 class SyncContainer extends StatelessWidget {
   /// Displays all synchronicity related widgets.
 

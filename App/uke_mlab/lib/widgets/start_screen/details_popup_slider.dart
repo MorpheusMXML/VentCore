@@ -9,6 +9,8 @@ import 'package:uke_mlab/utilities/app_theme.dart';
 /// + [name] holds an instance of [String] which will be used as the displayed Name for this widget.
 /// + [unit] holds an instance of [String] which will be used as the displayed unit for this widget.
 /// + [value] holds an instance of [RxDouble] which will be used as the displayed value for this widget.
+///
+/// {@category StartScreen}
 class PopupSlider extends StatelessWidget {
   final String name;
   final String unit;
@@ -64,9 +66,8 @@ class PopupSlider extends StatelessWidget {
           /// This Container contains the displayed value with the unit added.
           Container(
             margin: const EdgeInsets.fromLTRB(0, 5, 10, 5),
-            decoration: BoxDecoration(
-                color: theme.contrastColor,
-                borderRadius: const BorderRadius.all(Radius.circular(3))),
+            decoration:
+                BoxDecoration(color: theme.contrastColor, borderRadius: const BorderRadius.all(Radius.circular(3))),
             alignment: Alignment.center,
             height: 50 / MediaQuery.of(context).devicePixelRatio,
             width: 150 / MediaQuery.of(context).devicePixelRatio,

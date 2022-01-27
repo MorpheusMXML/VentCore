@@ -6,6 +6,8 @@ import 'package:uke_mlab/utilities/app_theme.dart';
 /// Creates an a [Text] that displays the current system diagnosis.
 ///
 /// The [DefibrillationController] handles all actions relating to this textfield.
+///
+/// {@category DefibrillationMode}
 class SystemDiagnosis extends StatelessWidget {
   /// Displays current system diagnosis.
 
@@ -17,8 +19,7 @@ class SystemDiagnosis extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    DefibrillationController defibrillationController =
-        Get.find<DefibrillationController>();
+    DefibrillationController defibrillationController = Get.find<DefibrillationController>();
 
     return Container(
       color: theme.primarySwatch[70],

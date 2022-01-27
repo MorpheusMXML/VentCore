@@ -11,6 +11,8 @@ import 'package:uke_mlab/widgets/graph_container/smart_adjustment_button.dart';
 
 /// Creates a border behind a graph to indicate whether the graph is in an alarm state or not.
 /// For that, different colors are used. Triggering alarm borders happens through the [SystemState].
+///
+/// {@category GraphContainer}
 class GraphAlarmBorder extends StatelessWidget {
   /// Border of a graph, the color depends on the [alarmStatus].
   final sensorEnumAbsolute sensor;
@@ -60,8 +62,7 @@ class GraphAlarmBorder extends StatelessWidget {
             children: [
               Expanded(
                 child: Container(
-                  color:
-                      systemState.getAlarmStateColor(sensor).withOpacity(0.65),
+                  color: systemState.getAlarmStateColor(sensor).withOpacity(0.65),
                   margin: const EdgeInsets.fromLTRB(0, 0, 0, 20),
                 ),
               ),

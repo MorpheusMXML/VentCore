@@ -6,6 +6,8 @@ import 'package:uke_mlab/widgets/appbar/alarm_list.dart';
 import 'package:uke_mlab/widgets/appbar/statusbar.dart';
 
 /// Contains constants relating the [StatusBar].
+///
+/// {@category Constants}
 class StatusBarConstants {
   /// Flex value for the [AlarmCounterTile].
   static const int flexBarAlarmCounterTile = 4;
@@ -32,15 +34,11 @@ class StatusBarConstants {
   static const double verticalMargin = 8;
 
   /// Width of the menu button
-  static const double menuButtonWidth =
-      56; // according to stackoverflow this is the default
+  static const double menuButtonWidth = 56; // according to stackoverflow this is the default
 
   /// Width for the [AlarmList]
   static final double alarmListWidth = (((Get.width - menuButtonWidth) /
-              (flexBarAlarmArea +
-                  flexBarO2BottleArea +
-                  flexBarPatientTypeArea +
-                  flexMuteECGButtonArea)) *
+              (flexBarAlarmArea + flexBarO2BottleArea + flexBarPatientTypeArea + flexMuteECGButtonArea)) *
           flexBarAlarmArea /
           (flexBarAlarmCounterTile + flexBarAlarmFieldTile) *
           flexBarAlarmFieldTile) -

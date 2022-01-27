@@ -5,12 +5,14 @@ import 'package:uke_mlab/providers/defibrillation_controller.dart';
 import 'package:uke_mlab/providers/screen_controller.dart';
 import 'package:uke_mlab/widgets/toggle/toggle_mode_button.dart';
 
-/// This Class implements the [ToggleButtons] that provide the Mode Changing Functionality.
+/// This class implements the [ToggleButtons] that provide the mode changing functionality.
 /// The respective toggle buttons are [ToggleModeButton]s.
 ///
-/// It houses the Buttons for Defibrillator, Ventilator and Monitoring with the corresponding Icons stored in the [iconLocationMap].
+/// It houses the Buttons for Defibrillator, Ventilator and Monitoring with the corresponding Icons stored in the iconLocationMap.
 /// Further gets the Instance of the [SystemState] to  track in which mode the App currently is.
 /// Also uses the [DefibrillationController] and [ScreenController] to restrict the availability of this Button during the Load/Shock Animation of the Defi.
+///
+/// {@category Toggle}
 class ToggleModeButtonContainer extends StatelessWidget {
   const ToggleModeButtonContainer({
     Key? key,
@@ -30,9 +32,7 @@ class ToggleModeButtonContainer extends StatelessWidget {
             ToggleModeButton(index: 2, path: 'assets/icons/AED.svg'),
           ],
           onPressed: (int index) {
-            if (Get.find<DefibrillationController>()
-                .toggleButtonAvailable
-                .isTrue) {
+            if (Get.find<DefibrillationController>().toggleButtonAvailable.isTrue) {
               Get.find<ScreenController>().setSelectedToggleView(index);
             }
           },

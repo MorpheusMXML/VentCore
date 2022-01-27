@@ -2,9 +2,15 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
+import 'package:uke_mlab/scenarios/patient_scenario.dart';
+import 'package:uke_mlab/scenarios/standard_scenario.dart';
 
 import 'package:uke_mlab/utilities/enums/sensor.dart';
 
+/// Abstract defining standard behaviour for scenarios.
+/// [PatientScenario] and [StandardScenario]
+///
+/// {@category Scenarios}
 abstract class AbstractScenario {
   bool scenarioRunning = false;
   Set<Timer?> scenarioTimer = {};

@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 
-/// This class represents a single Toggle Mode Button.
+/// This class represents a single toggle mode button.
 /// The buttons are used by the [ToggleModeButtonContainer].
 /// The toggling logic is implemented by [ToggleModeButtonContainer] which utilizes [SystemState].
 ///

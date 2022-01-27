@@ -1,4 +1,6 @@
-/// Enum for alarm message associated with an alarm
+/// Enum for alarm message associated with an alarm.
+///
+/// {@category Enums}
 enum alarmMessage {
   suppressed,
   lowerBoundaryViolated,

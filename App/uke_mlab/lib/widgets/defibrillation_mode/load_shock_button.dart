@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/providers/defibrillation_controller.dart';
 import 'package:uke_mlab/providers/sound_controller.dart';
 
-/// This Class implements the 2-in-1 Button for the Loading and Shock applying behaviour of the Defibrillator.
+/// This class implements the 2-in-1 button for the loading and shock applying behaviour of the defibrillator.
 /// #### Important Note: This Is a [StatefulWidget] this is necessary to adequately Animate the change for Loading the Defibrillator.
 ///
 /// When this Class is Instanciated, the [initState()] Method for this Widget creates an Instance of [AnimationController] and [ColorTween].
@@ -27,6 +27,8 @@ import 'package:uke_mlab/providers/sound_controller.dart';
 /// the Functionallity of the [ToggleModeButton] for changing the Mode of the Device.
 /// This is due to a Bug that will cause the app to crash when Animating a Widget while changing the Screen Mode.
 /// Further for Safety Reasons one should not be able to change the Mode of the Device when the User is Loading the Defibrillator and / or ready to apply the Shock.
+///
+/// {@category DefibrillationMode}
 class LoadShockButton extends StatefulWidget {
   const LoadShockButton({
     Key? key,
@@ -39,8 +41,7 @@ class LoadShockButton extends StatefulWidget {
 /// This implements the State for the [LoadShockButton]. Initializes a [AnimationController] and registeres a [ColorTween] with it. These initializations are called with [initState()].
 /// Holds a Reference to the [DefibrillationController], [SoundController] and Renders a [ElevatedButton] from the Information in the DefiController.
 /// Implements the Long Press and Short Press behaviour.
-class _LoadShockButtonState extends State<LoadShockButton>
-    with SingleTickerProviderStateMixin {
+class _LoadShockButtonState extends State<LoadShockButton> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     _animationController = AnimationController(
@@ -63,8 +64,7 @@ class _LoadShockButtonState extends State<LoadShockButton>
     _animationController.dispose();
   }
 
-  DefibrillationController defibrillationController =
-      Get.find<DefibrillationController>();
+  DefibrillationController defibrillationController = Get.find<DefibrillationController>();
   SoundController soundController = Get.find<SoundController>();
   late AnimationController _animationController;
   late Animation<Color?> _colorTween;
@@ -88,8 +88,7 @@ class _LoadShockButtonState extends State<LoadShockButton>
               children: [
                 Container(
                   color: _colorTween.value,
-                  child: (_animationController.isCompleted &&
-                          defibrillationController.isReadyToShock == true)
+                  child: (_animationController.isCompleted && defibrillationController.isReadyToShock == true)
                       ? SvgPicture.asset('assets/icons/Shock.svg')
                       : SvgPicture.asset('assets/icons/Battery.svg'),
                   padding: const EdgeInsets.all(8),

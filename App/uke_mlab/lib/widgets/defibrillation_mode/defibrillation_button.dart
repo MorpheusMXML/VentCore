@@ -3,11 +3,14 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/providers/defibrillation_controller.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 
-/// Creates an Auto or Manual Button depending on which constructor is called for the defibrillation settings.
+/// Creates an auto or manual button depending on which constructor is called for the defibrillation settings.
+///
 /// [DefibrillationButton.auto] creates an Auto Button.
 /// [DefibrillationButton.manual] creates a Manual Button.
 ///
 /// The [DefibrillationController] handles all actions relating to this button.
+///
+/// {@category DefibrilationMode}
 class DefibrillationButton extends StatelessWidget {
   /// Auto/Manual Button for the defibrillation settings.
   final String name;
@@ -27,8 +30,7 @@ class DefibrillationButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final DefibrillationController defibrillationController =
-        Get.find<DefibrillationController>();
+    final DefibrillationController defibrillationController = Get.find<DefibrillationController>();
 
     return Expanded(
       child: Container(
@@ -39,8 +41,7 @@ class DefibrillationButton extends StatelessWidget {
                   ? theme.defiRegularButtonStyle
                   : theme.defiSelectedButtonStyle,
               child: Text(name),
-              onPressed: defibrillationController.selectedDefiButton.value !=
-                      name
+              onPressed: defibrillationController.selectedDefiButton.value != name
                   ? () => defibrillationController.setSelectedDefiButton(name)
                   : null,
             );

@@ -12,6 +12,8 @@ import 'package:uke_mlab/widgets/value_box/value_box_tile_nibd.dart';
 /// + [ValueBoxTileNIBD]
 /// + [AlarmConfirmationRow]
 /// + [ToggleModeButtonContainer]
+///
+/// {@category Toggle}
 class MonitoringMode extends StatelessWidget {
   const MonitoringMode({
     Key? key,
@@ -26,12 +28,10 @@ class MonitoringMode extends StatelessWidget {
           child: Row(
             children: const [
               Expanded(
-                child: ValueBoxTile.withHeadline(
-                    sensorAbsolute: sensorEnumAbsolute.pulse),
+                child: ValueBoxTile.withHeadline(sensorAbsolute: sensorEnumAbsolute.pulse),
               ),
               Expanded(
-                child: ValueBoxTile.withHeadline(
-                    sensorAbsolute: sensorEnumAbsolute.tempAbsolute),
+                child: ValueBoxTile.withHeadline(sensorAbsolute: sensorEnumAbsolute.tempAbsolute),
               ),
             ],
           ),

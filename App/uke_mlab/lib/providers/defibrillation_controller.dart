@@ -2,12 +2,13 @@ import 'dart:async';
 
 import 'package:get/get.dart';
 
-/// This Class Implements the Controller for the Defibrillator.
-/// This Controller Manages the State of the Defibrillator, Tracks the Timings, No of Shocks and Shock Power.
+/// This class implements the controller for the defibrillator.
+/// This controller manages the state of the defibrillator, tracks the timings, number of shocks and shock power.
 ///
-/// It Further implements helper Methods that are calles to change the Settings of the Defibrillator like, Synchronicity, ShockPower and Impedance.
-/// Note that most of the Class Variables use [GetX] and the corresponding Data Classes [RxString], [RxBool], [RxInt] to make the changes of these Variables observable for the Widgets that display these Values,
+/// It further implements helper methods that are calles to change the settings of the defibrillator like, synchronicity, shockPower and impedance.
+/// Note that most of the class variables use [GetX] and the corresponding data classes [RxString], [RxBool], [RxInt] to make the changes of these variables observable for the widgets that display these values.
 ///
+/// {@category Providers}
 class DefibrillationController extends GetxController {
   Stopwatch timerWatch = Stopwatch();
   Stopwatch lastWatch = Stopwatch();

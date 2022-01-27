@@ -23,6 +23,8 @@ import 'package:uke_mlab/widgets/toggle/toggle_mode_button_container.dart';
 /// + [DefibrillationStats]
 ///
 /// These Widgets Display the different Settings and Information needed for the Defibrillation.
+///
+/// {@category Toggle}
 class DefibrillationMode extends StatelessWidget {
   const DefibrillationMode({
     Key? key,

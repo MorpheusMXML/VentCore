@@ -12,6 +12,8 @@ import 'package:uke_mlab/utilities/enums/scenarios.dart';
 import 'package:uke_mlab/scenarios/abstract_scenario.dart';
 
 /// This implementation of [AbstractScenario] allows the data to loop and never end.
+///
+/// {@category Scenarios}
 class StandardScenario extends AbstractScenario {
   StandardScenario({
     scenarioType = scenariosEnum.standardScenario,

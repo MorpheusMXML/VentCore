@@ -3,10 +3,12 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/providers/defibrillation_controller.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 
-/// Displays the shock power for the defibrillation in Joule.
+/// Displays the shock power for the defibrillation in joule.
 /// If clicked on the shock power value, widget renders into a [Slider] for adjusting the shock power.
 ///
 /// The [DefibrillationController] handles all actions relating to the button and switch.
+///
+/// {@category DefibrillationMode}
 class ShockPower extends StatelessWidget {
   /// Displays all widgets related to the shock power.
 
@@ -18,8 +20,7 @@ class ShockPower extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    DefibrillationController defibrillationController =
-        Get.find<DefibrillationController>();
+    DefibrillationController defibrillationController = Get.find<DefibrillationController>();
 
     return Flexible(
       child: Container(
@@ -32,17 +33,13 @@ class ShockPower extends StatelessWidget {
                 ? [
                     Expanded(
                       child: Slider(
-                        label: defibrillationController.shockPower.value
-                            .toString(),
+                        label: defibrillationController.shockPower.value.toString(),
                         min: 0,
                         max: 250,
                         divisions: 10,
-                        onChangeEnd: (value) =>
-                            defibrillationController.shockClicked.toggle(),
-                        onChanged: (newValue) => defibrillationController
-                            .shockPower.value = newValue.toInt(),
-                        value: defibrillationController.shockPower.value
-                            .toDouble(),
+                        onChangeEnd: (value) => defibrillationController.shockClicked.toggle(),
+                        onChanged: (newValue) => defibrillationController.shockPower.value = newValue.toInt(),
+                        value: defibrillationController.shockPower.value.toDouble(),
                       ),
                     )
                   ]
@@ -62,8 +59,7 @@ class ShockPower extends StatelessWidget {
                           '${defibrillationController.shockPower}',
                           style: theme.shockPowerButtonTextStyle,
                         ),
-                        onPressed: () =>
-                            defibrillationController.shockClicked.toggle(),
+                        onPressed: () => defibrillationController.shockClicked.toggle(),
                       ),
                     ),
                     Flexible(

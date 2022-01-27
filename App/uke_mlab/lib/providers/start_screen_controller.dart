@@ -2,9 +2,11 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/screens/start_screen.dart';
 import 'package:uke_mlab/widgets/start_screen/patient_type_button.dart';
 
-/// Controller for the [StartScreen]
+/// Controller for the [StartScreen].
 ///
 /// Contains default weights and heights for adult, child and infant as well as the ability to change them
+///
+/// {@category Providers}
 class StartScreenController extends GetxController {
   /// Name of the patient
   RxString selectedString = ''.obs;

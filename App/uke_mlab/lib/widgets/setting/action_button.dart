@@ -3,7 +3,9 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 
-/// Button to increment or decrement a respective IPPv-field
+/// Button to increment or decrement a respective IPPV-field.
+///
+/// {@category IppvSettings}
 class ActionButton extends StatelessWidget {
   /// Name of the IPPv-field, can be 'Freq.', 'Vt' or 'PEEP'
   final String name;

@@ -4,6 +4,8 @@ import 'package:uke_mlab/widgets/defibrillation_mode/impedance_button.dart';
 
 /// Creates a column of the three possible [ImpedanceButton]s,  [ImpedanceButton.low], [ImpedanceButton.medium] and [ImpedanceButton.high].
 /// The headline "Impedance" is displayed on top of this column.
+///
+/// {@category DefibrillationMode}
 class ImpedanceContainer extends StatelessWidget {
   /// Displays all impedance related widgets.
 

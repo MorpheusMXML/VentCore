@@ -12,6 +12,8 @@ import 'package:uke_mlab/widgets/value_box/value_box_tile_nibd.dart';
 import 'package:uke_mlab/widgets/value_box/alarm_confirmation/alarm_confirmation_button_single_list.dart';
 
 /// Provides an overview which [ValueBoxTile] and [ValueBoxTileNIBD]s are currently represented on screen and which of them has a current active [alarmStatus].
+///
+/// {@category ScreenElementModels}
 class AbsAlarmFieldModel extends GetxController {
   /// The [OverlayEntry] for [AlarmButtonAbsoluteList].
   OverlayEntry? entry;
@@ -41,8 +43,7 @@ class AbsAlarmFieldModel extends GetxController {
   /// A set over all the [sensorEnumAbsolute]s representing the [ValueBoxTile] and [ValueBoxTileNIBD]s.
   ///
   /// Currently active in the defibrillation Screen for access to the corresponding [DataModelAbsolute]
-  final Set<sensorEnumAbsolute> defiSet =
-      {}; // will be unused at the moment, but here for completion
+  final Set<sensorEnumAbsolute> defiSet = {}; // will be unused at the moment, but here for completion
 
   /// Represents a subset of the current Set as list containing the current active [sensorEnumAbsolute]s.
   final RxList<sensorEnumAbsolute> activeList = <sensorEnumAbsolute>[].obs;
@@ -69,8 +70,7 @@ class AbsAlarmFieldModel extends GetxController {
     if (activeList.isNotEmpty) {
       activeList.removeWhere((sensorKey) =>
           systemState.alarmState[sensorKey]!["status"] == alarmStatus.none ||
-          systemState.alarmState[sensorKey]!["status"] ==
-              alarmStatus.confirmed);
+          systemState.alarmState[sensorKey]!["status"] == alarmStatus.confirmed);
     }
 
     // if there are not any Elements in list left and list is expanded => overlay

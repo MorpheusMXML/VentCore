@@ -3,17 +3,18 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/models/system_state.dart';
 import 'package:uke_mlab/providers/start_screen_controller.dart';
 
-import 'package:uke_mlab/widgets/graph_container/graph_view.dart';
+import 'package:uke_mlab/widgets/toggle/graph_view.dart';
 
 import 'package:uke_mlab/widgets/toggle/defibrillation_mode.dart';
 import 'package:uke_mlab/widgets/toggle/monitoring_mode.dart';
 import 'package:uke_mlab/widgets/toggle/ventilation_mode.dart';
 
-/// main screen of the application, shows [GraphView] and [VentilationMode] for monitoring, ventilation and defibrillation
+/// Main screen of the application, shows [GraphView] and [VentilationMode] for monitoring, ventilation and defibrillation.
+///
+/// {@category Screens}
 class MainScreen extends StatelessWidget {
   final SystemState systemState = Get.find<SystemState>();
-  final StartScreenController startScreenController =
-      Get.find<StartScreenController>();
+  final StartScreenController startScreenController = Get.find<StartScreenController>();
 
   MainScreen({
     Key? key,
@@ -28,10 +29,8 @@ class MainScreen extends StatelessWidget {
             // Ventilation
             systemState.graphList.resetListToStandardGraphs();
             if (systemState.selectedToggleView[1]) {
-              return Row(children: const [
-                Flexible(flex: 2, child: GraphView()),
-                Flexible(flex: 1, child: VentilationMode())
-              ]);
+              return Row(
+                  children: const [Flexible(flex: 2, child: GraphView()), Flexible(flex: 1, child: VentilationMode())]);
             }
             // Defibrillation
             else if (systemState.selectedToggleView[2]) {
@@ -42,10 +41,8 @@ class MainScreen extends StatelessWidget {
             }
             // Monitoring
             else {
-              return Row(children: const [
-                Flexible(flex: 2, child: GraphView()),
-                Flexible(flex: 1, child: MonitoringMode())
-              ]);
+              return Row(
+                  children: const [Flexible(flex: 2, child: GraphView()), Flexible(flex: 1, child: MonitoringMode())]);
             }
           },
         ));

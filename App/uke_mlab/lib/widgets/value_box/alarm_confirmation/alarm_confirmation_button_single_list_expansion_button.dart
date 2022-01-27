@@ -9,6 +9,8 @@ import 'package:uke_mlab/widgets/value_box/alarm_confirmation/alarm_confirmation
 /// Contains a button which expands an overlay for all active, non confirmed alarms of absolute value tiles.
 ///
 /// The List in the overlay consitst of [AlarmButtonAbsoluteList]s
+///
+/// {@category AlarmConfirmation}
 class AlarmConfirmationButtonSingleListExpansion extends StatelessWidget {
   const AlarmConfirmationButtonSingleListExpansion({
     Key? key,
@@ -24,9 +26,7 @@ class AlarmConfirmationButtonSingleListExpansion extends StatelessWidget {
         style: theme.alarmConfirmButtonStyle2,
         onPressed: systemState.absAlarmFieldModel.activeList.isEmpty
             ? null
-            : () => systemState.absAlarmFieldModel.listExpanded.value
-                ? hideOverlay(context)
-                : showOverlay(context),
+            : () => systemState.absAlarmFieldModel.listExpanded.value ? hideOverlay(context) : showOverlay(context),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

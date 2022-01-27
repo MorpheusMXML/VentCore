@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 
-/// Contains a key for each graph currently available in the app
+/// Contains a key for each graph currently available in the app.
+///
+/// {@category Enums}
 enum sensorEnumGraph {
   paw,
   flow,
@@ -13,7 +15,9 @@ enum sensorEnumGraph {
   nibd,
 }
 
-/// Contains a key for each absolute tile currently available in the app
+/// Contains a key for each absolute tile currently available in the app.
+///
+/// {@category Enums}
 enum sensorEnumAbsolute {
   hfAbsolute, // heartfrequency
   tempAbsolute, // temprerature in °C
@@ -98,7 +102,7 @@ extension SensorGraphAttributes on sensorEnumGraph {
       'yAxisUnit': '',
       'xAxisUnit': '',
       'color': AppTheme.nibdColor,
-      'graphLength': 10, // TODO: intermediate value
+      'graphLength': 10,
     }
   };
 
@@ -304,8 +308,7 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
   String get displayString => attributes[this]!['displayString'] as String;
 
   /// Returns a shortened version of the sensors represented by [sensorEnumAbsolute] name.
-  String get displayShortString =>
-      attributes[this]!['displayShortString'] as String;
+  String get displayShortString => attributes[this]!['displayShortString'] as String;
 
   /// Returns an abreviation for the sensors represented by [sensorEnumAbsolute] name.
   String get abbreviation => attributes[this]!['abbreviation'] as String;
@@ -322,8 +325,7 @@ extension SensorAbsoluteAttributes on sensorEnumAbsolute {
   int get confirmDuration => attributes[this]!['confirmDuration'] ?? 60;
 
   /// Returns the default boundary deviation for this sensor.
-  dynamic get boundaryDeviation =>
-      attributes[this]!['boundaryDeviation'] as dynamic;
+  dynamic get boundaryDeviation => attributes[this]!['boundaryDeviation'] as dynamic;
 
   /// Returns a Map for the default lower bound values of the sensor, containing information for 'adult', 'child' and 'infant'.
   Map get upperBound => attributes[this]!['upperBound'] as Map<String, dynamic>;
