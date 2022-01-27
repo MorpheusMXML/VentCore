@@ -33,10 +33,11 @@ class PatientTypeButton extends StatelessWidget {
       child: Obx(
         () => ElevatedButton(
           style: ElevatedButton.styleFrom(
-            minimumSize:
-                Size(800 / MediaQuery.of(context).devicePixelRatio, 200 / MediaQuery.of(context).devicePixelRatio),
-            primary:
-                startScreenController.selectedString.value == name ? theme.primarySwatch[15] : theme.primarySwatch[10],
+            minimumSize: Size(800 / MediaQuery.of(context).devicePixelRatio,
+                200 / MediaQuery.of(context).devicePixelRatio),
+            primary: startScreenController.selectedString.value == name
+                ? theme.primarySwatch[20]
+                : theme.primarySwatch[10],
             onPrimary: theme.inverseContrastColor,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),
           ),

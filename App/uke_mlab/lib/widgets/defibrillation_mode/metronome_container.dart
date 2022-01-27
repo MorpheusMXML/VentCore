@@ -19,7 +19,7 @@ class MetronomeContainer extends StatelessWidget {
 
     return Container(
       margin: const EdgeInsets.all(8),
-      color: theme.primarySwatch[40],
+      color: theme.primarySwatch[70],
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: const [

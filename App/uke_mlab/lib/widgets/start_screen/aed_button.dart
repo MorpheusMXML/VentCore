@@ -26,7 +26,7 @@ class AEDButton extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             fixedSize: Size(300 / MediaQuery.of(context).devicePixelRatio,
                 300 / MediaQuery.of(context).devicePixelRatio),
-            primary: theme.primarySwatch[25],
+            primary: theme.primarySwatch[50],
             onPrimary: AppTheme.alarmWarningColor,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),

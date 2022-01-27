@@ -19,7 +19,7 @@ class ImpedanceContainer extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
 
     return Container(
-      color: theme.primarySwatch[40],
+      color: theme.primarySwatch[70],
       margin: const EdgeInsets.all(6),
       child: Column(
         children: [

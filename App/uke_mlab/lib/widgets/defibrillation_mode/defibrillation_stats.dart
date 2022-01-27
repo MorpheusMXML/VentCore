@@ -25,7 +25,7 @@ class DefibrillationStats extends StatelessWidget {
 
     return Flexible(
       child: Container(
-        color: theme.primarySwatch[40],
+        color: theme.primarySwatch[70],
         margin: const EdgeInsets.all(8),
         child: Column(
           children: [

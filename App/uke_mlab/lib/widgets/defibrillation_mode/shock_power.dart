@@ -24,7 +24,7 @@ class ShockPower extends StatelessWidget {
 
     return Flexible(
       child: Container(
-        color: theme.primarySwatch[40],
+        color: theme.primarySwatch[70],
         margin: const EdgeInsets.only(left: 8, right: 8),
         child: Obx(
           () => Row(

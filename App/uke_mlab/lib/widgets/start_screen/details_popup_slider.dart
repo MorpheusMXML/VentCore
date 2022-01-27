@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:uke_mlab/providers/start_screen_controller.dart';
 import 'package:uke_mlab/utilities/app_theme.dart';
 
-/// This class contains the popup slider and its [Slider] functionality.
+/// This class contains the Popup Slider and its [Slider] functionality.
 ///
 /// ### Class Variables
 /// + [name] holds an instance of [String] which will be used as the displayed Name for this widget.
@@ -32,7 +32,7 @@ class PopupSlider extends StatelessWidget {
     return Container(
       height: 100 / MediaQuery.of(context).devicePixelRatio,
       margin: const EdgeInsets.fromLTRB(12, 12, 12, 12),
-      color: theme.primarySwatch[30],
+      color: theme.primarySwatch[60],
 
       /// The Flexibles contain the layout of the objects in the Container
       child: Row(
@@ -72,7 +72,8 @@ class PopupSlider extends StatelessWidget {
             height: 50 / MediaQuery.of(context).devicePixelRatio,
             width: 150 / MediaQuery.of(context).devicePixelRatio,
             child: Obx(
-              () => Text('${value.value.round().toString()}$unit', style: theme.patientPopupTextStyle),
+              () => Text('${value.value.round().toString()}$unit',
+                  style: theme.patientPopupTextStyle),
             ),
           ),
         ],

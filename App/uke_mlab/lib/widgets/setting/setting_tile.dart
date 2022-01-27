@@ -29,7 +29,7 @@ class SettingTile extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(8),
       child: Container(
-        color: theme.primarySwatch[40],
+        color: theme.primarySwatch[70],
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [

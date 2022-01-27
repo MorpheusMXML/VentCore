@@ -41,7 +41,7 @@ class DefibrillationMode extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width / 3.5,
             margin: const EdgeInsets.only(top: 12),
-            color: theme.primarySwatch[50],
+            color: theme.primarySwatch[80],
             child: Column(
               children: [
                 const SystemDiagnosis(),

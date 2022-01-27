@@ -22,7 +22,7 @@ class SystemDiagnosis extends StatelessWidget {
     DefibrillationController defibrillationController = Get.find<DefibrillationController>();
 
     return Container(
-      color: theme.primarySwatch[40],
+      color: theme.primarySwatch[70],
       margin: const EdgeInsets.all(8),
       child: Obx(
         () => Text(

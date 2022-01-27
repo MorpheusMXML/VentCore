@@ -29,17 +29,17 @@ class CO2Graph extends StatelessWidget {
 
     return Obx(
       () => SfCartesianChart(
-        backgroundColor: theme.primarySwatch[40],
+        backgroundColor: theme.primarySwatch[70],
         primaryYAxis: NumericAxis(
           majorGridLines: MajorGridLines(
             width: 1,
-            color: theme.primarySwatch[20],
+            color: theme.primarySwatch[40],
           ),
         ),
         primaryXAxis: NumericAxis(
           majorGridLines: MajorGridLines(
             width: 1,
-            color: theme.primarySwatch[20],
+            color: theme.primarySwatch[40],
           ),
         ),
         series: [

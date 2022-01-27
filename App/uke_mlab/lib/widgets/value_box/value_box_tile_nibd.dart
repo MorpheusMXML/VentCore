@@ -45,7 +45,7 @@ class ValueBoxTileNIBD extends StatelessWidget {
     SystemState systemState = Get.find<SystemState>();
 
     return Container(
-      color: theme.primarySwatch[50],
+      color: theme.primarySwatch[80],
       margin: const EdgeInsets.only(left: 4, right: 4, top: 4, bottom: 4),
       child: Column(
         children: [
@@ -121,9 +121,9 @@ class ValueBoxTileNIBD extends StatelessWidget {
     );
   }
 
-  /// Helper method to evaluate the backgroundcolor for alarms (default != [Theme.of(context).primarySwatch[50]])
-  Color? evaluateBorderColor(
-      BuildContext context, sensorEnumAbsolute sensorKey, RxMap<sensorEnumAbsolute, Map<String, dynamic>> alarmState) {
+  /// Helper method to evaluate the backgroundcolor for alarms (default != [Theme.of(context).primarySwatch[80]])
+  Color? evaluateBorderColor(BuildContext context, sensorEnumAbsolute sensorKey,
+      RxMap<sensorEnumAbsolute, Map<String, dynamic>> alarmState) {
     final ThemeData theme = Theme.of(context);
     alarmStatus? alarm = alarmState[sensorKey]!["status"];
 
@@ -135,7 +135,7 @@ class ValueBoxTileNIBD extends StatelessWidget {
       case alarmStatus.confirmed:
         return (alarmState[sensorKey]!["color"] as Color).withOpacity(0.65);
       default:
-        return theme.primarySwatch[50];
+        return theme.primarySwatch[80];
     }
   }
 }

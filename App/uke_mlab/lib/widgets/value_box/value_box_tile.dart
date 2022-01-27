@@ -99,7 +99,7 @@ class ValueBoxTile extends StatelessWidget {
                                     top: 4,
                                     bottom: 4,
                                   ), //left: 35, right: 35),
-                                  color: theme.primarySwatch[50],
+                                  color: theme.primarySwatch[80],
                                   child: Center(
                                     child: Text(
                                       dataModel.displayShortString,
@@ -136,8 +136,9 @@ class ValueBoxTile extends StatelessWidget {
     }
   }
 
-  /// Helper method to evaluate the backgroundcolor for alarms (default != [Theme.of(context).primarySwatch[50]])
-  Color? evaluateBorderColor(BuildContext context, RxMap<sensorEnumAbsolute, Map<String, dynamic>> alarmState) {
+  /// Helper method to evaluate the backgroundcolor for alarms (default != [Theme.of(context).primarySwatch[80]])
+  Color? evaluateBorderColor(BuildContext context,
+      RxMap<sensorEnumAbsolute, Map<String, dynamic>> alarmState) {
     final ThemeData theme = Theme.of(context);
 
     alarmStatus? alarm = alarmState[sensorAbsolute]!["status"];
@@ -149,7 +150,7 @@ class ValueBoxTile extends StatelessWidget {
       case alarmStatus.confirmed:
         return (alarmState[sensorAbsolute]!["color"] as Color).withOpacity(0.65);
       default:
-        return theme.primarySwatch[50];
+        return theme.primarySwatch[80];
     }
   }
 }

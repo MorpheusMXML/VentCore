@@ -27,14 +27,18 @@ class ToggleModeButton extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-          color: systemState.selectedToggleView[index] ? theme.primarySwatch[60] : theme.primarySwatch[40]),
+          color: systemState.selectedToggleView[index]
+              ? theme.primarySwatch[90]
+              : theme.primarySwatch[70]),
       width: 100,
       child: Padding(
         padding: const EdgeInsets.all(5),
         child: SvgPicture.asset(
           path,
           height: 40.0,
-          color: systemState.selectedToggleView[index] ? theme.contrastColor : theme.primarySwatch[12],
+          color: systemState.selectedToggleView[index]
+              ? theme.contrastColor
+              : theme.primarySwatch[30],
         ),
       ),
     );

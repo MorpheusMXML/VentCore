@@ -34,13 +34,13 @@ class HistoryGraph extends StatelessWidget {
     return Obx(
       () => SfCartesianChart(
         tooltipBehavior: TooltipBehavior(enable: true),
-        backgroundColor: theme.primarySwatch[40],
+        backgroundColor: theme.primarySwatch[70],
         primaryYAxis: NumericAxis(
           plotOffset: 5,
           desiredIntervals: 10,
           majorGridLines: MajorGridLines(
             width: 1,
-            color: theme.primarySwatch[20],
+            color: theme.primarySwatch[40],
             dashArray: const <double>[2, 3],
           ),
         ),
@@ -50,7 +50,7 @@ class HistoryGraph extends StatelessWidget {
           desiredIntervals: 25,
           majorGridLines: MajorGridLines(
             width: 0,
-            color: theme.primarySwatch[20],
+            color: theme.primarySwatch[40],
           ),
         ),
         series: [

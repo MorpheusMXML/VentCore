@@ -27,7 +27,7 @@ class AlarmButtonAbsoluteList extends StatelessWidget {
           maxWidth: AbsoluteAlarmFieldConst.width,
         ),
         child: Container(
-          color: theme.primarySwatch[50],
+          color: theme.primarySwatch[80],
           padding: const EdgeInsets.only(
             left: AbsoluteAlarmFieldConst.horizontalMargin,
             right: AbsoluteAlarmFieldConst.horizontalMargin,

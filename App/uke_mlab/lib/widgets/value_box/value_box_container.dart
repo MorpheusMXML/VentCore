@@ -144,7 +144,7 @@ class ValueBoxContainer extends StatelessWidget {
         child: Container(
           decoration: ShapeDecoration(
             shape: const RoundedRectangleBorder(),
-            color: theme.primarySwatch[40],
+            color: theme.primarySwatch[70],
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

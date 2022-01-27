@@ -8,4 +8,5 @@
 - W08 Slides - Corvin Biebach - Usability for Mobile [PDF](W08-Testing_and_Quality_Management.pdf)
 - W09 Slides - M2 - Design Review [PDF](W09-M2-Design_Review.pdf)
 - W10 Slides - Fynn Menk - Build and Release Management [PDF](W10-Build_and_Release_Management.pdf)
-...
+- W11 Slides - Noah Scheld - Rollout and Delivery Management [PDF](W11-Rollout_and_Delivery_Management.pdf)
+- W14 Slides - [M3] Final Exhibition [PDF](W14-[M3]-Final Exhibition.pdf)

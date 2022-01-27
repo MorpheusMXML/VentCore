@@ -31,7 +31,7 @@ class CprGraph extends StatelessWidget {
     return Obx(
       () => SfCartesianChart(
         tooltipBehavior: TooltipBehavior(enable: true),
-        backgroundColor: theme.primarySwatch[40],
+        backgroundColor: theme.primarySwatch[70],
         primaryYAxis: NumericAxis(
           // This disables String labels at x-axis
           labelStyle: const TextStyle(fontSize: 0.0001),
@@ -58,7 +58,7 @@ class CprGraph extends StatelessWidget {
           minimum: 2,
           majorGridLines: MajorGridLines(
             width: 1,
-            color: theme.primarySwatch[20],
+            color: theme.primarySwatch[40],
           ),
         ),
         primaryXAxis: NumericAxis(
@@ -67,7 +67,7 @@ class CprGraph extends StatelessWidget {
           desiredIntervals: 25,
           majorGridLines: MajorGridLines(
             width: 1,
-            color: theme.primarySwatch[20],
+            color: theme.primarySwatch[40],
           ),
         ),
         series: <ColumnSeries<ChartData, dynamic>>[
