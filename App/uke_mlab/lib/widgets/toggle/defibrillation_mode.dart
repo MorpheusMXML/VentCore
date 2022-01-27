@@ -8,7 +8,7 @@ import 'package:uke_mlab/widgets/defibrillation_mode/metronome_container.dart';
 import 'package:uke_mlab/widgets/defibrillation_mode/shock_power.dart';
 import 'package:uke_mlab/widgets/defibrillation_mode/sync_container.dart';
 import 'package:uke_mlab/widgets/defibrillation_mode/system_diagnosis.dart';
-import 'package:uke_mlab/widgets/toggle/toggle_mode_button_container.dart';
+import 'package:uke_mlab/widgets/toggle/toggle_mode_button.dart';
 
 /// This Class Renders the [Widget] that Structures the Defibrillation Screen.
 ///
@@ -68,7 +68,7 @@ class DefibrillationMode extends StatelessWidget {
           ),
         ),
         const Spacer(),
-        const ToggleModeButtonContainer(),
+        ToggleModeButton(),
       ],
     );
   }
