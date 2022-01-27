@@ -399,10 +399,10 @@ And also for providing simulation / real patient data and helping with DataGener
 </div>
 
 <!-- MARKDOWN LINKS & IMAGES -->
-[issues-shield]: https://img.shields.io/badge/issues-167-brightgreen?style=for-the-badge
+[issues-shield]: https://img.shields.io/badge/issues-169-brightgreen?style=for-the-badge
 [issues-url]: https://git.informatik.uni-hamburg.de/mast/teaching/mlab/wt202122/uke/-/issues
 
-[commit-shield]:https://img.shields.io/badge/commits-1010-orange?style=for-the-badge
+[commit-shield]:https://img.shields.io/badge/commits-1647-orange?style=for-the-badge
 [commit-url]:https://git.informatik.uni-hamburg.de/mast/teaching/mlab/wt202122/uke/-/commits/main/
 
 [team-shield]:https://img.shields.io/badge/Contact-team-blue?style=for-the-badge
