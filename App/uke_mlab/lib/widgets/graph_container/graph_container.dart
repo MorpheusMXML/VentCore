@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:uke_mlab/models/enums.dart';
-import 'package:uke_mlab/models/model.dart';
-import 'package:uke_mlab/widgets/graph/history_graph.dart';
-import 'package:uke_mlab/widgets/graph_container/alarm_confirm_button.dart';
-import 'package:uke_mlab/widgets/graph_container/graph_alarm_message.dart';
-import 'package:uke_mlab/widgets/value_box/value_box_container.dart';
-import 'package:uke_mlab/widgets/graph/graph.dart';
 
+import 'package:uke_mlab/utilities/enums/sensor.dart';
+
+import 'package:uke_mlab/widgets/graph_container/graph_alarm_border.dart';
+import 'package:uke_mlab/widgets/graph_container/graph_row.dart';
+
+/// Provides a frame for everything relating to a graph.
+///
+/// Includes standard sizes i.e. [ConstrainedBox] as a Container
+///
+/// {@category GraphContainer}
 class GraphContainer extends StatelessWidget {
-  final sensorEnum sensor;
+  /// Uses a Stack to divide [GraphAlarmBorder] and the [GraphRow]
+  final sensorEnumGraph sensor;
 
+  /// Creates instance of [GraphContainer].
   const GraphContainer({
     Key? key,
     required this.sensor,
@@ -18,79 +22,34 @@ class GraphContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
-
-    return Obx(() {
-      switch (dataModel.alarmState.value) {
-        case 'alarm':
-          return Container(
-            color: Colors.red,
-            margin: const EdgeInsets.only(bottom: 8),
-            padding: const EdgeInsets.fromLTRB(12, 12, 12, 24),
-            child: Column(
-              children: [
-                ConstrainedBox(
-                  constraints: const BoxConstraints(maxHeight: 150),
-                  child: Row(
-                    children: [
-                      AlarmConfirmButton(sensor: sensor),
-                      const SizedBox(width: 8),
-                      ...getGraphRow(),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 8),
-                const GraphAlarmMessage(),
-              ],
+    return ConstrainedBox(
+      constraints: const BoxConstraints(maxHeight: 200),
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 8),
+        child: Stack(
+          children: [
+            evaluateGraphAlarmBorder(),
+            Container(
+              margin: const EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+              child: GraphRow(
+                sensor: sensor,
+              ),
             ),
-          );
-        case 'suppressed':
-          return Container(
-            color: Colors.red,
-            padding: const EdgeInsets.all(12),
-            margin: const EdgeInsets.only(bottom: 8),
-            child: ConstrainedBox(
-                constraints: const BoxConstraints(maxHeight: 150),
-                child: Row(
-                  children: getGraphRow(),
-                )),
-          );
-        default:
-          return Container(
-            margin: const EdgeInsets.only(bottom: 8),
-            child: ConstrainedBox(
-                constraints: const BoxConstraints(maxHeight: 150),
-                child: Row(
-                  children: getGraphRow(),
-                )),
-          );
-      }
-    });
+          ],
+        ),
+      ),
+    );
   }
 
-  List<Widget> getGraphRow() {
-    List<Widget> graphRow = [];
-
-    if (sensor == sensorEnum.nibd) {
-      // TODO: more or less hardcoded here
-      graphRow.add(Expanded(
-        child: HistoryGraph(graphData: {
-          'data': [
-            NIBDdata(DateTime.utc(2021, 12, 9, 11, 00), 120, 80),
-            NIBDdata(DateTime.utc(2021, 12, 9, 11, 05), 140, 95),
-            NIBDdata(DateTime.utc(2021, 12, 9, 11, 10), 180, 100),
-            NIBDdata(DateTime.utc(2021, 12, 9, 11, 15), 185, 75),
-            NIBDdata(DateTime.utc(2021, 12, 9, 11, 20), 200, 110),
-          ].obs,
-          'color': Colors.red,
-        }),
-      ));
+  /// evaluates whether the corresponding graph can throw errors with our mocked data, if not => set a container as background
+  Widget evaluateGraphAlarmBorder() {
+    if (SensorMapping.sensorMap[sensor] == null) {
+      return Container();
     } else {
-      graphRow.add(Expanded(child: Graph(sensor: sensor)));
-      graphRow.add(const SizedBox(width: 8));
-      graphRow.add(ValueBoxContainer(sensor: sensor));
+      return GraphAlarmBorder(
+        sensor: SensorMapping.sensorMap[sensor] as sensorEnumAbsolute,
+      );
     }
-
-    return graphRow;
   }
 }

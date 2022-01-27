@@ -1,62 +1,81 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:uke_mlab/widgets/start_screen/aed_button.dart';
 import 'package:uke_mlab/widgets/start_screen/patient_type_button.dart';
 import 'package:uke_mlab/widgets/start_screen/continue_button.dart';
 import 'package:uke_mlab/widgets/start_screen/details_popup.dart';
 import 'package:uke_mlab/widgets/start_screen/skip_button.dart';
 
+/// This class contains the initial screen for the app.
+///
+/// It uses the widgets [PatientTypeButton], [ContinueButton], [SkipButton], [AEDButton], [DetailsPopup].
+///
+/// {@category Screens}
 class StartScreen extends StatelessWidget {
   const StartScreen({
     Key? key,
   }) : super(key: key);
 
+  /// An [Map] is created with entries to match the Text written on the buttons to the Image.
   @override
   Widget build(BuildContext context) {
     Map<String, String> imageMap = {
-      'Adult': 'assets/icons/adults2.svg',
+      'Adult': 'assets/icons/parents.svg',
       'Child': 'assets/icons/children.svg',
       'Infant': 'assets/icons/newborn.svg',
     };
-
-    return Row(
-      children: [
-        Flexible(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children:
-                // TODO: precache images so loading doesn't take so long
-                // https://stackoverflow.com/questions/66872111/
-                imageMap.entries
+    return SingleChildScrollView(
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: Row(
+          children: [
+            /// This first flexible contains the left side of the Start Screen with the Preset-Buttons.
+            /// The map with the entries for the Buttons is used to create the buttons with matching Text and Image.
+            Flexible(
+              flex: 2,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: imageMap.entries
                     .map((entry) => PatientTypeButton(
                           name: entry.key,
-                          image: SvgPicture.asset(entry.value, height: 70),
+                          image: SvgPicture.asset(
+                            entry.value,
+                            height: 70,
+                            width: 70,
+                          ),
                         ))
                     .toList(),
-          ),
-        ),
-        Flexible(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const DetailsPopup(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+              ),
+            ),
+
+            /// This second flexible contains the right side of the Start Screen with the Patient details, Skip/Confirm and AED-Buttons.
+            Flexible(
+              flex: 3,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Column(
-                    children: const [
-                      ContinueButton(),
-                      SkipButton(),
+                  const DetailsPopup(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Column(
+                        children: const [
+                          ContinueButton(),
+                          SkipButton(),
+                        ],
+                      ),
+                      const AEDButton(),
                     ],
                   ),
-                  const AEDButton(),
                 ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }

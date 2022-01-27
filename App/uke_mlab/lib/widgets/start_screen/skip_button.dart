@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uke_mlab/models/enums.dart';
-import 'package:uke_mlab/utilities/screen_controller.dart';
+import 'package:uke_mlab/providers/screen_controller.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 
+/// This class contains the [SkipButton] and its functionality.
+///
+/// It provides a way to continue to the main screen without selecting patient preset and values.
+/// Instead it just continues to the main screen with default values.
+///
+/// {@category StartScreen}
 class SkipButton extends StatelessWidget {
   const SkipButton({
     Key? key,
@@ -10,29 +16,17 @@ class SkipButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     final screenController = Get.find<ScreenController>();
 
+    /// The Container contains the Buttons configuration and functionality.
     return Container(
       alignment: Alignment.centerRight,
       margin: const EdgeInsets.fromLTRB(0, 0, 10, 12),
       child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          fixedSize: const Size(200, 60),
-          primary: const Color(0xffeeeeee),
-          onPrimary: Colors.black,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(75),
-          ),
-        ),
-        child: const Text('Skip', style: TextStyle(fontSize: 20)),
-        onPressed: () {
-          // TODO: [BUGFIX] Currently using arguments instead of changing value
-          // of observable variable selectedSetting used in statusbar because
-          // startScreenController is deleted after page navigation?
-          Get.offNamed(
-              screenController.changeScreen1(screenChangeButtonEnum.aedButton),
-              arguments: {'patientType': 'Adult'});
-        },
+        style: theme.navigationButtonStyle,
+        child: Text('Skip', style: theme.navigationButtonTextStyle),
+        onPressed: () => screenController.skipButton(),
       ),
     );
   }

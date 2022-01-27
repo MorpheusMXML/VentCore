@@ -1,21 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:uke_mlab/models/system_state.dart';
+import 'package:uke_mlab/utilities/constants/absolute_alarm_field_constants.dart';
 
+/// Contains a button allowing the user to select IPPV mode.
+///
+/// {@category IppvSettings}
 class IPPVButton extends StatelessWidget {
   const IPPVButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final SystemState systemState = Get.find<SystemState>();
+
     return Container(
-      color: const Color(0xFF25232A),
       width: double.infinity,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          primary: const Color(0xFF5AC8FA),
+      margin: const EdgeInsets.only(
+        left: AbsoluteAlarmFieldConst.horizontalMargin,
+        right: AbsoluteAlarmFieldConst.horizontalMargin,
+        top: AbsoluteAlarmFieldConst.verticalMargin,
+      ),
+      child: Center(
+        child: Obx(
+          () => Container(
+            decoration:
+                BoxDecoration(color: Colors.lightBlue[300], borderRadius: const BorderRadius.all(Radius.circular(16))),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton(
+                isExpanded: true,
+                value: systemState.ippvModel.selectedIPPVMode.value,
+                onChanged: (newValue) => systemState.ippvModel.selectedIPPVMode.value = '$newValue',
+                items: <String>['IPPV', 'S-IPPV', 'PCV', 'BiLevel + ASB', 'CPAP', 'CPAP + ASB', 'CPR'].map((value) {
+                  return DropdownMenuItem(
+                    child: Container(margin: const EdgeInsets.only(left: 8), child: Text(value)),
+                    value: value,
+                  );
+                }).toList(),
+              ),
+            ),
+          ),
         ),
-        child: const Text('IPPV', style: TextStyle(fontSize: 25)),
-        onPressed: () {},
       ),
     );
   }

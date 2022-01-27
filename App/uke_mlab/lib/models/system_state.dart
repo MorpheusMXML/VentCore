@@ -1,59 +1,127 @@
-import 'dart:async';
-
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uke_mlab/models/enums.dart';
-import 'package:uke_mlab/models/model.dart';
-// Atm unused
-// TODO address in DataModel update/set methods
-// TODO use in use in AlarmController
+import 'package:uke_mlab/models/data_models/model_absolute.dart';
 
-class SystemState {
-  screenStatusEnum screenStatus = screenStatusEnum.topLevelScreen;
-  patientTypeEnum patientType = patientTypeEnum.none;
-  final Map<sensorEnum, boundaryStateEnum> violationStates = {};
+import 'package:uke_mlab/models/screen_element_models/general_alarms.dart';
+import 'package:uke_mlab/models/screen_element_models/absolute_alarm_field_model.dart';
+import 'package:uke_mlab/models/screen_element_models/graph_list.dart';
+import 'package:uke_mlab/models/screen_element_models/ippv_model.dart';
+import 'package:uke_mlab/models/screen_element_models/smart_adjustment_model.dart';
+import 'package:uke_mlab/models/screen_element_models/theme_model.dart';
+import 'package:uke_mlab/utilities/enums/alarm_message.dart';
+
+import 'package:uke_mlab/utilities/enums/alarm_status.dart';
+import 'package:uke_mlab/utilities/enums/sensor.dart';
+import 'package:uke_mlab/utilities/enums/screen_status.dart';
+import 'package:uke_mlab/utilities/enums/patient_type.dart';
+
+import 'package:uke_mlab/utilities/app_theme.dart';
+
+import 'package:uke_mlab/scenarios/abstract_scenario.dart';
+
+import 'package:uke_mlab/screens/main_screen.dart';
+
+/// Superclass holding references to various models for screen elements as well as holding the top level information of current status of the system.
+///
+/// {@category SystemState}
+class SystemState extends GetxController {
+  /// Contains global information whether an [AbstractScenario] is active.
   bool scenarioStarted = false;
 
-  // More or less copy pasted from old mockup class
-  RxList<sensorEnum> graphList = <sensorEnum>[].obs;
+  /// Contains information which screen is currently active using an element of [screenStatusEnum].
+  screenStatusEnum screenStatus = screenStatusEnum.patientSettingScreen;
 
-  
+  /// Contains information which patient Type is currently active using an element of [patientTypeEnum].
+  patientTypeEnum patientType = patientTypeEnum.none;
 
-  RxBool addGraph = false.obs;
+  /// Contains information which of the three monitoring, ventilation, defibrillation is currently active in [MainScreen] as a list of true or false values corresponding to the order given above.
+  RxList<bool> selectedToggleView = [true, false, false].obs;
 
-  Map<String, RxInt> ippvValues = {
-    'Freq.': 20.obs,
-    'Vt': 40.obs,
-    'PEEP': 60.obs
-  };
+  /// Contains global information about the status of the [sensorEnumAbsolute].
+  ///
+  /// Includes is in which [alarmStatus],
+  /// is of what priority, corresponds to which color and which alarm message will be printed on request
+  /// this is done via the RxMap with the following keys:
+  /// "priority" for priority
+  /// "message" for alarm message
+  /// "enum" for current [alarmStatus]
+  /// "color" for color
+  final RxMap<sensorEnumAbsolute, Map<String, dynamic>> alarmState = <sensorEnumAbsolute, Map<String, dynamic>>{}.obs;
 
-  RxString alarmMessage = ''.obs;
+  /// A reference to the current [GeneralAlarms] in use.
+  final GeneralAlarms generalAlarms = GeneralAlarms();
 
-  void incrementIPPV(name) {
-    ippvValues[name]!.value = ippvValues[name]!.value + 1;
-  }
+  /// A reference to the current [GraphList] in use.
+  final GraphList graphList = GraphList();
 
-  void decrementIPPV(name) {
-    ippvValues[name]!.value = ippvValues[name]!.value - 1;
-  }
+  /// A reference to the current [AbsAlarmFieldModel] in use.
+  final AbsAlarmFieldModel absAlarmFieldModel = AbsAlarmFieldModel();
 
-  void switchToAlarm(int type) {
-    // if ((allGraphs[type]['alarm'] as RxString).value == 'none') {
-    //   (allGraphs[type]['alarm'] as RxString).value = 'alarm';
-  }
+  /// A reference to the current [IppvModel] in use.
+  final IppvModel ippvModel = IppvModel();
 
-  void activateTimer() {
-    for (var sensor in sensorEnum.values) {
-      DataModel dataModel = Get.find<DataModel>(tag: sensor.toString());
-      Timer.periodic(const Duration(milliseconds: 2000), (timer) {
-        dataModel.updateValues();
-      });
-    }
-  }
+  /// A reference to the current [ThemeModel] in use.
+  final ThemeModel themeModel = ThemeModel();
+
+  /// A reference to the current [SmartAdjustmentMap] in use. Used for smartAdjustment.
+  final SmartAdjustmentMap smartAdjustmentMap = SmartAdjustmentMap();
 
   // SystemState initated with no violations at place and screenStatus as topLevelScreen
   SystemState() {
-    for (var sensor in sensorEnum.values) {
-      violationStates[sensor] = boundaryStateEnum.inBoundaries;
+    for (var sensor in sensorEnumAbsolute.values) {
+      alarmState[sensor] = {
+        'priority': alarmStatus.none.priority,
+        'message': alarmMessage.none.message,
+        'status': alarmStatus.none,
+        'color': AppTheme.alarmNoneColor,
+      };
     }
+  }
+
+  /// Get [alarmState].[alarmStatus.priority] for given [sensor].
+  int getAlarmStatePriority(sensorEnumAbsolute sensor) {
+    return alarmState[sensor]!['priority'];
+  }
+
+  /// Get [alarmState].[alarmMessage] for given [sensor].
+  String getAlarmStateMessage(sensorEnumAbsolute sensor) {
+    return alarmState[sensor]!['message'];
+  }
+
+  /// Get [alarmState].[alarmStatus.status]  for given [sensor].
+  alarmStatus getAlarmStateStatus(sensorEnumAbsolute sensor) {
+    return alarmState[sensor]!['status'];
+  }
+
+  /// Get [alarmState].[alarmStatus.color] for given [sensor].
+  Color getAlarmStateColor(sensorEnumAbsolute sensor) {
+    return alarmState[sensor]!['color'];
+  }
+
+  /// overwrites [selectedToggleView]s value with [newToggleView] for usage on switch between
+  /// monitoring, ventilation and defibrillation representation in [MainScreen]
+  void setSelectedToggleView(List<bool> newToggleView) {
+    for (var sensor in sensorEnumAbsolute.values) {
+      Get.find<DataModelAbsolute>(tag: sensor.name).hideOverlay();
+    }
+    selectedToggleView.value = newToggleView;
+    update();
+  }
+
+  ///Set [alarmState] for given [sensor].
+  void setAlarmState(sensorEnumAbsolute sensor, int? priority, String? message, alarmStatus? status, Color? color) {
+    alarmState[sensor] = {
+      'priority': priority ?? alarmState[sensor]!['priority'],
+      'message': message ?? getAlarmStateMessage(sensor),
+      'status': status ?? alarmState[sensor]!['status'],
+      'color': color ?? alarmState[sensor]!['color'],
+    };
+    graphList.evaluateActiveGraphAbsolutes();
+    absAlarmFieldModel.evaluateActiveList();
+  }
+
+  /// resets the [SystemState]s elements (currently only [ippvModel])
+  void resetSystemState() {
+    ippvModel.resetIPPV();
   }
 }

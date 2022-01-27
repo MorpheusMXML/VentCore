@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 
+/// Widget displaying an error message screen.
+///
+/// {@category Miscellaneous}
 class ErrorMessage extends StatelessWidget {
   final FlutterErrorDetails details;
   const ErrorMessage({
@@ -9,12 +13,14 @@ class ErrorMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
     return Container(
       alignment: Alignment.center,
       margin: const EdgeInsets.all(32),
       child: Text(
         'Error!\n\n${details.exception}',
-        style: const TextStyle(color: Colors.blue, fontSize: 24),
+        style: theme.errorMessageTextStyle,
         softWrap: true,
         textAlign: TextAlign.center,
         textDirection: TextDirection.ltr,

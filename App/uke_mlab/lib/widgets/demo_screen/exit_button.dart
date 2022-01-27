@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:uke_mlab/providers/screen_controller.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
+import 'package:uke_mlab/utilities/enums/screen_status.dart';
 
+/// Exit button for menus
+///
+/// Uses [ScreenController.menuExitButton] to lead back to previous screen denoted by [screenStatusEnum]
+///
+/// {@category DemoScreen}
 class ExitButton extends StatelessWidget {
   const ExitButton({
     Key? key,
@@ -8,20 +16,18 @@ class ExitButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
     return Container(
       alignment: Alignment.centerRight,
       margin: const EdgeInsets.fromLTRB(0, 0, 50, 50),
       child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          fixedSize: const Size(200, 60),
-          primary: const Color(0xFFEEEEEE),
-          onPrimary: Colors.black,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(75),
-          ),
+        style: theme.navigationButtonStyle,
+        child: Text(
+          'Exit',
+          style: theme.navigationButtonTextStyle,
         ),
-        child: const Text('Exit', style: TextStyle(fontSize: 20)),
-        onPressed: () => Get.offNamed('/start_screen'),
+        onPressed: () => Get.find<ScreenController>().menuExitButton(),
       ),
     );
   }

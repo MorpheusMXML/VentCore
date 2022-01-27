@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uke_mlab/providers/toggle_controller.dart';
+import 'package:uke_mlab/models/system_state.dart';
 
+/// Button allowing user to toggle the currently used theme (standard setting is dark).
+///
+/// {@category Menu}
 class ToggleThemeButton extends StatelessWidget {
   const ToggleThemeButton({
     Key? key,
@@ -9,11 +12,11 @@ class ToggleThemeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ToggleController toggleController = Get.find<ToggleController>();
+    SystemState systemState = Get.find<SystemState>();
 
     return IconButton(
-      onPressed: () => toggleController.toggleTheme(),
-      icon: Obx(() => toggleController.icon.value),
+      onPressed: () => systemState.themeModel.toggleTheme(),
+      icon: Obx(() => systemState.themeModel.toggleIcon.value),
     );
   }
 }

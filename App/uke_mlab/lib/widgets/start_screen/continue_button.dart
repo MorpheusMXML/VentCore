@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uke_mlab/models/enums.dart';
 import 'package:uke_mlab/providers/start_screen_controller.dart';
-import 'package:uke_mlab/utilities/screen_controller.dart';
+import 'package:uke_mlab/providers/screen_controller.dart';
+import 'package:uke_mlab/utilities/app_theme.dart';
 
+/// This class contains the continue button and its functionality.
+///
+/// It provides a way to continue to the main screen with the previously selected patient preset and values.
+///
+/// {@category StartScreen}
 class ContinueButton extends StatelessWidget {
   const ContinueButton({
     Key? key,
@@ -11,33 +16,26 @@ class ContinueButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     final startScreenController = Get.find<StartScreenController>();
     final screenController = Get.find<ScreenController>();
 
+    /// The returned Obx contains the behaviour and configuration of the Button
     return Obx(
       () => Container(
         alignment: Alignment.centerRight,
         margin: const EdgeInsets.fromLTRB(0, 0, 10, 12),
         child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            fixedSize: const Size(200, 60),
-            onSurface: const Color(0xffeeeeee),
-            primary: const Color(0xffeeeeee),
-            onPrimary: Colors.black,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(75)),
-          ),
-          onPressed: startScreenController.selectedString.toString() != ''
-              ? () => Get.offNamed(
-                    screenController.changeScreen2(
-                        screenChangeButtonEnum.continueButton,
-                        startScreenController.selectedString.value),
-                    arguments: {
-                      'patientType': startScreenController.selectedString.value
-                    },
-                  )
+          style: theme.navigationButtonStyle,
+          onPressed: startScreenController.selectedString.value != ''
+              ? () => screenController.continueButton(startScreenController.selectedString.value)
               : null,
-          child: const Text('Continue', style: TextStyle(fontSize: 20)),
+
+          /// The Child of the container holds the Text on the Button
+          child: Text(
+            'Continue',
+            style: theme.navigationButtonTextStyle,
+          ),
         ),
       ),
     );

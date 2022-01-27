@@ -1,0 +1,70 @@
+dartdoc:
+     categories:
+          "DataModels":
+               markdown: doc/DataModels.md
+               name: DataModels
+          "ScreenElementModels":
+               markdown: doc/ScreenElementModels.md
+               name: ScreenElementModels
+          "SystemState":
+               markdown: doc/SystemState.md
+               name: SystemState
+          "Providers":
+               markdown: doc/Providers.md
+               name: Providers
+          "Scenarios":
+               markdown: doc/Scenarios.md
+               name: Scenarios
+          "Screens":
+               markdown: doc/Screens.md
+               name: Screens
+          "Constants":
+               markdown: doc/Constants.md
+               name: Constants
+          "Enums":
+               markdown: doc/Enums.md
+               name: Enums
+          "Utilities":
+               markdown: doc/Utilities.md
+               name: Utilities
+          "AppBar":
+               markdown: doc/AppBar.md
+               name: AppBar
+          "DefibrillationMode":
+               markdown: doc/DefibrillationMode.md
+               name: DefibrillationMode
+          "DemoScreen":
+               markdown: doc/DemoScreen.md
+               name: DemoScreen
+          "Graph":
+               markdown: doc/Graph.md
+               name: Graph
+          "GraphContainer":
+               markdown: doc/GraphContainer.md
+               name: GraphContainer
+          "Info":
+               markdown: doc/Info.md
+               name: Info
+          "Menu":
+               markdown: doc/Menu.md
+               name: Menu
+          "Miscellaneous":
+               markdown: doc/Miscellaneous.md
+               name: Miscellaneous
+          "IppvSettings":
+               markdown: doc/IppvSettings.md
+               name: IppvSettings
+          "StartScreen":
+               markdown: doc/StartScreen.md
+               name: StartScreen
+          "Toggle":
+               markdown: doc/Toggle.md
+               name: Toggle
+          "AlarmConfirmation":
+               markdown: doc/AlarmConfirmation.md
+               name: AlarmConfirmation
+          "ValueBox":
+               markdown: doc/ValueBox.md
+               name: ValueBox
+     categoryOrder: ["AlarmConfirmation", "AppBar", "Constants", "DataModels","DefibrillationMode","DemoScreen","Enums","Graph","GraphContainer","Info","IppvSettings","Menu","Miscellaneous","Providers","Scenarios","ScreenElementModels","Screens","StartScreen","SystemState","Toggle","Utilities","ValueBox"]
+  

@@ -2,9 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:uke_mlab/widgets/info/info_container.dart';
 import 'package:uke_mlab/widgets/setting/setting_container.dart';
 import 'package:uke_mlab/widgets/toggle/toggle_mode_button.dart';
-import 'package:uke_mlab/widgets/value_box/value_tile.dart';
-import 'package:uke_mlab/models/enums.dart';
+import 'package:uke_mlab/widgets/value_box/alarm_confirmation/alarm_confirmation_button_row.dart';
+import 'package:uke_mlab/widgets/value_box/value_box_tile.dart';
+import 'package:uke_mlab/utilities/enums/sensor.dart';
 
+/// Renders the [Widget] that structures the right part of the ventilation screen.
+///
+/// It Calls the Custom Widgets:
+/// + [ValueBoxTile] for [sensorEnumAbsolute.breathfrequency], [sensorEnumAbsolute.mve] and [sensorEnumAbsolute.hfAbsolute]
+/// + [SettingContainer] for IPPv-setting
+/// + [InfoContainer]
+/// + [AlarmConfirmationRow]
+/// + [ToggleModeButtonContainer]
+///
+/// {@category Toggle}
 class VentilationMode extends StatelessWidget {
   const VentilationMode({
     Key? key,
@@ -12,8 +23,6 @@ class VentilationMode extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Move to a controller
-
     List<Map<String, Object>> infoData = [
       {'type': 'pPeak', 'value': 50.12, 'unit': 'mBar'},
       {'type': 'pPlat', 'value': 4.58, 'unit': 'mBar'},
@@ -30,26 +39,36 @@ class VentilationMode extends StatelessWidget {
     return Column(
       children: [
         Flexible(
-          flex: 1,
+          flex: 8,
           child: Row(
             children: const [
-              ValueTile(sensor: sensorEnum.mve),
-              ValueTile(sensor: sensorEnum.breathFrequency),
+              Expanded(
+                child: ValueBoxTile.withHeadline(sensorAbsolute: sensorEnumAbsolute.breathfrequency),
+              ),
+              Expanded(child: ValueBoxTile.withHeadline(sensorAbsolute: sensorEnumAbsolute.mve)),
             ],
           ),
         ),
         Flexible(
-          flex: 1,
+          flex: 8,
           child: Row(
             children: [
-              Expanded(child: InfoContainer(data: infoData)),
-              const ValueTile(sensor: sensorEnum.breathFrequency),
+              Expanded(
+                child: InfoContainer(data: infoData),
+              ),
+              const Expanded(
+                child: ValueBoxTile.withHeadline(sensorAbsolute: sensorEnumAbsolute.hfAbsolute),
+              ),
             ],
           ),
         ),
         Flexible(
-          flex: 2,
+          flex: 13,
           child: SettingContainer(data: settingData),
+        ),
+        const Flexible(
+          flex: 3,
+          child: AlarmConfirmationRow(),
         ),
         ToggleModeButton(),
       ],
