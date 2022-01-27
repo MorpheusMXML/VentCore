@@ -101,8 +101,10 @@ extension CustomColors on ThemeData {
         100: const Color(0xFF000000),
       });
 
-  Color? get contrastColor => Get.isDarkMode ? primarySwatch[0] : primarySwatch[100];
-  Color? get inverseContrastColor => Get.isDarkMode ? primarySwatch[100] : primarySwatch[0];
+  Color? get contrastColor =>
+      Get.isDarkMode ? primarySwatch[0] : primarySwatch[100];
+  Color? get inverseContrastColor =>
+      Get.isDarkMode ? primarySwatch[100] : primarySwatch[0];
 }
 
 /// This extension contains custom text styles that are used by certain widgets.
@@ -294,7 +296,7 @@ extension CustomButtonStyles on ThemeData {
   // ButtonStyle used by AlarmFieldTile
   ButtonStyle get alarmFieldButtonStyle => ElevatedButton.styleFrom(
         shape: const CircleBorder(),
-        primary: AppTheme.alarmNoneColor,
+        primary: primarySwatch[40],
         onPrimary: contrastColor,
       );
 
@@ -331,7 +333,8 @@ extension CustomButtonStyles on ThemeData {
       );
 
   ButtonStyle get alarmConfirmButtonStyle2 => ElevatedButton.styleFrom(
-        fixedSize: Size(AbsoluteAlarmFieldConst.buttonHeight.toDouble(), AbsoluteAlarmFieldConst.width * (3 / 8)),
+        fixedSize: Size(AbsoluteAlarmFieldConst.buttonHeight.toDouble(),
+            AbsoluteAlarmFieldConst.width * (3 / 8)),
         primary: primarySwatch[10],
         onPrimary: inverseContrastColor,
         shape: RoundedRectangleBorder(
