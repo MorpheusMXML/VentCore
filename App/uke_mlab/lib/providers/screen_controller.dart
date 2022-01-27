@@ -17,7 +17,6 @@ import 'package:uke_mlab/widgets/demo_screen/scenario_button.dart';
 import 'package:uke_mlab/widgets/menu/menu.dart';
 import 'package:uke_mlab/widgets/start_screen/continue_button.dart';
 import 'package:uke_mlab/widgets/start_screen/skip_button.dart';
-import 'package:uke_mlab/widgets/toggle/toggle_mode_button_container.dart';
 
 /// Handles user input and various button behavior.
 ///
@@ -59,8 +58,7 @@ class ScreenController {
     switch (scenario) {
       case scenariosEnum.standardScenario:
         runningScenario = StandardScenario();
-        systemState.graphList.setStandardGraphs(
-            ScenarioEnumDisplayedGraphs.graphs[scenario] as Map<screenStatusEnum, List<sensorEnumGraph>>);
+        systemState.graphList.setStandardGraphs(ScenarioEnumDisplayedGraphs.graphs[scenario] as Map<screenStatusEnum, List<sensorEnumGraph>>);
         runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
         break;
       case scenariosEnum.scenario1:
@@ -70,8 +68,7 @@ class ScreenController {
       case scenariosEnum.scenario3c:
       case scenariosEnum.scenario4:
         runningScenario = PatientScenario(scenarioType: scenario);
-        systemState.graphList.setStandardGraphs(
-            ScenarioEnumDisplayedGraphs.graphs[scenario] as Map<screenStatusEnum, List<sensorEnumGraph>>);
+        systemState.graphList.setStandardGraphs(ScenarioEnumDisplayedGraphs.graphs[scenario] as Map<screenStatusEnum, List<sensorEnumGraph>>);
         runningScenario!.startScenario(scenarioPath: scenario.scenarioPath);
         break;
       default:
@@ -100,8 +97,7 @@ class ScreenController {
         systemState.resetSystemState();
       }
     } else {
-      throw Exception(
-          'additionalInformation is not Adult, Child or Infant on screenChangeButton call from Continue Button');
+      throw Exception('additionalInformation is not Adult, Child or Infant on screenChangeButton call from Continue Button');
     }
     systemState.screenStatus = screenStatusEnum.monitorScreen;
     changeScenario(scenariosEnum.standardScenario);
